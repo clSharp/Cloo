@@ -1,0 +1,12 @@
+﻿[0.2-alpha]
++ added: mapping ComputeBuffer's content into host memory
++ added: setting ComputeKernel's value type arguments
++ added: execution of a single kernel through clEnqueueTask
+* fixed: garbage in ComputeProgram binary readback
+~ changed: ComputeQueue to ComputeJobQueue
+~ changed: ComputeProgram binaries and all related logic now represented by byte[] instead of string
+- removed: unmanaged allocs and unnecessary transfers between managed <-> unmanaged memory areas
+
+[0.1-alpha-1]
+The first experimental release of Cloo. This is an alpha release, so expect bugs and missing features.
+Only for testing purposes!
