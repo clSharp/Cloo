@@ -1,5 +1,5 @@
 ﻿[Description]
-Cloo is an open source, cross platform, object oriented API for the OpenCL standard.
+Cloo is a managed, object oriented wrapper for OpenCL. Written in C#, it takes full advantage of the .NET framework to provide ease of use and full functionality of the underlying API.
 
 [Requirements]
 The following is required for Cloo to work properly:

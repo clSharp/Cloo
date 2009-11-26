@@ -63,9 +63,9 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Documentation\License.txt" />
-    <Content Include="Documentation\Readme.txt" />
-    <Content Include="Documentation\History.txt" />
+    <Content Include="Documentation\license.txt" />
+    <Content Include="Documentation\readme.txt" />
+    <Content Include="Documentation\changelog.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
