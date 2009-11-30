@@ -177,7 +177,9 @@ namespace Cloo
         public void Build( ICollection<ComputeDevice> devices, string options, NotifyDelegate notifyDelegate, IntPtr notifyData )
         {
             IntPtr notifyDelegatePtr = ( notifyDelegate != null ) ? Marshal.GetFunctionPointerForDelegate( notifyDelegate ) : IntPtr.Zero;
-            int error;
+            buildOptions = ( options != null ) ? options : "";
+
+            int error;            
             if( devices != null )
             {
                 IntPtr[] deviceHandles = ComputeObject.ExtractHandles( devices );
@@ -187,10 +189,13 @@ namespace Cloo
             {
                 error = CL.BuildProgram( Handle, 0, ( IntPtr[] )null, options, notifyDelegatePtr, notifyData );
             }
-            ComputeTools.CheckError( error );
-            
-            binaries = GetBinaries();
-            buildOptions = ( options != null ) ? options : "";
+
+            if( error == ( int )ErrorCode.Success )
+            {
+                binaries = GetBinaries();
+            }
+
+            ComputeTools.CheckError( error );         
         }
 
         /// <summary>

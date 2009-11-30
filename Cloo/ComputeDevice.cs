@@ -57,8 +57,8 @@ namespace Cloo
         private readonly DeviceLocalMemType localMemType;
         private readonly long maxClockFrequency;
         private readonly long maxComputeUnits;
-        private readonly long maxConstantArgs;
-        private readonly ulong maxConstantBufferSize;
+        private readonly long maxConstArgs;
+        private readonly ulong maxConstBufferSize;
         private readonly ulong maxMemAllocSize;
         private readonly IntPtr maxParameterSize;
         private readonly long maxReadImageArgs;
@@ -114,8 +114,8 @@ namespace Cloo
             localMemType                = ( DeviceLocalMemType )GetInfo<long>( DeviceInfo.DeviceLocalMemType );
             maxClockFrequency           = GetInfo<long, uint>( DeviceInfo.DeviceMaxClockFrequency );
             maxComputeUnits             = GetInfo<long, uint>( DeviceInfo.DeviceMaxComputeUnits );
-            maxConstantArgs             = GetInfo<long, uint>( DeviceInfo.DeviceMaxConstantArgs );
-            maxConstantBufferSize       = GetInfo<ulong>( DeviceInfo.DeviceMaxConstantBufferSize );
+            maxConstArgs                = GetInfo<long, uint>( DeviceInfo.DeviceMaxConstantArgs );
+            maxConstBufferSize          = GetInfo<ulong>( DeviceInfo.DeviceMaxConstantBufferSize );
             maxMemAllocSize             = GetInfo<ulong>( DeviceInfo.DeviceMaxMemAllocSize );
             maxParameterSize            = GetInfo<IntPtr>( DeviceInfo.DeviceMaxParameterSize );
             maxReadImageArgs            = GetInfo<long, uint>( DeviceInfo.DeviceMaxReadImageArgs );
@@ -320,23 +320,23 @@ namespace Cloo
             }
         }
 
-        public long MaxConstantArguments
+        public long MaxConstArgs
         {
             get
             {
-                return maxConstantArgs;
+                return maxConstArgs;
             }
         }
 
-        public ulong MaxConstantBufferSize
+        public ulong MaxConstBufferSize
         {
             get
             {
-                return maxConstantBufferSize;
+                return maxConstBufferSize;
             }
         }
 
-        public ulong MaxMemoryAllocationSize
+        public ulong MaxMemoryAllocSize
         {
             get
             {
@@ -352,7 +352,7 @@ namespace Cloo
             }
         }
 
-        public long MaxReadImageArguments
+        public long MaxReadImageArgs
         {
             get
             {
@@ -392,7 +392,7 @@ namespace Cloo
             }
         }
 
-        public long MaxWriteImageArguments
+        public long MaxWriteImageArgs
         {
             get
             {

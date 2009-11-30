@@ -34,7 +34,7 @@ namespace ClooTester
 
             ComputeBuffer<float> a = new ComputeBuffer<float>( context, MemFlags.MemReadOnly | MemFlags.MemCopyHostPtr, arrA );
             ComputeBuffer<float> b = new ComputeBuffer<float>( context, MemFlags.MemReadOnly | MemFlags.MemCopyHostPtr, arrB );
-            ComputeBuffer<float> c = new ComputeBuffer<float>( context, MemFlags.MemWriteOnly | MemFlags.MemCopyHostPtr, arrC );
+            ComputeBuffer<float> c = new ComputeBuffer<float>( context, MemFlags.MemWriteOnly, arrC.Length );
 
             kernel.SetMemoryArg( 0, a );
             kernel.SetMemoryArg( 1, b );
