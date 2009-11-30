@@ -83,7 +83,7 @@ namespace Cloo
         {
             int error = ( int )ErrorCode.Success;
             Handle = CL.CreateSampler( context.Handle, normalizedCoords, addressing, filtering, out error );
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
             this.addressingMode = addressing;
             this.context = context;
             this.filterMode = filtering;

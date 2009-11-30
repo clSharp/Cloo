@@ -59,7 +59,7 @@ namespace Cloo
             byteSize = new IntPtr( count * Marshal.SizeOf( typeof( T ) ) );
             ErrorCode error = ErrorCode.Success;
             Handle = CL.CreateBuffer( context.Handle, flags, byteSize, IntPtr.Zero, out error );
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Cloo
                     dataPtr.Free();
                 }
             }
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
         }
                 
         public static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, MemFlags flags )

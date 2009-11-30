@@ -53,7 +53,7 @@ namespace Cloo
             {
                 Handle = CL.CreateImage3D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )depth, ( IntPtr )rowPitch, ( IntPtr )slicePitch, data, &error );
             }
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
 
             byteSize = GetInfo<MemInfo, IntPtr, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
         }

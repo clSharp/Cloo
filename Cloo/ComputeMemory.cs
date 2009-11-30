@@ -76,11 +76,11 @@ namespace Cloo
         {            
             int formatCountRet = 0, error = ( int )ErrorCode.Success;
             unsafe{ error = CL.GetSupportedImageFormats( context.Handle, flags, MemObjectType.MemObjectImage3d, 0, null, &formatCountRet ); }
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
 
             ImageFormat[] formats = new ImageFormat[ formatCountRet ];
             unsafe { error = CL.GetSupportedImageFormats( context.Handle, flags, MemObjectType.MemObjectImage3d, formatCountRet, formats, ( int[] )null ); }
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
 
             return new Collection<ImageFormat>( formats );
         }

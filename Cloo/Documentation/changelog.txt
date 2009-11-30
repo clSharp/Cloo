@@ -1,9 +1,10 @@
 ﻿[0.2.1] -----------------------------------------------------------------------
-~ changed: ComputeDevice now exposes properties instead of fields.
-~ changed: ComputeDevice fields refactoring.
-* fixed: ComputeProgram.Build(...) reading binary after unsuccessful build.
-+ added: Ray-Triangle intersection test.
-+ added: compute exception classes for all the error codes.
+~ changed: ComputeDevice now exposes properties instead of fields
+~ changed: ComputeDevice fields refactoring
+~ changed: error checking method moved to ComputeException
+* fixed: ComputeProgram.Build(...) reading binary after unsuccessful build
++ added: Ray-Triangle intersection test
++ added: compute exception classes for all the error codes
 
 [0.1.1.100] -------------------------------------------------------------------
 - removed: unmanaged allocs and unnecessary transfers between managed <-> unmanaged memory areas

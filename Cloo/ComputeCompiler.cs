@@ -37,7 +37,7 @@ namespace Cloo
         public static void Unload()
         {
             int error = CL.UnloadCompiler();
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
         }
     }
 }

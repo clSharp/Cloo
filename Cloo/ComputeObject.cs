@@ -118,7 +118,7 @@ namespace Cloo
             {
                 gcHandle.Free();
             }
-            ComputeTools.CheckError( errorCode );
+            ComputeException.ThrowIfError( errorCode );
             return buffer;
         }
 
@@ -149,7 +149,7 @@ namespace Cloo
             {
                 gcHandle.Free();
             }
-            ComputeTools.CheckError( errorCode );
+            ComputeException.ThrowIfError( errorCode );
             return buffer;
         }
 
@@ -191,7 +191,7 @@ namespace Cloo
                 result = ( ResultType )Convert.ChangeType( gcHandle.Target, typeof( ResultType ), new NumberFormatInfo() );
                 gcHandle.Free();                
             }
-            ComputeTools.CheckError( errorCode );
+            ComputeException.ThrowIfError( errorCode );
             return result;
         }
 
@@ -224,7 +224,7 @@ namespace Cloo
                 result = ( ResultType )Convert.ChangeType( gcHandle.Target, typeof( ResultType ), new NumberFormatInfo() );
                 gcHandle.Free();
             }
-            ComputeTools.CheckError( errorCode );
+            ComputeException.ThrowIfError( errorCode );
             return result;
         }
 

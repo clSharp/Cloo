@@ -44,7 +44,7 @@ namespace Cloo
             {
                 Handle = CL.CreateImage2D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )rowPitch, data, &error );
             }
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
         }
 
         public new static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, MemFlags flags )

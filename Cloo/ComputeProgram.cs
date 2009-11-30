@@ -100,7 +100,7 @@ namespace Cloo
                     ( IntPtr* )null, 
                     &error );
             }
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
 
             this.context = context;
             this.devices = context.Devices;
@@ -161,7 +161,7 @@ namespace Cloo
                     binariesGCHandles[ i ].Free();
             }
 
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
 
             this.binaries = new ReadOnlyCollection<byte[]>( binaries );
             this.context = context;
@@ -195,7 +195,7 @@ namespace Cloo
                 binaries = GetBinaries();
             }
 
-            ComputeTools.CheckError( error );         
+            ComputeException.ThrowIfError( error );         
         }
 
         /// <summary>
@@ -210,11 +210,11 @@ namespace Cloo
             unsafe
             {
                 int error = CL.CreateKernelsInProgram( Handle, 0, ( IntPtr* )null, &kernelsCount );
-                ComputeTools.CheckError( error );
+                ComputeException.ThrowIfError( error );
                 
                 kernelHandles = new IntPtr[ kernelsCount ];
                 error = CL.CreateKernelsInProgram( Handle, kernelsCount, kernelHandles, null );
-                ComputeTools.CheckError( error );
+                ComputeException.ThrowIfError( error );
             }
 
             for( int i = 0; i < kernelsCount; i++ )
@@ -308,7 +308,7 @@ namespace Cloo
                     binariesGCHandles[ i ].Free();
             }
 
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
 
             return new ReadOnlyCollection<byte[]>( binaries );
         }

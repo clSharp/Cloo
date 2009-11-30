@@ -118,7 +118,7 @@ namespace Cloo
             IntPtr[] eventHandles = ExtractHandles( events );
             
             int error = CL.WaitForEvents( eventHandles.Length, eventHandles );
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
         }
 
         protected override void Dispose( bool manual )

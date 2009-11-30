@@ -84,7 +84,7 @@ namespace Cloo
         {
             ErrorCode error = ErrorCode.Success;
             Handle = CL.CreateKernel( program.Handle, functionName, out error );
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
 
             context = program.Context;
             this.functionName = functionName;
@@ -145,7 +145,7 @@ namespace Cloo
             {
                 gcHandle.Free();
             }
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
         }
 
         public override string ToString()

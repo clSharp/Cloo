@@ -78,7 +78,7 @@ namespace Cloo
                 fixed( IntPtr* deviceHandlesPtr = deviceHandles )
                     Handle = CL.CreateContext( propertiesPtr, devices.Count, deviceHandlesPtr, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
             }
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
             this.properties = properties;
             this.devices = GetDevices();
         }
@@ -98,7 +98,7 @@ namespace Cloo
                 fixed( ContextProperties* propertiesPtr = propertiesList )
                     Handle = CL.CreateContextFromType( propertiesPtr, deviceType, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
             }
-            ComputeTools.CheckError( error );
+            ComputeException.ThrowIfError( error );
             this.properties = properties;
             this.devices = GetDevices();
         }
