@@ -1,8 +1,9 @@
 ﻿using System;
-using Cloo;
-using OpenTK.Compute.CL10;
-using OpenTK;
 using System.Diagnostics;
+using Cloo;
+using OpenTK;
+using OpenTK.Compute.CL10;
+using System.Runtime.InteropServices;
 
 namespace ClooTester
 {
@@ -10,11 +11,11 @@ namespace ClooTester
     {
         string kernelSource = @"
 kernel void intersect(
-    global float4 dir,
+    float4 dir,
     global float4 * pointA,
     global float4 * pointB,
     global float4 * pointC,
-    global float *    hits )
+    global float *  hits )
 {
 
 int index = get_global_id(0);
@@ -115,6 +116,7 @@ hits[ index ] = distance;
 
             Vector4 dir = new Vector4( 0.5f, 0.5f, -1, 0 );
 
+
             ComputeBuffer<Vector4> pointA = new ComputeBuffer<Vector4>( context, MemFlags.MemReadOnly | MemFlags.MemCopyHostPtr, arrA );
             ComputeBuffer<Vector4> pointB = new ComputeBuffer<Vector4>( context, MemFlags.MemReadOnly | MemFlags.MemCopyHostPtr, arrB );
             ComputeBuffer<Vector4> pointC = new ComputeBuffer<Vector4>( context, MemFlags.MemReadOnly | MemFlags.MemCopyHostPtr, arrC );
@@ -127,15 +129,14 @@ hits[ index ] = distance;
             kernel.SetMemoryArg( 4, hits );
 
             Stopwatch clTime = new Stopwatch();
-
             clTime.Start();
             queue.Execute( kernel, new int[] { count }, null, null );
-            clTime.Stop();        
-            
+            clTime.Stop();
+
             float[] clHits = queue.Read( hits, true, 0, count, null );
-            float[] csHits = new float[ count ];
 
             Stopwatch csTime = new Stopwatch();
+            float[] csHits = new float[ count ];
             csTime.Start();
             for( int i = 0; i < count; i++ )
                 intersect( dir, arrA, arrB, arrC, csHits, i );

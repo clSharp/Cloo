@@ -69,7 +69,7 @@ namespace Cloo
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the memory object and how it will be used.</param>
         /// <param name="data">The elements this buffer will contain.</param>
         public ComputeBuffer( ComputeContext context, MemFlags flags, T[] data )
-        {            
+        {        
             this.contxt = context;
             this.memflags = flags;
             byteSize = new IntPtr( data.Length * Marshal.SizeOf( typeof( T ) ) );
@@ -85,7 +85,7 @@ namespace Cloo
                         context.Handle,
                         flags,
                         byteSize,
-                        ( data != null ) ? dataPtr.AddrOfPinnedObject() : IntPtr.Zero,
+                        dataPtr.AddrOfPinnedObject(),
                         out error );
                 }
                 finally

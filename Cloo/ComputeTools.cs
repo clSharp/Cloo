@@ -35,7 +35,7 @@ namespace Cloo
     {
         internal static IntPtr[] ConvertArray( int[] array )
         {
-            if( array == null ) throw null;
+            if( array == null ) return null;
 
             NumberFormatInfo nfi = new NumberFormatInfo();
 
