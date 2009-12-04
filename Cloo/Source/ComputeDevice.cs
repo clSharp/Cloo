@@ -28,6 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.ObjectModel;
 using OpenTK.Compute.CL10;
+using System.Text.RegularExpressions;
 
 namespace Cloo
 {
@@ -99,7 +100,7 @@ namespace Cloo
             endianLittle                = GetBoolInfo( DeviceInfo.DeviceEndianLittle );
             errorCorrectionSupport      = GetBoolInfo( DeviceInfo.DeviceErrorCorrectionSupport );
             executionCapabilities       = ( DeviceExecCapabilitiesFlags )GetInfo<long>( DeviceInfo.DeviceExecutionCapabilities );
-            extensions                  = new ReadOnlyCollection<string>( GetStringInfo( DeviceInfo.DeviceExtensions ).Split( ' ' ) );
+            extensions                  = new ReadOnlyCollection<string>( Regex.Split( GetStringInfo( DeviceInfo.DeviceExtensions ), "[\\s]+" ) );
             globalMemCachelineSize      = GetInfo<long, uint>( DeviceInfo.DeviceGlobalMemCachelineSize );
             globalMemCacheSize          = GetInfo<ulong>( DeviceInfo.DeviceGlobalMemCacheSize );
             globalMemCacheType          = ( DeviceMemCacheType )GetInfo<long>( DeviceInfo.DeviceGlobalMemCacheType );

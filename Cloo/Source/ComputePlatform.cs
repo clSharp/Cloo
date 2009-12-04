@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using OpenTK.Compute.CL10;
+using System.Text.RegularExpressions;
 
 namespace Cloo
 {
@@ -146,7 +147,7 @@ namespace Cloo
             Handle = handle;
             devices = new ReadOnlyCollection<ComputeDevice>( GetDevices() );
             extensions = new ReadOnlyCollection<string>( 
-                GetStringInfo<PlatformInfo>( PlatformInfo.PlatformExtensions, CL.GetPlatformInfo ).Split( ' ' ) );
+                Regex.Split( GetStringInfo<PlatformInfo>( PlatformInfo.PlatformExtensions, CL.GetPlatformInfo ), "[\\s]+" ) );
             name = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformName, CL.GetPlatformInfo );
             profile = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformProfile, CL.GetPlatformInfo );
             vendor = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformVendor, CL.GetPlatformInfo );
