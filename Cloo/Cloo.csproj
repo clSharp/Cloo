@@ -40,23 +40,23 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComputeBuffer.cs" />
-    <Compile Include="ComputeCompiler.cs" />
-    <Compile Include="ComputeContext.cs" />
-    <Compile Include="ComputeDevice.cs" />
-    <Compile Include="ComputeEvent.cs" />
-    <Compile Include="ComputeException.cs" />
-    <Compile Include="ComputeImage2D.cs" />
-    <Compile Include="ComputeImage3D.cs" />
-    <Compile Include="ComputeKernel.cs" />
-    <Compile Include="ComputeMemory.cs" />
-    <Compile Include="ComputeObject.cs" />
-    <Compile Include="ComputePlatform.cs" />
-    <Compile Include="ComputeProgram.cs" />
-    <Compile Include="ComputeJobQueue.cs" />
-    <Compile Include="ComputeResource.cs" />
-    <Compile Include="ComputeSampler.cs" />
-    <Compile Include="ComputeTools.cs" />
+    <Compile Include="Source\ComputeBuffer.cs" />
+    <Compile Include="Source\ComputeCompiler.cs" />
+    <Compile Include="Source\ComputeContext.cs" />
+    <Compile Include="Source\ComputeDevice.cs" />
+    <Compile Include="Source\ComputeEvent.cs" />
+    <Compile Include="Source\ComputeException.cs" />
+    <Compile Include="Source\ComputeImage2D.cs" />
+    <Compile Include="Source\ComputeImage3D.cs" />
+    <Compile Include="Source\ComputeKernel.cs" />
+    <Compile Include="Source\ComputeMemory.cs" />
+    <Compile Include="Source\ComputeObject.cs" />
+    <Compile Include="Source\ComputePlatform.cs" />
+    <Compile Include="Source\ComputeProgram.cs" />
+    <Compile Include="Source\ComputeJobQueue.cs" />
+    <Compile Include="Source\ComputeResource.cs" />
+    <Compile Include="Source\ComputeSampler.cs" />
+    <Compile Include="Source\ComputeTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,9 +66,6 @@
     <Content Include="Documentation\license.txt" />
     <Content Include="Documentation\readme.txt" />
     <Content Include="Documentation\changelog.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

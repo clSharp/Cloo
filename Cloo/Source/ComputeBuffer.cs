@@ -37,6 +37,9 @@ namespace Cloo
     {
         private long count;
 
+        /// <summary>
+        /// The number of items this buffer contains.
+        /// </summary>
         public long Count
         {
             get
@@ -95,7 +98,13 @@ namespace Cloo
             }
             ComputeException.ThrowIfError( error );
         }
-                
+        
+        /// <summary>
+        /// Get a list of supported ComputeBuffer formats available on the context.
+        /// </summary>
+        /// <param name="context">A valid OpenCL context.</param>
+        /// <param name="flags">Restrict the list of formats to these flags.</param>
+        /// <returns>A list of supported ComputeBuffer formats.</returns>
         public static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, MemFlags flags )
         {
             return GetSupportedFormats( context, flags, MemObjectType.MemObjectBuffer );
