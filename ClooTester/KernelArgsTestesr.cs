@@ -8,10 +8,9 @@ namespace ClooTester
     {
         string argsKernel = @"
 kernel void argsKernel( 
-    global float4 * result,
-    float4 num )
+    local float4* result )
 {
-    result[0] = num;
+    
 }
 ";
         public KernelArgsTester()
@@ -30,11 +29,11 @@ kernel void argsKernel(
             program.Build( null, null, null, IntPtr.Zero );
             ComputeKernel kernel = program.CreateKernel( "argsKernel" );
 
-            kernel.SetMemoryArg( 0, result );
+            //kernel.SetMemoryArg( 0, result );
             Vector4 num = new Vector4( 1, 0, 1, 0 );
             unsafe
             {                
-                kernel.SetValueArg( 1, num );
+                kernel.SetArg( 0, new IntPtr( 100 ), IntPtr.Zero );
             }
 
             ComputeJobQueue jobs = new ComputeJobQueue( context, context.Devices[ 0 ], ( CommandQueueFlags )0 );

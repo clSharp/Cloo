@@ -101,7 +101,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The count specified by the __attribute__((reqd_work_group_size(X, Y, Z))) qualifier. If the above qualifier is not specified (0, 0, 0) is returned.
+        /// The compile work-group size specified by the __attribute__((reqd_work_group_size(X, Y, Z))) qualifier. If the above qualifier is not specified (0, 0, 0) is returned.
         /// </summary>
         public IntPtr[] GetCompileWorkGroupSize( ComputeDevice device )
         {
@@ -110,12 +110,28 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The maximum work-group count that can be used to execute the kernel on the specified device.
+        /// The maximum work-group size that can be used to execute the kernel on the specified device.
         /// </summary>
         public IntPtr GetWorkGroupSize( ComputeDevice device )
         {
             return GetInfo<KernelWorkGroupInfo, IntPtr, IntPtr>(
                 device, KernelWorkGroupInfo.KernelWorkGroupSize, CL.GetKernelWorkGroupInfo );
+        }
+
+        /// <summary>
+        /// Set the value of a specific argument of the kernel.
+        /// </summary>
+        /// <param name="index">The index of the argument to set.</param>
+        /// <param name="dataSize">The size in bytes of the data mapped to the argument.</param>
+        /// <param name="dataAddr">The address of the data mapped to the argument.</param>
+        public void SetArg( int index, IntPtr dataSize, IntPtr dataAddr )
+        {
+            int error = CL.SetKernelArg(
+                Handle,
+                index,
+                dataSize,
+                dataAddr );
+            ComputeException.ThrowIfError( error );
         }
 
         /// <summary>
@@ -131,21 +147,18 @@ namespace Cloo
         /// </summary>
         public void SetValueArg<T>( int index, T data ) where T : struct
         {
-            int error = ( int )ErrorCode.Success;
             GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );            
             try
             {
-                error = CL.SetKernelArg(
-                    Handle, 
-                    index, 
+                SetArg( 
+                    index,
                     new IntPtr( Marshal.SizeOf( typeof( T ) ) ),
                     gcHandle.AddrOfPinnedObject() );
             }
             finally
             {
                 gcHandle.Free();
-            }
-            ComputeException.ThrowIfError( error );
+            }            
         }
 
         public override string ToString()

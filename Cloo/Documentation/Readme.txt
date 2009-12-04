@@ -8,8 +8,8 @@ The following is required for Cloo to work properly:
 3) The EXPERIMENTAL version of the Open Toolkit library. Check "www.opentk.com" for details.
 
 [Download]
-You can download the most recent version of this library from: http://sourceforge.net/projects/cloo/
-The latest source code (stable or not) can be retrieved from the git repository at: git://opentk.git.sourceforge.net/opentk/cloo/
+You can download the most recent version of this library from: "http://sourceforge.net/projects/cloo/"
+The latest source code (stable or not) can be retrieved from the git repository at: "git://opentk.git.sourceforge.net/opentk/cloo/"
 
 For license information see "license.txt".
 For a list of changes see "changelog.txt".
