@@ -18,7 +18,7 @@ namespace ClooTester
             new MemoryMapper().Run();
             new VectorAdd().Run();
             new TriangleIntersector().Run();
-            new KernelArgsTester().Run();
+            //new KernelArgsTester().Run();
 
             Console.ReadKey();
         }

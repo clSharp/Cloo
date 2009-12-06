@@ -1,4 +1,11 @@
-﻿[0.2.1] -----------------------------------------------------------------------
+﻿[0.3.1] -----------------------------------------------------------------------
+~ changed: GetInfo string queries are now parsed with regexes
+* fixed: kernel signature for the ray-triangle intersection
++ added: a general ComputeKernel.SetArg method that closely follows clSetKernelArg.
++ added: an internal test for kernel args passing
++ added: ClooInfo, a winforms based app for printing CL related info
+
+[0.2.1] -----------------------------------------------------------------------
 ~ changed: ComputeDevice now exposes properties instead of fields
 ~ changed: ComputeDevice fields refactoring
 ~ changed: error checking method moved to ComputeException
