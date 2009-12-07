@@ -37,9 +37,11 @@
             // 
             // copyButton
             // 
-            this.copyButton.Location = new System.Drawing.Point( 473, 3 );
+            this.copyButton.AutoSize = true;
+            this.copyButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.copyButton.Location = new System.Drawing.Point( 471, 3 );
             this.copyButton.Name = "copyButton";
-            this.copyButton.Size = new System.Drawing.Size( 75, 23 );
+            this.copyButton.Size = new System.Drawing.Size( 77, 23 );
             this.copyButton.TabIndex = 1;
             this.copyButton.Text = "To Clipboard";
             this.copyButton.UseVisualStyleBackColor = true;
@@ -92,6 +94,7 @@
             this.Text = "ClooInfo";
             this.Load += new System.EventHandler( this.MainForm_Load );
             this.buttonsPanel.ResumeLayout( false );
+            this.buttonsPanel.PerformLayout();
             this.ResumeLayout( false );
             this.PerformLayout();
 
