@@ -59,7 +59,7 @@
     <Compile Include="BinaryPrinter.cs" />
     <Compile Include="InfoPrinter.cs" />
     <Compile Include="AbstractTester.cs" />
-    <Compile Include="KernelArgsTestesr.cs" />
+    <Compile Include="KernelArgsTester.cs" />
     <Compile Include="MemoryMapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
