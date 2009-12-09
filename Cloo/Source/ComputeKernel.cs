@@ -96,7 +96,7 @@ namespace Cloo
         /// </summary>
         public ulong GetLocalMemorySize( ComputeDevice device )
         {
-            return GetInfo<KernelWorkGroupInfo, ulong, ulong>(
+            return GetInfo<KernelWorkGroupInfo, ulong>(
                 device, KernelWorkGroupInfo.KernelLocalMemSize, CL.GetKernelWorkGroupInfo );
         }
 
@@ -115,7 +115,7 @@ namespace Cloo
         /// </summary>
         public long GetWorkGroupSize( ComputeDevice device )
         {
-            return ( long )GetInfo<KernelWorkGroupInfo, IntPtr, IntPtr>(
+            return ( long )GetInfo<KernelWorkGroupInfo, IntPtr>(
                     device, KernelWorkGroupInfo.KernelWorkGroupSize, CL.GetKernelWorkGroupInfo );
         }
 

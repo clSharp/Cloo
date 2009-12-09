@@ -246,7 +246,7 @@ namespace Cloo
         /// </summary>
         public BuildStatus GetBuildStatus( ComputeDevice device )
         {
-            return ( BuildStatus )GetInfo<ProgramBuildInfo, long, uint>(
+            return ( BuildStatus )GetInfo<ProgramBuildInfo, uint>(
                 device,
                 ProgramBuildInfo.ProgramBuildStatus,
                 CL.GetProgramBuildInfo );

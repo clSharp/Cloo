@@ -56,7 +56,7 @@ namespace Cloo
         {
             get
             {
-                return GetInfo<EventInfo, int, int>(
+                return GetInfo<EventInfo, int>(
                     EventInfo.EventCommandExecutionStatus, CL.GetEventInfo );
             }
         }
@@ -65,7 +65,7 @@ namespace Cloo
         {
             get
             {
-                return GetInfo<ProfilingInfo, ulong, ulong>(
+                return GetInfo<ProfilingInfo, ulong>(
                     ProfilingInfo.ProfilingCommandEnd, CL.GetEventProfilingInfo );
             }
         }
@@ -74,7 +74,7 @@ namespace Cloo
         {
             get
             {
-                return GetInfo<ProfilingInfo, ulong, ulong>(
+                return GetInfo<ProfilingInfo, ulong>(
                     ProfilingInfo.ProfilingCommandQueued, CL.GetEventProfilingInfo );
             }
         }
@@ -83,7 +83,7 @@ namespace Cloo
         {
             get
             {
-                return GetInfo<ProfilingInfo, ulong, ulong>(
+                return GetInfo<ProfilingInfo, ulong>(
                     ProfilingInfo.ProfilingCommandStart, CL.GetEventProfilingInfo );
             }
         }
@@ -92,7 +92,7 @@ namespace Cloo
         {
             get
             {
-                return GetInfo<ProfilingInfo, ulong, ulong>(
+                return GetInfo<ProfilingInfo, ulong>(
                     ProfilingInfo.ProfilingCommandSubmit, CL.GetEventProfilingInfo );
             }
         }
@@ -101,7 +101,7 @@ namespace Cloo
         {
             Handle = handle;
             commandQueue = queue;
-            commandType = ( CommandType )GetInfo<EventInfo, long, uint>( 
+            commandType = ( CommandType )GetInfo<EventInfo, uint>( 
                 EventInfo.EventCommandType, CL.GetEventInfo );
         }
 

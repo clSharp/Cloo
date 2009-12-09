@@ -93,7 +93,7 @@ namespace Cloo
         {
             Handle = handle;
             
-            addressBits                 = GetInfo<long, uint>( DeviceInfo.DeviceAddressBits );
+            addressBits                 = GetInfo<uint>( DeviceInfo.DeviceAddressBits );
             available                   = GetBoolInfo( DeviceInfo.DeviceAvailable );
             compilerAvailable           = GetBoolInfo( DeviceInfo.DeviceCompilerAvailable );
             driverVersion               = GetStringInfo( DeviceInfo.DriverVersion );
@@ -101,7 +101,7 @@ namespace Cloo
             errorCorrectionSupport      = GetBoolInfo( DeviceInfo.DeviceErrorCorrectionSupport );
             executionCapabilities       = ( DeviceExecCapabilitiesFlags )GetInfo<long>( DeviceInfo.DeviceExecutionCapabilities );
             extensions                  = new ReadOnlyCollection<string>( Regex.Split( GetStringInfo( DeviceInfo.DeviceExtensions ), "[\\s]+" ) );
-            globalMemCachelineSize      = GetInfo<long, uint>( DeviceInfo.DeviceGlobalMemCachelineSize );
+            globalMemCachelineSize      = GetInfo<uint>( DeviceInfo.DeviceGlobalMemCachelineSize );
             globalMemCacheSize          = GetInfo<ulong>( DeviceInfo.DeviceGlobalMemCacheSize );
             globalMemCacheType          = ( DeviceMemCacheType )GetInfo<long>( DeviceInfo.DeviceGlobalMemCacheType );
             globalMemSize               = GetInfo<ulong>( DeviceInfo.DeviceGlobalMemSize );
@@ -113,35 +113,35 @@ namespace Cloo
             imageSupport                = GetBoolInfo( DeviceInfo.DeviceImageSupport );
             localMemSize                = GetInfo<ulong>( DeviceInfo.DeviceLocalMemSize );
             localMemType                = ( DeviceLocalMemType )GetInfo<long>( DeviceInfo.DeviceLocalMemType );
-            maxClockFrequency           = GetInfo<long, uint>( DeviceInfo.DeviceMaxClockFrequency );
-            maxComputeUnits             = GetInfo<long, uint>( DeviceInfo.DeviceMaxComputeUnits );
-            maxConstArgs                = GetInfo<long, uint>( DeviceInfo.DeviceMaxConstantArgs );
+            maxClockFrequency           = GetInfo<uint>( DeviceInfo.DeviceMaxClockFrequency );
+            maxComputeUnits             = GetInfo<uint>( DeviceInfo.DeviceMaxComputeUnits );
+            maxConstArgs                = GetInfo<uint>( DeviceInfo.DeviceMaxConstantArgs );
             maxConstBufferSize          = GetInfo<ulong>( DeviceInfo.DeviceMaxConstantBufferSize );
             maxMemAllocSize             = GetInfo<ulong>( DeviceInfo.DeviceMaxMemAllocSize );
             maxParameterSize            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceMaxParameterSize );
-            maxReadImageArgs            = GetInfo<long, uint>( DeviceInfo.DeviceMaxReadImageArgs );
-            maxSamplers                 = GetInfo<long, uint>( DeviceInfo.DeviceMaxSamplers );
+            maxReadImageArgs            = GetInfo<uint>( DeviceInfo.DeviceMaxReadImageArgs );
+            maxSamplers                 = GetInfo<uint>( DeviceInfo.DeviceMaxSamplers );
             maxWorkGroupSize            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceMaxWorkGroupSize );
-            maxWorkItemDimensions       = GetInfo<long, uint>( DeviceInfo.DeviceMaxWorkItemDimensions );
+            maxWorkItemDimensions       = GetInfo<uint>( DeviceInfo.DeviceMaxWorkItemDimensions );
             maxWorkItemSizes            = new ReadOnlyCollection<long>( ComputeTools.ConvertArray( GetArrayInfo<DeviceInfo, IntPtr>( DeviceInfo.DeviceMaxWorkItemSizes, CL.GetDeviceInfo ) ) );
-            maxWriteImageArgs           = GetInfo<long, uint>( DeviceInfo.DeviceMaxWriteImageArgs );
-            memBaseAddrAlign            = GetInfo<long, uint>( DeviceInfo.DeviceMemBaseAddrAlign );
-            minDataTypeAlignSize        = GetInfo<long, uint>( DeviceInfo.DeviceMinDataTypeAlignSize );
+            maxWriteImageArgs           = GetInfo<uint>( DeviceInfo.DeviceMaxWriteImageArgs );
+            memBaseAddrAlign            = GetInfo<uint>( DeviceInfo.DeviceMemBaseAddrAlign );
+            minDataTypeAlignSize        = GetInfo<uint>( DeviceInfo.DeviceMinDataTypeAlignSize );
             name                        = GetStringInfo( DeviceInfo.DeviceName );
             this.platform               = platform;
-            preferredVectorWidthChar    = GetInfo<long, uint>( DeviceInfo.DevicePreferredVectorWidthChar );
-            preferredVectorWidthDouble  = GetInfo<long, uint>( DeviceInfo.DevicePreferredVectorWidthDouble );
-            preferredVectorWidthFloat   = GetInfo<long, uint>( DeviceInfo.DevicePreferredVectorWidthFloat );
-            preferredVectorWidthInt     = GetInfo<long, uint>( DeviceInfo.DevicePreferredVectorWidthInt );
-            preferredVectorWidthLong    = GetInfo<long, uint>( DeviceInfo.DevicePreferredVectorWidthLong );
-            preferredVectorWidthShort   = GetInfo<long, uint>( DeviceInfo.DevicePreferredVectorWidthShort );
+            preferredVectorWidthChar    = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthChar );
+            preferredVectorWidthDouble  = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthDouble );
+            preferredVectorWidthFloat   = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthFloat );
+            preferredVectorWidthInt     = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthInt );
+            preferredVectorWidthLong    = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthLong );
+            preferredVectorWidthShort   = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthShort );
             profile                     = GetStringInfo( DeviceInfo.DeviceProfile );
             profilingTimerResolution    = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceProfilingTimerResolution );
             queueProperties             = ( CommandQueueFlags )GetInfo<long>( DeviceInfo.DeviceQueueProperties );
             singleFPConfig              = ( DeviceFpConfigFlags )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
             type                        = ( DeviceTypeFlags )GetInfo<long>( DeviceInfo.DeviceType );
             vendor                      = GetStringInfo( DeviceInfo.DeviceVendor );
-            vendorId                    = GetInfo<long, uint>( DeviceInfo.DeviceVendorId );
+            vendorId                    = GetInfo<uint>( DeviceInfo.DeviceVendorId );
             version                     = GetStringInfo( DeviceInfo.DeviceVersion );
         }
 
@@ -555,16 +555,10 @@ namespace Cloo
             return GetBoolInfo<DeviceInfo>( paramName, CL.GetDeviceInfo );
         }
 
-        private ReturnType GetInfo<ReturnType>( DeviceInfo paramName ) where ReturnType: struct
-        {
-            return GetInfo<DeviceInfo, ReturnType, ReturnType>( paramName, CL.GetDeviceInfo );
-        }
-
-        private ReturnType GetInfo<ReturnType, NativeType>( DeviceInfo paramName )
-            where ReturnType: struct
+        private NativeType GetInfo<NativeType>( DeviceInfo paramName )
             where NativeType: struct
         {
-            return GetInfo<DeviceInfo, ReturnType, NativeType>( paramName, CL.GetDeviceInfo );
+            return GetInfo<DeviceInfo, NativeType>( paramName, CL.GetDeviceInfo );
         }
 
         private string GetStringInfo( DeviceInfo paramName )

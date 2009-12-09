@@ -159,55 +159,51 @@ namespace Cloo
                 GetInfoDelegate<InfoType> getInfoDelegate
             )
         {
-            int result = GetInfo<InfoType, int, int>
+            int result = GetInfo<InfoType, int>
                 ( paramName, getInfoDelegate );
             return ( result == 0 ) ? false : true;
         }
 
-        protected ResultType GetInfo<InfoType, ResultType, NativeType>
+        protected NativeType GetInfo<InfoType, NativeType>
             (
                 InfoType paramName,
                 GetInfoDelegate<InfoType> getInfoDelegate
             )
-            where ResultType: struct
             where NativeType: struct             
         {
             IntPtr valueSizeRet;
-            NativeType nativeResult = new NativeType();
-            ResultType result;
-            GCHandle gcHandle = GCHandle.Alloc( nativeResult, GCHandleType.Pinned );
+            NativeType result = new NativeType();
+            GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
             int errorCode;
             try
             {                
                 errorCode = getInfoDelegate(
                     handle,
                     paramName,
-                    ( IntPtr )Marshal.SizeOf( nativeResult ),
+                    ( IntPtr )Marshal.SizeOf( result ),
                     gcHandle.AddrOfPinnedObject(),
                     out valueSizeRet );                
             }
             finally
             {
-                result = ( ResultType )Convert.ChangeType( gcHandle.Target, typeof( ResultType ), new NumberFormatInfo() );
+                result = ( NativeType )gcHandle.Target;
                 gcHandle.Free();                
             }
             ComputeException.ThrowIfError( errorCode );
             return result;
         }
 
-        protected ResultType GetInfo<InfoType, ResultType, NativeType>
+        protected NativeType GetInfo<InfoType, NativeType>
             (
                 ComputeObject secondaryObject,
                 InfoType paramName,
                 GetInfoDelegateEx<InfoType> getInfoDelegate
             )
-            where ResultType : struct
             where NativeType : struct
         {
             IntPtr valueSizeRet;
-            NativeType nativeResult = new NativeType();
-            ResultType result;
-            GCHandle gcHandle = GCHandle.Alloc( nativeResult, GCHandleType.Pinned );
+            NativeType result = new NativeType();
+            GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
             int errorCode;
             try
             {
@@ -215,13 +211,13 @@ namespace Cloo
                     handle,
                     secondaryObject.handle,
                     paramName,
-                    ( IntPtr )Marshal.SizeOf( nativeResult ),
+                    ( IntPtr )Marshal.SizeOf( result ),
                     gcHandle.AddrOfPinnedObject(),
                     out valueSizeRet );
             }
             finally
             {
-                result = ( ResultType )Convert.ChangeType( gcHandle.Target, typeof( ResultType ), new NumberFormatInfo() );
+                result = ( NativeType )gcHandle.Target;
                 gcHandle.Free();
             }
             ComputeException.ThrowIfError( errorCode );
