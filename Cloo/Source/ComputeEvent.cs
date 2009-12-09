@@ -35,26 +35,26 @@ namespace Cloo
     {
         #region Fields
 
-        private ComputeJobQueue commandQueue;
-        private CommandType commandType;
+        private ComputeJobQueue jobQueue;
+        private CommandType jobType;
 
         #endregion
 
         #region Properties
 
-        public ComputeJobQueue CommandQueue
+        public ComputeJobQueue JobQueue
         {
             get
             {
-                return commandQueue;
+                return jobQueue;
             }
         }
 
-        public CommandType CommandType
+        public CommandType JobType
         {
             get
             {
-                return commandType; 
+                return jobType; 
             }
         }
 
@@ -67,38 +67,38 @@ namespace Cloo
             }
         }
 
-        public ulong JobFinishedTimestamp
+        public long JobFinishedTimestamp
         {
             get
             {
-                return GetInfo<ProfilingInfo, ulong>(
+                return ( long )GetInfo<ProfilingInfo, ulong>(
                     ProfilingInfo.ProfilingCommandEnd, CL.GetEventProfilingInfo );
             }
         }
 
-        public ulong JobQueuedTimestamp
+        public long JobQueuedTimestamp
         {
             get
             {
-                return GetInfo<ProfilingInfo, ulong>(
+                return ( long )GetInfo<ProfilingInfo, ulong>(
                     ProfilingInfo.ProfilingCommandQueued, CL.GetEventProfilingInfo );
             }
         }
 
-        public ulong JobStartedTimestamp
+        public long JobStartedTimestamp
         {
             get
             {
-                return GetInfo<ProfilingInfo, ulong>(
+                return ( long )GetInfo<ProfilingInfo, ulong>(
                     ProfilingInfo.ProfilingCommandStart, CL.GetEventProfilingInfo );
             }
         }
 
-        public ulong JobSubmittedTimestamp
+        public long JobSubmittedTimestamp
         {
             get
             {
-                return GetInfo<ProfilingInfo, ulong>(
+                return ( long )GetInfo<ProfilingInfo, ulong>(
                     ProfilingInfo.ProfilingCommandSubmit, CL.GetEventProfilingInfo );
             }
         }
@@ -110,8 +110,8 @@ namespace Cloo
         internal ComputeEvent( IntPtr handle, ComputeJobQueue queue )
         {
             Handle = handle;
-            commandQueue = queue;
-            commandType = ( CommandType )GetInfo<EventInfo, uint>( 
+            jobQueue = queue;
+            jobType = ( CommandType )GetInfo<EventInfo, uint>( 
                 EventInfo.EventCommandType, CL.GetEventInfo );
         }
 

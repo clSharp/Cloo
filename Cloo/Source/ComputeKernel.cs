@@ -108,9 +108,9 @@ namespace Cloo
         /// <summary>
         /// Return the amount of local memory in bytes used by the kernel.
         /// </summary>
-        public ulong GetLocalMemorySize( ComputeDevice device )
+        public long GetLocalMemorySize( ComputeDevice device )
         {
-            return GetInfo<KernelWorkGroupInfo, ulong>(
+            return ( long )GetInfo<KernelWorkGroupInfo, ulong>(
                 device, KernelWorkGroupInfo.KernelLocalMemSize, CL.GetKernelWorkGroupInfo );
         }
 

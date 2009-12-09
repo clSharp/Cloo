@@ -37,7 +37,7 @@ namespace Cloo
     {
         #region Fields
         
-        protected long byteSize;
+        protected long byteCount;
         protected MemFlags memflags;
         protected ComputeContext contxt;
 
@@ -65,7 +65,7 @@ namespace Cloo
         {
             get
             {
-                return byteSize;
+                return byteCount;
             }
         }
 

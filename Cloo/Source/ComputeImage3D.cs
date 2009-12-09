@@ -54,7 +54,7 @@ namespace Cloo
             }
             ComputeException.ThrowIfError( error );
 
-            byteSize = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
+            byteCount = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
         }
 
         protected ComputeImage3D()
