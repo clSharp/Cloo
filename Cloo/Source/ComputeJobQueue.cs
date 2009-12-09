@@ -141,7 +141,7 @@ namespace Cloo
         /// <param name="count">The number of elements to copy.</param>
         /// <param name="count">The number of elements to copy.</param>
         /// <param name="eventList">Specify events that need to complete before this particular job can be executed. If eventList is not null a new event identifying this job is attached to the end of the list.</param>
-        public void Copy<T>( ComputeBuffer<T> source, ComputeBuffer<T> destination, int sourceOffset, int destinationOffset, int size, ICollection<ComputeEvent> eventList ) where T: struct
+        public void Copy<T>( ComputeBuffer<T> source, ComputeBuffer<T> destination, long sourceOffset, long destinationOffset, long size, ICollection<ComputeEvent> eventList ) where T: struct
         {
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -177,7 +177,7 @@ namespace Cloo
         /// <param name="destinationOffset">The destination (x, y, z) offset in pixels where writing starts.</param>
         /// <param name="count">The region (width, height, depth) count in pixels to copy.</param>
         /// <param name="eventList">Specify events that need to complete before this particular job can be executed. If eventList is not null a new event identifying this job is attached to the end of the list.</param>
-        public void Copy<T>( ComputeBuffer<T> source, ComputeImage3D destination, int sourceOffset, int[] destinationOffset, int[] size, ICollection<ComputeEvent> eventList ) where T: struct
+        public void Copy<T>( ComputeBuffer<T> source, ComputeImage3D destination, long sourceOffset, long[] destinationOffset, long[] size, ICollection<ComputeEvent> eventList ) where T: struct
         {
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -210,7 +210,7 @@ namespace Cloo
         /// <param name="count">The region (width, height, depth) count in pixels to copy.</param>
         /// <param name="destinationOffset">The destination offset in elements where writing starts.</param>
         /// <param name="eventList">Specify events that need to complete before this particular job can be executed. If eventList is not null a new event identifying this job is attached to the end of the list.</param>
-        public void Copy<T>( ComputeImage3D source, ComputeBuffer<T> destination, int[] sourceOffset, int destinationOffset, int[] count, ICollection<ComputeEvent> eventList ) where T: struct
+        public void Copy<T>( ComputeImage3D source, ComputeBuffer<T> destination, long[] sourceOffset, long destinationOffset, long[] count, ICollection<ComputeEvent> eventList ) where T: struct
         {
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -238,7 +238,7 @@ namespace Cloo
         /// <param name="count">The region (width, height, depth) count in pixels to copy.</param>
         /// <param name="count">defines the (width, height, depth) count in pixels of the image copy.</param>
         /// <param name="eventList">Specify events that need to complete before this particular job can be executed. If eventList is not null a new event identifying this job is attached to the end of the list.</param>
-        public void Copy( ComputeImage3D source, ComputeImage3D destination, int[] sourceOffset, int[] destinationOffset, int[] size, ICollection<ComputeEvent> eventList )
+        public void Copy( ComputeImage3D source, ComputeImage3D destination, long[] sourceOffset, long[] destinationOffset, long[] size, ICollection<ComputeEvent> eventList )
         {
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -285,7 +285,7 @@ namespace Cloo
         /// <summary>
         /// Enqueues a job to execute a range of kernels.
         /// </summary>
-        public void Execute( ComputeKernel kernel, int[] globalWorkSize, int[] localWorkSize, ICollection<ComputeEvent> eventList )
+        public void Execute( ComputeKernel kernel, long[] globalWorkSize, long[] localWorkSize, ICollection<ComputeEvent> eventList )
         {
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -341,7 +341,7 @@ namespace Cloo
         /// <param name="count">The number of elements to map.</param>
         /// <param name="eventList">Specify events that need to complete before this particular job can be executed. If eventList is not null a new event identifying this job is attached to the end of the list.</param>
         /// <returns>The mapped area.</returns>
-        public IntPtr Map<T>( ComputeBuffer<T> buffer, bool blocking, MapFlags flags, int offset, int size, ICollection<ComputeEvent> eventList ) where T: struct
+        public IntPtr Map<T>( ComputeBuffer<T> buffer, bool blocking, MapFlags flags, long offset, long size, ICollection<ComputeEvent> eventList ) where T: struct
         {
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -385,7 +385,7 @@ namespace Cloo
         /// <param name="rowPitch">Returns the length of image scan-line in bytes.</param>
         /// <param name="slicePitch">Returns the count in bytes of the 2D slice of the 3D image.</param>
         /// <param name="eventList">Specify events that need to complete before this particular job can be executed. If eventList is not null a new event identifying this job is attached to the end of the list.</param>
-        public IntPtr Map( ComputeImage3D image, bool blocking, MapFlags flags, int[] offset, int[] size, out int rowPitch, out int slicePitch, ICollection<ComputeEvent> eventList )
+        public IntPtr Map( ComputeImage3D image, bool blocking, MapFlags flags, long[] offset, long[] size, out long rowPitch, out long slicePitch, ICollection<ComputeEvent> eventList )
         {
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -423,7 +423,7 @@ namespace Cloo
         /// <param name="count">The number of elements being read.</param>
         /// <param name="eventList">Specify events that need to complete before this particular job can be executed. If eventList is not null a new event identifying this job is attached to the end of the list.</param>
         /// <returns>The content read from the buffer.</returns>
-        public T[] Read<T>( ComputeBuffer<T> buffer, bool blocking, int offset, int size, ICollection<ComputeEvent> eventList ) where T: struct
+        public T[] Read<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long size, ICollection<ComputeEvent> eventList ) where T: struct
         {
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -475,7 +475,7 @@ namespace Cloo
         /// <param name="slicePitch">The count in bytes of the 2D slice of the 3D image.</param>
         /// <param name="eventList">Specify events that need to complete before this particular job can be executed. If eventList is not null a new event identifying this job is attached to the end of the list.</param>
         /// <returns>The content read from the image.</returns>
-        public IntPtr Read( ComputeImage3D image, bool blocking, int[] offset, int[] size, int rowPitch, int slicePitch, ICollection<ComputeEvent> eventList )
+        public IntPtr Read( ComputeImage3D image, bool blocking, long[] offset, long[] size, long rowPitch, long slicePitch, ICollection<ComputeEvent> eventList )
         {
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -552,7 +552,7 @@ namespace Cloo
         /// <param name="count">The number of elements to write.</param>
         /// <param name="data">The content written to the buffer.</param>
         /// <param name="eventList">Specify events that need to complete before this particular job can be executed. If eventList is not null a new event identifying this job is attached to the end of the list.</param>
-        public void Write<T>( ComputeBuffer<T> buffer, bool blocking, int offset, int count, T[] data, ICollection<ComputeEvent> eventList ) where T: struct
+        public void Write<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, T[] data, ICollection<ComputeEvent> eventList ) where T: struct
         {
             int sizeofT = Marshal.SizeOf( typeof( T ) );
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
@@ -592,7 +592,7 @@ namespace Cloo
         /// <param name="slicePitch">The count in bytes of the 2D slice of the 3D image.</param>
         /// <param name="data">The content written to the image.</param>
         /// <param name="eventList">Specify events that need to complete before this particular job can be executed. If eventList is not null a new event identifying this job is attached to the end of the list.</param>
-        public void Write( ComputeImage3D image, bool blocking, int[] offset, int[] size, int rowPitch, int slicePitch, IntPtr data, ICollection<ComputeEvent> eventList )
+        public void Write( ComputeImage3D image, bool blocking, long[] offset, long[] size, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> eventList )
         {
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;

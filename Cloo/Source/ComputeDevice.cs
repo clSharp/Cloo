@@ -49,11 +49,11 @@ namespace Cloo
         private readonly DeviceMemCacheType globalMemCacheType;
         private readonly ulong globalMemSize;
         private readonly bool imageSupport;
-        private readonly IntPtr image2DMaxHeight;
-        private readonly IntPtr image2DMaxWidth;
-        private readonly IntPtr image3DMaxDepth;
-        private readonly IntPtr image3DMaxHeight;
-        private readonly IntPtr image3DMaxWidth;
+        private readonly long image2DMaxHeight;
+        private readonly long image2DMaxWidth;
+        private readonly long image3DMaxDepth;
+        private readonly long image3DMaxHeight;
+        private readonly long image3DMaxWidth;
         private readonly ulong localMemSize;
         private readonly DeviceLocalMemType localMemType;
         private readonly long maxClockFrequency;
@@ -61,12 +61,12 @@ namespace Cloo
         private readonly long maxConstArgs;
         private readonly ulong maxConstBufferSize;
         private readonly ulong maxMemAllocSize;
-        private readonly IntPtr maxParameterSize;
+        private readonly long maxParameterSize;
         private readonly long maxReadImageArgs;
         private readonly long maxSamplers;
-        private readonly IntPtr maxWorkGroupSize;
+        private readonly long maxWorkGroupSize;
         private readonly long maxWorkItemDimensions;
-        private readonly ReadOnlyCollection<IntPtr> maxWorkItemSizes;
+        private readonly System.Collections.ObjectModel.ReadOnlyCollection<long> maxWorkItemSizes;
         private readonly long maxWriteImageArgs;
         private readonly long memBaseAddrAlign;
         private readonly long minDataTypeAlignSize;
@@ -79,7 +79,7 @@ namespace Cloo
         private readonly long preferredVectorWidthLong;
         private readonly long preferredVectorWidthShort;
         private readonly string profile;
-        private readonly IntPtr profilingTimerResolution;
+        private readonly long profilingTimerResolution;
         private readonly CommandQueueFlags queueProperties;
         private readonly DeviceFpConfigFlags singleFPConfig;
         private readonly DeviceTypeFlags type;
@@ -105,11 +105,11 @@ namespace Cloo
             globalMemCacheSize          = GetInfo<ulong>( DeviceInfo.DeviceGlobalMemCacheSize );
             globalMemCacheType          = ( DeviceMemCacheType )GetInfo<long>( DeviceInfo.DeviceGlobalMemCacheType );
             globalMemSize               = GetInfo<ulong>( DeviceInfo.DeviceGlobalMemSize );
-            image2DMaxHeight            = GetInfo<IntPtr>( DeviceInfo.DeviceImage2dMaxHeight );
-            image2DMaxWidth             = GetInfo<IntPtr>( DeviceInfo.DeviceImage2dMaxWidth );
-            image3DMaxDepth             = GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxDepth );
-            image3DMaxHeight            = GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxHeight );
-            image3DMaxWidth             = GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxWidth );
+            image2DMaxHeight            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage2dMaxHeight );
+            image2DMaxWidth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage2dMaxWidth );
+            image3DMaxDepth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxDepth );
+            image3DMaxHeight            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxHeight );
+            image3DMaxWidth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxWidth );
             imageSupport                = GetBoolInfo( DeviceInfo.DeviceImageSupport );
             localMemSize                = GetInfo<ulong>( DeviceInfo.DeviceLocalMemSize );
             localMemType                = ( DeviceLocalMemType )GetInfo<long>( DeviceInfo.DeviceLocalMemType );
@@ -118,12 +118,12 @@ namespace Cloo
             maxConstArgs                = GetInfo<long, uint>( DeviceInfo.DeviceMaxConstantArgs );
             maxConstBufferSize          = GetInfo<ulong>( DeviceInfo.DeviceMaxConstantBufferSize );
             maxMemAllocSize             = GetInfo<ulong>( DeviceInfo.DeviceMaxMemAllocSize );
-            maxParameterSize            = GetInfo<IntPtr>( DeviceInfo.DeviceMaxParameterSize );
+            maxParameterSize            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceMaxParameterSize );
             maxReadImageArgs            = GetInfo<long, uint>( DeviceInfo.DeviceMaxReadImageArgs );
             maxSamplers                 = GetInfo<long, uint>( DeviceInfo.DeviceMaxSamplers );
-            maxWorkGroupSize            = GetInfo<IntPtr>( DeviceInfo.DeviceMaxWorkGroupSize );
+            maxWorkGroupSize            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceMaxWorkGroupSize );
             maxWorkItemDimensions       = GetInfo<long, uint>( DeviceInfo.DeviceMaxWorkItemDimensions );
-            maxWorkItemSizes            = new ReadOnlyCollection<IntPtr>( GetArrayInfo<DeviceInfo, IntPtr>( DeviceInfo.DeviceMaxWorkItemSizes, CL.GetDeviceInfo ) );
+            maxWorkItemSizes            = new ReadOnlyCollection<long>( ComputeTools.ConvertArray( GetArrayInfo<DeviceInfo, IntPtr>( DeviceInfo.DeviceMaxWorkItemSizes, CL.GetDeviceInfo ) ) );
             maxWriteImageArgs           = GetInfo<long, uint>( DeviceInfo.DeviceMaxWriteImageArgs );
             memBaseAddrAlign            = GetInfo<long, uint>( DeviceInfo.DeviceMemBaseAddrAlign );
             minDataTypeAlignSize        = GetInfo<long, uint>( DeviceInfo.DeviceMinDataTypeAlignSize );
@@ -136,7 +136,7 @@ namespace Cloo
             preferredVectorWidthLong    = GetInfo<long, uint>( DeviceInfo.DevicePreferredVectorWidthLong );
             preferredVectorWidthShort   = GetInfo<long, uint>( DeviceInfo.DevicePreferredVectorWidthShort );
             profile                     = GetStringInfo( DeviceInfo.DeviceProfile );
-            profilingTimerResolution    = GetInfo<IntPtr>( DeviceInfo.DeviceProfilingTimerResolution );
+            profilingTimerResolution    = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceProfilingTimerResolution );
             queueProperties             = ( CommandQueueFlags )GetInfo<long>( DeviceInfo.DeviceQueueProperties );
             singleFPConfig              = ( DeviceFpConfigFlags )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
             type                        = ( DeviceTypeFlags )GetInfo<long>( DeviceInfo.DeviceType );
@@ -241,7 +241,7 @@ namespace Cloo
             }
         }
 
-        public IntPtr Image2DMaxHeight
+        public long Image2DMaxHeight
         {
             get
             {
@@ -249,7 +249,7 @@ namespace Cloo
             }
         }
 
-        public IntPtr Image2DMaxWidth
+        public long Image2DMaxWidth
         {
             get
             {
@@ -257,7 +257,7 @@ namespace Cloo
             }
         }
 
-        public IntPtr Image3DMaxDepth
+        public long Image3DMaxDepth
         {
             get
             {
@@ -265,7 +265,7 @@ namespace Cloo
             }
         }
 
-        public IntPtr Image3DMaxHeight
+        public long Image3DMaxHeight
         {
             get
             {
@@ -273,7 +273,7 @@ namespace Cloo
             }
         }
 
-        public IntPtr Image3DMaxWidth
+        public long Image3DMaxWidth
         {
             get
             {
@@ -345,7 +345,7 @@ namespace Cloo
             }
         }
 
-        public IntPtr MaxParameterSize
+        public long MaxParameterSize
         {
             get
             {
@@ -369,7 +369,7 @@ namespace Cloo
             }
         }
 
-        public IntPtr MaxWorkGroupSize
+        public long MaxWorkGroupSize
         {
             get
             {
@@ -385,7 +385,7 @@ namespace Cloo
             }
         }
 
-        public ReadOnlyCollection<IntPtr> MaxWorkItemSizes
+        public System.Collections.ObjectModel.ReadOnlyCollection<long> MaxWorkItemSizes
         {
             get
             {
@@ -489,7 +489,7 @@ namespace Cloo
             }
         }
 
-        public IntPtr ProfilingTimerResolution
+        public long ProfilingTimerResolution
         {
             get
             {

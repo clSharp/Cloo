@@ -130,7 +130,7 @@ hits[ index ] = distance;
 
             Stopwatch clTime = new Stopwatch();
             clTime.Start();
-            queue.Execute( kernel, new int[] { count }, null, null );
+            queue.Execute( kernel, new long[] { count }, null, null );
             clTime.Stop();
 
             float[] clHits = queue.Read( hits, true, 0, count, null );

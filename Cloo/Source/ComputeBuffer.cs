@@ -59,9 +59,9 @@ namespace Cloo
             this.contxt = context;
             this.memflags = flags;
             this.count = count;
-            byteSize = new IntPtr( count * Marshal.SizeOf( typeof( T ) ) );
+            byteSize = count * Marshal.SizeOf( typeof( T ) );
             ErrorCode error = ErrorCode.Success;
-            Handle = CL.CreateBuffer( context.Handle, flags, byteSize, IntPtr.Zero, out error );
+            Handle = CL.CreateBuffer( context.Handle, flags, new IntPtr( byteSize ), IntPtr.Zero, out error );
             ComputeException.ThrowIfError( error );
         }
 
@@ -75,7 +75,7 @@ namespace Cloo
         {        
             this.contxt = context;
             this.memflags = flags;
-            byteSize = new IntPtr( data.Length * Marshal.SizeOf( typeof( T ) ) );
+            byteSize = data.Length * Marshal.SizeOf( typeof( T ) );
             count = data.Length;
 
             ErrorCode error = ErrorCode.Success;
@@ -87,7 +87,7 @@ namespace Cloo
                     Handle = CL.CreateBuffer(
                         context.Handle,
                         flags,
-                        byteSize,
+                        new IntPtr( byteSize ),
                         dataPtr.AddrOfPinnedObject(),
                         out error );
                 }

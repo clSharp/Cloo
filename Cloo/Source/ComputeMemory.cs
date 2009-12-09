@@ -35,7 +35,7 @@ namespace Cloo
 {
     public abstract class ComputeMemory: ComputeResource
     {
-        protected IntPtr byteSize;
+        protected long byteSize;
         protected MemFlags memflags;
         protected ComputeContext contxt;
 
@@ -59,7 +59,7 @@ namespace Cloo
         {
             get
             {
-                return byteSize.ToInt64();
+                return byteSize;
             }
         }
         

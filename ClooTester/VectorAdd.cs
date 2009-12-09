@@ -41,7 +41,7 @@ namespace ClooTester
             kernel.SetMemoryArg( 2, c );
 
             ComputeJobQueue queue = new ComputeJobQueue( context, context.Devices[ 0 ], ( CommandQueueFlags )0 );
-            queue.Execute( kernel, new int[] { count }, null, null );
+            queue.Execute( kernel, new long[] { count }, null, null );
 
             arrC = queue.Read( c, true, 0, count, null );
             for( int i = 0; i < count; i++ )

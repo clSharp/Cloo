@@ -103,19 +103,20 @@ namespace Cloo
         /// <summary>
         /// The compile work-group size specified by the __attribute__((reqd_work_group_size(X, Y, Z))) qualifier. If the above qualifier is not specified (0, 0, 0) is returned.
         /// </summary>
-        public IntPtr[] GetCompileWorkGroupSize( ComputeDevice device )
+        public long[] GetCompileWorkGroupSize( ComputeDevice device )
         {
-            return GetArrayInfo<KernelWorkGroupInfo, IntPtr>(
-                device, KernelWorkGroupInfo.KernelCompileWorkGroupSize, CL.GetKernelWorkGroupInfo );
+            return ComputeTools.ConvertArray( 
+                GetArrayInfo<KernelWorkGroupInfo, IntPtr>(
+                    device, KernelWorkGroupInfo.KernelCompileWorkGroupSize, CL.GetKernelWorkGroupInfo ) );
         }
 
         /// <summary>
         /// The maximum work-group size that can be used to execute the kernel on the specified device.
         /// </summary>
-        public IntPtr GetWorkGroupSize( ComputeDevice device )
+        public long GetWorkGroupSize( ComputeDevice device )
         {
-            return GetInfo<KernelWorkGroupInfo, IntPtr, IntPtr>(
-                device, KernelWorkGroupInfo.KernelWorkGroupSize, CL.GetKernelWorkGroupInfo );
+            return ( long )GetInfo<KernelWorkGroupInfo, IntPtr, IntPtr>(
+                    device, KernelWorkGroupInfo.KernelWorkGroupSize, CL.GetKernelWorkGroupInfo );
         }
 
         /// <summary>
