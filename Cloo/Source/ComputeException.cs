@@ -32,17 +32,31 @@ namespace Cloo
 {
     public class ComputeException: Exception
     {
-        readonly ErrorCode code;
+        #region Fields
+
+        private readonly ErrorCode code;
+
+        #endregion
+
+        #region Properties
 
         public ErrorCode ErrorCode
         {
             get { return code; }
         }
+        
+        #endregion
+
+        #region Constructors
 
         public ComputeException( ErrorCode code )
         {
             this.code = code;
         }
+        
+        #endregion
+
+        #region Public methods
 
         /// <summary>
         /// Checks for an error and throws an exception if such is encountered.
@@ -201,7 +215,11 @@ namespace Cloo
                     throw new ComputeException( errorCode );            
             }
         }
+
+        #endregion
     }
+
+    #region Exception classes
 
     public class DeviceNotFoundComputeException: ComputeException
     { public DeviceNotFoundComputeException() : base( ErrorCode.DeviceNotFound ) { } }
@@ -337,4 +355,6 @@ namespace Cloo
 
     public class InvalidMipLevelComputeException: ComputeException
     { public InvalidMipLevelComputeException() : base( ErrorCode.InvalidMipLevel ) { } }
+
+    #endregion
 }

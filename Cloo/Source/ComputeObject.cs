@@ -27,16 +27,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
-using OpenTK.Compute.CL10;
-using System.Globalization;
 
 namespace Cloo
 {
     public abstract class ComputeObject: IEquatable<ComputeObject>
     {
+        #region Fields
+
         private IntPtr handle;
+        
+        #endregion
+
+        #region Properties
 
         public IntPtr Handle
         {
@@ -50,16 +53,20 @@ namespace Cloo
             }
         }
 
-        public override int GetHashCode()
-        {
-            return Handle.GetHashCode();
-        }
+        #endregion
+
+        #region Public methods
 
         public new static bool Equals( object objA, object objB )
         {
             if( objA == objB ) return true;
             if( objA == null || objB == null ) return false;
             return objA.Equals( objB );
+        }
+
+        public override int GetHashCode()
+        {
+            return Handle.GetHashCode();
         }
 
         public override bool Equals( object obj )
@@ -81,6 +88,10 @@ namespace Cloo
             return "(" + Handle.ToString() + ")";
         }
 
+        #endregion
+
+        #region Internal methods
+
         internal static IntPtr[] ExtractHandles<T>( ICollection<T> computeObjects ) where T: ComputeObject
         {
             IntPtr[] result = new IntPtr[ computeObjects.Count ];
@@ -93,17 +104,21 @@ namespace Cloo
             return result;
         }
 
-        protected ResultType[] GetArrayInfo<InfoType, ResultType>
+        #endregion
+
+        #region Protected methods
+
+        protected NativeType[] GetArrayInfo<InfoType, NativeType>
             (
                 InfoType paramName,
                 GetInfoDelegate<InfoType> getInfoDelegate
             )
         {
             int errorCode;
-            ResultType[] buffer;
+            NativeType[] buffer;
             IntPtr bufferSizeRet;
             getInfoDelegate( handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet );
-            buffer = new ResultType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( ResultType ) ) ];
+            buffer = new NativeType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( NativeType ) ) ];
             GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
             try
             {
@@ -122,7 +137,7 @@ namespace Cloo
             return buffer;
         }
 
-        protected ResultType[] GetArrayInfo<InfoType, ResultType>
+        protected NativeType[] GetArrayInfo<InfoType, NativeType>
             (
                 ComputeObject secondaryObject,
                 InfoType paramName,
@@ -130,10 +145,10 @@ namespace Cloo
             )
         {
             int errorCode;
-            ResultType[] buffer;
+            NativeType[] buffer;
             IntPtr bufferSizeRet;
             getInfoDelegate( handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet );
-            buffer = new ResultType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( ResultType ) ) ];
+            buffer = new NativeType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( NativeType ) ) ];
             GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
             try
             {
@@ -248,6 +263,10 @@ namespace Cloo
             return result.Trim();
         }
 
+        #endregion
+
+        #region Delegates
+
         protected unsafe delegate int GetInfoDelegate<InfoType>
             (
                 IntPtr objectHandle,
@@ -266,5 +285,7 @@ namespace Cloo
                 IntPtr paramValue,
                 out IntPtr paramValueSizeRet
             );
+
+        #endregion
     }
 }

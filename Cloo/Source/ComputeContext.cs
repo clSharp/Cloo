@@ -35,8 +35,14 @@ namespace Cloo
 {
     public class ComputeContext: ComputeResource
     {
+        #region Fields
+
         private readonly ReadOnlyCollection<ComputeDevice> devices;
         private readonly PropertiesDescriptor properties;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// The devices associated with this context.
@@ -59,6 +65,10 @@ namespace Cloo
                 return properties;
             }
         }
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Creates an OpenCL context with one or more associated devices.
@@ -103,6 +113,10 @@ namespace Cloo
             this.devices = GetDevices();
         }
 
+        #endregion
+
+        #region Public methods
+
         /// <summary>
         /// Gets a string representation of this context.
         /// </summary>
@@ -110,6 +124,10 @@ namespace Cloo
         {
             return "ComputeContext" + base.ToString();
         }
+        
+        #endregion
+
+        #region Protected methods
 
         protected override void Dispose( bool manual )
         {
@@ -126,6 +144,10 @@ namespace Cloo
             }
         }
 
+        #endregion
+
+        #region Private methods
+
         private ReadOnlyCollection<ComputeDevice> GetDevices()
         {
             List<IntPtr> validDeviceHandles = new List<IntPtr>( GetArrayInfo<ContextInfo, IntPtr>( ContextInfo.ContextDevices, CL.GetContextInfo ) );
@@ -139,7 +161,15 @@ namespace Cloo
             return new ReadOnlyCollection<ComputeDevice>( validDevices );
         }
 
+        #endregion
+
+        #region Delegates
+
         public delegate void NotifyDelegate( string errorInfo, IntPtr clData, IntPtr dataSize, IntPtr userData );
+
+        #endregion
+
+        #region Inner classes
 
         public class NotifyDescriptor
         {
@@ -177,5 +207,7 @@ namespace Cloo
                 this.platform = platform;
             }
         }
+
+        #endregion
     }
 }

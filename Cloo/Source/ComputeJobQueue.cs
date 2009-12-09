@@ -34,10 +34,16 @@ namespace Cloo
 {
     public class ComputeJobQueue: ComputeResource
     {
+        #region Fields
+
         private readonly ComputeContext context;
         private readonly ComputeDevice device;
         private bool outOfOrderExec;
         private bool profiling;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Gets the context specified when the job-queue is created.
@@ -93,6 +99,10 @@ namespace Cloo
             }
         }
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         /// Creates a new job-queue.
         /// </summary>
@@ -109,6 +119,10 @@ namespace Cloo
             outOfOrderExec = ( ( long )( properties & CommandQueueFlags.QueueOutOfOrderExecModeEnable ) != 0 );
             profiling = ( ( long )( properties & CommandQueueFlags.QueueProfilingEnable ) != 0 );
         }
+
+        #endregion
+
+        #region Public methods
 
         /// <summary>
         /// Enqueues a barrier job. This job ensures that all queued jobs have finished execution before the next batch of jobs can begin execution.
@@ -610,6 +624,10 @@ namespace Cloo
             throw new NotImplementedException();
         }
 
+        #endregion
+
+        #region Protected methods
+
         protected override void Dispose( bool manual )
         {
             if( manual )
@@ -624,6 +642,10 @@ namespace Cloo
                 Handle = IntPtr.Zero;
             }
         }
+        
+        #endregion
+
+        #region Private methods
 
         private void SetProperty( CommandQueueFlags flags, bool enable )
         {
@@ -631,5 +653,7 @@ namespace Cloo
             error = CL.SetCommandQueueProperty( Handle, flags, enable, ( CommandQueueFlags[] )null );
             ComputeException.ThrowIfError( error );
         }
+        
+        #endregion
     }
 }

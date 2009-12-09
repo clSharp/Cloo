@@ -27,8 +27,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.ObjectModel;
-using OpenTK.Compute.CL10;
 using System.Text.RegularExpressions;
+using OpenTK.Compute.CL10;
 
 namespace Cloo
 {
@@ -89,61 +89,7 @@ namespace Cloo
 
         #endregion
 
-        internal ComputeDevice( ComputePlatform platform, IntPtr handle )
-        {
-            Handle = handle;
-            
-            addressBits                 = GetInfo<uint>( DeviceInfo.DeviceAddressBits );
-            available                   = GetBoolInfo( DeviceInfo.DeviceAvailable );
-            compilerAvailable           = GetBoolInfo( DeviceInfo.DeviceCompilerAvailable );
-            driverVersion               = GetStringInfo( DeviceInfo.DriverVersion );
-            endianLittle                = GetBoolInfo( DeviceInfo.DeviceEndianLittle );
-            errorCorrectionSupport      = GetBoolInfo( DeviceInfo.DeviceErrorCorrectionSupport );
-            executionCapabilities       = ( DeviceExecCapabilitiesFlags )GetInfo<long>( DeviceInfo.DeviceExecutionCapabilities );
-            extensions                  = new ReadOnlyCollection<string>( Regex.Split( GetStringInfo( DeviceInfo.DeviceExtensions ), "[\\s]+" ) );
-            globalMemCachelineSize      = GetInfo<uint>( DeviceInfo.DeviceGlobalMemCachelineSize );
-            globalMemCacheSize          = GetInfo<ulong>( DeviceInfo.DeviceGlobalMemCacheSize );
-            globalMemCacheType          = ( DeviceMemCacheType )GetInfo<long>( DeviceInfo.DeviceGlobalMemCacheType );
-            globalMemSize               = GetInfo<ulong>( DeviceInfo.DeviceGlobalMemSize );
-            image2DMaxHeight            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage2dMaxHeight );
-            image2DMaxWidth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage2dMaxWidth );
-            image3DMaxDepth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxDepth );
-            image3DMaxHeight            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxHeight );
-            image3DMaxWidth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxWidth );
-            imageSupport                = GetBoolInfo( DeviceInfo.DeviceImageSupport );
-            localMemSize                = GetInfo<ulong>( DeviceInfo.DeviceLocalMemSize );
-            localMemType                = ( DeviceLocalMemType )GetInfo<long>( DeviceInfo.DeviceLocalMemType );
-            maxClockFrequency           = GetInfo<uint>( DeviceInfo.DeviceMaxClockFrequency );
-            maxComputeUnits             = GetInfo<uint>( DeviceInfo.DeviceMaxComputeUnits );
-            maxConstArgs                = GetInfo<uint>( DeviceInfo.DeviceMaxConstantArgs );
-            maxConstBufferSize          = GetInfo<ulong>( DeviceInfo.DeviceMaxConstantBufferSize );
-            maxMemAllocSize             = GetInfo<ulong>( DeviceInfo.DeviceMaxMemAllocSize );
-            maxParameterSize            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceMaxParameterSize );
-            maxReadImageArgs            = GetInfo<uint>( DeviceInfo.DeviceMaxReadImageArgs );
-            maxSamplers                 = GetInfo<uint>( DeviceInfo.DeviceMaxSamplers );
-            maxWorkGroupSize            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceMaxWorkGroupSize );
-            maxWorkItemDimensions       = GetInfo<uint>( DeviceInfo.DeviceMaxWorkItemDimensions );
-            maxWorkItemSizes            = new ReadOnlyCollection<long>( ComputeTools.ConvertArray( GetArrayInfo<DeviceInfo, IntPtr>( DeviceInfo.DeviceMaxWorkItemSizes, CL.GetDeviceInfo ) ) );
-            maxWriteImageArgs           = GetInfo<uint>( DeviceInfo.DeviceMaxWriteImageArgs );
-            memBaseAddrAlign            = GetInfo<uint>( DeviceInfo.DeviceMemBaseAddrAlign );
-            minDataTypeAlignSize        = GetInfo<uint>( DeviceInfo.DeviceMinDataTypeAlignSize );
-            name                        = GetStringInfo( DeviceInfo.DeviceName );
-            this.platform               = platform;
-            preferredVectorWidthChar    = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthChar );
-            preferredVectorWidthDouble  = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthDouble );
-            preferredVectorWidthFloat   = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthFloat );
-            preferredVectorWidthInt     = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthInt );
-            preferredVectorWidthLong    = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthLong );
-            preferredVectorWidthShort   = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthShort );
-            profile                     = GetStringInfo( DeviceInfo.DeviceProfile );
-            profilingTimerResolution    = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceProfilingTimerResolution );
-            queueProperties             = ( CommandQueueFlags )GetInfo<long>( DeviceInfo.DeviceQueueProperties );
-            singleFPConfig              = ( DeviceFpConfigFlags )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
-            type                        = ( DeviceTypeFlags )GetInfo<long>( DeviceInfo.DeviceType );
-            vendor                      = GetStringInfo( DeviceInfo.DeviceVendor );
-            vendorId                    = GetInfo<uint>( DeviceInfo.DeviceVendorId );
-            version                     = GetStringInfo( DeviceInfo.DeviceVersion );
-        }
+        #region Properties
 
         public long AddressBits
         {
@@ -545,10 +491,78 @@ namespace Cloo
             }
         }
 
+        #endregion
+
+        #region Constructors
+
+        internal ComputeDevice( ComputePlatform platform, IntPtr handle )
+        {
+            Handle = handle;
+            
+            addressBits                 = GetInfo<uint>( DeviceInfo.DeviceAddressBits );
+            available                   = GetBoolInfo( DeviceInfo.DeviceAvailable );
+            compilerAvailable           = GetBoolInfo( DeviceInfo.DeviceCompilerAvailable );
+            driverVersion               = GetStringInfo( DeviceInfo.DriverVersion );
+            endianLittle                = GetBoolInfo( DeviceInfo.DeviceEndianLittle );
+            errorCorrectionSupport      = GetBoolInfo( DeviceInfo.DeviceErrorCorrectionSupport );
+            executionCapabilities       = ( DeviceExecCapabilitiesFlags )GetInfo<long>( DeviceInfo.DeviceExecutionCapabilities );
+            extensions                  = new ReadOnlyCollection<string>( Regex.Split( GetStringInfo( DeviceInfo.DeviceExtensions ), "[\\s]+" ) );
+            globalMemCachelineSize      = GetInfo<uint>( DeviceInfo.DeviceGlobalMemCachelineSize );
+            globalMemCacheSize          = GetInfo<ulong>( DeviceInfo.DeviceGlobalMemCacheSize );
+            globalMemCacheType          = ( DeviceMemCacheType )GetInfo<long>( DeviceInfo.DeviceGlobalMemCacheType );
+            globalMemSize               = GetInfo<ulong>( DeviceInfo.DeviceGlobalMemSize );
+            image2DMaxHeight            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage2dMaxHeight );
+            image2DMaxWidth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage2dMaxWidth );
+            image3DMaxDepth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxDepth );
+            image3DMaxHeight            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxHeight );
+            image3DMaxWidth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxWidth );
+            imageSupport                = GetBoolInfo( DeviceInfo.DeviceImageSupport );
+            localMemSize                = GetInfo<ulong>( DeviceInfo.DeviceLocalMemSize );
+            localMemType                = ( DeviceLocalMemType )GetInfo<long>( DeviceInfo.DeviceLocalMemType );
+            maxClockFrequency           = GetInfo<uint>( DeviceInfo.DeviceMaxClockFrequency );
+            maxComputeUnits             = GetInfo<uint>( DeviceInfo.DeviceMaxComputeUnits );
+            maxConstArgs                = GetInfo<uint>( DeviceInfo.DeviceMaxConstantArgs );
+            maxConstBufferSize          = GetInfo<ulong>( DeviceInfo.DeviceMaxConstantBufferSize );
+            maxMemAllocSize             = GetInfo<ulong>( DeviceInfo.DeviceMaxMemAllocSize );
+            maxParameterSize            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceMaxParameterSize );
+            maxReadImageArgs            = GetInfo<uint>( DeviceInfo.DeviceMaxReadImageArgs );
+            maxSamplers                 = GetInfo<uint>( DeviceInfo.DeviceMaxSamplers );
+            maxWorkGroupSize            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceMaxWorkGroupSize );
+            maxWorkItemDimensions       = GetInfo<uint>( DeviceInfo.DeviceMaxWorkItemDimensions );
+            maxWorkItemSizes            = new ReadOnlyCollection<long>( ComputeTools.ConvertArray( GetArrayInfo<DeviceInfo, IntPtr>( DeviceInfo.DeviceMaxWorkItemSizes, CL.GetDeviceInfo ) ) );
+            maxWriteImageArgs           = GetInfo<uint>( DeviceInfo.DeviceMaxWriteImageArgs );
+            memBaseAddrAlign            = GetInfo<uint>( DeviceInfo.DeviceMemBaseAddrAlign );
+            minDataTypeAlignSize        = GetInfo<uint>( DeviceInfo.DeviceMinDataTypeAlignSize );
+            name                        = GetStringInfo( DeviceInfo.DeviceName );
+            this.platform               = platform;
+            preferredVectorWidthChar    = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthChar );
+            preferredVectorWidthDouble  = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthDouble );
+            preferredVectorWidthFloat   = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthFloat );
+            preferredVectorWidthInt     = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthInt );
+            preferredVectorWidthLong    = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthLong );
+            preferredVectorWidthShort   = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthShort );
+            profile                     = GetStringInfo( DeviceInfo.DeviceProfile );
+            profilingTimerResolution    = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceProfilingTimerResolution );
+            queueProperties             = ( CommandQueueFlags )GetInfo<long>( DeviceInfo.DeviceQueueProperties );
+            singleFPConfig              = ( DeviceFpConfigFlags )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
+            type                        = ( DeviceTypeFlags )GetInfo<long>( DeviceInfo.DeviceType );
+            vendor                      = GetStringInfo( DeviceInfo.DeviceVendor );
+            vendorId                    = GetInfo<uint>( DeviceInfo.DeviceVendorId );
+            version                     = GetStringInfo( DeviceInfo.DeviceVersion );
+        }
+
+        #endregion
+
+        #region Public methods
+
         public override string ToString()
         {
             return "ComputeDevice" + base.ToString();
         }
+
+        #endregion
+
+        #region Private methods
 
         private bool GetBoolInfo( DeviceInfo paramName )
         {
@@ -565,5 +579,7 @@ namespace Cloo
         {
             return GetStringInfo<DeviceInfo>( paramName, CL.GetDeviceInfo );
         }
+
+        #endregion
     }
 }

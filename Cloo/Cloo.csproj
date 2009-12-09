@@ -60,9 +60,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Documentation\license.txt" />
     <Content Include="Documentation\readme.txt" />
     <Content Include="Documentation\changelog.txt" />

@@ -36,11 +36,17 @@ namespace Cloo
 {
     public class ComputeProgram: ComputeResource
     {
+        #region Fields
+
         private ComputeContext context;
         private ReadOnlyCollection<ComputeDevice> devices;
         private string source;
         private ReadOnlyCollection<byte[]> binaries;
         private string buildOptions;
+        
+        #endregion
+
+        #region Properties
 
         public ReadOnlyCollection<byte[]> Binaries
         {
@@ -81,6 +87,10 @@ namespace Cloo
                 return source;
             }
         }
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Creates a program for a context, using the source code specified. The devices associated with the program are the devices associated with context.
@@ -167,6 +177,10 @@ namespace Cloo
             this.devices = new ReadOnlyCollection<ComputeDevice>( 
                 ( devices != null ) ? devices : context.Devices );
         }
+
+        #endregion
+
+        #region Public methods
 
         /// <summary>
         /// Builds (compiles and links) a program executable from the program source or binary for all the devices or some specific devices in the OpenCL context associated with program.
@@ -257,6 +271,10 @@ namespace Cloo
             return "ComputeProgram" + base.ToString();
         }
 
+        #endregion
+
+        #region Protected methods
+
         protected override void Dispose( bool manual )
         {
             if( manual )
@@ -270,6 +288,10 @@ namespace Cloo
                 Handle = IntPtr.Zero;
             }
         }
+
+        #endregion
+
+        #region Private methods
 
         private ReadOnlyCollection<byte[]> GetBinaries()
         {
@@ -312,6 +334,12 @@ namespace Cloo
             return new ReadOnlyCollection<byte[]>( binaries );
         }
 
+        #endregion
+
+        #region Delegates
+
         public delegate void NotifyDelegate( IntPtr program, IntPtr dataPtr );
+
+        #endregion
     }
 }

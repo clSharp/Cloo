@@ -26,24 +26,34 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 
 using System;
-using System.Collections.Generic;
-
 
 namespace Cloo
 {
     public abstract class ComputeResource: ComputeObject, IDisposable
     {
+        #region Public methods
+        
         public void Dispose()
         {
             Dispose( true );
             GC.SuppressFinalize( this );
         }
 
-        ~ComputeResource() 
+        #endregion
+
+        #region Protected methods
+
+        protected abstract void Dispose( bool manual );
+        
+        #endregion
+
+        #region Private methods
+
+        ~ComputeResource()
         {
             Dispose( false );
         }
 
-        protected abstract void Dispose( bool manual );
+        #endregion
     }
 }

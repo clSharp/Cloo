@@ -25,19 +25,20 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using System.Collections.Generic;
 using OpenTK.Compute.CL10;
-
 
 namespace Cloo
 {
     public class ComputeCompiler
-    {
+    {        
+        #region Public methods
+
         public static void Unload()
         {
             int error = CL.UnloadCompiler();
             ComputeException.ThrowIfError( error );
         }
+
+        #endregion
     }
 }

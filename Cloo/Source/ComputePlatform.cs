@@ -28,13 +28,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using OpenTK.Compute.CL10;
 using System.Text.RegularExpressions;
+using OpenTK.Compute.CL10;
 
 namespace Cloo
 {
     public class ComputePlatform: ComputeObject
     {
+        #region Fields
+        
         private readonly ReadOnlyCollection<ComputeDevice> devices;
         private readonly ReadOnlyCollection<string> extensions;
         private readonly string name;
@@ -42,6 +44,10 @@ namespace Cloo
         private readonly string profile;
         private readonly string vendor;
         private readonly string version;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// A list of devices available on this platform.
@@ -120,6 +126,10 @@ namespace Cloo
             }
         }
 
+        #endregion
+
+        #region Constructors
+
         static ComputePlatform()
         {
             IntPtr[] handles;
@@ -154,6 +164,19 @@ namespace Cloo
             version = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformVersion, CL.GetPlatformInfo );
         }
 
+        #endregion
+
+        #region Public methods
+
+        public override string ToString()
+        {
+            return "ComputePlatform" + base.ToString();
+        }
+
+        #endregion
+
+        #region Private methods
+
         private ComputeDevice[] GetDevices()
         {
             IntPtr[] handles;
@@ -176,9 +199,6 @@ namespace Cloo
             return devices;
         }
 
-        public override string ToString()
-        {
-            return "ComputePlatform" + base.ToString();
-        }
+        #endregion
     }
 }

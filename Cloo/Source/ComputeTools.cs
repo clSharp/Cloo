@@ -27,12 +27,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Globalization;
-using OpenTK.Compute.CL10;
 
 namespace Cloo
 {
     public class ComputeTools
     {
+        #region Internal methods
+
         internal static IntPtr[] ConvertArray( long[] array )
         {
             if( array == null ) return null;
@@ -56,5 +57,7 @@ namespace Cloo
                 result[ i ] = array[ i ].ToInt64();
             return result;
         }
+
+        #endregion
     }
 }

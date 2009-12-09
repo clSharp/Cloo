@@ -26,17 +26,22 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 
 using System;
-using System.Collections.Generic;
 using OpenTK.Compute.CL10;
 
 namespace Cloo
 {
     public class ComputeSampler: ComputeResource
     {
+        #region Fields
+        
         private ComputeContext context;
         private AddressingMode addressingMode;
         private FilterMode filterMode;
         private bool normalizedCoords;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// </summary>
@@ -72,6 +77,10 @@ namespace Cloo
             }
         }
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         /// Creates a sampler object.
         /// </summary>
@@ -90,6 +99,10 @@ namespace Cloo
             this.normalizedCoords = normalizedCoords;
         }
 
+        #endregion
+
+        #region Protected methods
+
         protected override void Dispose( bool manual )
         {
             if( manual )
@@ -104,5 +117,7 @@ namespace Cloo
                 Handle = IntPtr.Zero;
             }
         }
+
+        #endregion
     }
 }

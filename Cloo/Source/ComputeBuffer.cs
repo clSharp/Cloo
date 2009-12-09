@@ -27,15 +27,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using OpenTK.Compute.CL10;
 using System.Runtime.InteropServices;
+using OpenTK.Compute.CL10;
 
 
 namespace Cloo
 {
     public class ComputeBuffer<T>: ComputeMemory where T: struct
     {
+        #region Fields
+
         private long count;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// The number of items this buffer contains.
@@ -47,6 +53,10 @@ namespace Cloo
                 return count; 
             }
         }
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Creates a new memory object.
@@ -98,7 +108,11 @@ namespace Cloo
             }
             ComputeException.ThrowIfError( error );
         }
-        
+
+        #endregion
+
+        #region Public methods
+
         /// <summary>
         /// Get a list of supported ComputeBuffer formats available on the context.
         /// </summary>
@@ -114,5 +128,7 @@ namespace Cloo
         {
             return "ComputeBuffer" + base.ToString();
         }
+
+        #endregion
     }
 }

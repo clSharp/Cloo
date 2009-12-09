@@ -34,9 +34,15 @@ namespace Cloo
 {
     public class ComputeKernel: ComputeResource
     {
+        #region Fields
+
         private ComputeContext context;
         private string functionName;
         private ComputeProgram program;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// The ComputeContext associated with the kernel.
@@ -71,6 +77,10 @@ namespace Cloo
             }
         }
 
+        #endregion
+
+        #region Constructors
+
         internal ComputeKernel( IntPtr handle, ComputeProgram program )
         {
             this.Handle = handle;
@@ -90,6 +100,10 @@ namespace Cloo
             this.functionName = functionName;
             this.program = program;
         }
+
+        #endregion
+
+        #region Public methods
 
         /// <summary>
         /// Return the amount of local memory in bytes used by the kernel.
@@ -167,6 +181,10 @@ namespace Cloo
             return "ComputeKernel" + base.ToString();
         }
 
+        #endregion
+
+        #region Protected methods
+
         protected override void Dispose( bool manual )
         {
             if( Handle != IntPtr.Zero )
@@ -175,5 +193,7 @@ namespace Cloo
                 Handle = IntPtr.Zero;
             }
         }
+
+        #endregion
     }
 }

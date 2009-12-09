@@ -35,9 +35,15 @@ namespace Cloo
 {
     public abstract class ComputeMemory: ComputeResource
     {
+        #region Fields
+        
         protected long byteSize;
         protected MemFlags memflags;
         protected ComputeContext contxt;
+
+        #endregion
+
+        #region Properties
 
         public ComputeContext Context
         {
@@ -62,7 +68,11 @@ namespace Cloo
                 return byteSize;
             }
         }
-        
+
+        #endregion
+
+        #region Protected methods
+
         protected override void Dispose( bool manual )
         {            
             if( Handle != IntPtr.Zero )
@@ -84,5 +94,7 @@ namespace Cloo
 
             return new Collection<ImageFormat>( formats );
         }
+
+        #endregion
     }
 }

@@ -28,7 +28,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using OpenTK.Compute.CL10;
-using System.Collections.ObjectModel;
 
 namespace Cloo
 {

@@ -32,9 +32,15 @@ using OpenTK.Compute.CL10;
 namespace Cloo
 {
     public class ComputeEvent: ComputeResource
-    {        
+    {
+        #region Fields
+
         private ComputeJobQueue commandQueue;
         private CommandType commandType;
+
+        #endregion
+
+        #region Properties
 
         public ComputeJobQueue CommandQueue
         {
@@ -61,7 +67,7 @@ namespace Cloo
             }
         }
 
-        public ulong CmdFinishedTimestamp
+        public ulong JobFinishedTimestamp
         {
             get
             {
@@ -70,7 +76,7 @@ namespace Cloo
             }
         }
 
-        public ulong CmdQueuedTimestamp
+        public ulong JobQueuedTimestamp
         {
             get
             {
@@ -79,7 +85,7 @@ namespace Cloo
             }
         }
 
-        public ulong CmdStartedTimestamp
+        public ulong JobStartedTimestamp
         {
             get
             {
@@ -88,7 +94,7 @@ namespace Cloo
             }
         }
 
-        public ulong CmdSubmittedTimestamp
+        public ulong JobSubmittedTimestamp
         {
             get
             {
@@ -96,6 +102,10 @@ namespace Cloo
                     ProfilingInfo.ProfilingCommandSubmit, CL.GetEventProfilingInfo );
             }
         }
+
+        #endregion
+
+        #region Constructors
 
         internal ComputeEvent( IntPtr handle, ComputeJobQueue queue )
         {
@@ -105,13 +115,17 @@ namespace Cloo
                 EventInfo.EventCommandType, CL.GetEventInfo );
         }
 
+        #endregion
+
+        #region Public methods
+
         public override string ToString()
         {
             return "ComputeEvent" + base.ToString();
         }
 
         /// <summary>
-        /// Waits on the host thread for commands identified by event objects in the list to complete.
+        /// Waits on the host thread for jobs identified by event objects in the list to complete.
         /// </summary>
         public static void WaitFor( ICollection<ComputeEvent> events )
         {
@@ -121,6 +135,10 @@ namespace Cloo
             ComputeException.ThrowIfError( error );
         }
 
+        #endregion
+
+        #region Protected methods
+
         protected override void Dispose( bool manual )
         {
             if( Handle != IntPtr.Zero )
@@ -129,5 +147,7 @@ namespace Cloo
                 Handle = IntPtr.Zero;
             }
         }
+
+        #endregion
     }
 }
