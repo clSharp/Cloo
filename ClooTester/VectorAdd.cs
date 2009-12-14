@@ -10,10 +10,8 @@ namespace ClooTester
             : base( "VectorAdd" )
         { }
 
-        public override void Run()
+        protected override void RunInternal()
         {
-            StartRun();
-
             ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, null, null );
             ComputeProgram program = new ComputeProgram( context, vectorAddKernel );
             program.Build( null, null, null, IntPtr.Zero );
@@ -48,8 +46,6 @@ namespace ClooTester
             {
                 Console.WriteLine( "{0} + {1} = {2}", arrA[ i ], arrB[ i ], arrC[ i ] );
             }
-
-            EndRun();
         }
     }
 }

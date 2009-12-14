@@ -9,10 +9,8 @@ namespace ClooTester
             : base( "OpenCL platform info" )
         { }
 
-        public override void Run()
+        protected override void RunInternal()
         {
-            StartRun();
-
             foreach( ComputePlatform platform in ComputePlatform.Platforms )
             {
                 Console.WriteLine(
@@ -36,8 +34,6 @@ namespace ClooTester
                         Console.WriteLine( "\t + " + extension );
                 }
             }
-
-            EndRun();
         }
     }
 }

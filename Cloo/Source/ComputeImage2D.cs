@@ -33,6 +33,8 @@ namespace Cloo
 {
     public class ComputeImage2D: ComputeImage3D
     {
+        #region Constructors
+
         public ComputeImage2D( ComputeContext context, MemFlags flags, ImageFormat format, int width, int height, int rowPitch, IntPtr data )
         {
             this.contxt = context;
@@ -46,9 +48,15 @@ namespace Cloo
             ComputeException.ThrowIfError( error );
         }
 
+        #endregion
+
+        #region Public methods
+
         public new static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, MemFlags flags )
         {
             return GetSupportedFormats( context, flags, MemObjectType.MemObjectImage2d );
         }
-    }    
+
+        #endregion
+    }
 }

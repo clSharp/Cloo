@@ -11,10 +11,8 @@ namespace ClooTester
             : base( "Memory Object mapping" )
         { }
 
-        public override void Run()
+        protected override void RunInternal()
         {
-            StartRun();
-
             ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, null, null );
             ComputeJobQueue queue = new ComputeJobQueue( context, context.Devices[ 0 ], ( CommandQueueFlags )0 );
 
@@ -41,8 +39,6 @@ namespace ClooTester
             }
 
             queue.Unmap( buffer, ref mappedPtr, null );
-
-            EndRun();
         }
     }
 }

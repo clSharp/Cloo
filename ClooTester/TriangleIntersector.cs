@@ -67,10 +67,8 @@ hits[ index ] = distance;
             : base( "Triangle intersection" )
         { }
 
-        public override void Run()
+        protected override void RunInternal()
         {
-            StartRun();
-
             ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, null, null );
             ComputeProgram program = new ComputeProgram( context, kernelSource );
 
@@ -149,8 +147,6 @@ hits[ index ] = distance;
 
             Console.WriteLine( "Cloo ticks: {0}, \t\tmilliseconds: {1}", clTime.ElapsedTicks, clTime.ElapsedMilliseconds );
             Console.WriteLine( ".NET ticks: {0}, \t\tmilliseconds: {1}", csTime.ElapsedTicks, csTime.ElapsedMilliseconds );
-
-            EndRun();
         }
 
         private void intersect(

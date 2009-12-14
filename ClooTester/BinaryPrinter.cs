@@ -12,17 +12,13 @@ namespace ClooTester
             : base( "Program binary" )
         { }
 
-        public override void Run()
+        protected override void RunInternal()
         {
-            StartRun();
-
             ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, null, null );
             ComputeProgram program = new ComputeProgram( context, vectorAddKernel );
             program.Build( null, null, null, IntPtr.Zero );
             Encoding encoding = new ASCIIEncoding();
             Console.WriteLine( encoding.GetString( program.Binaries[ 0 ] ) );
-
-            EndRun();
         }
     }
 }

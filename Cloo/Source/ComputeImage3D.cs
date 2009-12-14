@@ -33,6 +33,8 @@ namespace Cloo
 {
     public class ComputeImage3D: ComputeMemory
     {
+        #region Constructors
+
         /// <param name="context">A valid OpenCL context on which the image object is to be created.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image.</param>
         /// <param name="format">A structure that describes the format properties of the image.</param>
@@ -60,6 +62,10 @@ namespace Cloo
         protected ComputeImage3D()
         { }
 
+        #endregion
+
+        #region Public methods
+
         /// <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
         /// <param name="Type">Describes the image Type.</param>
@@ -67,5 +73,7 @@ namespace Cloo
         {
             return GetSupportedFormats( context, flags, MemObjectType.MemObjectImage3d );
         }
+
+        #endregion
     }
 }

@@ -125,7 +125,7 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Enqueues a barrier job. This job ensures that all queued jobs have finished execution before the next batch of jobs can begin execution.
+        /// Enqueues a barrier. This barrier ensures that all queued jobs have finished execution before the next batch of jobs can begin execution.
         /// </summary>
         public void AddBarrier()
         {
@@ -134,7 +134,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Enqueues a marker job.
+        /// Enqueues a marker.
         /// </summary>
         public ComputeEvent AddMarker()
         {

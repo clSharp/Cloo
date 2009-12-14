@@ -5,7 +5,7 @@ namespace ClooTester
     public abstract class AbstractTester
     {
         private readonly string name;
-
+        
         protected string vectorAddKernel = @"
             kernel void
             vectorAdd(global const float * a,
@@ -22,12 +22,27 @@ namespace ClooTester
             this.name = name;
         }
 
+        public void Run()
+        {
+            StartRun();
+            try
+            {
+                RunInternal();
+            }
+            catch( Exception e )
+            {
+                Console.WriteLine( e.ToString() );
+                Console.WriteLine( e.StackTrace );
+            }
+            EndRun();
+        }
+
         protected void StartRun()
         {
             Console.WriteLine( "\n------------------| Start {0} |------------------", name );
         }
 
-        public abstract void Run();
+        protected abstract void RunInternal();
 
         protected void EndRun()
         {

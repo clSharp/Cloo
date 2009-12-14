@@ -35,10 +35,8 @@ namespace ClooTester
         {
         }
 
-        public override void Run()
+        protected override void RunInternal()
         {
-            StartRun();
-
             ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, null, null );
             ComputeBuffer<Vector4> result = new ComputeBuffer<Vector4>( context, MemFlags.MemReadWrite, 1 );
 
@@ -54,8 +52,6 @@ namespace ClooTester
             }
 
             List<ComputeKernel> kernels = new List<ComputeKernel>( program.CreateAllKernels() );            
-
-            EndRun();
         }
     }
 }
