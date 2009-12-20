@@ -1,7 +1,10 @@
 ﻿[0.4.1] -----------------------------------------------------------------------
 ~ changed: public IntPtrs replaced by longs
-~ changed: fixed CLS-Compliancy warnings
-~ changed: ComputeObject.GetInfo methods no longer provides conversion between native type and requested type
+~ changed: fixed CLS-Compliancy related warnings
+~ changed: ComputeObject.GetInfo methods no longer provide conversion between native type and queried type
+~ changed: Most fields converted to readonly
++ added: Missing comments on public methods and properties
++ added: ComputeKernel.SetSamplerArg for setting sampler_t kernel arguments
 
 [0.3.1] -----------------------------------------------------------------------
 ~ changed: GetInfo string queries are now parsed with regexes
