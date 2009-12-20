@@ -149,7 +149,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets the value of a specific argument of the kernel.
+        /// Sets the specified kernel argument.
         /// </summary>
         public void SetMemoryArg( int index, ComputeMemory memObj )
         {
@@ -157,7 +157,15 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets the value of a specific argument of the kernel.
+        /// Sets the specified kernel argument.
+        /// </summary>
+        public void SetSamplerArg( int index, ComputeSampler sampler )
+        {
+            SetValueArg<IntPtr>( index, sampler.Handle );
+        }        
+
+        /// <summary>
+        /// Sets the specified kernel argument.
         /// </summary>
         public void SetValueArg<T>( int index, T data ) where T : struct
         {
