@@ -37,7 +37,7 @@ namespace Cloo
     {
         #region Fields
 
-        private long count;
+        private readonly long count;
 
         #endregion
 
@@ -65,9 +65,8 @@ namespace Cloo
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the memory object and how it will be used.</param>
         /// <param name="count">The number of elements this buffer will contain.</param>
         public ComputeBuffer( ComputeContext context, MemFlags flags, long count )
+            : base( context, flags )
         {
-            this.contxt = context;
-            this.memflags = flags;
             this.count = count;
             byteCount = count * Marshal.SizeOf( typeof( T ) );
             ErrorCode error = ErrorCode.Success;
@@ -82,9 +81,8 @@ namespace Cloo
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the memory object and how it will be used.</param>
         /// <param name="data">The elements this buffer will contain.</param>
         public ComputeBuffer( ComputeContext context, MemFlags flags, T[] data )
+            : base( context, flags )
         {        
-            this.contxt = context;
-            this.memflags = flags;
             byteCount = data.Length * Marshal.SizeOf( typeof( T ) );
             count = data.Length;
 
@@ -123,7 +121,11 @@ namespace Cloo
         {
             return GetSupportedFormats( context, flags, MemObjectType.MemObjectBuffer );
         }
-        
+
+        /// <summary>
+        /// Gets a string representation of this buffer.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "ComputeBuffer" + base.ToString();

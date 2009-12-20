@@ -35,6 +35,9 @@ namespace Cloo
     {
         #region Constructors
 
+        /// <summary>
+        /// Creates a new 3D image.
+        /// </summary>
         /// <param name="context">A valid OpenCL context on which the image object is to be created.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image.</param>
         /// <param name="format">A structure that describes the format properties of the image.</param>
@@ -45,10 +48,8 @@ namespace Cloo
         /// <param name="slicePitch">The count in bytes of each 2D slice in the 3D image.</param>
         /// <param name="data">The image data that may be already allocated by the application.</param>
         public ComputeImage3D( ComputeContext context, MemFlags flags, ImageFormat format, int width, int height, int depth, int rowPitch, int slicePitch, IntPtr data )
+            : base( context, flags )
         {
-            this.contxt = context;
-            this.memflags = flags;
-
             int error = ( int )ErrorCode.Success;
             unsafe
             {
@@ -59,13 +60,17 @@ namespace Cloo
             byteCount = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
         }
 
-        protected ComputeImage3D()
+        protected ComputeImage3D( ComputeContext context, MemFlags flags )
+            : base( context, flags )
         { }
 
         #endregion
 
         #region Public methods
 
+        /// <summary>
+        /// Gets a collection of supported 3D image formats with the given context.
+        /// </summary>
         /// <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
         /// <param name="Type">Describes the image Type.</param>

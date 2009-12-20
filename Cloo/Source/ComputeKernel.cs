@@ -29,16 +29,15 @@ using System;
 using System.Runtime.InteropServices;
 using OpenTK.Compute.CL10;
 
-
 namespace Cloo
 {
     public class ComputeKernel: ComputeResource
     {
         #region Fields
 
-        private ComputeContext context;
-        private string functionName;
-        private ComputeProgram program;
+        private readonly ComputeContext context;
+        private readonly string functionName;
+        private readonly ComputeProgram program;
 
         #endregion
 
@@ -106,7 +105,7 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Return the amount of local memory in bytes used by the kernel.
+        /// Gets the amount of local memory in bytes used by the kernel.
         /// </summary>
         public long GetLocalMemorySize( ComputeDevice device )
         {
@@ -134,7 +133,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Set the value of a specific argument of the kernel.
+        /// Sets the value of a specific argument of the kernel.
         /// </summary>
         /// <param name="index">The index of the argument to set.</param>
         /// <param name="dataSize">The size in bytes of the data mapped to the argument.</param>
@@ -150,7 +149,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Set the value of a specific argument of the kernel.
+        /// Sets the value of a specific argument of the kernel.
         /// </summary>
         public void SetMemoryArg( int index, ComputeMemory memObj )
         {
@@ -158,7 +157,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Set the value of a specific argument of the kernel.
+        /// Sets the value of a specific argument of the kernel.
         /// </summary>
         public void SetValueArg<T>( int index, T data ) where T : struct
         {
@@ -176,6 +175,9 @@ namespace Cloo
             }            
         }
 
+        /// <summary>
+        /// Gets a string representation of this kernel.
+        /// </summary>
         public override string ToString()
         {
             return "ComputeKernel" + base.ToString();

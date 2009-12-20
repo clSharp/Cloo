@@ -27,20 +27,20 @@ namespace ClooInfo
         {
             StringBuilder info = new StringBuilder();
 
-            info.AppendLine( "HOST INFO" );
-            info.AppendLine( "Operating system:\t" + Environment.OSVersion );
+            info.AppendLine( "HOST" );
+            info.AppendLine( "Operating system:" + Environment.OSVersion );
 
             try
             {
                 info.AppendLine();
-                info.AppendLine( "OPENCL INFO" );
+                info.AppendLine( "OPENCL PLATFORMS" );
 
                 foreach( ComputePlatform platform in ComputePlatform.Platforms )
                 {
-                    info.AppendLine( "Name:\t\t" + platform.Name );
-                    info.AppendLine( "Vendor:\t\t" + platform.Vendor );
-                    info.AppendLine( "Version:\t\t" + platform.Version );
-                    info.AppendLine( "Profile:\t\t" + platform.Profile );
+                    info.AppendLine( "Name: " + platform.Name );
+                    info.AppendLine( "Vendor: " + platform.Vendor );
+                    info.AppendLine( "Version: " + platform.Version );
+                    info.AppendLine( "Profile: " + platform.Profile );
                     info.AppendLine( "Extensions:" );
 
                     foreach( string extension in platform.Extensions )
@@ -51,8 +51,13 @@ namespace ClooInfo
                     info.AppendLine( "Devices:" );
                     foreach( ComputeDevice device in platform.Devices )
                     {
-                        info.AppendLine( "\tName:\t" + device.Name );
-                        info.AppendLine( "\tDriver:\t" + device.DriverVersion );                        
+                        info.AppendLine( "\tName: " + device.Name );
+                        info.AppendLine( "\tVendor: " + device.Vendor );
+                        info.AppendLine( "\tDriver version: " + device.DriverVersion );
+                        info.AppendLine( "\tGlobal memory: " + device.GlobalMemorySize );
+                        info.AppendLine( "\tLocal memory: " + device.LocalMemorySize );
+                        info.AppendLine( "\tImage support: " + device.ImageSupport );
+                        info.AppendLine( "\tCompute units: " + device.MaxComputeUnits );
                         info.AppendLine( "\tExtensions:" );
 
                         foreach( string extension in device.Extensions )

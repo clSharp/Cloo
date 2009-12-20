@@ -507,6 +507,9 @@ namespace Cloo
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets a string representation of this queue.
+        /// </summary>
         public override string ToString()
         {
             return "ComputeQueue" + base.ToString();

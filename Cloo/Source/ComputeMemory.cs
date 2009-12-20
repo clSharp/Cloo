@@ -38,8 +38,8 @@ namespace Cloo
         #region Fields
         
         protected long byteCount;
-        protected MemFlags memflags;
-        protected ComputeContext contxt;
+        private readonly ComputeContext contxt;
+        private readonly MemFlags memflags;        
 
         #endregion
 
@@ -67,6 +67,16 @@ namespace Cloo
             {
                 return byteCount;
             }
+        }
+
+        #endregion
+
+        #region Constructors
+
+        protected ComputeMemory( ComputeContext context, MemFlags flags )
+        {
+            this.contxt = context;
+            this.memflags = flags;
         }
 
         #endregion

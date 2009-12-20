@@ -35,23 +35,29 @@ namespace Cloo
     {
         #region Constructors
 
+        /// <summary>
+        /// Creates a new 2D image.
+        /// </summary>
         public ComputeImage2D( ComputeContext context, MemFlags flags, ImageFormat format, int width, int height, int rowPitch, IntPtr data )
+            : base( context, flags )
         {
-            this.contxt = context;
-            this.memflags = flags;
-
             int error = ( int )ErrorCode.Success;
             unsafe
             {
                 Handle = CL.CreateImage2D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )rowPitch, data, &error );
             }
             ComputeException.ThrowIfError( error );
+            
+            byteCount = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
         }
 
         #endregion
 
         #region Public methods
 
+        /// <summary>
+        /// Gets a collection of supported 2D image formats with the given context.
+        /// </summary>
         public new static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, MemFlags flags )
         {
             return GetSupportedFormats( context, flags, MemObjectType.MemObjectImage2d );

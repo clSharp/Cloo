@@ -168,6 +168,9 @@ namespace Cloo
 
         #region Public methods
 
+        /// <summary>
+        /// Gets a string representation of this platform.
+        /// </summary>
         public override string ToString()
         {
             return "ComputePlatform" + base.ToString();

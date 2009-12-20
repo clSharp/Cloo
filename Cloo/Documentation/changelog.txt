@@ -1,7 +1,7 @@
 ﻿[0.4.1] -----------------------------------------------------------------------
 ~ changed: public IntPtrs replaced by longs
-~ changed: non CLS-compliant ulongs converted to longs
-~ changed: ComputeObject.GetInfo methods no longer provide conversion between native type and requested type
+~ changed: fixed CLS-Compliancy warnings
+~ changed: ComputeObject.GetInfo methods no longer provides conversion between native type and requested type
 
 [0.3.1] -----------------------------------------------------------------------
 ~ changed: GetInfo string queries are now parsed with regexes

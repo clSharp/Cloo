@@ -33,6 +33,9 @@ namespace Cloo
     {        
         #region Public methods
 
+        /// <summary>
+        /// Unloads the OpenCL compiler.
+        /// </summary>
         public static void Unload()
         {
             int error = CL.UnloadCompiler();

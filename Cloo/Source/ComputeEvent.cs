@@ -35,13 +35,16 @@ namespace Cloo
     {
         #region Fields
 
-        private ComputeJobQueue jobQueue;
-        private CommandType jobType;
+        private readonly ComputeJobQueue jobQueue;
+        private readonly CommandType jobType;
 
         #endregion
 
         #region Properties
 
+        /// <summary>
+        /// Return the ComputeJobQueue associated with event.
+        /// </summary>
         public ComputeJobQueue JobQueue
         {
             get
@@ -50,6 +53,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// Return the job associated with event.
+        /// </summary>
         public CommandType JobType
         {
             get
@@ -58,6 +64,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// Return the execution status of the job identified by event.
+        /// </summary>
         public int ExecutionStatus
         {
             get
@@ -67,6 +76,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// A 64-bit value that describes the current device time counter in nanoseconds when the job identified by event has finished execution on the device.
+        /// </summary>
         public long JobFinishedTimestamp
         {
             get
@@ -76,6 +88,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// A 64-bit value that describes the current device time counter in nanoseconds when the job identified by event is enqueued in a job-queue by the host.
+        /// </summary>
         public long JobQueuedTimestamp
         {
             get
@@ -85,6 +100,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// A 64-bit value that describes the current device time counter in nanoseconds when the job identified by event starts execution on the device.
+        /// </summary>
         public long JobStartedTimestamp
         {
             get
@@ -94,6 +112,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// A 64-bit value that describes the current device time counter in nanoseconds when the job identified by event that has been enqueued is submitted by the host to the device associated with the job-queue.
+        /// </summary>
         public long JobSubmittedTimestamp
         {
             get
@@ -119,6 +140,9 @@ namespace Cloo
 
         #region Public methods
 
+        /// <summary>
+        /// Gets the string representation of this event.
+        /// </summary>
         public override string ToString()
         {
             return "ComputeEvent" + base.ToString();

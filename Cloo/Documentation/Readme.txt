@@ -1,5 +1,5 @@
 [Description]
-Cloo is an object oriented OpenCL wrapper. Written in C#, it takes advantage of the .NET framework to provide portability and ease of use while exposing the full functionality of the OpenCL platform.
+Cloo is an object oriented, OpenCL wrapper. Written in C#, it takes advantage of the .NET framework to provide portability and ease of use while exposing the full functionality of the OpenCL platform.
 
 [Requirements]
 The following is required for Cloo to work properly:

@@ -34,16 +34,17 @@ namespace Cloo
     {
         #region Fields
         
-        private ComputeContext context;
-        private AddressingMode addressingMode;
-        private FilterMode filterMode;
-        private bool normalizedCoords;
+        private readonly ComputeContext context;
+        private readonly AddressingMode addressingMode;
+        private readonly FilterMode filterMode;
+        private readonly bool normalizedCoords;
 
         #endregion
 
         #region Properties
 
         /// <summary>
+        /// Return the context specified when the sampler is created.
         /// </summary>
         public ComputeContext Context
         {
@@ -53,6 +54,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// Return the value specified by addressing argument when the sampler is created.
+        /// </summary>
         public AddressingMode AddressingMode
         {
             get
@@ -61,6 +65,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// Return the value specified by filtering argument when the sampler is created.
+        /// </summary>
         public FilterMode FilterMode
         {
             get
@@ -69,6 +76,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// Return the value specified by normalizedCoords when the sampler is created.
+        /// </summary>
         public bool NormalizedCoords
         {
             get

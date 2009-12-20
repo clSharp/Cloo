@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows.Forms;
+
 namespace ClooInfo
 {
     public class Program
@@ -6,7 +8,7 @@ namespace ClooInfo
         [STAThread]
         public static void Main()
         {
-            System.Windows.Forms.Application.Run( new MainForm() );
+            Application.Run( new MainForm() );
         }
     }
 }

@@ -38,9 +38,9 @@ namespace Cloo
     {
         #region Fields
 
-        private ComputeContext context;
-        private ReadOnlyCollection<ComputeDevice> devices;
-        private string source;
+        private readonly ComputeContext context;
+        private readonly ReadOnlyCollection<ComputeDevice> devices;
+        private readonly string source;
         private ReadOnlyCollection<byte[]> binaries;
         private string buildOptions;
         
@@ -48,6 +48,9 @@ namespace Cloo
 
         #region Properties
 
+        /// <summary>
+        /// Return the program binaries for all devices associated with program. he bits returned can be an implementation-specific intermediate representation (a.k.a. IR) or device specific executable bits or both. The decision on which information is returned in the binary is up to the OpenCL implementation.
+        /// </summary>
         public ReadOnlyCollection<byte[]> Binaries
         {
             get
@@ -56,6 +59,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// Return the build options specified by the options argument when the program is created.
+        /// </summary>
         public string BuildOptions
         {
             get
@@ -64,6 +70,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// Return the context specified when the program object is created
+        /// </summary>
         public ComputeContext Context
         {
             get
@@ -72,6 +81,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// Return the list of devices associated with the program object. This can be the devices associated with context on which the program object has been created or can be a subset of devices that are specified when a progam object is created from binaries.
+        /// </summary>
         public ReadOnlyCollection<ComputeDevice> Devices
         {
             get
@@ -80,6 +92,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// Return the program source code specified when creating the program. null if program was created from binaries.
+        /// </summary>
         public string Source
         {
             get
@@ -237,7 +252,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Create a kernel object for the kernel function specified by the function name.
+        /// Creates a kernel object for the kernel function specified by the function name.
         /// </summary>
         public ComputeKernel CreateKernel( string functionName )
         {
@@ -245,7 +260,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Get the build status of program for the specified device.
+        /// Gets the build log of program for the specified device.
         /// </summary>
         public string GetBuildLog( ComputeDevice device )
         {
@@ -256,7 +271,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Get the build options of this program.
+        /// Gets the build status of program for the specified device.
         /// </summary>
         public BuildStatus GetBuildStatus( ComputeDevice device )
         {
@@ -266,6 +281,9 @@ namespace Cloo
                 CL.GetProgramBuildInfo );
         }
 
+        /// <summary>
+        /// Gets a string representation of this program.
+        /// </summary>
         public override string ToString()
         {
             return "ComputeProgram" + base.ToString();

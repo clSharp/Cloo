@@ -13,7 +13,6 @@ namespace ClooTester
         [STAThread]
         static void Main()
         {
-            new InfoPrinter().Run();
             new BinaryPrinter().Run();
             new MemoryMapper().Run();
             new VectorAdd().Run();

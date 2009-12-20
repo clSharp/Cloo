@@ -64,6 +64,9 @@ namespace Cloo
             return objA.Equals( objB );
         }
 
+        /// <summary>
+        /// Gets the hash code for this compute object.
+        /// </summary>
         public override int GetHashCode()
         {
             return Handle.GetHashCode();
@@ -83,6 +86,9 @@ namespace Cloo
             return true;
         }
 
+        /// <summary>
+        /// Gets a string representation for this object.
+        /// </summary>
         public override string ToString()
         {
             return "(" + Handle.ToString() + ")";
