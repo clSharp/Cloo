@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="BinaryPrinter.cs" />
     <Compile Include="AbstractTester.cs" />
+    <Compile Include="DummyTest.cs" />
     <Compile Include="KernelArgsTester.cs" />
     <Compile Include="MemoryMapper.cs" />
     <Compile Include="Program.cs" />

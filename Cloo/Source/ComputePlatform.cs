@@ -186,7 +186,7 @@ namespace Cloo
             int handlesLength = 0;
             unsafe
             {
-                int error = CL.GetDeviceIDs( Handle, DeviceTypeFlags.DeviceTypeDefault, 0, null, &handlesLength );
+                int error = CL.GetDeviceIDs( Handle, DeviceTypeFlags.DeviceTypeAll, 0, null, &handlesLength );
                 ComputeException.ThrowIfError( error );
 
                 handles = new IntPtr[ handlesLength ];

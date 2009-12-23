@@ -1,6 +1,6 @@
 ﻿[0.4.1] -----------------------------------------------------------------------
-~ changed: public IntPtrs replaced by longs
-~ changed: fixed CLS-Compliancy related warnings
+~ changed: Public IntPtrs replaced by longs
+~ changed: Fixed CLS-Compliancy related warnings
 ~ changed: ComputeObject.GetInfo methods no longer provide conversion between native type and queried type
 ~ changed: Most fields converted to readonly
 + added: Missing comments on public methods and properties
