@@ -156,8 +156,13 @@ namespace Cloo
         {
             Handle = handle;
             devices = new ReadOnlyCollection<ComputeDevice>( GetDevices() );
-            extensions = new ReadOnlyCollection<string>( 
-                Regex.Split( GetStringInfo<PlatformInfo>( PlatformInfo.PlatformExtensions, CL.GetPlatformInfo ), "[\\s]+" ) );
+            
+            string extensionString = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformExtensions, CL.GetPlatformInfo );
+            if( extensionString.Equals( "" ) )
+                extensions = new ReadOnlyCollection<string>( new string[ 0 ] );
+            else
+                extensions = new ReadOnlyCollection<string>( Regex.Split( extensionString, "[\\s]+" ) );
+            
             name = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformName, CL.GetPlatformInfo );
             profile = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformProfile, CL.GetPlatformInfo );
             vendor = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformVendor, CL.GetPlatformInfo );

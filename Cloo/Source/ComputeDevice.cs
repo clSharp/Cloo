@@ -656,7 +656,13 @@ namespace Cloo
             endianLittle                = GetBoolInfo( DeviceInfo.DeviceEndianLittle );
             errorCorrectionSupport      = GetBoolInfo( DeviceInfo.DeviceErrorCorrectionSupport );
             executionCapabilities       = ( DeviceExecCapabilitiesFlags )GetInfo<long>( DeviceInfo.DeviceExecutionCapabilities );
-            extensions                  = new ReadOnlyCollection<string>( Regex.Split( GetStringInfo( DeviceInfo.DeviceExtensions ), "[\\s]+" ) );
+            
+            string extensionString = GetStringInfo<DeviceInfo>( DeviceInfo.DeviceExtensions, CL.GetDeviceInfo );
+            if( extensionString.Equals( "" ) )
+                extensions = new ReadOnlyCollection<string>( new string[ 0 ] );
+            else
+                extensions = new ReadOnlyCollection<string>( Regex.Split( extensionString, "[\\s]+" ) );
+
             globalMemCachelineSize      = GetInfo<uint>( DeviceInfo.DeviceGlobalMemCachelineSize );
             globalMemCacheSize          = ( long )GetInfo<ulong>( DeviceInfo.DeviceGlobalMemCacheSize );
             globalMemCacheType          = ( DeviceMemCacheType )GetInfo<long>( DeviceInfo.DeviceGlobalMemCacheType );

@@ -27,8 +27,8 @@ namespace ClooInfo
         {
             StringBuilder info = new StringBuilder();
 
-            info.AppendLine( "HOST" );
-            info.AppendLine( "Operating system:" + Environment.OSVersion );
+            info.AppendLine( "HOST INFO" );
+            info.AppendLine( "Operating system: " + Environment.OSVersion );
 
             try
             {
@@ -62,6 +62,8 @@ namespace ClooInfo
 
                         foreach( string extension in device.Extensions )
                             info.AppendLine( "\t + " + extension );
+
+                        info.AppendLine();
                     }
                 }
             }
