@@ -1,13 +1,5 @@
 
-*.user
-*.userprefs
-*.usertasks
-*.suo
-*.snk
-*.patch
-*.pidb
-obj/
-bin/
+*.zip
 
 #ignore thumbnails created by windows
 Thumbs.db
