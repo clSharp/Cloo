@@ -82,11 +82,11 @@ hits[ index ] = distance;
             }
 
             ComputeKernel kernel = program.CreateKernel( "intersect" );
-            ComputeJobQueue queue = new ComputeJobQueue( context, context.Devices[ 0 ], ( CommandQueueFlags )0 );
+            ComputeQueue queue = new ComputeQueue( context, context.Devices[ 0 ], ( CommandQueueFlags )0 );
 
             Random rand = new Random();
 
-            int count = 65535;
+            int count = 1000;
             Vector4[] arrA = new Vector4[ count ];
             Vector4[] arrB = new Vector4[ count ];
             Vector4[] arrC = new Vector4[ count ];

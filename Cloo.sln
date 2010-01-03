@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+# Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloo", "Cloo\Cloo.csproj", "{656E96CE-2587-4CCC-A4DB-06D36267133A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClooTester", "ClooTester\ClooTester.csproj", "{8D19C574-28E2-4F6F-B842-95952F5FDF70}"

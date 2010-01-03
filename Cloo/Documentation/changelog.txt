@@ -1,4 +1,11 @@
-﻿[0.4.1] -----------------------------------------------------------------------
+﻿[0.4.2] -----------------------------------------------------------------------
+Inner changes:
+Extension queries modified in order to return an empty list of extension tokens instead of a list containing one empty extension token.
+
+Bugfixes:
+Corrected enumeration of devices of an OpenCL platform.
+
+[0.4.1] -----------------------------------------------------------------------
 ~ changed: Public IntPtrs replaced by longs
 ~ changed: Fixed CLS-Compliancy related warnings
 ~ changed: ComputeObject.GetInfo methods no longer provide conversion between native type and queried type

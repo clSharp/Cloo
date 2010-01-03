@@ -61,6 +61,7 @@ namespace Cloo
         /// <summary>
         /// Checks for an error and throws an exception if such is encountered.
         /// </summary>
+        /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
         public static void ThrowIfError( int errorCode )
         {
             ThrowIfError( ( ErrorCode )errorCode );
@@ -69,6 +70,7 @@ namespace Cloo
         /// <summary>
         /// Checks for an error and throws an exception if such is encountered.
         /// </summary>
+        /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
         public static void ThrowIfError( ErrorCode errorCode )
         {
             switch( errorCode )
@@ -131,7 +133,7 @@ namespace Cloo
                     throw new InvalidQueuePropertiesComputeException();
 
                 case ErrorCode.InvalidCommandQueue: 
-                    throw new InvalidJobQueueComputeException();
+                    throw new InvalidCommandQueueComputeException();
 
                 case ErrorCode.InvalidHostPtr: 
                     throw new InvalidHostPointerComputeException();
@@ -275,8 +277,8 @@ namespace Cloo
     public class InvalidQueuePropertiesComputeException: ComputeException
     { public InvalidQueuePropertiesComputeException() : base( ErrorCode.InvalidQueueProperties ) { } }
 
-    public class InvalidJobQueueComputeException: ComputeException
-    { public InvalidJobQueueComputeException() : base( ErrorCode.InvalidCommandQueue ) { } }
+    public class InvalidCommandQueueComputeException: ComputeException
+    { public InvalidCommandQueueComputeException() : base( ErrorCode.InvalidCommandQueue ) { } }
 
     public class InvalidHostPointerComputeException: ComputeException
     { public InvalidHostPointerComputeException() : base( ErrorCode.InvalidHostPtr ) { } }

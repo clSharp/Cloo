@@ -35,7 +35,7 @@ namespace Cloo
     {
         #region Fields
 
-        private readonly ComputeJobQueue jobQueue;
+        private readonly ComputeCommandQueue jobQueue;
         private readonly CommandType jobType;
 
         #endregion
@@ -45,7 +45,7 @@ namespace Cloo
         /// <summary>
         /// Return the ComputeJobQueue associated with event.
         /// </summary>
-        public ComputeJobQueue JobQueue
+        public ComputeCommandQueue JobQueue
         {
             get
             {
@@ -128,7 +128,7 @@ namespace Cloo
 
         #region Constructors
 
-        internal ComputeEvent( IntPtr handle, ComputeJobQueue queue )
+        internal ComputeEvent( IntPtr handle, ComputeCommandQueue queue )
         {
             Handle = handle;
             jobQueue = queue;
@@ -151,6 +151,7 @@ namespace Cloo
         /// <summary>
         /// Waits on the host thread for jobs identified by event objects in the list to complete.
         /// </summary>
+        /// <param name="events">The list of events to wait for.</param>
         public static void WaitFor( ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = ExtractHandles( events );

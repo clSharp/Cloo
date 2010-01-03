@@ -73,7 +73,6 @@ namespace Cloo
         /// </summary>
         /// <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
-        /// <param name="Type">Describes the image Type.</param>
         public static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, MemFlags flags )
         {
             return GetSupportedFormats( context, flags, MemObjectType.MemObjectImage3d );

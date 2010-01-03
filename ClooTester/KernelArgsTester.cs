@@ -62,6 +62,7 @@ namespace ClooTester
 
         protected override void RunInternal()
         {
+            /*
             ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, null, null );
             ComputeBuffer<Vector4> result = new ComputeBuffer<Vector4>( context, MemFlags.MemReadWrite, 1 );
 
@@ -71,6 +72,7 @@ namespace ClooTester
 
             List<ComputeKernel> kernels = new List<ComputeKernel>( program.CreateAllKernels() );
             Console.WriteLine( "Kernels successfully created." );
+             */
         }
     }
 }

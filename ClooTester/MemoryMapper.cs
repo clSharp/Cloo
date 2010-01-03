@@ -14,7 +14,7 @@ namespace ClooTester
         protected override void RunInternal()
         {
             ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, null, null );
-            ComputeJobQueue queue = new ComputeJobQueue( context, context.Devices[ 0 ], ( CommandQueueFlags )0 );
+            ComputeCommandQueue queue = new ComputeCommandQueue( context, context.Devices[ 0 ], ( CommandQueueFlags )0 );
 
             Console.WriteLine( "Original content:" );
 

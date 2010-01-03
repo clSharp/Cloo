@@ -75,6 +75,7 @@ namespace Cloo
         /// </summary>
         /// <param name="devices">A list of devices to associate with this context.</param>
         /// <param name="properties">A descriptor of this context properties.</param>
+        /// <param name="notify">A descriptor specifying the callback function and the callback user data.</param>
         public ComputeContext( ICollection<ComputeDevice> devices, PropertiesDescriptor properties, NotifyDescriptor notify )
         {
             IntPtr[] deviceHandles = ComputeObject.ExtractHandles( devices );
@@ -98,6 +99,7 @@ namespace Cloo
         /// </summary>
         /// <param name="deviceType">A bit-field that identifies the Type of device to associate with this context.</param>
         /// <param name="properties">A descriptor of this context properties.</param>
+        /// <param name="notify">A descriptor specifying the callback function and the callback user data.</param>
         public ComputeContext( DeviceTypeFlags deviceType, PropertiesDescriptor properties, NotifyDescriptor notify )
         {
             ContextProperties[] propertiesList = ( properties != null ) ? properties.PropertiesList : null;

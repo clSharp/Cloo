@@ -17,7 +17,7 @@ namespace ClooTester
             new BinaryPrinter().Run();
             new MemoryMapper().Run();
             new VectorAdd().Run();
-            new TriangleIntersector().Run();
+            //new TriangleIntersector().Run();
             new KernelArgsTester().Run();
 
             Console.ReadKey();

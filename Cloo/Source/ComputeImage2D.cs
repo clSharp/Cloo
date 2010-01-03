@@ -38,6 +38,13 @@ namespace Cloo
         /// <summary>
         /// Creates a new 2D image.
         /// </summary>
+        /// <param name="context">A valid OpenCL context on which the image object is to be created.</param>
+        /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image.</param>
+        /// <param name="format">A structure that describes the format properties of the image.</param>
+        /// <param name="width">Width of the image in pixels.</param>
+        /// <param name="height">Height of the image in pixels.</param>
+        /// <param name="rowPitch">The scan-line pitch in bytes.</param>
+        /// <param name="data">The image data that may be already allocated by the application.</param>
         public ComputeImage2D( ComputeContext context, MemFlags flags, ImageFormat format, int width, int height, int rowPitch, IntPtr data )
             : base( context, flags )
         {
@@ -58,6 +65,8 @@ namespace Cloo
         /// <summary>
         /// Gets a collection of supported 2D image formats with the given context.
         /// </summary>
+        /// <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
+        /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
         public new static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, MemFlags flags )
         {
             return GetSupportedFormats( context, flags, MemObjectType.MemObjectImage2d );
