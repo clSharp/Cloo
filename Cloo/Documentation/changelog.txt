@@ -30,7 +30,7 @@ Corrected enumeration of devices of an OpenCL platform.
 
 [0.1.1.100] -------------------------------------------------------------------
 - removed: unmanaged allocs and unnecessary transfers between managed <-> unmanaged memory areas
-~ changed: ComputeQueue to ComputeJobQueue
+~ changed: ComputeQueue to ComputeCommandQueue
 ~ changed: ComputeProgram binaries and all related logic now represented by byte[] instead of string
 * fixed: garbage in ComputeProgram binary readback
 + added: mapping ComputeBuffer's content into host memory

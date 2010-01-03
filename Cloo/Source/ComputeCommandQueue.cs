@@ -617,7 +617,6 @@ namespace Cloo
         public void Wait( ICollection<ComputeEvent> eventList )
         {
             IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
-            IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
             {
@@ -627,9 +626,6 @@ namespace Cloo
                     ComputeException.ThrowIfError( error );
                 }
             }
-
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>

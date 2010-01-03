@@ -1,5 +1,7 @@
 ﻿using Cloo;
 using OpenTK.Compute.CL10;
+using System;
+using System.Collections.Generic;
 namespace ClooTester
 {
     public class DummyTest: AbstractTester
@@ -10,38 +12,19 @@ namespace ClooTester
 
         protected override void RunInternal()
         {
-            /*
-            ComputePlatform currentPlatform = null;
-            //find our platform
-            foreach( ComputePlatform platform in ComputePlatform.Platforms )
-            {
-                System.Console.WriteLine( "VendorName = {0}", platform.Vendor );
-                if( platform.Name.Equals( "ATI Stream" ) )
-                {
-                    currentPlatform = platform;
-                }
-                //break;
-            }
-
-            ComputeContext.PropertiesDescriptor pd = new ComputeContext.PropertiesDescriptor( ComputePlatform.Platforms[ 0 ] );
-
-            ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, pd, null );*/
-
-            ComputePlatform currentPlatform = null;
-            //find our platform
-            foreach( ComputePlatform platform in ComputePlatform.Platforms )
-            {
-                System.Console.WriteLine( "VendorName = {0}", platform.Vendor );
-                if( platform.Vendor.Equals( "Advanced Micro Devices, Inc." ) )
-                {
-                    currentPlatform = platform;
-                }
-                //break;
-            }
-
+            ComputePlatform currentPlatform = ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." );
             ComputeContext.PropertiesDescriptor pd = new ComputeContext.PropertiesDescriptor( currentPlatform );
-
             ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, pd, null );
+            ComputeCommandQueue queue = new ComputeCommandQueue( context, context.Devices[ 0 ], 0 );
+
+            int count = 100000;
+            ComputeBuffer<float> a = new ComputeBuffer<float>( context, 0, count );
+
+            List<ComputeEvent> events = new List<ComputeEvent>();
+            queue.Write( a, false, 0, count, new float[ count ], events );
+            float[] read = queue.Read( a, false, 0, count, events );
+            
+            queue.Wait( events );
         }
     }
 }

@@ -422,7 +422,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Maximum number of work-items that can be specified in each dimension of the globalWorkSize to ComputeJobQueue.Execute(...).
+        /// Maximum number of work-items that can be specified in each dimension of the globalWorkSize to ComputeCommandQueue.Execute(...).
         /// </summary>
         public System.Collections.ObjectModel.ReadOnlyCollection<long> MaxWorkItemSizes
         {

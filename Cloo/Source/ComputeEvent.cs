@@ -35,37 +35,37 @@ namespace Cloo
     {
         #region Fields
 
-        private readonly ComputeCommandQueue jobQueue;
-        private readonly CommandType jobType;
+        private readonly ComputeCommandQueue commandQueue;
+        private readonly CommandType commandType;
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// Return the ComputeJobQueue associated with event.
+        /// Return the ComputeCommandQueue associated with event.
         /// </summary>
-        public ComputeCommandQueue JobQueue
+        public ComputeCommandQueue CommandQueue
         {
             get
             {
-                return jobQueue;
+                return commandQueue;
             }
         }
 
         /// <summary>
-        /// Return the job associated with event.
+        /// Return the command associated with event.
         /// </summary>
-        public CommandType JobType
+        public CommandType CommandType
         {
             get
             {
-                return jobType; 
+                return commandType; 
             }
         }
 
         /// <summary>
-        /// Return the execution status of the job identified by event.
+        /// Return the execution status of the command identified by event.
         /// </summary>
         public int ExecutionStatus
         {
@@ -77,9 +77,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// A 64-bit value that describes the current device time counter in nanoseconds when the job identified by event has finished execution on the device.
+        /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event has finished execution on the device.
         /// </summary>
-        public long JobFinishedTimestamp
+        public long CommandFinishedTimestamp
         {
             get
             {
@@ -89,9 +89,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// A 64-bit value that describes the current device time counter in nanoseconds when the job identified by event is enqueued in a job-queue by the host.
+        /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event is enqueued in a command-queue by the host.
         /// </summary>
-        public long JobQueuedTimestamp
+        public long CommandQueuedTimestamp
         {
             get
             {
@@ -101,9 +101,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// A 64-bit value that describes the current device time counter in nanoseconds when the job identified by event starts execution on the device.
+        /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event starts execution on the device.
         /// </summary>
-        public long JobStartedTimestamp
+        public long CommandStartedTimestamp
         {
             get
             {
@@ -113,9 +113,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// A 64-bit value that describes the current device time counter in nanoseconds when the job identified by event that has been enqueued is submitted by the host to the device associated with the job-queue.
+        /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event that has been enqueued is submitted by the host to the device associated with the command-queue.
         /// </summary>
-        public long JobSubmittedTimestamp
+        public long CommandSubmittedTimestamp
         {
             get
             {
@@ -131,8 +131,8 @@ namespace Cloo
         internal ComputeEvent( IntPtr handle, ComputeCommandQueue queue )
         {
             Handle = handle;
-            jobQueue = queue;
-            jobType = ( CommandType )GetInfo<EventInfo, uint>( 
+            commandQueue = queue;
+            commandType = ( CommandType )GetInfo<EventInfo, uint>( 
                 EventInfo.EventCommandType, CL.GetEventInfo );
         }
 
@@ -149,7 +149,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Waits on the host thread for jobs identified by event objects in the list to complete.
+        /// Waits on the host thread for commands identified by event objects in the list to complete.
         /// </summary>
         /// <param name="events">The list of events to wait for.</param>
         public static void WaitFor( ICollection<ComputeEvent> events )
