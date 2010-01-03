@@ -25,15 +25,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
-using OpenTK.Compute.CL10;
-
 namespace Cloo
 {
-    public class ComputePlatform: ComputeObject
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Text.RegularExpressions;
+    using OpenTK.Compute.CL10;
+
+    public class ComputePlatform : ComputeObject
     {
         #region Fields
         
@@ -173,6 +173,24 @@ namespace Cloo
 
         #region Public methods
 
+        public static ComputePlatform GetByName( string platformName )
+        {
+            foreach( ComputePlatform platform in Platforms )
+                if( platform.Name.Equals( platformName ) )
+                    return platform;
+
+            throw new ArgumentException( "Platform not found." );
+        }
+
+        public static ComputePlatform GetByVendor( string platformVendor )
+        {
+            foreach( ComputePlatform platform in Platforms )
+                if( platform.Vendor.Equals( platformVendor ) )
+                    return platform;
+
+            throw new ArgumentException( "Platform not found." );
+        }
+
         /// <summary>
         /// Gets a string representation of this platform.
         /// </summary>
@@ -188,7 +206,7 @@ namespace Cloo
         private ComputeDevice[] GetDevices()
         {
             IntPtr[] handles;
-            int handlesLength = 0;
+            uint handlesLength = 0;
             unsafe
             {
                 int error = CL.GetDeviceIDs( Handle, DeviceTypeFlags.DeviceTypeAll, 0, null, &handlesLength );
