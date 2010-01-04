@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
-using OpenTK.Cloo.CL10;
+using OpenTK.Compute.CL10;
 
 
 namespace Cloo

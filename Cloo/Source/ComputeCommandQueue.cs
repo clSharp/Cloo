@@ -36,7 +36,7 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
-    using OpenTK.Cloo.CL10;
+    using OpenTK.Compute.CL10;
 
     public class ComputeCommandQueue : ComputeResource
     {
@@ -198,7 +198,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Overrides.EnqueueCopyBufferToImage(
+                    int error = DllImports.EnqueueCopyBufferToImage(
                         Handle,
                         source.Handle,
                         destination.Handle,
@@ -239,7 +239,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Overrides.EnqueueCopyImageToBuffer(
+                    int error = DllImports.EnqueueCopyImageToBuffer(
                         Handle,
                         source.Handle,
                         destination.Handle,
@@ -280,7 +280,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Overrides.EnqueueCopyImage(
+                    int error = DllImports.EnqueueCopyImage(
                         Handle,
                         source.Handle,
                         destination.Handle,
@@ -444,7 +444,7 @@ namespace Cloo
                 {
                     int error = (int)ErrorCode.Success;
 
-                    mappedPtr = Overrides.EnqueueMapImage(
+                    mappedPtr = DllImports.EnqueueMapImage(
                         Handle,
                         image.Handle,
                         blocking,
@@ -557,7 +557,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Overrides.EnqueueReadImage(
+                    int error = DllImports.EnqueueReadImage(
                         Handle,
                         image.Handle,
                         blocking,
@@ -690,7 +690,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Overrides.EnqueueWriteImage(
+                    int error = DllImports.EnqueueWriteImage(
                         Handle,
                         image.Handle,
                         blocking,

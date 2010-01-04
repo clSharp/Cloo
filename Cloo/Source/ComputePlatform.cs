@@ -31,7 +31,7 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Text.RegularExpressions;
-    using OpenTK.Cloo.CL10;
+    using OpenTK.Compute.CL10;
 
     public class ComputePlatform : ComputeObject
     {

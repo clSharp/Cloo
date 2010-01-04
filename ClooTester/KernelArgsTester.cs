@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Cloo;
 using OpenTK;
-using OpenTK.Cloo.CL10;
+using OpenTK.Compute.CL10;
 
 namespace ClooTester
 {
