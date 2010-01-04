@@ -1,4 +1,4 @@
-﻿[0.5.1] -----------------------------------------------------------------------
+[0.5.1] -----------------------------------------------------------------------
 Breaking changes:
 ComputeJobQueue renamed to ComputeCommandQueue. Avoids confusion for new users.
 All ComputeEvent properties that included "Job" in their names are renamed as well.
@@ -16,7 +16,11 @@ Extension queries modified in order to give an empty list of tokens instead of a
 Bugfixes:
 Enumeration of devices of an OpenCL platform.
 Fixed bug that prevented creation of ComputeContext on ATI Stream 1.0 final in 64bit OS's.
+ComputeCommandQueue.Read( ComputeBuffer... ) now reads the specified count of items and not the whole buffer.
+Crash on ComputeCommandQueue.Wait(). 
 
+Documentation:
+A lot of small tweaks, fixes and new lines.
 
 [0.4.1] -----------------------------------------------------------------------
 ~ changed: Public IntPtrs replaced by longs
