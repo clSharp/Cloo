@@ -2,7 +2,7 @@
 {
     using System;
     using System.Runtime.InteropServices;
-    using OpenTK.Compute.CL10;
+    using OpenTK.Cloo.CL10;
     using System.Security;
 
     internal class Overrides

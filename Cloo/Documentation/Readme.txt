@@ -10,7 +10,7 @@ The following is required for Cloo to work properly:
 You can download the most recent version of Cloo from: "http://sourceforge.net/projects/cloo/"
 
 [Notes]
-Image support is a work in progress. The API is present but most of the related calls will fail with a NotImplementedException.
+Image support is a work in progress. The API is present but the related calls will fail with a NotImplementedException.
 Currently, there is no support for object sharing and data transfers between OpenCL and OpenGL.
 
 For license information see "license.txt".

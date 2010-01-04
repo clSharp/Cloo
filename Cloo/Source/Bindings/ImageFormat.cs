@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace OpenTK.Compute.CL10
+namespace OpenTK.Cloo.CL10
 {
     /// <summary>
     /// Defines the format of an OpenCL image.

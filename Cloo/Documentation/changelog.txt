@@ -1,9 +1,23 @@
-﻿[0.4.2] -----------------------------------------------------------------------
+﻿[0.5.1] -----------------------------------------------------------------------
+Breaking changes:
+ComputeJobQueue renamed to ComputeCommandQueue. Avoids confusion for new users.
+All ComputeEvent properties that included "Job" in their names are renamed as well.
+AddBarrier(), AddMarker() and WaitFor() of ComputeCommandQueue renamed to Barrier(), Marker() and Wait() respectively.
+
+New functionality:
+None.
+
+New overloads/helpers:
+GetByName() and GetByVendor() methods in ComputePlatform.
+
 Inner changes:
-Extension queries modified in order to return an empty list of extension tokens instead of a list containing one empty extension token.
+Extension queries modified in order to give an empty list of tokens instead of a list containing one empty token in case no extensions are supported.
+OpenTK raw bindings are now included with Cloo. There is no more dependency on OpenTK.dll.
 
 Bugfixes:
-Corrected enumeration of devices of an OpenCL platform.
+Enumeration of devices of an OpenCL platform.
+Fixed bug that prevented creation of ComputeContext on ATI Stream 1.0 final in 64bit OS's.
+
 
 [0.4.1] -----------------------------------------------------------------------
 ~ changed: Public IntPtrs replaced by longs

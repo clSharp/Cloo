@@ -31,7 +31,7 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Text.RegularExpressions;
-    using OpenTK.Compute.CL10;
+    using OpenTK.Cloo.CL10;
 
     public class ComputePlatform : ComputeObject
     {
@@ -179,7 +179,7 @@ namespace Cloo
                 if( platform.Name.Equals( platformName ) )
                     return platform;
 
-            throw new ArgumentException( "Platform not found." );
+            return null;
         }
 
         public static ComputePlatform GetByVendor( string platformVendor )
@@ -188,7 +188,7 @@ namespace Cloo
                 if( platform.Vendor.Equals( platformVendor ) )
                     return platform;
 
-            throw new ArgumentException( "Platform not found." );
+            return null;
         }
 
         /// <summary>

@@ -27,7 +27,7 @@
 
 using System;
 
-namespace OpenTK.Compute.CL10
+namespace OpenTK.Cloo.CL10
 {
     #pragma warning disable 1591
 

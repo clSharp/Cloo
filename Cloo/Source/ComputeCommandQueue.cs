@@ -26,9 +26,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 
 /* 
- * Read/Write/Copy operations should check for blocking flag.
- * Non-blocking operations are not implemented properly and 
- * as a result GC handles may be released before such operations complete!!!
+ * TODO:
+ * There may be a problem related to non-blocking operations.
+ * The GC Handles may be released before such operations complete.
  */
 
 namespace Cloo
@@ -36,7 +36,7 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
-    using OpenTK.Compute.CL10;
+    using OpenTK.Cloo.CL10;
 
     public class ComputeCommandQueue : ComputeResource
     {
@@ -186,6 +186,8 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy<T>( ComputeBuffer<T> source, ComputeImage3D destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
+            throw new NotImplementedException();
+
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             int sizeofT = Marshal.SizeOf( typeof( T ) );
@@ -225,6 +227,8 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy<T>( ComputeImage3D source, ComputeBuffer<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
+            throw new NotImplementedException();
+
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             int sizeofT = Marshal.SizeOf( typeof( T ) );
@@ -264,6 +268,8 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy( ComputeImage3D source, ComputeImage3D destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events )
         {
+            throw new NotImplementedException();
+
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
 
@@ -424,6 +430,8 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public IntPtr Map( ComputeImage3D image, bool blocking, MapFlags flags, long[] offset, long[] region, out long rowPitch, out long slicePitch, ICollection<ComputeEvent> events )
         {
+            throw new NotImplementedException();
+
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             IntPtr mappedPtr, rowPitchPtr, slicePitchPtr;
@@ -540,9 +548,8 @@ namespace Cloo
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
                         
-            // TODO: allocate a buffer for the read data
             byte[] imageBits = new byte[ region[ 2 ] * slicePitch * region[ 1 ] * rowPitch * region[ 0 ] ];
-            IntPtr readData = IntPtr.Zero;
+            IntPtr readData = Marshal.UnsafeAddrOfPinnedArrayElement( imageBits, 0 );
 
             unsafe
             {

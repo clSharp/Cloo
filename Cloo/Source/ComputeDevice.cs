@@ -28,7 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
-using OpenTK.Compute.CL10;
+using OpenTK.Cloo.CL10;
 
 namespace Cloo
 {

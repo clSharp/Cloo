@@ -26,7 +26,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 
 using System;
-using OpenTK.Compute.CL10;
+using OpenTK.Cloo.CL10;
 
 namespace Cloo
 {

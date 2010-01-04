@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 
-namespace OpenTK.Compute.CL10
+namespace OpenTK.Cloo.CL10
 {
     /// <summary>
     /// Provides access to the OpenCL 1.0 flat API.

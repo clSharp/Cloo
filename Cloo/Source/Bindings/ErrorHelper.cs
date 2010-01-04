@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OpenTK.Compute.CL10
+namespace OpenTK.Cloo.CL10
 {
     struct ErrorHelper : IDisposable
     {
