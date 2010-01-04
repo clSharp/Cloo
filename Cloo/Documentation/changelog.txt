@@ -12,7 +12,6 @@ GetByName() and GetByVendor() methods in ComputePlatform.
 
 Inner changes:
 Extension queries modified in order to give an empty list of tokens instead of a list containing one empty token in case no extensions are supported.
-OpenTK raw bindings are now included with Cloo. There is no more dependency on OpenTK.dll.
 
 Bugfixes:
 Enumeration of devices of an OpenCL platform.

@@ -26,8 +26,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 
 /* 
- * TODO:
- * There may be a problem related to non-blocking operations.
+ * Should investigate:
+ * There may be a problem related to asynchronous operations.
  * The GC Handles may be released before such operations complete.
  */
 
