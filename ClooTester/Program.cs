@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Cloo;
-using OpenTK.Compute.CL10;
+using OpenTK.Cloo.CL10;
 
 namespace ClooTester
 {

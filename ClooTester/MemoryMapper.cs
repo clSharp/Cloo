@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Cloo;
-using OpenTK.Compute.CL10;
+using OpenTK.Cloo.CL10;
 
 namespace ClooTester
 {
@@ -13,7 +13,9 @@ namespace ClooTester
 
         protected override void RunInternal()
         {
-            ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, null, null );
+            ComputeContext.PropertiesDescriptor pd = new ComputeContext.PropertiesDescriptor( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
+
+            ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, pd, null );
             ComputeCommandQueue queue = new ComputeCommandQueue( context, context.Devices[ 0 ], ( CommandQueueFlags )0 );
 
             Console.WriteLine( "Original content:" );

@@ -1,5 +1,5 @@
 ﻿using Cloo;
-using OpenTK.Compute.CL10;
+using OpenTK.Cloo.CL10;
 using System;
 using System.Collections.Generic;
 namespace ClooTester
