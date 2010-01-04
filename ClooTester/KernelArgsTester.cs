@@ -62,6 +62,7 @@ namespace ClooTester
 
         protected override void RunInternal()
         {            
+            /*
             ComputeContext.PropertiesDescriptor pd = new ComputeContext.PropertiesDescriptor( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
 
             ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, pd, null );
@@ -73,6 +74,7 @@ namespace ClooTester
 
             List<ComputeKernel> kernels = new List<ComputeKernel>( program.CreateAllKernels() );
             Console.WriteLine( "Kernels successfully created." );
+             */
         }
     }
 }
