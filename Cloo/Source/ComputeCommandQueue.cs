@@ -28,7 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 /* 
  * Read/Write/Copy operations should check for blocking flag.
  * Non-blocking operations are not implemented properly and 
- * as a result GC handles are released before such operations complete!!!
+ * as a result GC handles may be released before such operations complete!!!
  */
 
 namespace Cloo
@@ -147,10 +147,10 @@ namespace Cloo
         /// <param name="sourceOffset">The source offset in elements where reading starts.</param>
         /// <param name="destinationOffset">The destination offset in elements where writing starts.</param>
         /// <param name="count">The number of elements to copy.</param>
-        /// <param name="eventList">Specify events that need to complete before this particular command can be executed. If eventList is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Copy<T>( ComputeBuffer<T> source, ComputeBuffer<T> destination, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEvent> eventList ) where T: struct
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Copy<T>( ComputeBuffer<T> source, ComputeBuffer<T> destination, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             int sizeofT = Marshal.SizeOf( typeof( T ) );
 
@@ -171,8 +171,8 @@ namespace Cloo
                 }
             }
 
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
@@ -183,12 +183,10 @@ namespace Cloo
         /// <param name="sourceOffset">The source offset in elements where reading starts.</param>
         /// <param name="destinationOffset">The destination (x, y, z) offset in pixels where writing starts.</param>
         /// <param name="region">The region (width, height, depth) count in pixels to copy.</param>
-        /// <param name="eventList">Specify events that need to complete before this particular command can be executed. If eventList is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Copy<T>( ComputeBuffer<T> source, ComputeImage3D destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> eventList ) where T: struct
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Copy<T>( ComputeBuffer<T> source, ComputeImage3D destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
-            throw new NotImplementedException();
-
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             int sizeofT = Marshal.SizeOf( typeof( T ) );
 
@@ -212,8 +210,8 @@ namespace Cloo
                 }                
             }
 
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
@@ -224,12 +222,10 @@ namespace Cloo
         /// <param name="sourceOffset">The source (x, y, z) offset in pixels where reading starts.</param>
         /// <param name="region">The region (width, height, depth) count in pixels to copy.</param>
         /// <param name="destinationOffset">The destination offset in elements where writing starts.</param>
-        /// <param name="eventList">Specify events that need to complete before this particular command can be executed. If eventList is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Copy<T>( ComputeImage3D source, ComputeBuffer<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> eventList ) where T: struct
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Copy<T>( ComputeImage3D source, ComputeBuffer<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
-            throw new NotImplementedException();
-
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             int sizeofT = Marshal.SizeOf( typeof( T ) );
 
@@ -253,8 +249,8 @@ namespace Cloo
                 }
             }
 
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
@@ -265,10 +261,10 @@ namespace Cloo
         /// <param name="sourceOffset">The source (x, y, z) offset in pixels where reading starts.</param>
         /// <param name="destinationOffset">The destination (x, y, z) offset in pixels where writing starts.</param>
         /// <param name="region">The region (width, height, depth) count in pixels to copy.</param>
-        /// <param name="eventList">Specify events that need to complete before this particular command can be executed. If eventList is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Copy( ComputeImage3D source, ComputeImage3D destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> eventList )
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Copy( ComputeImage3D source, ComputeImage3D destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
@@ -292,16 +288,16 @@ namespace Cloo
                 }
             }
 
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
         /// Enqueues a command to execute a single kernel.
         /// </summary>
-        public void Execute( ComputeKernel kernel, ICollection<ComputeEvent> eventList )
+        public void Execute( ComputeKernel kernel, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
@@ -318,16 +314,16 @@ namespace Cloo
                 }
             }
 
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
         /// Enqueues a command to execute a range of kernels.
         /// </summary>
-        public void Execute( ComputeKernel kernel, long[] globalWorkOffset, long[] globalWorkSize, long[] localWorkSize, ICollection<ComputeEvent> eventList )
+        public void Execute( ComputeKernel kernel, long[] globalWorkOffset, long[] globalWorkSize, long[] localWorkSize, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
@@ -350,8 +346,8 @@ namespace Cloo
                     ComputeException.ThrowIfError( error );
                 }
             }
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
@@ -380,11 +376,11 @@ namespace Cloo
         /// <param name="flags">A list of properties for the mapping mode.</param>
         /// <param name="offset">The source offset in elements where mapping starts.</param>
         /// <param name="count">The number of elements to map.</param>
-        /// <param name="eventList">Specify events that need to complete before this particular command can be executed. If eventList is not null a new event identifying this command is attached to the end of the list.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         /// <returns>The mapped area.</returns>
-        public IntPtr Map<T>( ComputeBuffer<T> buffer, bool blocking, MapFlags flags, long offset, long count, ICollection<ComputeEvent> eventList ) where T: struct
+        public IntPtr Map<T>( ComputeBuffer<T> buffer, bool blocking, MapFlags flags, long offset, long count, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             IntPtr mappedPtr = IntPtr.Zero;
             int error = ( int )ErrorCode.Success;
@@ -409,8 +405,8 @@ namespace Cloo
                 }
             }
 
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
 
             return mappedPtr;
         }
@@ -425,12 +421,10 @@ namespace Cloo
         /// <param name="region">The region (width, height, depth) count in pixels to map.</param>
         /// <param name="rowPitch">Returns the length of image scan-line in bytes.</param>
         /// <param name="slicePitch">Returns the count in bytes of the 2D slice of the 3D image.</param>
-        /// <param name="eventList">Specify events that need to complete before this particular command can be executed. If eventList is not null a new event identifying this command is attached to the end of the list.</param>
-        public IntPtr Map( ComputeImage3D image, bool blocking, MapFlags flags, long[] offset, long[] region, out long rowPitch, out long slicePitch, ICollection<ComputeEvent> eventList )
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public IntPtr Map( ComputeImage3D image, bool blocking, MapFlags flags, long[] offset, long[] region, out long rowPitch, out long slicePitch, ICollection<ComputeEvent> events )
         {
-            throw new NotImplementedException();
-
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             IntPtr mappedPtr, rowPitchPtr, slicePitchPtr;
 
@@ -459,8 +453,8 @@ namespace Cloo
                 }
             }
 
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
 
             rowPitch = rowPitchPtr.ToInt64();
             slicePitch = slicePitchPtr.ToInt64();
@@ -487,11 +481,11 @@ namespace Cloo
         /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
         /// <param name="offset">The offset in elements where reading starts.</param>
         /// <param name="count">The number of elements to read.</param>
-        /// <param name="eventList">Specify events that need to complete before this particular command can be executed. If eventList is not null a new event identifying this command is attached to the end of the list.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         /// <returns>The content read from the buffer.</returns>
-        public T[] Read<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, ICollection<ComputeEvent> eventList ) where T: struct
+        public T[] Read<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
 
             int sizeofT = Marshal.SizeOf( typeof( T ) );            
@@ -522,8 +516,8 @@ namespace Cloo
                 }
             }
 
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
 
             return readData;
         }
@@ -537,13 +531,13 @@ namespace Cloo
         /// <param name="region">The region (width, height, depth) count in pixels to read.</param>
         /// <param name="rowPitch">The length of image scan-line in bytes.</param>
         /// <param name="slicePitch">The count in bytes of the 2D slice of the 3D image.</param>
-        /// <param name="eventList">Specify events that need to complete before this particular command can be executed. If eventList is not null a new event identifying this command is attached to the end of the list.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         /// <returns>A pointer to the image data.</returns>
-        public IntPtr Read( ComputeImage3D image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, ICollection<ComputeEvent> eventList )
+        public IntPtr Read( ComputeImage3D image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, ICollection<ComputeEvent> events )
         {
             throw new NotImplementedException();
 
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
                         
             // TODO: allocate a buffer for the read data
@@ -572,8 +566,8 @@ namespace Cloo
                 }                
             }
 
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
 
             return readData;
         }
@@ -589,9 +583,9 @@ namespace Cloo
         /// <summary>
         /// Enqueues a command to unmap a buffer or an image from the host address space.
         /// </summary>
-        public void Unmap( ComputeMemory memory, ref IntPtr mappedPtr, ICollection<ComputeEvent> eventList )
+        public void Unmap( ComputeMemory memory, ref IntPtr mappedPtr, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
@@ -614,9 +608,9 @@ namespace Cloo
         /// <summary>
         /// Enqueues a wait for a list of events to complete before any future commands queued in the command-queue are executed.
         /// </summary>
-        public void Wait( ICollection<ComputeEvent> eventList )
+        public void Wait( ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
 
             unsafe
             {
@@ -636,11 +630,11 @@ namespace Cloo
         /// <param name="offset">The offset in elements where writing starts.</param>
         /// <param name="count">The number of elements to write.</param>
         /// <param name="data">The content written to the buffer.</param>
-        /// <param name="eventList">Specify events that need to complete before this particular command can be executed. If eventList is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Write<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, T[] data, ICollection<ComputeEvent> eventList ) where T: struct
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Write<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, T[] data, ICollection<ComputeEvent> events ) where T: struct
         {
             int sizeofT = Marshal.SizeOf( typeof( T ) );
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             IntPtr byteOffset = ( IntPtr )( offset * sizeofT );
 
@@ -661,8 +655,8 @@ namespace Cloo
                 ComputeException.ThrowIfError( error );
             }
 
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
@@ -675,12 +669,12 @@ namespace Cloo
         /// <param name="rowPitch">The length of image scan-line in bytes.</param>
         /// <param name="slicePitch">The count in bytes of the 2D slice of the 3D image.</param>
         /// <param name="data">The content written to the image.</param>
-        /// <param name="eventList">Specify events that need to complete before this particular command can be executed. If eventList is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Write( ComputeImage3D image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> eventList )
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Write( ComputeImage3D image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events )
         {
             throw new NotImplementedException();
 
-            IntPtr[] eventHandles = ( eventList != null ) ? ExtractHandles( eventList ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
@@ -705,8 +699,8 @@ namespace Cloo
                 }
             }
 
-            if( eventList != null )
-                eventList.Add( new ComputeEvent( newEventHandle, this ) );
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         #endregion

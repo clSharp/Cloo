@@ -25,14 +25,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Runtime.InteropServices;
-using OpenTK.Compute.CL10;
-
 namespace Cloo
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Runtime.InteropServices;
+    using OpenTK.Compute.CL10;
+
     public class ComputeContext: ComputeResource
     {
         #region Fields
@@ -80,14 +80,14 @@ namespace Cloo
         {
             IntPtr[] deviceHandles = ComputeObject.ExtractHandles( devices );
 
-            ContextProperties[] propertiesList = ( properties != null ) ? properties.PropertiesList : null;
+            IntPtr[] propertiesList = ( properties != null ) ? properties.PropertiesList : null;
             NotifyDescriptor notifyDescr = ( notify != null ) ? notify : new NotifyDescriptor( null, IntPtr.Zero );
             int error;
             unsafe
-            {                
-                fixed( ContextProperties* propertiesPtr = propertiesList )
+            {
+                fixed( IntPtr* propertiesPtr = propertiesList )
                 fixed( IntPtr* deviceHandlesPtr = deviceHandles )
-                    Handle = CL.CreateContext( propertiesPtr, devices.Count, deviceHandlesPtr, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
+                    Handle = Overrides.CreateContext( propertiesPtr, ( uint )devices.Count, deviceHandlesPtr, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
             }
             ComputeException.ThrowIfError( error );
             this.properties = properties;
@@ -102,13 +102,13 @@ namespace Cloo
         /// <param name="notify">A descriptor specifying the callback function and the callback user data.</param>
         public ComputeContext( DeviceTypeFlags deviceType, PropertiesDescriptor properties, NotifyDescriptor notify )
         {
-            ContextProperties[] propertiesList = ( properties != null ) ? properties.PropertiesList : null;
+            IntPtr[] propertiesList = ( properties != null ) ? properties.PropertiesList : null;
             NotifyDescriptor notifyDescr = ( notify != null ) ? notify : new NotifyDescriptor( null, IntPtr.Zero );
-            ErrorCode error = ErrorCode.Success;
+            int error = ( int )ErrorCode.Success;
             unsafe
             {
-                fixed( ContextProperties* propertiesPtr = propertiesList )
-                    Handle = CL.CreateContextFromType( propertiesPtr, deviceType, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
+                fixed( IntPtr* propertiesPtr = propertiesList )
+                    Handle = Overrides.CreateContextFromType( propertiesPtr, deviceType, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
             }
             ComputeException.ThrowIfError( error );
             this.properties = properties;
@@ -189,17 +189,17 @@ namespace Cloo
         {
             readonly ComputePlatform platform;
             
-            internal ContextProperties[] PropertiesList
+            internal IntPtr[] PropertiesList
             {
                 get
                 {
-                    List<ContextProperties> propertiesList = new List<ContextProperties>();
+                    List<IntPtr> propertiesList = new List<IntPtr>();
                     if( platform != null )
                     {
-                        propertiesList.Add( ContextProperties.ContextPlatform );
-                        propertiesList.Add( ( ContextProperties )platform.Handle );
+                        propertiesList.Add( new IntPtr( ( int )ContextProperties.ContextPlatform ) );
+                        propertiesList.Add( platform.Handle );
                     }
-                    propertiesList.Add( ( ContextProperties )0 );
+                    propertiesList.Add( IntPtr.Zero );
                     return propertiesList.ToArray();
                 }
             }

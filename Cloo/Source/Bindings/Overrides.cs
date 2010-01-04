@@ -10,6 +10,14 @@
         const string filename = "opencl.dll";
 
         [SuppressUnmanagedCodeSecurity()]
+        [DllImport( filename, EntryPoint = "clCreateContext", ExactSpelling = true )]
+        internal extern static unsafe IntPtr CreateContext( IntPtr* properties, UInt32 num_devices, IntPtr* devices, IntPtr pfn_notify, IntPtr user_data, [OutAttribute] Int32* errcode_ret );
+
+        [SuppressUnmanagedCodeSecurity()]
+        [DllImport( filename, EntryPoint = "clCreateContextFromType", ExactSpelling = true )]
+        internal extern static unsafe IntPtr CreateContextFromType( IntPtr* properties, DeviceTypeFlags device_type, IntPtr pfn_notify, IntPtr user_data, [OutAttribute] Int32* errcode_ret );
+
+        [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyBufferToImage", ExactSpelling = true )]
         internal extern static unsafe int EnqueueCopyBufferToImage( IntPtr command_queue, IntPtr src_buffer, IntPtr dst_image, IntPtr src_offset, IntPtr* dst_origin, IntPtr* region, uint num_events_in_wait_list, IntPtr* event_wait_list, IntPtr* @event );
         
