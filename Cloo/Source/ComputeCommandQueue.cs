@@ -643,7 +643,6 @@ namespace Cloo
             int sizeofT = Marshal.SizeOf( typeof( T ) );
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
-            IntPtr byteOffset = ( IntPtr )( offset * sizeofT );
 
             unsafe
             {
@@ -653,7 +652,7 @@ namespace Cloo
                             Handle,
                             buffer.Handle,
                             blocking,
-                            byteOffset,
+                            new IntPtr( offset * sizeofT ),
                             new IntPtr( count * sizeofT ),
                             data,
                             eventHandles.Length,

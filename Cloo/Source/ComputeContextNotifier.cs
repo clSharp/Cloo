@@ -32,49 +32,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
-    using System.Collections.Generic;
-    using OpenTK.Compute.CL10;
+    using System.Runtime.InteropServices;
 
-    public class ComputeContextProperties
+    public delegate void ComputeContextNotifyDelegate( string errorInfo, IntPtr clDataPtr, IntPtr clDataSize, IntPtr userDataPtr );
+
+    public class ComputeContextNotifier
     {
-        #region Fields
+        internal readonly IntPtr funcPtr;
+        internal readonly IntPtr dataPtr;
 
-        ComputePlatform platform;
-
-        #endregion
-
-        #region Properties
-
-        public ComputePlatform Platform
+        public ComputeContextNotifier( ComputeContextNotifyDelegate notifyDelegate, IntPtr notifyData )
         {
-            get { return platform; }
+            funcPtr = ( notifyDelegate != null ) ? Marshal.GetFunctionPointerForDelegate( notifyDelegate ) : IntPtr.Zero;
+            this.dataPtr = notifyData;
         }
-
-        #endregion
-
-        #region Constructors
-
-        public ComputeContextProperties( ComputePlatform platform )
-        {
-            this.platform = platform;
-        }
-
-        #endregion
-
-        #region Internal methods
-
-        internal IntPtr[] ToArray()
-        {
-            List<IntPtr> propertiesList = new List<IntPtr>();
-            if( platform != null )
-            {
-                propertiesList.Add( new IntPtr( ( int )ContextProperties.ContextPlatform ) );
-                propertiesList.Add( platform.Handle );
-            }
-            propertiesList.Add( IntPtr.Zero );
-            return propertiesList.ToArray();
-        }
-
-        #endregion
     }
 }

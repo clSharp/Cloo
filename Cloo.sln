@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual C# Express 2008
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloo", "Cloo\Cloo.csproj", "{656E96CE-2587-4CCC-A4DB-06D36267133A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClooTester", "ClooTester\ClooTester.csproj", "{8D19C574-28E2-4F6F-B842-95952F5FDF70}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClooInfo", "ClooInfo\ClooInfo.csproj", "{83AD9C67-060F-459D-9B97-AD5F40D5A70F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Converter", "Converter\Converter.csproj", "{04F5073F-4491-43C1-93BA-E36D08D243F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{83AD9C67-060F-459D-9B97-AD5F40D5A70F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83AD9C67-060F-459D-9B97-AD5F40D5A70F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83AD9C67-060F-459D-9B97-AD5F40D5A70F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04F5073F-4491-43C1-93BA-E36D08D243F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04F5073F-4491-43C1-93BA-E36D08D243F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04F5073F-4491-43C1-93BA-E36D08D243F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04F5073F-4491-43C1-93BA-E36D08D243F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

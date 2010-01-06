@@ -25,12 +25,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using System.Collections.Generic;
-using OpenTK.Compute.CL10;
-
 namespace Cloo
 {
+    using System;
+    using System.Collections.Generic;
+    using OpenTK.Compute.CL10;
+
     public class ComputeImage2D: ComputeImage3D
     {
         #region Constructors
