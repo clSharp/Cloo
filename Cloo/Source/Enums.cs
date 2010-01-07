@@ -125,4 +125,12 @@ namespace Cloo
         Image2D = 0x10F1,
         Image3D = 0x10F2
     }
+
+    public enum ComputeSamplerAddressing: int
+    {
+        None = 0x1130,
+        ClampToEdge = 0x1131,
+        Clamp = 0x1132,
+        Repeat = 0x1133
+    }
 }

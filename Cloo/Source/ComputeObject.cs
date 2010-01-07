@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -25,12 +27,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+#endregion
 
 namespace Cloo
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Runtime.InteropServices;
+
     public abstract class ComputeObject: IEquatable<ComputeObject>
     {
         #region Fields

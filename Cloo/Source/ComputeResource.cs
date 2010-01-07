@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -25,10 +27,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
+#endregion
 
 namespace Cloo
 {
+    using System;
+
     public abstract class ComputeResource: ComputeObject, IDisposable
     {
         #region Public methods

@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -25,17 +27,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using OpenTK.Compute.CL10;
+#endregion
 
 namespace Cloo
 {
+    using System;
+    using OpenTK.Compute.CL10;
+
     public class ComputeSampler: ComputeResource
     {
         #region Fields
         
         private readonly ComputeContext context;
-        private readonly AddressingMode addressingMode;
+        private readonly ComputeSamplerAddressing addressingMode;
         private readonly FilterMode filterMode;
         private readonly bool normalizedCoords;
 
@@ -57,7 +61,7 @@ namespace Cloo
         /// <summary>
         /// Return the value specified by addressing argument when the sampler is created.
         /// </summary>
-        public AddressingMode AddressingMode
+        public ComputeSamplerAddressing ComputeSamplerAddressingMode
         {
             get
             {
@@ -98,7 +102,7 @@ namespace Cloo
         /// <param name="normalizedCoords">Determines if the image coordinates specified are normalized or not.</param>
         /// <param name="addressing">Specifies how out-of-range image coordinates are handled when reading from an image.</param>
         /// <param name="filtering">Specifies the Type of filter that must be applied when reading an image.</param>
-        public ComputeSampler( ComputeContext context, bool normalizedCoords, AddressingMode addressing, FilterMode filtering )
+        public ComputeSampler( ComputeContext context, bool normalizedCoords, ComputeSamplerAddressing addressing, FilterMode filtering )
         {
             int error = ( int )ErrorCode.Success;
             Handle = CL.CreateSampler( context.Handle, normalizedCoords, addressing, filtering, out error );
