@@ -58,9 +58,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Return the command associated with event.
+        /// Return the command type associated with event.
         /// </summary>
-        public ComputeCommandType ComputeCommandType
+        public ComputeCommandType CommandType
         {
             get
             {
@@ -83,7 +83,7 @@ namespace Cloo
         /// <summary>
         /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event has finished execution on the device.
         /// </summary>
-        public long CommandFinishedTimestamp
+        public long CommandFinishTime
         {
             get
             {
@@ -95,7 +95,7 @@ namespace Cloo
         /// <summary>
         /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event is enqueued in a command-queue by the host.
         /// </summary>
-        public long CommandQueuedTimestamp
+        public long CommandEnqueueTime
         {
             get
             {
@@ -107,7 +107,7 @@ namespace Cloo
         /// <summary>
         /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event starts execution on the device.
         /// </summary>
-        public long CommandStartedTimestamp
+        public long CommandStartTime
         {
             get
             {
@@ -119,7 +119,7 @@ namespace Cloo
         /// <summary>
         /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event that has been enqueued is submitted by the host to the device associated with the command-queue.
         /// </summary>
-        public long CommandSubmittedTimestamp
+        public long CommandSubmitTime
         {
             get
             {
