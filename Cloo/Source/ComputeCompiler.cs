@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -25,10 +27,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using OpenTK.Compute.CL10;
+#endregion
 
 namespace Cloo
 {
+    using OpenTK.Compute.CL10;
+
     public class ComputeCompiler
     {        
         #region Public methods

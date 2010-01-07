@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -24,6 +26,8 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 */
+
+#endregion
 
 /* 
  * Should investigate:
@@ -448,7 +452,7 @@ namespace Cloo
                         Handle,
                         image.Handle,
                         blocking,
-                        ( MapFlags )flags,
+                        flags,
                         offsetPtr,
                         regionPtr,
                         &rowPitchPtr,

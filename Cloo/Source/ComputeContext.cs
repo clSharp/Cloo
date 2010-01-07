@@ -104,7 +104,7 @@ namespace Cloo
         /// <param name="deviceType">A bit-field that identifies the Type of device to associate with this context.</param>
         /// <param name="properties">A descriptor of this context properties.</param>
         /// <param name="notify">A descriptor specifying the callback function and the callback user data.</param>
-        public ComputeContext( DeviceTypeFlags deviceType, PropertiesDescriptor properties, NotifyDescriptor notify )
+        public ComputeContext( ComputeDeviceTypeFlags deviceType, PropertiesDescriptor properties, NotifyDescriptor notify )
         {
             IntPtr[] propertiesList = ( properties != null ) ? properties.PropertiesList : null;
             NotifyDescriptor notifyDescr = ( notify != null ) ? notify : new NotifyDescriptor( null, IntPtr.Zero );

@@ -14,7 +14,7 @@ namespace ClooTester
         {
             ComputeContext.PropertiesDescriptor pd = new ComputeContext.PropertiesDescriptor( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
 
-            ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, pd, null );
+            ComputeContext context = new ComputeContext( ComputeDeviceTypeFlags.Default, pd, null );
             ComputeProgram program = new ComputeProgram( context, vectorAddKernel );
             program.Build( null, null, null, IntPtr.Zero );
             ComputeKernel kernel = program.CreateKernel( "vectorAdd" );

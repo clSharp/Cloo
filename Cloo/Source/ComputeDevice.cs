@@ -85,7 +85,7 @@ namespace Cloo
         private readonly long profilingTimerResolution;
         private readonly ComputeCommandQueueFlags queueProperties;
         private readonly DeviceFpConfigFlags singleFPConfig;
-        private readonly DeviceTypeFlags type;
+        private readonly ComputeDeviceTypeFlags type;
         private readonly string vendor;
         private readonly long vendorId;
         private readonly string version;
@@ -603,7 +603,7 @@ namespace Cloo
         /// <summary>
         /// The OpenCL device type. Currently supported values are one of or a combination of: Cpu, Gpu, Accelerator, or Default.
         /// </summary>
-        public DeviceTypeFlags Type
+        public ComputeDeviceTypeFlags Type
         {
             get
             {
@@ -701,7 +701,7 @@ namespace Cloo
             profilingTimerResolution    = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceProfilingTimerResolution );
             queueProperties             = ( ComputeCommandQueueFlags )GetInfo<long>( DeviceInfo.DeviceQueueProperties );
             singleFPConfig              = ( DeviceFpConfigFlags )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
-            type                        = ( DeviceTypeFlags )GetInfo<long>( DeviceInfo.DeviceType );
+            type                        = ( ComputeDeviceTypeFlags )GetInfo<long>( DeviceInfo.DeviceType );
             vendor                      = GetStringInfo( DeviceInfo.DeviceVendor );
             vendorId                    = GetInfo<uint>( DeviceInfo.DeviceVendorId );
             version                     = GetStringInfo( DeviceInfo.DeviceVersion );

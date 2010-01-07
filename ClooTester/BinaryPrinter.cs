@@ -15,7 +15,7 @@ namespace ClooTester
         protected override void RunInternal()
         {
             ComputeContext.PropertiesDescriptor pd = new ComputeContext.PropertiesDescriptor( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
-            ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, pd, null );
+            ComputeContext context = new ComputeContext( ComputeDeviceTypeFlags.Default, pd, null );
             ComputeProgram program = new ComputeProgram( context, vectorAddKernel );
             program.Build( null, null, null, IntPtr.Zero );
             Encoding encoding = new ASCIIEncoding();
