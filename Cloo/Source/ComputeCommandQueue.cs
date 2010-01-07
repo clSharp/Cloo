@@ -84,7 +84,7 @@ namespace Cloo
             }
             set
             {
-                SetProperty( CommandQueueFlags.QueueOutOfOrderExecModeEnable, value );
+                SetProperty( ComputeCommandQueueFlags.OutOfOrderExecution, value );
                 outOfOrderExec = value;
             }
         }
@@ -100,7 +100,7 @@ namespace Cloo
             }
             set
             {
-                SetProperty( CommandQueueFlags.QueueProfilingEnable, value );
+                SetProperty( ComputeCommandQueueFlags.Profiling, value );
                 profiling = value;
             }
         }
@@ -115,15 +115,15 @@ namespace Cloo
         /// <param name="context">Must be a valid OpenCL context.</param>
         /// <param name="device">Must be a device associated with context. It can either be in the list of devices or have the same Type as the device specified when the contex is created.</param>
         /// <param name="properties">A list of properties for the command-queue.</param>
-        public ComputeCommandQueue( ComputeContext context, ComputeDevice device, CommandQueueFlags properties )
+        public ComputeCommandQueue( ComputeContext context, ComputeDevice device, ComputeCommandQueueFlags properties )
         {
             ErrorCode error = ErrorCode.Success;
-            Handle = CL.CreateCommandQueue( context.Handle, device.Handle, properties, out error );
+            Handle = CL.CreateCommandQueue( context.Handle, device.Handle, ( CommandQueueFlags )properties, out error );
             ComputeException.ThrowIfError( error );
             this.device = device;
             this.context = context;
-            outOfOrderExec = ( ( long )( properties & CommandQueueFlags.QueueOutOfOrderExecModeEnable ) != 0 );
-            profiling = ( ( long )( properties & CommandQueueFlags.QueueProfilingEnable ) != 0 );
+            outOfOrderExec = ( ( long )( properties & ComputeCommandQueueFlags.OutOfOrderExecution ) != 0 );
+            profiling = ( ( long )( properties & ComputeCommandQueueFlags.Profiling ) != 0 );
         }
 
         #endregion
@@ -732,10 +732,10 @@ namespace Cloo
 
         #region Private methods
 
-        private void SetProperty( CommandQueueFlags flags, bool enable )
+        private void SetProperty( ComputeCommandQueueFlags flags, bool enable )
         {
             int error = ( int )ErrorCode.Success;
-            error = CL.SetCommandQueueProperty( Handle, flags, enable, ( CommandQueueFlags[] )null );
+            error = CL.SetCommandQueueProperty( Handle, ( CommandQueueFlags )flags, enable, ( CommandQueueFlags[] )null );
             ComputeException.ThrowIfError( error );
         }
         

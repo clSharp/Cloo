@@ -83,7 +83,7 @@ namespace Cloo
         private readonly long preferredVectorWidthShort;
         private readonly string profile;
         private readonly long profilingTimerResolution;
-        private readonly CommandQueueFlags queueProperties;
+        private readonly ComputeCommandQueueFlags queueProperties;
         private readonly DeviceFpConfigFlags singleFPConfig;
         private readonly DeviceTypeFlags type;
         private readonly string vendor;
@@ -581,7 +581,7 @@ namespace Cloo
         /// <summary>
         /// Describes the command-queue properties supported by the device.
         /// </summary>
-        public CommandQueueFlags CommandQueueFlags
+        public ComputeCommandQueueFlags ComputeCommandQueueFlags
         {
             get
             {
@@ -699,7 +699,7 @@ namespace Cloo
             preferredVectorWidthShort   = GetInfo<uint>( DeviceInfo.DevicePreferredVectorWidthShort );
             profile                     = GetStringInfo( DeviceInfo.DeviceProfile );
             profilingTimerResolution    = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceProfilingTimerResolution );
-            queueProperties             = ( CommandQueueFlags )GetInfo<long>( DeviceInfo.DeviceQueueProperties );
+            queueProperties             = ( ComputeCommandQueueFlags )GetInfo<long>( DeviceInfo.DeviceQueueProperties );
             singleFPConfig              = ( DeviceFpConfigFlags )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
             type                        = ( DeviceTypeFlags )GetInfo<long>( DeviceInfo.DeviceType );
             vendor                      = GetStringInfo( DeviceInfo.DeviceVendor );

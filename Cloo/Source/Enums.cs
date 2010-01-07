@@ -2,6 +2,12 @@
 
 namespace Cloo
 {
+    public enum ComputeCommandQueueFlags: long
+    {
+        OutOfOrderExecution = ( 1 << 0 ),
+        Profiling = ( 1 << 1 )
+    }
+
     public enum ComputeMemoryFlags: long
     {
         ReadWrite = ( 1 << 0 ),
