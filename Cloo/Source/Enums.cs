@@ -98,10 +98,12 @@ namespace Cloo
         All = 0xFFFFFFFF
     }
 
+    /*
     public enum ComputeErrorCode: int
     {
 
     }
+    */
 
     public enum ComputeMemoryFlags: long
     {
@@ -132,5 +134,11 @@ namespace Cloo
         ClampToEdge = 0x1131,
         Clamp = 0x1132,
         Repeat = 0x1133
+    }
+
+    public enum ComputeSamplerFiltering: int
+    {
+        Nearest = 0x1140,
+        Linear = 0x1141
     }
 }
