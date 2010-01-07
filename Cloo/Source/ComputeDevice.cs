@@ -49,7 +49,7 @@ namespace Cloo
         private readonly ReadOnlyCollection<string> extensions;
         private readonly long globalMemCachelineSize;
         private readonly long globalMemCacheSize;
-        private readonly DeviceMemCacheType globalMemCacheType;
+        private readonly ComputeDeviceMemoryCacheType globalMemCacheType;
         private readonly long globalMemSize;
         private readonly bool imageSupport;
         private readonly long image2DMaxHeight;
@@ -207,7 +207,7 @@ namespace Cloo
         /// <summary>
         /// Type of global memory cache supported. Valid values are: None, ReadOnlyCache and ReadWriteCache.
         /// </summary>
-        public DeviceMemCacheType GlobalMemoryCacheType
+        public ComputeDeviceMemoryCacheType GlobalMemoryCacheType
         {
             get
             {
@@ -665,7 +665,7 @@ namespace Cloo
 
             globalMemCachelineSize      = GetInfo<uint>( DeviceInfo.DeviceGlobalMemCachelineSize );
             globalMemCacheSize          = ( long )GetInfo<ulong>( DeviceInfo.DeviceGlobalMemCacheSize );
-            globalMemCacheType          = ( DeviceMemCacheType )GetInfo<long>( DeviceInfo.DeviceGlobalMemCacheType );
+            globalMemCacheType          = ( ComputeDeviceMemoryCacheType )GetInfo<long>( DeviceInfo.DeviceGlobalMemCacheType );
             globalMemSize               = ( long )GetInfo<ulong>( DeviceInfo.DeviceGlobalMemSize );
             image2DMaxHeight            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage2dMaxHeight );
             image2DMaxWidth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage2dMaxWidth );

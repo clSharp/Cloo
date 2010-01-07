@@ -45,6 +45,13 @@ namespace Cloo
         NativeKernel = ( 1 << 1 )
     }
 
+    public enum ComputeDeviceMemoryCacheType: long
+    {
+        None = 0x0,
+        ReadOnly = 0x1,
+        WriteOnly = 0x2
+    }
+
     public enum ComputeDeviceTypeFlags: long
     {
         Default = ( 1 << 0 ),
