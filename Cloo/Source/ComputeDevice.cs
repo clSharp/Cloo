@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -25,13 +27,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
-using OpenTK.Compute.CL10;
+#endregion
 
 namespace Cloo
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Text.RegularExpressions;
+    using OpenTK.Compute.CL10;
+
     public class ComputeDevice: ComputeObject
     {
         #region Fields
@@ -336,7 +340,7 @@ namespace Cloo
         /// <summary>
         /// Max number of arguments declared with the __constant qualifier in a kernel. The minimum value is 8.
         /// </summary>
-        public long MaxConstantArgs
+        public long MaxConstantArguments
         {
             get
             {
@@ -358,7 +362,7 @@ namespace Cloo
         /// <summary>
         /// Max size of memory object allocation in bytes. The minimum value is max(GlobalMemorySize/4, 128*1024*1024).
         /// </summary>
-        public long MaxMemoryAllocSize
+        public long MaxMemoryAllocationSize
         {
             get
             {
@@ -380,7 +384,7 @@ namespace Cloo
         /// <summary>
         /// Max number of simultaneous image objects that can be read by a kernel. The minimum value is 128 if ImageSupport is true.
         /// </summary>
-        public long MaxReadImageArgs
+        public long MaxReadImageArguments
         {
             get
             {
@@ -424,7 +428,7 @@ namespace Cloo
         /// <summary>
         /// Maximum number of work-items that can be specified in each dimension of the globalWorkSize to ComputeCommandQueue.Execute(...).
         /// </summary>
-        public System.Collections.ObjectModel.ReadOnlyCollection<long> MaxWorkItemSizes
+        public ReadOnlyCollection<long> MaxWorkItemSizes
         {
             get
             {
@@ -435,7 +439,7 @@ namespace Cloo
         /// <summary>
         /// Max number of simultaneous image objects that can be written to by a kernel. The minimum value is 8 if  ImageSupport is true.
         /// </summary>
-        public long MaxWriteImageArgs
+        public long MaxWriteImageArguments
         {
             get
             {
@@ -446,7 +450,7 @@ namespace Cloo
         /// <summary>
         /// Describes the alignment in bits of the base address of any allocated memory object.
         /// </summary>
-        public long MemoryBaseAddressAlign
+        public long MemoryBaseAddressAlignment
         {
             get
             {
@@ -457,7 +461,7 @@ namespace Cloo
         /// <summary>
         /// The smallest alignment in bytes which can be used for any data type.
         /// </summary>
-        public long MinDataTypeAlignSize
+        public long MinDataTypeAlignmentSize
         {
             get
             {
@@ -578,7 +582,7 @@ namespace Cloo
         /// <summary>
         /// Describes the command-queue properties supported by the device.
         /// </summary>
-        public CommandQueueFlags QueueProperties
+        public CommandQueueFlags CommandQueueFlags
         {
             get
             {
@@ -589,7 +593,7 @@ namespace Cloo
         /// <summary>
         /// Describes single precision floating-point capability of the device.
         /// </summary>
-        public DeviceFpConfigFlags SingleFPConfig
+        public DeviceFpConfigFlags SingleFPCapabilites
         {
             get
             {
