@@ -48,7 +48,7 @@ namespace Cloo
             IntPtr* devices,
             IntPtr pfn_notify,
             IntPtr user_data,
-            [OutAttribute] Int32* errcode_ret );
+            [Out] Int32* errcode_ret );
 
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clCreateContextFromType", ExactSpelling = true )]
@@ -57,7 +57,7 @@ namespace Cloo
             DeviceTypeFlags device_type,
             IntPtr pfn_notify,
             IntPtr user_data,
-            [OutAttribute] Int32* errcode_ret );
+            [Out] Int32* errcode_ret );
 
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyBufferToImage", ExactSpelling = true )]
@@ -70,7 +70,7 @@ namespace Cloo
             IntPtr* region,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            IntPtr* @event );
+            [Out] IntPtr* event_ret );
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyImage", ExactSpelling = true )]
@@ -83,7 +83,7 @@ namespace Cloo
             IntPtr* region,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            IntPtr* @event );
+            [Out] IntPtr* event_ret );
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyImageToBuffer", ExactSpelling = true )]
@@ -96,7 +96,7 @@ namespace Cloo
             IntPtr dst_offset,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            IntPtr* @event );
+            [Out] IntPtr* event_ret );
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueMapImage", ExactSpelling = true )]
@@ -111,8 +111,8 @@ namespace Cloo
             IntPtr* image_slice_pitch,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            IntPtr* @event,
-            [OutAttribute] Int32* errcode_ret );
+            IntPtr* event_ret,
+            [Out] Int32* errcode_ret );
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueReadImage", ExactSpelling = true )]
@@ -127,7 +127,7 @@ namespace Cloo
             IntPtr ptr,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            IntPtr* @event );
+            [Out] IntPtr* event_ret );
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueWriteImage", ExactSpelling = true )]
@@ -142,6 +142,6 @@ namespace Cloo
             IntPtr ptr,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            IntPtr* @event );        
+            [Out] IntPtr* event_ret );        
     }
 }
