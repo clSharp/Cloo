@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -25,18 +27,20 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using System.Collections.Generic;
-using OpenTK.Compute.CL10;
+#endregion
 
 namespace Cloo
 {
+    using System;
+    using System.Collections.Generic;
+    using OpenTK.Compute.CL10;
+
     public class ComputeEvent: ComputeResource
     {
         #region Fields
 
         private readonly ComputeCommandQueue commandQueue;
-        private readonly CommandType commandType;
+        private readonly ComputeCommandType commandType;
 
         #endregion
 
@@ -56,7 +60,7 @@ namespace Cloo
         /// <summary>
         /// Return the command associated with event.
         /// </summary>
-        public CommandType CommandType
+        public ComputeCommandType ComputeCommandType
         {
             get
             {
@@ -132,7 +136,7 @@ namespace Cloo
         {
             Handle = handle;
             commandQueue = queue;
-            commandType = ( CommandType )GetInfo<EventInfo, uint>( 
+            commandType = ( ComputeCommandType )GetInfo<EventInfo, uint>( 
                 EventInfo.EventCommandType, CL.GetEventInfo );
         }
 
