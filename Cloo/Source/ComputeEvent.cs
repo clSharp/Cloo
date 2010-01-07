@@ -156,7 +156,7 @@ namespace Cloo
         /// Waits on the host thread for commands identified by event objects in the list to complete.
         /// </summary>
         /// <param name="events">The list of events to wait for.</param>
-        public static void WaitFor( ICollection<ComputeEvent> events )
+        public static void Wait( ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = ExtractHandles( events );
             
