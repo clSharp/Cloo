@@ -58,7 +58,7 @@ namespace Cloo
         private readonly long image3DMaxHeight;
         private readonly long image3DMaxWidth;
         private readonly long localMemSize;
-        private readonly DeviceLocalMemType localMemType;
+        private readonly ComputeDeviceLocalMemoryType localMemType;
         private readonly long maxClockFrequency;
         private readonly long maxComputeUnits;
         private readonly long maxConstArgs;
@@ -306,7 +306,7 @@ namespace Cloo
         /// <summary>
         /// Type of local memory supported. This can be set to Local implying dedicated local memory storage such as SRAM, or Global.
         /// </summary>
-        public DeviceLocalMemType LocalMemoryType
+        public ComputeDeviceLocalMemoryType LocalMemoryType
         {
             get
             {
@@ -674,7 +674,7 @@ namespace Cloo
             image3DMaxWidth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxWidth );
             imageSupport                = GetBoolInfo( DeviceInfo.DeviceImageSupport );
             localMemSize                = ( long )GetInfo<ulong>( DeviceInfo.DeviceLocalMemSize );
-            localMemType                = ( DeviceLocalMemType )GetInfo<long>( DeviceInfo.DeviceLocalMemType );
+            localMemType                = ( ComputeDeviceLocalMemoryType )GetInfo<long>( DeviceInfo.ComputeDeviceLocalMemoryType );
             maxClockFrequency           = GetInfo<uint>( DeviceInfo.DeviceMaxClockFrequency );
             maxComputeUnits             = GetInfo<uint>( DeviceInfo.DeviceMaxComputeUnits );
             maxConstArgs                = GetInfo<uint>( DeviceInfo.DeviceMaxConstantArgs );

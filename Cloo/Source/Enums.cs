@@ -45,7 +45,13 @@ namespace Cloo
         NativeKernel = ( 1 << 1 )
     }
 
-    public enum ComputeDeviceMemoryCacheType: long
+    public enum ComputeDeviceLocalMemoryType: int
+    {
+        Local = 0x1,
+        Global = 0x2
+    }
+
+    public enum ComputeDeviceMemoryCacheType: int
     {
         None = 0x0,
         ReadOnly = 0x1,
