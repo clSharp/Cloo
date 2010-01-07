@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -25,19 +27,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using OpenTK.Compute.CL10;
+#endregion
 
 namespace Cloo
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using OpenTK.Compute.CL10;
+
     public abstract class ComputeMemory: ComputeResource
     {
         #region Fields
         
         protected long byteCount;
-        private readonly ComputeContext contxt;
+        private readonly ComputeContext context;
         private readonly ComputeMemoryFlags ComputeMemoryFlags;        
 
         #endregion
@@ -48,7 +52,7 @@ namespace Cloo
         {
             get
             {
-                return contxt;
+                return context;
             }
         }
 
@@ -74,7 +78,7 @@ namespace Cloo
 
         protected ComputeMemory( ComputeContext context, ComputeMemoryFlags flags )
         {
-            this.contxt = context;
+            this.context = context;
             this.ComputeMemoryFlags = flags;
         }
 
@@ -91,14 +95,14 @@ namespace Cloo
             }
         }
 
-        protected static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags, MemObjectType type )
+        protected static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type )
         {            
             int formatCountRet = 0, error = ( int )ErrorCode.Success;
-            unsafe{ error = CL.GetSupportedImageFormats( context.Handle, ( MemFlags )flags, MemObjectType.MemObjectImage3d, 0, null, &formatCountRet ); }
+            unsafe { error = CL.GetSupportedImageFormats( context.Handle, ( MemFlags )flags, ( MemObjectType )ComputeMemoryType.Image3D, 0, null, &formatCountRet ); }
             ComputeException.ThrowIfError( error );
 
             ImageFormat[] formats = new ImageFormat[ formatCountRet ];
-            unsafe { error = CL.GetSupportedImageFormats( context.Handle, ( MemFlags )flags, MemObjectType.MemObjectImage3d, formatCountRet, formats, ( int[] )null ); }
+            unsafe { error = CL.GetSupportedImageFormats( context.Handle, ( MemFlags )flags, ( MemObjectType )ComputeMemoryType.Image3D, formatCountRet, formats, ( int[] )null ); }
             ComputeException.ThrowIfError( error );
 
             return new Collection<ImageFormat>( formats );

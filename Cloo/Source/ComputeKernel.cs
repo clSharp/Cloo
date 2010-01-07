@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -25,12 +27,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using System.Runtime.InteropServices;
-using OpenTK.Compute.CL10;
+#endregion
 
 namespace Cloo
 {
+    using System;
+    using System.Runtime.InteropServices;
+    using OpenTK.Compute.CL10;
+
     public class ComputeKernel: ComputeResource
     {
         #region Fields

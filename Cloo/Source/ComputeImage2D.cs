@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -24,6 +26,8 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 */
+
+#endregion
 
 namespace Cloo
 {
@@ -69,7 +73,7 @@ namespace Cloo
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
         public new static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
-            return GetSupportedFormats( context, flags, MemObjectType.MemObjectImage2d );
+            return GetSupportedFormats( context, flags, ComputeMemoryType.Image2D );
         }
 
         #endregion

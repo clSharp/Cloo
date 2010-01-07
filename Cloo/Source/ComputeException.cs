@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -25,11 +27,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using OpenTK.Compute.CL10;
+#endregion
 
 namespace Cloo
 {
+    using System;
+    using OpenTK.Compute.CL10;
+
     public class ComputeException: Exception
     {
         #region Fields
@@ -130,7 +134,7 @@ namespace Cloo
                     throw new InvalidContextComputeException();
 
                 case ErrorCode.InvalidQueueProperties: 
-                    throw new InvalidQueuePropertiesComputeException();
+                    throw new InvalidCommandQueueFlagsComputeException();
 
                 case ErrorCode.InvalidCommandQueue: 
                     throw new InvalidCommandQueueComputeException();
@@ -274,8 +278,8 @@ namespace Cloo
     public class InvalidContextComputeException: ComputeException
     { public InvalidContextComputeException() : base( ErrorCode.InvalidContext ) { } }
 
-    public class InvalidQueuePropertiesComputeException: ComputeException
-    { public InvalidQueuePropertiesComputeException() : base( ErrorCode.InvalidQueueProperties ) { } }
+    public class InvalidCommandQueueFlagsComputeException: ComputeException
+    { public InvalidCommandQueueFlagsComputeException() : base( ErrorCode.InvalidQueueProperties ) { } }
 
     public class InvalidCommandQueueComputeException: ComputeException
     { public InvalidCommandQueueComputeException() : base( ErrorCode.InvalidCommandQueue ) { } }

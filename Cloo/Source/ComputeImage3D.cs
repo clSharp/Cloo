@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -25,12 +27,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using System.Collections.Generic;
-using OpenTK.Compute.CL10;
+#endregion
 
 namespace Cloo
 {
+    using System;
+    using System.Collections.Generic;
+    using OpenTK.Compute.CL10;
+
     public class ComputeImage3D: ComputeMemory
     {
         #region Constructors
@@ -75,7 +79,7 @@ namespace Cloo
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
         public static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
-            return GetSupportedFormats( context, flags, MemObjectType.MemObjectImage3d );
+            return GetSupportedFormats( context, flags, ComputeMemoryType.Image3D );
         }
 
         #endregion

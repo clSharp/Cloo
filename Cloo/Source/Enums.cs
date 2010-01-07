@@ -51,7 +51,7 @@ namespace Cloo
         UnmapMemory = 0x11FD,
         Marker = 0x11FE,
         AcquireGLObjects = 0x11FF,
-        ReleaseGL_Objects = 0x1200
+        ReleaseGLObjects = 0x1200
     }
 
     public enum ComputeCommandQueueFlags: long
@@ -98,6 +98,11 @@ namespace Cloo
         All = 0xFFFFFFFF
     }
 
+    public enum ComputeErrorCode: int
+    {
+
+    }
+
     public enum ComputeMemoryFlags: long
     {
         ReadWrite = ( 1 << 0 ),
@@ -112,5 +117,12 @@ namespace Cloo
     {
         Read = ( 1 << 0 ),
         Write = ( 1 << 1 )
+    }
+
+    public enum ComputeMemoryType: int
+    {
+        Buffer = 0x10F0,
+        Image2D = 0x10F1,
+        Image3D = 0x10F2
     }
 }

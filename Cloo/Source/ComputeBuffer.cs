@@ -122,7 +122,7 @@ namespace Cloo
         /// <returns>A list of supported ComputeBuffer formats.</returns>
         public static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
-            return GetSupportedFormats( context, flags, MemObjectType.MemObjectBuffer );
+            return GetSupportedFormats( context, flags, ComputeMemoryType.Buffer );
         }
 
         /// <summary>
