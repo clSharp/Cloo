@@ -84,7 +84,7 @@ namespace Cloo
         private readonly string profile;
         private readonly long profilingTimerResolution;
         private readonly ComputeCommandQueueFlags queueProperties;
-        private readonly DeviceFpConfigFlags singleFPConfig;
+        private readonly ComputeDeviceFPFlags singleFPConfig;
         private readonly ComputeDeviceTypeFlags type;
         private readonly string vendor;
         private readonly long vendorId;
@@ -592,7 +592,7 @@ namespace Cloo
         /// <summary>
         /// Describes single precision floating-point capability of the device.
         /// </summary>
-        public DeviceFpConfigFlags SingleFPCapabilites
+        public ComputeDeviceFPFlags SingleFPCapabilites
         {
             get
             {
@@ -674,7 +674,7 @@ namespace Cloo
             image3DMaxWidth             = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceImage3dMaxWidth );
             imageSupport                = GetBoolInfo( DeviceInfo.DeviceImageSupport );
             localMemSize                = ( long )GetInfo<ulong>( DeviceInfo.DeviceLocalMemSize );
-            localMemType                = ( ComputeDeviceLocalMemoryType )GetInfo<long>( DeviceInfo.ComputeDeviceLocalMemoryType );
+            localMemType                = ( ComputeDeviceLocalMemoryType )GetInfo<long>( DeviceInfo.DeviceLocalMemType );
             maxClockFrequency           = GetInfo<uint>( DeviceInfo.DeviceMaxClockFrequency );
             maxComputeUnits             = GetInfo<uint>( DeviceInfo.DeviceMaxComputeUnits );
             maxConstArgs                = GetInfo<uint>( DeviceInfo.DeviceMaxConstantArgs );
@@ -700,7 +700,7 @@ namespace Cloo
             profile                     = GetStringInfo( DeviceInfo.DeviceProfile );
             profilingTimerResolution    = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceProfilingTimerResolution );
             queueProperties             = ( ComputeCommandQueueFlags )GetInfo<long>( DeviceInfo.DeviceQueueProperties );
-            singleFPConfig              = ( DeviceFpConfigFlags )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
+            singleFPConfig              = ( ComputeDeviceFPFlags )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
             type                        = ( ComputeDeviceTypeFlags )GetInfo<long>( DeviceInfo.DeviceType );
             vendor                      = GetStringInfo( DeviceInfo.DeviceVendor );
             vendorId                    = GetInfo<uint>( DeviceInfo.DeviceVendorId );

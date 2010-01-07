@@ -33,6 +33,27 @@ namespace Cloo
 {
     using System;
 
+    public enum ComputeCommandType: int
+    {
+        NDRangeKernel = 0x11F0,
+        Task = 0x11F1,
+        NativeKernel = 0x11F2,
+        ReadBuffer = 0x11F3,
+        WriteBuffer = 0x11F4,
+        CopyBuffer = 0x11F5,
+        ReadImage = 0x11F6,
+        WriteImage = 0x11F7,
+        CopyImage = 0x11F8,
+        CopyImageToBuffer = 0x11F9,
+        CopyBufferToImage = 0x11FA,
+        MapBuffer = 0x11FB,
+        MapImage = 0x11FC,
+        UnmapMemory = 0x11FD,
+        Marker = 0x11FE,
+        AcquireGLObjects = 0x11FF,
+        ReleaseGL_Objects = 0x1200
+    }
+
     public enum ComputeCommandQueueFlags: long
     {
         OutOfOrderExecution = ( 1 << 0 ),
@@ -43,6 +64,16 @@ namespace Cloo
     {
         OpenCLKernel = ( 1 << 0 ),
         NativeKernel = ( 1 << 1 )
+    }
+
+    public enum ComputeDeviceFPFlags: long
+    {
+        Denorm = ( 1 << 0 ),
+        InfNan = ( 1 << 1 ),
+        RoundToNearest = ( 1 << 2 ),
+        RoundToZero = ( 1 << 3 ),
+        RoundToInf = ( 1 << 4 ),
+        Fma = ( 1 << 5 )
     }
 
     public enum ComputeDeviceLocalMemoryType: int
