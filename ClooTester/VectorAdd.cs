@@ -32,9 +32,9 @@ namespace ClooTester
                 arrB[ i ] = ( float )( rand.NextDouble() * 100 );
             }
 
-            ComputeBuffer<float> a = new ComputeBuffer<float>( context, MemFlags.MemReadOnly | MemFlags.MemCopyHostPtr, arrA );
-            ComputeBuffer<float> b = new ComputeBuffer<float>( context, MemFlags.MemReadOnly | MemFlags.MemCopyHostPtr, arrB );
-            ComputeBuffer<float> c = new ComputeBuffer<float>( context, MemFlags.MemWriteOnly, arrC.Length );
+            ComputeBuffer<float> a = new ComputeBuffer<float>( context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPtr, arrA );
+            ComputeBuffer<float> b = new ComputeBuffer<float>( context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPtr, arrB );
+            ComputeBuffer<float> c = new ComputeBuffer<float>( context, ComputeMemoryFlags.WriteOnly, arrC.Length );
 
             kernel.SetMemoryArg( 0, a );
             kernel.SetMemoryArg( 1, b );

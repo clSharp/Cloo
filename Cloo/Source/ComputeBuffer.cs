@@ -64,13 +64,13 @@ namespace Cloo
         /// <param name="context">A valid OpenCL context used to create the memory.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the memory object and how it will be used.</param>
         /// <param name="count">The number of elements this buffer will contain.</param>
-        public ComputeBuffer( ComputeContext context, MemFlags flags, long count )
+        public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, long count )
             : base( context, flags )
         {
             this.count = count;
             byteCount = count * Marshal.SizeOf( typeof( T ) );
             ErrorCode error = ErrorCode.Success;
-            Handle = CL.CreateBuffer( context.Handle, flags, new IntPtr( byteCount ), IntPtr.Zero, out error );
+            Handle = CL.CreateBuffer( context.Handle, ( MemFlags )flags, new IntPtr( byteCount ), IntPtr.Zero, out error );
             ComputeException.ThrowIfError( error );
         }
 
@@ -80,7 +80,7 @@ namespace Cloo
         /// <param name="context">A valid OpenCL context used to create the memory.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the memory object and how it will be used.</param>
         /// <param name="data">The elements this buffer will contain.</param>
-        public ComputeBuffer( ComputeContext context, MemFlags flags, T[] data )
+        public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, T[] data )
             : base( context, flags )
         {        
             byteCount = data.Length * Marshal.SizeOf( typeof( T ) );
@@ -94,7 +94,7 @@ namespace Cloo
                 {
                     Handle = CL.CreateBuffer(
                         context.Handle,
-                        flags,
+                        ( MemFlags )flags,
                         new IntPtr( byteCount ),
                         dataPtr.AddrOfPinnedObject(),
                         out error );
@@ -117,7 +117,7 @@ namespace Cloo
         /// <param name="context">A valid OpenCL context.</param>
         /// <param name="flags">Restrict the list of formats to these flags.</param>
         /// <returns>A list of supported ComputeBuffer formats.</returns>
-        public static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, MemFlags flags )
+        public static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
             return GetSupportedFormats( context, flags, MemObjectType.MemObjectBuffer );
         }

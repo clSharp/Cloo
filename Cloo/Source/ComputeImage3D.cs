@@ -47,20 +47,20 @@ namespace Cloo
         /// <param name="rowPitch">The scan-line pitch in bytes.</param>
         /// <param name="slicePitch">The count in bytes of each 2D slice in the 3D image.</param>
         /// <param name="data">The image data that may be already allocated by the application.</param>
-        public ComputeImage3D( ComputeContext context, MemFlags flags, ImageFormat format, int width, int height, int depth, int rowPitch, int slicePitch, IntPtr data )
+        public ComputeImage3D( ComputeContext context, ComputeMemoryFlags flags, ImageFormat format, int width, int height, int depth, int rowPitch, int slicePitch, IntPtr data )
             : base( context, flags )
         {
             int error = ( int )ErrorCode.Success;
             unsafe
             {
-                Handle = CL.CreateImage3D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )depth, ( IntPtr )rowPitch, ( IntPtr )slicePitch, data, &error );
+                Handle = CL.CreateImage3D( context.Handle, ( MemFlags )flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )depth, ( IntPtr )rowPitch, ( IntPtr )slicePitch, data, &error );
             }
             ComputeException.ThrowIfError( error );
 
             byteCount = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
         }
 
-        protected ComputeImage3D( ComputeContext context, MemFlags flags )
+        protected ComputeImage3D( ComputeContext context, ComputeMemoryFlags flags )
             : base( context, flags )
         { }
 
@@ -73,7 +73,7 @@ namespace Cloo
         /// </summary>
         /// <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
-        public static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, MemFlags flags )
+        public static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
             return GetSupportedFormats( context, flags, MemObjectType.MemObjectImage3d );
         }

@@ -38,7 +38,7 @@ namespace Cloo
         
         protected long byteCount;
         private readonly ComputeContext contxt;
-        private readonly MemFlags memflags;        
+        private readonly ComputeMemoryFlags ComputeMemoryFlags;        
 
         #endregion
 
@@ -52,11 +52,11 @@ namespace Cloo
             }
         }
 
-        public MemFlags Flags
+        public ComputeMemoryFlags Flags
         {
             get
             {
-                return memflags;
+                return ComputeMemoryFlags;
             }
         }
 
@@ -72,10 +72,10 @@ namespace Cloo
 
         #region Constructors
 
-        protected ComputeMemory( ComputeContext context, MemFlags flags )
+        protected ComputeMemory( ComputeContext context, ComputeMemoryFlags flags )
         {
             this.contxt = context;
-            this.memflags = flags;
+            this.ComputeMemoryFlags = flags;
         }
 
         #endregion
@@ -91,14 +91,14 @@ namespace Cloo
             }
         }
 
-        protected static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, MemFlags flags, MemObjectType type )
+        protected static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags, MemObjectType type )
         {            
             int formatCountRet = 0, error = ( int )ErrorCode.Success;
-            unsafe{ error = CL.GetSupportedImageFormats( context.Handle, flags, MemObjectType.MemObjectImage3d, 0, null, &formatCountRet ); }
+            unsafe{ error = CL.GetSupportedImageFormats( context.Handle, ( MemFlags )flags, MemObjectType.MemObjectImage3d, 0, null, &formatCountRet ); }
             ComputeException.ThrowIfError( error );
 
             ImageFormat[] formats = new ImageFormat[ formatCountRet ];
-            unsafe { error = CL.GetSupportedImageFormats( context.Handle, flags, MemObjectType.MemObjectImage3d, formatCountRet, formats, ( int[] )null ); }
+            unsafe { error = CL.GetSupportedImageFormats( context.Handle, ( MemFlags )flags, MemObjectType.MemObjectImage3d, formatCountRet, formats, ( int[] )null ); }
             ComputeException.ThrowIfError( error );
 
             return new Collection<ImageFormat>( formats );

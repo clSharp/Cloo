@@ -30,7 +30,6 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Text.RegularExpressions;
     using OpenTK.Compute.CL10;
 
     public class ComputePlatform : ComputeObject
@@ -158,10 +157,7 @@ namespace Cloo
             devices = new ReadOnlyCollection<ComputeDevice>( GetDevices() );
             
             string extensionString = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformExtensions, CL.GetPlatformInfo );
-            if( extensionString.Equals( "" ) )
-                extensions = new ReadOnlyCollection<string>( new string[ 0 ] );
-            else
-                extensions = new ReadOnlyCollection<string>( Regex.Split( extensionString, "[\\s]+" ) );
+            extensions = new ReadOnlyCollection<string>( extensionString.Split( new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries ) );
             
             name = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformName, CL.GetPlatformInfo );
             profile = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformProfile, CL.GetPlatformInfo );

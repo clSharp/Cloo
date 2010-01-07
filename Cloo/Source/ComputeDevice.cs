@@ -33,7 +33,6 @@ namespace Cloo
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.Text.RegularExpressions;
     using OpenTK.Compute.CL10;
 
     public class ComputeDevice: ComputeObject
@@ -662,10 +661,7 @@ namespace Cloo
             executionCapabilities       = ( DeviceExecCapabilitiesFlags )GetInfo<long>( DeviceInfo.DeviceExecutionCapabilities );
             
             string extensionString = GetStringInfo<DeviceInfo>( DeviceInfo.DeviceExtensions, CL.GetDeviceInfo );
-            if( extensionString.Equals( "" ) )
-                extensions = new ReadOnlyCollection<string>( new string[ 0 ] );
-            else
-                extensions = new ReadOnlyCollection<string>( Regex.Split( extensionString, "[\\s]+" ) );
+            extensions = new ReadOnlyCollection<string>( extensionString.Split( new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries ) );
 
             globalMemCachelineSize      = GetInfo<uint>( DeviceInfo.DeviceGlobalMemCachelineSize );
             globalMemCacheSize          = ( long )GetInfo<ulong>( DeviceInfo.DeviceGlobalMemCacheSize );
