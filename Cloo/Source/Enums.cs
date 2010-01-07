@@ -39,6 +39,12 @@ namespace Cloo
         Profiling = ( 1 << 1 )
     }
 
+    public enum ComputeDeviceExecutionFlags: long
+    {
+        OpenCLKernel = ( 1 << 0 ),
+        NativeKernel = ( 1 << 1 )
+    }
+
     public enum ComputeDeviceTypeFlags: long
     {
         Default = ( 1 << 0 ),

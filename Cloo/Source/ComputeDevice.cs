@@ -45,7 +45,7 @@ namespace Cloo
         private readonly string driverVersion;
         private readonly bool endianLittle;
         private readonly bool errorCorrectionSupport;
-        private readonly DeviceExecCapabilitiesFlags executionCapabilities;
+        private readonly ComputeDeviceExecutionFlags executionCapabilities;
         private readonly ReadOnlyCollection<string> extensions;
         private readonly long globalMemCachelineSize;
         private readonly long globalMemCacheSize;
@@ -163,7 +163,7 @@ namespace Cloo
         /// <summary>
         /// Describes the execution capabilities of the device. This is a bit-field that describes one or more of the following values: ExecKernel - The OpenCL device can execute OpenCL kernels. ExecNativeKernel - The OpenCL device can execute native kernels. The mandated minimum capability is ExecKernel.
         /// </summary>
-        public DeviceExecCapabilitiesFlags ExecutionCapabilities
+        public ComputeDeviceExecutionFlags ExecutionCapabilities
         {
             get
             {
@@ -658,7 +658,7 @@ namespace Cloo
             driverVersion               = GetStringInfo( DeviceInfo.DriverVersion );
             endianLittle                = GetBoolInfo( DeviceInfo.DeviceEndianLittle );
             errorCorrectionSupport      = GetBoolInfo( DeviceInfo.DeviceErrorCorrectionSupport );
-            executionCapabilities       = ( DeviceExecCapabilitiesFlags )GetInfo<long>( DeviceInfo.DeviceExecutionCapabilities );
+            executionCapabilities       = ( ComputeDeviceExecutionFlags )GetInfo<long>( DeviceInfo.DeviceExecutionCapabilities );
             
             string extensionString = GetStringInfo<DeviceInfo>( DeviceInfo.DeviceExtensions, CL.GetDeviceInfo );
             extensions = new ReadOnlyCollection<string>( extensionString.Split( new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries ) );
