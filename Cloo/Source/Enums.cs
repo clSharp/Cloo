@@ -17,4 +17,10 @@ namespace Cloo
         AllocHostPtr = ( 1 << 4 ),
         CopyHostPtr = ( 1 << 5 )
     }
+
+    public enum ComputeMemoryMapFlags: long
+    {
+        Read = ( 1 << 0 ),
+        Write = ( 1 << 1 )
+    }
 }

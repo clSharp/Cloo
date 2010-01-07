@@ -30,7 +30,7 @@ namespace ClooTester
             }
 
             ComputeBuffer<long> buffer = new ComputeBuffer<long>( context, ComputeMemoryFlags.CopyHostPtr, bufferContent );
-            IntPtr mappedPtr = queue.Map( buffer, true, MapFlags.MapRead, 0, bufferContent.Length, null );
+            IntPtr mappedPtr = queue.Map( buffer, true, ComputeMemoryMapFlags.Read, 0, bufferContent.Length, null );
 
             Console.WriteLine( "Mapped content:" );
 
