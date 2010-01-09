@@ -12,7 +12,7 @@ namespace ClooTester
         protected override void RunInternal()
         {
             ComputePlatform currentPlatform = ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." );
-            ComputeContext.PropertiesDescriptor pd = new ComputeContext.PropertiesDescriptor( currentPlatform );
+            ComputeContextProperties pd = new ComputeContextProperties( currentPlatform );
             ComputeContext context = new ComputeContext( ComputeDeviceTypeFlags.Default, pd, null );
             ComputeCommandQueue queue = new ComputeCommandQueue( context, context.Devices[ 0 ], 0 );
             

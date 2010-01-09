@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Text;
 using Cloo;
-using OpenTK.Compute.CL10;
-using ClooTester;
 
 namespace ClooTester
 {
@@ -14,7 +12,7 @@ namespace ClooTester
 
         protected override void RunInternal()
         {
-            ComputeContext.PropertiesDescriptor pd = new ComputeContext.PropertiesDescriptor( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
+            ComputeContextProperties pd = new ComputeContextProperties( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
             ComputeContext context = new ComputeContext( ComputeDeviceTypeFlags.Default, pd, null );
             ComputeProgram program = new ComputeProgram( context, vectorAddKernel );
             program.Build( null, null, null, IntPtr.Zero );

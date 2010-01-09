@@ -42,7 +42,7 @@ namespace Cloo
         #region Fields
 
         private readonly ReadOnlyCollection<ComputeDevice> devices;
-        private readonly PropertiesDescriptor properties;
+        private readonly ComputeContextProperties properties;
 
         #endregion
 
@@ -62,7 +62,7 @@ namespace Cloo
         /// <summary>
         /// The properties of the context as specified on context creation.
         /// </summary>
-        public PropertiesDescriptor Properties
+        public ComputeContextProperties Properties
         {
             get
             {
@@ -80,12 +80,12 @@ namespace Cloo
         /// <param name="devices">A list of devices to associate with this context.</param>
         /// <param name="properties">A descriptor of this context properties.</param>
         /// <param name="notify">A descriptor specifying the callback function and the callback user data.</param>
-        public ComputeContext( ICollection<ComputeDevice> devices, PropertiesDescriptor properties, NotifyDescriptor notify )
+        public ComputeContext( ICollection<ComputeDevice> devices, ComputeContextProperties properties, ComputeContextNotifier notify )
         {
             IntPtr[] deviceHandles = ComputeObject.ExtractHandles( devices );
 
-            IntPtr[] propertiesList = ( properties != null ) ? properties.PropertiesList : null;
-            NotifyDescriptor notifyDescr = ( notify != null ) ? notify : new NotifyDescriptor( null, IntPtr.Zero );
+            IntPtr[] propertiesList = ( properties != null ) ? properties.ToArray() : null;
+            ComputeContextNotifier notifyDescr = ( notify != null ) ? notify : new ComputeContextNotifier( null, IntPtr.Zero );
             int error;
             unsafe
             {
@@ -104,10 +104,10 @@ namespace Cloo
         /// <param name="deviceType">A bit-field that identifies the Type of device to associate with this context.</param>
         /// <param name="properties">A descriptor of this context properties.</param>
         /// <param name="notify">A descriptor specifying the callback function and the callback user data.</param>
-        public ComputeContext( ComputeDeviceTypeFlags deviceType, PropertiesDescriptor properties, NotifyDescriptor notify )
+        public ComputeContext( ComputeDeviceTypeFlags deviceType, ComputeContextProperties properties, ComputeContextNotifier notify )
         {
-            IntPtr[] propertiesList = ( properties != null ) ? properties.PropertiesList : null;
-            NotifyDescriptor notifyDescr = ( notify != null ) ? notify : new NotifyDescriptor( null, IntPtr.Zero );
+            IntPtr[] propertiesList = ( properties != null ) ? properties.ToArray() : null;
+            ComputeContextNotifier notifyDescr = ( notify != null ) ? notify : new ComputeContextNotifier( null, IntPtr.Zero );
             int error = ( int )ErrorCode.Success;
             unsafe
             {
@@ -168,52 +168,5 @@ namespace Cloo
         }
 
         #endregion
-
-        #region Delegates
-
-        public delegate void NotifyDelegate( string errorInfo, IntPtr clData, IntPtr dataSize, IntPtr userData );
-
-        #endregion
-
-        #region Inner classes
-
-        public class NotifyDescriptor
-        {
-            internal readonly IntPtr funcPtr;
-            internal readonly IntPtr dataPtr;
-
-            public NotifyDescriptor( NotifyDelegate notifyDelegate, IntPtr notifyData )
-            {
-                funcPtr = ( notifyDelegate != null ) ? Marshal.GetFunctionPointerForDelegate( notifyDelegate ) : IntPtr.Zero;
-                this.dataPtr = notifyData;
-            }
-        }
-
-        public class PropertiesDescriptor
-        {
-            readonly ComputePlatform platform;
-            
-            internal IntPtr[] PropertiesList
-            {
-                get
-                {
-                    List<IntPtr> propertiesList = new List<IntPtr>();
-                    if( platform != null )
-                    {
-                        propertiesList.Add( new IntPtr( ( int )ContextProperties.ContextPlatform ) );
-                        propertiesList.Add( platform.Handle );
-                    }
-                    propertiesList.Add( IntPtr.Zero );
-                    return propertiesList.ToArray();
-                }
-            }
-
-            public PropertiesDescriptor( ComputePlatform platform )
-            {
-                this.platform = platform;
-            }
-        }
-
-        #endregion
-    }
+   }
 }

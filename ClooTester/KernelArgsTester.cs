@@ -63,7 +63,7 @@ namespace ClooTester
         protected override void RunInternal()
         {            
             /*
-            ComputeContext.PropertiesDescriptor pd = new ComputeContext.PropertiesDescriptor( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
+            ComputeContextProperties pd = new ComputeContextProperties( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
 
             ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, pd, null );
             ComputeBuffer<Vector4> result = new ComputeBuffer<Vector4>( context, MemFlags.MemReadWrite, 1 );
