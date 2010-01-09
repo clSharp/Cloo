@@ -36,7 +36,7 @@ namespace Cloo
     using System.Security;
     using OpenTK.Compute.CL10;
 
-    internal class DllImports
+    internal class Imports
     {
         const string filename = "opencl.dll";
 

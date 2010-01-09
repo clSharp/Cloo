@@ -202,7 +202,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = DllImports.EnqueueCopyBufferToImage(
+                    int error = Imports.EnqueueCopyBufferToImage(
                         Handle,
                         source.Handle,
                         destination.Handle,
@@ -243,7 +243,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = DllImports.EnqueueCopyImageToBuffer(
+                    int error = Imports.EnqueueCopyImageToBuffer(
                         Handle,
                         source.Handle,
                         destination.Handle,
@@ -284,7 +284,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = DllImports.EnqueueCopyImage(
+                    int error = Imports.EnqueueCopyImage(
                         Handle,
                         source.Handle,
                         destination.Handle,
@@ -448,7 +448,7 @@ namespace Cloo
                 {
                     int error = (int)ErrorCode.Success;
 
-                    mappedPtr = DllImports.EnqueueMapImage(
+                    mappedPtr = Imports.EnqueueMapImage(
                         Handle,
                         image.Handle,
                         blocking,
@@ -561,7 +561,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = DllImports.EnqueueReadImage(
+                    int error = Imports.EnqueueReadImage(
                         Handle,
                         image.Handle,
                         blocking,
@@ -693,7 +693,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = DllImports.EnqueueWriteImage(
+                    int error = Imports.EnqueueWriteImage(
                         Handle,
                         image.Handle,
                         blocking,
