@@ -115,17 +115,6 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Get a list of supported ComputeBuffer formats available on the context.
-        /// </summary>
-        /// <param name="context">A valid OpenCL context.</param>
-        /// <param name="flags">Restrict the list of formats to these flags.</param>
-        /// <returns>A list of supported ComputeBuffer formats.</returns>
-        public static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
-        {
-            return GetSupportedFormats( context, flags, ComputeMemoryType.Buffer );
-        }
-
-        /// <summary>
         /// Gets a string representation of this buffer.
         /// </summary>
         /// <returns></returns>
