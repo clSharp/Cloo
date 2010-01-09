@@ -33,8 +33,8 @@ namespace Cloo
 {
     using System;
     using System.Collections.Generic;
-    using OpenTK.Compute.CL10;
     using System.Collections.ObjectModel;
+    using OpenTK.Compute.CL10;
 
     public class ComputeImage3D: ComputeMemory
     {

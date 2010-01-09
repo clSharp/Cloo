@@ -190,8 +190,6 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy<T>( ComputeBuffer<T> source, ComputeImage3D destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
-            throw new NotImplementedException();
-
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             int sizeofT = Marshal.SizeOf( typeof( T ) );
@@ -231,8 +229,6 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy<T>( ComputeImage3D source, ComputeBuffer<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
-            throw new NotImplementedException();
-
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             int sizeofT = Marshal.SizeOf( typeof( T ) );
@@ -272,8 +268,6 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy( ComputeImage3D source, ComputeImage3D destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events )
         {
-            throw new NotImplementedException();
-
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
 
@@ -434,8 +428,6 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public IntPtr Map( ComputeImage3D image, bool blocking, ComputeMemoryMapFlags flags, long[] offset, long[] region, out long rowPitch, out long slicePitch, ICollection<ComputeEvent> events )
         {
-            throw new NotImplementedException();
-
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
             IntPtr mappedPtr, rowPitchPtr, slicePitchPtr;
@@ -547,8 +539,6 @@ namespace Cloo
         /// <returns>A pointer to the image data.</returns>
         public IntPtr Read( ComputeImage3D image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, ICollection<ComputeEvent> events )
         {
-            throw new NotImplementedException();
-
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
                         
@@ -682,8 +672,6 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Write( ComputeImage3D image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events )
         {
-            throw new NotImplementedException();
-
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
 
