@@ -32,8 +32,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using OpenTK.Compute.CL10;
 
     public abstract class ComputeMemory: ComputeResource
@@ -93,26 +91,6 @@ namespace Cloo
                 CL.ReleaseMemObject( Handle );
                 Handle = IntPtr.Zero;
             }
-        }
-
-        protected static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type )
-        {
-            uint formatCountRet = 0;
-            int error = ( int )ErrorCode.Success;
-            unsafe { error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, 0, null, &formatCountRet ); }
-            ComputeException.ThrowIfError( error );
-
-            ComputeImageFormat[] formats = new ComputeImageFormat[ formatCountRet ];
-            unsafe
-            {
-                fixed( ComputeImageFormat* formatsPtr = formats )
-                {
-                    error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, formatCountRet, formatsPtr, null );
-                }
-            }
-            ComputeException.ThrowIfError( error );
-
-            return new Collection<ComputeImageFormat>( formats );
         }
 
         #endregion
