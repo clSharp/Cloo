@@ -173,6 +173,10 @@ namespace Cloo
 
         #region Public methods
 
+        /// <summary>
+        /// Gets a platform of a matching name.
+        /// </summary>
+        /// <param name="platformName">The name of the queried platform.</param>
         public static ComputePlatform GetByName( string platformName )
         {
             foreach( ComputePlatform platform in Platforms )
@@ -182,6 +186,10 @@ namespace Cloo
             return null;
         }
 
+        /// <summary>
+        /// Gets a platform of a matching vendor.
+        /// </summary>
+        /// <param name="platformVendor">The vendor of the queried platform.</param>
         public static ComputePlatform GetByVendor( string platformVendor )
         {
             foreach( ComputePlatform platform in Platforms )
