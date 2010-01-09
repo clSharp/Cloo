@@ -49,13 +49,13 @@ namespace Cloo
         /// <param name="height">Height of the image in pixels.</param>
         /// <param name="rowPitch">The scan-line pitch in bytes.</param>
         /// <param name="data">The image data that may be already allocated by the application.</param>
-        public ComputeImage2D( ComputeContext context, ComputeMemoryFlags flags, ImageFormat format, int width, int height, int rowPitch, IntPtr data )
+        public ComputeImage2D( ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int rowPitch, IntPtr data )
             : base( context, flags )
         {
             int error = ( int )ErrorCode.Success;
             unsafe
             {
-                Handle = CL.CreateImage2D( context.Handle, ( MemFlags )flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )rowPitch, data, &error );
+                Handle = Imports.CreateImage2D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )rowPitch, data, &error );
             }
             ComputeException.ThrowIfError( error );
             
@@ -71,7 +71,7 @@ namespace Cloo
         /// </summary>
         /// <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
-        public new static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
+        public new static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
             return GetSupportedFormats( context, flags, ComputeMemoryType.Image2D );
         }

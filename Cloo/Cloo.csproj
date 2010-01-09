@@ -51,6 +51,7 @@
     <Compile Include="Source\ComputeException.cs" />
     <Compile Include="Source\ComputeImage2D.cs" />
     <Compile Include="Source\ComputeImage3D.cs" />
+    <Compile Include="Source\ComputeImageFormat.cs" />
     <Compile Include="Source\ComputeKernel.cs" />
     <Compile Include="Source\ComputeMemory.cs" />
     <Compile Include="Source\ComputeObject.cs" />

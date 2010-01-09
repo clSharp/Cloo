@@ -95,17 +95,24 @@ namespace Cloo
             }
         }
 
-        protected static ICollection<ImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type )
-        {            
-            int formatCountRet = 0, error = ( int )ErrorCode.Success;
-            unsafe { error = CL.GetSupportedImageFormats( context.Handle, ( MemFlags )flags, ( MemObjectType )ComputeMemoryType.Image3D, 0, null, &formatCountRet ); }
+        protected static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type )
+        {
+            uint formatCountRet = 0;
+            int error = ( int )ErrorCode.Success;
+            unsafe { error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, 0, null, &formatCountRet ); }
             ComputeException.ThrowIfError( error );
 
-            ImageFormat[] formats = new ImageFormat[ formatCountRet ];
-            unsafe { error = CL.GetSupportedImageFormats( context.Handle, ( MemFlags )flags, ( MemObjectType )ComputeMemoryType.Image3D, formatCountRet, formats, ( int[] )null ); }
+            ComputeImageFormat[] formats = new ComputeImageFormat[ formatCountRet ];
+            unsafe
+            {
+                fixed( ComputeImageFormat* formatsPtr = formats )
+                {
+                    error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, formatCountRet, formatsPtr, null );
+                }
+            }
             ComputeException.ThrowIfError( error );
 
-            return new Collection<ImageFormat>( formats );
+            return new Collection<ComputeImageFormat>( formats );
         }
 
         #endregion

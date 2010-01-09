@@ -97,9 +97,8 @@ namespace Cloo
         Accelerator = ( 1 << 3 ),
         All = 0xFFFFFFFF
     }
-
-    /*
-    public enum ComputeImageChannelOrder
+        
+    public enum ComputeImageChannelOrder: int
     {
         R = 0x10B0,
         A = 0x10B1,
@@ -113,7 +112,7 @@ namespace Cloo
         Luminance = 0x10B9
     }
 
-    public enum ComputeImageChannelType
+    public enum ComputeImageChannelType: int
     {
         SNormInt8 = 0x10D0,
         SNormInt16 = 0x10D1,
@@ -131,7 +130,6 @@ namespace Cloo
         HalfFloat = 0x10DD,
         Float = 0x10DE,
     }
-    */
 
     public enum ComputeMemoryFlags: long
     {

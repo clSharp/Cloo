@@ -60,8 +60,34 @@ namespace Cloo
             [Out] Int32* errcode_ret );
 
         [SuppressUnmanagedCodeSecurity()]
+        [DllImport( filename, EntryPoint = "clCreateImage2D", ExactSpelling = true )]
+        internal extern static unsafe IntPtr CreateImage2D(
+            IntPtr context,
+            ComputeMemoryFlags flags,
+            ComputeImageFormat* format,
+            IntPtr image_width,
+            IntPtr image_height,
+            IntPtr image_row_pitch,
+            IntPtr host_ptr,
+            [Out] Int32* errcode_ret );
+
+        [SuppressUnmanagedCodeSecurity()]
+        [DllImport( filename, EntryPoint = "clCreateImage3D", ExactSpelling = true )]
+        internal extern static unsafe IntPtr CreateImage3D(
+            IntPtr context,
+            ComputeMemoryFlags flags,
+            ComputeImageFormat* format,
+            IntPtr image_width,
+            IntPtr image_height,
+            IntPtr image_depth,
+            IntPtr image_row_pitch,
+            IntPtr image_slice_pitch,
+            IntPtr host_ptr,
+            [Out] Int32* errcode_ret );
+
+        [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyBufferToImage", ExactSpelling = true )]
-        internal extern static unsafe int EnqueueCopyBufferToImage(
+        internal extern static unsafe Int32 EnqueueCopyBufferToImage(
             IntPtr command_queue,
             IntPtr src_buffer,
             IntPtr dst_image,
@@ -74,7 +100,7 @@ namespace Cloo
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyImage", ExactSpelling = true )]
-        internal extern static unsafe int EnqueueCopyImage(
+        internal extern static unsafe Int32 EnqueueCopyImage(
             IntPtr command_queue,
             IntPtr src_image,
             IntPtr dst_image,
@@ -87,7 +113,7 @@ namespace Cloo
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyImageToBuffer", ExactSpelling = true )]
-        internal extern static unsafe int EnqueueCopyImageToBuffer(
+        internal extern static unsafe Int32 EnqueueCopyImageToBuffer(
             IntPtr command_queue,
             IntPtr src_image,
             IntPtr dst_buffer,
@@ -116,7 +142,7 @@ namespace Cloo
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueReadImage", ExactSpelling = true )]
-        internal extern static unsafe int EnqueueReadImage(
+        internal extern static unsafe Int32 EnqueueReadImage(
             IntPtr command_queue,
             IntPtr image,
             bool blocking_read,
@@ -131,7 +157,7 @@ namespace Cloo
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueWriteImage", ExactSpelling = true )]
-        internal extern static unsafe int EnqueueWriteImage(
+        internal extern static unsafe Int32 EnqueueWriteImage(
             IntPtr command_queue,
             IntPtr image,
             bool blocking_write,
@@ -142,6 +168,16 @@ namespace Cloo
             IntPtr ptr,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            [Out] IntPtr* event_ret );        
+            [Out] IntPtr* event_ret );
+
+        [SuppressUnmanagedCodeSecurity]
+        [DllImport( filename, EntryPoint = "clGetSupportedImageFormats", ExactSpelling = true )]
+        internal extern static unsafe Int32 GetSupportedImageFormats(
+            IntPtr context,
+            ComputeMemoryFlags flags,
+            MemObjectType image_type,
+            UInt32 num_entries,
+            ComputeImageFormat* image_formats,
+            [Out] UInt32* num_image_formats );
     }
 }
