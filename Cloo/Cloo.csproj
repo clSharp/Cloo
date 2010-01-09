@@ -62,7 +62,7 @@
     <Compile Include="Source\ComputeTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Enums.cs" />
-    <Compile Include="Source\Raw\DllImports.cs" />
+    <Compile Include="Source\Raw\Imports.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\license.txt" />

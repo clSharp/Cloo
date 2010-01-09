@@ -73,7 +73,7 @@ namespace Cloo
             this.count = count;
             byteCount = count * Marshal.SizeOf( typeof( T ) );
             ErrorCode error = ErrorCode.Success;
-            Handle = CL.CreateBuffer( context.Handle, ( MemFlags )flags, new IntPtr( byteCount ), IntPtr.Zero, out error );
+            unsafe { Handle = CL.CreateBuffer( context.Handle, ( MemFlags )flags, new IntPtr( byteCount ), IntPtr.Zero, &error ); }
             ComputeException.ThrowIfError( error );
         }
 
@@ -100,7 +100,7 @@ namespace Cloo
                         ( MemFlags )flags,
                         new IntPtr( byteCount ),
                         dataPtr.AddrOfPinnedObject(),
-                        out error );
+                        &error );
                 }
                 finally
                 {

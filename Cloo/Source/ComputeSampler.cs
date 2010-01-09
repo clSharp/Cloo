@@ -39,8 +39,8 @@ namespace Cloo
         #region Fields
         
         private readonly ComputeContext context;
-        private readonly ComputeSamplerAddressing addressing;
-        private readonly ComputeSamplerFiltering filtering;
+        private readonly ComputeImageAddressing addressing;
+        private readonly ComputeImageFiltering filtering;
         private readonly bool normalizedCoords;
 
         #endregion
@@ -61,7 +61,7 @@ namespace Cloo
         /// <summary>
         /// Return the value specified by addressing argument when the sampler is created.
         /// </summary>
-        public ComputeSamplerAddressing Addressing
+        public ComputeImageAddressing Addressing
         {
             get
             {
@@ -72,7 +72,7 @@ namespace Cloo
         /// <summary>
         /// Return the value specified by filtering argument when the sampler is created.
         /// </summary>
-        public ComputeSamplerFiltering Filtering
+        public ComputeImageFiltering Filtering
         {
             get
             {
@@ -102,7 +102,7 @@ namespace Cloo
         /// <param name="normalizedCoords">Determines if the image coordinates specified are normalized or not.</param>
         /// <param name="addressing">Specifies how out-of-range image coordinates are handled when reading from an image.</param>
         /// <param name="filtering">Specifies the Type of filter that must be applied when reading an image.</param>
-        public ComputeSampler( ComputeContext context, bool normalizedCoords, ComputeSamplerAddressing addressing, ComputeSamplerFiltering filtering )
+        public ComputeSampler( ComputeContext context, bool normalizedCoords, ComputeImageAddressing addressing, ComputeImageFiltering filtering )
         {
             int error = ( int )ErrorCode.Success;
             Handle = CL.CreateSampler( context.Handle, normalizedCoords, ( AddressingMode )addressing, ( FilterMode )filtering, out error );

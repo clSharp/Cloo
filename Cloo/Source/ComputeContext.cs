@@ -91,7 +91,7 @@ namespace Cloo
             {
                 fixed( IntPtr* propertiesPtr = propertiesList )
                 fixed( IntPtr* deviceHandlesPtr = deviceHandles )
-                    Handle = DllImports.CreateContext( propertiesPtr, ( uint )devices.Count, deviceHandlesPtr, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
+                    Handle = Imports.CreateContext( propertiesPtr, ( uint )devices.Count, deviceHandlesPtr, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
             }
             ComputeException.ThrowIfError( error );
             this.properties = properties;
@@ -112,7 +112,7 @@ namespace Cloo
             unsafe
             {
                 fixed( IntPtr* propertiesPtr = propertiesList )
-                    Handle = DllImports.CreateContextFromType( propertiesPtr, deviceType, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
+                    Handle = Imports.CreateContextFromType( propertiesPtr, deviceType, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
             }
             ComputeException.ThrowIfError( error );
             this.properties = properties;

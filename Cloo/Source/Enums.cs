@@ -99,9 +99,37 @@ namespace Cloo
     }
 
     /*
-    public enum ComputeErrorCode: int
+    public enum ComputeImageChannelOrder
     {
+        R = 0x10B0,
+        A = 0x10B1,
+        RG = 0x10B2,
+        RA = 0x10B3,
+        Rgb = 0x10B4,
+        Rgba = 0x10B5,
+        Bgra = 0x10B6,
+        Argb = 0x10B7,
+        Intensity = 0x10B8,
+        Luminance = 0x10B9
+    }
 
+    public enum ComputeImageChannelType
+    {
+        SNormInt8 = 0x10D0,
+        SNormInt16 = 0x10D1,
+        UNormInt8 = 0x10D2,
+        UNormInt16 = 0x10D3,
+        UNormShort565 = 0x10D4,
+        UNormShort555 = 0x10D5,
+        UNormInt101010 = 0x10D6,
+        SignedInt8 = 0x10D7,
+        SignedInt16 = 0x10D8,
+        SignedInt32 = 0x10D9,
+        UnsignedInt8 = 0x10DA,
+        UnsignedInt16 = 0x10DB,
+        UnsingedInt32 = 0x10DC,
+        HalfFloat = 0x10DD,
+        Float = 0x10DE,
     }
     */
 
@@ -128,7 +156,7 @@ namespace Cloo
         Image3D = 0x10F2
     }
 
-    public enum ComputeSamplerAddressing: int
+    public enum ComputeImageAddressing: int
     {
         None = 0x1130,
         ClampToEdge = 0x1131,
@@ -136,7 +164,7 @@ namespace Cloo
         Repeat = 0x1133
     }
 
-    public enum ComputeSamplerFiltering: int
+    public enum ComputeImageFiltering: int
     {
         Nearest = 0x1140,
         Linear = 0x1141
