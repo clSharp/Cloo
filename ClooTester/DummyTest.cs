@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cloo;
 
 namespace ClooTester
@@ -13,7 +14,7 @@ namespace ClooTester
         {
             ComputePlatform currentPlatform = ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." );
             ComputeContextProperties pd = new ComputeContextProperties( currentPlatform );
-            ComputeContext context = new ComputeContext( ComputeDeviceTypeFlags.Default, pd, null );
+            ComputeContext context = new ComputeContext( ComputeDeviceTypeFlags.Default, pd, null, IntPtr.Zero );
             ComputeCommandQueue queue = new ComputeCommandQueue( context, context.Devices[ 0 ], 0 );
             
             List<ComputeEvent> events = new List<ComputeEvent>();

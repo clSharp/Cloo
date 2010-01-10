@@ -15,7 +15,7 @@ namespace ClooTester
         {
             ComputeContextProperties pd = new ComputeContextProperties( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
 
-            ComputeContext context = new ComputeContext( ComputeDeviceTypeFlags.Default, pd, null );
+            ComputeContext context = new ComputeContext( ComputeDeviceTypeFlags.Default, pd, null, IntPtr.Zero );
             ComputeCommandQueue queue = new ComputeCommandQueue( context, context.Devices[ 0 ], ComputeCommandQueueFlags.Profiling );
 
             Console.WriteLine( "Original content:" );

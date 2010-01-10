@@ -79,21 +79,22 @@ namespace Cloo
         /// </summary>
         /// <param name="devices">A list of devices to associate with this context.</param>
         /// <param name="properties">A descriptor of this context properties.</param>
-        /// <param name="notify">A descriptor specifying the callback function and the callback user data.</param>
-        public ComputeContext( ICollection<ComputeDevice> devices, ComputeContextProperties properties, ComputeContextNotifier notify )
+        /// <param name="notify">A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered.</param>
+        public ComputeContext( ICollection<ComputeDevice> devices, ComputeContextProperties properties, ComputeContextNotify notify, IntPtr notifyDataPtr )
         {
             IntPtr[] deviceHandles = ComputeObject.ExtractHandles( devices );
-
             IntPtr[] propertiesList = ( properties != null ) ? properties.ToArray() : null;
-            ComputeContextNotifier notifyDescr = ( notify != null ) ? notify : new ComputeContextNotifier( null, IntPtr.Zero );
-            int error;
+            IntPtr notifyFuncPtr = ( notify != null ) ? Marshal.GetFunctionPointerForDelegate( notify ) : IntPtr.Zero;
+            
             unsafe
             {
+                int error;
                 fixed( IntPtr* propertiesPtr = propertiesList )
-                fixed( IntPtr* deviceHandlesPtr = deviceHandles )
-                    Handle = Imports.CreateContext( propertiesPtr, ( uint )devices.Count, deviceHandlesPtr, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
+                fixed( IntPtr* deviceHandlesPtr = deviceHandles )                
+                    Handle = Imports.CreateContext( propertiesPtr, ( uint )devices.Count, deviceHandlesPtr, notifyFuncPtr, notifyDataPtr, &error );
+                ComputeException.ThrowIfError( error );
             }
-            ComputeException.ThrowIfError( error );
+
             this.properties = properties;
             this.devices = GetDevices();
         }
@@ -101,20 +102,23 @@ namespace Cloo
         /// <summary>
         /// Creates an OpenCL context from a device Type that identifies the specific device(s) to use.
         /// </summary>
-        /// <param name="deviceType">A bit-field that identifies the Type of device to associate with this context.</param>
-        /// <param name="properties">A descriptor of this context properties.</param>
-        /// <param name="notify">A descriptor specifying the callback function and the callback user data.</param>
-        public ComputeContext( ComputeDeviceTypeFlags deviceType, ComputeContextProperties properties, ComputeContextNotifier notify )
+        /// <param name="deviceType"> A bit-field that identifies the Type of device to associate with this context.</param>
+        /// <param name="properties"> A descriptor of this context properties.</param>
+        /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered.</param>
+        /// <param name="notifyDataPtr"> Passed as the userDataPtr argument when notify is called. userDataPtr can be IntPtr.Zero. </param>
+        public ComputeContext( ComputeDeviceTypeFlags deviceType, ComputeContextProperties properties, ComputeContextNotify notify, IntPtr notifyDataPtr )
         {
             IntPtr[] propertiesList = ( properties != null ) ? properties.ToArray() : null;
-            ComputeContextNotifier notifyDescr = ( notify != null ) ? notify : new ComputeContextNotifier( null, IntPtr.Zero );
-            int error = ( int )ErrorCode.Success;
+            IntPtr notifyFuncPtr = ( notify != null ) ? Marshal.GetFunctionPointerForDelegate( notify ) : IntPtr.Zero;
+            
             unsafe
             {
+                int error = ( int )ErrorCode.Success;
                 fixed( IntPtr* propertiesPtr = propertiesList )
-                    Handle = Imports.CreateContextFromType( propertiesPtr, deviceType, notifyDescr.funcPtr, notifyDescr.dataPtr, &error );
+                    Handle = Imports.CreateContextFromType( propertiesPtr, deviceType, notifyFuncPtr, notifyDataPtr, &error );
+                ComputeException.ThrowIfError( error );
             }
-            ComputeException.ThrowIfError( error );
+
             this.properties = properties;
             this.devices = GetDevices();
         }
@@ -169,4 +173,6 @@ namespace Cloo
 
         #endregion
    }
+
+    public delegate void ComputeContextNotify( string errorInfo, IntPtr clDataPtr, IntPtr clDataSize, IntPtr userDataPtr );
 }
