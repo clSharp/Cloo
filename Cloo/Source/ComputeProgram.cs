@@ -207,19 +207,20 @@ namespace Cloo
         /// <param name="options">A set of options for the OpenCL compiler.</param>
         /// <param name="notify">A notification routine. The notification routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If notify is not null, ComputeProgram.Build does not need to wait for the build to complete and can return immediately. If notify is null, ComputeProgram.Build does not return until the build has completed. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.</param>
         /// <param name="notifyDataPtr">Passed as an argument when notify is called. notifyDataPtr can be IntPtr.Zero. </param>
-        public void Build( ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotify notify, IntPtr notifyDataPtr )
+        public void Build( ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr )
         {
-            buildOptions = ( options != null ) ? options : "";
-            IntPtr notifyDelegatePtr = ( notify != null ) ? Marshal.GetFunctionPointerForDelegate( notify ) : IntPtr.Zero;
+            buildOptions = ( options != null ) ? options : "" ;
+
+            IntPtr notifyPtr = ( notify != null ) ? Marshal.GetFunctionPointerForDelegate( notify ) : IntPtr.Zero;
 
             int error;
             if( devices != null )
             {
                 IntPtr[] deviceHandles = ComputeObject.ExtractHandles( devices );
-                error = CL.BuildProgram( Handle, deviceHandles.Length, deviceHandles, options, notifyDelegatePtr, notifyDataPtr );
+                error = CL.BuildProgram( Handle, deviceHandles.Length, deviceHandles, options, notifyPtr, notifyDataPtr );
             }
             else
-                error = CL.BuildProgram( Handle, 0, ( IntPtr[] )null, options, notifyDelegatePtr, notifyDataPtr );
+                error = CL.BuildProgram( Handle, 0, ( IntPtr[] )null, options, notifyPtr, notifyDataPtr );
             
             ComputeException.ThrowIfError( error );
 
@@ -355,5 +356,6 @@ namespace Cloo
         #endregion
     }
 
-    public delegate void ComputeProgramBuildNotify( IntPtr program, IntPtr dataPtr );
+    [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
+    public delegate void ComputeProgramBuildNotifier( IntPtr programHandle, IntPtr userDataPtr );
 }

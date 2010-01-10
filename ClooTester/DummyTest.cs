@@ -21,7 +21,7 @@ namespace ClooTester
             
             int count = 1000000;
             ComputeBuffer<float> buffA = new ComputeBuffer<float>( context, ComputeMemoryFlags.ReadOnly, new float[ count ] );
-            queue.Write( buffA, false, 0, count, new float[ count ], events );            
+            queue.Write( buffA, false, 0, count, new float[ count ], events );
         }
     }
 }

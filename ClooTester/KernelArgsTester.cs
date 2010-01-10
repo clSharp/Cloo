@@ -62,19 +62,22 @@ namespace ClooTester
 
         protected override void RunInternal()
         {            
-            /*
             ComputeContextProperties pd = new ComputeContextProperties( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
 
-            ComputeContext context = new ComputeContext( DeviceTypeFlags.DeviceTypeDefault, pd, null );
-            ComputeBuffer<Vector4> result = new ComputeBuffer<Vector4>( context, MemFlags.MemReadWrite, 1 );
+            ComputeContext context = new ComputeContext( ComputeDeviceTypeFlags.Default, pd, null, IntPtr.Zero );
+            ComputeBuffer<Vector4> result = new ComputeBuffer<Vector4>( context, ComputeMemoryFlags.ReadWrite, 1 );
 
             ComputeProgram program = new ComputeProgram( context, argsKernel );
-            program.Build( null, null, null, IntPtr.Zero );
+            program.Build( null, null, new ComputeProgramBuildNotifier( notify ), IntPtr.Zero );
             Console.WriteLine( "Program successfully built." );
 
             List<ComputeKernel> kernels = new List<ComputeKernel>( program.CreateAllKernels() );
-            Console.WriteLine( "Kernels successfully created." );
-             */
+            Console.WriteLine( "Kernels successfully created." );            
+        }
+
+        private void notify( IntPtr programHandle, IntPtr userDataPtr )
+        {
+            Console.WriteLine( "Program build notification." );
         }
     }
 }
