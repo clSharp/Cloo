@@ -46,7 +46,7 @@ namespace Cloo
         private readonly string source;
         private ReadOnlyCollection<byte[]> binaries;
         private string buildOptions;
-        
+
         #endregion
 
         #region Properties
@@ -118,13 +118,13 @@ namespace Cloo
         public ComputeProgram( ComputeContext context, string source )
         {
             ErrorCode error = ErrorCode.Success;
-            unsafe 
-            { 
-                Handle = CL.CreateProgramWithSource( 
-                    context.Handle, 
-                    1, 
-                    new string[]{ source }, 
-                    ( IntPtr* )null, 
+            unsafe
+            {
+                Handle = CL.CreateProgramWithSource(
+                    context.Handle,
+                    1,
+                    new string[] { source },
+                    ( IntPtr* )null,
                     &error );
             }
             ComputeException.ThrowIfError( error );
@@ -142,12 +142,12 @@ namespace Cloo
         /// <param name="devices">A subset of the devices associated with the context or null for all the devices associated with the context.</param>
         public ComputeProgram( ComputeContext context, IList<byte[]> binaries, IList<ComputeDevice> devices )
         {
-            int count = binaries.Count;            
-            
+            int count = binaries.Count;
+
             IntPtr[] deviceHandles = ( devices != null ) ?
                 ExtractHandles<ComputeDevice>( devices ) :
                 ExtractHandles<ComputeDevice>( context.Devices );
-                        
+
             IntPtr[] binariesPtrs = new IntPtr[ count ];
             IntPtr[] binariesLengths = new IntPtr[ count ];
             int[] binariesStats = new int[ count ];
@@ -166,7 +166,7 @@ namespace Cloo
                 }
 
                 unsafe
-                {                    
+                {
                     byte** binariesPtr = ( byte** )binariesPtrGCHandle.AddrOfPinnedObject();
                     fixed( IntPtr* binariesLengthsPtr = binariesLengths )
                     fixed( IntPtr* deviceHandlesPtr = deviceHandles )
@@ -192,7 +192,7 @@ namespace Cloo
 
             this.binaries = new ReadOnlyCollection<byte[]>( binaries );
             this.context = context;
-            this.devices = new ReadOnlyCollection<ComputeDevice>( 
+            this.devices = new ReadOnlyCollection<ComputeDevice>(
                 ( devices != null ) ? devices : context.Devices );
         }
 
@@ -204,29 +204,26 @@ namespace Cloo
         /// Builds (compiles and links) a program executable from the program source or binary for all the devices or some specific devices in the OpenCL context associated with program.
         /// </summary>
         /// <param name="devices">A list of devices associated with program. If the list is null, the program executable is built for all devices associated with program for which a source or a binary has been loaded.</param>
-        /// <param name="options">The set of options for the OpenCL compiler.</param>
-        public void Build( ICollection<ComputeDevice> devices, string options, NotifyDelegate notifyDelegate, IntPtr notifyData )
+        /// <param name="options">A set of options for the OpenCL compiler.</param>
+        /// <param name="notify">A notification routine. The notification routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If notify is not null, ComputeProgram.Build does not need to wait for the build to complete and can return immediately. If notify is null, ComputeProgram.Build does not return until the build has completed. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.</param>
+        /// <param name="notifyDataPtr">Passed as an argument when notify is called. notifyDataPtr can be IntPtr.Zero. </param>
+        public void Build( ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotify notify, IntPtr notifyDataPtr )
         {
-            IntPtr notifyDelegatePtr = ( notifyDelegate != null ) ? Marshal.GetFunctionPointerForDelegate( notifyDelegate ) : IntPtr.Zero;
             buildOptions = ( options != null ) ? options : "";
+            IntPtr notifyDelegatePtr = ( notify != null ) ? Marshal.GetFunctionPointerForDelegate( notify ) : IntPtr.Zero;
 
-            int error;            
+            int error;
             if( devices != null )
             {
                 IntPtr[] deviceHandles = ComputeObject.ExtractHandles( devices );
-                error = CL.BuildProgram( Handle, deviceHandles.Length, deviceHandles, options, notifyDelegatePtr, notifyData );
+                error = CL.BuildProgram( Handle, deviceHandles.Length, deviceHandles, options, notifyDelegatePtr, notifyDataPtr );
             }
             else
-            {
-                error = CL.BuildProgram( Handle, 0, ( IntPtr[] )null, options, notifyDelegatePtr, notifyData );
-            }
+                error = CL.BuildProgram( Handle, 0, ( IntPtr[] )null, options, notifyDelegatePtr, notifyDataPtr );
+            
+            ComputeException.ThrowIfError( error );
 
-            if( error == ( int )ErrorCode.Success )
-            {
-                binaries = GetBinaries();
-            }
-
-            ComputeException.ThrowIfError( error );         
+            binaries = GetBinaries();            
         }
 
         /// <summary>
@@ -242,7 +239,7 @@ namespace Cloo
             {
                 int error = CL.CreateKernelsInProgram( Handle, 0, ( IntPtr* )null, &kernelsCount );
                 ComputeException.ThrowIfError( error );
-                
+
                 kernelHandles = new IntPtr[ kernelsCount ];
                 error = CL.CreateKernelsInProgram( Handle, kernelsCount, kernelHandles, null );
                 ComputeException.ThrowIfError( error );
@@ -356,11 +353,7 @@ namespace Cloo
         }
 
         #endregion
-
-        #region Delegates
-
-        public delegate void NotifyDelegate( IntPtr program, IntPtr dataPtr );
-
-        #endregion
     }
+
+    public delegate void ComputeProgramBuildNotify( IntPtr program, IntPtr dataPtr );
 }
