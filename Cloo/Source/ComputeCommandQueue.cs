@@ -382,7 +382,7 @@ namespace Cloo
         /// <param name="count">The number of elements to map.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         /// <returns>The mapped area.</returns>
-        public IntPtr Map<T>( ComputeBuffer<T> buffer, bool blocking, ComputeMemoryMapFlags flags, long offset, long count, ICollection<ComputeEvent> events ) where T: struct
+        public IntPtr Map<T>( ComputeBuffer<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, long offset, long count, ICollection<ComputeEvent> events ) where T: struct
         {
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -426,7 +426,7 @@ namespace Cloo
         /// <param name="rowPitch">Returns the length of image scan-line in bytes.</param>
         /// <param name="slicePitch">Returns the count in bytes of the 2D slice of the 3D image.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public IntPtr Map( ComputeImage3D image, bool blocking, ComputeMemoryMapFlags flags, long[] offset, long[] region, out long rowPitch, out long slicePitch, ICollection<ComputeEvent> events )
+        public IntPtr Map( ComputeImage3D image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, out long rowPitch, out long slicePitch, ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;

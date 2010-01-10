@@ -106,7 +106,7 @@ namespace Cloo
         /// <param name="properties"> A descriptor of this context properties.</param>
         /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered.</param>
         /// <param name="notifyDataPtr"> Passed as the userDataPtr argument when notify is called. userDataPtr can be IntPtr.Zero. </param>
-        public ComputeContext( ComputeDeviceTypeFlags deviceType, ComputeContextProperties properties, ComputeContextNotifier notify, IntPtr notifyDataPtr )
+        public ComputeContext( ComputeDeviceTypes deviceType, ComputeContextProperties properties, ComputeContextNotifier notify, IntPtr notifyDataPtr )
         {
             IntPtr[] propertiesList = ( properties != null ) ? properties.ToArray() : null;
             IntPtr notifyFuncPtr = ( notify != null ) ? Marshal.GetFunctionPointerForDelegate( notify ) : IntPtr.Zero;

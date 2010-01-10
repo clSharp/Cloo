@@ -15,7 +15,7 @@ namespace ClooTester
         {
             ComputeContextProperties pd = new ComputeContextProperties( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
 
-            ComputeContext context = new ComputeContext( ComputeDeviceTypeFlags.Default, pd, null, IntPtr.Zero );
+            ComputeContext context = new ComputeContext( ComputeDeviceTypes.Default, pd, null, IntPtr.Zero );
             ComputeCommandQueue queue = new ComputeCommandQueue( context, context.Devices[ 0 ], ComputeCommandQueueFlags.Profiling );
 
             Console.WriteLine( "Original content:" );
@@ -30,7 +30,7 @@ namespace ClooTester
             }
 
             ComputeBuffer<long> buffer = new ComputeBuffer<long>( context, ComputeMemoryFlags.CopyHostPtr, bufferContent );
-            IntPtr mappedPtr = queue.Map( buffer, true, ComputeMemoryMapFlags.Read, 0, bufferContent.Length, null );
+            IntPtr mappedPtr = queue.Map( buffer, true, ComputeMemoryMappingFlags.Read, 0, bufferContent.Length, null );
 
             Console.WriteLine( "Mapped content:" );
 

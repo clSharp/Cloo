@@ -64,7 +64,7 @@ namespace ClooTester
         {            
             ComputeContextProperties pd = new ComputeContextProperties( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
 
-            ComputeContext context = new ComputeContext( ComputeDeviceTypeFlags.Default, pd, null, IntPtr.Zero );
+            ComputeContext context = new ComputeContext( ComputeDeviceTypes.Default, pd, null, IntPtr.Zero );
             ComputeBuffer<Vector4> result = new ComputeBuffer<Vector4>( context, ComputeMemoryFlags.ReadWrite, 1 );
 
             ComputeProgram program = new ComputeProgram( context, argsKernel );

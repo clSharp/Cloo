@@ -61,13 +61,13 @@ namespace Cloo
         Profiling = ( 1 << 1 )
     }
 
-    public enum ComputeDeviceExecutionFlags: long
+    public enum ComputeDeviceExecutionCapabilites: long
     {
         OpenCLKernel = ( 1 << 0 ),
         NativeKernel = ( 1 << 1 )
     }
 
-    public enum ComputeDeviceFPFlags: long
+    public enum ComputeDeviceFPCapabilites: long
     {
         Denorm = ( 1 << 0 ),
         InfNan = ( 1 << 1 ),
@@ -90,7 +90,7 @@ namespace Cloo
         WriteOnly = 0x2
     }
 
-    public enum ComputeDeviceTypeFlags: long
+    public enum ComputeDeviceTypes: long
     {
         Default = ( 1 << 0 ),
         Cpu = ( 1 << 1 ),
@@ -138,11 +138,11 @@ namespace Cloo
         WriteOnly = ( 1 << 1 ),
         ReadOnly = ( 1 << 2 ),
         UseHostPtr = ( 1 << 3 ),
-        AllocHostPtr = ( 1 << 4 ),
+        AllocateHostPtr = ( 1 << 4 ),
         CopyHostPtr = ( 1 << 5 )
     }
 
-    public enum ComputeMemoryMapFlags: long
+    public enum ComputeMemoryMappingFlags: long
     {
         Read = ( 1 << 0 ),
         Write = ( 1 << 1 )

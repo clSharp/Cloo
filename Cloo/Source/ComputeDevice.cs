@@ -45,7 +45,7 @@ namespace Cloo
         private readonly string driverVersion;
         private readonly bool endianLittle;
         private readonly bool errorCorrectionSupport;
-        private readonly ComputeDeviceExecutionFlags executionCapabilities;
+        private readonly ComputeDeviceExecutionCapabilites executionCapabilities;
         private readonly ReadOnlyCollection<string> extensions;
         private readonly long globalMemCachelineSize;
         private readonly long globalMemCacheSize;
@@ -84,8 +84,8 @@ namespace Cloo
         private readonly string profile;
         private readonly long profilingTimerResolution;
         private readonly ComputeCommandQueueFlags queueProperties;
-        private readonly ComputeDeviceFPFlags singleFPConfig;
-        private readonly ComputeDeviceTypeFlags type;
+        private readonly ComputeDeviceFPCapabilites singleFPConfig;
+        private readonly ComputeDeviceTypes type;
         private readonly string vendor;
         private readonly long vendorId;
         private readonly string version;
@@ -163,7 +163,7 @@ namespace Cloo
         /// <summary>
         /// Describes the execution capabilities of the device. This is a bit-field that describes one or more of the following values: ExecKernel - The OpenCL device can execute OpenCL kernels. ExecNativeKernel - The OpenCL device can execute native kernels. The mandated minimum capability is ExecKernel.
         /// </summary>
-        public ComputeDeviceExecutionFlags ExecutionCapabilities
+        public ComputeDeviceExecutionCapabilites ExecutionCapabilities
         {
             get
             {
@@ -592,7 +592,7 @@ namespace Cloo
         /// <summary>
         /// Describes single precision floating-point capability of the device.
         /// </summary>
-        public ComputeDeviceFPFlags SingleFPCapabilites
+        public ComputeDeviceFPCapabilites SingleFPCapabilites
         {
             get
             {
@@ -603,7 +603,7 @@ namespace Cloo
         /// <summary>
         /// The OpenCL device type. Currently supported values are one of or a combination of: Cpu, Gpu, Accelerator, or Default.
         /// </summary>
-        public ComputeDeviceTypeFlags Type
+        public ComputeDeviceTypes Type
         {
             get
             {
@@ -658,7 +658,7 @@ namespace Cloo
             driverVersion               = GetStringInfo( DeviceInfo.DriverVersion );
             endianLittle                = GetBoolInfo( DeviceInfo.DeviceEndianLittle );
             errorCorrectionSupport      = GetBoolInfo( DeviceInfo.DeviceErrorCorrectionSupport );
-            executionCapabilities       = ( ComputeDeviceExecutionFlags )GetInfo<long>( DeviceInfo.DeviceExecutionCapabilities );
+            executionCapabilities       = ( ComputeDeviceExecutionCapabilites )GetInfo<long>( DeviceInfo.DeviceExecutionCapabilities );
             
             string extensionString = GetStringInfo<DeviceInfo>( DeviceInfo.DeviceExtensions, CL.GetDeviceInfo );
             extensions = new ReadOnlyCollection<string>( extensionString.Split( new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries ) );
@@ -700,8 +700,8 @@ namespace Cloo
             profile                     = GetStringInfo( DeviceInfo.DeviceProfile );
             profilingTimerResolution    = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceProfilingTimerResolution );
             queueProperties             = ( ComputeCommandQueueFlags )GetInfo<long>( DeviceInfo.DeviceQueueProperties );
-            singleFPConfig              = ( ComputeDeviceFPFlags )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
-            type                        = ( ComputeDeviceTypeFlags )GetInfo<long>( DeviceInfo.DeviceType );
+            singleFPConfig              = ( ComputeDeviceFPCapabilites )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
+            type                        = ( ComputeDeviceTypes )GetInfo<long>( DeviceInfo.DeviceType );
             vendor                      = GetStringInfo( DeviceInfo.DeviceVendor );
             vendorId                    = GetInfo<uint>( DeviceInfo.DeviceVendorId );
             version                     = GetStringInfo( DeviceInfo.DeviceVersion );

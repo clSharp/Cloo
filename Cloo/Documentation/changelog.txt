@@ -1,3 +1,59 @@
+[0.6.0] -----------------------------------------------------------------------
+Breaking changes:
+ComputeBuffer
+	Removed GetSupportedFormats.
+ComputeContext
+	ComputeContext.PropertiesDescriptor -> ComputeContextProperties
+	Removed ComputeContext.NotifyDescriptor. Instead you should directly pass a ComputeContextNotifier delegate and its data to the constructor.
+ComputeDevice
+	MaxMemoryAllocSize -> MaxMemoryAllocationSize
+	MaxReadImageArgs -> MaxReadImageArguments
+	MaxWriteImageArgs -> MaxWriteImageArguments
+	MemoryBaseAddressAlign -> MemoryBaseAddressAlignment
+	MinDataTypeAlignSize -> MinDataTypeAlignmentSize
+	QueueProperties -> CommandQueueFlags
+	SingleFPConfig -> SingleFPCapabilites
+ComputeEvent
+	ComputeCommandType -> CommandType
+	CommandFinishedTimestamp -> CommandFinishTime
+	CommandQueuedTimestamp -> CommandEnqueueTime
+	CommandStartedTimestamp -> CommandStartTime
+	CommandSubmittedTimestamp -> CommandSubmitTime
+ComputeProgram
+	ComputeProgram.NotifyDelegate -> ComputeProgramBuildNotifier.
+OpenTK constructs replacements
+    AddressingMode -> ComputeImageAddressing
+	CommandQueueFlags -> ComputeCommandQueueFlags
+	CommandType -> ComputeCommandType
+    DeviceExecCapabilitiesFlags -> ComputeDeviceExecutionCapabilites
+    DeviceFPConfigFlags -> ComputeDeviceFPCapabilities
+    DeviceLocalMemType -> ComputeDeviceLocalMemoryType
+    DeviceMemCacheType -> ComputeDeviceMemoryCacheType
+	DeviceTypeFlags -> ComputeDeviceTypes
+	FilterMode -> ComputeImageFiltering
+	ImageFormat -> ComputeImageFormat
+	MapFlags -> ComputeMemoryMappingFlags
+	MemFlags -> ComputeMemoryFlags
+	MemObjectType -> ComputeMemoryType
+    ChannelOrder -> ComputeImageChannelOrder
+    ChannelType -> ComputeImageChannelType
+
+New functionality:
+Image support.
+Added ComputeCommandQueueFlags.None.
+
+Bugfixes:
+ComputeImage2D.GetSupportedFormats() returns a list of 3D image formats.
+
+Internals:
+Added [Out] atributes to the appropriate DllImport'ed method arguments.
+
+Documentation:
+Added comments for most of the new public bits.
+Added missing comments around existing bits.
+
+
+
 [0.5.1] -----------------------------------------------------------------------
 Breaking changes:
 ComputeJobQueue renamed to ComputeCommandQueue. Avoids confusion for new users.

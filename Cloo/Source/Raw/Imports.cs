@@ -54,7 +54,7 @@ namespace Cloo
         [DllImport( filename, EntryPoint = "clCreateContextFromType", ExactSpelling = true )]
         internal extern static unsafe IntPtr CreateContextFromType(
             IntPtr* properties,
-            ComputeDeviceTypeFlags device_type,
+            ComputeDeviceTypes device_type,
             IntPtr pfn_notify,
             IntPtr user_data,
             [Out] Int32* errcode_ret );
@@ -130,7 +130,7 @@ namespace Cloo
             IntPtr command_queue,
             IntPtr image,
             bool blocking_map,
-            ComputeMemoryMapFlags map_flags,
+            ComputeMemoryMappingFlags map_flags,
             IntPtr* origin,
             IntPtr* region,
             IntPtr* image_row_pitch,
