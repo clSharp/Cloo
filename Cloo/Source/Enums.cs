@@ -56,6 +56,7 @@ namespace Cloo
 
     public enum ComputeCommandQueueFlags: long
     {
+        None = 0,
         OutOfOrderExecution = ( 1 << 0 ),
         Profiling = ( 1 << 1 )
     }
