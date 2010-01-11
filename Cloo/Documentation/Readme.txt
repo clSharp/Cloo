@@ -1,10 +1,10 @@
 [Description]
-Cloo is an object oriented, OpenCL wrapper. Written in C#, it takes advantage of the .NET framework to provide portability and ease of use while exposing the full functionality of the OpenCL platform.
+Cloo is an open source, easy to use, managed library. It allows .NET/Mono applications to safely access full OpenCL functionality in an object oriented fashion.
 
 [Requirements]
 The following is required for Cloo to work properly:
-1) OpenCL drivers. If not preinstalled, you can obtain them from your graphics card manufacturer website or operating system vendor website.
-2) Microsoft .NET Framework 2.0 or an equivalent alternative (Mono).
+1) OpenCL drivers. Depending on your system, you can obtain them from your graphics card manufacturer website or operating system vendor website.
+2) The Microsoft .NET Framework 2.0 or an equivalent alternative (Mono).
 3) The EXPERIMENTAL version of the OpenTK library. For more info refer to: http://www.opentk.com/
 
 [Download]
