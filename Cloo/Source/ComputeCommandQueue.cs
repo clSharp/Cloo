@@ -31,8 +31,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 /* 
  * Should investigate:
- * There may be a problem related to asynchronous operations.
- * The GC Handles may be released before such operations complete.
+ * There may be a problem related to some asynchronous operations.
+ * The GC handles may be released before such operations complete.
+ *
+ * Possible fix:
+ * Store these handles in the ComputeEvent accompanying this command.
+ * They will be released through ComputeEvent.Dispose().
  */
 
 namespace Cloo
@@ -200,7 +204,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Imports.EnqueueCopyBufferToImage(
+                    int error = Core.EnqueueCopyBufferToImage(
                         Handle,
                         source.Handle,
                         destination.Handle,
@@ -239,7 +243,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Imports.EnqueueCopyImageToBuffer(
+                    int error = Core.EnqueueCopyImageToBuffer(
                         Handle,
                         source.Handle,
                         destination.Handle,
@@ -278,7 +282,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Imports.EnqueueCopyImage(
+                    int error = Core.EnqueueCopyImage(
                         Handle,
                         source.Handle,
                         destination.Handle,
@@ -440,7 +444,7 @@ namespace Cloo
                 {
                     int error = (int)ErrorCode.Success;
 
-                    mappedPtr = Imports.EnqueueMapImage(
+                    mappedPtr = Core.EnqueueMapImage(
                         Handle,
                         image.Handle,
                         blocking,
@@ -551,7 +555,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Imports.EnqueueReadImage(
+                    int error = Core.EnqueueReadImage(
                         Handle,
                         image.Handle,
                         blocking,
@@ -681,7 +685,7 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = ComputeTools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Imports.EnqueueWriteImage(
+                    int error = Core.EnqueueWriteImage(
                         Handle,
                         image.Handle,
                         blocking,

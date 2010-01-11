@@ -55,7 +55,7 @@ namespace Cloo
             int error = ( int )ErrorCode.Success;
             unsafe
             {
-                Handle = Imports.CreateImage2D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )rowPitch, data, &error );
+                Handle = Core.CreateImage2D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )rowPitch, data, &error );
             }
             ComputeException.ThrowIfError( error );
             

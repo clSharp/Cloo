@@ -91,7 +91,7 @@ namespace Cloo
                 int error;
                 fixed( IntPtr* propertiesPtr = propertiesList )
                 fixed( IntPtr* deviceHandlesPtr = deviceHandles )
-                    Handle = Imports.CreateContext( propertiesPtr, ( uint )devices.Count, deviceHandlesPtr, notifyFuncPtr, notifyDataPtr, &error );
+                    Handle = Core.CreateContext( propertiesPtr, ( uint )devices.Count, deviceHandlesPtr, notifyFuncPtr, notifyDataPtr, &error );
                 ComputeException.ThrowIfError( error );
             }
 
@@ -100,7 +100,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates an OpenCL context from a device Type that identifies the specific device(s) to use.
+        /// Creates an OpenCL context from a device type that identifies the specific device(s) to use.
         /// </summary>
         /// <param name="deviceType"> A bit-field that identifies the Type of device to associate with this context.</param>
         /// <param name="properties"> A descriptor of this context properties.</param>
@@ -115,7 +115,7 @@ namespace Cloo
             {
                 int error = ( int )ErrorCode.Success;
                 fixed( IntPtr* propertiesPtr = propertiesList )
-                    Handle = Imports.CreateContextFromType( propertiesPtr, deviceType, notifyFuncPtr, notifyDataPtr, &error );
+                    Handle = Core.CreateContextFromType( propertiesPtr, deviceType, notifyFuncPtr, notifyDataPtr, &error );
                 ComputeException.ThrowIfError( error );
             }
 

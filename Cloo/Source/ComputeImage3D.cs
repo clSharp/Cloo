@@ -58,7 +58,7 @@ namespace Cloo
             int error = ( int )ErrorCode.Success;
             unsafe
             {
-                Handle = Imports.CreateImage3D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )depth, ( IntPtr )rowPitch, ( IntPtr )slicePitch, data, &error );
+                Handle = Core.CreateImage3D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )depth, ( IntPtr )rowPitch, ( IntPtr )slicePitch, data, &error );
             }
             ComputeException.ThrowIfError( error );
 
@@ -93,7 +93,7 @@ namespace Cloo
             int error = ( int )ErrorCode.Success;
             unsafe 
             {
-                error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, 0, null, &formatCountRet ); 
+                error = Core.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, 0, null, &formatCountRet ); 
             }
             ComputeException.ThrowIfError( error );
 
@@ -102,7 +102,7 @@ namespace Cloo
             {
                 fixed( ComputeImageFormat* formatsPtr = formats )
                 {
-                    error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, formatCountRet, formatsPtr, null );
+                    error = Core.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, formatCountRet, formatsPtr, null );
                 }
             }
             ComputeException.ThrowIfError( error );
