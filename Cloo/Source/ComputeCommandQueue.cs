@@ -193,7 +193,7 @@ namespace Cloo
         /// <param name="destinationOffset">The destination (x, y, z) offset in pixels where writing starts.</param>
         /// <param name="region">The region (width, height, depth) count in pixels to copy.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Copy<T>( ComputeBuffer<T> source, ComputeImage3D destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
+        public void Copy<T>( ComputeBuffer<T> source, ComputeImage destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -232,7 +232,7 @@ namespace Cloo
         /// <param name="region">The region (width, height, depth) count in pixels to copy.</param>
         /// <param name="destinationOffset">The destination offset in elements where writing starts.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Copy<T>( ComputeImage3D source, ComputeBuffer<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
+        public void Copy<T>( ComputeImage source, ComputeBuffer<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -271,7 +271,7 @@ namespace Cloo
         /// <param name="destinationOffset">The destination (x, y, z) offset in pixels where writing starts.</param>
         /// <param name="region">The region (width, height, depth) count in pixels to copy.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Copy( ComputeImage3D source, ComputeImage3D destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events )
+        public void Copy( ComputeImage source, ComputeImage destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -431,7 +431,7 @@ namespace Cloo
         /// <param name="rowPitch">Returns the length of image scan-line in bytes.</param>
         /// <param name="slicePitch">Returns the count in bytes of the 2D slice of the 3D image.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public IntPtr Map( ComputeImage3D image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, out long rowPitch, out long slicePitch, ICollection<ComputeEvent> events )
+        public IntPtr Map( ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, out long rowPitch, out long slicePitch, ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -542,7 +542,7 @@ namespace Cloo
         /// <param name="slicePitch">The count in bytes of the 2D slice of the 3D image.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         /// <returns>A pointer to the image data.</returns>
-        public IntPtr Read( ComputeImage3D image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, ICollection<ComputeEvent> events )
+        public IntPtr Read( ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
@@ -675,7 +675,7 @@ namespace Cloo
         /// <param name="slicePitch">The count in bytes of the 2D slice of the 3D image.</param>
         /// <param name="data">The content written to the image.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Write( ComputeImage3D image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events )
+        public void Write( ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = ( events != null ) ? ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;

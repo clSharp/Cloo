@@ -37,7 +37,7 @@ namespace Cloo
     using Cloo.Bindings;
     using OpenTK.Compute.CL10;
 
-    public class ComputeImage3D: ComputeMemory
+    public class ComputeImage3D: ComputeImage
     {
         #region Constructors
 
@@ -87,33 +87,6 @@ namespace Cloo
         public static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
             return GetSupportedFormats( context, flags, ComputeMemoryType.Image3D );
-        }
-
-        #endregion
-
-        #region Protected methods
-
-        protected static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type )
-        {
-            uint formatCountRet = 0;
-            int error = ( int )ErrorCode.Success;
-            unsafe 
-            {
-                error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, 0, null, &formatCountRet ); 
-            }
-            ComputeException.ThrowOnError( error );
-
-            ComputeImageFormat[] formats = new ComputeImageFormat[ formatCountRet ];
-            unsafe
-            {
-                fixed( ComputeImageFormat* formatsPtr = formats )
-                {
-                    error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, formatCountRet, formatsPtr, null );
-                }
-            }
-            ComputeException.ThrowOnError( error );
-
-            return new Collection<ComputeImageFormat>( formats );
         }
 
         #endregion

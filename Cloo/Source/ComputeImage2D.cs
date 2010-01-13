@@ -35,9 +35,8 @@ namespace Cloo
     using System.Collections.Generic;
     using Cloo.Bindings;
     using OpenTK.Compute.CL10;
-using OpenTK.Graphics.OpenGL;
 
-    public class ComputeImage2D: ComputeImage3D
+    public class ComputeImage2D: ComputeImage
     {
         #region Constructors
 
@@ -83,7 +82,7 @@ using OpenTK.Graphics.OpenGL;
         /// </summary>
         /// <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
-        public new static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
+        public static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
             return GetSupportedFormats( context, flags, ComputeMemoryType.Image2D );
         }
