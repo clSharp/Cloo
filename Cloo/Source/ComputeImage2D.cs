@@ -35,6 +35,7 @@ namespace Cloo
     using System.Collections.Generic;
     using Cloo.Bindings;
     using OpenTK.Compute.CL10;
+using OpenTK.Graphics.OpenGL;
 
     public class ComputeImage2D: ComputeImage3D
     {
@@ -66,6 +67,16 @@ namespace Cloo
         #endregion
 
         #region Public methods
+
+        public static ComputeImage2D CreateFromGLRenderbuffer( ComputeContext context, ComputeMemoryFlags flags, int renderbufferId )
+        {
+            throw new NotImplementedException();
+        }
+
+        public static ComputeImage2D CreateFromGLTexture2D( ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId )
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Gets a collection of supported 2D image formats with the given context.

@@ -128,6 +128,16 @@ namespace Cloo
 
         #region Public methods
 
+        public void AcquireGLObjects( ComputeCommandQueue commandQueue, ICollection<ComputeMemory> memoryObjects, ICollection<ComputeEvent> events )
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReleaseGLObjects( ComputeCommandQueue commandQueue, ICollection<ComputeMemory> memoryObjects, ICollection<ComputeEvent> events )
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Gets a string representation of this context.
         /// </summary>

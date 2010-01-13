@@ -74,6 +74,11 @@ namespace Cloo
 
         #region Public methods
 
+        public static ComputeImage3D CreateFromGLTexture3D( ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId )
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Gets a collection of supported 3D image formats with the given context.
         /// </summary>

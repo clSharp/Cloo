@@ -118,9 +118,19 @@ namespace Cloo
             ComputeException.ThrowOnError( error );
         }
 
+        private ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags )
+            : base( context, flags )
+        {
+        }
+
         #endregion
 
         #region Public methods
+
+        public static ComputeBuffer<T> CreateFromGLBuffer<T>( ComputeContext context, ComputeMemoryFlags flags, int bufferId ) where T: struct
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Gets a string representation of this buffer.

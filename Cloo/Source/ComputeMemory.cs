@@ -40,7 +40,7 @@ namespace Cloo
         
         protected long byteCount;
         private readonly ComputeContext context;
-        private readonly ComputeMemoryFlags ComputeMemoryFlags;        
+        private readonly ComputeMemoryFlags flags;        
 
         #endregion
 
@@ -58,7 +58,7 @@ namespace Cloo
         {
             get
             {
-                return ComputeMemoryFlags;
+                return flags;
             }
         }
 
@@ -77,7 +77,7 @@ namespace Cloo
         protected ComputeMemory( ComputeContext context, ComputeMemoryFlags flags )
         {
             this.context = context;
-            this.ComputeMemoryFlags = flags;
+            this.flags = flags;
         }
 
         #endregion
