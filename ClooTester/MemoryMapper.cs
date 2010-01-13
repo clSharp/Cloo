@@ -29,7 +29,7 @@ namespace ClooTester
                 Console.WriteLine( "\t" + bufferContent[ i ] );
             }
 
-            ComputeBuffer<long> buffer = new ComputeBuffer<long>( context, ComputeMemoryFlags.CopyHostPtr, bufferContent );
+            ComputeBuffer<long> buffer = new ComputeBuffer<long>( context, ComputeMemoryFlags.CopyHostPointer, bufferContent );
             IntPtr mappedPtr = queue.Map( buffer, true, ComputeMemoryMappingFlags.Read, 0, bufferContent.Length, null );
 
             Console.WriteLine( "Mapped content:" );

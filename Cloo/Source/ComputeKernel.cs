@@ -142,7 +142,7 @@ namespace Cloo
         /// <param name="index">The index of the argument to set.</param>
         /// <param name="dataSize">The size in bytes of the data mapped to the argument.</param>
         /// <param name="dataAddr">The address of the data mapped to the argument.</param>
-        public void SetArg( int index, IntPtr dataSize, IntPtr dataAddr )
+        public void SetArgument( int index, IntPtr dataSize, IntPtr dataAddr )
         {
             int error = CL.SetKernelArg(
                 Handle,
@@ -155,28 +155,28 @@ namespace Cloo
         /// <summary>
         /// Sets the specified kernel argument.
         /// </summary>
-        public void SetMemoryArg( int index, ComputeMemory memObj )
+        public void SetMemoryArgument( int index, ComputeMemory memObj )
         {
-            SetValueArg<IntPtr>( index, memObj.Handle );
+            SetValueArgument<IntPtr>( index, memObj.Handle );
         }
 
         /// <summary>
         /// Sets the specified kernel argument.
         /// </summary>
-        public void SetSamplerArg( int index, ComputeSampler sampler )
+        public void SetSamplerArgument( int index, ComputeSampler sampler )
         {
-            SetValueArg<IntPtr>( index, sampler.Handle );
+            SetValueArgument<IntPtr>( index, sampler.Handle );
         }        
 
         /// <summary>
         /// Sets the specified kernel argument.
         /// </summary>
-        public void SetValueArg<T>( int index, T data ) where T : struct
+        public void SetValueArgument<T>( int index, T data ) where T : struct
         {
             GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );            
             try
             {
-                SetArg( 
+                SetArgument( 
                     index,
                     new IntPtr( Marshal.SizeOf( typeof( T ) ) ),
                     gcHandle.AddrOfPinnedObject() );

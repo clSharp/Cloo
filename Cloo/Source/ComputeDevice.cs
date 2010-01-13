@@ -84,7 +84,7 @@ namespace Cloo
         private readonly string profile;
         private readonly long profilingTimerResolution;
         private readonly ComputeCommandQueueFlags queueProperties;
-        private readonly ComputeDeviceFPCapabilites singleFPConfig;
+        private readonly ComputeDeviceSingleFPCapabilites singleFPConfig;
         private readonly ComputeDeviceTypes type;
         private readonly string vendor;
         private readonly long vendorId;
@@ -592,7 +592,7 @@ namespace Cloo
         /// <summary>
         /// Describes single precision floating-point capability of the device.
         /// </summary>
-        public ComputeDeviceFPCapabilites SingleFPCapabilites
+        public ComputeDeviceSingleFPCapabilites SingleFPCapabilites
         {
             get
             {
@@ -700,7 +700,7 @@ namespace Cloo
             profile                     = GetStringInfo( DeviceInfo.DeviceProfile );
             profilingTimerResolution    = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceProfilingTimerResolution );
             queueProperties             = ( ComputeCommandQueueFlags )GetInfo<long>( DeviceInfo.DeviceQueueProperties );
-            singleFPConfig              = ( ComputeDeviceFPCapabilites )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
+            singleFPConfig              = ( ComputeDeviceSingleFPCapabilites )GetInfo<long>( DeviceInfo.DeviceSingleFpConfig );
             type                        = ( ComputeDeviceTypes )GetInfo<long>( DeviceInfo.DeviceType );
             vendor                      = GetStringInfo( DeviceInfo.DeviceVendor );
             vendorId                    = GetInfo<uint>( DeviceInfo.DeviceVendorId );

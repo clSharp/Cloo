@@ -67,7 +67,7 @@ namespace Cloo
         NativeKernel = ( 1 << 1 )
     }
 
-    public enum ComputeDeviceFPCapabilites: long
+    public enum ComputeDeviceSingleFPCapabilites: long
     {
         Denorm = ( 1 << 0 ),
         InfNan = ( 1 << 1 ),
@@ -137,9 +137,9 @@ namespace Cloo
         ReadWrite = ( 1 << 0 ),
         WriteOnly = ( 1 << 1 ),
         ReadOnly = ( 1 << 2 ),
-        UseHostPtr = ( 1 << 3 ),
-        AllocateHostPtr = ( 1 << 4 ),
-        CopyHostPtr = ( 1 << 5 )
+        UseHostPointer = ( 1 << 3 ),
+        AllocateHostPointer = ( 1 << 4 ),
+        CopyHostPointer = ( 1 << 5 )
     }
 
     public enum ComputeMemoryMappingFlags: long

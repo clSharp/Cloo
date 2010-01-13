@@ -32,13 +32,13 @@ namespace ClooTester
                 arrB[ i ] = ( float )( rand.NextDouble() * 100 );
             }
 
-            ComputeBuffer<float> a = new ComputeBuffer<float>( context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPtr, arrA );
-            ComputeBuffer<float> b = new ComputeBuffer<float>( context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPtr, arrB );
+            ComputeBuffer<float> a = new ComputeBuffer<float>( context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrA );
+            ComputeBuffer<float> b = new ComputeBuffer<float>( context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrB );
             ComputeBuffer<float> c = new ComputeBuffer<float>( context, ComputeMemoryFlags.WriteOnly, arrC.Length );
 
-            kernel.SetMemoryArg( 0, a );
-            kernel.SetMemoryArg( 1, b );
-            kernel.SetMemoryArg( 2, c );
+            kernel.SetMemoryArgument( 0, a );
+            kernel.SetMemoryArgument( 1, b );
+            kernel.SetMemoryArgument( 2, c );
 
             ComputeCommandQueue queue = new ComputeCommandQueue( context, context.Devices[ 0 ], ComputeCommandQueueFlags.Profiling );
             queue.Execute( kernel, null, new long[] { count }, null, null );
