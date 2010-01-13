@@ -61,6 +61,11 @@ namespace Cloo
         Profiling = ( 1 << 1 )
     }
 
+    public enum ComputeContextPropertyName: int
+    {
+        Platform = 0x1084
+    }
+
     public enum ComputeDeviceExecutionCapabilites: long
     {
         OpenCLKernel = ( 1 << 0 ),

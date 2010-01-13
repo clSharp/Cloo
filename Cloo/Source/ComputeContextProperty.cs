@@ -29,19 +29,52 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
-using System;
-using OpenTK.Compute.CL10;
 namespace Cloo
 {
+    using System;
+
     public class ComputeContextProperty
     {
-        private readonly IntPtr name;
+        #region Fields
+
+        private readonly ComputeContextPropertyName name;
         private readonly IntPtr value;
 
-        public ComputeContextProperty( ComputePlatform platform )
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// The name of this property.
+        /// </summary>
+        public ComputeContextPropertyName Name
         {
-            name = new IntPtr( ( long )ContextProperties.ContextPlatform );
-            value = platform.Handle;
+            get { return name; }
         }
+
+        /// <summary>
+        /// The value of this property.
+        /// </summary>
+        public IntPtr Value
+        {
+            get { return value; }
+        }
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Creates a new context property.
+        /// </summary>
+        /// <param name="name">The name of the created property.</param>
+        /// <param name="value">The value of the created property.</param>
+        public ComputeContextProperty( ComputeContextPropertyName name, IntPtr value )
+        {
+            name = ComputeContextPropertyName.Platform;
+            this.value = value;
+        }
+
+        #endregion
     }
 }
