@@ -29,14 +29,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
-namespace Cloo
+namespace Cloo.Bindings
 {
     using System;
     using System.Runtime.InteropServices;
     using System.Security;
     using OpenTK.Compute.CL10;
 
-    internal class Core
+    internal class Imports
     {
         const string filename = "opencl.dll";
 

@@ -33,6 +33,7 @@ namespace Cloo
 {
     using System;
     using System.Collections.Generic;
+    using Cloo.Bindings;
     using OpenTK.Compute.CL10;
 
     public class ComputeImage2D: ComputeImage3D
@@ -55,7 +56,7 @@ namespace Cloo
             int error = ( int )ErrorCode.Success;
             unsafe
             {
-                Handle = Core.CreateImage2D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )rowPitch, data, &error );
+                Handle = Imports.CreateImage2D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )rowPitch, data, &error );
             }
             ComputeException.ThrowIfError( error );
             

@@ -35,6 +35,7 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.InteropServices;
+    using Cloo.Bindings;
     using OpenTK.Compute.CL10;
 
     public class ComputeContext: ComputeResource
@@ -91,7 +92,7 @@ namespace Cloo
                 int error;
                 fixed( IntPtr* propertiesPtr = propertiesList )
                 fixed( IntPtr* deviceHandlesPtr = deviceHandles )
-                    Handle = Core.CreateContext( propertiesPtr, ( uint )devices.Count, deviceHandlesPtr, notifyFuncPtr, notifyDataPtr, &error );
+                    Handle = Imports.CreateContext( propertiesPtr, ( uint )devices.Count, deviceHandlesPtr, notifyFuncPtr, notifyDataPtr, &error );
                 ComputeException.ThrowIfError( error );
             }
 
@@ -115,7 +116,7 @@ namespace Cloo
             {
                 int error = ( int )ErrorCode.Success;
                 fixed( IntPtr* propertiesPtr = propertiesList )
-                    Handle = Core.CreateContextFromType( propertiesPtr, deviceType, notifyFuncPtr, notifyDataPtr, &error );
+                    Handle = Imports.CreateContextFromType( propertiesPtr, deviceType, notifyFuncPtr, notifyDataPtr, &error );
                 ComputeException.ThrowIfError( error );
             }
 
