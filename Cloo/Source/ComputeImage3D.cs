@@ -61,7 +61,7 @@ namespace Cloo
             {
                 Handle = Imports.CreateImage3D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )depth, ( IntPtr )rowPitch, ( IntPtr )slicePitch, data, &error );
             }
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
 
             byteCount = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
         }
@@ -96,7 +96,7 @@ namespace Cloo
             {
                 error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, 0, null, &formatCountRet ); 
             }
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
 
             ComputeImageFormat[] formats = new ComputeImageFormat[ formatCountRet ];
             unsafe
@@ -106,7 +106,7 @@ namespace Cloo
                     error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, formatCountRet, formatsPtr, null );
                 }
             }
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
 
             return new Collection<ComputeImageFormat>( formats );
         }

@@ -73,8 +73,16 @@ namespace Cloo
             this.count = count;
             byteCount = count * Marshal.SizeOf( typeof( T ) );
             ErrorCode error = ErrorCode.Success;
-            unsafe { Handle = CL.CreateBuffer( context.Handle, ( MemFlags )flags, new IntPtr( byteCount ), IntPtr.Zero, &error ); }
-            ComputeException.ThrowIfError( error );
+            unsafe
+            {
+                Handle = CL.CreateBuffer( 
+                    context.Handle, 
+                    ( MemFlags )flags,
+                    new IntPtr( byteCount ),
+                    IntPtr.Zero,
+                    &error );
+            }
+            ComputeException.ThrowOnError( error );
         }
 
         /// <summary>
@@ -107,7 +115,7 @@ namespace Cloo
                     dataPtr.Free();
                 }
             }
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
         }
 
         #endregion

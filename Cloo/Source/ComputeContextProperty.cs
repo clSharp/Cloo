@@ -71,8 +71,17 @@ namespace Cloo
         /// <param name="value">The value of the created property.</param>
         public ComputeContextProperty( ComputeContextPropertyName name, IntPtr value )
         {
-            name = ComputeContextPropertyName.Platform;
+            this.name = name;
             this.value = value;
+        }
+
+        #endregion
+
+        #region Public methods
+
+        public override string ToString()
+        {
+            return "ComputeContextProperty(" + name + ", " + value + ")";
         }
 
         #endregion

@@ -58,7 +58,7 @@ namespace Cloo
             {
                 Handle = Imports.CreateImage2D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )rowPitch, data, &error );
             }
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
             
             byteCount = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
         }

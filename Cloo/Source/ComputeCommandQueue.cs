@@ -128,7 +128,7 @@ namespace Cloo
         {
             ErrorCode error = ErrorCode.Success;
             Handle = CL.CreateCommandQueue( context.Handle, device.Handle, ( CommandQueueFlags )properties, out error );
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
             this.device = device;
             this.context = context;
             outOfOrderExec = ( ( long )( properties & ComputeCommandQueueFlags.OutOfOrderExecution ) != 0 );
@@ -142,10 +142,10 @@ namespace Cloo
         /// <summary>
         /// Enqueues a barrier. This barrier ensures that all queued commands have finished execution before the next batch of commands can begin execution.
         /// </summary>
-        public void Barrier()
+        public void AddBarrier()
         {
             int error = CL.EnqueueBarrier( Handle );
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
         }
 
         /// <summary>
@@ -215,7 +215,7 @@ namespace Cloo
                         ( uint )eventHandles.Length,
                         eventHandlesPtr,
                         &newEventHandle );
-                    ComputeException.ThrowIfError( error );
+                    ComputeException.ThrowOnError( error );
                 }                
             }
 
@@ -254,7 +254,7 @@ namespace Cloo
                         ( uint )eventHandles.Length,
                         eventHandlesPtr,
                         &newEventHandle );
-                    ComputeException.ThrowIfError( error );
+                    ComputeException.ThrowOnError( error );
                 }
             }
 
@@ -293,7 +293,7 @@ namespace Cloo
                         ( uint )eventHandles.Length,
                         eventHandlesPtr,
                         &newEventHandle );
-                    ComputeException.ThrowIfError( error );
+                    ComputeException.ThrowOnError( error );
                 }
             }
 
@@ -319,7 +319,7 @@ namespace Cloo
                         eventHandles.Length,
                         eventHandlesPtr,
                         &newEventHandle );
-                    ComputeException.ThrowIfError( error );
+                    ComputeException.ThrowOnError( error );
                 }
             }
 
@@ -352,7 +352,7 @@ namespace Cloo
                         eventHandles.Length,
                         eventHandlesPtr,
                         &newEventHandle );
-                    ComputeException.ThrowIfError( error );
+                    ComputeException.ThrowOnError( error );
                 }
             }
             if( events != null )
@@ -365,7 +365,7 @@ namespace Cloo
         public void Finish()
         {
             int error = CL.Finish( Handle );
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
         }
 
         /// <summary>
@@ -374,7 +374,7 @@ namespace Cloo
         public void Flush()
         {
             int error = CL.Finish( Handle );
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
         }
 
         /// <summary>
@@ -410,7 +410,7 @@ namespace Cloo
                         eventHandlesPtr,
                         &newEventHandle,
                         &error );
-                    ComputeException.ThrowIfError( error );
+                    ComputeException.ThrowOnError( error );
                 }
             }
 
@@ -458,7 +458,7 @@ namespace Cloo
                         eventHandlesPtr,
                         &newEventHandle,
                         &error );
-                    ComputeException.ThrowIfError( error );
+                    ComputeException.ThrowOnError( error );
                 }
             }
 
@@ -474,11 +474,11 @@ namespace Cloo
         /// <summary>
         /// Enqueues a marker.
         /// </summary>
-        public ComputeEvent Marker()
+        public ComputeEvent Mark()
         {
             IntPtr eventHandle = IntPtr.Zero;
             int error = CL.EnqueueMarker( Handle, ref eventHandle );
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
 
             return new ComputeEvent( eventHandle, this );
         }
@@ -517,7 +517,7 @@ namespace Cloo
                             eventHandles.Length,
                             eventHandlesPtr,
                             &newEventHandle );
-                    ComputeException.ThrowIfError( error );
+                    ComputeException.ThrowOnError( error );
                 }
                 finally
                 {
@@ -568,7 +568,7 @@ namespace Cloo
                         ( uint )eventHandles.Length,
                         eventHandlesPtr,
                         &newEventHandle );
-                    ComputeException.ThrowIfError( error );
+                    ComputeException.ThrowOnError( error );
                 }                
             }
 
@@ -605,7 +605,7 @@ namespace Cloo
                         eventHandles.Length,
                         eventHandlesPtr,
                         &newEventHandle );
-                ComputeException.ThrowIfError( error );
+                ComputeException.ThrowOnError( error );
             }
 
             mappedPtr = IntPtr.Zero;
@@ -623,7 +623,7 @@ namespace Cloo
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
                     int error = CL.WaitForEvents( eventHandles.Length, eventHandlesPtr );
-                    ComputeException.ThrowIfError( error );
+                    ComputeException.ThrowOnError( error );
                 }
             }
         }
@@ -657,7 +657,7 @@ namespace Cloo
                             eventHandles.Length,
                             eventHandlesPtr,
                             &newEventHandle );
-                ComputeException.ThrowIfError( error );
+                ComputeException.ThrowOnError( error );
             }
 
             if( events != null )
@@ -698,7 +698,7 @@ namespace Cloo
                         ( uint )eventHandles.Length,
                         eventHandlesPtr,
                         &newEventHandle );
-                    ComputeException.ThrowIfError( error );
+                    ComputeException.ThrowOnError( error );
                 }
             }
 
@@ -733,7 +733,7 @@ namespace Cloo
         {
             int error = ( int )ErrorCode.Success;
             error = CL.SetCommandQueueProperty( Handle, ( CommandQueueFlags )flags, enable, ( CommandQueueFlags[] )null );
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
         }
         
         #endregion

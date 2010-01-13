@@ -93,7 +93,7 @@ namespace Cloo
                 fixed( IntPtr* propertiesPtr = propertiesList )
                 fixed( IntPtr* deviceHandlesPtr = deviceHandles )
                     Handle = Imports.CreateContext( propertiesPtr, ( uint )devices.Count, deviceHandlesPtr, notifyFuncPtr, notifyDataPtr, &error );
-                ComputeException.ThrowIfError( error );
+                ComputeException.ThrowOnError( error );
             }
 
             this.properties = properties;
@@ -117,7 +117,7 @@ namespace Cloo
                 int error = ( int )ErrorCode.Success;
                 fixed( IntPtr* propertiesPtr = propertiesList )
                     Handle = Imports.CreateContextFromType( propertiesPtr, deviceType, notifyFuncPtr, notifyDataPtr, &error );
-                ComputeException.ThrowIfError( error );
+                ComputeException.ThrowOnError( error );
             }
 
             this.properties = properties;

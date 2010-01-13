@@ -43,7 +43,7 @@ namespace Cloo
         public static void Unload()
         {
             int error = CL.UnloadCompiler();
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
         }
 
         #endregion

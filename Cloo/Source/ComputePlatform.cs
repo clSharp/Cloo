@@ -140,12 +140,12 @@ namespace Cloo
             unsafe
             {
                 int error = CL.GetPlatformIDs( 0, null, &handlesLength );
-                ComputeException.ThrowIfError( error );
+                ComputeException.ThrowOnError( error );
                 handles = new IntPtr[ handlesLength ];
 
                 fixed( IntPtr* handlesPtr = handles )
                 { error = CL.GetPlatformIDs( handlesLength, handlesPtr, null ); }
-                ComputeException.ThrowIfError( error );
+                ComputeException.ThrowOnError( error );
             }
 
             List<ComputePlatform> platformList = new List<ComputePlatform>( handlesLength );
@@ -218,12 +218,12 @@ namespace Cloo
             unsafe
             {
                 int error = CL.GetDeviceIDs( Handle, DeviceTypeFlags.DeviceTypeAll, 0, null, &handlesLength );
-                ComputeException.ThrowIfError( error );
+                ComputeException.ThrowOnError( error );
 
                 handles = new IntPtr[ handlesLength ];
                 fixed( IntPtr* devicesPtr = handles )
                     error = CL.GetDeviceIDs( Handle, DeviceTypeFlags.DeviceTypeAll, handlesLength, devicesPtr, null );
-                ComputeException.ThrowIfError( error );
+                ComputeException.ThrowOnError( error );
             }
 
             ComputeDevice[] devices = new ComputeDevice[ handlesLength ];

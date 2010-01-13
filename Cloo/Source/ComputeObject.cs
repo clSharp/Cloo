@@ -143,7 +143,7 @@ namespace Cloo
             {
                 gcHandle.Free();
             }
-            ComputeException.ThrowIfError( errorCode );
+            ComputeException.ThrowOnError( errorCode );
             return buffer;
         }
 
@@ -174,7 +174,7 @@ namespace Cloo
             {
                 gcHandle.Free();
             }
-            ComputeException.ThrowIfError( errorCode );
+            ComputeException.ThrowOnError( errorCode );
             return buffer;
         }
 
@@ -214,7 +214,7 @@ namespace Cloo
                 result = ( NativeType )gcHandle.Target;
                 gcHandle.Free();                
             }
-            ComputeException.ThrowIfError( errorCode );
+            ComputeException.ThrowOnError( errorCode );
             return result;
         }
 
@@ -245,7 +245,7 @@ namespace Cloo
                 result = ( NativeType )gcHandle.Target;
                 gcHandle.Free();
             }
-            ComputeException.ThrowIfError( errorCode );
+            ComputeException.ThrowOnError( errorCode );
             return result;
         }
 

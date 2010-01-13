@@ -66,16 +66,16 @@ namespace Cloo
         /// Checks for an error and throws an exception if such is encountered.
         /// </summary>
         /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
-        public static void ThrowIfError( int errorCode )
+        public static void ThrowOnError( int errorCode )
         {
-            ThrowIfError( ( ErrorCode )errorCode );
+            ThrowOnError( ( ErrorCode )errorCode );
         }
 
         /// <summary>
         /// Checks for an error and throws an exception if such is encountered.
         /// </summary>
         /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
-        public static void ThrowIfError( ErrorCode errorCode )
+        public static void ThrowOnError( ErrorCode errorCode )
         {
             switch( errorCode )
             {

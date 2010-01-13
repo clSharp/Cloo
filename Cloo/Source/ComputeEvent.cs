@@ -161,7 +161,7 @@ namespace Cloo
             IntPtr[] eventHandles = ExtractHandles( events );
             
             int error = CL.WaitForEvents( eventHandles.Length, eventHandles );
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
         }
 
         #endregion

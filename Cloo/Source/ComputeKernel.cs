@@ -97,7 +97,7 @@ namespace Cloo
         {
             ErrorCode error = ErrorCode.Success;
             Handle = CL.CreateKernel( program.Handle, functionName, out error );
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
 
             context = program.Context;
             this.functionName = functionName;
@@ -149,7 +149,7 @@ namespace Cloo
                 index,
                 dataSize,
                 dataAddr );
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
         }
 
         /// <summary>

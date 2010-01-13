@@ -106,7 +106,7 @@ namespace Cloo
         {
             int error = ( int )ErrorCode.Success;
             Handle = CL.CreateSampler( context.Handle, normalizedCoords, ( AddressingMode )addressing, ( FilterMode )filtering, out error );
-            ComputeException.ThrowIfError( error );
+            ComputeException.ThrowOnError( error );
             this.addressing = addressing;
             this.context = context;
             this.filtering = filtering;
