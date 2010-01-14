@@ -1,5 +1,5 @@
 [Description]
-Cloo is an open source, easy to use, managed library. It allows .NET/Mono applications to safely access full OpenCL functionality in an object oriented fashion.
+Cloo is an open source, easy to use, managed library which enables .NET/Mono applications to take full advantage of the OpenCL framework.
 
 [Requirements]
 The following is required for Cloo to work properly:
