@@ -100,22 +100,6 @@ namespace Cloo
 
         #endregion
 
-        #region Internal methods
-
-        internal static IntPtr[] ExtractHandles<T>( ICollection<T> computeObjects ) where T: ComputeObject
-        {
-            IntPtr[] result = new IntPtr[ computeObjects.Count ];
-            int i = 0;
-            foreach( T computeObj in computeObjects )
-            {
-                result[ i ] = computeObj.Handle;
-                i++;
-            }
-            return result;
-        }
-
-        #endregion
-
         #region Protected methods
 
         protected NativeType[] GetArrayInfo<InfoType, NativeType>

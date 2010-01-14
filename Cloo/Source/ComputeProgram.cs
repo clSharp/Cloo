@@ -145,8 +145,8 @@ namespace Cloo
             int count = binaries.Count;
 
             IntPtr[] deviceHandles = ( devices != null ) ?
-                ExtractHandles<ComputeDevice>( devices ) :
-                ExtractHandles<ComputeDevice>( context.Devices );
+                ComputeTools.ExtractHandles<ComputeDevice>( devices ) :
+                ComputeTools.ExtractHandles<ComputeDevice>( context.Devices );
 
             IntPtr[] binariesPtrs = new IntPtr[ count ];
             IntPtr[] binariesLengths = new IntPtr[ count ];
@@ -216,7 +216,7 @@ namespace Cloo
             int error;
             if( devices != null )
             {
-                IntPtr[] deviceHandles = ComputeObject.ExtractHandles( devices );
+                IntPtr[] deviceHandles = ComputeTools.ExtractHandles( devices );
                 error = CL.BuildProgram( Handle, deviceHandles.Length, deviceHandles, options, notifyPtr, notifyDataPtr );
             }
             else

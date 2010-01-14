@@ -1,4 +1,6 @@
-﻿/*
+﻿#region License
+
+/*
 
 Copyright (c) 2009 Fatjon Sakiqi
 
@@ -25,11 +27,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-using System;
-using System.Globalization;
+#endregion
 
 namespace Cloo
 {
+    using System;
+    using System.Globalization;
+    using System.Collections.Generic;
+
     public class ComputeTools
     {
         #region Internal methods
@@ -55,6 +60,18 @@ namespace Cloo
             long[] result = new long[ array.Length ];
             for( long i = 0; i < array.Length; i++ )
                 result[ i ] = array[ i ].ToInt64();
+            return result;
+        }
+
+        internal static IntPtr[] ExtractHandles<T>( ICollection<T> computeObjects ) where T: ComputeObject
+        {
+            IntPtr[] result = new IntPtr[ computeObjects.Count ];
+            int i = 0;
+            foreach( T computeObj in computeObjects )
+            {
+                result[ i ] = computeObj.Handle;
+                i++;
+            }
             return result;
         }
 
