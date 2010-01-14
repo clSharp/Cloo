@@ -48,7 +48,7 @@ namespace Cloo.Bindings
             IntPtr* devices,
             IntPtr pfn_notify,
             IntPtr user_data,
-            [Out] Int32* errcode_ret );
+            Int32* errcode_ret );
 
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clCreateContextFromType", ExactSpelling = true )]
@@ -57,7 +57,33 @@ namespace Cloo.Bindings
             ComputeDeviceTypes device_type,
             IntPtr pfn_notify,
             IntPtr user_data,
-            [Out] Int32* errcode_ret );
+            Int32* errcode_ret );
+
+        [SuppressUnmanagedCodeSecurity()]
+        [DllImport( filename, EntryPoint = "clCreateFromGLBuffer", ExactSpelling = true )]
+        internal extern static unsafe IntPtr CreateFromGLBuffer(
+            IntPtr context,
+            ComputeMemoryFlags flags,
+            UInt32 buffer,
+            Int32* errcode_ret );
+
+        [SuppressUnmanagedCodeSecurity]
+        [DllImport( filename, EntryPoint = "clCreateFromGLRenderbuffer", ExactSpelling = true )]
+        internal extern static unsafe IntPtr CreateFromGLRenderbuffer(
+            IntPtr context,
+            ComputeMemoryFlags flags,
+            UInt32 renderbuffer,
+            Int32* errcode_ret );
+
+        [SuppressUnmanagedCodeSecurity()]
+        [DllImport( filename, EntryPoint = "clCreateFromGLTexture2D", ExactSpelling = true )]
+        internal extern static unsafe IntPtr CreateFromGLTexture2D(
+            IntPtr context,
+            ComputeMemoryFlags flags,
+            Int32 target,
+            Int32 miplevel,
+            UInt32 texture,
+            Int32* errcode_ret );
 
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clCreateImage2D", ExactSpelling = true )]
@@ -69,7 +95,7 @@ namespace Cloo.Bindings
             IntPtr image_height,
             IntPtr image_row_pitch,
             IntPtr host_ptr,
-            [Out] Int32* errcode_ret );
+            Int32* errcode_ret );
 
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clCreateImage3D", ExactSpelling = true )]
@@ -83,7 +109,17 @@ namespace Cloo.Bindings
             IntPtr image_row_pitch,
             IntPtr image_slice_pitch,
             IntPtr host_ptr,
-            [Out] Int32* errcode_ret );
+            Int32* errcode_ret );
+
+        [SuppressUnmanagedCodeSecurity]
+        [DllImport( filename, EntryPoint = "clEnqueueAcquireGLObjects", ExactSpelling = true )]
+        internal extern static unsafe Int32 EnqueueAcquireGLObjects(
+            IntPtr command_queue,
+            UInt32 num_objects,
+            IntPtr* mem_objects,
+            UInt32 num_events_in_wait_list,
+            IntPtr* event_wait_list,
+            IntPtr* newEvent );        
 
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyBufferToImage", ExactSpelling = true )]
@@ -96,7 +132,7 @@ namespace Cloo.Bindings
             IntPtr* region,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            [Out] IntPtr* event_ret );
+            IntPtr* event_ret );
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyImage", ExactSpelling = true )]
@@ -109,7 +145,7 @@ namespace Cloo.Bindings
             IntPtr* region,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            [Out] IntPtr* event_ret );
+            IntPtr* event_ret );
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyImageToBuffer", ExactSpelling = true )]
@@ -122,7 +158,7 @@ namespace Cloo.Bindings
             IntPtr dst_offset,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            [Out] IntPtr* event_ret );
+            IntPtr* event_ret );
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueMapImage", ExactSpelling = true )]
@@ -138,7 +174,7 @@ namespace Cloo.Bindings
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
             IntPtr* event_ret,
-            [Out] Int32* errcode_ret );
+            Int32* errcode_ret );
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueReadImage", ExactSpelling = true )]
@@ -153,7 +189,17 @@ namespace Cloo.Bindings
             IntPtr ptr,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            [Out] IntPtr* event_ret );
+            IntPtr* event_ret );
+
+        [SuppressUnmanagedCodeSecurity]
+        [DllImport( filename, EntryPoint = "clEnqueueReleaseGLObjects", ExactSpelling = true )]
+        internal extern static unsafe Int32 EnqueueReleaseGLObjects(
+            IntPtr command_queue,
+            UInt32 num_objects,
+            IntPtr* mem_objects,
+            UInt32 num_events_in_wait_list,
+            IntPtr* event_wait_list,
+            IntPtr* newEvent );
         
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueWriteImage", ExactSpelling = true )]
@@ -168,7 +214,23 @@ namespace Cloo.Bindings
             IntPtr ptr,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            [Out] IntPtr* event_ret );
+            IntPtr* event_ret );
+
+        [SuppressUnmanagedCodeSecurity]
+        [DllImport( filename, EntryPoint = "clGetGLObjectInfo", ExactSpelling = true )]
+        internal extern static unsafe Int32 GetGLObjectInfo(
+            IntPtr memobj,
+            UInt32* gl_object_type,
+            UInt32* gl_object_name );
+
+        [SuppressUnmanagedCodeSecurity]
+        [DllImport( filename, EntryPoint = "clGetGLTextureInfo", ExactSpelling = true )]
+        internal extern static unsafe Int32 GetGLTextureInfo(
+            IntPtr memobj,
+            UInt32 param_name,
+            IntPtr param_value_size,
+            IntPtr param_value,
+            [Out] IntPtr param_value_size_ret );
 
         [SuppressUnmanagedCodeSecurity]
         [DllImport( filename, EntryPoint = "clGetSupportedImageFormats", ExactSpelling = true )]
@@ -178,6 +240,6 @@ namespace Cloo.Bindings
             MemObjectType image_type,
             UInt32 num_entries,
             ComputeImageFormat* image_formats,
-            [Out] UInt32* num_image_formats );
+            UInt32* num_image_formats );
     }
 }
