@@ -54,6 +54,7 @@ namespace Cloo
         ReleaseGLObjects = 0x1200
     }
 
+    [Flags]
     public enum ComputeCommandQueueFlags: long
     {
         None = 0,
@@ -66,12 +67,14 @@ namespace Cloo
         Platform = 0x1084
     }
 
+    [Flags]
     public enum ComputeDeviceExecutionCapabilites: long
     {
         OpenCLKernel = ( 1 << 0 ),
         NativeKernel = ( 1 << 1 )
     }
 
+    [Flags]
     public enum ComputeDeviceSingleFPCapabilites: long
     {
         Denorm = ( 1 << 0 ),
@@ -95,6 +98,7 @@ namespace Cloo
         WriteOnly = 0x2
     }
 
+    [Flags]
     public enum ComputeDeviceTypes: long
     {
         Default = ( 1 << 0 ),
@@ -137,6 +141,7 @@ namespace Cloo
         Float = 0x10DE,
     }
 
+    [Flags]
     public enum ComputeMemoryFlags: long
     {
         ReadWrite = ( 1 << 0 ),
@@ -147,6 +152,7 @@ namespace Cloo
         CopyHostPointer = ( 1 << 5 )
     }
 
+    [Flags]
     public enum ComputeMemoryMappingFlags: long
     {
         Read = ( 1 << 0 ),
