@@ -20,7 +20,7 @@ namespace ClooTester
             List<ComputeEvent> events = new List<ComputeEvent>();
             
             int count = 1000000;
-            ComputeBuffer<float> buffA = new ComputeBuffer<float>( context, ComputeMemoryFlags.ReadOnly, new float[ count ] );
+            ComputeBuffer<float> buffA = new ComputeBuffer<float>( context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, new float[ count ] );
             queue.Write( buffA, false, 0, count, new float[ count ], events );
         }
     }
