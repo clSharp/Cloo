@@ -63,12 +63,29 @@ namespace Cloo
             byteCount = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
         }
 
+        private ComputeImage2D( ComputeContext context, ComputeMemoryFlags flags )
+            : base( context, flags )
+        { }
+
         #endregion
 
         #region Public methods
 
         public static ComputeImage2D CreateFromGLRenderbuffer( ComputeContext context, ComputeMemoryFlags flags, int renderbufferId )
         {
+            ComputeImage2D image = new ComputeImage2D( context, flags );
+
+            unsafe
+            {
+                int error = ( int )ErrorCode.Success;
+                Imports.CreateFromGLRenderbuffer(
+                    context.Handle,
+                    flags,
+                    ( uint )renderbufferId,
+                    &error );
+                ComputeException.ThrowOnError( error );
+            }
+
             throw new NotImplementedException();
         }
 

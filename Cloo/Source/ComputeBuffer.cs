@@ -129,11 +129,11 @@ namespace Cloo
 
         public static ComputeBuffer<T> CreateFromGLBuffer<T>( ComputeContext context, ComputeMemoryFlags flags, int bufferId ) where T: struct
         {
-            ComputeBuffer<T> glBuffer = new ComputeBuffer<T>( context, flags );
+            ComputeBuffer<T> buffer = new ComputeBuffer<T>( context, flags );
             unsafe
             {
                 int error = ( int )OpenTK.Compute.CL10.ErrorCode.Success;
-                glBuffer.Handle = Imports.CreateFromGLBuffer( 
+                buffer.Handle = Imports.CreateFromGLBuffer( 
                     context.Handle, 
                     flags, 
                     ( uint )bufferId,
@@ -142,11 +142,11 @@ namespace Cloo
             }
             int size = 0;
             GL.GetBufferParameter( BufferTarget.ArrayBuffer, BufferParameterName.BufferSize, out size );
-            glBuffer.byteCount = size;
+            buffer.byteCount = size;
             
-            glBuffer.count = size / Marshal.SizeOf( typeof( T ) );
+            buffer.count = size / Marshal.SizeOf( typeof( T ) );
             
-            return glBuffer;
+            return buffer;
         }
 
         /// <summary>
