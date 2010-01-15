@@ -3,7 +3,7 @@ Breaking changes:
 ComputeBuffer
 	Removed GetSupportedFormats.
 ComputeContext
-	ComputeContext.PropertiesDescriptor -> ComputeContextProperties
+	ComputeContext.PropertiesDescriptor -> ComputeContextPropertyList and ComputeContextProperty
 	Removed ComputeContext.NotifyDescriptor. Instead you should directly pass a ComputeContextNotifier delegate and its data to the constructor.
 ComputeDevice
 	MaxMemoryAllocSize -> MaxMemoryAllocationSize

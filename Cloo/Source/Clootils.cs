@@ -35,7 +35,7 @@ namespace Cloo
     using System.Globalization;
     using System.Collections.Generic;
 
-    public class ComputeTools
+    public class Clootils
     {
         #region Internal methods
 

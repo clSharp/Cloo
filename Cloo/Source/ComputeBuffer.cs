@@ -32,15 +32,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using Cloo.Bindings;
     using OpenTK.Compute.CL10;
+    using OpenTK.Graphics.OpenGL;
 
     public class ComputeBuffer<T>: ComputeMemory where T: struct
     {
         #region Fields
 
-        private readonly long count;
+        private long count;
 
         #endregion
 
@@ -72,7 +73,7 @@ namespace Cloo
         {
             this.count = count;
             byteCount = count * Marshal.SizeOf( typeof( T ) );
-            ErrorCode error = ErrorCode.Success;
+            OpenTK.Compute.CL10.ErrorCode error = OpenTK.Compute.CL10.ErrorCode.Success;
             unsafe
             {
                 Handle = CL.CreateBuffer( 
@@ -81,8 +82,8 @@ namespace Cloo
                     new IntPtr( byteCount ),
                     IntPtr.Zero,
                     &error );
+                ComputeException.ThrowOnError( error );
             }
-            ComputeException.ThrowOnError( error );
         }
 
         /// <summary>
@@ -97,7 +98,7 @@ namespace Cloo
             byteCount = data.Length * Marshal.SizeOf( typeof( T ) );
             count = data.Length;
 
-            ErrorCode error = ErrorCode.Success;
+            OpenTK.Compute.CL10.ErrorCode error = OpenTK.Compute.CL10.ErrorCode.Success;
             unsafe
             {
                 GCHandle dataPtr = GCHandle.Alloc( data, GCHandleType.Pinned );
@@ -109,19 +110,18 @@ namespace Cloo
                         new IntPtr( byteCount ),
                         dataPtr.AddrOfPinnedObject(),
                         &error );
+                    ComputeException.ThrowOnError( error );
                 }
                 finally
                 {
                     dataPtr.Free();
                 }
             }
-            ComputeException.ThrowOnError( error );
         }
 
         private ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags )
             : base( context, flags )
-        {
-        }
+        { }
 
         #endregion
 
@@ -129,7 +129,24 @@ namespace Cloo
 
         public static ComputeBuffer<T> CreateFromGLBuffer<T>( ComputeContext context, ComputeMemoryFlags flags, int bufferId ) where T: struct
         {
-            throw new NotImplementedException();
+            ComputeBuffer<T> glBuffer = new ComputeBuffer<T>( context, flags );
+            unsafe
+            {
+                int error = ( int )OpenTK.Compute.CL10.ErrorCode.Success;
+                glBuffer.Handle = Imports.CreateFromGLBuffer( 
+                    context.Handle, 
+                    flags, 
+                    ( uint )bufferId,
+                    &error );
+                ComputeException.ThrowOnError( error );
+            }
+            int size = 0;
+            GL.GetBufferParameter( BufferTarget.ArrayBuffer, BufferParameterName.BufferSize, out size );
+            glBuffer.byteCount = size;
+            
+            glBuffer.count = size / Marshal.SizeOf( typeof( T ) );
+            
+            return glBuffer;
         }
 
         /// <summary>

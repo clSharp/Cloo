@@ -83,7 +83,7 @@ namespace Cloo
         /// <param name="notify">A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered.</param>
         public ComputeContext( ICollection<ComputeDevice> devices, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr notifyDataPtr )
         {
-            IntPtr[] deviceHandles = ComputeTools.ExtractHandles( devices );
+            IntPtr[] deviceHandles = Clootils.ExtractHandles( devices );
             IntPtr[] propertiesList = ( properties != null ) ? properties.ToIntPtrArray() : null;
             IntPtr notifyFuncPtr = ( notify != null ) ? Marshal.GetFunctionPointerForDelegate( notify ) : IntPtr.Zero;
 
@@ -130,12 +130,48 @@ namespace Cloo
 
         public void AcquireGLObjects( ComputeCommandQueue commandQueue, ICollection<ComputeMemory> memoryObjects, ICollection<ComputeEvent> events )
         {
-            throw new NotImplementedException();
+            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr newEventHandle = IntPtr.Zero;
+
+            unsafe
+            {
+                fixed( IntPtr* memoryObjectsPtr = Clootils.ExtractHandles( memoryObjects ) )
+                fixed( IntPtr* eventHandlesPtr = eventHandles )
+                {
+                    int error = ( int )ErrorCode.Success;
+                    error = Imports.EnqueueAcquireGLObjects(
+                        commandQueue.Context.Handle,
+                        ( uint )memoryObjects.Count,
+                        memoryObjectsPtr,
+                        ( uint )eventHandles.Length,
+                        eventHandlesPtr,
+                        &newEventHandle );
+                    ComputeException.ThrowOnError( error );
+                }
+            }
         }
 
         public void ReleaseGLObjects( ComputeCommandQueue commandQueue, ICollection<ComputeMemory> memoryObjects, ICollection<ComputeEvent> events )
         {
-            throw new NotImplementedException();
+            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr newEventHandle = IntPtr.Zero;
+
+            unsafe
+            {
+                fixed( IntPtr* memoryObjectsPtr = Clootils.ExtractHandles( memoryObjects ) )
+                fixed( IntPtr* eventHandlesPtr = eventHandles )
+                {
+                    int error = ( int )ErrorCode.Success;
+                    error = Imports.EnqueueReleaseGLObjects(
+                        commandQueue.Context.Handle,
+                        ( uint )memoryObjects.Count,
+                        memoryObjectsPtr,
+                        ( uint )eventHandles.Length,
+                        eventHandlesPtr,
+                        &newEventHandle );
+                    ComputeException.ThrowOnError( error );
+                }
+            }
         }
 
         /// <summary>

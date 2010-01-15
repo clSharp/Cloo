@@ -11,7 +11,7 @@ The following is required for Cloo to work properly:
 You can download the most recent version of Cloo from "http://sourceforge.net/projects/cloo/".
 
 [Help]
-You can use the forums at "http://sourceforge.net/projects/cloo/forums" to contact the developers.
+You can use the forums at "http://sourceforge.net/projects/cloo/forums".
 
 [Notes]
 Currently, there is no support for object sharing and data transfers between OpenCL and OpenGL.

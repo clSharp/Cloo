@@ -685,7 +685,7 @@ namespace Cloo
             maxSamplers                 = GetInfo<uint>( DeviceInfo.DeviceMaxSamplers );
             maxWorkGroupSize            = ( long )GetInfo<IntPtr>( DeviceInfo.DeviceMaxWorkGroupSize );
             maxWorkItemDimensions       = GetInfo<uint>( DeviceInfo.DeviceMaxWorkItemDimensions );
-            maxWorkItemSizes            = new ReadOnlyCollection<long>( ComputeTools.ConvertArray( GetArrayInfo<DeviceInfo, IntPtr>( DeviceInfo.DeviceMaxWorkItemSizes, CL.GetDeviceInfo ) ) );
+            maxWorkItemSizes            = new ReadOnlyCollection<long>( Clootils.ConvertArray( GetArrayInfo<DeviceInfo, IntPtr>( DeviceInfo.DeviceMaxWorkItemSizes, CL.GetDeviceInfo ) ) );
             maxWriteImageArgs           = GetInfo<uint>( DeviceInfo.DeviceMaxWriteImageArgs );
             memBaseAddrAlign            = GetInfo<uint>( DeviceInfo.DeviceMemBaseAddrAlign );
             minDataTypeAlignSize        = GetInfo<uint>( DeviceInfo.DeviceMinDataTypeAlignSize );

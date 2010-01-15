@@ -158,7 +158,7 @@ namespace Cloo
         /// <param name="events">The list of events to wait for.</param>
         public static void Wait( ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ComputeTools.ExtractHandles( events );
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             
             int error = CL.WaitForEvents( eventHandles.Length, eventHandles );
             ComputeException.ThrowOnError( error );
