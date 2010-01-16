@@ -39,6 +39,60 @@ namespace Cloo
 
     public class ComputeImage3D: ComputeImage
     {
+        #region Fields
+
+        private int depth;
+        private int height;
+        private int rowPitch;
+        private int slicePitch;
+        private int width;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// The depth of the image in pixels.
+        /// </summary>
+        public int Depth
+        {
+            get { return depth; }
+        }
+
+        /// <summary>
+        /// The height of the image in pixels.
+        /// </summary>
+        public int Height
+        {
+            get { return height; }
+        }
+
+        /// <summary>
+        /// The size of the image row in bytes.
+        /// </summary>
+        public int RowPitch
+        {
+            get { return rowPitch; }
+        }
+
+        /// <summary>
+        /// The size of the image slice in bytes.
+        /// </summary>
+        public int SlicePitch
+        {
+            get { return slicePitch; }
+        }
+
+        /// <summary>
+        /// The width of the image in pixels.
+        /// </summary>
+        public int Width
+        {
+            get { return width; }
+        }
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -51,24 +105,28 @@ namespace Cloo
         /// <param name="height">Height of the image in pixels.</param>
         /// <param name="depth">Depth of the image in pixels.</param>
         /// <param name="rowPitch">The scan-line pitch in bytes.</param>
-        /// <param name="slicePitch">The count in bytes of each 2D slice in the 3D image.</param>
+        /// <param name="slicePitch">The size in bytes of each 2D slice in the 3D image.</param>
         /// <param name="data">The image data that may be already allocated by the application.</param>
         public ComputeImage3D( ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int depth, int rowPitch, int slicePitch, IntPtr data )
             : base( context, flags )
         {
-            int error = ( int )ErrorCode.Success;
             unsafe
             {
+                int error = ( int )ErrorCode.Success;
                 Handle = Imports.CreateImage3D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )depth, ( IntPtr )rowPitch, ( IntPtr )slicePitch, data, &error );
+                ComputeException.ThrowOnError( error );
             }
-            ComputeException.ThrowOnError( error );
 
-            byteCount = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
+            Init();
         }
 
-        protected ComputeImage3D( ComputeContext context, ComputeMemoryFlags flags )
+        private ComputeImage3D( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
             : base( context, flags )
-        { }
+        {
+            Handle = handle;
+
+            Init();
+        }
 
         #endregion
 
@@ -76,7 +134,20 @@ namespace Cloo
 
         public static ComputeImage3D CreateFromGLTexture3D( ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId )
         {
-            throw new NotImplementedException();
+            IntPtr image = IntPtr.Zero;
+            unsafe
+            {
+                int error = ( int )ErrorCode.Success;
+                image = Imports.CreateFromGLTexture3D(
+                    context.Handle,
+                    flags,
+                    textureTarget,
+                    mipLevel,
+                    ( uint )textureId,
+                    &error );
+                ComputeException.ThrowOnError( error );
+            }
+            return new ComputeImage3D( image, context, flags );
         }
 
         /// <summary>
@@ -87,6 +158,20 @@ namespace Cloo
         public static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
             return GetSupportedFormats( context, flags, ComputeMemoryType.Image3D );
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void Init()
+        {
+            depth = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageDepth, CL.GetImageInfo );
+            height = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageHeight, CL.GetImageInfo );
+            rowPitch = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageRowPitch, CL.GetImageInfo );
+            Size = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
+            slicePitch = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageSlicePitch, CL.GetImageInfo );
+            width = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageWidth, CL.GetImageInfo );
         }
 
         #endregion

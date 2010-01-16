@@ -38,9 +38,9 @@ namespace Cloo
     {
         #region Fields
         
-        protected long byteCount;
         private readonly ComputeContext context;
-        private readonly ComputeMemoryFlags flags;        
+        private readonly ComputeMemoryFlags flags;
+        private long size;
 
         #endregion
 
@@ -75,7 +75,11 @@ namespace Cloo
         {
             get
             {
-                return byteCount;
+                return size;
+            }
+            protected set
+            {
+                size = value;
             }
         }
 

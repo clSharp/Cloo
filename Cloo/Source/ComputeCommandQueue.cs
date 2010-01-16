@@ -547,7 +547,7 @@ namespace Cloo
             IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
             IntPtr newEventHandle = IntPtr.Zero;
                         
-            byte[] imageBits = new byte[ region[ 2 ] * slicePitch * region[ 1 ] * rowPitch * region[ 0 ] ];
+            byte[] imageBits = new byte[ image.Size ];
             IntPtr readData = Marshal.UnsafeAddrOfPinnedArrayElement( imageBits, 0 );
 
             unsafe

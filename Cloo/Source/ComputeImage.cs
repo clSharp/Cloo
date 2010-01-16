@@ -55,8 +55,8 @@ namespace Cloo
             unsafe
             {
                 error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, 0, null, &formatCountRet );
+                ComputeException.ThrowOnError( error );
             }
-            ComputeException.ThrowOnError( error );
 
             ComputeImageFormat[] formats = new ComputeImageFormat[ formatCountRet ];
             unsafe
@@ -64,9 +64,9 @@ namespace Cloo
                 fixed( ComputeImageFormat* formatsPtr = formats )
                 {
                     error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, formatCountRet, formatsPtr, null );
+                    ComputeException.ThrowOnError( error );
                 }
-            }
-            ComputeException.ThrowOnError( error );
+            }            
 
             return new Collection<ComputeImageFormat>( formats );
         }

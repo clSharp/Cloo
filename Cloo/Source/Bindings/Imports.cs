@@ -86,6 +86,16 @@ namespace Cloo.Bindings
             Int32* errcode_ret );
 
         [SuppressUnmanagedCodeSecurity()]
+        [DllImport( filename, EntryPoint = "clCreateFromGLTexture3D", ExactSpelling = true )]
+        internal extern static unsafe IntPtr CreateFromGLTexture3D(
+            IntPtr context,
+            ComputeMemoryFlags flags,
+            Int32 target,
+            Int32 miplevel,
+            UInt32 texture,
+            Int32* errcode_ret );
+
+        [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clCreateImage2D", ExactSpelling = true )]
         internal extern static unsafe IntPtr CreateImage2D(
             IntPtr context,

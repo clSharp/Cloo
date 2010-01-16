@@ -35,7 +35,6 @@ namespace Cloo
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
     using OpenTK.Compute.CL10;
-    using OpenTK.Graphics.OpenGL;
 
     public class ComputeBuffer<T>: ComputeMemory where T: struct
     {
@@ -72,14 +71,14 @@ namespace Cloo
             : base( context, flags )
         {
             this.count = count;
-            byteCount = count * Marshal.SizeOf( typeof( T ) );
-            OpenTK.Compute.CL10.ErrorCode error = OpenTK.Compute.CL10.ErrorCode.Success;
+            Size = count * Marshal.SizeOf( typeof( T ) );
+            ErrorCode error = ErrorCode.Success;
             unsafe
             {
                 Handle = CL.CreateBuffer( 
                     context.Handle, 
                     ( MemFlags )flags,
-                    new IntPtr( byteCount ),
+                    new IntPtr( Size ),
                     IntPtr.Zero,
                     &error );
                 ComputeException.ThrowOnError( error );
@@ -95,19 +94,19 @@ namespace Cloo
         public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, T[] data )
             : base( context, flags )
         {        
-            byteCount = data.Length * Marshal.SizeOf( typeof( T ) );
+            Size = data.Length * Marshal.SizeOf( typeof( T ) );
             count = data.Length;
 
-            OpenTK.Compute.CL10.ErrorCode error = OpenTK.Compute.CL10.ErrorCode.Success;
             unsafe
             {
                 GCHandle dataPtr = GCHandle.Alloc( data, GCHandleType.Pinned );
                 try
                 {
+                    ErrorCode error = ErrorCode.Success;
                     Handle = CL.CreateBuffer(
                         context.Handle,
                         ( MemFlags )flags,
-                        new IntPtr( byteCount ),
+                        new IntPtr( Size ),
                         dataPtr.AddrOfPinnedObject(),
                         &error );
                     ComputeException.ThrowOnError( error );
@@ -140,12 +139,9 @@ namespace Cloo
                     &error );
                 ComputeException.ThrowOnError( error );
             }
-            int size = 0;
-            GL.GetBufferParameter( BufferTarget.ArrayBuffer, BufferParameterName.BufferSize, out size );
-            buffer.byteCount = size;
-            
-            buffer.count = size / Marshal.SizeOf( typeof( T ) );
-            
+
+            buffer.Size = ( long )buffer.GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );            
+            buffer.count = buffer.Size / Marshal.SizeOf( typeof( T ) );            
             return buffer;
         }
 

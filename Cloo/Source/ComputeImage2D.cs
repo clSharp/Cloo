@@ -38,6 +38,42 @@ namespace Cloo
 
     public class ComputeImage2D: ComputeImage
     {
+        #region Fields
+
+        private int height;
+        private int rowPitch;
+        private int width;        
+
+        #endregion
+        
+        #region Properties
+
+        /// <summary>
+        /// The height of the image in pixels.
+        /// </summary>
+        public int Height
+        {
+            get { return height; }
+        }
+
+        /// <summary>
+        /// The size of the image row in bytes.
+        /// </summary>
+        public int RowPitch
+        {
+            get { return rowPitch; }
+        }
+
+        /// <summary>
+        /// The width of the image in pixels.
+        /// </summary>
+        public int Width
+        {
+            get { return width; }
+        }
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -53,19 +89,23 @@ namespace Cloo
         public ComputeImage2D( ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int rowPitch, IntPtr data )
             : base( context, flags )
         {
-            int error = ( int )ErrorCode.Success;
             unsafe
             {
+                int error = ( int )ErrorCode.Success;
                 Handle = Imports.CreateImage2D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )rowPitch, data, &error );
+                ComputeException.ThrowOnError( error );
             }
-            ComputeException.ThrowOnError( error );
-            
-            byteCount = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
+
+            Init();
         }
 
-        private ComputeImage2D( ComputeContext context, ComputeMemoryFlags flags )
+        private ComputeImage2D( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
             : base( context, flags )
-        { }
+        {
+            Handle = handle;
+            
+            Init();
+        }
 
         #endregion
 
@@ -73,25 +113,36 @@ namespace Cloo
 
         public static ComputeImage2D CreateFromGLRenderbuffer( ComputeContext context, ComputeMemoryFlags flags, int renderbufferId )
         {
-            ComputeImage2D image = new ComputeImage2D( context, flags );
-
+            IntPtr image = IntPtr.Zero;
             unsafe
             {
                 int error = ( int )ErrorCode.Success;
-                Imports.CreateFromGLRenderbuffer(
+                image = Imports.CreateFromGLRenderbuffer(
                     context.Handle,
                     flags,
                     ( uint )renderbufferId,
                     &error );
                 ComputeException.ThrowOnError( error );
             }
-
-            throw new NotImplementedException();
+            return new ComputeImage2D( image, context, flags );
         }
 
         public static ComputeImage2D CreateFromGLTexture2D( ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId )
         {
-            throw new NotImplementedException();
+            IntPtr image = IntPtr.Zero;
+            unsafe
+            {
+                int error = ( int )ErrorCode.Success;
+                image = Imports.CreateFromGLTexture2D(
+                    context.Handle,
+                    flags,
+                    textureTarget,
+                    mipLevel,
+                    ( uint )textureId,
+                    &error );
+                ComputeException.ThrowOnError( error );
+            }
+            return new ComputeImage2D( image, context, flags );
         }
 
         /// <summary>
@@ -102,6 +153,18 @@ namespace Cloo
         public static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
             return GetSupportedFormats( context, flags, ComputeMemoryType.Image2D );
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void Init()
+        {
+            Size = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
+            width = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageWidth, CL.GetImageInfo );
+            height = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageHeight, CL.GetImageInfo );
+            rowPitch = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageRowPitch, CL.GetImageInfo );
         }
 
         #endregion
