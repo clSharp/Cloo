@@ -69,14 +69,6 @@ namespace Cloo
         /// <summary>
         /// Creates a new property list.
         /// </summary>
-        public ComputeContextPropertyList()
-        {
-            properties = new List<ComputeContextProperty>();
-        }
-
-        /// <summary>
-        /// Creates a new property list.
-        /// </summary>
         /// <param name="platform">A platform property for this list. Can be null.</param>
         public ComputeContextPropertyList( ComputePlatform platform )
         {            
@@ -88,8 +80,17 @@ namespace Cloo
                 properties.Add( new ComputeContextProperty( ComputeContextPropertyName.Platform, platform.Handle ) );
         }
 
-        #endregion
+        /// <summary>
+        /// Creates a new property list.
+        /// </summary>
+        /// <param name="properties">A collection of ComputeContextProperty items.</param>
+        public ComputeContextPropertyList( IEnumerable<ComputeContextProperty> properties )
+        {
+            properties = new List<ComputeContextProperty>( properties );
+        }
 
+        #endregion
+                
         #region Internal methods
 
         internal IntPtr[] ToIntPtrArray()
