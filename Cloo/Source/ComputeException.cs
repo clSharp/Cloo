@@ -92,7 +92,7 @@ namespace Cloo
                     throw new CompilerNotAvailableComputeException();
                 
                 case ErrorCode.MemObjectAllocationFailure: 
-                    throw new MemoryAllocationComputeException();
+                    throw new MemoryObjectAllocationComputeException();
                 
                 case ErrorCode.OutOfResources: 
                     throw new OutOfResourcesComputeException();
@@ -209,7 +209,7 @@ namespace Cloo
                     throw new InvalidOperationComputeException();
 
                 case ErrorCode.InvalidGlObject: 
-                    throw new InvalidGraphicsObjectComputeException();
+                    throw new InvalidGLObjectComputeException();
 
                 case ErrorCode.InvalidBufferSize: 
                     throw new InvalidBufferSizeComputeException();
@@ -236,8 +236,8 @@ namespace Cloo
     public class CompilerNotAvailableComputeException: ComputeException
     { public CompilerNotAvailableComputeException() : base( ErrorCode.CompilerNotAvailable ) { } }
 
-    public class MemoryAllocationComputeException: ComputeException
-    { public MemoryAllocationComputeException() : base( ErrorCode.MemObjectAllocationFailure ) { } }
+    public class MemoryObjectAllocationComputeException: ComputeException
+    { public MemoryObjectAllocationComputeException() : base( ErrorCode.MemObjectAllocationFailure ) { } }
 
     public class OutOfResourcesComputeException: ComputeException
     { public OutOfResourcesComputeException() : base( ErrorCode.OutOfResources ) { } }
@@ -353,8 +353,8 @@ namespace Cloo
     public class InvalidOperationComputeException: ComputeException
     { public InvalidOperationComputeException() : base( ErrorCode.InvalidOperation ) { } }
 
-    public class InvalidGraphicsObjectComputeException: ComputeException
-    { public InvalidGraphicsObjectComputeException() : base( ErrorCode.InvalidGlObject ) { } }
+    public class InvalidGLObjectComputeException: ComputeException
+    { public InvalidGLObjectComputeException() : base( ErrorCode.InvalidGlObject ) { } }
 
     public class InvalidBufferSizeComputeException: ComputeException
     { public InvalidBufferSizeComputeException() : base( ErrorCode.InvalidBufferSize ) { } }

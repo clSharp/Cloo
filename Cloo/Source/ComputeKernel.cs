@@ -29,6 +29,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+/*
+ * This class can be used to overcome the situation described
+ * here: http://www.opentk.com/node/1509.
+ * A possible fix would be to keep the params "alive" in the kernel object.
+ * Until:
+ * 1) the parameter is set again.
+ * 2) a ComputeKernel.Unlock method is called. 
+ */
+
 namespace Cloo
 {
     using System;

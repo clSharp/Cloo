@@ -107,7 +107,57 @@ namespace Cloo
         Accelerator = ( 1 << 3 ),
         All = 0xFFFFFFFF
     }
-        
+
+    public enum ComputeErrorCode: int
+    {
+        Success = ( ( int )0 ),
+        DeviceNotFound = ( ( int )-1 ),
+        DeviceNotAvailable = ( ( int )-2 ),
+        CompilerNotAvailable = ( ( int )-3 ),
+        MemoryObjectAllocationFailure = ( ( int )-4 ),
+        OutOfResources = ( ( int )-5 ),
+        OutOfHostMemory = ( ( int )-6 ),
+        ProfilingInfoNotAvailable = ( ( int )-7 ),
+        MemoryCopyOverlap = ( ( int )-8 ),
+        ImageFormatMismatch = ( ( int )-9 ),
+        ImageFormatNotSupported = ( ( int )-10 ),
+        BuildProgramFailure = ( ( int )-11 ),
+        MapFailure = ( ( int )-12 ),
+        InvalidValue = ( ( int )-30 ),
+        InvalidDeviceType = ( ( int )-31 ),
+        InvalidPlatform = ( ( int )-32 ),
+        InvalidDevice = ( ( int )-33 ),
+        InvalidContext = ( ( int )-34 ),
+        InvalidCommandQueueProperties = ( ( int )-35 ),
+        InvalidCommandQueue = ( ( int )-36 ),
+        InvalidHostPointer = ( ( int )-37 ),
+        InvalidMemoryObject = ( ( int )-38 ),
+        InvalidImageFormatDescriptor = ( ( int )-39 ),
+        InvalidImageSize = ( ( int )-40 ),
+        InvalidSampler = ( ( int )-41 ),
+        InvalidBinary = ( ( int )-42 ),
+        InvalidBuildOptions = ( ( int )-43 ),
+        InvalidProgram = ( ( int )-44 ),
+        InvalidProgramExecutable = ( ( int )-45 ),
+        InvalidKernelName = ( ( int )-46 ),
+        InvalidKernelDefinition = ( ( int )-47 ),
+        InvalidKernel = ( ( int )-48 ),
+        InvalidArgIndex = ( ( int )-49 ),
+        InvalidArgValue = ( ( int )-50 ),
+        InvalidArgSize = ( ( int )-51 ),
+        InvalidKernelArgs = ( ( int )-52 ),
+        InvalidWorkDimension = ( ( int )-53 ),
+        InvalidWorkGroupSize = ( ( int )-54 ),
+        InvalidWorkItemSize = ( ( int )-55 ),
+        InvalidGlobalOffset = ( ( int )-56 ),
+        InvalidEventWaitList = ( ( int )-57 ),
+        InvalidEvent = ( ( int )-58 ),
+        InvalidOperation = ( ( int )-59 ),
+        InvalidGlObject = ( ( int )-60 ),
+        InvalidBufferSize = ( ( int )-61 ),
+        InvalidMipLevel = ( ( int )-62 ),
+    }
+
     public enum ComputeImageChannelOrder: int
     {
         Color = 0x10B0,

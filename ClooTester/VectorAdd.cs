@@ -40,7 +40,7 @@ namespace ClooTester
             kernel.SetMemoryArgument( 1, b );
             kernel.SetMemoryArgument( 2, c );
 
-            ComputeCommandQueue queue = new ComputeCommandQueue( context, context.Devices[ 0 ], ComputeCommandQueueFlags.Profiling );
+            ComputeCommandQueue queue = new ComputeCommandQueue( context, context.Devices[ 0 ], ComputeCommandQueueFlags.None );
             queue.Execute( kernel, null, new long[] { count }, null, null );
 
             arrC = queue.Read( c, true, 0, count, null );
