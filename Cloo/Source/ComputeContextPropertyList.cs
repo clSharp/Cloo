@@ -87,6 +87,13 @@ namespace Cloo
         public ComputeContextPropertyList( IEnumerable<ComputeContextProperty> properties )
         {
             properties = new List<ComputeContextProperty>( properties );
+
+            foreach( ComputeContextProperty property in properties )
+                if( property.Name == ComputeContextPropertyName.Platform )
+                {
+                    platform = ComputePlatform.GetByHandle( property.Value );
+                    break;
+                }
         }
 
         #endregion
