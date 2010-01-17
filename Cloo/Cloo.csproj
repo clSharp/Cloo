@@ -36,7 +36,7 @@
   <ItemGroup>
     <Reference Include="OpenTK, Version=0.9.9.4, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\OpenTK Bin\OpenTK.dll</HintPath>
+      <HintPath>..\Dependencies\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>

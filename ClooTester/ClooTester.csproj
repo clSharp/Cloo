@@ -51,7 +51,7 @@
   <ItemGroup>
     <Reference Include="OpenTK, Version=0.9.9.4, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\OpenTK Bin\OpenTK.dll</HintPath>
+      <HintPath>..\Dependencies\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -60,6 +60,7 @@
     <Compile Include="BinaryPrinter.cs" />
     <Compile Include="AbstractTester.cs" />
     <Compile Include="DummyTest.cs" />
+    <Compile Include="ImageTest.cs" />
     <Compile Include="KernelArgsTester.cs" />
     <Compile Include="MemoryMapper.cs" />
     <Compile Include="Program.cs" />
