@@ -1,6 +1,5 @@
 
 Generator/*
-*.dll
 *.zip
 
 #ignore thumbnails created by windows
