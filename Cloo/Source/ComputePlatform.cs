@@ -173,6 +173,15 @@ namespace Cloo
 
         #region Public methods
 
+        public static ComputePlatform GetByHandle( IntPtr handle )
+        {
+            foreach( ComputePlatform platform in Platforms )
+                if( platform.Handle == handle )
+                    return platform;
+
+            return null;
+        }
+
         /// <summary>
         /// Gets a platform of a matching name.
         /// </summary>
