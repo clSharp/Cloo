@@ -47,7 +47,7 @@ namespace Cloo
     using Cloo.Bindings;
     using OpenTK.Compute.CL10;
 
-    public class ComputeCommandQueue : ComputeResource
+    public class ComputeCommandQueue: ComputeResource
     {
         #region Fields
 
@@ -474,7 +474,7 @@ namespace Cloo
         /// <summary>
         /// Enqueues a marker.
         /// </summary>
-        public ComputeEvent Mark()
+        public ComputeEvent AddMarker()
         {
             IntPtr eventHandle = IntPtr.Zero;
             int error = CL.EnqueueMarker( Handle, ref eventHandle );
