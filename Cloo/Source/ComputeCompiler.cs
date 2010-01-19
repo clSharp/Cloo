@@ -32,6 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using OpenTK.Compute.CL10;
+    using Cloo.Bindings;
 
     public class ComputeCompiler
     {        

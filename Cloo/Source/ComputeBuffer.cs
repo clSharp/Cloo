@@ -131,7 +131,7 @@ namespace Cloo
             ComputeBuffer<T> buffer = new ComputeBuffer<T>( context, flags );
             unsafe
             {
-                int error = ( int )OpenTK.Compute.CL10.ErrorCode.Success;
+                int error = ( int )ErrorCode.Success;
                 buffer.Handle = Imports.CreateFromGLBuffer( 
                     context.Handle, 
                     flags, 

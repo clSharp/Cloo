@@ -33,6 +33,7 @@ namespace Cloo
 {
     using System;
     using OpenTK.Compute.CL10;
+    using Cloo.Bindings;
 
     public abstract class ComputeMemory: ComputeResource
     {

@@ -139,6 +139,29 @@ namespace Cloo
 
         #region Public methods
 
+        public void AcquireGLObjects( ICollection<ComputeMemory> memoryObjects, ICollection<ComputeEvent> events )
+        {
+            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr newEventHandle = IntPtr.Zero;
+
+            unsafe
+            {
+                fixed( IntPtr* memoryObjectsPtr = Clootils.ExtractHandles( memoryObjects ) )
+                fixed( IntPtr* eventHandlesPtr = eventHandles )
+                {
+                    int error = ( int )ErrorCode.Success;
+                    error = Imports.EnqueueAcquireGLObjects(
+                        Handle,
+                        ( uint )memoryObjects.Count,
+                        memoryObjectsPtr,
+                        ( uint )eventHandles.Length,
+                        eventHandlesPtr,
+                        &newEventHandle );
+                    ComputeException.ThrowOnError( error );
+                }
+            }
+        }
+
         /// <summary>
         /// Enqueues a barrier. This barrier ensures that all queued commands have finished execution before the next batch of commands can begin execution.
         /// </summary>
@@ -146,6 +169,18 @@ namespace Cloo
         {
             int error = CL.EnqueueBarrier( Handle );
             ComputeException.ThrowOnError( error );
+        }
+
+        /// <summary>
+        /// Enqueues a marker.
+        /// </summary>
+        public ComputeEvent AddMarker()
+        {
+            IntPtr eventHandle = IntPtr.Zero;
+            int error = CL.EnqueueMarker( Handle, ref eventHandle );
+            ComputeException.ThrowOnError( error );
+
+            return new ComputeEvent( eventHandle, this );
         }
 
         /// <summary>
@@ -472,18 +507,6 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Enqueues a marker.
-        /// </summary>
-        public ComputeEvent AddMarker()
-        {
-            IntPtr eventHandle = IntPtr.Zero;
-            int error = CL.EnqueueMarker( Handle, ref eventHandle );
-            ComputeException.ThrowOnError( error );
-
-            return new ComputeEvent( eventHandle, this );
-        }
-
-        /// <summary>
         /// Enqueues a command to read data from a buffer.
         /// </summary>
         /// <param name="buffer">The buffer to read from.</param>
@@ -576,6 +599,29 @@ namespace Cloo
                 events.Add( new ComputeEvent( newEventHandle, this ) );
 
             return readData;
+        }
+
+        public void ReleaseGLObjects( ICollection<ComputeMemory> memoryObjects, ICollection<ComputeEvent> events )
+        {
+            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr newEventHandle = IntPtr.Zero;
+
+            unsafe
+            {
+                fixed( IntPtr* memoryObjectsPtr = Clootils.ExtractHandles( memoryObjects ) )
+                fixed( IntPtr* eventHandlesPtr = eventHandles )
+                {
+                    int error = ( int )ErrorCode.Success;
+                    error = Imports.EnqueueReleaseGLObjects(
+                        Handle,
+                        ( uint )memoryObjects.Count,
+                        memoryObjectsPtr,
+                        ( uint )eventHandles.Length,
+                        eventHandlesPtr,
+                        &newEventHandle );
+                    ComputeException.ThrowOnError( error );
+                }
+            }
         }
 
         /// <summary>

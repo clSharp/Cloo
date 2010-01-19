@@ -34,6 +34,7 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using OpenTK.Compute.CL10;
+    using Cloo.Bindings;
 
     public class ComputeEvent: ComputeResource
     {
