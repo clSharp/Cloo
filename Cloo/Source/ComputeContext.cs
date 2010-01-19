@@ -128,52 +128,6 @@ namespace Cloo
 
         #region Public methods
 
-        public void AcquireGLObjects( ComputeCommandQueue commandQueue, ICollection<ComputeMemory> memoryObjects, ICollection<ComputeEvent> events )
-        {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
-            IntPtr newEventHandle = IntPtr.Zero;
-
-            unsafe
-            {
-                fixed( IntPtr* memoryObjectsPtr = Clootils.ExtractHandles( memoryObjects ) )
-                fixed( IntPtr* eventHandlesPtr = eventHandles )
-                {
-                    int error = ( int )ErrorCode.Success;
-                    error = Imports.EnqueueAcquireGLObjects(
-                        commandQueue.Context.Handle,
-                        ( uint )memoryObjects.Count,
-                        memoryObjectsPtr,
-                        ( uint )eventHandles.Length,
-                        eventHandlesPtr,
-                        &newEventHandle );
-                    ComputeException.ThrowOnError( error );
-                }
-            }
-        }
-
-        public void ReleaseGLObjects( ComputeCommandQueue commandQueue, ICollection<ComputeMemory> memoryObjects, ICollection<ComputeEvent> events )
-        {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
-            IntPtr newEventHandle = IntPtr.Zero;
-
-            unsafe
-            {
-                fixed( IntPtr* memoryObjectsPtr = Clootils.ExtractHandles( memoryObjects ) )
-                fixed( IntPtr* eventHandlesPtr = eventHandles )
-                {
-                    int error = ( int )ErrorCode.Success;
-                    error = Imports.EnqueueReleaseGLObjects(
-                        commandQueue.Context.Handle,
-                        ( uint )memoryObjects.Count,
-                        memoryObjectsPtr,
-                        ( uint )eventHandles.Length,
-                        eventHandlesPtr,
-                        &newEventHandle );
-                    ComputeException.ThrowOnError( error );
-                }
-            }
-        }
-
         /// <summary>
         /// Gets a string representation of this context.
         /// </summary>
