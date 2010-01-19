@@ -64,7 +64,12 @@ namespace Cloo
 
     public enum ComputeContextPropertyName: int
     {
-        Platform = 0x1084
+        Platform = 0x1084,
+        GLContextKhr = 0x2008,
+        EglDisplayKhr = 0x2009,
+        GlxDisplayKhr = 0x200A,
+        WglHdcKhr = 0x200B,
+        CglSharegroupKhr = 0x200C,
     }
 
     [Flags]
@@ -74,8 +79,12 @@ namespace Cloo
         NativeKernel = ( 1 << 1 )
     }
 
+    public enum ComputeDeviceInfo: int
+    {
+    }
+
     [Flags]
-    public enum ComputeDeviceSingleFPCapabilites: long
+    public enum ComputeDeviceSingleFPCapabilites: ulong
     {
         Denorm = ( 1 << 0 ),
         InfNan = ( 1 << 1 ),
