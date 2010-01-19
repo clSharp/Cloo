@@ -35,7 +35,7 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.InteropServices;
-    using OpenTK.Compute.CL10;
+    using Cloo.Bindings;
 
     public class ComputeProgram: ComputeResource
     {
@@ -117,15 +117,15 @@ namespace Cloo
         /// <param name="source">The source code for this program.</param>
         public ComputeProgram( ComputeContext context, string source )
         {
-            ErrorCode error = ErrorCode.Success;
+            ComputeErrorCode error = ComputeErrorCode.Success;
             unsafe
             {
-                Handle = CL.CreateProgramWithSource(
+                Handle = CL10.CreateProgramWithSource(
                     context.Handle,
                     1,
                     new string[] { source },
-                    ( IntPtr* )null,
-                    &error );
+                    null,
+                    out error );
             }
             ComputeException.ThrowOnError( error );
 
@@ -145,13 +145,13 @@ namespace Cloo
             int count = binaries.Count;
 
             IntPtr[] deviceHandles = ( devices != null ) ?
-                Clootils.ExtractHandles<ComputeDevice>( devices ) :
-                Clootils.ExtractHandles<ComputeDevice>( context.Devices );
+                Clootils.ExtractHandles( devices ) :
+                Clootils.ExtractHandles( context.Devices );
 
             IntPtr[] binariesPtrs = new IntPtr[ count ];
             IntPtr[] binariesLengths = new IntPtr[ count ];
             int[] binariesStats = new int[ count ];
-            ErrorCode error = ErrorCode.Success;
+            ComputeErrorCode error = ComputeErrorCode.Success;
             GCHandle binariesPtrGCHandle = new GCHandle();
             GCHandle[] binariesGCHandles = new GCHandle[ count ];
 
@@ -171,14 +171,14 @@ namespace Cloo
                     fixed( IntPtr* binariesLengthsPtr = binariesLengths )
                     fixed( IntPtr* deviceHandlesPtr = deviceHandles )
                     fixed( int* binaryStatusPtr = binariesStats )
-                        Handle = CL.CreateProgramWithBinary(
+                        Handle = CL10.CreateProgramWithBinary(
                             context.Handle,
                             count,
                             deviceHandlesPtr,
                             binariesLengthsPtr,
                             binariesPtr,
                             binaryStatusPtr,
-                            &error );
+                            out error );
                 }
             }
             finally
@@ -209,20 +209,24 @@ namespace Cloo
         /// <param name="notifyDataPtr">Passed as an argument when notify is called. notifyDataPtr can be IntPtr.Zero. </param>
         public void Build( ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr )
         {
+            IntPtr[] deviceHandles = Clootils.ExtractHandles( devices );
             buildOptions = ( options != null ) ? options : "" ;
-
             IntPtr notifyPtr = ( notify != null ) ? Marshal.GetFunctionPointerForDelegate( notify ) : IntPtr.Zero;
 
-            int error;
-            if( devices != null )
+            unsafe
             {
-                IntPtr[] deviceHandles = Clootils.ExtractHandles( devices );
-                error = CL.BuildProgram( Handle, deviceHandles.Length, deviceHandles, options, notifyPtr, notifyDataPtr );
+
+                ComputeErrorCode error;
+                fixed( IntPtr* deviceHandlesPtr = deviceHandles )
+                error = CL10.BuildProgram(
+                    Handle,
+                    deviceHandles.Length,
+                    deviceHandlesPtr,
+                    buildOptions,
+                    notifyPtr,
+                    notifyDataPtr );
+                ComputeException.ThrowOnError( error );
             }
-            else
-                error = CL.BuildProgram( Handle, 0, ( IntPtr[] )null, options, notifyPtr, notifyDataPtr );
-            
-            ComputeException.ThrowOnError( error );
 
             binaries = GetBinaries();            
         }
@@ -238,11 +242,16 @@ namespace Cloo
 
             unsafe
             {
-                int error = CL.CreateKernelsInProgram( Handle, 0, ( IntPtr* )null, &kernelsCount );
+                ComputeErrorCode error = CL10.CreateKernelsInProgram( Handle, 0, null, &kernelsCount );
                 ComputeException.ThrowOnError( error );
 
                 kernelHandles = new IntPtr[ kernelsCount ];
-                error = CL.CreateKernelsInProgram( Handle, kernelsCount, kernelHandles, null );
+                fixed( IntPtr* kernelHandlesPtr = kernelHandles )
+                    error = CL10.CreateKernelsInProgram( 
+                        Handle, 
+                        kernelsCount, 
+                        kernelHandlesPtr, 
+                        null );
                 ComputeException.ThrowOnError( error );
             }
 
@@ -265,21 +274,21 @@ namespace Cloo
         /// </summary>
         public string GetBuildLog( ComputeDevice device )
         {
-            return GetStringInfo<ProgramBuildInfo>(
+            return GetStringInfo<ComputeProgramBuildInfo>(
                 device,
-                ProgramBuildInfo.ProgramBuildLog,
-                CL.GetProgramBuildInfo );
+                ComputeProgramBuildInfo.BuildLog,
+                CL10.GetProgramBuildInfo );
         }
 
         /// <summary>
         /// Gets the build status of program for the specified device.
         /// </summary>
-        public BuildStatus GetBuildStatus( ComputeDevice device )
+        public ComputeProgramBuildStatus GetBuildStatus( ComputeDevice device )
         {
-            return ( BuildStatus )GetInfo<ProgramBuildInfo, uint>(
+            return ( ComputeProgramBuildStatus )GetInfo<ComputeProgramBuildInfo, uint>(
                 device,
-                ProgramBuildInfo.ProgramBuildStatus,
-                CL.GetProgramBuildInfo );
+                ComputeProgramBuildInfo.Status,
+                CL10.GetProgramBuildInfo );
         }
 
         /// <summary>
@@ -303,7 +312,7 @@ namespace Cloo
 
             if( Handle != IntPtr.Zero )
             {
-                CL.ReleaseProgram( Handle );
+                CL10.ReleaseProgram( Handle );
                 Handle = IntPtr.Zero;
             }
         }
@@ -314,14 +323,13 @@ namespace Cloo
 
         private ReadOnlyCollection<byte[]> GetBinaries()
         {
-            IntPtr[] binaryLengths = GetArrayInfo<ProgramInfo, IntPtr>(
-                ProgramInfo.ProgramBinarySizes, CL.GetProgramInfo );
+            IntPtr[] binaryLengths = GetArrayInfo<ComputeProgramInfo, IntPtr>(
+                ComputeProgramInfo.BinarySizes, CL10.GetProgramInfo );
 
             GCHandle[] binariesGCHandles = new GCHandle[ binaryLengths.Length ];
             IntPtr[] binariesPtrs = new IntPtr[ binaryLengths.Length ];
             IList<byte[]> binaries = new List<byte[]>();
 
-            int error = ( int )ErrorCode.Success;
             try
             {
                 for( int i = 0; i < binaryLengths.Length; i++ )
@@ -334,12 +342,16 @@ namespace Cloo
 
                 unsafe
                 {
-                    error = CL.GetProgramInfo(
+                    IntPtr ret;
+                    ComputeErrorCode error = ( int )ComputeErrorCode.Success;
+                    error = CL10.GetProgramInfo(
                         Handle,
-                        ProgramInfo.ProgramBinaries,
-                        new IntPtr( binariesPtrs.Length * sizeof( IntPtr ) ),
-                        binariesPtrs,
-                        ( IntPtr* )null );
+                        ComputeProgramInfo.Binaries,
+                        new IntPtr( binariesPtrs.Length * IntPtr.Size ),
+                        Marshal.UnsafeAddrOfPinnedArrayElement( binariesPtrs, 0 ),
+                        out ret );
+                    ComputeException.ThrowOnError( error );
+
                 }
             }
             finally
@@ -347,8 +359,6 @@ namespace Cloo
                 for( int i = 0; i < binaryLengths.Length; i++ )
                     binariesGCHandles[ i ].Free();
             }
-
-            ComputeException.ThrowOnError( error );
 
             return new ReadOnlyCollection<byte[]>( binaries );
         }

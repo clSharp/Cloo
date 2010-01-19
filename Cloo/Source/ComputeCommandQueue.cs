@@ -45,7 +45,6 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
-    using OpenTK.Compute.CL10;
 
     public class ComputeCommandQueue: ComputeResource
     {
@@ -126,8 +125,8 @@ namespace Cloo
         /// <param name="properties">A list of properties for the command-queue.</param>
         public ComputeCommandQueue( ComputeContext context, ComputeDevice device, ComputeCommandQueueFlags properties )
         {
-            ErrorCode error = ErrorCode.Success;
-            Handle = CL.CreateCommandQueue( context.Handle, device.Handle, ( CommandQueueFlags )properties, out error );
+            ComputeErrorCode error = ComputeErrorCode.Success;
+            Handle = CL10.CreateCommandQueue( context.Handle, device.Handle, properties, out error );
             ComputeException.ThrowOnError( error );
             this.device = device;
             this.context = context;
@@ -139,24 +138,25 @@ namespace Cloo
 
         #region Public methods
 
-        public void AcquireGLObjects( ICollection<ComputeMemory> memoryObjects, ICollection<ComputeEvent> events )
+        public void AcquireGLObjects( ICollection<ComputeMemory> memObjs, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] memObjHandles = Clootils.ExtractHandles( memObjs );
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
             {
-                fixed( IntPtr* memoryObjectsPtr = Clootils.ExtractHandles( memoryObjects ) )
+                fixed( IntPtr* memObjHandlesPtr = memObjHandles )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = ( int )ErrorCode.Success;
-                    error = Imports.EnqueueAcquireGLObjects(
+                    ComputeErrorCode error = ( int )ComputeErrorCode.Success;
+                    error = CL10.EnqueueAcquireGLObjects(
                         Handle,
-                        ( uint )memoryObjects.Count,
-                        memoryObjectsPtr,
-                        ( uint )eventHandles.Length,
+                        memObjHandles.Length,
+                        memObjHandlesPtr,
+                        eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle );
+                        out newEventHandle );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -167,7 +167,7 @@ namespace Cloo
         /// </summary>
         public void AddBarrier()
         {
-            int error = CL.EnqueueBarrier( Handle );
+            ComputeErrorCode error = CL10.EnqueueBarrier( Handle );
             ComputeException.ThrowOnError( error );
         }
 
@@ -177,7 +177,7 @@ namespace Cloo
         public ComputeEvent AddMarker()
         {
             IntPtr eventHandle = IntPtr.Zero;
-            int error = CL.EnqueueMarker( Handle, ref eventHandle );
+            ComputeErrorCode error = CL10.EnqueueMarker( Handle, out eventHandle );
             ComputeException.ThrowOnError( error );
 
             return new ComputeEvent( eventHandle, this );
@@ -194,7 +194,7 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy<T>( ComputeBuffer<T> source, ComputeBuffer<T> destination, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
             int sizeofT = Marshal.SizeOf( typeof( T ) );
 
@@ -202,7 +202,7 @@ namespace Cloo
             {
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = CL.EnqueueCopyBuffer(
+                    ComputeErrorCode error = CL10.EnqueueCopyBuffer(
                         Handle,
                         source.Handle,
                         destination.Handle,
@@ -211,7 +211,7 @@ namespace Cloo
                         new IntPtr( count * sizeofT ),
                         eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle );
+                        out newEventHandle );
                 }
             }
 
@@ -230,7 +230,7 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy<T>( ComputeBuffer<T> source, ComputeImage destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
             int sizeofT = Marshal.SizeOf( typeof( T ) );
 
@@ -240,16 +240,16 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = Clootils.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Imports.EnqueueCopyBufferToImage(
+                    ComputeErrorCode error = CL10.EnqueueCopyBufferToImage(
                         Handle,
                         source.Handle,
                         destination.Handle,
                         new IntPtr( sourceOffset * sizeofT ),
                         destinationOffsetPtr,
                         regionPtr,
-                        ( uint )eventHandles.Length,
+                        eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle );
+                        out newEventHandle );
                     ComputeException.ThrowOnError( error );
                 }                
             }
@@ -269,7 +269,7 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy<T>( ComputeImage source, ComputeBuffer<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
             int sizeofT = Marshal.SizeOf( typeof( T ) );
 
@@ -279,16 +279,16 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = Clootils.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Imports.EnqueueCopyImageToBuffer(
+                    ComputeErrorCode error = CL10.EnqueueCopyImageToBuffer(
                         Handle,
                         source.Handle,
                         destination.Handle,
                         sourceOffsetPtr,
                         regionPtr,
                         new IntPtr( destinationOffset * sizeofT ),
-                        ( uint )eventHandles.Length,
+                        eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle );
+                        out newEventHandle );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -308,7 +308,7 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy( ComputeImage source, ComputeImage destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
@@ -318,16 +318,16 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = Clootils.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Imports.EnqueueCopyImage(
+                    ComputeErrorCode error = CL10.EnqueueCopyImage(
                         Handle,
                         source.Handle,
                         destination.Handle,
                         sourceOffsetPtr,
                         destinationOffsetPtr,
                         regionPtr,
-                        ( uint )eventHandles.Length,
+                        eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle );
+                        out newEventHandle );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -341,19 +341,19 @@ namespace Cloo
         /// </summary>
         public void Execute( ComputeKernel kernel, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
             {
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = CL.EnqueueTask(
+                    ComputeErrorCode error = CL10.EnqueueTask(
                         Handle,
                         kernel.Handle,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle );
+                        out newEventHandle );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -367,7 +367,7 @@ namespace Cloo
         /// </summary>
         public void Execute( ComputeKernel kernel, long[] globalWorkOffset, long[] globalWorkSize, long[] localWorkSize, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
@@ -377,7 +377,7 @@ namespace Cloo
                 fixed( IntPtr* localWorkSizePtr = Clootils.ConvertArray( localWorkSize ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = CL.EnqueueNDRangeKernel(
+                    ComputeErrorCode error = CL10.EnqueueNDRangeKernel(
                         Handle,
                         kernel.Handle,
                         globalWorkSize.Length,
@@ -386,7 +386,7 @@ namespace Cloo
                         localWorkSizePtr,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle );
+                        out newEventHandle );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -399,7 +399,7 @@ namespace Cloo
         /// </summary>
         public void Finish()
         {
-            int error = CL.Finish( Handle );
+            ComputeErrorCode error = CL10.Finish( Handle );
             ComputeException.ThrowOnError( error );
         }
 
@@ -408,7 +408,7 @@ namespace Cloo
         /// </summary>
         public void Flush()
         {
-            int error = CL.Finish( Handle );
+            ComputeErrorCode error = CL10.Finish( Handle );
             ComputeException.ThrowOnError( error );
         }
 
@@ -424,27 +424,27 @@ namespace Cloo
         /// <returns>The mapped area.</returns>
         public IntPtr Map<T>( ComputeBuffer<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, long offset, long count, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
             IntPtr mappedPtr = IntPtr.Zero;
-            int error = ( int )ErrorCode.Success;
             int sizeofT = Marshal.SizeOf( typeof( T ) );
 
             unsafe
             {
+                ComputeErrorCode error = ComputeErrorCode.Success;
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    mappedPtr = CL.EnqueueMapBuffer(
+                    mappedPtr = CL10.EnqueueMapBuffer(
                         Handle,
                         buffer.Handle,
-                        blocking,
-                        ( MapFlags )flags,
+                        ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
+                        flags,
                         new IntPtr( offset * sizeofT ),
                         new IntPtr( count * sizeofT ),
                         eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle,
-                        &error );
+                        out newEventHandle,
+                        out error );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -468,7 +468,7 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public IntPtr Map( ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, out long rowPitch, out long slicePitch, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
             IntPtr mappedPtr, rowPitchPtr, slicePitchPtr;
 
@@ -478,21 +478,20 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = Clootils.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = (int)ErrorCode.Success;
-
-                    mappedPtr = Imports.EnqueueMapImage(
+                    ComputeErrorCode error = ComputeErrorCode.Success;
+                    mappedPtr = CL10.EnqueueMapImage(
                         Handle,
                         image.Handle,
-                        blocking,
+                        ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
                         flags,
                         offsetPtr,
                         regionPtr,
                         &rowPitchPtr,
                         &slicePitchPtr,
-                        ( uint )eventHandles.Length,
+                        eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle,
-                        &error );
+                        out newEventHandle,
+                        out error );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -517,7 +516,7 @@ namespace Cloo
         /// <returns>The content read from the buffer.</returns>
         public T[] Read<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
 
             int sizeofT = Marshal.SizeOf( typeof( T ) );            
@@ -526,20 +525,20 @@ namespace Cloo
 
             unsafe
             {
-                int error = ( int )ErrorCode.Success;
+                ComputeErrorCode error = ( int )ComputeErrorCode.Success;
                 try
                 {
                     fixed( IntPtr* eventHandlesPtr = eventHandles )
-                        error = CL.EnqueueReadBuffer(
+                        error = CL10.EnqueueReadBuffer(
                             Handle,
                             buffer.Handle,
-                            blocking,
+                            ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
                             new IntPtr( offset * sizeofT ),
                             new IntPtr( count * sizeofT ),
                             gcHandle.AddrOfPinnedObject(),
                             eventHandles.Length,
                             eventHandlesPtr,
-                            &newEventHandle );
+                            out newEventHandle );
                     ComputeException.ThrowOnError( error );
                 }
                 finally
@@ -567,7 +566,7 @@ namespace Cloo
         /// <returns>A pointer to the image data.</returns>
         public IntPtr Read( ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
                         
             byte[] imageBits = new byte[ image.Size ];
@@ -579,18 +578,18 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = Clootils.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Imports.EnqueueReadImage(
+                    ComputeErrorCode error = CL10.EnqueueReadImage(
                         Handle,
                         image.Handle,
-                        blocking,
+                        ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
                         offsetPtr,
                         regionPtr,
                         new IntPtr( rowPitch ),
                         new IntPtr( slicePitch ),
                         readData,
-                        ( uint )eventHandles.Length,
+                        eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle );
+                        out newEventHandle );
                     ComputeException.ThrowOnError( error );
                 }                
             }
@@ -601,24 +600,25 @@ namespace Cloo
             return readData;
         }
 
-        public void ReleaseGLObjects( ICollection<ComputeMemory> memoryObjects, ICollection<ComputeEvent> events )
+        public void ReleaseGLObjects( ICollection<ComputeMemory> memObjs, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] memObjHandles = Clootils.ExtractHandles( memObjs );
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
             {
-                fixed( IntPtr* memoryObjectsPtr = Clootils.ExtractHandles( memoryObjects ) )
+                fixed( IntPtr* memoryObjectsPtr = memObjHandles )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = ( int )ErrorCode.Success;
-                    error = Imports.EnqueueReleaseGLObjects(
+                    ComputeErrorCode error = ( int )ComputeErrorCode.Success;
+                    error = CL10.EnqueueReleaseGLObjects(
                         Handle,
-                        ( uint )memoryObjects.Count,
+                        memObjHandles.Length,
                         memoryObjectsPtr,
-                        ( uint )eventHandles.Length,
+                        eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle );
+                        out newEventHandle );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -637,20 +637,20 @@ namespace Cloo
         /// </summary>
         public void Unmap( ComputeMemory memory, ref IntPtr mappedPtr, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
             {
-                int error = ( int )ErrorCode.Success;
+                ComputeErrorCode error = ( int )ComputeErrorCode.Success;
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
-                    error = CL.EnqueueUnmapMemObject(
+                    error = CL10.EnqueueUnmapMemObject(
                         Handle,
                         memory.Handle,
                         mappedPtr,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle );
+                        out newEventHandle );
                 ComputeException.ThrowOnError( error );
             }
 
@@ -662,13 +662,13 @@ namespace Cloo
         /// </summary>
         public void Wait( ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
 
             unsafe
             {
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = CL.WaitForEvents( eventHandles.Length, eventHandlesPtr );
+                    ComputeErrorCode error = CL10.WaitForEvents( eventHandles.Length, eventHandlesPtr );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -686,23 +686,23 @@ namespace Cloo
         public void Write<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, T[] data, ICollection<ComputeEvent> events ) where T: struct
         {
             int sizeofT = Marshal.SizeOf( typeof( T ) );
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
             {
-                int error = ( int )ErrorCode.Success;
+                ComputeErrorCode error = ( int )ComputeErrorCode.Success;
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
-                    error = CL.EnqueueWriteBuffer(
+                    error = CL10.EnqueueWriteBuffer(
                             Handle,
                             buffer.Handle,
-                            blocking,
+                            ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
                             new IntPtr( offset * sizeofT ),
                             new IntPtr( count * sizeofT ),
-                            data,
+                            Marshal.UnsafeAddrOfPinnedArrayElement( data, 0 ),
                             eventHandles.Length,
                             eventHandlesPtr,
-                            &newEventHandle );
+                            out newEventHandle );
                 ComputeException.ThrowOnError( error );
             }
 
@@ -723,7 +723,7 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Write( ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = ( events != null ) ? Clootils.ExtractHandles( events ) : new IntPtr[ 0 ];
+            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
 
             unsafe
@@ -732,18 +732,18 @@ namespace Cloo
                 fixed( IntPtr* regionPtr = Clootils.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    int error = Imports.EnqueueWriteImage(
+                    ComputeErrorCode error = CL10.EnqueueWriteImage(
                         Handle,
                         image.Handle,
-                        blocking,
+                        ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
                         offsetPtr,
                         regionPtr,
                         new IntPtr( rowPitch ),
                         new IntPtr( slicePitch ),
                         data,
-                        ( uint )eventHandles.Length,
+                        eventHandles.Length,
                         eventHandlesPtr,
-                        &newEventHandle );
+                        out newEventHandle );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -766,7 +766,7 @@ namespace Cloo
             // free native resources
             if( Handle != IntPtr.Zero )
             {
-                CL.ReleaseCommandQueue( Handle );
+                CL10.ReleaseCommandQueue( Handle );
                 Handle = IntPtr.Zero;
             }
         }
@@ -777,8 +777,13 @@ namespace Cloo
 
         private void SetProperty( ComputeCommandQueueFlags flags, bool enable )
         {
-            int error = ( int )ErrorCode.Success;
-            error = CL.SetCommandQueueProperty( Handle, ( CommandQueueFlags )flags, enable, ( CommandQueueFlags[] )null );
+            ComputeCommandQueueFlags oldProperties = 0;
+            ComputeErrorCode error = ( int )ComputeErrorCode.Success;
+            error = CL10.SetCommandQueueProperty( 
+                Handle,
+                flags,
+                ( enable ) ? ComputeBoolean.True : ComputeBoolean.False,
+                out oldProperties );
             ComputeException.ThrowOnError( error );
         }
         

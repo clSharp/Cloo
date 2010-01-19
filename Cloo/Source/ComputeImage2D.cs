@@ -34,7 +34,6 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using Cloo.Bindings;
-    using OpenTK.Compute.CL10;
 
     public class ComputeImage2D: ComputeImage
     {
@@ -91,11 +90,18 @@ namespace Cloo
         {
             unsafe
             {
-                int error = ( int )ErrorCode.Success;
-                Handle = Imports.CreateImage2D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )rowPitch, data, &error );
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                Handle = CL10.CreateImage2D(
+                    context.Handle,
+                    flags,
+                    &format,
+                    new IntPtr( width ),
+                    new IntPtr( height ),
+                    new IntPtr( rowPitch ),
+                    data,
+                    out error );
                 ComputeException.ThrowOnError( error );
             }
-
             Init();
         }
 
@@ -116,12 +122,12 @@ namespace Cloo
             IntPtr image = IntPtr.Zero;
             unsafe
             {
-                int error = ( int )ErrorCode.Success;
-                image = Imports.CreateFromGLRenderbuffer(
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                image = CL10.CreateFromGLRenderbuffer(
                     context.Handle,
                     flags,
-                    ( uint )renderbufferId,
-                    &error );
+                    renderbufferId,
+                    out error );
                 ComputeException.ThrowOnError( error );
             }
             return new ComputeImage2D( image, context, flags );
@@ -132,14 +138,14 @@ namespace Cloo
             IntPtr image = IntPtr.Zero;
             unsafe
             {
-                int error = ( int )ErrorCode.Success;
-                image = Imports.CreateFromGLTexture2D(
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                image = CL10.CreateFromGLTexture2D(
                     context.Handle,
                     flags,
                     textureTarget,
                     mipLevel,
-                    ( uint )textureId,
-                    &error );
+                    textureId,
+                    out error );
                 ComputeException.ThrowOnError( error );
             }
             return new ComputeImage2D( image, context, flags );
@@ -161,10 +167,10 @@ namespace Cloo
 
         private void Init()
         {
-            Size = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
-            width = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageWidth, CL.GetImageInfo );
-            height = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageHeight, CL.GetImageInfo );
-            rowPitch = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageRowPitch, CL.GetImageInfo );
+            Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
+            width = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Width, CL10.GetImageInfo );
+            height = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Height, CL10.GetImageInfo );
+            rowPitch = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.RowPitch, CL10.GetImageInfo );
         }
 
         #endregion

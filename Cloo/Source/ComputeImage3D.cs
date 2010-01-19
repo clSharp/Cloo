@@ -35,7 +35,6 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
-    using OpenTK.Compute.CL10;
 
     public class ComputeImage3D: ComputeImage
     {
@@ -112,11 +111,20 @@ namespace Cloo
         {
             unsafe
             {
-                int error = ( int )ErrorCode.Success;
-                Handle = Imports.CreateImage3D( context.Handle, flags, &format, ( IntPtr )width, ( IntPtr )height, ( IntPtr )depth, ( IntPtr )rowPitch, ( IntPtr )slicePitch, data, &error );
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                Handle = CL10.CreateImage3D(
+                    context.Handle,
+                    flags,
+                    &format,
+                    new IntPtr( width ),
+                    new IntPtr( height ),
+                    new IntPtr( depth ),
+                    new IntPtr( rowPitch ),
+                    new IntPtr( slicePitch ),
+                    data,
+                    out error );
                 ComputeException.ThrowOnError( error );
             }
-
             Init();
         }
 
@@ -137,14 +145,14 @@ namespace Cloo
             IntPtr image = IntPtr.Zero;
             unsafe
             {
-                int error = ( int )ErrorCode.Success;
-                image = Imports.CreateFromGLTexture3D(
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                image = CL10.CreateFromGLTexture3D(
                     context.Handle,
                     flags,
                     textureTarget,
                     mipLevel,
-                    ( uint )textureId,
-                    &error );
+                    textureId,
+                    out error );
                 ComputeException.ThrowOnError( error );
             }
             return new ComputeImage3D( image, context, flags );
@@ -166,12 +174,12 @@ namespace Cloo
 
         private void Init()
         {
-            depth = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageDepth, CL.GetImageInfo );
-            height = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageHeight, CL.GetImageInfo );
-            rowPitch = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageRowPitch, CL.GetImageInfo );
-            Size = ( long )GetInfo<MemInfo, IntPtr>( MemInfo.MemSize, CL.GetMemObjectInfo );
-            slicePitch = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageSlicePitch, CL.GetImageInfo );
-            width = ( int )GetInfo<ImageInfo, IntPtr>( ImageInfo.ImageWidth, CL.GetImageInfo );
+            depth = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Depth, CL10.GetImageInfo );
+            height = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Height, CL10.GetImageInfo );
+            rowPitch = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.RowPitch, CL10.GetImageInfo );
+            Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
+            slicePitch = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.SlicePitch, CL10.GetImageInfo );
+            width = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Width, CL10.GetImageInfo );
         }
 
         #endregion

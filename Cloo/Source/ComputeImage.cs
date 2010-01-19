@@ -34,7 +34,6 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
-    using OpenTK.Compute.CL10;
 
     public abstract class ComputeImage: ComputeMemory
     {
@@ -50,11 +49,11 @@ namespace Cloo
 
         protected static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type )
         {
-            uint formatCountRet = 0;
-            int error = ( int )ErrorCode.Success;
+            int formatCountRet = 0;
+            ComputeErrorCode error;
             unsafe
             {
-                error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, 0, null, &formatCountRet );
+                error = CL10.GetSupportedImageFormats( context.Handle, flags, type, 0, null, &formatCountRet );
                 ComputeException.ThrowOnError( error );
             }
 
@@ -63,7 +62,7 @@ namespace Cloo
             {
                 fixed( ComputeImageFormat* formatsPtr = formats )
                 {
-                    error = Imports.GetSupportedImageFormats( context.Handle, flags, ( MemObjectType )type, formatCountRet, formatsPtr, null );
+                    error = CL10.GetSupportedImageFormats( context.Handle, flags, type, formatCountRet, formatsPtr, null );
                     ComputeException.ThrowOnError( error );
                 }
             }            

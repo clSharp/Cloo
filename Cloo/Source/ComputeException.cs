@@ -32,19 +32,18 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
-    using OpenTK.Compute.CL10;
 
     public class ComputeException: Exception
     {
         #region Fields
 
-        private readonly ErrorCode code;
+        private readonly ComputeErrorCode code;
 
         #endregion
 
         #region Properties
 
-        public ErrorCode ErrorCode
+        public ComputeErrorCode ComputeErrorCode
         {
             get { return code; }
         }
@@ -53,7 +52,7 @@ namespace Cloo
 
         #region Constructors
 
-        public ComputeException( ErrorCode code )
+        public ComputeException( ComputeErrorCode code )
         {
             this.code = code;
         }
@@ -68,153 +67,153 @@ namespace Cloo
         /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
         public static void ThrowOnError( int errorCode )
         {
-            ThrowOnError( ( ErrorCode )errorCode );
+            ThrowOnError( ( ComputeErrorCode )errorCode );
         }
 
         /// <summary>
         /// Checks for an error and throws an exception if such is encountered.
         /// </summary>
         /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
-        public static void ThrowOnError( ErrorCode errorCode )
+        public static void ThrowOnError( ComputeErrorCode errorCode )
         {
             switch( errorCode )
             {
-                case ErrorCode.Success:
+                case ComputeErrorCode.Success:
                     return;
                 
-                case ErrorCode.DeviceNotFound:
+                case ComputeErrorCode.DeviceNotFound:
                     throw new DeviceNotFoundComputeException();
                 
-                case ErrorCode.DeviceNotAvailable: 
+                case ComputeErrorCode.DeviceNotAvailable: 
                     throw new DeviceNotAvailableComputeException();
                 
-                case ErrorCode.CompilerNotAvailable: 
+                case ComputeErrorCode.CompilerNotAvailable: 
                     throw new CompilerNotAvailableComputeException();
                 
-                case ErrorCode.MemObjectAllocationFailure: 
+                case ComputeErrorCode.MemoryObjectAllocationFailure: 
                     throw new MemoryObjectAllocationComputeException();
                 
-                case ErrorCode.OutOfResources: 
+                case ComputeErrorCode.OutOfResources: 
                     throw new OutOfResourcesComputeException();
 
-                case ErrorCode.OutOfHostMemory: 
+                case ComputeErrorCode.OutOfHostMemory: 
                     throw new OutOfHostMemoryComputeException();
 
-                case ErrorCode.ProfilingInfoNotAvailable: 
+                case ComputeErrorCode.ProfilingInfoNotAvailable: 
                     throw new ProfilingInfoNotAvailableComputeException();
 
-                case ErrorCode.MemCopyOverlap: 
+                case ComputeErrorCode.MemoryCopyOverlap: 
                     throw new MemoryCopyOverlapComputeException();
 
-                case ErrorCode.ImageFormatMismatch: 
+                case ComputeErrorCode.ImageFormatMismatch: 
                     throw new ImageFormatMismatchComputeException();
 
-                case ErrorCode.ImageFormatNotSupported: 
+                case ComputeErrorCode.ImageFormatNotSupported: 
                     throw new ImageFormatNotSupportedComputeException();
 
-                case ErrorCode.BuildProgramFailure: 
+                case ComputeErrorCode.BuildProgramFailure: 
                     throw new BuildProgramFailureComputeException();
 
-                case ErrorCode.MapFailure: 
+                case ComputeErrorCode.MapFailure: 
                     throw new MapFailureComputeException();
 
-                case ErrorCode.InvalidValue: 
+                case ComputeErrorCode.InvalidValue: 
                     throw new InvalidValueComputeException();
 
-                case ErrorCode.InvalidDeviceType: 
+                case ComputeErrorCode.InvalidDeviceType: 
                     throw new InvalidDeviceTypeComputeException();
 
-                case ErrorCode.InvalidPlatform: 
+                case ComputeErrorCode.InvalidPlatform: 
                     throw new InvalidPlatformComputeException();
 
-                case ErrorCode.InvalidDevice: 
+                case ComputeErrorCode.InvalidDevice: 
                     throw new InvalidDeviceComputeException();
 
-                case ErrorCode.InvalidContext: 
+                case ComputeErrorCode.InvalidContext: 
                     throw new InvalidContextComputeException();
 
-                case ErrorCode.InvalidQueueProperties: 
+                case ComputeErrorCode.InvalidCommandQueueFlags: 
                     throw new InvalidCommandQueueFlagsComputeException();
 
-                case ErrorCode.InvalidCommandQueue: 
+                case ComputeErrorCode.InvalidCommandQueue: 
                     throw new InvalidCommandQueueComputeException();
 
-                case ErrorCode.InvalidHostPtr: 
+                case ComputeErrorCode.InvalidHostPointer: 
                     throw new InvalidHostPointerComputeException();
 
-                case ErrorCode.InvalidMemObject: 
+                case ComputeErrorCode.InvalidMemoryObject: 
                     throw new InvalidMemoryObjectComputeException();
 
-                case ErrorCode.InvalidImageFormatDescriptor: 
+                case ComputeErrorCode.InvalidImageFormatDescriptor: 
                     throw new InvalidImageFormatDescriptorComputeException();
 
-                case ErrorCode.InvalidImageSize: 
+                case ComputeErrorCode.InvalidImageSize: 
                     throw new InvalidImageSizeComputeException();
 
-                case ErrorCode.InvalidSampler: 
+                case ComputeErrorCode.InvalidSampler: 
                     throw new InvalidSamplerComputeException();
 
-                case ErrorCode.InvalidBinary: 
+                case ComputeErrorCode.InvalidBinary: 
                     throw new InvalidBinaryComputeException();
 
-                case ErrorCode.InvalidBuildOptions: 
+                case ComputeErrorCode.InvalidBuildOptions: 
                     throw new InvalidBuildOptionsComputeException();
 
-                case ErrorCode.InvalidProgram: 
+                case ComputeErrorCode.InvalidProgram: 
                     throw new InvalidProgramComputeException();
 
-                case ErrorCode.InvalidProgramExecutable: 
+                case ComputeErrorCode.InvalidProgramExecutable: 
                     throw new InvalidProgramExecutableComputeException();
 
-                case ErrorCode.InvalidKernelName: 
+                case ComputeErrorCode.InvalidKernelName: 
                     throw new InvalidKernelNameComputeException();
 
-                case ErrorCode.InvalidKernelDefinition: 
+                case ComputeErrorCode.InvalidKernelDefinition: 
                     throw new InvalidKernelDefinitionComputeException();
 
-                case ErrorCode.InvalidKernel: 
+                case ComputeErrorCode.InvalidKernel: 
                     throw new InvalidKernelComputeException();
 
-                case ErrorCode.InvalidArgIndex: 
+                case ComputeErrorCode.InvalidArgumentIndex: 
                     throw new InvalidArgumentIndexComputeException();
 
-                case ErrorCode.InvalidArgValue: 
+                case ComputeErrorCode.InvalidArgumentValue: 
                     throw new InvalidArgumentValueComputeException();
 
-                case ErrorCode.InvalidArgSize: 
+                case ComputeErrorCode.InvalidArgumentSize: 
                     throw new InvalidArgumentSizeComputeException();
 
-                case ErrorCode.InvalidKernelArgs: 
+                case ComputeErrorCode.InvalidKernelArguments: 
                     throw new InvalidKernelArgumentsComputeException();
 
-                case ErrorCode.InvalidWorkDimension: 
+                case ComputeErrorCode.InvalidWorkDimension: 
                     throw new InvalidWorkDimensionsComputeException();
 
-                case ErrorCode.InvalidWorkGroupSize: 
+                case ComputeErrorCode.InvalidWorkGroupSize: 
                     throw new InvalidWorkGroupSizeComputeException();
 
-                case ErrorCode.InvalidWorkItemSize: 
+                case ComputeErrorCode.InvalidWorkItemSize: 
                     throw new InvalidWorkItemSizeComputeException();
 
-                case ErrorCode.InvalidGlobalOffset: 
+                case ComputeErrorCode.InvalidGlobalOffset: 
                     throw new InvalidGlobalOffsetComputeException();
 
-                case ErrorCode.InvalidEventWaitList: 
+                case ComputeErrorCode.InvalidEventWaitList: 
                     throw new InvalidEventWaitListComputeException();
 
-                case ErrorCode.InvalidEvent: 
+                case ComputeErrorCode.InvalidEvent: 
                     throw new InvalidEventComputeException();
 
-                case ErrorCode.InvalidOperation: 
+                case ComputeErrorCode.InvalidOperation: 
                     throw new InvalidOperationComputeException();
 
-                case ErrorCode.InvalidGlObject: 
+                case ComputeErrorCode.InvalidGLObject: 
                     throw new InvalidGLObjectComputeException();
 
-                case ErrorCode.InvalidBufferSize: 
+                case ComputeErrorCode.InvalidBufferSize: 
                     throw new InvalidBufferSizeComputeException();
 
-                case ErrorCode.InvalidMipLevel: 
+                case ComputeErrorCode.InvalidMipLevel: 
                     throw new InvalidMipLevelComputeException();
                 
                 default:
@@ -228,139 +227,139 @@ namespace Cloo
     #region Exception classes
 
     public class DeviceNotFoundComputeException: ComputeException
-    { public DeviceNotFoundComputeException() : base( ErrorCode.DeviceNotFound ) { } }
+    { public DeviceNotFoundComputeException() : base( ComputeErrorCode.DeviceNotFound ) { } }
 
     public class DeviceNotAvailableComputeException: ComputeException
-    { public DeviceNotAvailableComputeException() : base( ErrorCode.DeviceNotAvailable ) { } }
+    { public DeviceNotAvailableComputeException() : base( ComputeErrorCode.DeviceNotAvailable ) { } }
 
     public class CompilerNotAvailableComputeException: ComputeException
-    { public CompilerNotAvailableComputeException() : base( ErrorCode.CompilerNotAvailable ) { } }
+    { public CompilerNotAvailableComputeException() : base( ComputeErrorCode.CompilerNotAvailable ) { } }
 
     public class MemoryObjectAllocationComputeException: ComputeException
-    { public MemoryObjectAllocationComputeException() : base( ErrorCode.MemObjectAllocationFailure ) { } }
+    { public MemoryObjectAllocationComputeException() : base( ComputeErrorCode.MemoryObjectAllocationFailure ) { } }
 
     public class OutOfResourcesComputeException: ComputeException
-    { public OutOfResourcesComputeException() : base( ErrorCode.OutOfResources ) { } }
+    { public OutOfResourcesComputeException() : base( ComputeErrorCode.OutOfResources ) { } }
 
     public class OutOfHostMemoryComputeException: ComputeException
-    { public OutOfHostMemoryComputeException() : base( ErrorCode.OutOfHostMemory ) { } }
+    { public OutOfHostMemoryComputeException() : base( ComputeErrorCode.OutOfHostMemory ) { } }
 
     public class ProfilingInfoNotAvailableComputeException: ComputeException
-    { public ProfilingInfoNotAvailableComputeException() : base( ErrorCode.ProfilingInfoNotAvailable ) { } }
+    { public ProfilingInfoNotAvailableComputeException() : base( ComputeErrorCode.ProfilingInfoNotAvailable ) { } }
 
     public class MemoryCopyOverlapComputeException: ComputeException
-    { public MemoryCopyOverlapComputeException() : base( ErrorCode.MemCopyOverlap ) { } }
+    { public MemoryCopyOverlapComputeException() : base( ComputeErrorCode.MemoryCopyOverlap ) { } }
 
     public class ImageFormatMismatchComputeException: ComputeException
-    { public ImageFormatMismatchComputeException() : base( ErrorCode.ImageFormatMismatch ) { } }
+    { public ImageFormatMismatchComputeException() : base( ComputeErrorCode.ImageFormatMismatch ) { } }
 
     public class ImageFormatNotSupportedComputeException: ComputeException
-    { public ImageFormatNotSupportedComputeException() : base( ErrorCode.ImageFormatNotSupported ) { } }
+    { public ImageFormatNotSupportedComputeException() : base( ComputeErrorCode.ImageFormatNotSupported ) { } }
 
     public class BuildProgramFailureComputeException: ComputeException
-    { public BuildProgramFailureComputeException() : base( ErrorCode.BuildProgramFailure ) { } }
+    { public BuildProgramFailureComputeException() : base( ComputeErrorCode.BuildProgramFailure ) { } }
 
     public class MapFailureComputeException: ComputeException
-    { public MapFailureComputeException() : base( ErrorCode.MapFailure ) { } }
+    { public MapFailureComputeException() : base( ComputeErrorCode.MapFailure ) { } }
 
     public class InvalidValueComputeException: ComputeException
-    { public InvalidValueComputeException() : base( ErrorCode.InvalidValue ) { } }
+    { public InvalidValueComputeException() : base( ComputeErrorCode.InvalidValue ) { } }
 
     public class InvalidDeviceTypeComputeException: ComputeException
-    { public InvalidDeviceTypeComputeException() : base( ErrorCode.InvalidDeviceType ) { } }
+    { public InvalidDeviceTypeComputeException() : base( ComputeErrorCode.InvalidDeviceType ) { } }
 
     public class InvalidPlatformComputeException: ComputeException
-    { public InvalidPlatformComputeException() : base( ErrorCode.InvalidPlatform ) { } }
+    { public InvalidPlatformComputeException() : base( ComputeErrorCode.InvalidPlatform ) { } }
 
     public class InvalidDeviceComputeException: ComputeException
-    { public InvalidDeviceComputeException() : base( ErrorCode.InvalidDevice ) { } }
+    { public InvalidDeviceComputeException() : base( ComputeErrorCode.InvalidDevice ) { } }
 
     public class InvalidContextComputeException: ComputeException
-    { public InvalidContextComputeException() : base( ErrorCode.InvalidContext ) { } }
+    { public InvalidContextComputeException() : base( ComputeErrorCode.InvalidContext ) { } }
 
     public class InvalidCommandQueueFlagsComputeException: ComputeException
-    { public InvalidCommandQueueFlagsComputeException() : base( ErrorCode.InvalidQueueProperties ) { } }
+    { public InvalidCommandQueueFlagsComputeException() : base( ComputeErrorCode.InvalidCommandQueueFlags ) { } }
 
     public class InvalidCommandQueueComputeException: ComputeException
-    { public InvalidCommandQueueComputeException() : base( ErrorCode.InvalidCommandQueue ) { } }
+    { public InvalidCommandQueueComputeException() : base( ComputeErrorCode.InvalidCommandQueue ) { } }
 
     public class InvalidHostPointerComputeException: ComputeException
-    { public InvalidHostPointerComputeException() : base( ErrorCode.InvalidHostPtr ) { } }
+    { public InvalidHostPointerComputeException() : base( ComputeErrorCode.InvalidHostPointer ) { } }
 
     public class InvalidMemoryObjectComputeException: ComputeException
-    { public InvalidMemoryObjectComputeException() : base( ErrorCode.InvalidMemObject ) { } }
+    { public InvalidMemoryObjectComputeException() : base( ComputeErrorCode.InvalidMemoryObject ) { } }
 
     public class InvalidImageFormatDescriptorComputeException: ComputeException
-    { public InvalidImageFormatDescriptorComputeException() : base( ErrorCode.InvalidImageFormatDescriptor ) { } }
+    { public InvalidImageFormatDescriptorComputeException() : base( ComputeErrorCode.InvalidImageFormatDescriptor ) { } }
 
     public class InvalidImageSizeComputeException: ComputeException
-    { public InvalidImageSizeComputeException() : base( ErrorCode.InvalidImageSize ) { } }
+    { public InvalidImageSizeComputeException() : base( ComputeErrorCode.InvalidImageSize ) { } }
 
     public class InvalidSamplerComputeException: ComputeException
-    { public InvalidSamplerComputeException() : base( ErrorCode.InvalidSampler ) { } }
+    { public InvalidSamplerComputeException() : base( ComputeErrorCode.InvalidSampler ) { } }
 
     public class InvalidBinaryComputeException: ComputeException
-    { public InvalidBinaryComputeException() : base( ErrorCode.InvalidBinary ) { } }
+    { public InvalidBinaryComputeException() : base( ComputeErrorCode.InvalidBinary ) { } }
 
     public class InvalidBuildOptionsComputeException: ComputeException
-    { public InvalidBuildOptionsComputeException() : base( ErrorCode.InvalidBuildOptions ) { } }
+    { public InvalidBuildOptionsComputeException() : base( ComputeErrorCode.InvalidBuildOptions ) { } }
 
     public class InvalidProgramComputeException: ComputeException
-    { public InvalidProgramComputeException() : base( ErrorCode.InvalidProgram ) { } }
+    { public InvalidProgramComputeException() : base( ComputeErrorCode.InvalidProgram ) { } }
 
     public class InvalidProgramExecutableComputeException: ComputeException
-    { public InvalidProgramExecutableComputeException() : base( ErrorCode.InvalidProgramExecutable ) { } }
+    { public InvalidProgramExecutableComputeException() : base( ComputeErrorCode.InvalidProgramExecutable ) { } }
 
     public class InvalidKernelNameComputeException: ComputeException
-    { public InvalidKernelNameComputeException() : base( ErrorCode.InvalidKernelName ) { } }
+    { public InvalidKernelNameComputeException() : base( ComputeErrorCode.InvalidKernelName ) { } }
 
     public class InvalidKernelDefinitionComputeException: ComputeException
-    { public InvalidKernelDefinitionComputeException() : base( ErrorCode.InvalidKernelDefinition ) { } }
+    { public InvalidKernelDefinitionComputeException() : base( ComputeErrorCode.InvalidKernelDefinition ) { } }
 
     public class InvalidKernelComputeException: ComputeException
-    { public InvalidKernelComputeException() : base( ErrorCode.InvalidKernel ) { } }
+    { public InvalidKernelComputeException() : base( ComputeErrorCode.InvalidKernel ) { } }
 
     public class InvalidArgumentIndexComputeException: ComputeException
-    { public InvalidArgumentIndexComputeException() : base( ErrorCode.InvalidArgIndex ) { } }
+    { public InvalidArgumentIndexComputeException() : base( ComputeErrorCode.InvalidArgumentIndex ) { } }
 
     public class InvalidArgumentValueComputeException: ComputeException
-    { public InvalidArgumentValueComputeException() : base( ErrorCode.InvalidArgValue ) { } }
+    { public InvalidArgumentValueComputeException() : base( ComputeErrorCode.InvalidArgumentValue ) { } }
 
     public class InvalidArgumentSizeComputeException: ComputeException
-    { public InvalidArgumentSizeComputeException() : base( ErrorCode.InvalidArgSize ) { } }
+    { public InvalidArgumentSizeComputeException() : base( ComputeErrorCode.InvalidArgumentSize ) { } }
 
     public class InvalidKernelArgumentsComputeException: ComputeException
-    { public InvalidKernelArgumentsComputeException() : base( ErrorCode.InvalidKernelArgs ) { } }
+    { public InvalidKernelArgumentsComputeException() : base( ComputeErrorCode.InvalidKernelArguments ) { } }
 
     public class InvalidWorkDimensionsComputeException: ComputeException
-    { public InvalidWorkDimensionsComputeException() : base( ErrorCode.InvalidWorkDimension ) { } }
+    { public InvalidWorkDimensionsComputeException() : base( ComputeErrorCode.InvalidWorkDimension ) { } }
 
     public class InvalidWorkGroupSizeComputeException: ComputeException
-    { public InvalidWorkGroupSizeComputeException() : base( ErrorCode.InvalidWorkGroupSize ) { } }
+    { public InvalidWorkGroupSizeComputeException() : base( ComputeErrorCode.InvalidWorkGroupSize ) { } }
 
     public class InvalidWorkItemSizeComputeException: ComputeException
-    { public InvalidWorkItemSizeComputeException() : base( ErrorCode.InvalidWorkItemSize ) { } }
+    { public InvalidWorkItemSizeComputeException() : base( ComputeErrorCode.InvalidWorkItemSize ) { } }
 
     public class InvalidGlobalOffsetComputeException: ComputeException
-    { public InvalidGlobalOffsetComputeException() : base( ErrorCode.InvalidGlobalOffset ) { } }
+    { public InvalidGlobalOffsetComputeException() : base( ComputeErrorCode.InvalidGlobalOffset ) { } }
 
     public class InvalidEventWaitListComputeException: ComputeException
-    { public InvalidEventWaitListComputeException() : base( ErrorCode.InvalidEventWaitList ) { } }
+    { public InvalidEventWaitListComputeException() : base( ComputeErrorCode.InvalidEventWaitList ) { } }
 
     public class InvalidEventComputeException: ComputeException
-    { public InvalidEventComputeException() : base( ErrorCode.InvalidEvent ) { } }
+    { public InvalidEventComputeException() : base( ComputeErrorCode.InvalidEvent ) { } }
 
     public class InvalidOperationComputeException: ComputeException
-    { public InvalidOperationComputeException() : base( ErrorCode.InvalidOperation ) { } }
+    { public InvalidOperationComputeException() : base( ComputeErrorCode.InvalidOperation ) { } }
 
     public class InvalidGLObjectComputeException: ComputeException
-    { public InvalidGLObjectComputeException() : base( ErrorCode.InvalidGlObject ) { } }
+    { public InvalidGLObjectComputeException() : base( ComputeErrorCode.InvalidGLObject ) { } }
 
     public class InvalidBufferSizeComputeException: ComputeException
-    { public InvalidBufferSizeComputeException() : base( ErrorCode.InvalidBufferSize ) { } }
+    { public InvalidBufferSizeComputeException() : base( ComputeErrorCode.InvalidBufferSize ) { } }
 
     public class InvalidMipLevelComputeException: ComputeException
-    { public InvalidMipLevelComputeException() : base( ErrorCode.InvalidMipLevel ) { } }
+    { public InvalidMipLevelComputeException() : base( ComputeErrorCode.InvalidMipLevel ) { } }
 
     #endregion
 }

@@ -36,7 +36,6 @@ namespace Cloo
     using System.Collections.ObjectModel;
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
-    using OpenTK.Compute.CL10;
 
     public class ComputeContext: ComputeResource
     {
@@ -89,10 +88,16 @@ namespace Cloo
 
             unsafe
             {
-                int error;
+                ComputeErrorCode error = ComputeErrorCode.Success;
                 fixed( IntPtr* propertiesPtr = propertiesList )
                 fixed( IntPtr* deviceHandlesPtr = deviceHandles )
-                    Handle = Imports.CreateContext( propertiesPtr, ( uint )devices.Count, deviceHandlesPtr, notifyFuncPtr, notifyDataPtr, &error );
+                    Handle = CL10.CreateContext( 
+                        propertiesPtr, 
+                        devices.Count, 
+                        deviceHandlesPtr, 
+                        notifyFuncPtr, 
+                        notifyDataPtr, 
+                        out error );
                 ComputeException.ThrowOnError( error );
             }
 
@@ -114,9 +119,14 @@ namespace Cloo
 
             unsafe
             {
-                int error = ( int )ErrorCode.Success;
+                ComputeErrorCode error = ComputeErrorCode.Success;
                 fixed( IntPtr* propertiesPtr = propertiesList )
-                    Handle = Imports.CreateContextFromType( propertiesPtr, deviceType, notifyFuncPtr, notifyDataPtr, &error );
+                    Handle = CL10.CreateContextFromType( 
+                        propertiesPtr, 
+                        deviceType, 
+                        notifyFuncPtr, 
+                        notifyDataPtr, 
+                        out error );
                 ComputeException.ThrowOnError( error );
             }
 
@@ -150,7 +160,7 @@ namespace Cloo
             // free native resources
             if( Handle != IntPtr.Zero )
             {
-                CL.ReleaseContext( Handle );
+                CL10.ReleaseContext( Handle );
                 Handle = IntPtr.Zero;
             }
         }
@@ -161,7 +171,7 @@ namespace Cloo
 
         private ReadOnlyCollection<ComputeDevice> GetDevices()
         {
-            List<IntPtr> validDeviceHandles = new List<IntPtr>( GetArrayInfo<ContextInfo, IntPtr>( ContextInfo.ContextDevices, CL.GetContextInfo ) );
+            List<IntPtr> validDeviceHandles = new List<IntPtr>( GetArrayInfo<ComputeContextInfo, IntPtr>( ComputeContextInfo.Devices, CL10.GetContextInfo ) );
             List<ComputeDevice> validDevices = new List<ComputeDevice>();
             foreach( ComputePlatform platform in ComputePlatform.Platforms )
             {

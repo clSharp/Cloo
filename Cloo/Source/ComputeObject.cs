@@ -108,7 +108,7 @@ namespace Cloo
                 GetInfoDelegate<InfoType> getInfoDelegate
             )
         {
-            int errorCode;
+            ComputeErrorCode error;
             NativeType[] buffer;
             IntPtr bufferSizeRet;
             getInfoDelegate( handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet );
@@ -116,18 +116,18 @@ namespace Cloo
             GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
             try
             {
-                errorCode = getInfoDelegate(
+                error = getInfoDelegate(
                     handle,
                     paramName,
                     bufferSizeRet,
                     gcHandle.AddrOfPinnedObject(),
                     out bufferSizeRet );
+                ComputeException.ThrowOnError( error );
             }
             finally
             {
                 gcHandle.Free();
             }
-            ComputeException.ThrowOnError( errorCode );
             return buffer;
         }
 
@@ -138,27 +138,27 @@ namespace Cloo
                 GetInfoDelegateEx<InfoType> getInfoDelegate
             )
         {
-            int errorCode;
+            ComputeErrorCode error;
             NativeType[] buffer;
             IntPtr bufferSizeRet;
-            getInfoDelegate( handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet );
+            error = getInfoDelegate( handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet );
             buffer = new NativeType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( NativeType ) ) ];
             GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
             try
             {
-                errorCode = getInfoDelegate(
+                error = getInfoDelegate(
                     handle,
                     secondaryObject.handle,
                     paramName,
                     bufferSizeRet,
                     gcHandle.AddrOfPinnedObject(),
                     out bufferSizeRet );
+                ComputeException.ThrowOnError( error );
             }
             finally
             {
                 gcHandle.Free();
             }
-            ComputeException.ThrowOnError( errorCode );
             return buffer;
         }
 
@@ -180,25 +180,25 @@ namespace Cloo
             )
             where NativeType: struct             
         {
+            ComputeErrorCode error;
             IntPtr valueSizeRet;
             NativeType result = new NativeType();
             GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
-            int errorCode;
             try
-            {                
-                errorCode = getInfoDelegate(
+            {
+                error = getInfoDelegate(
                     handle,
                     paramName,
                     ( IntPtr )Marshal.SizeOf( result ),
                     gcHandle.AddrOfPinnedObject(),
-                    out valueSizeRet );                
+                    out valueSizeRet );
+                ComputeException.ThrowOnError( error );
             }
             finally
             {
                 result = ( NativeType )gcHandle.Target;
-                gcHandle.Free();                
+                gcHandle.Free();
             }
-            ComputeException.ThrowOnError( errorCode );
             return result;
         }
 
@@ -210,26 +210,29 @@ namespace Cloo
             )
             where NativeType : struct
         {
+            ComputeErrorCode error;
             IntPtr valueSizeRet;
             NativeType result = new NativeType();
             GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
-            int errorCode;
-            try
+            unsafe
             {
-                errorCode = getInfoDelegate(
-                    handle,
-                    secondaryObject.handle,
-                    paramName,
-                    ( IntPtr )Marshal.SizeOf( result ),
-                    gcHandle.AddrOfPinnedObject(),
-                    out valueSizeRet );
+                try
+                {
+                    error = getInfoDelegate(
+                        handle,
+                        secondaryObject.handle,
+                        paramName,
+                        new IntPtr( Marshal.SizeOf( result ) ),
+                        gcHandle.AddrOfPinnedObject(),
+                        out valueSizeRet );
+                    ComputeException.ThrowOnError( error );
+                }
+                finally
+                {
+                    result = ( NativeType )gcHandle.Target;
+                    gcHandle.Free();
+                }
             }
-            finally
-            {
-                result = ( NativeType )gcHandle.Target;
-                gcHandle.Free();
-            }
-            ComputeException.ThrowOnError( errorCode );
             return result;
         }
 
@@ -261,7 +264,7 @@ namespace Cloo
 
         #region Delegates
 
-        protected unsafe delegate int GetInfoDelegate<InfoType>
+        protected unsafe delegate ComputeErrorCode GetInfoDelegate<InfoType>
             (
                 IntPtr objectHandle,
                 InfoType paramName,
@@ -270,7 +273,7 @@ namespace Cloo
                 out IntPtr paramValueSizeRet
             );
 
-        protected unsafe delegate int GetInfoDelegateEx<InfoType>
+        protected unsafe delegate ComputeErrorCode GetInfoDelegateEx<InfoType>
             (
                 IntPtr mainObjectHandle,
                 IntPtr secondaryObjectHandle,

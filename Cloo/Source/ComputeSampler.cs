@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
-    using OpenTK.Compute.CL10;
+    using Cloo.Bindings;
 
     public class ComputeSampler: ComputeResource
     {
@@ -104,8 +104,13 @@ namespace Cloo
         /// <param name="filtering">Specifies the Type of filter that must be applied when reading an image.</param>
         public ComputeSampler( ComputeContext context, bool normalizedCoords, ComputeImageAddressing addressing, ComputeImageFiltering filtering )
         {
-            int error = ( int )ErrorCode.Success;
-            Handle = CL.CreateSampler( context.Handle, normalizedCoords, ( AddressingMode )addressing, ( FilterMode )filtering, out error );
+            ComputeErrorCode error = ComputeErrorCode.Success;
+            Handle = CL10.CreateSampler(
+                context.Handle,
+                ( normalizedCoords ) ? ComputeBoolean.True : ComputeBoolean.False,
+                addressing,
+                filtering,
+                out error );
             ComputeException.ThrowOnError( error );
             this.addressing = addressing;
             this.context = context;
@@ -127,7 +132,7 @@ namespace Cloo
             // free native resources
             if( Handle != IntPtr.Zero )
             {
-                CL.ReleaseSampler( Handle );
+                CL10.ReleaseSampler( Handle );
                 Handle = IntPtr.Zero;
             }
         }

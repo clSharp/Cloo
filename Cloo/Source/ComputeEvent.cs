@@ -33,7 +33,6 @@ namespace Cloo
 {
     using System;
     using System.Collections.Generic;
-    using OpenTK.Compute.CL10;
     using Cloo.Bindings;
 
     public class ComputeEvent: ComputeResource
@@ -76,8 +75,8 @@ namespace Cloo
         {
             get
             {
-                return GetInfo<EventInfo, int>(
-                    EventInfo.EventCommandExecutionStatus, CL.GetEventInfo );
+                return GetInfo<ComputeEventInfo, int>(
+                    ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo );
             }
         }
 
@@ -88,8 +87,8 @@ namespace Cloo
         {
             get
             {
-                return ( long )GetInfo<ProfilingInfo, ulong>(
-                    ProfilingInfo.ProfilingCommandEnd, CL.GetEventProfilingInfo );
+                return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
+                    ComputeCommandProfilingInfo.Ended, CL10.GetEventProfilingInfo );
             }
         }
 
@@ -100,8 +99,8 @@ namespace Cloo
         {
             get
             {
-                return ( long )GetInfo<ProfilingInfo, ulong>(
-                    ProfilingInfo.ProfilingCommandQueued, CL.GetEventProfilingInfo );
+                return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
+                    ComputeCommandProfilingInfo.Queued, CL10.GetEventProfilingInfo );
             }
         }
 
@@ -112,8 +111,8 @@ namespace Cloo
         {
             get
             {
-                return ( long )GetInfo<ProfilingInfo, ulong>(
-                    ProfilingInfo.ProfilingCommandStart, CL.GetEventProfilingInfo );
+                return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
+                    ComputeCommandProfilingInfo.Started, CL10.GetEventProfilingInfo );
             }
         }
 
@@ -124,8 +123,8 @@ namespace Cloo
         {
             get
             {
-                return ( long )GetInfo<ProfilingInfo, ulong>(
-                    ProfilingInfo.ProfilingCommandSubmit, CL.GetEventProfilingInfo );
+                return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
+                    ComputeCommandProfilingInfo.Submitted, CL10.GetEventProfilingInfo );
             }
         }
 
@@ -137,8 +136,8 @@ namespace Cloo
         {
             Handle = handle;
             commandQueue = queue;
-            commandType = ( ComputeCommandType )GetInfo<EventInfo, uint>( 
-                EventInfo.EventCommandType, CL.GetEventInfo );
+            commandType = ( ComputeCommandType )GetInfo<ComputeEventInfo, uint>(
+                ComputeEventInfo.CommandType, CL10.GetEventInfo );
         }
 
         #endregion
@@ -159,10 +158,14 @@ namespace Cloo
         /// <param name="events">The list of events to wait for.</param>
         public static void Wait( ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = Clootils.ExtractHandles( events );
-            
-            int error = CL.WaitForEvents( eventHandles.Length, eventHandles );
-            ComputeException.ThrowOnError( error );
+            unsafe
+            {
+                fixed( IntPtr* eventHandlesPtr = Clootils.ExtractHandles( events ) )
+                {
+                    ComputeErrorCode error = CL10.WaitForEvents( events.Count, eventHandlesPtr );
+                    ComputeException.ThrowOnError( error );
+                }
+            }
         }
 
         #endregion
@@ -173,7 +176,7 @@ namespace Cloo
         {
             if( Handle != IntPtr.Zero )
             {
-                CL.ReleaseEvent( Handle );
+                CL10.ReleaseEvent( Handle );
                 Handle = IntPtr.Zero;
             }
         }

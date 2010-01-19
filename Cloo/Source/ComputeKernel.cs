@@ -42,7 +42,7 @@ namespace Cloo
 {
     using System;
     using System.Runtime.InteropServices;
-    using OpenTK.Compute.CL10;
+    using Cloo.Bindings;
 
     public class ComputeKernel: ComputeResource
     {
@@ -98,14 +98,18 @@ namespace Cloo
             this.Handle = handle;
 
             context = program.Context;
-            functionName = GetStringInfo<KernelInfo>( KernelInfo.KernelFunctionName, CL.GetKernelInfo );
+            functionName = GetStringInfo<ComputeKernelInfo>( 
+                ComputeKernelInfo.FunctionName, CL10.GetKernelInfo );
             this.program = program;
         }
 
         internal ComputeKernel( string functionName, ComputeProgram program )
         {
-            ErrorCode error = ErrorCode.Success;
-            Handle = CL.CreateKernel( program.Handle, functionName, out error );
+            ComputeErrorCode error = ComputeErrorCode.Success;
+            Handle = CL10.CreateKernel( 
+                program.Handle, 
+                functionName, 
+                out error );
             ComputeException.ThrowOnError( error );
 
             context = program.Context;
@@ -122,8 +126,8 @@ namespace Cloo
         /// </summary>
         public long GetLocalMemorySize( ComputeDevice device )
         {
-            return ( long )GetInfo<KernelWorkGroupInfo, ulong>(
-                device, KernelWorkGroupInfo.KernelLocalMemSize, CL.GetKernelWorkGroupInfo );
+            return ( long )GetInfo<ComputeKernelWorkGroupInfo, ulong>(
+                device, ComputeKernelWorkGroupInfo.LocalMemorySize, CL10.GetKernelWorkGroupInfo );
         }
 
         /// <summary>
@@ -131,9 +135,9 @@ namespace Cloo
         /// </summary>
         public long[] GetCompileWorkGroupSize( ComputeDevice device )
         {
-            return Clootils.ConvertArray( 
-                GetArrayInfo<KernelWorkGroupInfo, IntPtr>(
-                    device, KernelWorkGroupInfo.KernelCompileWorkGroupSize, CL.GetKernelWorkGroupInfo ) );
+            return Clootils.ConvertArray(
+                GetArrayInfo<ComputeKernelWorkGroupInfo, IntPtr>(
+                    device, ComputeKernelWorkGroupInfo.CompileWorkGroupSize, CL10.GetKernelWorkGroupInfo ) );
         }
 
         /// <summary>
@@ -141,8 +145,8 @@ namespace Cloo
         /// </summary>
         public long GetWorkGroupSize( ComputeDevice device )
         {
-            return ( long )GetInfo<KernelWorkGroupInfo, IntPtr>(
-                    device, KernelWorkGroupInfo.KernelWorkGroupSize, CL.GetKernelWorkGroupInfo );
+            return ( long )GetInfo<ComputeKernelWorkGroupInfo, IntPtr>(
+                    device, ComputeKernelWorkGroupInfo.WorkGroupSize, CL10.GetKernelWorkGroupInfo );
         }
 
         /// <summary>
@@ -153,7 +157,7 @@ namespace Cloo
         /// <param name="dataAddr">The address of the data mapped to the argument.</param>
         public void SetArgument( int index, IntPtr dataSize, IntPtr dataAddr )
         {
-            int error = CL.SetKernelArg(
+            ComputeErrorCode error = CL10.SetKernelArg(
                 Handle,
                 index,
                 dataSize,
@@ -212,7 +216,7 @@ namespace Cloo
         {
             if( Handle != IntPtr.Zero )
             {
-                CL.ReleaseKernel( Handle );
+                CL10.ReleaseKernel( Handle );
                 Handle = IntPtr.Zero;
             }
         }

@@ -65,6 +65,9 @@ namespace Cloo
 
         internal static IntPtr[] ExtractHandles<T>( ICollection<T> computeObjects ) where T: ComputeObject
         {
+            if( computeObjects == null )
+                return new IntPtr[ 0 ];
+
             IntPtr[] result = new IntPtr[ computeObjects.Count ];
             int i = 0;
             foreach( T computeObj in computeObjects )

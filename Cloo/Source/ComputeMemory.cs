@@ -32,7 +32,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
-    using OpenTK.Compute.CL10;
     using Cloo.Bindings;
 
     public abstract class ComputeMemory: ComputeResource
@@ -102,7 +101,7 @@ namespace Cloo
         {            
             if( Handle != IntPtr.Zero )
             {
-                CL.ReleaseMemObject( Handle );
+                CL10.ReleaseMemObject( Handle );
                 Handle = IntPtr.Zero;
             }
         }

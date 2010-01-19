@@ -34,7 +34,7 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using OpenTK.Compute.CL10;
+    using Cloo.Bindings;
 
     public class ComputePlatform : ComputeObject
     {
@@ -139,12 +139,12 @@ namespace Cloo
             int handlesLength = 0;
             unsafe
             {
-                int error = CL.GetPlatformIDs( 0, null, &handlesLength );
+                ComputeErrorCode error = CL10.GetPlatformIDs( 0, null, &handlesLength );
                 ComputeException.ThrowOnError( error );
                 handles = new IntPtr[ handlesLength ];
 
                 fixed( IntPtr* handlesPtr = handles )
-                { error = CL.GetPlatformIDs( handlesLength, handlesPtr, null ); }
+                { error = CL10.GetPlatformIDs( handlesLength, handlesPtr, null ); }
                 ComputeException.ThrowOnError( error );
             }
 
@@ -159,14 +159,14 @@ namespace Cloo
         {
             Handle = handle;
             devices = new ReadOnlyCollection<ComputeDevice>( GetDevices() );
-            
-            string extensionString = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformExtensions, CL.GetPlatformInfo );
+
+            string extensionString = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Extensions, CL10.GetPlatformInfo );
             extensions = new ReadOnlyCollection<string>( extensionString.Split( new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries ) );
-            
-            name = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformName, CL.GetPlatformInfo );
-            profile = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformProfile, CL.GetPlatformInfo );
-            vendor = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformVendor, CL.GetPlatformInfo );
-            version = GetStringInfo<PlatformInfo>( PlatformInfo.PlatformVersion, CL.GetPlatformInfo );
+
+            name = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Name, CL10.GetPlatformInfo );
+            profile = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Profile, CL10.GetPlatformInfo );
+            vendor = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Vendor, CL10.GetPlatformInfo );
+            version = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Version, CL10.GetPlatformInfo );
         }
 
         #endregion
@@ -223,15 +223,15 @@ namespace Cloo
         private ComputeDevice[] GetDevices()
         {
             IntPtr[] handles;
-            uint handlesLength = 0;
+            int handlesLength = 0;
             unsafe
             {
-                int error = CL.GetDeviceIDs( Handle, DeviceTypeFlags.DeviceTypeAll, 0, null, &handlesLength );
+                ComputeErrorCode error = CL10.GetDeviceIDs( Handle, ComputeDeviceTypes.All, 0, null, &handlesLength );
                 ComputeException.ThrowOnError( error );
 
                 handles = new IntPtr[ handlesLength ];
                 fixed( IntPtr* devicesPtr = handles )
-                    error = CL.GetDeviceIDs( Handle, DeviceTypeFlags.DeviceTypeAll, handlesLength, devicesPtr, null );
+                    error = CL10.GetDeviceIDs( Handle, ComputeDeviceTypes.All, handlesLength, devicesPtr, null );
                 ComputeException.ThrowOnError( error );
             }
 
