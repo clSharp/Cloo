@@ -42,7 +42,7 @@ namespace Cloo.Bindings
 
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clCreateContext", ExactSpelling = true )]
-        internal extern static unsafe IntPtr CreateContext( 
+        internal extern static unsafe IntPtr CreateContext(
             IntPtr* properties,
             UInt32 num_devices,
             IntPtr* devices,
@@ -129,7 +129,7 @@ namespace Cloo.Bindings
             IntPtr* mem_objects,
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            IntPtr* newEvent );        
+            IntPtr* newEvent );
 
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyBufferToImage", ExactSpelling = true )]
@@ -143,7 +143,7 @@ namespace Cloo.Bindings
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
             IntPtr* event_ret );
-        
+
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyImage", ExactSpelling = true )]
         internal extern static unsafe Int32 EnqueueCopyImage(
@@ -156,7 +156,7 @@ namespace Cloo.Bindings
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
             IntPtr* event_ret );
-        
+
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueCopyImageToBuffer", ExactSpelling = true )]
         internal extern static unsafe Int32 EnqueueCopyImageToBuffer(
@@ -169,7 +169,7 @@ namespace Cloo.Bindings
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
             IntPtr* event_ret );
-        
+
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueMapImage", ExactSpelling = true )]
         internal extern static unsafe IntPtr EnqueueMapImage(
@@ -185,7 +185,7 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* event_ret,
             Int32* errcode_ret );
-        
+
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueReadImage", ExactSpelling = true )]
         internal extern static unsafe Int32 EnqueueReadImage(
@@ -210,7 +210,7 @@ namespace Cloo.Bindings
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
             IntPtr* newEvent );
-        
+
         [SuppressUnmanagedCodeSecurity()]
         [DllImport( filename, EntryPoint = "clEnqueueWriteImage", ExactSpelling = true )]
         internal extern static unsafe Int32 EnqueueWriteImage(
@@ -225,6 +225,11 @@ namespace Cloo.Bindings
             UInt32 num_events_in_wait_list,
             IntPtr* event_wait_list,
             IntPtr* event_ret );
+
+        [SuppressUnmanagedCodeSecurity]
+        [DllImport( filename, EntryPoint="clGetExtensionFunctionAddress", ExactSpelling= true )]
+        internal extern static unsafe IntPtr GetExtensionFunctionAddress(
+            String func_name );
 
         [SuppressUnmanagedCodeSecurity]
         [DllImport( filename, EntryPoint = "clGetGLObjectInfo", ExactSpelling = true )]
