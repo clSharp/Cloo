@@ -35,7 +35,7 @@ namespace Cloo.Bindings
     using System.Runtime.InteropServices;
     using System.Security;
 
-    public class CL10
+    internal class CL10
     {
         const string dll = "opencl.dll";
 

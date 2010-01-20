@@ -81,6 +81,7 @@ namespace Cloo
         ProfilingInfoNotAvailable = -7,
         MemoryCopyOverlap = -8,
         ImageFormatMismatch = -9,
+        CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR = -1000
     }
 
     public enum OpenCLVersion: int
@@ -214,7 +215,12 @@ namespace Cloo
 
     public enum ComputeContextPropertyName: int
     {
-        Platform = 0x1084
+        Platform = 0x1084,
+        CL_GL_CONTEXT_KHR = 0x2008,
+        CL_EGL_DISPLAY_KHR = 0x2009,
+        CL_GLX_DISPLAY_KHR = 0x200A,
+        CL_WGL_HDC_KHR = 0x200B,
+        CL_CGL_SHAREGROUP_KHR = 0x200C,
     }
 
     public enum ComputeCommandQueueInfo: int
@@ -430,5 +436,11 @@ namespace Cloo
     {
         TextureTarget = 0x2004,
         MipMapLevel = 0x2005
+    }
+
+    public enum ComputeGLContextInfo: int
+    {
+        CL_CURRENT_DEVICE_FOR_GL_CONTEXT_KHR = 0x2006,
+        CL_DEVICES_FOR_GL_CONTEXT_KHR = 0x2007
     }
 }

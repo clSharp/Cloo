@@ -62,7 +62,6 @@
     <Compile Include="Source\Clootils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Enums.cs" />
-    <Compile Include="Source\ExtensionEnums.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\license.txt" />

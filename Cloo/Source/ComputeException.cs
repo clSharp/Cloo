@@ -74,9 +74,9 @@ namespace Cloo
         /// Checks for an error and throws an exception if such is encountered.
         /// </summary>
         /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
-        public static void ThrowOnError( ComputeErrorCode errorCode )
+        public static void ThrowOnError( ComputeErrorCode error )
         {
-            switch( errorCode )
+            switch( error )
             {
                 case ComputeErrorCode.Success:
                     return;
@@ -217,7 +217,7 @@ namespace Cloo
                     throw new InvalidMipLevelComputeException();
                 
                 default:
-                    throw new ComputeException( errorCode );            
+                    throw new ComputeException( error );            
             }
         }
 

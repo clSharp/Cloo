@@ -36,9 +36,9 @@ namespace Cloo.Bindings
     
     public class Clx
     {
-        public class Delegates
+        internal static class Delegates
         {
-            public unsafe delegate Int32 clGetGLContextInfoKHR(
+            internal unsafe delegate ComputeErrorCode clGetGLContextInfoKHR(
                 IntPtr* properties,
                 ComputeGLContextInfo param_name,
                 IntPtr param_value_size,
@@ -46,13 +46,26 @@ namespace Cloo.Bindings
                 IntPtr* param_value_size_ret );
         }
 
-        public readonly static Delegates.clGetGLContextInfoKHR GetGLContextInfoKHR;
+        private readonly Delegates.clGetGLContextInfoKHR clGetGLContextInfoKHR;
 
-        static Clx()
+        public unsafe ComputeErrorCode GetGLContextInfoKHR(
+                IntPtr* properties,
+                ComputeGLContextInfo param_name,
+                IntPtr param_value_size,
+                IntPtr param_value,
+                IntPtr* param_value_size_ret )
         {
-            GetGLContextInfoKHR = ( Delegates.clGetGLContextInfoKHR )Marshal.GetDelegateForFunctionPointer(
-                CL10.GetExtensionFunctionAddress( "clGetGLContextInfoKHR" ),
-                typeof( Delegates.clGetGLContextInfoKHR ) );
+            return clGetGLContextInfoKHR( properties, param_name, param_value_size, param_value, param_value_size_ret );
+        }
+
+        public Clx( ComputePlatform platform )
+        {
+            if( platform.Extensions.Contains( "cl_khr_gl_sharing" ) )
+                clGetGLContextInfoKHR = ( Delegates.clGetGLContextInfoKHR )Marshal.GetDelegateForFunctionPointer(
+                    CL10.GetExtensionFunctionAddress( "clGetGLContextInfoKHR" ),
+                    typeof( Delegates.clGetGLContextInfoKHR ) );
+            else
+                clGetGLContextInfoKHR = null;
         }
     }
 }

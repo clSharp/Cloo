@@ -351,7 +351,6 @@ namespace Cloo
                         Marshal.UnsafeAddrOfPinnedArrayElement( binariesPtrs, 0 ),
                         out ret );
                     ComputeException.ThrowOnError( error );
-
                 }
             }
             finally

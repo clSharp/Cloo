@@ -16,9 +16,10 @@ namespace ClooTester
             ComputePlatform currentPlatform = ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." );
             ComputeContextPropertyList pd = new ComputeContextPropertyList( currentPlatform );
             ComputeContext context = new ComputeContext( ComputeDeviceTypes.Default, pd, null, IntPtr.Zero );
+            Clx clx = new Clx( currentPlatform );
             unsafe
             {
-                Clx.GetGLContextInfoKHR( null, ( ComputeGLContextInfo )0, IntPtr.Zero, IntPtr.Zero, ( IntPtr* )IntPtr.Zero );
+                clx.GetGLContextInfoKHR( null, ( ComputeGLContextInfo )0, IntPtr.Zero, IntPtr.Zero, ( IntPtr* )IntPtr.Zero );
             }
         }
     }
