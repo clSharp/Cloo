@@ -33,7 +33,7 @@ namespace Cloo
 {
     using System;
 
-    public class ComputeException: Exception
+    public class ComputeException: ApplicationException
     {
         #region Fields
 
