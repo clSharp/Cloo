@@ -55,6 +55,7 @@ namespace Cloo.Bindings
                 IntPtr param_value,
                 IntPtr* param_value_size_ret )
         {
+            if( clGetGLContextInfoKHR == null ) throw new EntryPointNotFoundException( "clGetGLContextInfoKHR not available." );
             return clGetGLContextInfoKHR( properties, param_name, param_value_size, param_value, param_value_size_ret );
         }
 
