@@ -244,10 +244,10 @@ namespace Cloo
 
     public enum ComputeImageChannelOrder: int
     {
-        Color = 0x10B0,
-        Alpha = 0x10B1,
-        ColorColor = 0x10B2,
-        ColorAlpha = 0x10B3,
+        R = 0x10B0,
+        A = 0x10B1,
+        RG = 0x10B2,
+        RA = 0x10B3,
         Rgb = 0x10B4,
         Rgba = 0x10B5,
         Bgra = 0x10B6,
@@ -322,7 +322,7 @@ namespace Cloo
     {
         ReferenceCount = 0x1150,
         Context = 0x1151,
-        NormalizedCoordsLIZED_COORDS = 0x1152,
+        NormalizedCoords = 0x1152,
         Addressing = 0x1153,
         Filtering = 0x1154
     }

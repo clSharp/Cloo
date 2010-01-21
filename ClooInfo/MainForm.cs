@@ -27,13 +27,13 @@ namespace ClooInfo
         {
             StringBuilder info = new StringBuilder();
 
-            info.AppendLine( "HOST INFO" );
+            info.AppendLine( "[HOST INFO]" );
             info.AppendLine( "Operating system: " + Environment.OSVersion );
 
             try
             {
                 info.AppendLine();
-                info.AppendLine( "OPENCL PLATFORMS" );
+                info.AppendLine( "[OPENCL PLATFORMS]" );
 
                 foreach( ComputePlatform platform in ComputePlatform.Platforms )
                 {
@@ -49,6 +49,7 @@ namespace ClooInfo
                     info.AppendLine();
 
                     info.AppendLine( "Devices:" );
+
                     foreach( ComputeDevice device in platform.Devices )
                     {
                         info.AppendLine( "\tName: " + device.Name );
@@ -64,7 +65,8 @@ namespace ClooInfo
                             info.AppendLine( "\t + " + extension );
 
                         info.AppendLine();
-                    }
+                    }                    
+                    info.AppendLine();
                 }
             }
 

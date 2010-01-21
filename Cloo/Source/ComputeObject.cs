@@ -102,17 +102,17 @@ namespace Cloo
 
         #region Protected methods
 
-        protected NativeType[] GetArrayInfo<InfoType, NativeType>
+        protected QueriedType[] GetArrayInfo<InfoEnum, QueriedType>
             (
-                InfoType paramName,
-                GetInfoDelegate<InfoType> getInfoDelegate
+                InfoEnum paramName,
+                GetInfoDelegate<InfoEnum> getInfoDelegate
             )
         {
             ComputeErrorCode error;
-            NativeType[] buffer;
+            QueriedType[] buffer;
             IntPtr bufferSizeRet;
             getInfoDelegate( handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet );
-            buffer = new NativeType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( NativeType ) ) ];
+            buffer = new QueriedType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( QueriedType ) ) ];
             GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
             try
             {
@@ -131,18 +131,18 @@ namespace Cloo
             return buffer;
         }
 
-        protected NativeType[] GetArrayInfo<InfoType, NativeType>
+        protected QueriedType[] GetArrayInfo<InfoEnum, QueriedType>
             (
                 ComputeObject secondaryObject,
-                InfoType paramName,
-                GetInfoDelegateEx<InfoType> getInfoDelegate
+                InfoEnum paramName,
+                GetInfoDelegateEx<InfoEnum> getInfoDelegate
             )
         {
             ComputeErrorCode error;
-            NativeType[] buffer;
+            QueriedType[] buffer;
             IntPtr bufferSizeRet;
             error = getInfoDelegate( handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet );
-            buffer = new NativeType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( NativeType ) ) ];
+            buffer = new QueriedType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( QueriedType ) ) ];
             GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
             try
             {
@@ -162,27 +162,27 @@ namespace Cloo
             return buffer;
         }
 
-        protected bool GetBoolInfo<InfoType>
+        protected bool GetBoolInfo<InfoEnum>
             (
-                InfoType paramName,
-                GetInfoDelegate<InfoType> getInfoDelegate
+                InfoEnum paramName,
+                GetInfoDelegate<InfoEnum> getInfoDelegate
             )
         {
-            int result = GetInfo<InfoType, int>
+            int result = GetInfo<InfoEnum, int>
                 ( paramName, getInfoDelegate );
-            return ( result == 0 ) ? false : true;
+            return ( result == ( int )ComputeBoolean.True ) ? true : false;
         }
 
-        protected NativeType GetInfo<InfoType, NativeType>
+        protected QueriedType GetInfo<InfoEnum, QueriedType>
             (
-                InfoType paramName,
-                GetInfoDelegate<InfoType> getInfoDelegate
+                InfoEnum paramName,
+                GetInfoDelegate<InfoEnum> getInfoDelegate
             )
-            where NativeType: struct             
+            where QueriedType: struct             
         {
             ComputeErrorCode error;
             IntPtr valueSizeRet;
-            NativeType result = new NativeType();
+            QueriedType result = new QueriedType();
             GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
             try
             {
@@ -196,23 +196,23 @@ namespace Cloo
             }
             finally
             {
-                result = ( NativeType )gcHandle.Target;
+                result = ( QueriedType )gcHandle.Target;
                 gcHandle.Free();
             }
             return result;
         }
 
-        protected NativeType GetInfo<InfoType, NativeType>
+        protected QueriedType GetInfo<InfoEnum, QueriedType>
             (
                 ComputeObject secondaryObject,
-                InfoType paramName,
-                GetInfoDelegateEx<InfoType> getInfoDelegate
+                InfoEnum paramName,
+                GetInfoDelegateEx<InfoEnum> getInfoDelegate
             )
-            where NativeType : struct
+            where QueriedType : struct
         {
             ComputeErrorCode error;
             IntPtr valueSizeRet;
-            NativeType result = new NativeType();
+            QueriedType result = new QueriedType();
             GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
             unsafe
             {
@@ -229,55 +229,55 @@ namespace Cloo
                 }
                 finally
                 {
-                    result = ( NativeType )gcHandle.Target;
+                    result = ( QueriedType )gcHandle.Target;
                     gcHandle.Free();
                 }
             }
             return result;
         }
 
-        protected string GetStringInfo<InfoType>( InfoType paramName, GetInfoDelegate<InfoType> getInfoDelegate )
+        protected string GetStringInfo<InfoEnum>( InfoEnum paramName, GetInfoDelegate<InfoEnum> getInfoDelegate )
         {
             string result = null;
-            sbyte[] buffer = GetArrayInfo<InfoType, sbyte>( paramName, getInfoDelegate );
+            sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>( paramName, getInfoDelegate );
             unsafe
             {
                 fixed( sbyte* bufferPtr = buffer )
                     result = new string( bufferPtr );
             }
-            return result.Trim();
+            return result;
         }
 
-        protected string GetStringInfo<InfoType>( ComputeObject secondaryObject, InfoType paramName, GetInfoDelegateEx<InfoType> getInfoDelegate )
+        protected string GetStringInfo<InfoEnum>( ComputeObject secondaryObject, InfoEnum paramName, GetInfoDelegateEx<InfoEnum> getInfoDelegate )
         {
             string result = null;
-            sbyte[] buffer = GetArrayInfo<InfoType, sbyte>( secondaryObject, paramName, getInfoDelegate );
+            sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>( secondaryObject, paramName, getInfoDelegate );
             unsafe
             {
                 fixed( sbyte* bufferPtr = buffer )
                     result = new string( bufferPtr );
             }
-            return result.Trim();
+            return result;
         }
 
         #endregion
 
         #region Delegates
 
-        protected unsafe delegate ComputeErrorCode GetInfoDelegate<InfoType>
+        protected unsafe delegate ComputeErrorCode GetInfoDelegate<InfoEnum>
             (
                 IntPtr objectHandle,
-                InfoType paramName,
+                InfoEnum paramName,
                 IntPtr paramValueSize,
                 IntPtr paramValue,
                 out IntPtr paramValueSizeRet
             );
 
-        protected unsafe delegate ComputeErrorCode GetInfoDelegateEx<InfoType>
+        protected unsafe delegate ComputeErrorCode GetInfoDelegateEx<InfoEnum>
             (
                 IntPtr mainObjectHandle,
                 IntPtr secondaryObjectHandle,
-                InfoType paramName,
+                InfoEnum paramName,
                 IntPtr paramValueSize,
                 IntPtr paramValue,
                 out IntPtr paramValueSizeRet

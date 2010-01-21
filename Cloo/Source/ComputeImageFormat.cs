@@ -54,7 +54,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the size of the channel data type.
+        /// Gets the type of the channel data.
         /// </summary>
         public ComputeImageChannelType ChannelType
         {
@@ -69,7 +69,7 @@ namespace Cloo
         /// Creates a new ComputeImageFormat.
         /// </summary>
         /// <param name="channelOrder">Specifies the number of channels and the channel layout i.e. the memory layout in which channels are stored in the image.</param>
-        /// <param name="channelType">Describes the size of the channel data type. The number of bits per element determined by the channelType and channelOrder must be a power of two.</param>
+        /// <param name="channelType">Describes the type of the channel data. The number of bits per element determined by the channelType and channelOrder must be a power of two.</param>
         public ComputeImageFormat( ComputeImageChannelOrder channelOrder, ComputeImageChannelType channelType )
         {
             this.channelOrder = channelOrder;
