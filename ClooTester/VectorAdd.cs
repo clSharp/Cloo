@@ -1,6 +1,5 @@
 ﻿using Cloo;
 using System;
-using OpenTK.Compute.CL10;
 
 namespace ClooTester
 {

@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 Fatjon Sakiqi
+Copyright (c) 2009 - 2010 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -71,11 +71,11 @@ namespace Cloo
         /// <summary>
         /// Return the execution status of the command identified by event.
         /// </summary>
-        public int ExecutionStatus
+        public ComputeCommandExecutionStatus ExecutionStatus
         {
             get
             {
-                return GetInfo<ComputeEventInfo, int>(
+                return ( ComputeCommandExecutionStatus )GetInfo<ComputeEventInfo, int>(
                     ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo );
             }
         }
@@ -87,7 +87,7 @@ namespace Cloo
         {
             get
             {
-                return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
+                return GetInfo<ComputeCommandProfilingInfo, long>(
                     ComputeCommandProfilingInfo.Ended, CL10.GetEventProfilingInfo );
             }
         }
@@ -150,22 +150,6 @@ namespace Cloo
         public override string ToString()
         {
             return "ComputeEvent" + base.ToString();
-        }
-
-        /// <summary>
-        /// Waits on the host thread for commands identified by event objects in the list to complete.
-        /// </summary>
-        /// <param name="events">The list of events to wait for.</param>
-        public static void Wait( ICollection<ComputeEvent> events )
-        {
-            unsafe
-            {
-                fixed( IntPtr* eventHandlesPtr = Clootils.ExtractHandles( events ) )
-                {
-                    ComputeErrorCode error = CL10.WaitForEvents( events.Count, eventHandlesPtr );
-                    ComputeException.ThrowOnError( error );
-                }
-            }
         }
 
         #endregion

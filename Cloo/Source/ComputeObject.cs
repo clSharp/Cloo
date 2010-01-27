@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 Fatjon Sakiqi
+Copyright (c) 2009 - 2010 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -68,14 +68,6 @@ namespace Cloo
             return objA.Equals( objB );
         }
 
-        /// <summary>
-        /// Gets the hash code for this compute object.
-        /// </summary>
-        public override int GetHashCode()
-        {
-            return Handle.GetHashCode();
-        }
-
         public override bool Equals( object obj )
         {
             if( obj == null ) return false;
@@ -88,6 +80,14 @@ namespace Cloo
             if( obj == null ) return false;
             if( !Handle.Equals( obj.Handle ) ) return false;
             return true;
+        }
+
+        /// <summary>
+        /// Gets the hash code for this compute object.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            return Handle.GetHashCode();
         }
 
         /// <summary>

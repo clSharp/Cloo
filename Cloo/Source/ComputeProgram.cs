@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 Fatjon Sakiqi
+Copyright (c) 2009 - 2010 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -215,7 +215,6 @@ namespace Cloo
 
             unsafe
             {
-
                 ComputeErrorCode error;
                 fixed( IntPtr* deviceHandlesPtr = deviceHandles )
                 error = CL10.BuildProgram(

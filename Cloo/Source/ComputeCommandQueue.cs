@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 Fatjon Sakiqi
+Copyright (c) 2009 - 2010 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
  * The GC handles may be released before such operations complete.
  *
  * Possible fix:
- * Store these handles in the ComputeEvent accompanying this command.
+ * Store these handles in the ComputeEvent accompanying the command.
  * They will be released through ComputeEvent.Dispose().
  */
 
@@ -160,6 +160,9 @@ namespace Cloo
                     ComputeException.ThrowOnError( error );
                 }
             }
+
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
@@ -622,6 +625,9 @@ namespace Cloo
                     ComputeException.ThrowOnError( error );
                 }
             }
+
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>

@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 Fatjon Sakiqi
+Copyright (c) 2009 - 2010 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -79,6 +79,9 @@ namespace Cloo
 
         #region Public methods
 
+        /// <summary>
+        /// Gets a string representation of this ComputeContextProperty.
+        /// </summary>
         public override string ToString()
         {
             return "ComputeContextProperty(" + name + ", " + value + ")";

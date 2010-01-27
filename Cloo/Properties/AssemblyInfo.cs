@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "" )]
 [assembly: AssemblyProduct( "Cloo" )]
-[assembly: AssemblyCopyright( "Copyright (c) 2009 Fatjon Sakiqi" )]
+[assembly: AssemblyCopyright( "Copyright (c) 2009 - 2010 Fatjon Sakiqi" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
@@ -35,4 +35,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion( "0.6.0" )]
 
 [assembly: CLSCompliant( true )]
-[assembly: AssemblyFileVersionAttribute( "0.6.0" )]
+[assembly: AssemblyFileVersion( "0.6.0" )]
