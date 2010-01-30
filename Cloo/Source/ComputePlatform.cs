@@ -35,6 +35,7 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
+    using System.Reflection;
 
     public class ComputePlatform : ComputeObject
     {
@@ -43,7 +44,7 @@ namespace Cloo
         private readonly ReadOnlyCollection<ComputeDevice> devices;
         private readonly ReadOnlyCollection<string> extensions;
         private readonly string name;
-        private static readonly ReadOnlyCollection<ComputePlatform> platforms;
+        private static ReadOnlyCollection<ComputePlatform> platforms;
         private readonly string profile;
         private readonly string vendor;
         private readonly string version;
@@ -92,6 +93,9 @@ namespace Cloo
         {
             get
             {
+                if( platforms == null )
+                    Initialize();
+
                 return platforms;
             }
         }
@@ -133,31 +137,9 @@ namespace Cloo
 
         #region Constructors
 
-        static ComputePlatform()
-        {
-            IntPtr[] handles;
-            int handlesLength = 0;
-            unsafe
-            {
-                ComputeErrorCode error = CL10.GetPlatformIDs( 0, null, &handlesLength );
-                ComputeException.ThrowOnError( error );
-                handles = new IntPtr[ handlesLength ];
-
-                fixed( IntPtr* handlesPtr = handles )
-                { error = CL10.GetPlatformIDs( handlesLength, handlesPtr, null ); }
-                ComputeException.ThrowOnError( error );
-            }
-
-            List<ComputePlatform> platformList = new List<ComputePlatform>( handlesLength );
-            foreach( IntPtr handle in handles )
-                platformList.Add( new ComputePlatform( handle ) );
-
-            platforms = platformList.AsReadOnly();
-        }
-
         private ComputePlatform( IntPtr handle )
         {
-            Handle = handle;
+            this.handle = handle;
             devices = new ReadOnlyCollection<ComputeDevice>( GetDevices() );
 
             string extensionString = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Extensions, CL10.GetPlatformInfo );
@@ -206,6 +188,33 @@ namespace Cloo
                     return platform;
 
             return null;
+        }
+
+        /// <summary>
+        /// Retrieves all the available platforms and their devices.
+        /// </summary>
+        public static void Initialize()
+        {
+            if( platforms != null ) return;
+
+            IntPtr[] handles;
+            int handlesLength = 0;
+            unsafe
+            {
+                ComputeErrorCode error = CL10.GetPlatformIDs( 0, null, &handlesLength );
+                ComputeException.ThrowOnError( error );
+                handles = new IntPtr[ handlesLength ];
+
+                fixed( IntPtr* handlesPtr = handles )
+                { error = CL10.GetPlatformIDs( handlesLength, handlesPtr, null ); }
+                ComputeException.ThrowOnError( error );
+            }
+
+            List<ComputePlatform> platformList = new List<ComputePlatform>( handlesLength );
+            foreach( IntPtr handle in handles )
+                platformList.Add( new ComputePlatform( handle ) );
+
+            platforms = platformList.AsReadOnly();
         }
 
         /// <summary>

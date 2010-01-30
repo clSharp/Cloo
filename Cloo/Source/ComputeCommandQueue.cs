@@ -126,7 +126,7 @@ namespace Cloo
         public ComputeCommandQueue( ComputeContext context, ComputeDevice device, ComputeCommandQueueFlags properties )
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL10.CreateCommandQueue( context.Handle, device.Handle, properties, out error );
+            handle = CL10.CreateCommandQueue( context.Handle, device.Handle, properties, out error );
             ComputeException.ThrowOnError( error );
             this.device = device;
             this.context = context;
@@ -469,7 +469,7 @@ namespace Cloo
         /// <param name="rowPitch">Returns the length of image scan-line in bytes.</param>
         /// <param name="slicePitch">Returns the count in bytes of the 2D slice of the 3D image.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public IntPtr Map( ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, out long rowPitch, out long slicePitch, ICollection<ComputeEvent> events )
+        public IntPtr Map( ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, /*out long rowPitch, out long slicePitch,*/ ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
@@ -489,8 +489,8 @@ namespace Cloo
                         flags,
                         offsetPtr,
                         regionPtr,
-                        &rowPitchPtr,
-                        &slicePitchPtr,
+                        null, //&rowPitchPtr,
+                        null, //&slicePitchPtr,
                         eventHandles.Length,
                         eventHandlesPtr,
                         out newEventHandle,
@@ -502,8 +502,8 @@ namespace Cloo
             if( events != null )
                 events.Add( new ComputeEvent( newEventHandle, this ) );
 
-            rowPitch = rowPitchPtr.ToInt64();
-            slicePitch = slicePitchPtr.ToInt64();
+            //rowPitch = rowPitchPtr.ToInt64();
+            //slicePitch = slicePitchPtr.ToInt64();
 
             return mappedPtr;
         }
@@ -563,11 +563,11 @@ namespace Cloo
         /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
         /// <param name="offset">The (x, y, z) offset in pixels where reading starts.</param>
         /// <param name="region">The region (width, height, depth) count in pixels to read.</param>
-        /// <param name="rowPitch">The length of image scan-line in bytes.</param>
-        /// <param name="slicePitch">The count in bytes of the 2D slice of the 3D image.</param>
+        // <param name="rowPitch">The length of image scan-line in bytes.</param>
+        // <param name="slicePitch">The count in bytes of the 2D slice of the 3D image.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         /// <returns>A pointer to the image data.</returns>
-        public IntPtr Read( ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, ICollection<ComputeEvent> events )
+        public IntPtr Read( ComputeImage image, bool blocking, long[] offset, long[] region, /*long rowPitch, long slicePitch,*/ ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = Clootils.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
@@ -587,8 +587,8 @@ namespace Cloo
                         ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
                         offsetPtr,
                         regionPtr,
-                        new IntPtr( rowPitch ),
-                        new IntPtr( slicePitch ),
+                        new IntPtr( image.RowPitch ),
+                        new IntPtr( image.SlicePitch ),
                         readData,
                         eventHandles.Length,
                         eventHandlesPtr,
@@ -773,7 +773,7 @@ namespace Cloo
             if( Handle != IntPtr.Zero )
             {
                 CL10.ReleaseCommandQueue( Handle );
-                Handle = IntPtr.Zero;
+                handle = IntPtr.Zero;
             }
         }
         

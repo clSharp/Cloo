@@ -39,7 +39,7 @@ namespace Cloo
     {
         #region Fields
 
-        private IntPtr handle;
+        protected IntPtr handle;
         
         #endregion
 
@@ -50,10 +50,6 @@ namespace Cloo
             get
             {
                 return handle;
-            }
-            protected set
-            {
-                handle = value;
             }
         }
 

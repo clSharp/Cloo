@@ -105,7 +105,7 @@ namespace Cloo
         public ComputeSampler( ComputeContext context, bool normalizedCoords, ComputeImageAddressing addressing, ComputeImageFiltering filtering )
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL10.CreateSampler(
+            handle = CL10.CreateSampler(
                 context.Handle,
                 ( normalizedCoords ) ? ComputeBoolean.True : ComputeBoolean.False,
                 addressing,
@@ -133,7 +133,7 @@ namespace Cloo
             if( Handle != IntPtr.Zero )
             {
                 CL10.ReleaseSampler( Handle );
-                Handle = IntPtr.Zero;
+                handle = IntPtr.Zero;
             }
         }
 

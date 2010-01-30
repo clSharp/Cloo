@@ -47,14 +47,6 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets a collection of all the properties in this list.
-        /// </summary>
-        public ReadOnlyCollection<ComputeContextProperty> Content
-        {
-            get { return new ReadOnlyCollection<ComputeContextProperty>( properties ); }
-        }
-
-        /// <summary>
         /// Gets the platform of this property list or null if none was specified.
         /// </summary>
         public ComputePlatform Platform

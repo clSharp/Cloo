@@ -37,42 +37,6 @@ namespace Cloo
 
     public class ComputeImage2D: ComputeImage
     {
-        #region Fields
-
-        private int height;
-        private int rowPitch;
-        private int width;        
-
-        #endregion
-        
-        #region Properties
-
-        /// <summary>
-        /// The height of the image in pixels.
-        /// </summary>
-        public int Height
-        {
-            get { return height; }
-        }
-
-        /// <summary>
-        /// The size of the image row in bytes.
-        /// </summary>
-        public int RowPitch
-        {
-            get { return rowPitch; }
-        }
-
-        /// <summary>
-        /// The width of the image in pixels.
-        /// </summary>
-        public int Width
-        {
-            get { return width; }
-        }
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -91,7 +55,7 @@ namespace Cloo
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateImage2D(
+                handle = CL10.CreateImage2D(
                     context.Handle,
                     flags,
                     &format,
@@ -102,13 +66,14 @@ namespace Cloo
                     out error );
                 ComputeException.ThrowOnError( error );
             }
+
             Init();
         }
 
         private ComputeImage2D( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
             : base( context, flags )
         {
-            Handle = handle;
+            handle = handle;
             
             Init();
         }
@@ -159,18 +124,6 @@ namespace Cloo
         public static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
             return GetSupportedFormats( context, flags, ComputeMemoryType.Image2D );
-        }
-
-        #endregion
-
-        #region Private methods
-
-        private void Init()
-        {
-            Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
-            width = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Width, CL10.GetImageInfo );
-            height = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Height, CL10.GetImageInfo );
-            rowPitch = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.RowPitch, CL10.GetImageInfo );
         }
 
         #endregion

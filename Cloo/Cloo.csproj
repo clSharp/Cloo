@@ -48,7 +48,7 @@
     <Compile Include="Source\ComputeContextProperty.cs" />
     <Compile Include="Source\ComputeDevice.cs" />
     <Compile Include="Source\ComputeEvent.cs" />
-    <Compile Include="Source\ComputeEventCollection.cs" />
+    <Compile Include="Source\ComputeEventList.cs" />
     <Compile Include="Source\ComputeException.cs" />
     <Compile Include="Source\ComputeImage.cs" />
     <Compile Include="Source\ComputeImage2D.cs" />

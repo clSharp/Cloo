@@ -70,9 +70,10 @@ namespace Cloo
             : base( context, flags )
         {
             this.count = count;
-            Size = count * Marshal.SizeOf( typeof( T ) );
+            size = count * Marshal.SizeOf( typeof( T ) );
+
             ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL10.CreateBuffer(
+            handle = CL10.CreateBuffer(
                 context.Handle,
                 flags,
                 new IntPtr( Size ),
@@ -90,14 +91,14 @@ namespace Cloo
         public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, T[] data )
             : base( context, flags )
         {
-            Size = data.Length * Marshal.SizeOf( typeof( T ) );
             count = data.Length;
+            size = count * Marshal.SizeOf( typeof( T ) );
 
             GCHandle dataPtr = GCHandle.Alloc( data, GCHandleType.Pinned );
             try
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateBuffer(
+                handle = CL10.CreateBuffer(
                     context.Handle,
                     flags,
                     new IntPtr( Size ),
@@ -111,9 +112,14 @@ namespace Cloo
             }
         }
 
-        private ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags )
+        private ComputeBuffer( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
             : base( context, flags )
-        { }
+        {
+            this.handle = handle;
+            
+            size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
+            count = size / Marshal.SizeOf( typeof( T ) );
+        }
 
         #endregion
 
@@ -121,11 +127,12 @@ namespace Cloo
 
         public static ComputeBuffer<T> CreateFromGLBuffer<T>( ComputeContext context, ComputeMemoryFlags flags, int bufferId ) where T: struct
         {
-            ComputeBuffer<T> buffer = new ComputeBuffer<T>( context, flags );
+            IntPtr handle;
+
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                buffer.Handle = CL10.CreateFromGLBuffer( 
+                handle = CL10.CreateFromGLBuffer( 
                     context.Handle, 
                     flags, 
                     bufferId,
@@ -133,9 +140,7 @@ namespace Cloo
                 ComputeException.ThrowOnError( error );
             }
 
-            buffer.Size = ( long )buffer.GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );            
-            buffer.count = buffer.Size / Marshal.SizeOf( typeof( T ) );            
-            return buffer;
+            return new ComputeBuffer<T>( handle, context, flags );
         }
 
         /// <summary>

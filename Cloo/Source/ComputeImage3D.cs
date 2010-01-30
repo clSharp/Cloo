@@ -38,60 +38,6 @@ namespace Cloo
 
     public class ComputeImage3D: ComputeImage
     {
-        #region Fields
-
-        private int depth;
-        private int height;
-        private int rowPitch;
-        private int slicePitch;
-        private int width;
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// The depth of the image in pixels.
-        /// </summary>
-        public int Depth
-        {
-            get { return depth; }
-        }
-
-        /// <summary>
-        /// The height of the image in pixels.
-        /// </summary>
-        public int Height
-        {
-            get { return height; }
-        }
-
-        /// <summary>
-        /// The size of the image row in bytes.
-        /// </summary>
-        public int RowPitch
-        {
-            get { return rowPitch; }
-        }
-
-        /// <summary>
-        /// The size of the image slice in bytes.
-        /// </summary>
-        public int SlicePitch
-        {
-            get { return slicePitch; }
-        }
-
-        /// <summary>
-        /// The width of the image in pixels.
-        /// </summary>
-        public int Width
-        {
-            get { return width; }
-        }
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -112,7 +58,7 @@ namespace Cloo
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateImage3D(
+                handle = CL10.CreateImage3D(
                     context.Handle,
                     flags,
                     &format,
@@ -125,13 +71,14 @@ namespace Cloo
                     out error );
                 ComputeException.ThrowOnError( error );
             }
+
             Init();
         }
 
         private ComputeImage3D( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
             : base( context, flags )
         {
-            Handle = handle;
+            this.handle = handle;
 
             Init();
         }
@@ -166,20 +113,6 @@ namespace Cloo
         public static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
         {
             return GetSupportedFormats( context, flags, ComputeMemoryType.Image3D );
-        }
-
-        #endregion
-
-        #region Private methods
-
-        private void Init()
-        {
-            depth = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Depth, CL10.GetImageInfo );
-            height = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Height, CL10.GetImageInfo );
-            rowPitch = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.RowPitch, CL10.GetImageInfo );
-            Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
-            slicePitch = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.SlicePitch, CL10.GetImageInfo );
-            width = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Width, CL10.GetImageInfo );
         }
 
         #endregion

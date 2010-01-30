@@ -34,9 +34,20 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
+    using System;
 
     public abstract class ComputeImage: ComputeMemory
     {
+        #region Properties
+
+        public int Depth { get; protected set; }
+        public int Height { get; protected set; }
+        public long RowPitch { get; protected set; }
+        public long SlicePitch { get; protected set; }
+        public int Width { get; protected set; }
+
+        #endregion
+
         #region Constructors
 
         protected ComputeImage( ComputeContext context, ComputeMemoryFlags flags )
@@ -68,6 +79,16 @@ namespace Cloo
             }            
 
             return new Collection<ComputeImageFormat>( formats );
+        }
+
+        protected void Init()
+        {
+            Depth = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Depth, CL10.GetImageInfo );
+            Height = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Height, CL10.GetImageInfo );
+            RowPitch = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.RowPitch, CL10.GetImageInfo );
+            size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
+            SlicePitch = ( long )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.SlicePitch, CL10.GetImageInfo );
+            Width = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Width, CL10.GetImageInfo );
         }
 
         #endregion

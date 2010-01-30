@@ -120,7 +120,7 @@ namespace Cloo
             ComputeErrorCode error = ComputeErrorCode.Success;
             unsafe
             {
-                Handle = CL10.CreateProgramWithSource(
+                handle = CL10.CreateProgramWithSource(
                     context.Handle,
                     1,
                     new string[] { source },
@@ -171,7 +171,7 @@ namespace Cloo
                     fixed( IntPtr* binariesLengthsPtr = binariesLengths )
                     fixed( IntPtr* deviceHandlesPtr = deviceHandles )
                     fixed( int* binaryStatusPtr = binariesStats )
-                        Handle = CL10.CreateProgramWithBinary(
+                        handle = CL10.CreateProgramWithBinary(
                             context.Handle,
                             count,
                             deviceHandlesPtr,
@@ -312,7 +312,7 @@ namespace Cloo
             if( Handle != IntPtr.Zero )
             {
                 CL10.ReleaseProgram( Handle );
-                Handle = IntPtr.Zero;
+                handle = IntPtr.Zero;
             }
         }
 

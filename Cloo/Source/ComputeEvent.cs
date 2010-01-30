@@ -134,7 +134,7 @@ namespace Cloo
 
         internal ComputeEvent( IntPtr handle, ComputeCommandQueue queue )
         {
-            Handle = handle;
+            this.handle = handle;
             commandQueue = queue;
             commandType = ( ComputeCommandType )GetInfo<ComputeEventInfo, uint>(
                 ComputeEventInfo.CommandType, CL10.GetEventInfo );
@@ -161,7 +161,7 @@ namespace Cloo
             if( Handle != IntPtr.Zero )
             {
                 CL10.ReleaseEvent( Handle );
-                Handle = IntPtr.Zero;
+                handle = IntPtr.Zero;
             }
         }
 
