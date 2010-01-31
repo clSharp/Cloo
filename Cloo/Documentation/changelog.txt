@@ -11,16 +11,17 @@ Added ComputeCommandQueueFlags.None.
 Added delegates for callback functions.
 OpenCL/OpenGL sharing API.
 Extension loading mechanism.
+Config file for out-of-the-box Linux and MacOS support.
 
 Bugfixes:
 ComputeImage2D.GetSupportedFormats() returns a list of 3D image formats.
 
 Internals:
-Replaced OpenTK DllImports with a new layer of bindings.
+Replaced OpenTK DllImports and enums with a new layer of bindings. Removes dependency on OpenTK.
 
 Documentation:
 Added comments for some of the new public bits.
-Added missing comments around existing bits.
+Added/modified missing comments around existing bits.
 
 
 [0.5.1] -----------------------------------------------------------------------
