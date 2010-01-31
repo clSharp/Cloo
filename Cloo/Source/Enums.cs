@@ -179,7 +179,7 @@ namespace Cloo
         Fma = 1 << 5 ,
     }
 
-    public enum ComputeDeviceMemoryCacheType: int
+    public enum ComputeDeviceGlobalMemoryCacheType: int
     {
         None = 0x0,
         ReadOnlyCache = 0x1,

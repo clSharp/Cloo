@@ -108,10 +108,10 @@ namespace Cloo
         /// <summary>
         /// Creates an OpenCL context from a device type that identifies the specific device(s) to use.
         /// </summary>
-        /// <param name="deviceType"> A bit-field that identifies the Type of device to associate with this context.</param>
-        /// <param name="properties"> A descriptor of this context properties.</param>
-        /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered.</param>
-        /// <param name="notifyDataPtr"> Passed as the userDataPtr argument when notify is called. userDataPtr can be IntPtr.Zero. </param>
+        /// <param name="deviceType">A bit-field that identifies the Type of device to associate with this context.</param>
+        /// <param name="properties">A descriptor of this context properties.</param>
+        /// <param name="notify">A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered.</param>
+        /// <param name="notifyDataPtr">Passed as the userDataPtr argument when notify is called. userDataPtr can be IntPtr.Zero.</param>
         public ComputeContext( ComputeDeviceTypes deviceType, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr notifyDataPtr )
         {
             IntPtr[] propertiesList = ( properties != null ) ? properties.ToIntPtrArray() : null;
@@ -185,6 +185,13 @@ namespace Cloo
         #endregion
     }
 
+    /// <summary>
+    /// A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
+    /// </summary>
+    /// <param name="errorInfo">An error string.</param>
+    /// <param name="clDataPtr">A pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error.</param>
+    /// <param name="clDataSize">The size of the binary data that is returned by the OpenCL.</param>
+    /// <param name="userDataPtr">A pointer to user supplied data.</param>
     [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
     public delegate void ComputeContextNotifier( String errorInfo, IntPtr clDataPtr, IntPtr clDataSize, IntPtr userDataPtr );
 }

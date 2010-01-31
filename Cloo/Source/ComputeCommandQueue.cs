@@ -734,7 +734,7 @@ namespace Cloo
         /// <param name="image">The image to write to.</param>
         /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
         /// <param name="offset">The (x, y, z) offset in pixels where writing starts.</param>
-        /// <param name="region">The region (width, height, depth) count in pixels to write.</param>
+        /// <param name="region">The region (width, height, depth) in pixels to write.</param>
         /// <param name="rowPitch">The length of image scan-line in bytes.</param>
         /// <param name="slicePitch">The count in bytes of the 2D slice of the 3D image.</param>
         /// <param name="data">The content written to the image.</param>

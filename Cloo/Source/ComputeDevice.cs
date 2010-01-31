@@ -47,9 +47,9 @@ namespace Cloo
         private readonly bool errorCorrectionSupport;
         private readonly ComputeDeviceExecutionCapabilities executionCapabilities;
         private readonly ReadOnlyCollection<string> extensions;
-        private readonly long globalMemCachelineSize;
-        private readonly long globalMemCacheSize;
-        private readonly ComputeDeviceMemoryCacheType globalMemCacheType;
+        private readonly long globalMemoryCachelineSize;
+        private readonly long globalMemoryCacheSize;
+        private readonly ComputeDeviceGlobalMemoryCacheType globalMemoryCacheType;
         private readonly long globalMemSize;
         private readonly bool imageSupport;
         private readonly long image2DMaxHeight;
@@ -189,7 +189,7 @@ namespace Cloo
         {
             get
             {
-                return globalMemCachelineSize;
+                return globalMemoryCachelineSize;
             }
         }
 
@@ -200,18 +200,18 @@ namespace Cloo
         {
             get
             {
-                return globalMemCacheSize;
+                return globalMemoryCacheSize;
             }
         }
 
         /// <summary>
         /// Type of global memory cache supported. Valid values are: None, ReadOnlyCache and ReadWriteCache.
         /// </summary>
-        public ComputeDeviceMemoryCacheType GlobalMemoryCacheType
+        public ComputeDeviceGlobalMemoryCacheType GlobalMemoryCacheType
         {
             get
             {
-                return globalMemCacheType;
+                return globalMemoryCacheType;
             }
         }
 
@@ -663,9 +663,9 @@ namespace Cloo
             string extensionString = GetStringInfo<ComputeDeviceInfo>( ComputeDeviceInfo.Extensions, CL10.GetDeviceInfo );
             extensions = new ReadOnlyCollection<string>( extensionString.Split( new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries ) );
 
-            globalMemCachelineSize      = GetInfo<uint>( ComputeDeviceInfo.GlobalMemoryCachelineSize );
-            globalMemCacheSize          = ( long )GetInfo<ulong>( ComputeDeviceInfo.GlobalMemoryCacheSize );
-            globalMemCacheType          = ( ComputeDeviceMemoryCacheType )GetInfo<long>( ComputeDeviceInfo.GlobalMemoryCacheType );
+            globalMemoryCachelineSize   = GetInfo<uint>( ComputeDeviceInfo.GlobalMemoryCachelineSize );
+            globalMemoryCacheSize       = ( long )GetInfo<ulong>( ComputeDeviceInfo.GlobalMemoryCacheSize );
+            globalMemoryCacheType       = ( ComputeDeviceGlobalMemoryCacheType )GetInfo<long>( ComputeDeviceInfo.GlobalMemoryCacheType );
             globalMemSize               = ( long )GetInfo<ulong>( ComputeDeviceInfo.GlobalMemorySize );
             image2DMaxHeight            = ( long )GetInfo<IntPtr>( ComputeDeviceInfo.Image2DMaxHeight );
             image2DMaxWidth             = ( long )GetInfo<IntPtr>( ComputeDeviceInfo.Image2DMaxWidth );
