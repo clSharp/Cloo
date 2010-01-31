@@ -135,7 +135,7 @@ namespace Cloo
         /// </summary>
         public long[] GetCompileWorkGroupSize( ComputeDevice device )
         {
-            return Clootils.ConvertArray(
+            return Tools.ConvertArray(
                 GetArrayInfo<ComputeKernelWorkGroupInfo, IntPtr>(
                     device, ComputeKernelWorkGroupInfo.CompileWorkGroupSize, CL10.GetKernelWorkGroupInfo ) );
         }

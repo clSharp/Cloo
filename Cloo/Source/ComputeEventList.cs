@@ -75,7 +75,7 @@ namespace Cloo
         {
             unsafe
             {
-                fixed( IntPtr* eventHandlesPtr = Clootils.ExtractHandles( events ) )
+                fixed( IntPtr* eventHandlesPtr = Tools.ExtractHandles( events ) )
                 {
                     ComputeErrorCode error = CL10.WaitForEvents( events.Count, eventHandlesPtr );
                     ComputeException.ThrowOnError( error );

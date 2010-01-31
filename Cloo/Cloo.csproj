@@ -62,7 +62,7 @@
     <Compile Include="Source\ComputeCommandQueue.cs" />
     <Compile Include="Source\ComputeResource.cs" />
     <Compile Include="Source\ComputeSampler.cs" />
-    <Compile Include="Source\Clootils.cs" />
+    <Compile Include="Source\Tools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Enums.cs" />
   </ItemGroup>

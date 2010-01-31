@@ -145,8 +145,8 @@ namespace Cloo
             int count = binaries.Count;
 
             IntPtr[] deviceHandles = ( devices != null ) ?
-                Clootils.ExtractHandles( devices ) :
-                Clootils.ExtractHandles( context.Devices );
+                Tools.ExtractHandles( devices ) :
+                Tools.ExtractHandles( context.Devices );
 
             IntPtr[] binariesPtrs = new IntPtr[ count ];
             IntPtr[] binariesLengths = new IntPtr[ count ];
@@ -209,7 +209,7 @@ namespace Cloo
         /// <param name="notifyDataPtr">Passed as an argument when notify is called. notifyDataPtr can be IntPtr.Zero. </param>
         public void Build( ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr )
         {
-            IntPtr[] deviceHandles = Clootils.ExtractHandles( devices );
+            IntPtr[] deviceHandles = Tools.ExtractHandles( devices );
             buildOptions = ( options != null ) ? options : "" ;
             IntPtr notifyPtr = ( notify != null ) ? Marshal.GetFunctionPointerForDelegate( notify ) : IntPtr.Zero;
 

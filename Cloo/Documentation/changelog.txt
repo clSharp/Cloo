@@ -1,55 +1,25 @@
 [0.6.0] -----------------------------------------------------------------------
 Breaking changes:
-ComputeBuffer
-	Removed GetSupportedFormats.
-ComputeContext
-	ComputeContext.PropertiesDescriptor -> ComputeContextPropertyList and ComputeContextProperty
-	Removed ComputeContext.NotifyDescriptor. Instead you should directly pass a ComputeContextNotifier delegate and its data to the constructor.
-ComputeDevice
-	MaxMemoryAllocSize -> MaxMemoryAllocationSize
-	MaxReadImageArgs -> MaxReadImageArguments
-	MaxWriteImageArgs -> MaxWriteImageArguments
-	MemoryBaseAddressAlign -> MemoryBaseAddressAlignment
-	MinDataTypeAlignSize -> MinDataTypeAlignmentSize
-	QueueProperties -> CommandQueueFlags
-	SingleFPConfig -> SingleFPCapabilites
-ComputeEvent
-	ComputeCommandType -> CommandType
-	CommandFinishedTimestamp -> CommandFinishTime
-	CommandQueuedTimestamp -> CommandEnqueueTime
-	CommandStartedTimestamp -> CommandStartTime
-	CommandSubmittedTimestamp -> CommandSubmitTime
-ComputeProgram
-	ComputeProgram.NotifyDelegate -> ComputeProgramBuildNotifier.
-OpenTK constructs replacements
-    AddressingMode -> ComputeImageAddressing
-	CommandQueueFlags -> ComputeCommandQueueFlags
-	CommandType -> ComputeCommandType
-    DeviceExecCapabilitiesFlags -> ComputeDeviceExecutionCapabilites
-    DeviceFPConfigFlags -> ComputeDeviceFPCapabilities
-    DeviceLocalMemType -> ComputeDeviceLocalMemoryType
-    DeviceMemCacheType -> ComputeDeviceMemoryCacheType
-	DeviceTypeFlags -> ComputeDeviceTypes
-	FilterMode -> ComputeImageFiltering
-	ImageFormat -> ComputeImageFormat
-	MapFlags -> ComputeMemoryMappingFlags
-	MemFlags -> ComputeMemoryFlags
-	MemObjectType -> ComputeMemoryType
-    ChannelOrder -> ComputeImageChannelOrder
-    ChannelType -> ComputeImageChannelType
+Replaced all OpenTK enums with new ones.
+Restructured ComputeMemory and its dependents' architecture.
+Modified ComputeContext constructors. Added ComputeContextProperty and ComputeContextPropertyList for this purpose.
+Project Clootils replaced ClooInfo and ClooTester.
 
 New functionality:
 Image support.
 Added ComputeCommandQueueFlags.None.
+Added delegates for callback functions.
+OpenCL/OpenGL sharing API.
+Extension loading mechanism.
 
 Bugfixes:
 ComputeImage2D.GetSupportedFormats() returns a list of 3D image formats.
 
 Internals:
-Added [Out] atributes to the appropriate DllImport'ed method arguments.
+Replaced OpenTK DllImports with a new layer of bindings.
 
 Documentation:
-Added comments for most of the new public bits.
+Added comments for some of the new public bits.
 Added missing comments around existing bits.
 
 
