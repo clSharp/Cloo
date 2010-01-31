@@ -43,7 +43,7 @@ namespace Cloo
 
         private readonly ComputeContext context;
         private readonly ReadOnlyCollection<ComputeDevice> devices;
-        private readonly string source;
+        private readonly string[] source;
         private ReadOnlyCollection<byte[]> binaries;
         private string buildOptions;
 
@@ -98,11 +98,11 @@ namespace Cloo
         /// <summary>
         /// Return the program source code specified when creating the program. null if program was created from binaries.
         /// </summary>
-        public string Source
+        public ReadOnlyCollection<string> Source
         {
             get
             {
-                return source;
+                return new ReadOnlyCollection<string>( source );
             }
         }
 
@@ -115,15 +115,15 @@ namespace Cloo
         /// </summary>
         /// <param name="context">A valid OpenCL context.</param>
         /// <param name="source">The source code for this program.</param>
-        public ComputeProgram( ComputeContext context, string source )
+        public ComputeProgram( ComputeContext context, string[] source )
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
             unsafe
             {
                 handle = CL10.CreateProgramWithSource(
                     context.Handle,
-                    1,
-                    new string[] { source },
+                    source.Length,
+                    source,                    
                     null,
                     out error );
             }
