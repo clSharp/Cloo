@@ -39,7 +39,7 @@ namespace Cloo
     {
         #region Fields
 
-        private long count;
+        private readonly long count;
 
         #endregion
 
@@ -63,8 +63,8 @@ namespace Cloo
         /// <summary>
         /// Creates a new memory object.
         /// </summary>
-        /// <param name="context">A valid OpenCL context used to create the memory.</param>
-        /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the memory object and how it will be used.</param>
+        /// <param name="context">A valid OpenCL context used to create this buffer.</param>
+        /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
         /// <param name="count">The number of elements this buffer will contain.</param>
         public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, long count )
             : base( context, flags )
@@ -85,8 +85,8 @@ namespace Cloo
         /// <summary>
         /// Creates a new memory object.
         /// </summary>
-        /// <param name="context">A valid OpenCL context used to create the memory.</param>
-        /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the memory object and how it will be used.</param>
+        /// <param name="context">A valid OpenCL context used to create this buffer.</param>
+        /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
         /// <param name="data">The elements this buffer will contain.</param>
         public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, T[] data )
             : base( context, flags )
@@ -125,6 +125,13 @@ namespace Cloo
 
         #region Public methods
 
+        /// <summary>
+        /// Creates a new buffer from an existing OpenGL buffer.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of this buffer.</typeparam>
+        /// <param name="context">A compute context with enabled CL/GL sharing.</param>
+        /// <param name="flags">A bit field that is used to specify allocation and usage information.</param>
+        /// <param name="bufferId">The OpenGL buffer object to create this buffer from.</param>
         public static ComputeBuffer<T> CreateFromGLBuffer<T>( ComputeContext context, ComputeMemoryFlags flags, int bufferId ) where T: struct
         {
             IntPtr handle;
