@@ -101,6 +101,8 @@ namespace Clootils
 
         private void buildProgramMenuItem_Click( object sender, EventArgs e )
         {
+            if( editorTextBox.Text.Length < 1 ) return;
+
             string[] logContent;
 
             ComputeContextPropertyList properties = new ComputeContextPropertyList( ComputePlatform.Platforms[ 0 ] );
