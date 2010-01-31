@@ -56,6 +56,18 @@ namespace Cloo
 
         #endregion
 
+        #region Public methods
+
+        /// <summary>
+        /// Gets a string representation of this ComputeImage.
+        /// </summary>
+        public override string ToString()
+        {
+            return "ComputeImage" + base.ToString();
+        }
+
+        #endregion
+
         #region Protected methods
 
         protected static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type )
