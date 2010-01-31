@@ -169,7 +169,7 @@ namespace Cloo
     }
 
     [Flags]
-    public enum ComputeDeviceFloatCapabilities: long
+    public enum ComputeDeviceSingleCapabilities: long
     {
         Denorm = 1 << 0 ,
         InfNan = 1 << 1 ,
