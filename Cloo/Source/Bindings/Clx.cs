@@ -47,7 +47,7 @@ namespace Cloo.Bindings
         }
 
         private readonly Delegates.clGetGLContextInfoKHR clGetGLContextInfoKHR;
-
+        
         public unsafe ComputeErrorCode GetGLContextInfoKHR(
                 IntPtr* properties,
                 ComputeGLContextInfo param_name,

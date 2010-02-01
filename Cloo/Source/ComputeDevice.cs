@@ -50,19 +50,19 @@ namespace Cloo
         private readonly long globalMemoryCachelineSize;
         private readonly long globalMemoryCacheSize;
         private readonly ComputeDeviceGlobalMemoryCacheType globalMemoryCacheType;
-        private readonly long globalMemSize;
+        private readonly long globalMemorySize;
         private readonly bool imageSupport;
         private readonly long image2DMaxHeight;
         private readonly long image2DMaxWidth;
         private readonly long image3DMaxDepth;
         private readonly long image3DMaxHeight;
         private readonly long image3DMaxWidth;
-        private readonly long localMemSize;
-        private readonly ComputeDeviceLocalMemoryType localMemType;
+        private readonly long localMemorySize;
+        private readonly ComputeDeviceLocalMemoryType localMemoryType;
         private readonly long maxClockFrequency;
         private readonly long maxComputeUnits;
-        private readonly long maxConstArgs;
-        private readonly long maxConstBufferSize;
+        private readonly long maxConstantArguments;
+        private readonly long maxConstantBufferSize;
         private readonly long maxMemAllocSize;
         private readonly long maxParameterSize;
         private readonly long maxReadImageArgs;
@@ -84,7 +84,7 @@ namespace Cloo
         private readonly string profile;
         private readonly long profilingTimerResolution;
         private readonly ComputeCommandQueueFlags queueProperties;
-        private readonly ComputeDeviceSingleCapabilities singleFPConfig;
+        private readonly ComputeDeviceSingleCapabilities singleCapabilities;
         private readonly ComputeDeviceTypes type;
         private readonly string vendor;
         private readonly long vendorId;
@@ -222,7 +222,7 @@ namespace Cloo
         {
             get
             {
-                return globalMemSize;
+                return globalMemorySize;
             }
         }
 
@@ -299,7 +299,7 @@ namespace Cloo
         {
             get
             {
-                return localMemSize;
+                return localMemorySize;
             }
         }
 
@@ -310,7 +310,7 @@ namespace Cloo
         {
             get
             {
-                return localMemType;
+                return localMemoryType;
             }
         }
 
@@ -343,7 +343,7 @@ namespace Cloo
         {
             get
             {
-                return maxConstArgs;
+                return maxConstantArguments;
             }
         }
 
@@ -354,7 +354,7 @@ namespace Cloo
         {
             get
             {
-                return maxConstBufferSize;
+                return maxConstantBufferSize;
             }
         }
 
@@ -596,7 +596,7 @@ namespace Cloo
         {
             get
             {
-                return singleFPConfig;
+                return singleCapabilities;
             }
         }
 
@@ -666,19 +666,19 @@ namespace Cloo
             globalMemoryCachelineSize   = GetInfo<uint>( ComputeDeviceInfo.GlobalMemoryCachelineSize );
             globalMemoryCacheSize       = ( long )GetInfo<ulong>( ComputeDeviceInfo.GlobalMemoryCacheSize );
             globalMemoryCacheType       = ( ComputeDeviceGlobalMemoryCacheType )GetInfo<long>( ComputeDeviceInfo.GlobalMemoryCacheType );
-            globalMemSize               = ( long )GetInfo<ulong>( ComputeDeviceInfo.GlobalMemorySize );
+            globalMemorySize            = ( long )GetInfo<ulong>( ComputeDeviceInfo.GlobalMemorySize );
             image2DMaxHeight            = ( long )GetInfo<IntPtr>( ComputeDeviceInfo.Image2DMaxHeight );
             image2DMaxWidth             = ( long )GetInfo<IntPtr>( ComputeDeviceInfo.Image2DMaxWidth );
             image3DMaxDepth             = ( long )GetInfo<IntPtr>( ComputeDeviceInfo.Image3DMaxDepth );
             image3DMaxHeight            = ( long )GetInfo<IntPtr>( ComputeDeviceInfo.Image3DMaxHeight );
             image3DMaxWidth             = ( long )GetInfo<IntPtr>( ComputeDeviceInfo.Image3DMaxWidth );
             imageSupport                = GetBoolInfo( ComputeDeviceInfo.ImageSupport );
-            localMemSize                = ( long )GetInfo<ulong>( ComputeDeviceInfo.LocalMemorySize );
-            localMemType                = ( ComputeDeviceLocalMemoryType )GetInfo<long>( ComputeDeviceInfo.LocalMemoryType );
+            localMemorySize             = ( long )GetInfo<ulong>( ComputeDeviceInfo.LocalMemorySize );
+            localMemoryType             = ( ComputeDeviceLocalMemoryType )GetInfo<long>( ComputeDeviceInfo.LocalMemoryType );
             maxClockFrequency           = GetInfo<uint>( ComputeDeviceInfo.MaxClockFrequency );
             maxComputeUnits             = GetInfo<uint>( ComputeDeviceInfo.MaxComputeUnits );
-            maxConstArgs                = GetInfo<uint>( ComputeDeviceInfo.MaxConstantArguments );
-            maxConstBufferSize          = ( long )GetInfo<ulong>( ComputeDeviceInfo.MaxConstantBufferSize );
+            maxConstantArguments        = GetInfo<uint>( ComputeDeviceInfo.MaxConstantArguments );
+            maxConstantBufferSize       = ( long )GetInfo<ulong>( ComputeDeviceInfo.MaxConstantBufferSize );
             maxMemAllocSize             = ( long )GetInfo<ulong>( ComputeDeviceInfo.MaxMemoryAllocationSize );
             maxParameterSize            = ( long )GetInfo<IntPtr>( ComputeDeviceInfo.MaxParameterSize );
             maxReadImageArgs            = GetInfo<uint>( ComputeDeviceInfo.MaxReadImageArguments );
@@ -700,7 +700,7 @@ namespace Cloo
             profile                     = GetStringInfo( ComputeDeviceInfo.Profile );
             profilingTimerResolution    = ( long )GetInfo<IntPtr>( ComputeDeviceInfo.ProfilingTimerResolution );
             queueProperties             = ( ComputeCommandQueueFlags )GetInfo<long>( ComputeDeviceInfo.CommandQueueProperties );
-            singleFPConfig              = ( ComputeDeviceSingleCapabilities )GetInfo<long>( ComputeDeviceInfo.SingleFPConfig );
+            singleCapabilities          = ( ComputeDeviceSingleCapabilities )GetInfo<long>( ComputeDeviceInfo.SingleFPConfig );
             type                        = ( ComputeDeviceTypes )GetInfo<long>( ComputeDeviceInfo.Type );
             vendor                      = GetStringInfo( ComputeDeviceInfo.Vendor );
             vendorId                    = GetInfo<uint>( ComputeDeviceInfo.VendorId );
