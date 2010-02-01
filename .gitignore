@@ -1,5 +1,6 @@
 
-Generator/*
+Clootils/*
+opencl.dll
 *.zip
 
 #ignore thumbnails created by windows

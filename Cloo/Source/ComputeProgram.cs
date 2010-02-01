@@ -193,8 +193,10 @@ namespace Cloo
                             binariesPtr,
                             binaryStatusPtr,
                             out error );
+                    ComputeException.ThrowOnError( error );
                 }
             }
+
             finally
             {
                 binariesPtrGCHandle.Free();
@@ -202,7 +204,6 @@ namespace Cloo
                     binariesGCHandles[ i ].Free();
             }
 
-            ComputeException.ThrowOnError( error );
 
             this.binaries = new ReadOnlyCollection<byte[]>( binaries );
             this.context = context;
