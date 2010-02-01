@@ -49,7 +49,7 @@ kernel void Test( void )
 
         protected override void RunInternal()
         {
-            ComputeContextPropertyList pd = new ComputeContextPropertyList( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
+            ComputeContextPropertyList pd = new ComputeContextPropertyList( ComputePlatform.Platforms[ 0 ] );
             ComputeContext context = new ComputeContext( ComputeDeviceTypes.Default, pd, null, IntPtr.Zero );
             ComputeProgram program = new ComputeProgram( context, new string[]{ kernelSource } );
             program.Build( null, null, null, IntPtr.Zero );

@@ -90,11 +90,11 @@ namespace Clootils
 
         protected override void RunInternal()
         {            
-            ComputeContextPropertyList pd = new ComputeContextPropertyList( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
+            ComputeContextPropertyList pd = new ComputeContextPropertyList( ComputePlatform.Platforms[ 0 ] );
             ComputeContext context = new ComputeContext( ComputeDeviceTypes.Default, pd, null, IntPtr.Zero );
 
-            ComputeProgram program = new ComputeProgram( context, new string[]{ kernelSources } );
-            program.Build( null, null, new ComputeProgramBuildNotifier( notify ), IntPtr.Zero );
+            ComputeProgram program = new ComputeProgram( context, kernelSources );
+            program.Build( null, null, null, IntPtr.Zero );
             Console.WriteLine( "Program successfully built." );
 
             List<ComputeKernel> kernels = new List<ComputeKernel>( program.CreateAllKernels() );

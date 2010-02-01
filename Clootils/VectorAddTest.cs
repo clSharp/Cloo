@@ -52,7 +52,7 @@ kernel void VectorAdd(
 
         protected override void RunInternal()
         {
-            ComputeContextPropertyList cpl = new ComputeContextPropertyList( ComputePlatform.GetByVendor( "Advanced Micro Devices, Inc." ) );
+            ComputeContextPropertyList cpl = new ComputeContextPropertyList( ComputePlatform.Platforms[ 0 ] );
 
             ComputeContext context = new ComputeContext( ComputeDeviceTypes.Default, cpl, null, IntPtr.Zero );
             ComputeProgram program = new ComputeProgram( context, new string[]{ kernelSource } );
