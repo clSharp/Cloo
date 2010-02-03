@@ -139,7 +139,7 @@ namespace Cloo
 
         private ComputePlatform( IntPtr handle )
         {
-            this.handle = handle;
+            Handle = handle;
             devices = new ReadOnlyCollection<ComputeDevice>( GetDevices() );
 
             string extensionString = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Extensions, CL10.GetPlatformInfo );
@@ -193,7 +193,7 @@ namespace Cloo
         /// <summary>
         /// Retrieves all the available platforms and their devices.
         /// </summary>
-        public static void Initialize()
+        private static void Initialize()
         {
             if( platforms != null ) return;
 

@@ -650,7 +650,7 @@ namespace Cloo
 
         internal ComputeDevice( ComputePlatform platform, IntPtr handle )
         {
-            this.handle = handle;
+            Handle = handle;
 
             addressBits                 = GetInfo<uint>( ComputeDeviceInfo.AddressBits );
             available                   = GetBoolInfo( ComputeDeviceInfo.Available );

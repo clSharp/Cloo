@@ -55,7 +55,7 @@ namespace Cloo
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                handle = CL10.CreateImage2D(
+                Handle = CL10.CreateImage2D(
                     context.Handle,
                     flags,
                     &format,
@@ -73,7 +73,7 @@ namespace Cloo
         private ComputeImage2D( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
             : base( context, flags )
         {
-            handle = handle;
+            Handle = handle;
             
             Init();
         }

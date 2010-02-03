@@ -114,15 +114,6 @@ namespace Cloo
         /// Creates a program for a context, using the source code specified. The devices associated with the program are the devices associated with context.
         /// </summary>
         /// <param name="context">A valid OpenCL context.</param>
-        /// <param name="source">The source code for this program.</param>        
-        public ComputeProgram( ComputeContext context, string source )
-            : this( context, new string[] { source } )
-        { }
-
-        /// <summary>
-        /// Creates a program for a context, using the source code specified. The devices associated with the program are the devices associated with context.
-        /// </summary>
-        /// <param name="context">A valid OpenCL context.</param>
         /// <param name="source">The source code for this program.</param>
         public ComputeProgram( ComputeContext context, string[] source )
         {
@@ -134,11 +125,11 @@ namespace Cloo
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
                 fixed( IntPtr* lengthsPtr = lengths )
-                    handle = CL10.CreateProgramWithSource(
+                    Handle = CL10.CreateProgramWithSource(
                         context.Handle,
                         source.Length,
                         source,                    
-                        lengthsPtr,
+                        null,
                         out error );
                 ComputeException.ThrowOnError( error );
             }
@@ -185,7 +176,7 @@ namespace Cloo
                     fixed( IntPtr* binariesLengthsPtr = binariesLengths )
                     fixed( IntPtr* deviceHandlesPtr = deviceHandles )
                     fixed( int* binaryStatusPtr = binariesStats )
-                        handle = CL10.CreateProgramWithBinary(
+                        Handle = CL10.CreateProgramWithBinary(
                             context.Handle,
                             count,
                             deviceHandlesPtr,
@@ -234,8 +225,8 @@ namespace Cloo
                 fixed( IntPtr* deviceHandlesPtr = deviceHandles )
                 error = CL10.BuildProgram(
                     Handle,
-                    ( devices != null ) ? devices.Count : 0,
-                    ( devices != null ) ? deviceHandlesPtr : null,
+                    deviceHandles.Length,
+                    deviceHandlesPtr,
                     buildOptions,
                     notifyPtr,
                     notifyDataPtr );
@@ -327,7 +318,7 @@ namespace Cloo
             if( Handle != IntPtr.Zero )
             {
                 CL10.ReleaseProgram( Handle );
-                handle = IntPtr.Zero;
+                Handle = IntPtr.Zero;
             }
         }
 

@@ -40,7 +40,7 @@ namespace Cloo
         
         private readonly ComputeContext context;
         private readonly ComputeMemoryFlags flags;
-        protected long size;
+        private long size;
 
         #endregion
 
@@ -73,10 +73,8 @@ namespace Cloo
         /// </summary>
         public long Size
         {
-            get
-            {
-                return size;
-            }
+            get;
+            protected set;
         }
 
         #endregion
@@ -98,7 +96,7 @@ namespace Cloo
             if( Handle != IntPtr.Zero )
             {
                 CL10.ReleaseMemObject( Handle );
-                handle = IntPtr.Zero;
+                Handle = IntPtr.Zero;
             }
         }
 

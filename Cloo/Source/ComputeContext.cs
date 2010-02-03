@@ -91,7 +91,7 @@ namespace Cloo
                 ComputeErrorCode error = ComputeErrorCode.Success;
                 fixed( IntPtr* propertiesPtr = propertiesList )
                 fixed( IntPtr* deviceHandlesPtr = deviceHandles )
-                    handle = CL10.CreateContext( 
+                    Handle = CL10.CreateContext( 
                         propertiesPtr, 
                         devices.Count, 
                         deviceHandlesPtr, 
@@ -121,7 +121,7 @@ namespace Cloo
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
                 fixed( IntPtr* propertiesPtr = propertiesList )
-                    handle = CL10.CreateContextFromType( 
+                    Handle = CL10.CreateContextFromType( 
                         propertiesPtr, 
                         deviceType, 
                         notifyFuncPtr, 
@@ -161,7 +161,7 @@ namespace Cloo
             if( Handle != IntPtr.Zero )
             {
                 CL10.ReleaseContext( Handle );
-                handle = IntPtr.Zero;
+                Handle = IntPtr.Zero;
             }
         }
 

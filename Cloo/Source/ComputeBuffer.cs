@@ -70,10 +70,10 @@ namespace Cloo
             : base( context, flags )
         {
             this.count = count;
-            size = count * Marshal.SizeOf( typeof( T ) );
+            Size = count * Marshal.SizeOf( typeof( T ) );
 
             ComputeErrorCode error = ComputeErrorCode.Success;
-            handle = CL10.CreateBuffer(
+            Handle = CL10.CreateBuffer(
                 context.Handle,
                 flags,
                 new IntPtr( Size ),
@@ -92,13 +92,13 @@ namespace Cloo
             : base( context, flags )
         {
             count = data.Length;
-            size = count * Marshal.SizeOf( typeof( T ) );
+            Size = count * Marshal.SizeOf( typeof( T ) );
 
             GCHandle dataPtr = GCHandle.Alloc( data, GCHandleType.Pinned );
             try
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                handle = CL10.CreateBuffer(
+                Handle = CL10.CreateBuffer(
                     context.Handle,
                     flags,
                     new IntPtr( Size ),
@@ -115,10 +115,10 @@ namespace Cloo
         private ComputeBuffer( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
             : base( context, flags )
         {
-            this.handle = handle;
+            Handle = handle;
             
-            size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
-            count = size / Marshal.SizeOf( typeof( T ) );
+            Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
+            count = Size / Marshal.SizeOf( typeof( T ) );
         }
 
         #endregion

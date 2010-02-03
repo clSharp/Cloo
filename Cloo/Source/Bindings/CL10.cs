@@ -247,13 +247,13 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             out IntPtr param_value_size_ret );
 
-        // Program Object APIs
+        // Program Object APIs        
         [DllImport( dll, EntryPoint = "clCreateProgramWithSource" )]
         internal extern static unsafe IntPtr
         CreateProgramWithSource(
             IntPtr context,
             Int32 count,
-            /* const */ String[] strings,
+            /* const */ [MarshalAsAttribute( UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr )] String[] strings,
             /* const */ IntPtr* lengths,
             out ComputeErrorCode errcode_ret );
 

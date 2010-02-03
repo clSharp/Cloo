@@ -58,7 +58,7 @@ namespace Cloo
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                handle = CL10.CreateImage3D(
+                Handle = CL10.CreateImage3D(
                     context.Handle,
                     flags,
                     &format,
@@ -78,7 +78,7 @@ namespace Cloo
         private ComputeImage3D( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
             : base( context, flags )
         {
-            this.handle = handle;
+            Handle = handle;
 
             Init();
         }

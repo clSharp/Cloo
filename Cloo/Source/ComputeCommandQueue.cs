@@ -126,7 +126,7 @@ namespace Cloo
         public ComputeCommandQueue( ComputeContext context, ComputeDevice device, ComputeCommandQueueFlags properties )
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
-            handle = CL10.CreateCommandQueue( context.Handle, device.Handle, properties, out error );
+            Handle = CL10.CreateCommandQueue( context.Handle, device.Handle, properties, out error );
             ComputeException.ThrowOnError( error );
             this.device = device;
             this.context = context;
@@ -529,7 +529,7 @@ namespace Cloo
             IntPtr newEventHandle = IntPtr.Zero;
 
             int sizeofT = Marshal.SizeOf( typeof( T ) );            
-            T[] readData = new T[ buffer.Count ];
+            T[] readData = new T[ count ];
             GCHandle gcHandle = GCHandle.Alloc( readData, GCHandleType.Pinned );
 
             unsafe
@@ -570,34 +570,42 @@ namespace Cloo
         /// <param name="offset">The (x, y, z) offset in pixels where reading starts.</param>
         /// <param name="region">The region (width, height, depth) in pixels to read.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public IntPtr Read( ComputeImage image, bool blocking, long[] offset, long[] region, ICollection<ComputeEvent> events )
+        public byte[] Read( ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = Tools.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
-                        
-            byte[] imageBits = new byte[ image.Size ];
-            IntPtr readData = Marshal.UnsafeAddrOfPinnedArrayElement( imageBits, 0 );
+            
+
+            byte[] readData = new byte[ region[2] * slicePitch + region[1] * rowPitch + region[0] * image.PixelSize ];
+            GCHandle gcHandle = GCHandle.Alloc( readData, GCHandleType.Pinned );
 
             unsafe
             {
-                fixed( IntPtr* offsetPtr = Tools.ConvertArray( offset ) )
-                fixed( IntPtr* regionPtr = Tools.ConvertArray( region ) )
-                fixed( IntPtr* eventHandlesPtr = eventHandles )
+                try
                 {
-                    ComputeErrorCode error = CL10.EnqueueReadImage(
-                        Handle,
-                        image.Handle,
-                        ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
-                        offsetPtr,
-                        regionPtr,
-                        new IntPtr( image.RowPitch ),
-                        new IntPtr( image.SlicePitch ),
-                        readData,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        out newEventHandle );
-                    ComputeException.ThrowOnError( error );
-                }                
+                    fixed( IntPtr* offsetPtr = Tools.ConvertArray( offset ) )
+                    fixed( IntPtr* regionPtr = Tools.ConvertArray( region ) )
+                    fixed( IntPtr* eventHandlesPtr = eventHandles )
+                    {
+                        ComputeErrorCode error = CL10.EnqueueReadImage(
+                            Handle,
+                            image.Handle,
+                            ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
+                            offsetPtr,
+                            regionPtr,
+                            new IntPtr( image.RowPitch ),
+                            new IntPtr( image.SlicePitch ),
+                            gcHandle.AddrOfPinnedObject(),
+                            eventHandles.Length,
+                            eventHandlesPtr,
+                            out newEventHandle );
+                        ComputeException.ThrowOnError( error );
+                    }
+                }
+                finally
+                {
+                    gcHandle.Free();
+                }
             }
 
             if( events != null )
@@ -785,7 +793,7 @@ namespace Cloo
             if( Handle != IntPtr.Zero )
             {
                 CL10.ReleaseCommandQueue( Handle );
-                handle = IntPtr.Zero;
+                Handle = IntPtr.Zero;
             }
         }
         

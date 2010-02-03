@@ -95,7 +95,7 @@ namespace Cloo
 
         internal ComputeKernel( IntPtr handle, ComputeProgram program )
         {
-            this.handle = handle;
+            Handle = handle;
 
             context = program.Context;
             functionName = GetStringInfo<ComputeKernelInfo>( 
@@ -106,7 +106,7 @@ namespace Cloo
         internal ComputeKernel( string functionName, ComputeProgram program )
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
-            handle = CL10.CreateKernel( 
+            Handle = CL10.CreateKernel( 
                 program.Handle, 
                 functionName, 
                 out error );
@@ -217,7 +217,7 @@ namespace Cloo
             if( Handle != IntPtr.Zero )
             {
                 CL10.ReleaseKernel( Handle );
-                handle = IntPtr.Zero;
+                Handle = IntPtr.Zero;
             }
         }
 
