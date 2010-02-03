@@ -424,7 +424,7 @@ namespace Cloo
         /// </summary>
         public void Flush()
         {
-            ComputeErrorCode error = CL10.Finish( Handle );
+            ComputeErrorCode error = CL10.Flush( Handle );
             ComputeException.ThrowOnError( error );
         }
 

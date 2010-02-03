@@ -36,7 +36,7 @@ namespace Cloo
     public abstract class ComputeResource: ComputeObject, IDisposable
     {
         #region Public methods
-        
+
         public void Dispose()
         {
             Dispose( true );
