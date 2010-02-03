@@ -334,7 +334,8 @@ namespace Cloo
             GCHandle[] binariesGCHandles = new GCHandle[ binaryLengths.Length ];
             IntPtr[] binariesPtrs = new IntPtr[ binaryLengths.Length ];
             IList<byte[]> binaries = new List<byte[]>();
-
+            GCHandle binariesPtrsGCHandle = GCHandle.Alloc( binariesPtrs, GCHandleType.Pinned );
+            
             try
             {
                 for( int i = 0; i < binaryLengths.Length; i++ )
@@ -348,12 +349,12 @@ namespace Cloo
                 unsafe
                 {
                     IntPtr ret;
-                    ComputeErrorCode error = ( int )ComputeErrorCode.Success;
+                    ComputeErrorCode error = ComputeErrorCode.Success;
                     error = CL10.GetProgramInfo(
                         Handle,
                         ComputeProgramInfo.Binaries,
                         new IntPtr( binariesPtrs.Length * IntPtr.Size ),
-                        Marshal.UnsafeAddrOfPinnedArrayElement( binariesPtrs, 0 ),
+                        binariesPtrsGCHandle.AddrOfPinnedObject(),
                         out ret );
                     ComputeException.ThrowOnError( error );
                 }
@@ -362,6 +363,7 @@ namespace Cloo
             {
                 for( int i = 0; i < binaryLengths.Length; i++ )
                     binariesGCHandles[ i ].Free();
+                binariesPtrsGCHandle.Free();
             }
 
             return new ReadOnlyCollection<byte[]>( binaries );
