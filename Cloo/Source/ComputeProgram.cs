@@ -46,6 +46,7 @@ namespace Cloo
         private readonly string[] source;
         private ReadOnlyCollection<byte[]> binaries;
         private string buildOptions;
+        private bool built = false;
 
         #endregion
 
@@ -215,25 +216,28 @@ namespace Cloo
         /// <param name="notifyDataPtr">Passed as an argument when notify is called. notifyDataPtr can be IntPtr.Zero. </param>
         public void Build( ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr )
         {
+            if( built ) return; // prevent building multiple times
+
             IntPtr[] deviceHandles = Tools.ExtractHandles( devices );
-            buildOptions = ( options != null ) ? options : "" ;
+            buildOptions = ( options != null ) ? options : "";
             IntPtr notifyPtr = ( notify != null ) ? Marshal.GetFunctionPointerForDelegate( notify ) : IntPtr.Zero;
 
             unsafe
             {
                 ComputeErrorCode error;
                 fixed( IntPtr* deviceHandlesPtr = deviceHandles )
-                error = CL10.BuildProgram(
-                    Handle,
-                    deviceHandles.Length,
-                    deviceHandlesPtr,
-                    buildOptions,
-                    notifyPtr,
-                    notifyDataPtr );
+                    error = CL10.BuildProgram(
+                        Handle,
+                        deviceHandles.Length,
+                        deviceHandlesPtr,
+                        options,
+                        notifyPtr,
+                        notifyDataPtr );
                 ComputeException.ThrowOnError( error );
             }
-
-            binaries = GetBinaries();            
+            
+            binaries = GetBinaries();
+            built = true;
         }
 
         /// <summary>
