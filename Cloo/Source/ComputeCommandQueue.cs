@@ -569,6 +569,8 @@ namespace Cloo
         /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
         /// <param name="offset">The (x, y, z) offset in pixels where reading starts.</param>
         /// <param name="region">The region (width, height, depth) in pixels to read.</param>
+        /// <param name="rowPitch">The length of each row in bytes. This value must be greater than or equal to the pixel size in bytes * width.</param>
+        /// <param name="slicePitch">Size in bytes of the 2D slice of the 3D region of a 3D image being read. This must be 0 if image is a 2D image. This value must be greater than or equal to rowPitch * height.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public byte[] Read( ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, ICollection<ComputeEvent> events )
         {
