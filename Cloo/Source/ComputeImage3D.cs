@@ -52,7 +52,7 @@ namespace Cloo
         /// <param name="rowPitch">The scan-line pitch in bytes.</param>
         /// <param name="slicePitch">The size in bytes of each 2D slice in the 3D image.</param>
         /// <param name="data">The image data that may be already allocated by the application.</param>
-        public ComputeImage3D( ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int depth, int rowPitch, int slicePitch, IntPtr data )
+        public ComputeImage3D( ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int depth, long rowPitch, long slicePitch, IntPtr data )
             : base( context, flags )
         {
             unsafe

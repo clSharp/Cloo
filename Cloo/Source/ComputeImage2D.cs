@@ -49,7 +49,7 @@ namespace Cloo
         /// <param name="height">Height of the image in pixels.</param>
         /// <param name="rowPitch">The scan-line pitch in bytes.</param>
         /// <param name="data">The image data that may be already allocated by the application.</param>
-        public ComputeImage2D( ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int rowPitch, IntPtr data )
+        public ComputeImage2D( ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, long rowPitch, IntPtr data )
             : base( context, flags )
         {
             unsafe
