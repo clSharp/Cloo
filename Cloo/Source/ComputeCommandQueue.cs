@@ -579,8 +579,8 @@ namespace Cloo
         {
             IntPtr[] eventHandles = Tools.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
-                        
-            byte[] readData = new byte[ region[2] * slicePitch + region[1] * rowPitch + region[0] * image.PixelSize ];
+
+            byte[] readData = new byte[ region[ 2 ] * slicePitch + region[ 1 ] * rowPitch + region[ 0 ] * image.PixelSize ];
             GCHandle gcHandle = GCHandle.Alloc( readData, GCHandleType.Pinned );
 
             unsafe
@@ -597,8 +597,8 @@ namespace Cloo
                             ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
                             offsetPtr,
                             regionPtr,
-                            new IntPtr( image.RowPitch ),
-                            new IntPtr( image.SlicePitch ),
+                            new IntPtr( rowPitch ),
+                            new IntPtr( slicePitch ),
                             gcHandle.AddrOfPinnedObject(),
                             eventHandles.Length,
                             eventHandlesPtr,

@@ -1,3 +1,28 @@
+[0.6.1] -----------------------------------------------------------------------
+Breaking changes:
+Renamed ComputeDeviceMemoryCacheType to ComputeDeviceGlobalMemoryCacheType.
+Changed signature of ComputeCommandQueue.Read( ComputeImage ).
+Changed return type of ComputeCommandQueue.Read( ComputeImage... ) from IntPtr to byte[].
+
+New functionality:
+ComputeImage.ToString().
+ComputeProgram..ctor() that takes a single string as an argument.
+
+Bugfixes:
+ComputeCommandQueue methods causing memory leaks by creating (and not releasing) unnecessary event objects.
+ComputeCommandQueue.Read() ignores "count" parameter.
+CommandQueue.Flush() calls CL10.Finish().
+Clootils not working with ATI Stream on Windows.
+
+Internals:
+Added workaround to prevent a program being built multiple times. Fixes memory leak in the drivers.
+
+Documentation:
+Added or modified: ComputeBuffer.CreateFromGLBuffer(), ComputeCommandQueue.AcquireGLObjects(), ComputeCommandQueue.Execute(),
+ComputeCommandQueue.ReleaseGLObjects(), ComputeCommandQueue.Read(), ComputeCommandQueue.Unmap(), ComputeCommandQueue.Wait(),
+ComputeContext..ctor(), ComputeContextNotifier().
+
+	
 [0.6.0] -----------------------------------------------------------------------
 Breaking changes:
 Replaced all OpenTK enums with new ones.

@@ -253,7 +253,7 @@ namespace Cloo.Bindings
         CreateProgramWithSource(
             IntPtr context,
             Int32 count,
-            /* const */ [MarshalAsAttribute( UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr )] String[] strings,
+            String[] strings,
             /* const */ IntPtr* lengths,
             out ComputeErrorCode errcode_ret );
 
