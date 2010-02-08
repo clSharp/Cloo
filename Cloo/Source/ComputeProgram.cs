@@ -216,7 +216,7 @@ namespace Cloo
         /// <param name="notifyDataPtr">Passed as an argument when notify is called. notifyDataPtr can be IntPtr.Zero. </param>
         public void Build( ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr )
         {
-            if( built ) return; // prevent building multiple times
+            if( built ) return; // prevent building multiple times which causes memory leaks in the drivers
 
             IntPtr[] deviceHandles = Tools.ExtractHandles( devices );
             buildOptions = ( options != null ) ? options : "";

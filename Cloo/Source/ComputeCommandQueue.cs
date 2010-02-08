@@ -161,7 +161,7 @@ namespace Cloo
                         memObjHandlesPtr,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle );
+                        ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -184,11 +184,13 @@ namespace Cloo
         /// </summary>
         public ComputeEvent AddMarker()
         {
-            IntPtr eventHandle = IntPtr.Zero;
-            ComputeErrorCode error = CL10.EnqueueMarker( Handle, out eventHandle );
-            ComputeException.ThrowOnError( error );
-
-            return new ComputeEvent( eventHandle, this );
+            IntPtr newEventHandle = IntPtr.Zero;
+            unsafe
+            {
+                ComputeErrorCode error = CL10.EnqueueMarker( Handle, &newEventHandle );
+                ComputeException.ThrowOnError( error );
+            }
+            return new ComputeEvent( newEventHandle, this );
         }
 
         /// <summary>
@@ -219,7 +221,7 @@ namespace Cloo
                         new IntPtr( count * sizeofT ),
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle );
+                        ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -258,7 +260,7 @@ namespace Cloo
                         regionPtr,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle );
+                        ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }                
             }
@@ -297,7 +299,7 @@ namespace Cloo
                         new IntPtr( destinationOffset * sizeofT ),
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle );
+                        ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -336,7 +338,7 @@ namespace Cloo
                         regionPtr,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle );
+                        ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -364,7 +366,7 @@ namespace Cloo
                         kernel.Handle,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle );
+                        ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -402,10 +404,11 @@ namespace Cloo
                         localWorkSizePtr,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle );
+                        ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
             }
+
             if( events != null )
                 events.Add( new ComputeEvent( newEventHandle, this ) );
         }
@@ -458,7 +461,7 @@ namespace Cloo
                         new IntPtr( count * sizeofT ),
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle,
+                        ( events != null ) ? &newEventHandle : null,
                         out error );
                     ComputeException.ThrowOnError( error );
                 }
@@ -503,7 +506,7 @@ namespace Cloo
                         null,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle,
+                        ( events != null ) ? &newEventHandle : null,
                         out error );
                     ComputeException.ThrowOnError( error );
                 }
@@ -534,7 +537,7 @@ namespace Cloo
 
             unsafe
             {
-                ComputeErrorCode error = ( int )ComputeErrorCode.Success;
+                ComputeErrorCode error = ComputeErrorCode.Success;
                 try
                 {
                     fixed( IntPtr* eventHandlesPtr = eventHandles )
@@ -547,7 +550,7 @@ namespace Cloo
                             gcHandle.AddrOfPinnedObject(),
                             eventHandles.Length,
                             eventHandlesPtr,
-                            out newEventHandle );
+                            ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
                 finally
@@ -576,8 +579,7 @@ namespace Cloo
         {
             IntPtr[] eventHandles = Tools.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
-            
-
+                        
             byte[] readData = new byte[ region[2] * slicePitch + region[1] * rowPitch + region[0] * image.PixelSize ];
             GCHandle gcHandle = GCHandle.Alloc( readData, GCHandleType.Pinned );
 
@@ -600,7 +602,7 @@ namespace Cloo
                             gcHandle.AddrOfPinnedObject(),
                             eventHandles.Length,
                             eventHandlesPtr,
-                            out newEventHandle );
+                            ( events != null ) ? &newEventHandle : null );
                         ComputeException.ThrowOnError( error );
                     }
                 }
@@ -639,7 +641,7 @@ namespace Cloo
                         memoryObjectsPtr,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle );
+                        ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -677,7 +679,7 @@ namespace Cloo
                         mappedPtr,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle );
+                        ( events != null ) ? &newEventHandle : null );
                 ComputeException.ThrowOnError( error );
             }
 
@@ -730,7 +732,7 @@ namespace Cloo
                             Marshal.UnsafeAddrOfPinnedArrayElement( data, 0 ),
                             eventHandles.Length,
                             eventHandlesPtr,
-                            out newEventHandle );
+                            ( events != null ) ? &newEventHandle : null );
                 ComputeException.ThrowOnError( error );
             }
 
@@ -771,7 +773,7 @@ namespace Cloo
                         data,
                         eventHandles.Length,
                         eventHandlesPtr,
-                        out newEventHandle );
+                        ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
             }
