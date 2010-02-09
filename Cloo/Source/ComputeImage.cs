@@ -41,7 +41,7 @@ namespace Cloo
         #region Properties
 
         public int Depth { get; protected set; }
-        public int PixelSize { get; protected set; }
+        public int ElementSize { get; protected set; }
         public int Height { get; protected set; }
         public long RowPitch { get; protected set; }
         public long SlicePitch { get; protected set; }
@@ -97,7 +97,7 @@ namespace Cloo
         protected void Init()
         {
             Depth = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Depth, CL10.GetImageInfo );
-            PixelSize = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.ElementSize, CL10.GetImageInfo );
+            ElementSize = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.ElementSize, CL10.GetImageInfo );
             Height = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Height, CL10.GetImageInfo );
             RowPitch = ( long )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.RowPitch, CL10.GetImageInfo );
             Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
