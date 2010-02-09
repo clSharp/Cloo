@@ -698,7 +698,7 @@ namespace Cloo
             {
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    ComputeErrorCode error = CL10.WaitForEvents( eventHandles.Length, eventHandlesPtr );
+                    ComputeErrorCode error = CL10.EnqueueWaitForEvents( Handle, eventHandles.Length, eventHandlesPtr );
                     ComputeException.ThrowOnError( error );
                 }
             }
