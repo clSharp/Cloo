@@ -154,7 +154,7 @@ namespace Cloo
                 fixed( IntPtr* memObjHandlesPtr = memObjHandles )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    ComputeErrorCode error = ( int )ComputeErrorCode.Success;
+                    ComputeErrorCode error = ComputeErrorCode.Success;
                     error = CL10.EnqueueAcquireGLObjects(
                         Handle,
                         memObjHandles.Length,
@@ -371,6 +371,8 @@ namespace Cloo
                 }
             }
 
+            kernel.ReferenceArguments();
+
             if( events != null )
                 events.Add( new ComputeEvent( newEventHandle, this ) );
         }
@@ -408,6 +410,8 @@ namespace Cloo
                     ComputeException.ThrowOnError( error );
                 }
             }
+
+            kernel.ReferenceArguments();
 
             if( events != null )
                 events.Add( new ComputeEvent( newEventHandle, this ) );
@@ -634,7 +638,7 @@ namespace Cloo
                 fixed( IntPtr* memoryObjectsPtr = memObjHandles )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    ComputeErrorCode error = ( int )ComputeErrorCode.Success;
+                    ComputeErrorCode error = ComputeErrorCode.Success;
                     error = CL10.EnqueueReleaseGLObjects(
                         Handle,
                         memObjHandles.Length,
@@ -671,7 +675,7 @@ namespace Cloo
 
             unsafe
             {
-                ComputeErrorCode error = ( int )ComputeErrorCode.Success;
+                ComputeErrorCode error = ComputeErrorCode.Success;
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                     error = CL10.EnqueueUnmapMemObject(
                         Handle,
@@ -721,7 +725,7 @@ namespace Cloo
 
             unsafe
             {
-                ComputeErrorCode error = ( int )ComputeErrorCode.Success;
+                ComputeErrorCode error = ComputeErrorCode.Success;
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                     error = CL10.EnqueueWriteBuffer(
                             Handle,
@@ -808,7 +812,7 @@ namespace Cloo
         private void SetProperty( ComputeCommandQueueFlags flags, bool enable )
         {
             ComputeCommandQueueFlags oldProperties = 0;
-            ComputeErrorCode error = ( int )ComputeErrorCode.Success;
+            ComputeErrorCode error = ComputeErrorCode.Success;
             error = CL10.SetCommandQueueProperty( 
                 Handle,
                 flags,

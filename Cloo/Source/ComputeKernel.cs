@@ -43,6 +43,7 @@ namespace Cloo
     using System;
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
+using System.Collections.Generic;
 
     public class ComputeKernel: ComputeResource
     {
@@ -51,6 +52,7 @@ namespace Cloo
         private readonly ComputeContext context;
         private readonly string functionName;
         private readonly ComputeProgram program;
+        private readonly Dictionary<int, ComputeResource> tracker;
 
         #endregion
 
@@ -96,11 +98,11 @@ namespace Cloo
         internal ComputeKernel( IntPtr handle, ComputeProgram program )
         {
             Handle = handle;
-
-            context = program.Context;
+            context = program.Context;            
             functionName = GetStringInfo<ComputeKernelInfo>( 
-                ComputeKernelInfo.FunctionName, CL10.GetKernelInfo );
+                ComputeKernelInfo.FunctionName, CL10.GetKernelInfo );            
             this.program = program;
+            tracker = new Dictionary<int, ComputeResource>();
         }
 
         internal ComputeKernel( string functionName, ComputeProgram program )
@@ -111,10 +113,10 @@ namespace Cloo
                 functionName, 
                 out error );
             ComputeException.ThrowOnError( error );
-
             context = program.Context;
             this.functionName = functionName;
             this.program = program;
+            tracker = new Dictionary<int, ComputeResource>();
         }
 
         #endregion
@@ -152,9 +154,9 @@ namespace Cloo
         /// <summary>
         /// Sets the value of a specific argument of the kernel.
         /// </summary>
-        /// <param name="index">The index of the argument to set.</param>
-        /// <param name="dataSize">The size in bytes of the data mapped to the argument.</param>
-        /// <param name="dataAddr">The address of the data mapped to the argument.</param>
+        /// <param name="index">The argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n - 1, where n is the total number of arguments declared by a kernel.</param>
+        /// <param name="dataSize">Specifies the size of the argument value in bytes.</param>
+        /// <param name="dataAddr">A pointer to data that should be used as the argument value for argument specified by index.</param>
         public void SetArgument( int index, IntPtr dataSize, IntPtr dataAddr )
         {
             ComputeErrorCode error = CL10.SetKernelArg(
@@ -166,24 +168,55 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets the specified kernel argument.
+        /// Set the argument value for a specific argument of a kernel.
         /// </summary>
+        [Obsolete( "Use SetMemoryArgument(int, ComputeMemory, bool) instead." )]
         public void SetMemoryArgument( int index, ComputeMemory memObj )
         {
             SetValueArgument<IntPtr>( index, memObj.Handle );
         }
 
         /// <summary>
-        /// Sets the specified kernel argument.
+        /// Set the argument value for a specific argument of a kernel.
         /// </summary>
-        public void SetSamplerArgument( int index, ComputeSampler sampler )
+        /// <param name="index">The argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n - 1, where n is the total number of arguments declared by a kernel.</param>
+        /// <param name="memObj">The memory object that is passed as the argument to the kernel.</param>
+        /// <param name="track">Specify whether the kernel should prevent garbage collection of this memory object before kernel execution. This is useful if the application code doesn't refer to this memory object after this call.</param>
+        public void SetMemoryArgument( int index, ComputeMemory memObj, bool track )
         {
-            SetValueArgument<IntPtr>( index, sampler.Handle );
-        }        
+            if( track ) tracker[ index ] = memObj;
+
+            SetValueArgument<IntPtr>( index, memObj.Handle );
+        }
 
         /// <summary>
         /// Sets the specified kernel argument.
         /// </summary>
+        [Obsolete( "Use SetSamplerArgument(int, ComputeSampler, bool ) instead." )]
+        public void SetSamplerArgument( int index, ComputeSampler sampler )
+        {
+            SetValueArgument<IntPtr>( index, sampler.Handle );
+        }
+
+        /// <summary>
+        /// Sets the argument value for a specific argument of a kernel.
+        /// </summary>
+        /// <param name="index">The argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n - 1, where n is the total number of arguments declared by a kernel.</param>
+        /// <param name="sampler">The sampler object that is passed as the argument to the kernel.</param>
+        /// <param name="track">Specify whether the kernel should prevent garbage collection of this sampler object before kernel execution. This is useful if the application code doesn't refer to this sampler object after this call.</param>
+        public void SetSamplerArgument( int index, ComputeSampler sampler, bool track )
+        {
+            if( track ) tracker[ index ] = sampler;
+
+            SetValueArgument<IntPtr>( index, sampler.Handle );
+        }
+
+        /// <summary>
+        /// Sets the argument value for a specific argument of a kernel.
+        /// </summary>
+        /// <typeparam name="T">The type of the argument value.</typeparam>
+        /// <param name="index">The argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n - 1, where n is the total number of arguments declared by a kernel.</param>
+        /// <param name="data">The data that is passed as the argument value to the kernel.</param>
         public void SetValueArgument<T>( int index, T data ) where T : struct
         {
             GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );            
@@ -206,6 +239,16 @@ namespace Cloo
         public override string ToString()
         {
             return "ComputeKernel" + base.ToString();
+        }
+
+        #endregion
+
+        #region Internal methods
+
+        internal void ReferenceArguments()
+        {
+            foreach( ComputeResource resource in tracker.Values )
+                GC.KeepAlive( resource );
         }
 
         #endregion
