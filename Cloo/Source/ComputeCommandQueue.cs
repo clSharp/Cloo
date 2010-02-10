@@ -722,22 +722,30 @@ namespace Cloo
             int sizeofT = Marshal.SizeOf( typeof( T ) );
             IntPtr[] eventHandles = Tools.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
+            GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
 
             unsafe
             {
-                ComputeErrorCode error = ComputeErrorCode.Success;
-                fixed( IntPtr* eventHandlesPtr = eventHandles )
-                    error = CL10.EnqueueWriteBuffer(
-                            Handle,
-                            buffer.Handle,
-                            ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
-                            new IntPtr( offset * sizeofT ),
-                            new IntPtr( count * sizeofT ),
-                            Marshal.UnsafeAddrOfPinnedArrayElement( data, 0 ),
-                            eventHandles.Length,
-                            eventHandlesPtr,
-                            ( events != null ) ? &newEventHandle : null );
-                ComputeException.ThrowOnError( error );
+                try
+                {
+                    ComputeErrorCode error = ComputeErrorCode.Success;
+                    fixed( IntPtr* eventHandlesPtr = eventHandles )
+                        error = CL10.EnqueueWriteBuffer(
+                                Handle,
+                                buffer.Handle,
+                                ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
+                                new IntPtr( offset * sizeofT ),
+                                new IntPtr( count * sizeofT ),
+                                gcHandle.AddrOfPinnedObject(),
+                                eventHandles.Length,
+                                eventHandlesPtr,
+                                ( events != null ) ? &newEventHandle : null );
+                    ComputeException.ThrowOnError( error );
+                }
+                finally
+                {
+                    gcHandle.Free();
+                }
             }
 
             if( events != null )
