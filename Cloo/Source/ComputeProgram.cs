@@ -43,7 +43,7 @@ namespace Cloo
 
         private readonly ComputeContext context;
         private readonly ReadOnlyCollection<ComputeDevice> devices;
-        private readonly string[] source;
+        private readonly ReadOnlyCollection<string> source;
         private ReadOnlyCollection<byte[]> binaries;
         private string buildOptions;
         private bool built = false;
@@ -103,13 +103,37 @@ namespace Cloo
         {
             get
             {
-                return new ReadOnlyCollection<string>( source );
+                return source;
             }
         }
 
         #endregion
 
         #region Constructors
+
+        /// <summary>
+        /// Creates a program for a context, using the source code specified. The devices associated with the program are the devices associated with context.
+        /// </summary>
+        /// <param name="context">A valid OpenCL context.</param>
+        /// <param name="source">The source code for this program.</param>
+        public ComputeProgram( ComputeContext context, string source )
+        {
+            unsafe
+            {
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                Handle = CL10.CreateProgramWithSource(
+                    context.Handle,
+                    1,
+                    new string[]{ source },
+                    null,
+                    out error );
+                ComputeException.ThrowOnError( error );
+            }
+
+            this.context = context;
+            this.devices = context.Devices;
+            this.source = new ReadOnlyCollection<string>( new string[] { source } );
+        }
 
         /// <summary>
         /// Creates a program for a context, using the source code specified. The devices associated with the program are the devices associated with context.
@@ -137,7 +161,7 @@ namespace Cloo
 
             this.context = context;
             this.devices = context.Devices;
-            this.source = source;
+            this.source = new ReadOnlyCollection<string>( source );
         }
 
         /// <summary>
