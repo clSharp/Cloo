@@ -584,7 +584,7 @@ namespace Cloo
             IntPtr[] eventHandles = Tools.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
 
-            byte[] readData = new byte[ region[ 2 ] * slicePitch + region[ 1 ] * rowPitch + region[ 0 ] * image.ElementSize ];
+            byte[] readData = new byte[ region[ 0 ] * region[ 1 ] * region[ 2 ] * image.ElementSize ];
             GCHandle gcHandle = GCHandle.Alloc( readData, GCHandleType.Pinned );
 
             unsafe
