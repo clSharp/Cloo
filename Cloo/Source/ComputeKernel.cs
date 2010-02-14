@@ -41,9 +41,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
-using System.Collections.Generic;
 
     public class ComputeKernel: ComputeResource
     {
@@ -170,10 +170,9 @@ using System.Collections.Generic;
         /// <summary>
         /// Set the argument value for a specific argument of a kernel.
         /// </summary>
-        [Obsolete( "Use SetMemoryArgument(int, ComputeMemory, bool) instead." )]
         public void SetMemoryArgument( int index, ComputeMemory memObj )
         {
-            SetValueArgument<IntPtr>( index, memObj.Handle );
+            SetMemoryArgument( index, memObj, true );
         }
 
         /// <summary>
@@ -192,10 +191,9 @@ using System.Collections.Generic;
         /// <summary>
         /// Sets the specified kernel argument.
         /// </summary>
-        [Obsolete( "Use SetSamplerArgument(int, ComputeSampler, bool ) instead." )]
         public void SetSamplerArgument( int index, ComputeSampler sampler )
         {
-            SetValueArgument<IntPtr>( index, sampler.Handle );
+            SetSamplerArgument( index, sampler, true );
         }
 
         /// <summary>
