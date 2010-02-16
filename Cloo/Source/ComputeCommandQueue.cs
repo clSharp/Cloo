@@ -130,8 +130,8 @@ namespace Cloo
             ComputeException.ThrowOnError( error );
             this.device = device;
             this.context = context;
-            outOfOrderExec = ( ( long )( properties & ComputeCommandQueueFlags.OutOfOrderExecution ) != 0 );
-            profiling = ( ( long )( properties & ComputeCommandQueueFlags.Profiling ) != 0 );
+            outOfOrderExec = ( ( properties & ComputeCommandQueueFlags.OutOfOrderExecution ) == ComputeCommandQueueFlags.OutOfOrderExecution );
+            profiling = ( ( properties & ComputeCommandQueueFlags.Profiling ) == ComputeCommandQueueFlags.Profiling );
         }
 
         #endregion
