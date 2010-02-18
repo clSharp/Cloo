@@ -37,7 +37,8 @@
             this.saveFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildProgramMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buildConfigMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontSettngsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editorFontMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logFontMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,12 +57,6 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
-            this.buildDeviceMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.acceleratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cPUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gPUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.compilerTab.SuspendLayout();
             this.compilerTableLayoutPanel.SuspendLayout();
@@ -121,7 +116,7 @@
             this.compilerMenuStrip.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.fileMenuItem,
             this.buildMenuItem,
-            this.settingsToolStripMenuItem} );
+            this.optionsToolStripMenuItem} );
             this.compilerMenuStrip.Location = new System.Drawing.Point( 0, 0 );
             this.compilerMenuStrip.Name = "compilerMenuStrip";
             this.compilerMenuStrip.Size = new System.Drawing.Size( 778, 24 );
@@ -157,7 +152,7 @@
             // 
             this.buildMenuItem.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.buildProgramMenuItem,
-            this.buildDeviceMenuItem} );
+            this.buildConfigMenuItem} );
             this.buildMenuItem.Name = "buildMenuItem";
             this.buildMenuItem.Size = new System.Drawing.Size( 41, 20 );
             this.buildMenuItem.Text = "Build";
@@ -166,17 +161,24 @@
             // 
             this.buildProgramMenuItem.Name = "buildProgramMenuItem";
             this.buildProgramMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.buildProgramMenuItem.Size = new System.Drawing.Size( 152, 22 );
+            this.buildProgramMenuItem.Size = new System.Drawing.Size( 162, 22 );
             this.buildProgramMenuItem.Text = "Program";
             this.buildProgramMenuItem.Click += new System.EventHandler( this.buildProgramMenuItem_Click );
             // 
-            // settingsToolStripMenuItem
+            // buildConfigMenuItem
             // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
+            this.buildConfigMenuItem.Name = "buildConfigMenuItem";
+            this.buildConfigMenuItem.Size = new System.Drawing.Size( 162, 22 );
+            this.buildConfigMenuItem.Text = "Configuration...";
+            this.buildConfigMenuItem.Click += new System.EventHandler( this.buildDeviceMenuItem_Click );
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.fontSettngsMenuItem} );
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size( 58, 20 );
-            this.settingsToolStripMenuItem.Text = "Settings";
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size( 56, 20 );
+            this.optionsToolStripMenuItem.Text = "Options";
             // 
             // fontSettngsMenuItem
             // 
@@ -190,14 +192,14 @@
             // editorFontMenuItem
             // 
             this.editorFontMenuItem.Name = "editorFontMenuItem";
-            this.editorFontMenuItem.Size = new System.Drawing.Size( 152, 22 );
+            this.editorFontMenuItem.Size = new System.Drawing.Size( 125, 22 );
             this.editorFontMenuItem.Text = "Editor...";
             this.editorFontMenuItem.Click += new System.EventHandler( this.editorFontMenuItem_Click );
             // 
             // logFontMenuItem
             // 
             this.logFontMenuItem.Name = "logFontMenuItem";
-            this.logFontMenuItem.Size = new System.Drawing.Size( 152, 22 );
+            this.logFontMenuItem.Size = new System.Drawing.Size( 125, 22 );
             this.logFontMenuItem.Text = "Log...";
             this.logFontMenuItem.Click += new System.EventHandler( this.logFontMenuItem_Click );
             // 
@@ -348,57 +350,6 @@
             this.testButton.UseVisualStyleBackColor = true;
             this.testButton.Click += new System.EventHandler( this.testButton_Click );
             // 
-            // buildDeviceMenuItem
-            // 
-            this.buildDeviceMenuItem.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
-            this.acceleratorToolStripMenuItem,
-            this.toolStripMenuItem2,
-            this.cPUToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.gPUToolStripMenuItem} );
-            this.buildDeviceMenuItem.Enabled = false;
-            this.buildDeviceMenuItem.Name = "buildDeviceMenuItem";
-            this.buildDeviceMenuItem.Size = new System.Drawing.Size( 152, 22 );
-            this.buildDeviceMenuItem.Text = "Device";
-            // 
-            // acceleratorToolStripMenuItem
-            // 
-            this.acceleratorToolStripMenuItem.CheckOnClick = true;
-            this.acceleratorToolStripMenuItem.Name = "acceleratorToolStripMenuItem";
-            this.acceleratorToolStripMenuItem.ShortcutKeys = ( ( System.Windows.Forms.Keys )( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E ) ) );
-            this.acceleratorToolStripMenuItem.Size = new System.Drawing.Size( 174, 22 );
-            this.acceleratorToolStripMenuItem.Text = "Accelerator";
-            // 
-            // cPUToolStripMenuItem
-            // 
-            this.cPUToolStripMenuItem.Name = "cPUToolStripMenuItem";
-            this.cPUToolStripMenuItem.ShortcutKeys = ( ( System.Windows.Forms.Keys )( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C ) ) );
-            this.cPUToolStripMenuItem.Size = new System.Drawing.Size( 174, 22 );
-            this.cPUToolStripMenuItem.Text = "CPU";
-            // 
-            // gPUToolStripMenuItem
-            // 
-            this.gPUToolStripMenuItem.Name = "gPUToolStripMenuItem";
-            this.gPUToolStripMenuItem.ShortcutKeys = ( ( System.Windows.Forms.Keys )( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.G ) ) );
-            this.gPUToolStripMenuItem.Size = new System.Drawing.Size( 174, 22 );
-            this.gPUToolStripMenuItem.Text = "GPU";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Checked = true;
-            this.toolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.ShortcutKeys = ( ( System.Windows.Forms.Keys )( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D ) ) );
-            this.toolStripMenuItem1.Size = new System.Drawing.Size( 174, 22 );
-            this.toolStripMenuItem1.Text = "Default";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.ShortcutKeys = ( ( System.Windows.Forms.Keys )( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A ) ) );
-            this.toolStripMenuItem2.Size = new System.Drawing.Size( 174, 22 );
-            this.toolStripMenuItem2.Text = "All";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
@@ -459,16 +410,11 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.FontDialog fontDialog;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fontSettngsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editorFontMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logFontMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem buildDeviceMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem acceleratorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cPUToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gPUToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem buildConfigMenuItem;
 
     }
 }

@@ -32,22 +32,37 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Windows.Forms;
 using Cloo;
+using System.IO;
+using System.Text;
+using System.Runtime.InteropServices;
 
 namespace Clootils
 {
     public class Program
     {
+        [DllImport( "kernel32" )]
+        static extern bool AllocConsole();
+
+        [DllImport( "kernel32.dll" )]
+        public static extern bool FreeConsole();
+
         [STAThread]
         public static void Main()
         {
-            try { ComputePlatform.Initialize(); }
+            bool runningWin32NT = ( Environment.OSVersion.Platform == PlatformID.Win32NT ) ? true : false;
+            bool consoleAllocated = false;
+
+            try
+            {
+                if( runningWin32NT ) consoleAllocated = AllocConsole();
+                Application.Run( new MainForm() );                
+            }
             catch( Exception ex )
             {
-                MessageBox.Show( "Error initializing Cloo.\n" + ex.ToString() );
-                Application.Exit();
+                MessageBox.Show( "Clootils Error:\n" + ex.ToString() );                
             }
             
-            Application.Run( new MainForm() );
+            if( runningWin32NT && consoleAllocated ) FreeConsole();
         }
     }
 }

@@ -93,7 +93,7 @@ namespace Clootils
             ComputeContextPropertyList pd = new ComputeContextPropertyList( ComputePlatform.Platforms[ 0 ] );
             ComputeContext context = new ComputeContext( ComputeDeviceTypes.Default, pd, null, IntPtr.Zero );
 
-            ComputeProgram program = new ComputeProgram( context, kernelSources );
+            ComputeProgram program = new ComputeProgram( context, new string[]{ kernelSources } );
             program.Build( null, null, null, IntPtr.Zero );
             Console.WriteLine( "Program successfully built." );
 

@@ -42,6 +42,8 @@ namespace Clootils
 {
     public partial class MainForm: Form
     {
+        ConfigForm settingsForm;
+
         public MainForm()
         {
             InitializeComponent();
@@ -59,6 +61,8 @@ namespace Clootils
             openFileDialog.Multiselect = false;
 
             saveFileDialog.OverwritePrompt = true;
+
+            settingsForm = new ConfigForm();
         }
 
         private void InitializeSettings()
@@ -105,12 +109,12 @@ namespace Clootils
 
             string[] logContent;
 
-            ComputeContextPropertyList properties = new ComputeContextPropertyList( ComputePlatform.Platforms[ 0 ] );
+            ComputeContextPropertyList properties = new ComputeContextPropertyList( settingsForm.Platform );
             ComputeContext context = new ComputeContext( ComputeDeviceTypes.All, properties, null, IntPtr.Zero );
             ComputeProgram program = new ComputeProgram( context, editorTextBox.Lines );
             try
             {
-                program.Build( null, null, null, IntPtr.Zero );
+                program.Build( settingsForm.Devices, settingsForm.Options, null, IntPtr.Zero );
                 logContent = new string[] { "build succeeded" };
             }
             catch( ComputeException exception )
@@ -118,12 +122,8 @@ namespace Clootils
                 List<string> lineList = new List<string>();
                 foreach( ComputeDevice device in context.Devices )
                 {
-                    char[] delimiter = new char[ device.Name.Length ];
-                    for( int i = 0; i < delimiter.Length; i++ ) delimiter[ i ] = '-';
-
-                    lineList.Add( new string( delimiter ) );
-                    lineList.Add( device.Name );
-                    lineList.Add( new string( delimiter ) );
+                    string header = "PLATFORM: " + settingsForm.Platform.Name + ", DEVICE: " + device.Name;
+                    lineList.Add( header );
 
                     StringReader reader = new StringReader( program.GetBuildLog( device ) );                    
                     string line = reader.ReadLine();
@@ -132,6 +132,8 @@ namespace Clootils
                         lineList.Add( line );
                         line = reader.ReadLine();
                     }
+
+                    lineList.Add( "" );
                 }
                 logContent = lineList.ToArray();
             }
@@ -223,8 +225,8 @@ namespace Clootils
 
             Console.SetOut( Console.Out );
             writer.Close();
-            
-            infoTextBox.Lines = ParseLines( output.ToString() );
+
+            infoTextBox.Lines = ParseLines( output.ToString() );            
         }
 
         private string[] ParseLines( string text )
@@ -244,6 +246,11 @@ namespace Clootils
         {
             Clipboard.Clear();
             Clipboard.SetText( infoTextBox.Text );
+        }
+
+        private void buildDeviceMenuItem_Click( object sender, EventArgs e )
+        {
+            settingsForm.ShowDialog( this );
         }
     }
 }
