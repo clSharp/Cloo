@@ -688,12 +688,15 @@ namespace Cloo
             }
 
             mappedPtr = IntPtr.Zero;
+
+            if( events != null )
+                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
         /// Enqueues a wait for a list of events to complete before any future commands queued in the command-queue are executed.
         /// </summary>
-        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        /// <param name="events">The events that this command queue needs to wait for.</param>
         public void Wait( ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = Tools.ExtractHandles( events );
