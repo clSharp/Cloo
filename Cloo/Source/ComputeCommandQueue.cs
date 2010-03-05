@@ -696,7 +696,7 @@ namespace Cloo
         /// <summary>
         /// Enqueues a wait for a list of events to complete before any future commands queued in the command-queue are executed.
         /// </summary>
-        /// <param name="events">The events that this command queue needs to wait for.</param>
+        /// <param name="events">The events that will be waited for.</param>
         public void Wait( ICollection<ComputeEvent> events )
         {
             IntPtr[] eventHandles = Tools.ExtractHandles( events );
