@@ -37,11 +37,17 @@ namespace Cloo
     {
         Success = 0,
         DeviceNotFound = -1,
+        DeviceNotAvailable = -2,
+        CompilerNotAvailable = -3,
+        MemoryObjectAllocationFailure = -4,
+        OutOfResources = -5,
+        OutOfHostMemory = -6,
+        ProfilingInfoNotAvailable = -7,
+        MemoryCopyOverlap = -8,
+        ImageFormatMismatch = -9,
         ImageFormatNotSupported = -10,
         BuildProgramFailure = -11,
         MapFailure = -12,
-        DeviceNotAvailable = -2,
-        CompilerNotAvailable = -3,
         InvalidValue = -30,
         InvalidDeviceType = -31,
         InvalidPlatform = -32,
@@ -52,7 +58,6 @@ namespace Cloo
         InvalidHostPointer = -37,
         InvalidMemoryObject = -38,
         InvalidImageFormatDescriptor = -39,
-        MemoryObjectAllocationFailure = -4,
         InvalidImageSize = -40,
         InvalidSampler = -41,
         InvalidBinary = -42,
@@ -63,7 +68,6 @@ namespace Cloo
         InvalidKernelDefinition = -47,
         InvalidKernel = -48,
         InvalidArgumentIndex = -49,
-        OutOfResources = -5,
         InvalidArgumentValue = -50,
         InvalidArgumentSize = -51,
         InvalidKernelArguments = -52,
@@ -74,14 +78,11 @@ namespace Cloo
         InvalidEventWaitList = -57,
         InvalidEvent = -58,
         InvalidOperation = -59,
-        OutOfHostMemory = -6,
         InvalidGLObject = -60,
         InvalidBufferSize = -61,
         InvalidMipLevel = -62,
-        ProfilingInfoNotAvailable = -7,
-        MemoryCopyOverlap = -8,
-        ImageFormatMismatch = -9,
-        CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR = -1000
+        CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR = -1000,
+        CL_PLATFORM_NOT_FOUND_KHR = -1001,
     }
 
     public enum OpenCLVersion: int
@@ -101,7 +102,8 @@ namespace Cloo
         Version = 0x0901,
         Name = 0x0902,
         Vendor = 0x0903,
-        Extensions = 0x0904
+        Extensions = 0x0904,
+        CL_PLATFORM_ICD_SUFFIX_KHR = 0x0920,
     }
 
     [Flags]
@@ -166,6 +168,8 @@ namespace Cloo
         Version = 0x102F,
         Extensions = 0x1030,
         Platform = 0x1031,
+        CL_DEVICE_DOUBLE_FP_CONFIG = 0x1032,
+        CL_DEVICE_HALF_FP_CONFIG = 0x1033,
     }
 
     [Flags]
@@ -210,12 +214,13 @@ namespace Cloo
     {
         ReferenceCount = 0x1080,
         Devices = 0x1081,
-        Properties = 0x1082
+        Properties = 0x1082,
+        Platform = 0x1084,
     }
 
     public enum ComputeContextPropertyName: int
     {
-        Platform = 0x1084,
+        Platform = ComputeContextInfo.Platform,
         CL_GL_CONTEXT_KHR = 0x2008,
         CL_EGL_DISPLAY_KHR = 0x2009,
         CL_GLX_DISPLAY_KHR = 0x200A,
