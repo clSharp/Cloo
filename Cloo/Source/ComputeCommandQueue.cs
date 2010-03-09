@@ -536,8 +536,8 @@ namespace Cloo
             IntPtr newEventHandle = IntPtr.Zero;
 
             int sizeofT = Marshal.SizeOf( typeof( T ) );            
-            T[] readData = new T[ count ];
-            GCHandle gcHandle = GCHandle.Alloc( readData, GCHandleType.Pinned );
+            T[] data = new T[ count ];
+            GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
 
             unsafe
             {
@@ -566,7 +566,7 @@ namespace Cloo
             if( events != null )
                 events.Add( new ComputeEvent( newEventHandle, this ) );
 
-            return readData;
+            return data;
         }
 
         /// <summary>
@@ -584,8 +584,8 @@ namespace Cloo
             IntPtr[] eventHandles = Tools.ExtractHandles( events );
             IntPtr newEventHandle = IntPtr.Zero;
 
-            byte[] readData = new byte[ region[ 0 ] * region[ 1 ] * region[ 2 ] * image.ElementSize ];
-            GCHandle gcHandle = GCHandle.Alloc( readData, GCHandleType.Pinned );
+            byte[] data = new byte[ region[ 0 ] * region[ 1 ] * region[ 2 ] * image.ElementSize ];
+            GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
 
             unsafe
             {
@@ -619,7 +619,7 @@ namespace Cloo
             if( events != null )
                 events.Add( new ComputeEvent( newEventHandle, this ) );
 
-            return readData;
+            return data;
         }
 
         /// <summary>

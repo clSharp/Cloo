@@ -34,6 +34,8 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using Cloo.Bindings;
+using System.Runtime.InteropServices;
+    using System.Diagnostics;
 
     public class ComputeEvent: ComputeResource
     {
@@ -41,6 +43,7 @@ namespace Cloo
 
         private readonly ComputeCommandQueue commandQueue;
         private readonly ComputeCommandType commandType;
+        private GCHandle gcHandle;
 
         #endregion
 
@@ -65,18 +68,6 @@ namespace Cloo
             get
             {
                 return commandType; 
-            }
-        }
-
-        /// <summary>
-        /// Return the execution status of the command identified by event.
-        /// </summary>
-        public ComputeCommandExecutionStatus ExecutionStatus
-        {
-            get
-            {
-                return ( ComputeCommandExecutionStatus )GetInfo<ComputeEventInfo, int>(
-                    ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo );
             }
         }
 
@@ -128,6 +119,18 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// Return the execution status of the command identified by event.
+        /// </summary>
+        public ComputeCommandExecutionStatus ExecutionStatus
+        {
+            get
+            {
+                return ( ComputeCommandExecutionStatus )GetInfo<ComputeEventInfo, int>(
+                    ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo );
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -154,6 +157,21 @@ namespace Cloo
 
         #endregion
 
+        #region Internal methods
+
+        internal void FreeGCHandle()
+        {
+            if( !gcHandle.IsAllocated && gcHandle.Target == null ) return;
+            gcHandle.Free();
+        }
+
+        internal void TrackGCHandle( GCHandle handle )
+        {
+            gcHandle = handle;
+        }
+
+        #endregion
+        
         #region Protected methods
 
         protected override void Dispose( bool manual )
@@ -162,7 +180,7 @@ namespace Cloo
             {
                 CL10.ReleaseEvent( Handle );
                 Handle = IntPtr.Zero;
-            }
+            }            
         }
 
         #endregion

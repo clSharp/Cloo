@@ -18,5 +18,5 @@ For a list of changes see "Changelog.txt".
 
 [Thank You Speech]
 I'd like to thank the developers and the community of The Open Toolkit library for their all-time support and precious help.
-I'd also like to thank everyone that has bothered to fill in a bug report/feature request, has posted a patch/solution or just dropped a few lines.
+I'd also like to thank everyone that has bothered to fill in a bug report/feature request, has posted a patch/solution or just dropped a few encouraging lines.
 Much appreciated.

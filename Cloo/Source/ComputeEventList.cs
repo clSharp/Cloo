@@ -85,6 +85,16 @@ namespace Cloo
 
         #endregion
 
+        #region Internal methods
+
+        internal void FreeGCHandles()
+        {
+            foreach( ComputeEvent ev in this )
+                ev.FreeGCHandle();
+        }
+
+        #endregion
+
         #region IList<ComputeEvent> Members
 
         public int IndexOf( ComputeEvent item )
