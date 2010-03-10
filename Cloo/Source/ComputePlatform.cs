@@ -197,24 +197,26 @@ namespace Cloo
         {
             if( platforms != null ) return;
 
-            IntPtr[] handles;
-            int handlesLength = 0;
             unsafe
             {
+                IntPtr[] handles;
+                int handlesLength = 0;
                 ComputeErrorCode error = CL10.GetPlatformIDs( 0, null, &handlesLength );
                 ComputeException.ThrowOnError( error );
                 handles = new IntPtr[ handlesLength ];
 
                 fixed( IntPtr* handlesPtr = handles )
-                { error = CL10.GetPlatformIDs( handlesLength, handlesPtr, null ); }
-                ComputeException.ThrowOnError( error );
+                {
+                    error = CL10.GetPlatformIDs( handlesLength, handlesPtr, null );
+                    ComputeException.ThrowOnError( error );
+                }                
+
+                List<ComputePlatform> platformList = new List<ComputePlatform>( handlesLength );
+                foreach( IntPtr handle in handles )
+                    platformList.Add( new ComputePlatform( handle ) );
+
+                platforms = platformList.AsReadOnly();
             }
-
-            List<ComputePlatform> platformList = new List<ComputePlatform>( handlesLength );
-            foreach( IntPtr handle in handles )
-                platformList.Add( new ComputePlatform( handle ) );
-
-            platforms = platformList.AsReadOnly();
         }
 
         /// <summary>
@@ -231,24 +233,25 @@ namespace Cloo
 
         private ComputeDevice[] GetDevices()
         {
-            IntPtr[] handles;
-            int handlesLength = 0;
             unsafe
-            {
+            {                
+                int handlesLength = 0;
                 ComputeErrorCode error = CL10.GetDeviceIDs( Handle, ComputeDeviceTypes.All, 0, null, &handlesLength );
                 ComputeException.ThrowOnError( error );
 
-                handles = new IntPtr[ handlesLength ];
+                IntPtr[] handles = new IntPtr[ handlesLength ];
                 fixed( IntPtr* devicesPtr = handles )
+                {
                     error = CL10.GetDeviceIDs( Handle, ComputeDeviceTypes.All, handlesLength, devicesPtr, null );
-                ComputeException.ThrowOnError( error );
+                    ComputeException.ThrowOnError( error );
+                }
+
+                ComputeDevice[] devices = new ComputeDevice[ handlesLength ];
+                for( int i = 0; i < handlesLength; i++ )
+                    devices[ i ] = new ComputeDevice( this, handles[ i ] );
+
+                return devices;
             }
-
-            ComputeDevice[] devices = new ComputeDevice[ handlesLength ];
-            for( int i = 0; i < handlesLength; i++ )
-                devices[ i ] = new ComputeDevice( this, handles[ i ] );
-
-            return devices;
         }
 
         #endregion

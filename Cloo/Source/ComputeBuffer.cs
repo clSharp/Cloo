@@ -134,20 +134,18 @@ namespace Cloo
         /// <param name="bufferId">The OpenGL buffer object to create this buffer from.</param>
         public static ComputeBuffer<T> CreateFromGLBuffer<T>( ComputeContext context, ComputeMemoryFlags flags, int bufferId ) where T: struct
         {
-            IntPtr handle;
-
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                handle = CL10.CreateFromGLBuffer( 
-                    context.Handle, 
-                    flags, 
+                IntPtr handle = CL10.CreateFromGLBuffer(
+                    context.Handle,
+                    flags,
                     bufferId,
                     out error );
                 ComputeException.ThrowOnError( error );
-            }
 
-            return new ComputeBuffer<T>( handle, context, flags );
+                return new ComputeBuffer<T>( handle, context, flags );
+            }
         }
 
         /// <summary>

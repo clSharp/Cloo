@@ -65,9 +65,9 @@ namespace Cloo
                     data,
                     out error );
                 ComputeException.ThrowOnError( error );
-            }
 
-            Init();
+                Init();
+            }            
         }
 
         private ComputeImage2D( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
@@ -84,27 +84,26 @@ namespace Cloo
 
         public static ComputeImage2D CreateFromGLRenderbuffer( ComputeContext context, ComputeMemoryFlags flags, int renderbufferId )
         {
-            IntPtr image = IntPtr.Zero;
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                image = CL10.CreateFromGLRenderbuffer(
+                IntPtr image = CL10.CreateFromGLRenderbuffer(
                     context.Handle,
                     flags,
                     renderbufferId,
                     out error );
                 ComputeException.ThrowOnError( error );
+
+                return new ComputeImage2D( image, context, flags );
             }
-            return new ComputeImage2D( image, context, flags );
         }
 
         public static ComputeImage2D CreateFromGLTexture2D( ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId )
         {
-            IntPtr image = IntPtr.Zero;
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                image = CL10.CreateFromGLTexture2D(
+                IntPtr image = CL10.CreateFromGLTexture2D(
                     context.Handle,
                     flags,
                     textureTarget,
@@ -112,8 +111,9 @@ namespace Cloo
                     textureId,
                     out error );
                 ComputeException.ThrowOnError( error );
+
+                return new ComputeImage2D( image, context, flags );
             }
-            return new ComputeImage2D( image, context, flags );
         }
 
         /// <summary>

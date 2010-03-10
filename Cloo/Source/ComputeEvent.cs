@@ -32,10 +32,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
-    using System.Collections.Generic;
+    using System.Runtime.InteropServices;
     using Cloo.Bindings;
-using System.Runtime.InteropServices;
-    using System.Diagnostics;
 
     public class ComputeEvent: ComputeResource
     {

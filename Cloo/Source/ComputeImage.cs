@@ -73,25 +73,21 @@ namespace Cloo
 
         protected static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type )
         {
-            int formatCountRet = 0;
-            ComputeErrorCode error;
             unsafe
             {
-                error = CL10.GetSupportedImageFormats( context.Handle, flags, type, 0, null, &formatCountRet );
+                int formatCountRet = 0;
+                ComputeErrorCode error = CL10.GetSupportedImageFormats( context.Handle, flags, type, 0, null, &formatCountRet );
                 ComputeException.ThrowOnError( error );
-            }
 
-            ComputeImageFormat[] formats = new ComputeImageFormat[ formatCountRet ];
-            unsafe
-            {
+                ComputeImageFormat[] formats = new ComputeImageFormat[ formatCountRet ];
                 fixed( ComputeImageFormat* formatsPtr = formats )
                 {
                     error = CL10.GetSupportedImageFormats( context.Handle, flags, type, formatCountRet, formatsPtr, null );
                     ComputeException.ThrowOnError( error );
                 }
-            }            
 
-            return new Collection<ComputeImageFormat>( formats );
+                return new Collection<ComputeImageFormat>( formats );
+            }
         }
 
         protected void Init()

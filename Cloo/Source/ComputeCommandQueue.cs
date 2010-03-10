@@ -145,12 +145,12 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void AcquireGLObjects( ICollection<ComputeMemory> memObjs, ICollection<ComputeEvent> events )
         {
-            IntPtr[] memObjHandles = Tools.ExtractHandles( memObjs );
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-
             unsafe
             {
+                IntPtr[] memObjHandles = Tools.ExtractHandles( memObjs );
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+
                 fixed( IntPtr* memObjHandlesPtr = memObjHandles )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
@@ -164,10 +164,10 @@ namespace Cloo
                         ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
-            }
 
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+            }
         }
 
         /// <summary>
@@ -184,13 +184,13 @@ namespace Cloo
         /// </summary>
         public ComputeEvent AddMarker()
         {
-            IntPtr newEventHandle = IntPtr.Zero;
             unsafe
             {
+                IntPtr newEventHandle = IntPtr.Zero;
                 ComputeErrorCode error = CL10.EnqueueMarker( Handle, &newEventHandle );
                 ComputeException.ThrowOnError( error );
+                return new ComputeEvent( newEventHandle, this );
             }
-            return new ComputeEvent( newEventHandle, this );
         }
 
         /// <summary>
@@ -204,12 +204,12 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy<T>( ComputeBuffer<T> source, ComputeBuffer<T> destination, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-            int sizeofT = Marshal.SizeOf( typeof( T ) );
-
             unsafe
             {
+                int sizeofT = Marshal.SizeOf( typeof( T ) );
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
                     ComputeErrorCode error = CL10.EnqueueCopyBuffer(
@@ -224,10 +224,10 @@ namespace Cloo
                         ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
-            }
 
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+            }
         }
 
         /// <summary>
@@ -241,12 +241,12 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy<T>( ComputeBuffer<T> source, ComputeImage destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-            int sizeofT = Marshal.SizeOf( typeof( T ) );
-
             unsafe
-            {                
+            {
+                int sizeofT = Marshal.SizeOf( typeof( T ) );
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;                
+
                 fixed( IntPtr* destinationOffsetPtr = Tools.ConvertArray( destinationOffset ) )
                 fixed( IntPtr* regionPtr = Tools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
@@ -262,11 +262,11 @@ namespace Cloo
                         eventHandlesPtr,
                         ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
-                }                
-            }
+                }
 
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+            }
         }
 
         /// <summary>
@@ -280,12 +280,12 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy<T>( ComputeImage source, ComputeBuffer<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-            int sizeofT = Marshal.SizeOf( typeof( T ) );
-
             unsafe
             {
+                int sizeofT = Marshal.SizeOf( typeof( T ) );
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+
                 fixed( IntPtr* sourceOffsetPtr = Tools.ConvertArray( sourceOffset ) )
                 fixed( IntPtr* regionPtr = Tools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
@@ -302,10 +302,10 @@ namespace Cloo
                         ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
-            }
 
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+            }
         }
 
         /// <summary>
@@ -319,11 +319,11 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy( ComputeImage source, ComputeImage destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-
             unsafe
             {
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+
                 fixed( IntPtr* sourceOffsetPtr = Tools.ConvertArray( sourceOffset ) )
                 fixed( IntPtr* destinationOffsetPtr = Tools.ConvertArray( destinationOffset ) )
                 fixed( IntPtr* regionPtr = Tools.ConvertArray( region ) )
@@ -341,10 +341,10 @@ namespace Cloo
                         ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
-            }
 
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+            }
         }
 
         /// <summary>
@@ -354,11 +354,11 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Execute( ComputeKernel kernel, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-
             unsafe
             {
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
                     ComputeErrorCode error = CL10.EnqueueTask(
@@ -369,12 +369,12 @@ namespace Cloo
                         ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
+
+                kernel.ReferenceArguments();
+
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
             }
-
-            kernel.ReferenceArguments();
-
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
@@ -387,11 +387,11 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Execute( ComputeKernel kernel, long[] globalWorkOffset, long[] globalWorkSize, long[] localWorkSize, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-
             unsafe
             {
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+
                 fixed( IntPtr* globalWorkOffsetPtr = Tools.ConvertArray( globalWorkOffset ) )
                 fixed( IntPtr* globalWorkSizePtr = Tools.ConvertArray( globalWorkSize ) )
                 fixed( IntPtr* localWorkSizePtr = Tools.ConvertArray( localWorkSize ) )
@@ -409,12 +409,12 @@ namespace Cloo
                         ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
+
+                kernel.ReferenceArguments();
+
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
             }
-
-            kernel.ReferenceArguments();
-
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
@@ -446,16 +446,16 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public IntPtr Map<T>( ComputeBuffer<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, long offset, long count, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-            IntPtr mappedPtr = IntPtr.Zero;
-            int sizeofT = Marshal.SizeOf( typeof( T ) );
-
             unsafe
             {
-                ComputeErrorCode error = ComputeErrorCode.Success;
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+                IntPtr mappedPtr = IntPtr.Zero;
+                int sizeofT = Marshal.SizeOf( typeof( T ) );
+                                
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
+                    ComputeErrorCode error = ComputeErrorCode.Success;
                     mappedPtr = CL10.EnqueueMapBuffer(
                         Handle,
                         buffer.Handle,
@@ -469,12 +469,12 @@ namespace Cloo
                         out error );
                     ComputeException.ThrowOnError( error );
                 }
+
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+
+                return mappedPtr;
             }
-
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
-
-            return mappedPtr;
         }
 
         /// <summary>
@@ -488,12 +488,12 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public IntPtr Map( ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-            IntPtr mappedPtr;
-
             unsafe
             {
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+                IntPtr mappedPtr;
+
                 fixed( IntPtr* offsetPtr = Tools.ConvertArray( offset ) )
                 fixed( IntPtr* regionPtr = Tools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
@@ -514,12 +514,12 @@ namespace Cloo
                         out error );
                     ComputeException.ThrowOnError( error );
                 }
+
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+
+                return mappedPtr;
             }
-
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
-
-            return mappedPtr;
         }
 
         /// <summary>
@@ -532,20 +532,19 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public T[] Read<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, ICollection<ComputeEvent> events ) where T: struct
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-
-            int sizeofT = Marshal.SizeOf( typeof( T ) );            
-            T[] data = new T[ count ];
-            GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
-
             unsafe
             {
-                ComputeErrorCode error = ComputeErrorCode.Success;
+                int sizeofT = Marshal.SizeOf( typeof( T ) );
+                T[] data = new T[ count ];
+                GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;                
+
                 try
                 {
                     fixed( IntPtr* eventHandlesPtr = eventHandles )
-                        error = CL10.EnqueueReadBuffer(
+                    {
+                        ComputeErrorCode error = CL10.EnqueueReadBuffer(
                             Handle,
                             buffer.Handle,
                             ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
@@ -555,18 +554,19 @@ namespace Cloo
                             eventHandles.Length,
                             eventHandlesPtr,
                             ( events != null ) ? &newEventHandle : null );
-                    ComputeException.ThrowOnError( error );
+                        ComputeException.ThrowOnError( error );
+                    }
                 }
                 finally
                 {
                     gcHandle.Free();
                 }
+
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+
+                return data;
             }
-
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
-
-            return data;
         }
 
         /// <summary>
@@ -581,14 +581,13 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public byte[] Read( ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-
-            byte[] data = new byte[ region[ 0 ] * region[ 1 ] * region[ 2 ] * image.ElementSize ];
-            GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
-
             unsafe
             {
+                byte[] data = new byte[ region[ 0 ] * region[ 1 ] * region[ 2 ] * image.ElementSize ];
+                GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+
                 try
                 {
                     fixed( IntPtr* offsetPtr = Tools.ConvertArray( offset ) )
@@ -614,12 +613,12 @@ namespace Cloo
                 {
                     gcHandle.Free();
                 }
+
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+
+                return data;
             }
-
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
-
-            return data;
         }
 
         /// <summary>
@@ -629,17 +628,16 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void ReleaseGLObjects( ICollection<ComputeMemory> memObjs, ICollection<ComputeEvent> events )
         {
-            IntPtr[] memObjHandles = Tools.ExtractHandles( memObjs );
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-
             unsafe
             {
+                IntPtr[] memObjHandles = Tools.ExtractHandles( memObjs );
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+
                 fixed( IntPtr* memoryObjectsPtr = memObjHandles )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    ComputeErrorCode error = ComputeErrorCode.Success;
-                    error = CL10.EnqueueReleaseGLObjects(
+                    ComputeErrorCode error = CL10.EnqueueReleaseGLObjects(
                         Handle,
                         memObjHandles.Length,
                         memoryObjectsPtr,
@@ -648,10 +646,10 @@ namespace Cloo
                         ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
-            }
 
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+            }
         }
 
         /// <summary>
@@ -670,27 +668,28 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Unmap( ComputeMemory memory, ref IntPtr mappedPtr, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-
             unsafe
             {
-                ComputeErrorCode error = ComputeErrorCode.Success;
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
-                    error = CL10.EnqueueUnmapMemObject(
+                {
+                    ComputeErrorCode error = CL10.EnqueueUnmapMemObject(
                         Handle,
                         memory.Handle,
                         mappedPtr,
                         eventHandles.Length,
                         eventHandlesPtr,
                         ( events != null ) ? &newEventHandle : null );
-                ComputeException.ThrowOnError( error );
+                    ComputeException.ThrowOnError( error );
+                }
+
+                mappedPtr = IntPtr.Zero;
+
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
             }
-
-            mappedPtr = IntPtr.Zero;
-
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
         }
 
         /// <summary>
@@ -699,13 +698,16 @@ namespace Cloo
         /// <param name="events">The events that will be waited for.</param>
         public void Wait( ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-
             unsafe
             {
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    ComputeErrorCode error = CL10.EnqueueWaitForEvents( Handle, eventHandles.Length, eventHandlesPtr );
+                    ComputeErrorCode error = CL10.EnqueueWaitForEvents( 
+                        Handle, 
+                        eventHandles.Length, 
+                        eventHandlesPtr );
                     ComputeException.ThrowOnError( error );
                 }
             }
@@ -722,37 +724,38 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Write<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, T[] data, ICollection<ComputeEvent> events ) where T: struct
         {
-            int sizeofT = Marshal.SizeOf( typeof( T ) );
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-            GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
-
             unsafe
             {
+                int sizeofT = Marshal.SizeOf( typeof( T ) );
+                GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+
                 try
                 {
-                    ComputeErrorCode error = ComputeErrorCode.Success;
                     fixed( IntPtr* eventHandlesPtr = eventHandles )
-                        error = CL10.EnqueueWriteBuffer(
-                                Handle,
-                                buffer.Handle,
-                                ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
-                                new IntPtr( offset * sizeofT ),
-                                new IntPtr( count * sizeofT ),
-                                gcHandle.AddrOfPinnedObject(),
-                                eventHandles.Length,
-                                eventHandlesPtr,
-                                ( events != null ) ? &newEventHandle : null );
-                    ComputeException.ThrowOnError( error );
+                    {
+                        ComputeErrorCode error = CL10.EnqueueWriteBuffer(
+                            Handle,
+                            buffer.Handle,
+                            ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
+                            new IntPtr( offset * sizeofT ),
+                            new IntPtr( count * sizeofT ),
+                            gcHandle.AddrOfPinnedObject(),
+                            eventHandles.Length,
+                            eventHandlesPtr,
+                            ( events != null ) ? &newEventHandle : null );
+                        ComputeException.ThrowOnError( error );
+                    }
                 }
                 finally
                 {
                     gcHandle.Free();
                 }
-            }
 
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+            }
         }
 
         /// <summary>
@@ -768,11 +771,11 @@ namespace Cloo
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Write( ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events )
         {
-            IntPtr[] eventHandles = Tools.ExtractHandles( events );
-            IntPtr newEventHandle = IntPtr.Zero;
-
             unsafe
             {
+                IntPtr[] eventHandles = Tools.ExtractHandles( events );
+                IntPtr newEventHandle = IntPtr.Zero;
+
                 fixed( IntPtr* offsetPtr = Tools.ConvertArray( offset ) )
                 fixed( IntPtr* regionPtr = Tools.ConvertArray( region ) )
                 fixed( IntPtr* eventHandlesPtr = eventHandles )
@@ -791,10 +794,10 @@ namespace Cloo
                         ( events != null ) ? &newEventHandle : null );
                     ComputeException.ThrowOnError( error );
                 }
-            }
 
-            if( events != null )
-                events.Add( new ComputeEvent( newEventHandle, this ) );
+                if( events != null )
+                    events.Add( new ComputeEvent( newEventHandle, this ) );
+            }
         }
 
         #endregion

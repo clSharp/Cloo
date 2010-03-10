@@ -168,8 +168,7 @@ namespace Cloo
                 GetInfoDelegate<InfoEnum> getInfoDelegate
             )
         {
-            int result = GetInfo<InfoEnum, int>
-                ( paramName, getInfoDelegate );
+            int result = GetInfo<InfoEnum, int>( paramName, getInfoDelegate );
             return ( result == ( int )ComputeBoolean.True ) ? true : false;
         }
 
@@ -210,15 +209,14 @@ namespace Cloo
             )
             where QueriedType : struct
         {
-            ComputeErrorCode error;
-            IntPtr valueSizeRet;
-            QueriedType result = new QueriedType();
-            GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
             unsafe
             {
+                IntPtr valueSizeRet;
+                QueriedType result = new QueriedType();
+                GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
                 try
                 {
-                    error = getInfoDelegate(
+                    ComputeErrorCode error = getInfoDelegate(
                         handle,
                         secondaryObject.handle,
                         paramName,
@@ -232,32 +230,34 @@ namespace Cloo
                     result = ( QueriedType )gcHandle.Target;
                     gcHandle.Free();
                 }
+
+                return result;
             }
-            return result;
         }
 
         protected string GetStringInfo<InfoEnum>( InfoEnum paramName, GetInfoDelegate<InfoEnum> getInfoDelegate )
         {
-            string result = null;
-            sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>( paramName, getInfoDelegate );
             unsafe
             {
+                string result = null;
+                sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>( paramName, getInfoDelegate );
                 fixed( sbyte* bufferPtr = buffer )
                     result = new string( bufferPtr );
+                return result;
             }
-            return result;
         }
 
         protected string GetStringInfo<InfoEnum>( ComputeObject secondaryObject, InfoEnum paramName, GetInfoDelegateEx<InfoEnum> getInfoDelegate )
         {
-            string result = null;
-            sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>( secondaryObject, paramName, getInfoDelegate );
             unsafe
             {
+                string result = null;
+                sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>( secondaryObject, paramName, getInfoDelegate );
                 fixed( sbyte* bufferPtr = buffer )
                     result = new string( bufferPtr );
+
+                return result;
             }
-            return result;
         }
 
         #endregion

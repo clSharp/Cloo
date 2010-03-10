@@ -124,11 +124,6 @@ namespace Cloo
 
         protected override void Dispose( bool manual )
         {
-            if( manual )
-            {
-                //free managed resources
-            }
-
             // free native resources
             if( Handle != IntPtr.Zero )
             {
