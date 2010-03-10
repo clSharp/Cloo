@@ -59,7 +59,7 @@ namespace Clootils
             }
             catch( Exception ex )
             {
-                MessageBox.Show( "Clootils Error:\n" + ex.ToString() );                
+                MessageBox.Show( ex.ToString(), "Clootils Error" );
             }
             
             if( runningWin32NT && consoleAllocated ) FreeConsole();

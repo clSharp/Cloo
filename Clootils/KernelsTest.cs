@@ -94,7 +94,7 @@ namespace Clootils
             ComputeContext context = new ComputeContext( ComputeDeviceTypes.Default, pd, null, IntPtr.Zero );
 
             ComputeProgram program = new ComputeProgram( context, new string[]{ kernelSources } );
-            program.Build( null, null, null, IntPtr.Zero );
+            program.Build( null, null, notify, IntPtr.Zero );
             Console.WriteLine( "Program successfully built." );
 
             List<ComputeKernel> kernels = new List<ComputeKernel>( program.CreateAllKernels() );

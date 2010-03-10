@@ -50,10 +50,8 @@ namespace Clootils
 
             InitializeSettings();
 
-            editorTextBox.AcceptsReturn = true;
-            editorTextBox.AcceptsTab = true;
             editorTextBox.Font = Settings.Default.EditorFont;
-                        
+            
             fontDialog.FontMustExist = true;
 
             logTextBox.Font = Settings.Default.LogFont;
@@ -163,7 +161,31 @@ namespace Clootils
             }
         }
 
-        private void infoButton_Click( object sender, EventArgs e )
+        private string[] ParseLines( string text )
+        {
+            List<string> lineList = new List<string>();
+            StringReader reader = new StringReader( text );
+            string line = reader.ReadLine();
+            while( line != null )
+            {
+                lineList.Add( line );
+                line = reader.ReadLine();
+            }
+            return lineList.ToArray();
+        }
+
+        private void copyButton_Click( object sender, EventArgs e )
+        {
+            Clipboard.Clear();
+            Clipboard.SetText( logTextBox.Text );
+        }
+
+        private void buildDeviceMenuItem_Click( object sender, EventArgs e )
+        {
+            settingsForm.ShowDialog( this );
+        }
+
+        private void showInfoToolStripMenuItem_Click( object sender, EventArgs e )
         {
             StringBuilder info = new StringBuilder();
 
@@ -193,10 +215,10 @@ namespace Clootils
                     info.AppendLine( "\tName: " + device.Name );
                     info.AppendLine( "\tVendor: " + device.Vendor );
                     info.AppendLine( "\tDriver version: " + device.DriverVersion );
+                    info.AppendLine( "\tCompute units: " + device.MaxComputeUnits );
                     info.AppendLine( "\tGlobal memory: " + device.GlobalMemorySize );
                     info.AppendLine( "\tLocal memory: " + device.LocalMemorySize );
                     info.AppendLine( "\tImage support: " + device.ImageSupport );
-                    info.AppendLine( "\tCompute units: " + device.MaxComputeUnits );
                     info.AppendLine( "\tExtensions:" );
 
                     foreach( string extension in device.Extensions )
@@ -207,10 +229,10 @@ namespace Clootils
                 info.AppendLine();
             }
 
-            infoTextBox.Lines = ParseLines( info.ToString() );
+            logTextBox.Lines = ParseLines( info.ToString() );
         }
 
-        private void testButton_Click( object sender, EventArgs e )
+        private void runTestsToolStripMenuItem_Click( object sender, EventArgs e )
         {
             StringBuilder output = new StringBuilder();
             StringWriter writer = new StringWriter( output );
@@ -226,31 +248,7 @@ namespace Clootils
             Console.SetOut( Console.Out );
             writer.Close();
 
-            infoTextBox.Lines = ParseLines( output.ToString() );            
-        }
-
-        private string[] ParseLines( string text )
-        {
-            List<string> lineList = new List<string>();
-            StringReader reader = new StringReader( text );
-            string line = reader.ReadLine();
-            while( line != null )
-            {
-                lineList.Add( line );
-                line = reader.ReadLine();
-            }
-            return lineList.ToArray();
-        }
-
-        private void copyButton_Click( object sender, EventArgs e )
-        {
-            Clipboard.Clear();
-            Clipboard.SetText( infoTextBox.Text );
-        }
-
-        private void buildDeviceMenuItem_Click( object sender, EventArgs e )
-        {
-            settingsForm.ShowDialog( this );
+            logTextBox.Lines = ParseLines( output.ToString() );
         }
     }
 }

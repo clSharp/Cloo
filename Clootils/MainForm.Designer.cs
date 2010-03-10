@@ -28,100 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.compilerTab = new System.Windows.Forms.TabPage();
-            this.compilerTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.compilerMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildProgramMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildConfigMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontSettngsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editorFontMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logFontMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.compilerStatusStrip = new System.Windows.Forms.StatusStrip();
-            this.compilerSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.editorTextBox = new System.Windows.Forms.TextBox();
-            this.logTextBox = new System.Windows.Forms.TextBox();
-            this.infoTab = new System.Windows.Forms.TabPage();
-            this.infoTextBox = new System.Windows.Forms.TextBox();
-            this.infoTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.copyFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.copyButton = new System.Windows.Forms.Button();
-            this.infoFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.infoButton = new System.Windows.Forms.Button();
-            this.testButton = new System.Windows.Forms.Button();
+            this.openCLMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runTestsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
-            this.tabControl.SuspendLayout();
-            this.compilerTab.SuspendLayout();
-            this.compilerTableLayoutPanel.SuspendLayout();
-            this.compilerMenuStrip.SuspendLayout();
-            this.compilerSplitContainer.Panel1.SuspendLayout();
-            this.compilerSplitContainer.Panel2.SuspendLayout();
-            this.compilerSplitContainer.SuspendLayout();
-            this.infoTab.SuspendLayout();
-            this.infoTableLayoutPanel.SuspendLayout();
-            this.copyFlowLayoutPanel.SuspendLayout();
-            this.infoFlowLayoutPanel.SuspendLayout();
+            this.editorTextBox = new System.Windows.Forms.RichTextBox();
+            this.logTextBox = new System.Windows.Forms.RichTextBox();
+            this.tableLayoutPanel.SuspendLayout();
+            this.menuStrip.SuspendLayout();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl
+            // tableLayoutPanel
             // 
-            this.tabControl.Controls.Add( this.compilerTab );
-            this.tabControl.Controls.Add( this.infoTab );
-            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point( 0, 0 );
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size( 792, 566 );
-            this.tabControl.TabIndex = 0;
+            this.tableLayoutPanel.AutoSize = true;
+            this.tableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel.ColumnCount = 1;
+            this.tableLayoutPanel.ColumnStyles.Add( new System.Windows.Forms.ColumnStyle() );
+            this.tableLayoutPanel.Controls.Add( this.menuStrip, 0, 0 );
+            this.tableLayoutPanel.Controls.Add( this.statusStrip, 0, 2 );
+            this.tableLayoutPanel.Controls.Add( this.splitContainer, 0, 1 );
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.Location = new System.Drawing.Point( 0, 0 );
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 3;
+            this.tableLayoutPanel.RowStyles.Add( new System.Windows.Forms.RowStyle() );
+            this.tableLayoutPanel.RowStyles.Add( new System.Windows.Forms.RowStyle( System.Windows.Forms.SizeType.Percent, 100F ) );
+            this.tableLayoutPanel.RowStyles.Add( new System.Windows.Forms.RowStyle() );
+            this.tableLayoutPanel.Size = new System.Drawing.Size( 792, 566 );
+            this.tableLayoutPanel.TabIndex = 0;
             // 
-            // compilerTab
+            // menuStrip
             // 
-            this.compilerTab.Controls.Add( this.compilerTableLayoutPanel );
-            this.compilerTab.Location = new System.Drawing.Point( 4, 22 );
-            this.compilerTab.Name = "compilerTab";
-            this.compilerTab.Padding = new System.Windows.Forms.Padding( 3 );
-            this.compilerTab.Size = new System.Drawing.Size( 784, 540 );
-            this.compilerTab.TabIndex = 0;
-            this.compilerTab.Text = "Compiler";
-            this.compilerTab.UseVisualStyleBackColor = true;
-            // 
-            // compilerTableLayoutPanel
-            // 
-            this.compilerTableLayoutPanel.AutoSize = true;
-            this.compilerTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.compilerTableLayoutPanel.ColumnCount = 1;
-            this.compilerTableLayoutPanel.ColumnStyles.Add( new System.Windows.Forms.ColumnStyle() );
-            this.compilerTableLayoutPanel.Controls.Add( this.compilerMenuStrip, 0, 0 );
-            this.compilerTableLayoutPanel.Controls.Add( this.compilerStatusStrip, 0, 2 );
-            this.compilerTableLayoutPanel.Controls.Add( this.compilerSplitContainer, 0, 1 );
-            this.compilerTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.compilerTableLayoutPanel.Location = new System.Drawing.Point( 3, 3 );
-            this.compilerTableLayoutPanel.Name = "compilerTableLayoutPanel";
-            this.compilerTableLayoutPanel.RowCount = 3;
-            this.compilerTableLayoutPanel.RowStyles.Add( new System.Windows.Forms.RowStyle() );
-            this.compilerTableLayoutPanel.RowStyles.Add( new System.Windows.Forms.RowStyle( System.Windows.Forms.SizeType.Percent, 100F ) );
-            this.compilerTableLayoutPanel.RowStyles.Add( new System.Windows.Forms.RowStyle() );
-            this.compilerTableLayoutPanel.Size = new System.Drawing.Size( 778, 534 );
-            this.compilerTableLayoutPanel.TabIndex = 0;
-            // 
-            // compilerMenuStrip
-            // 
-            this.compilerMenuStrip.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.fileMenuItem,
             this.buildMenuItem,
-            this.optionsToolStripMenuItem} );
-            this.compilerMenuStrip.Location = new System.Drawing.Point( 0, 0 );
-            this.compilerMenuStrip.Name = "compilerMenuStrip";
-            this.compilerMenuStrip.Size = new System.Drawing.Size( 778, 24 );
-            this.compilerMenuStrip.TabIndex = 0;
-            this.compilerMenuStrip.Text = "menuStrip1";
+            this.optionsMenuItem,
+            this.openCLMenuItem} );
+            this.menuStrip.Location = new System.Drawing.Point( 0, 0 );
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size( 792, 24 );
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "menuStrip1";
             // 
             // fileMenuItem
             // 
@@ -172,13 +138,13 @@
             this.buildConfigMenuItem.Text = "Configuration...";
             this.buildConfigMenuItem.Click += new System.EventHandler( this.buildDeviceMenuItem_Click );
             // 
-            // optionsToolStripMenuItem
+            // optionsMenuItem
             // 
-            this.optionsToolStripMenuItem.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
+            this.optionsMenuItem.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.fontSettngsMenuItem} );
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size( 56, 20 );
-            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsMenuItem.Name = "optionsMenuItem";
+            this.optionsMenuItem.Size = new System.Drawing.Size( 56, 20 );
+            this.optionsMenuItem.Text = "Options";
             // 
             // fontSettngsMenuItem
             // 
@@ -203,218 +169,126 @@
             this.logFontMenuItem.Text = "Log...";
             this.logFontMenuItem.Click += new System.EventHandler( this.logFontMenuItem_Click );
             // 
-            // compilerStatusStrip
+            // openCLMenuItem
             // 
-            this.compilerStatusStrip.Location = new System.Drawing.Point( 0, 512 );
-            this.compilerStatusStrip.Name = "compilerStatusStrip";
-            this.compilerStatusStrip.Size = new System.Drawing.Size( 778, 22 );
-            this.compilerStatusStrip.TabIndex = 1;
-            this.compilerStatusStrip.Text = "statusStrip1";
+            this.openCLMenuItem.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
+            this.showInfoMenuItem,
+            this.runTestsMenuItem} );
+            this.openCLMenuItem.Name = "openCLMenuItem";
+            this.openCLMenuItem.Size = new System.Drawing.Size( 57, 20 );
+            this.openCLMenuItem.Text = "OpenCL";
             // 
-            // compilerSplitContainer
+            // showInfoMenuItem
             // 
-            this.compilerSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.compilerSplitContainer.Location = new System.Drawing.Point( 3, 27 );
-            this.compilerSplitContainer.Name = "compilerSplitContainer";
-            this.compilerSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.showInfoMenuItem.Name = "showInfoMenuItem";
+            this.showInfoMenuItem.Size = new System.Drawing.Size( 152, 22 );
+            this.showInfoMenuItem.Text = "Show Info";
+            this.showInfoMenuItem.Click += new System.EventHandler( this.showInfoToolStripMenuItem_Click );
             // 
-            // compilerSplitContainer.Panel1
+            // runTestsMenuItem
             // 
-            this.compilerSplitContainer.Panel1.Controls.Add( this.editorTextBox );
+            this.runTestsMenuItem.Name = "runTestsMenuItem";
+            this.runTestsMenuItem.Size = new System.Drawing.Size( 152, 22 );
+            this.runTestsMenuItem.Text = "Run Tests";
+            this.runTestsMenuItem.Click += new System.EventHandler( this.runTestsToolStripMenuItem_Click );
             // 
-            // compilerSplitContainer.Panel2
+            // statusStrip
             // 
-            this.compilerSplitContainer.Panel2.Controls.Add( this.logTextBox );
-            this.compilerSplitContainer.Size = new System.Drawing.Size( 772, 482 );
-            this.compilerSplitContainer.SplitterDistance = 364;
-            this.compilerSplitContainer.TabIndex = 2;
+            this.statusStrip.Location = new System.Drawing.Point( 0, 544 );
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size( 792, 22 );
+            this.statusStrip.TabIndex = 1;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // splitContainer
+            // 
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.Location = new System.Drawing.Point( 3, 27 );
+            this.splitContainer.Name = "splitContainer";
+            this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.Controls.Add( this.editorTextBox );
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Controls.Add( this.logTextBox );
+            this.splitContainer.Size = new System.Drawing.Size( 786, 514 );
+            this.splitContainer.SplitterDistance = 320;
+            this.splitContainer.TabIndex = 2;
             // 
             // editorTextBox
             // 
+            this.editorTextBox.AcceptsTab = true;
+            this.editorTextBox.DetectUrls = false;
             this.editorTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.editorTextBox.Location = new System.Drawing.Point( 0, 0 );
-            this.editorTextBox.Multiline = true;
             this.editorTextBox.Name = "editorTextBox";
-            this.editorTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.editorTextBox.Size = new System.Drawing.Size( 772, 364 );
+            this.editorTextBox.Size = new System.Drawing.Size( 786, 320 );
             this.editorTextBox.TabIndex = 0;
+            this.editorTextBox.Text = "";
             this.editorTextBox.WordWrap = false;
             // 
             // logTextBox
             // 
+            this.logTextBox.AcceptsTab = true;
+            this.logTextBox.DetectUrls = false;
             this.logTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logTextBox.Location = new System.Drawing.Point( 0, 0 );
-            this.logTextBox.Multiline = true;
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
-            this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.logTextBox.Size = new System.Drawing.Size( 772, 114 );
+            this.logTextBox.Size = new System.Drawing.Size( 786, 190 );
             this.logTextBox.TabIndex = 1;
+            this.logTextBox.Text = "";
             this.logTextBox.WordWrap = false;
-            // 
-            // infoTab
-            // 
-            this.infoTab.Controls.Add( this.infoTextBox );
-            this.infoTab.Controls.Add( this.infoTableLayoutPanel );
-            this.infoTab.Location = new System.Drawing.Point( 4, 22 );
-            this.infoTab.Name = "infoTab";
-            this.infoTab.Padding = new System.Windows.Forms.Padding( 3 );
-            this.infoTab.Size = new System.Drawing.Size( 784, 540 );
-            this.infoTab.TabIndex = 1;
-            this.infoTab.Text = "InfoView";
-            this.infoTab.UseVisualStyleBackColor = true;
-            // 
-            // infoTextBox
-            // 
-            this.infoTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.infoTextBox.Location = new System.Drawing.Point( 3, 3 );
-            this.infoTextBox.Multiline = true;
-            this.infoTextBox.Name = "infoTextBox";
-            this.infoTextBox.ReadOnly = true;
-            this.infoTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.infoTextBox.Size = new System.Drawing.Size( 778, 499 );
-            this.infoTextBox.TabIndex = 5;
-            this.infoTextBox.WordWrap = false;
-            // 
-            // infoTableLayoutPanel
-            // 
-            this.infoTableLayoutPanel.AutoSize = true;
-            this.infoTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.infoTableLayoutPanel.ColumnCount = 2;
-            this.infoTableLayoutPanel.ColumnStyles.Add( new System.Windows.Forms.ColumnStyle( System.Windows.Forms.SizeType.Percent, 100F ) );
-            this.infoTableLayoutPanel.ColumnStyles.Add( new System.Windows.Forms.ColumnStyle() );
-            this.infoTableLayoutPanel.Controls.Add( this.copyFlowLayoutPanel, 1, 0 );
-            this.infoTableLayoutPanel.Controls.Add( this.infoFlowLayoutPanel, 0, 0 );
-            this.infoTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.infoTableLayoutPanel.Location = new System.Drawing.Point( 3, 502 );
-            this.infoTableLayoutPanel.Name = "infoTableLayoutPanel";
-            this.infoTableLayoutPanel.RowCount = 1;
-            this.infoTableLayoutPanel.RowStyles.Add( new System.Windows.Forms.RowStyle() );
-            this.infoTableLayoutPanel.Size = new System.Drawing.Size( 778, 35 );
-            this.infoTableLayoutPanel.TabIndex = 4;
-            // 
-            // copyFlowLayoutPanel
-            // 
-            this.copyFlowLayoutPanel.AutoSize = true;
-            this.copyFlowLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.copyFlowLayoutPanel.Controls.Add( this.copyButton );
-            this.copyFlowLayoutPanel.Location = new System.Drawing.Point( 665, 3 );
-            this.copyFlowLayoutPanel.Name = "copyFlowLayoutPanel";
-            this.copyFlowLayoutPanel.Size = new System.Drawing.Size( 110, 29 );
-            this.copyFlowLayoutPanel.TabIndex = 5;
-            // 
-            // copyButton
-            // 
-            this.copyButton.AutoSize = true;
-            this.copyButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.copyButton.Location = new System.Drawing.Point( 3, 3 );
-            this.copyButton.Name = "copyButton";
-            this.copyButton.Size = new System.Drawing.Size( 104, 23 );
-            this.copyButton.TabIndex = 2;
-            this.copyButton.Text = "Copy To Clipboard";
-            this.copyButton.UseVisualStyleBackColor = true;
-            this.copyButton.Click += new System.EventHandler( this.copyButton_Click );
-            // 
-            // infoFlowLayoutPanel
-            // 
-            this.infoFlowLayoutPanel.AutoSize = true;
-            this.infoFlowLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.infoFlowLayoutPanel.Controls.Add( this.infoButton );
-            this.infoFlowLayoutPanel.Controls.Add( this.testButton );
-            this.infoFlowLayoutPanel.Location = new System.Drawing.Point( 3, 3 );
-            this.infoFlowLayoutPanel.Name = "infoFlowLayoutPanel";
-            this.infoFlowLayoutPanel.Size = new System.Drawing.Size( 186, 29 );
-            this.infoFlowLayoutPanel.TabIndex = 0;
-            // 
-            // infoButton
-            // 
-            this.infoButton.AutoSize = true;
-            this.infoButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.infoButton.Location = new System.Drawing.Point( 3, 3 );
-            this.infoButton.Name = "infoButton";
-            this.infoButton.Size = new System.Drawing.Size( 108, 23 );
-            this.infoButton.TabIndex = 1;
-            this.infoButton.Text = "Query OpenCL Info";
-            this.infoButton.UseVisualStyleBackColor = true;
-            this.infoButton.Click += new System.EventHandler( this.infoButton_Click );
-            // 
-            // testButton
-            // 
-            this.testButton.AutoSize = true;
-            this.testButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.testButton.Location = new System.Drawing.Point( 117, 3 );
-            this.testButton.Name = "testButton";
-            this.testButton.Size = new System.Drawing.Size( 66, 23 );
-            this.testButton.TabIndex = 0;
-            this.testButton.Text = "Run Tests";
-            this.testButton.UseVisualStyleBackColor = true;
-            this.testButton.Click += new System.EventHandler( this.testButton_Click );
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size( 792, 566 );
-            this.Controls.Add( this.tabControl );
-            this.MainMenuStrip = this.compilerMenuStrip;
+            this.Controls.Add( this.tableLayoutPanel );
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clootils";
-            this.tabControl.ResumeLayout( false );
-            this.compilerTab.ResumeLayout( false );
-            this.compilerTab.PerformLayout();
-            this.compilerTableLayoutPanel.ResumeLayout( false );
-            this.compilerTableLayoutPanel.PerformLayout();
-            this.compilerMenuStrip.ResumeLayout( false );
-            this.compilerMenuStrip.PerformLayout();
-            this.compilerSplitContainer.Panel1.ResumeLayout( false );
-            this.compilerSplitContainer.Panel1.PerformLayout();
-            this.compilerSplitContainer.Panel2.ResumeLayout( false );
-            this.compilerSplitContainer.Panel2.PerformLayout();
-            this.compilerSplitContainer.ResumeLayout( false );
-            this.infoTab.ResumeLayout( false );
-            this.infoTab.PerformLayout();
-            this.infoTableLayoutPanel.ResumeLayout( false );
-            this.infoTableLayoutPanel.PerformLayout();
-            this.copyFlowLayoutPanel.ResumeLayout( false );
-            this.copyFlowLayoutPanel.PerformLayout();
-            this.infoFlowLayoutPanel.ResumeLayout( false );
-            this.infoFlowLayoutPanel.PerformLayout();
+            this.tableLayoutPanel.ResumeLayout( false );
+            this.tableLayoutPanel.PerformLayout();
+            this.menuStrip.ResumeLayout( false );
+            this.menuStrip.PerformLayout();
+            this.splitContainer.Panel1.ResumeLayout( false );
+            this.splitContainer.Panel2.ResumeLayout( false );
+            this.splitContainer.ResumeLayout( false );
             this.ResumeLayout( false );
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage compilerTab;
-        private System.Windows.Forms.TableLayoutPanel compilerTableLayoutPanel;
-        private System.Windows.Forms.TabPage infoTab;
-        private System.Windows.Forms.MenuStrip compilerMenuStrip;
-        private System.Windows.Forms.StatusStrip compilerStatusStrip;
-        private System.Windows.Forms.SplitContainer compilerSplitContainer;
-        private System.Windows.Forms.TextBox editorTextBox;
-        private System.Windows.Forms.TextBox logTextBox;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.ToolStripMenuItem fileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openFileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveFileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildProgramMenuItem;
-        private System.Windows.Forms.Button testButton;
-        private System.Windows.Forms.Button infoButton;
-        private System.Windows.Forms.Button copyButton;
-        private System.Windows.Forms.TableLayoutPanel infoTableLayoutPanel;
-        private System.Windows.Forms.FlowLayoutPanel infoFlowLayoutPanel;
-        private System.Windows.Forms.FlowLayoutPanel copyFlowLayoutPanel;
-        private System.Windows.Forms.TextBox infoTextBox;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.FontDialog fontDialog;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fontSettngsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editorFontMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logFontMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildConfigMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openCLMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showInfoMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runTestsMenuItem;
+        private System.Windows.Forms.RichTextBox editorTextBox;
+        private System.Windows.Forms.RichTextBox logTextBox;
 
     }
 }
