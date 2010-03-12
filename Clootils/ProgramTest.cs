@@ -53,13 +53,9 @@ kernel void Test( void )
             ComputeContext context = new ComputeContext( ComputeDeviceTypes.Default, pd, null, IntPtr.Zero );
             ComputeProgram program = new ComputeProgram( context, new string[]{ kernelSource } );
             program.Build( null, null, null, IntPtr.Zero );
-            Encoding encoding = new ASCIIEncoding();
-            string binary = encoding.GetString( program.Binaries[ 0 ] );
-            
-            if( binary.EndsWith( "\0" ) )
-                binary = binary.TrimEnd( new char[]{ '\0' } );
-            
-            Console.WriteLine( binary );
+            byte[] bytes = program.Binaries[ 0 ];
+            Console.WriteLine( "Compiled program head:" );
+            Console.WriteLine( BitConverter.ToString( bytes, 0, 16 ) + "..." );            
         }
     }
 }
