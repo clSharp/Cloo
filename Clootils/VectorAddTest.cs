@@ -30,6 +30,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
+using System.Runtime.InteropServices;
 using Cloo;
 
 namespace Clootils
@@ -86,7 +87,13 @@ kernel void VectorAdd(
 
             commands.Execute( kernel, null, new long[] { count }, null, events );
 
-            arrC = commands.Read( c, true, 0, count, events );
+            arrC = new float[ count ];
+            GCHandle arrCHandle = GCHandle.Alloc( arrC, GCHandleType.Pinned );
+            
+            commands.Read( c, false, 0, count, arrCHandle.AddrOfPinnedObject(), events );
+            commands.Finish();
+
+            arrCHandle.Free();
 
             for( int i = 0; i < count; i++ )
                 Console.WriteLine( "{0} + {1} = {2}", arrA[ i ], arrB[ i ], arrC[ i ] );

@@ -529,43 +529,33 @@ namespace Cloo
         /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
         /// <param name="offset">The offset in elements where reading starts.</param>
         /// <param name="count">The number of elements to read.</param>
+        /// <param name="data">A preallocated memory area to read the data into.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public T[] Read<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, ICollection<ComputeEvent> events ) where T: struct
+        public void Read<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEvent> events ) where T: struct
         {
             unsafe
             {
                 int sizeofT = Marshal.SizeOf( typeof( T ) );
-                T[] data = new T[ count ];
-                GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
                 IntPtr[] eventHandles = Tools.ExtractHandles( events );
-                IntPtr newEventHandle = IntPtr.Zero;                
+                IntPtr newEventHandle = IntPtr.Zero;
 
-                try
+                fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    fixed( IntPtr* eventHandlesPtr = eventHandles )
-                    {
-                        ComputeErrorCode error = CL10.EnqueueReadBuffer(
-                            Handle,
-                            buffer.Handle,
-                            ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
-                            new IntPtr( offset * sizeofT ),
-                            new IntPtr( count * sizeofT ),
-                            gcHandle.AddrOfPinnedObject(),
-                            eventHandles.Length,
-                            eventHandlesPtr,
-                            ( events != null ) ? &newEventHandle : null );
-                        ComputeException.ThrowOnError( error );
-                    }
-                }
-                finally
-                {
-                    gcHandle.Free();
+                    ComputeErrorCode error = CL10.EnqueueReadBuffer(
+                        Handle,
+                        buffer.Handle,
+                        ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
+                        new IntPtr( offset * sizeofT ),
+                        new IntPtr( count * sizeofT ),
+                        data,
+                        eventHandles.Length,
+                        eventHandlesPtr,
+                        ( events != null ) ? &newEventHandle : null );
+                    ComputeException.ThrowOnError( error );
                 }
 
                 if( events != null )
                     events.Add( new ComputeEvent( newEventHandle, this ) );
-
-                return data;
             }
         }
 
@@ -578,46 +568,36 @@ namespace Cloo
         /// <param name="region">The region (width, height, depth) in pixels to read.</param>
         /// <param name="rowPitch">The length of each row in bytes. This value must be greater than or equal to the pixel size in bytes * width.</param>
         /// <param name="slicePitch">Size in bytes of the 2D slice of the 3D region of a 3D image being read. This must be 0 if image is a 2D image. This value must be greater than or equal to rowPitch * height.</param>
+        /// <param name="data">A preallocated memory area to read the data into.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public byte[] Read( ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, ICollection<ComputeEvent> events )
+        public void Read( ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events )
         {
             unsafe
             {
-                byte[] data = new byte[ region[ 0 ] * region[ 1 ] * region[ 2 ] * image.ElementSize ];
-                GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
                 IntPtr[] eventHandles = Tools.ExtractHandles( events );
                 IntPtr newEventHandle = IntPtr.Zero;
 
-                try
+                fixed( IntPtr* offsetPtr = Tools.ConvertArray( offset ) )
+                fixed( IntPtr* regionPtr = Tools.ConvertArray( region ) )
+                fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    fixed( IntPtr* offsetPtr = Tools.ConvertArray( offset ) )
-                    fixed( IntPtr* regionPtr = Tools.ConvertArray( region ) )
-                    fixed( IntPtr* eventHandlesPtr = eventHandles )
-                    {
-                        ComputeErrorCode error = CL10.EnqueueReadImage(
-                            Handle,
-                            image.Handle,
-                            ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
-                            offsetPtr,
-                            regionPtr,
-                            new IntPtr( rowPitch ),
-                            new IntPtr( slicePitch ),
-                            gcHandle.AddrOfPinnedObject(),
-                            eventHandles.Length,
-                            eventHandlesPtr,
-                            ( events != null ) ? &newEventHandle : null );
-                        ComputeException.ThrowOnError( error );
-                    }
-                }
-                finally
-                {
-                    gcHandle.Free();
+                    ComputeErrorCode error = CL10.EnqueueReadImage(
+                        Handle,
+                        image.Handle,
+                        ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
+                        offsetPtr,
+                        regionPtr,
+                        new IntPtr( rowPitch ),
+                        new IntPtr( slicePitch ),
+                        data,
+                        eventHandles.Length,
+                        eventHandlesPtr,
+                        ( events != null ) ? &newEventHandle : null );
+                    ComputeException.ThrowOnError( error );
                 }
 
                 if( events != null )
                     events.Add( new ComputeEvent( newEventHandle, this ) );
-
-                return data;
             }
         }
 
@@ -722,35 +702,27 @@ namespace Cloo
         /// <param name="count">The number of elements to write.</param>
         /// <param name="data">The content written to the buffer.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Write<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, T[] data, ICollection<ComputeEvent> events ) where T: struct
+        public void Write<T>( ComputeBuffer<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEvent> events ) where T: struct
         {
             unsafe
             {
                 int sizeofT = Marshal.SizeOf( typeof( T ) );
-                GCHandle gcHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
                 IntPtr[] eventHandles = Tools.ExtractHandles( events );
                 IntPtr newEventHandle = IntPtr.Zero;
 
-                try
+                fixed( IntPtr* eventHandlesPtr = eventHandles )
                 {
-                    fixed( IntPtr* eventHandlesPtr = eventHandles )
-                    {
-                        ComputeErrorCode error = CL10.EnqueueWriteBuffer(
-                            Handle,
-                            buffer.Handle,
-                            ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
-                            new IntPtr( offset * sizeofT ),
-                            new IntPtr( count * sizeofT ),
-                            gcHandle.AddrOfPinnedObject(),
-                            eventHandles.Length,
-                            eventHandlesPtr,
-                            ( events != null ) ? &newEventHandle : null );
-                        ComputeException.ThrowOnError( error );
-                    }
-                }
-                finally
-                {
-                    gcHandle.Free();
+                    ComputeErrorCode error = CL10.EnqueueWriteBuffer(
+                        Handle,
+                        buffer.Handle,
+                        ( blocking ) ? ComputeBoolean.True : ComputeBoolean.False,
+                        new IntPtr( offset * sizeofT ),
+                        new IntPtr( count * sizeofT ),
+                        data,
+                        eventHandles.Length,
+                        eventHandlesPtr,
+                        ( events != null ) ? &newEventHandle : null );
+                    ComputeException.ThrowOnError( error );
                 }
 
                 if( events != null )
