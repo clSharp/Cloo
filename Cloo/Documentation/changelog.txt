@@ -1,3 +1,22 @@
+[0.7.0] -----------------------------------------------------------------------
+Breaking changes:
+Changes affecting ComputeCommandQueue.Read()/Write() methods in order to fix a bug concerning non-blocking calls. The responsibility of allocating/freeing memory or GC Handles is now up to the application. See VectorAddTest.cs for an example of use.
+
+New functionality:
+Enabled public access to the raw OpenCL bindings.
+Added enum tokens for the cl_khr_icd extension.
+
+Bugfixes:
+ComputeCommandQueue.Read() returns invalid data if invoked as non-blocking.
+ComputeCommandQueue.Unmap() doesn't append the event to the list. 
+
+Internals:
+The bindings no longer have "out" parameters. Everything converted to pointers for consistency.
+
+Documentation:
+None.
+
+
 [0.6.2] -----------------------------------------------------------------------
 Breaking changes:
 Renamed ComputeImage.PixelSize to ElementSize.
