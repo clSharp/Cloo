@@ -125,13 +125,16 @@ namespace Cloo
         /// <param name="properties">A list of properties for the command-queue.</param>
         public ComputeCommandQueue( ComputeContext context, ComputeDevice device, ComputeCommandQueueFlags properties )
         {
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL10.CreateCommandQueue( context.Handle, device.Handle, properties, out error );
-            ComputeException.ThrowOnError( error );
-            this.device = device;
-            this.context = context;
-            outOfOrderExec = ( ( properties & ComputeCommandQueueFlags.OutOfOrderExecution ) == ComputeCommandQueueFlags.OutOfOrderExecution );
-            profiling = ( ( properties & ComputeCommandQueueFlags.Profiling ) == ComputeCommandQueueFlags.Profiling );
+            unsafe
+            {
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                Handle = CL10.CreateCommandQueue( context.Handle, device.Handle, properties, &error );
+                ComputeException.ThrowOnError( error );
+                this.device = device;
+                this.context = context;
+                outOfOrderExec = ( ( properties & ComputeCommandQueueFlags.OutOfOrderExecution ) == ComputeCommandQueueFlags.OutOfOrderExecution );
+                profiling = ( ( properties & ComputeCommandQueueFlags.Profiling ) == ComputeCommandQueueFlags.Profiling );
+            }
         }
 
         #endregion
@@ -466,7 +469,7 @@ namespace Cloo
                         eventHandles.Length,
                         eventHandlesPtr,
                         ( events != null ) ? &newEventHandle : null,
-                        out error );
+                        &error );
                     ComputeException.ThrowOnError( error );
                 }
 
@@ -511,7 +514,7 @@ namespace Cloo
                         eventHandles.Length,
                         eventHandlesPtr,
                         ( events != null ) ? &newEventHandle : null,
-                        out error );
+                        &error );
                     ComputeException.ThrowOnError( error );
                 }
 

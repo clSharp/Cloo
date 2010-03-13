@@ -76,8 +76,11 @@ namespace Cloo
         {
             get
             {
-                return GetInfo<ComputeCommandProfilingInfo, long>(
-                    ComputeCommandProfilingInfo.Ended, CL10.GetEventProfilingInfo );
+                unsafe
+                {
+                    return GetInfo<ComputeCommandProfilingInfo, long>(
+                        ComputeCommandProfilingInfo.Ended, CL10.GetEventProfilingInfo );
+                }
             }
         }
 
@@ -88,8 +91,11 @@ namespace Cloo
         {
             get
             {
-                return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
-                    ComputeCommandProfilingInfo.Queued, CL10.GetEventProfilingInfo );
+                unsafe
+                {
+                    return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
+                        ComputeCommandProfilingInfo.Queued, CL10.GetEventProfilingInfo );
+                }
             }
         }
 
@@ -100,8 +106,11 @@ namespace Cloo
         {
             get
             {
-                return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
-                    ComputeCommandProfilingInfo.Started, CL10.GetEventProfilingInfo );
+                unsafe
+                {
+                    return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
+                        ComputeCommandProfilingInfo.Started, CL10.GetEventProfilingInfo );
+                }
             }
         }
 
@@ -112,8 +121,11 @@ namespace Cloo
         {
             get
             {
-                return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
-                    ComputeCommandProfilingInfo.Submitted, CL10.GetEventProfilingInfo );
+                unsafe
+                {
+                    return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
+                        ComputeCommandProfilingInfo.Submitted, CL10.GetEventProfilingInfo );
+                }
             }
         }
 
@@ -124,8 +136,11 @@ namespace Cloo
         {
             get
             {
-                return ( ComputeCommandExecutionStatus )GetInfo<ComputeEventInfo, int>(
-                    ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo );
+                unsafe
+                {
+                    return ( ComputeCommandExecutionStatus )GetInfo<ComputeEventInfo, int>(
+                        ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo );
+                }
             }
         }
 
@@ -135,10 +150,13 @@ namespace Cloo
 
         internal ComputeEvent( IntPtr handle, ComputeCommandQueue queue )
         {
-            Handle = handle;
-            commandQueue = queue;
-            commandType = ( ComputeCommandType )GetInfo<ComputeEventInfo, uint>(
-                ComputeEventInfo.CommandType, CL10.GetEventInfo );
+            unsafe
+            {
+                Handle = handle;
+                commandQueue = queue;
+                commandType = ( ComputeCommandType )GetInfo<ComputeEventInfo, uint>(
+                    ComputeEventInfo.CommandType, CL10.GetEventInfo );
+            }
         }
 
         #endregion

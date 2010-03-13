@@ -63,7 +63,7 @@ namespace Cloo
                     new IntPtr( height ),
                     new IntPtr( rowPitch ),
                     data,
-                    out error );
+                    &error );
                 ComputeException.ThrowOnError( error );
 
                 Init();
@@ -91,7 +91,7 @@ namespace Cloo
                     context.Handle,
                     flags,
                     renderbufferId,
-                    out error );
+                    &error );
                 ComputeException.ThrowOnError( error );
 
                 return new ComputeImage2D( image, context, flags );
@@ -109,7 +109,7 @@ namespace Cloo
                     textureTarget,
                     mipLevel,
                     textureId,
-                    out error );
+                    &error );
                 ComputeException.ThrowOnError( error );
 
                 return new ComputeImage2D( image, context, flags );

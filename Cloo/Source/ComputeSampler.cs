@@ -104,18 +104,21 @@ namespace Cloo
         /// <param name="filtering">Specifies the Type of filter that must be applied when reading an image.</param>
         public ComputeSampler( ComputeContext context, bool normalizedCoords, ComputeImageAddressing addressing, ComputeImageFiltering filtering )
         {
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL10.CreateSampler(
-                context.Handle,
-                ( normalizedCoords ) ? ComputeBoolean.True : ComputeBoolean.False,
-                addressing,
-                filtering,
-                out error );
-            ComputeException.ThrowOnError( error );
-            this.addressing = addressing;
-            this.context = context;
-            this.filtering = filtering;
-            this.normalizedCoords = normalizedCoords;
+            unsafe
+            {
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                Handle = CL10.CreateSampler(
+                    context.Handle,
+                    ( normalizedCoords ) ? ComputeBoolean.True : ComputeBoolean.False,
+                    addressing,
+                    filtering,
+                    &error );
+                ComputeException.ThrowOnError( error );
+                this.addressing = addressing;
+                this.context = context;
+                this.filtering = filtering;
+                this.normalizedCoords = normalizedCoords;
+            }
         }
 
         #endregion

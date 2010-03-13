@@ -97,7 +97,7 @@ namespace Cloo
                         deviceHandlesPtr,
                         notifyFuncPtr,
                         notifyDataPtr,
-                        out error );
+                        &error );
                 ComputeException.ThrowOnError( error );
 
                 this.properties = properties;
@@ -126,7 +126,7 @@ namespace Cloo
                         deviceType,
                         notifyFuncPtr,
                         notifyDataPtr,
-                        out error );
+                        &error );
                 ComputeException.ThrowOnError( error );
 
                 this.properties = properties;
@@ -171,15 +171,18 @@ namespace Cloo
 
         private ReadOnlyCollection<ComputeDevice> GetDevices()
         {
-            List<IntPtr> validDeviceHandles = new List<IntPtr>( GetArrayInfo<ComputeContextInfo, IntPtr>( ComputeContextInfo.Devices, CL10.GetContextInfo ) );
-            List<ComputeDevice> validDevices = new List<ComputeDevice>();
-            foreach( ComputePlatform platform in ComputePlatform.Platforms )
+            unsafe
             {
-                foreach( ComputeDevice device in platform.Devices )
-                    if( validDeviceHandles.Contains( device.Handle ) )
-                        validDevices.Add( device );
+                List<IntPtr> validDeviceHandles = new List<IntPtr>( GetArrayInfo<ComputeContextInfo, IntPtr>( ComputeContextInfo.Devices, CL10.GetContextInfo ) );
+                List<ComputeDevice> validDevices = new List<ComputeDevice>();
+                foreach( ComputePlatform platform in ComputePlatform.Platforms )
+                {
+                    foreach( ComputeDevice device in platform.Devices )
+                        if( validDeviceHandles.Contains( device.Handle ) )
+                            validDevices.Add( device );
+                }
+                return new ReadOnlyCollection<ComputeDevice>( validDevices );
             }
-            return new ReadOnlyCollection<ComputeDevice>( validDevices );
         }
 
         #endregion

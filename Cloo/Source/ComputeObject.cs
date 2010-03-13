@@ -108,27 +108,30 @@ namespace Cloo
                 GetInfoDelegate<InfoEnum> getInfoDelegate
             )
         {
-            ComputeErrorCode error;
-            QueriedType[] buffer;
-            IntPtr bufferSizeRet;
-            getInfoDelegate( handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet );
-            buffer = new QueriedType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( QueriedType ) ) ];
-            GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
-            try
+            unsafe
             {
-                error = getInfoDelegate(
-                    handle,
-                    paramName,
-                    bufferSizeRet,
-                    gcHandle.AddrOfPinnedObject(),
-                    out bufferSizeRet );
-                ComputeException.ThrowOnError( error );
+                ComputeErrorCode error;
+                QueriedType[] buffer;
+                IntPtr bufferSizeRet;
+                getInfoDelegate( handle, paramName, IntPtr.Zero, IntPtr.Zero, &bufferSizeRet );
+                buffer = new QueriedType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( QueriedType ) ) ];
+                GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
+                try
+                {
+                    error = getInfoDelegate(
+                        handle,
+                        paramName,
+                        bufferSizeRet,
+                        gcHandle.AddrOfPinnedObject(),
+                        null );
+                    ComputeException.ThrowOnError( error );
+                }
+                finally
+                {
+                    gcHandle.Free();
+                }
+                return buffer;
             }
-            finally
-            {
-                gcHandle.Free();
-            }
-            return buffer;
         }
 
         protected QueriedType[] GetArrayInfo<InfoEnum, QueriedType>
@@ -138,28 +141,31 @@ namespace Cloo
                 GetInfoDelegateEx<InfoEnum> getInfoDelegate
             )
         {
-            ComputeErrorCode error;
-            QueriedType[] buffer;
-            IntPtr bufferSizeRet;
-            error = getInfoDelegate( handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet );
-            buffer = new QueriedType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( QueriedType ) ) ];
-            GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
-            try
+            unsafe
             {
-                error = getInfoDelegate(
-                    handle,
-                    secondaryObject.handle,
-                    paramName,
-                    bufferSizeRet,
-                    gcHandle.AddrOfPinnedObject(),
-                    out bufferSizeRet );
-                ComputeException.ThrowOnError( error );
+                ComputeErrorCode error;
+                QueriedType[] buffer;
+                IntPtr bufferSizeRet;
+                error = getInfoDelegate( handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, &bufferSizeRet );
+                buffer = new QueriedType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( QueriedType ) ) ];
+                GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
+                try
+                {
+                    error = getInfoDelegate(
+                        handle,
+                        secondaryObject.handle,
+                        paramName,
+                        bufferSizeRet,
+                        gcHandle.AddrOfPinnedObject(),
+                        null );
+                    ComputeException.ThrowOnError( error );
+                }
+                finally
+                {
+                    gcHandle.Free();
+                }
+                return buffer;
             }
-            finally
-            {
-                gcHandle.Free();
-            }
-            return buffer;
         }
 
         protected bool GetBoolInfo<InfoEnum>
@@ -179,26 +185,28 @@ namespace Cloo
             )
             where QueriedType: struct             
         {
-            ComputeErrorCode error;
-            IntPtr valueSizeRet;
-            QueriedType result = new QueriedType();
-            GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
-            try
+            unsafe
             {
-                error = getInfoDelegate(
-                    handle,
-                    paramName,
-                    ( IntPtr )Marshal.SizeOf( result ),
-                    gcHandle.AddrOfPinnedObject(),
-                    out valueSizeRet );
-                ComputeException.ThrowOnError( error );
+                ComputeErrorCode error;
+                QueriedType result = new QueriedType();
+                GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
+                try
+                {
+                    error = getInfoDelegate(
+                        handle,
+                        paramName,
+                        ( IntPtr )Marshal.SizeOf( result ),
+                        gcHandle.AddrOfPinnedObject(),
+                        null );
+                    ComputeException.ThrowOnError( error );
+                }
+                finally
+                {
+                    result = ( QueriedType )gcHandle.Target;
+                    gcHandle.Free();
+                }
+                return result;
             }
-            finally
-            {
-                result = ( QueriedType )gcHandle.Target;
-                gcHandle.Free();
-            }
-            return result;
         }
 
         protected QueriedType GetInfo<InfoEnum, QueriedType>
@@ -211,7 +219,6 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr valueSizeRet;
                 QueriedType result = new QueriedType();
                 GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
                 try
@@ -222,7 +229,7 @@ namespace Cloo
                         paramName,
                         new IntPtr( Marshal.SizeOf( result ) ),
                         gcHandle.AddrOfPinnedObject(),
-                        out valueSizeRet );
+                        null );
                     ComputeException.ThrowOnError( error );
                 }
                 finally
@@ -270,7 +277,7 @@ namespace Cloo
                 InfoEnum paramName,
                 IntPtr paramValueSize,
                 IntPtr paramValue,
-                out IntPtr paramValueSizeRet
+                IntPtr* paramValueSizeRet
             );
 
         protected unsafe delegate ComputeErrorCode GetInfoDelegateEx<InfoEnum>
@@ -280,7 +287,7 @@ namespace Cloo
                 InfoEnum paramName,
                 IntPtr paramValueSize,
                 IntPtr paramValue,
-                out IntPtr paramValueSizeRet
+                IntPtr* paramValueSizeRet
             );
 
         #endregion

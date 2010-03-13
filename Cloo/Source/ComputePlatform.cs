@@ -139,16 +139,19 @@ namespace Cloo
 
         private ComputePlatform( IntPtr handle )
         {
-            Handle = handle;
-            devices = new ReadOnlyCollection<ComputeDevice>( GetDevices() );
+            unsafe
+            {
+                Handle = handle;
+                devices = new ReadOnlyCollection<ComputeDevice>( GetDevices() );
 
-            string extensionString = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Extensions, CL10.GetPlatformInfo );
-            extensions = new ReadOnlyCollection<string>( extensionString.Split( new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries ) );
+                string extensionString = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Extensions, CL10.GetPlatformInfo );
+                extensions = new ReadOnlyCollection<string>( extensionString.Split( new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries ) );
 
-            name = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Name, CL10.GetPlatformInfo );
-            profile = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Profile, CL10.GetPlatformInfo );
-            vendor = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Vendor, CL10.GetPlatformInfo );
-            version = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Version, CL10.GetPlatformInfo );
+                name = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Name, CL10.GetPlatformInfo );
+                profile = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Profile, CL10.GetPlatformInfo );
+                vendor = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Vendor, CL10.GetPlatformInfo );
+                version = GetStringInfo<ComputePlatformInfo>( ComputePlatformInfo.Version, CL10.GetPlatformInfo );
+            }
         }
 
         #endregion

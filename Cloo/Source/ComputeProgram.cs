@@ -126,7 +126,7 @@ namespace Cloo
                     1,
                     new string[] { source },
                     null,
-                    out error );
+                    &error );
                 ComputeException.ThrowOnError( error );
 
                 this.context = context;
@@ -155,7 +155,7 @@ namespace Cloo
                         source.Length,
                         source,
                         null,
-                        out error );
+                        &error );
                 ComputeException.ThrowOnError( error );
 
                 this.context = context;
@@ -209,7 +209,7 @@ namespace Cloo
                             binariesLengthsPtr,
                             binariesPtr,
                             binaryStatusPtr,
-                            out error );
+                            &error );
                         ComputeException.ThrowOnError( error );
                     }
                 }
@@ -309,10 +309,13 @@ namespace Cloo
         /// </summary>
         public string GetBuildLog( ComputeDevice device )
         {
-            return GetStringInfo<ComputeProgramBuildInfo>(
-                device,
-                ComputeProgramBuildInfo.BuildLog,
-                CL10.GetProgramBuildInfo );
+            unsafe
+            {
+                return GetStringInfo<ComputeProgramBuildInfo>(
+                    device,
+                    ComputeProgramBuildInfo.BuildLog,
+                    CL10.GetProgramBuildInfo );
+            }
         }
 
         /// <summary>
@@ -320,10 +323,13 @@ namespace Cloo
         /// </summary>
         public ComputeProgramBuildStatus GetBuildStatus( ComputeDevice device )
         {
-            return ( ComputeProgramBuildStatus )GetInfo<ComputeProgramBuildInfo, uint>(
-                device,
-                ComputeProgramBuildInfo.Status,
-                CL10.GetProgramBuildInfo );
+            unsafe
+            {
+                return ( ComputeProgramBuildStatus )GetInfo<ComputeProgramBuildInfo, uint>(
+                    device,
+                    ComputeProgramBuildInfo.Status,
+                    CL10.GetProgramBuildInfo );
+            }
         }
 
         /// <summary>
@@ -379,7 +385,7 @@ namespace Cloo
                         ComputeProgramInfo.Binaries,
                         new IntPtr( binariesPtrs.Length * IntPtr.Size ),
                         binariesPtrsGCHandle.AddrOfPinnedObject(),
-                        out ret );
+                        null );
                     ComputeException.ThrowOnError( error );
                 }
                 finally

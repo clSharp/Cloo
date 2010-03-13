@@ -88,25 +88,31 @@ namespace Cloo
 
         internal ComputeKernel( IntPtr handle, ComputeProgram program )
         {
-            Handle = handle;
-            context = program.Context;            
-            functionName = GetStringInfo<ComputeKernelInfo>( ComputeKernelInfo.FunctionName, CL10.GetKernelInfo );            
-            this.program = program;
-            tracker = new Dictionary<int, ComputeResource>();
+            unsafe
+            {
+                Handle = handle;
+                context = program.Context;
+                functionName = GetStringInfo<ComputeKernelInfo>( ComputeKernelInfo.FunctionName, CL10.GetKernelInfo );
+                this.program = program;
+                tracker = new Dictionary<int, ComputeResource>();
+            }
         }
 
         internal ComputeKernel( string functionName, ComputeProgram program )
         {
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL10.CreateKernel( 
-                program.Handle, 
-                functionName, 
-                out error );
-            ComputeException.ThrowOnError( error );
-            context = program.Context;
-            this.functionName = functionName;
-            this.program = program;
-            tracker = new Dictionary<int, ComputeResource>();
+            unsafe
+            {
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                Handle = CL10.CreateKernel(
+                    program.Handle,
+                    functionName,
+                    &error );
+                ComputeException.ThrowOnError( error );
+                context = program.Context;
+                this.functionName = functionName;
+                this.program = program;
+                tracker = new Dictionary<int, ComputeResource>();
+            }
         }
 
         #endregion
@@ -118,8 +124,11 @@ namespace Cloo
         /// </summary>
         public long GetLocalMemorySize( ComputeDevice device )
         {
-            return ( long )GetInfo<ComputeKernelWorkGroupInfo, ulong>(
-                device, ComputeKernelWorkGroupInfo.LocalMemorySize, CL10.GetKernelWorkGroupInfo );
+            unsafe
+            {
+                return ( long )GetInfo<ComputeKernelWorkGroupInfo, ulong>(
+                    device, ComputeKernelWorkGroupInfo.LocalMemorySize, CL10.GetKernelWorkGroupInfo );
+            }
         }
 
         /// <summary>
@@ -127,9 +136,12 @@ namespace Cloo
         /// </summary>
         public long[] GetCompileWorkGroupSize( ComputeDevice device )
         {
-            return Tools.ConvertArray(
-                GetArrayInfo<ComputeKernelWorkGroupInfo, IntPtr>(
-                    device, ComputeKernelWorkGroupInfo.CompileWorkGroupSize, CL10.GetKernelWorkGroupInfo ) );
+            unsafe
+            {
+                return Tools.ConvertArray(
+                    GetArrayInfo<ComputeKernelWorkGroupInfo, IntPtr>(
+                        device, ComputeKernelWorkGroupInfo.CompileWorkGroupSize, CL10.GetKernelWorkGroupInfo ) );
+            }
         }
 
         /// <summary>
@@ -137,8 +149,11 @@ namespace Cloo
         /// </summary>
         public long GetWorkGroupSize( ComputeDevice device )
         {
-            return ( long )GetInfo<ComputeKernelWorkGroupInfo, IntPtr>(
-                    device, ComputeKernelWorkGroupInfo.WorkGroupSize, CL10.GetKernelWorkGroupInfo );
+            unsafe
+            {
+                return ( long )GetInfo<ComputeKernelWorkGroupInfo, IntPtr>(
+                        device, ComputeKernelWorkGroupInfo.WorkGroupSize, CL10.GetKernelWorkGroupInfo );
+            }
         }
 
         /// <summary>

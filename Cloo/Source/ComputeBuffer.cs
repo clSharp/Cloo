@@ -69,17 +69,20 @@ namespace Cloo
         public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, long count )
             : base( context, flags )
         {
-            this.count = count;
-            Size = count * Marshal.SizeOf( typeof( T ) );
+            unsafe
+            {
+                this.count = count;
+                Size = count * Marshal.SizeOf( typeof( T ) );
 
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL10.CreateBuffer(
-                context.Handle,
-                flags,
-                new IntPtr( Size ),
-                IntPtr.Zero,
-                out error );
-            ComputeException.ThrowOnError( error );
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                Handle = CL10.CreateBuffer(
+                    context.Handle,
+                    flags,
+                    new IntPtr( Size ),
+                    IntPtr.Zero,
+                    &error );
+                ComputeException.ThrowOnError( error );
+            }
         }
 
         /// <summary>
@@ -91,34 +94,40 @@ namespace Cloo
         public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, T[] data )
             : base( context, flags )
         {
-            count = data.Length;
-            Size = count * Marshal.SizeOf( typeof( T ) );
+            unsafe
+            {
+                count = data.Length;
+                Size = count * Marshal.SizeOf( typeof( T ) );
 
-            GCHandle dataPtr = GCHandle.Alloc( data, GCHandleType.Pinned );
-            try
-            {
-                ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateBuffer(
-                    context.Handle,
-                    flags,
-                    new IntPtr( Size ),
-                    dataPtr.AddrOfPinnedObject(),
-                    out error );
-                ComputeException.ThrowOnError( error );
-            }
-            finally
-            {
-                dataPtr.Free();
+                GCHandle dataPtr = GCHandle.Alloc( data, GCHandleType.Pinned );
+                try
+                {
+                    ComputeErrorCode error = ComputeErrorCode.Success;
+                    Handle = CL10.CreateBuffer(
+                        context.Handle,
+                        flags,
+                        new IntPtr( Size ),
+                        dataPtr.AddrOfPinnedObject(),
+                        &error );
+                    ComputeException.ThrowOnError( error );
+                }
+                finally
+                {
+                    dataPtr.Free();
+                }
             }
         }
 
         private ComputeBuffer( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
             : base( context, flags )
         {
-            Handle = handle;
-            
-            Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
-            count = Size / Marshal.SizeOf( typeof( T ) );
+            unsafe
+            {
+                Handle = handle;
+
+                Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
+                count = Size / Marshal.SizeOf( typeof( T ) );
+            }
         }
 
         #endregion
@@ -141,7 +150,7 @@ namespace Cloo
                     context.Handle,
                     flags,
                     bufferId,
-                    out error );
+                    &error );
                 ComputeException.ThrowOnError( error );
 
                 return new ComputeBuffer<T>( handle, context, flags );

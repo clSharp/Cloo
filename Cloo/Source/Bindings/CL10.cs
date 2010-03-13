@@ -56,7 +56,7 @@ namespace Cloo.Bindings
             ComputePlatformInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         // Device APIs
         [DllImport( dll, EntryPoint = "clGetDeviceIDs" )]
@@ -75,7 +75,7 @@ namespace Cloo.Bindings
             ComputeDeviceInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         // Context APIs
         [DllImport( dll, EntryPoint = "clCreateContext" )]
@@ -86,7 +86,7 @@ namespace Cloo.Bindings
             /* const */ IntPtr* devices,
             /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ IntPtr pfn_notify,
             /* void* */ IntPtr user_data,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clCreateContextFromType" )]
         public extern static unsafe IntPtr
@@ -95,7 +95,7 @@ namespace Cloo.Bindings
             ComputeDeviceTypes device_type,
             /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ IntPtr pfn_notify,
             /* void* */ IntPtr user_data,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clRetainContext" )]
         public extern static unsafe ComputeErrorCode
@@ -112,7 +112,7 @@ namespace Cloo.Bindings
             ComputeContextInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         // Command Queue APIs
         [DllImport( dll, EntryPoint = "clCreateCommandQueue" )]
@@ -121,7 +121,7 @@ namespace Cloo.Bindings
             IntPtr context,
             IntPtr device,
             ComputeCommandQueueFlags properties,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clRetainCommandQueue" )]
         public extern static unsafe ComputeErrorCode
@@ -138,7 +138,7 @@ namespace Cloo.Bindings
             ComputeCommandQueueInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         [DllImport( dll, EntryPoint = "clSetCommandQueueProperty" )]
         public extern static unsafe ComputeErrorCode
@@ -156,7 +156,7 @@ namespace Cloo.Bindings
             ComputeMemoryFlags flags,
             IntPtr size,
             /* void* */ IntPtr host_ptr,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clCreateImage2D" )]
         public extern static unsafe IntPtr
@@ -168,7 +168,7 @@ namespace Cloo.Bindings
             IntPtr image_height,
             IntPtr image_row_pitch,
             /* void* */ IntPtr host_ptr,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clCreateImage2D" )]
         public extern static unsafe IntPtr
@@ -182,7 +182,7 @@ namespace Cloo.Bindings
             IntPtr image_row_pitch,
             IntPtr image_slice_pitch,
             /* void* */ IntPtr host_ptr,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clRetainMemObject" )]
         public extern static unsafe ComputeErrorCode
@@ -209,7 +209,7 @@ namespace Cloo.Bindings
             ComputeMemoryInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         [DllImport( dll, EntryPoint = "clGetImageInfo" )]
         public extern static unsafe ComputeErrorCode
@@ -218,7 +218,7 @@ namespace Cloo.Bindings
             ComputeImageInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         // Sampler APIs
         [DllImport( dll, EntryPoint = "clCreateSampler" )]
@@ -228,7 +228,7 @@ namespace Cloo.Bindings
             ComputeBoolean normalized_coords,
             ComputeImageAddressing addressing_mode,
             ComputeImageFiltering filter_mode,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clRetainSampler" )]
         public extern static unsafe ComputeErrorCode
@@ -245,7 +245,7 @@ namespace Cloo.Bindings
             ComputeSamplerInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         // Program Object APIs        
         [DllImport( dll, EntryPoint = "clCreateProgramWithSource" )]
@@ -255,7 +255,7 @@ namespace Cloo.Bindings
             Int32 count,
             String[] strings,
             /* const */ IntPtr* lengths,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clCreateProgramWithBinary" )]
         public extern static unsafe IntPtr
@@ -266,7 +266,7 @@ namespace Cloo.Bindings
             /* const */ IntPtr* lengths,
             /* const */ Byte** binaries,
             Int32* binary_status,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clRetainProgram" )]
         public extern static unsafe ComputeErrorCode
@@ -297,7 +297,7 @@ namespace Cloo.Bindings
             ComputeProgramInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         [DllImport( dll, EntryPoint = "clGetProgramBuildInfo" )]
         public extern static unsafe ComputeErrorCode
@@ -307,7 +307,7 @@ namespace Cloo.Bindings
             ComputeProgramBuildInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         // Kernel Object APIs
         [DllImport( dll, EntryPoint = "clCreateKernel" )]
@@ -315,7 +315,7 @@ namespace Cloo.Bindings
         CreateKernel(
             IntPtr program,
             /* const */ String kernel_name,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clCreateKernelsInProgram" )]
         public extern static unsafe ComputeErrorCode
@@ -348,7 +348,7 @@ namespace Cloo.Bindings
             ComputeKernelInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         [DllImport( dll, EntryPoint = "clGetKernelWorkGroupInfo" )]
         public extern static unsafe ComputeErrorCode
@@ -358,7 +358,7 @@ namespace Cloo.Bindings
             ComputeKernelWorkGroupInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         // Event Object APIs
         [DllImport( dll, EntryPoint = "clWaitForEvents" )]
@@ -374,7 +374,7 @@ namespace Cloo.Bindings
             ComputeEventInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         [DllImport( dll, EntryPoint = "clRetainEvent" )]
         public extern static unsafe ComputeErrorCode
@@ -392,7 +392,7 @@ namespace Cloo.Bindings
             ComputeCommandProfilingInfo param_name,
             IntPtr param_value_size,
             /* void* */ IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         // Flush and Finish APIs
         [DllImport( dll, EntryPoint = "clFlush" )]
@@ -524,7 +524,7 @@ namespace Cloo.Bindings
             Int32 num_events_in_wait_list,
             /* const */ IntPtr* event_wait_list,
             IntPtr* newEvent,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clEnqueueMapImage" )]
         public extern static unsafe /* void* */ IntPtr
@@ -540,7 +540,7 @@ namespace Cloo.Bindings
             Int32 num_events_in_wait_list,
             /* const */ IntPtr* event_wait_list,
             IntPtr* newEvent,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clEnqueueUnmapMemObject" )]
         public extern static unsafe ComputeErrorCode
@@ -625,7 +625,7 @@ namespace Cloo.Bindings
             IntPtr context,
             ComputeMemoryFlags flags,
             Int32 bufobj,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clCreateFromGLTexture2D" )]
         public extern static unsafe IntPtr
@@ -635,7 +635,7 @@ namespace Cloo.Bindings
             Int32 target,
             Int32 miplevel,
             Int32 texture,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clCreateFromGLTexture3D" )]
         public extern static unsafe IntPtr
@@ -645,7 +645,7 @@ namespace Cloo.Bindings
             Int32 target,
             Int32 miplevel,
             Int32 texture,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clCreateFromGLRenderbuffer" )]
         public extern static unsafe IntPtr
@@ -653,7 +653,7 @@ namespace Cloo.Bindings
             IntPtr context,
             ComputeMemoryFlags flags,
             Int32 renderbuffer,
-            out ComputeErrorCode errcode_ret );
+            ComputeErrorCode* errcode_ret );
 
         [DllImport( dll, EntryPoint = "clGetGLObjectInfo" )]
         public extern static unsafe ComputeErrorCode
@@ -669,7 +669,7 @@ namespace Cloo.Bindings
             ComputeGLTextureInfo param_name,
             IntPtr param_value_size,
             IntPtr param_value,
-            out IntPtr param_value_size_ret );
+            IntPtr* param_value_size_ret );
 
         [DllImport( dll, EntryPoint = "clEnqueueAcquireGLObjects" )]
         public extern static unsafe ComputeErrorCode

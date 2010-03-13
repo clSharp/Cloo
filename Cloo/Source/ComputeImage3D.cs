@@ -68,11 +68,11 @@ namespace Cloo
                     new IntPtr( rowPitch ),
                     new IntPtr( slicePitch ),
                     data,
-                    out error );
+                    &error );
                 ComputeException.ThrowOnError( error );
+                
+                Init();
             }
-
-            Init();
         }
 
         private ComputeImage3D( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
@@ -99,7 +99,7 @@ namespace Cloo
                     textureTarget,
                     mipLevel,
                     textureId,
-                    out error );
+                    &error );
                 ComputeException.ThrowOnError( error );
             }
             return new ComputeImage3D( image, context, flags );
