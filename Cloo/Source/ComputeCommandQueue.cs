@@ -29,16 +29,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
-/* 
- * Should investigate:
- * There may be a problem related to some asynchronous operations.
- * The GC handles may be released before such operations complete.
- *
- * Possible fix:
- * Store these handles in the ComputeEvent accompanying the command.
- * They will be released through ComputeEvent.Dispose().
- */
-
 namespace Cloo
 {
     using System;

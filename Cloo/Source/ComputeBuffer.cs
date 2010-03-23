@@ -90,6 +90,31 @@ namespace Cloo
         /// </summary>
         /// <param name="context">A valid OpenCL context used to create this buffer.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
+        /// <param name="data">A pointer to the data this buffer will contain.</param>
+        public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, IntPtr dataPtr )
+            : base( context, flags )
+        {
+            unsafe
+            {
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                Handle = CL10.CreateBuffer(
+                    context.Handle,
+                    flags,
+                    new IntPtr( Size ),
+                    dataPtr,
+                    &error );
+                ComputeException.ThrowOnError( error );
+
+                Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
+                count = Size / Marshal.SizeOf( typeof( T ) );
+            }
+        }
+
+        /// <summary>
+        /// Creates a new memory object.
+        /// </summary>
+        /// <param name="context">A valid OpenCL context used to create this buffer.</param>
+        /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
         /// <param name="data">The elements this buffer will contain.</param>
         public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, T[] data )
             : base( context, flags )
