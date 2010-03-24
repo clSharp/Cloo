@@ -35,7 +35,7 @@ using Cloo;
 
 namespace Clootils
 {
-    public class MappingTest: AbstractTest
+    public class MappingTest: TestBase
     {
         public MappingTest()
             : base( "Mapping Test" )
@@ -43,10 +43,7 @@ namespace Clootils
 
         protected override void RunInternal()
         {
-            ComputeContextPropertyList cpl = new ComputeContextPropertyList( ComputePlatform.Platforms[ 0 ] );
-
-            ComputeContext context = new ComputeContext( ComputeDeviceTypes.Default, cpl, null, IntPtr.Zero );
-            ComputeCommandQueue queue = new ComputeCommandQueue( context, context.Devices[ 0 ], ComputeCommandQueueFlags.Profiling );
+            ComputeCommandQueue commands = new ComputeCommandQueue( context, context.Devices[ 0 ], ComputeCommandQueueFlags.Profiling );
 
             Console.WriteLine( "Original content:" );
 
@@ -60,7 +57,8 @@ namespace Clootils
             }
 
             ComputeBuffer<long> buffer = new ComputeBuffer<long>( context, ComputeMemoryFlags.CopyHostPointer, bufferContent );
-            IntPtr mappedPtr = queue.Map( buffer, true, ComputeMemoryMappingFlags.Read, 0, bufferContent.Length, null );
+            IntPtr mappedPtr = commands.Map( buffer, false, ComputeMemoryMappingFlags.Read, 0, bufferContent.Length, null );
+            commands.Finish();
 
             Console.WriteLine( "Mapped content:" );
 
@@ -70,7 +68,7 @@ namespace Clootils
                 Console.WriteLine( "\t" + Marshal.ReadInt64( ptr ) );
             }
 
-            queue.Unmap( buffer, ref mappedPtr, null );
+            commands.Unmap( buffer, ref mappedPtr, null );
         }
     }
 }

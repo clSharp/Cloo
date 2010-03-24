@@ -54,7 +54,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractTest.cs" />
+    <Compile Include="TestBase.cs" />
     <Compile Include="ProgramTest.cs" />
     <Compile Include="DummyTest.cs" />
     <Compile Include="KernelsTest.cs" />

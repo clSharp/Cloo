@@ -108,7 +108,7 @@ namespace Clootils
             string[] logContent;
 
             ComputeContextPropertyList properties = new ComputeContextPropertyList( settingsForm.Platform );
-            ComputeContext context = new ComputeContext( ComputeDeviceTypes.All, properties, null, IntPtr.Zero );
+            ComputeContext context = new ComputeContext( settingsForm.Devices, properties, null, IntPtr.Zero );
             ComputeProgram program = new ComputeProgram( context, editorTextBox.Lines );
             try
             {
@@ -238,6 +238,16 @@ namespace Clootils
             StringWriter writer = new StringWriter( output );
 
             Console.SetOut( writer );
+
+            ComputeContextPropertyList properties = new ComputeContextPropertyList( settingsForm.Platform );
+            ComputeContext context = new ComputeContext( settingsForm.Devices, properties, null, IntPtr.Zero );
+            TestBase.SetContext( context );
+
+            Console.WriteLine( "Platform: " + context.Platform.Name );
+            Console.Write( "Devices:" );
+            foreach( ComputeDevice device in context.Devices )
+                Console.Write( " " + device.Name + "    " );
+            Console.WriteLine();
 
             new DummyTest().Run();
             new MappingTest().Run();

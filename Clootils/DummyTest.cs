@@ -31,7 +31,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Clootils
 {
-    public class DummyTest: AbstractTest
+    public class DummyTest: TestBase
     {
         public DummyTest()
             : base( "Dummy Test" )

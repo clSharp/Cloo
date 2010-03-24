@@ -30,14 +30,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
+using Cloo;
 
 namespace Clootils
 {
-    public abstract class AbstractTest
+    public abstract class TestBase
     {
         private readonly string name;
-        
-        protected AbstractTest( string name )
+        protected static ComputeContext context;
+
+        protected TestBase( string name )
         {
             this.name = name;
         }
@@ -54,6 +56,11 @@ namespace Clootils
                 Console.WriteLine( e.ToString() );
             }
             EndRun();
+        }
+
+        public static void SetContext( ComputeContext context )
+        {
+            TestBase.context = context;
         }
 
         protected void StartRun()

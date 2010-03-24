@@ -35,7 +35,7 @@ using Cloo;
 
 namespace Clootils
 {
-    class VectorAddTest: AbstractTest
+    class VectorAddTest: TestBase
     {
         private string kernelSource = @"
 kernel void VectorAdd(
@@ -53,9 +53,6 @@ kernel void VectorAdd(
 
         protected override void RunInternal()
         {
-            ComputeContextPropertyList cpl = new ComputeContextPropertyList( ComputePlatform.Platforms[ 0 ] );
-            ComputeContext context = new ComputeContext( ComputeDeviceTypes.Default, cpl, null, IntPtr.Zero );
-
             int count = 10;
             float[] arrA = new float[ count ];
             float[] arrB = new float[ count ];
