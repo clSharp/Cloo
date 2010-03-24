@@ -42,6 +42,7 @@ namespace Cloo
         #region Fields
 
         private readonly ReadOnlyCollection<ComputeDevice> devices;
+        private readonly ComputePlatform platform;
         private readonly ComputeContextPropertyList properties;
 
         #endregion
@@ -56,6 +57,17 @@ namespace Cloo
             get
             {
                 return devices;
+            }
+        }
+
+        /// <summary>
+        /// The platform associated with this context.
+        /// </summary>
+        public ComputePlatform Platform
+        {
+            get
+            {
+                return platform;
             }
         }
 
@@ -101,6 +113,8 @@ namespace Cloo
                 ComputeException.ThrowOnError( error );
 
                 this.properties = properties;
+                ComputeContextProperty platformProperty = properties.GetByName( ComputeContextPropertyName.Platform );
+                this.platform = ComputePlatform.GetByHandle( platformProperty.Value );
                 this.devices = GetDevices();
             }
         }
@@ -130,6 +144,8 @@ namespace Cloo
                 ComputeException.ThrowOnError( error );
 
                 this.properties = properties;
+                ComputeContextProperty platformProperty = properties.GetByName( ComputeContextPropertyName.Platform );
+                this.platform = ComputePlatform.GetByHandle( platformProperty.Value );
                 this.devices = GetDevices();
             }
         }
