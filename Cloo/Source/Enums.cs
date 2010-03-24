@@ -239,6 +239,7 @@ namespace Cloo
     [Flags]
     public enum ComputeMemoryFlags: long
     {
+        None = 0,
         ReadWrite = 1 << 0,
         WriteOnly = 1 << 1,
         ReadOnly = 1 << 2,
