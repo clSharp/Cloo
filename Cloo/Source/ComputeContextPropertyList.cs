@@ -44,18 +44,6 @@ namespace Cloo
 
         #endregion
 
-        #region Properties
-
-        /// <summary>
-        /// Gets the platform of this property list or null if none was specified.
-        /// </summary>
-        public ComputePlatform Platform
-        {
-            get { return platform; }
-        }
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -89,7 +77,20 @@ namespace Cloo
         }
 
         #endregion
-                
+
+        #region Public methods
+
+        public ComputeContextProperty GetByName( ComputeContextPropertyName name )
+        {
+            foreach( ComputeContextProperty property in properties )
+                if( property.Name == name )
+                    return property;
+            
+            return null;
+        }
+
+        #endregion
+
         #region Internal methods
 
         internal IntPtr[] ToIntPtrArray()
