@@ -1,3 +1,26 @@
+[0.7.1] -----------------------------------------------------------------------
+Breaking changes:
+Removed ComputeContextPropertyList.Platform property.
+Renamed ComputeCommandQueue.Execute( kernel, events ) to ExecuteTask.
+
+New functionality:
+Added a bunch of overload methods to ComputeCommandQueue that default hidden parameters to safe values.
+Added ComputeBuffer contstructor that accepts a pointer to the data to initialize the buffer with.
+Added ComputeContext.Platform property.
+Added ComputeContextPropertyList.GetByName() method.
+Added ComputeMemoryFlags.None token.
+
+Bugfixes:
+ComputeContextPropertyList.properties field stays null after constructor run.
+ComputeBuffer constructor creates zero-sized buffer.
+
+Internals:
+None.
+
+Documentation:
+Documented new overloads in ComputeCommandQueue.
+
+
 [0.7.0] -----------------------------------------------------------------------
 Breaking changes:
 Changes affecting ComputeCommandQueue.Read()/Write() methods in order to fix a bug concerning non-blocking calls. The responsibility of allocating/freeing memory or GC Handles is now up to the application. See VectorAddTest.cs for an example of use.
