@@ -47,19 +47,12 @@ namespace Clootils
         public MainForm()
         {
             InitializeComponent();
-
             InitializeSettings();
-
-            editorTextBox.Font = Settings.Default.EditorFont;
-            
+            editorTextBox.Font = Settings.Default.EditorFont;            
             fontDialog.FontMustExist = true;
-
             logTextBox.Font = Settings.Default.LogFont;
-
             openFileDialog.Multiselect = false;
-
             saveFileDialog.OverwritePrompt = true;
-
             settingsForm = new ConfigForm();
         }
 

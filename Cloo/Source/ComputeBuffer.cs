@@ -61,7 +61,7 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new memory object.
+        /// Creates a new buffer object.
         /// </summary>
         /// <param name="context">A valid OpenCL context used to create this buffer.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
@@ -86,12 +86,13 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new memory object.
+        /// Creates a new buffer object.
         /// </summary>
         /// <param name="context">A valid OpenCL context used to create this buffer.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
-        /// <param name="data">A pointer to the data this buffer will contain.</param>
-        public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, IntPtr dataPtr )
+        /// <param name="size">The size in bytes of this buffer object.</param>
+        /// <param name="dataPtr">A pointer to the data this buffer will contain.</param>
+        public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, long size, IntPtr dataPtr )
             : base( context, flags )
         {
             unsafe
@@ -100,7 +101,7 @@ namespace Cloo
                 Handle = CL10.CreateBuffer(
                     context.Handle,
                     flags,
-                    new IntPtr( Size ),
+                    new IntPtr( size ),
                     dataPtr,
                     &error );
                 ComputeException.ThrowOnError( error );
@@ -111,7 +112,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new memory object.
+        /// Creates a new buffer object.
         /// </summary>
         /// <param name="context">A valid OpenCL context used to create this buffer.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
