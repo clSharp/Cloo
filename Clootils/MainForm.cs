@@ -108,7 +108,7 @@ namespace Clootils
                 program.Build( settingsForm.Devices, settingsForm.Options, null, IntPtr.Zero );
                 logContent = new string[] { "build succeeded" };
             }
-            catch( ComputeException exception )
+            catch( Exception exception )
             {
                 List<string> lineList = new List<string>();
                 foreach( ComputeDevice device in context.Devices )
@@ -125,6 +125,7 @@ namespace Clootils
                     }
 
                     lineList.Add( "" );
+                    lineList.Add( exception.GetType().ToString() + ": " + exception.Message );
                 }
                 logContent = lineList.ToArray();
             }
