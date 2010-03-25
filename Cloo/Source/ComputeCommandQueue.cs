@@ -191,6 +191,17 @@ namespace Cloo
         /// </summary>
         /// <param name="source">The buffer to copy from.</param>
         /// <param name="destination">The buffer to copy to.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Copy<T>( ComputeBuffer<T> source, ComputeBuffer<T> destination, ICollection<ComputeEvent> events ) where T : struct
+        {
+            Copy( source, destination, 0, 0, source.Count, events );
+        }
+
+        /// <summary>
+        /// Enqueues a command to copy data between buffers.
+        /// </summary>
+        /// <param name="source">The buffer to copy from.</param>
+        /// <param name="destination">The buffer to copy to.</param>
         /// <param name="sourceOffset">The source offset in elements where reading starts.</param>
         /// <param name="destinationOffset">The destination offset in elements where writing starts.</param>
         /// <param name="count">The number of elements to copy.</param>
@@ -221,6 +232,17 @@ namespace Cloo
                 if( events != null )
                     events.Add( new ComputeEvent( newEventHandle, this ) );
             }
+        }
+
+        /// <summary>
+        /// Enqueues a command to copy data from buffer to image.
+        /// </summary>
+        /// <param name="source">The buffer to copy from.</param>
+        /// <param name="destination">The image to copy to.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Copy<T>( ComputeBuffer<T> source, ComputeImage destination, ICollection<ComputeEvent> events ) where T : struct
+        {
+            Copy( source, destination, 0, new long[] { 0, 0, 0 }, new long[] { destination.Width, destination.Height, destination.Depth }, events );
         }
 
         /// <summary>
@@ -262,14 +284,27 @@ namespace Cloo
             }
         }
 
+
+        /// <summary>
+        /// Enqueues a command to copy data from image to buffer.
+        /// </summary>
+        /// <param name="source">The image to copy from.</param>
+        /// <param name="destination">The buffer to copy to.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Copy<T>( ComputeImage source, ComputeBuffer<T> destination, ICollection<ComputeEvent> events ) where T : struct
+        {
+            Copy( source, destination, new long[] { 0, 0, 0 }, 0, new long[] { source.Width, source.Height, source.Depth }, events );
+            
+        }
+        
         /// <summary>
         /// Enqueues a command to copy data from image to buffer.
         /// </summary>
         /// <param name="source">The image to copy from.</param>
         /// <param name="destination">The buffer to copy to.</param>
         /// <param name="sourceOffset">The source (x, y, z) offset in pixels where reading starts.</param>
-        /// <param name="region">The region (width, height, depth) in pixels to copy.</param>
         /// <param name="destinationOffset">The destination offset in elements where writing starts.</param>
+        /// <param name="region">The region (width, height, depth) in pixels to copy.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Copy<T>( ComputeImage source, ComputeBuffer<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> events ) where T: struct
         {
@@ -299,6 +334,18 @@ namespace Cloo
                 if( events != null )
                     events.Add( new ComputeEvent( newEventHandle, this ) );
             }
+        }
+
+        /// <summary>
+        /// Enqueues a command to copy data between images.
+        /// </summary>
+        /// <param name="source">The image to copy from.</param>
+        /// <param name="destination">The image to copy to.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Copy( ComputeImage source, ComputeImage destination, ICollection<ComputeEvent> events )
+        {
+            long[] offset = new long[]{ 0, 0, 0 };
+            Copy( source, destination, offset, offset, new long[] { source.Width, source.Height, source.Depth }, events );
         }
 
         /// <summary>
@@ -429,6 +476,18 @@ namespace Cloo
         }
 
         /// <summary>
+        /// Enqueues a command to map a buffer into the host address space.
+        /// </summary>
+        /// <param name="buffer">The buffer to map.</param>
+        /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
+        /// <param name="flags">A list of properties for the mapping mode.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public IntPtr Map<T>( ComputeBuffer<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEvent> events ) where T : struct
+        {
+            return Map( buffer, blocking, flags, 0, buffer.Count, events );
+        }
+
+        /// <summary>
         /// Enqueues a command to map a part of a buffer into the host address space.
         /// </summary>
         /// <param name="buffer">The buffer to map.</param>
@@ -468,6 +527,18 @@ namespace Cloo
 
                 return mappedPtr;
             }
+        }
+
+        /// <summary>
+        /// Enqueues a command to map an image into the host address space.
+        /// </summary>
+        /// <param name="image">The image to map.</param>
+        /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
+        /// <param name="flags">A list of properties for the mapping mode.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public IntPtr Map( ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEvent> events )
+        {
+            return Map( image, blocking, flags, new long[]{ 0, 0, 0 }, new long[]{ image.Width, image.Height, image.Depth }, events );
         }
 
         /// <summary>
@@ -576,6 +647,34 @@ namespace Cloo
                 if( events != null )
                     events.Add( new ComputeEvent( newEventHandle, this ) );
             }
+        }
+
+        /// <summary>
+        /// Enqueues a command to read data from an image.
+        /// </summary>
+        /// <param name="image">The image to read from.</param>
+        /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
+        /// <param name="offset">The (x, y, z) offset in pixels where reading starts.</param>
+        /// <param name="region">The region (width, height, depth) in pixels to read.</param>
+        /// <param name="data">A preallocated memory area to read the data into.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Read( ComputeImage image, bool blocking, IntPtr data, ICollection<ComputeEvent> events )
+        {
+            Read( image, blocking, new long[]{ 0, 0, 0 }, new long[]{ image.Width, image.Height, image.Depth }, image.RowPitch, image.SlicePitch, data, events );
+        }
+
+        /// <summary>
+        /// Enqueues a command to read data from an image.
+        /// </summary>
+        /// <param name="image">The image to read from.</param>
+        /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
+        /// <param name="offset">The (x, y, z) offset in pixels where reading starts.</param>
+        /// <param name="region">The region (width, height, depth) in pixels to read.</param>
+        /// <param name="data">A preallocated memory area to read the data into.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Read( ComputeImage image, bool blocking, long[] offset, long[] region, IntPtr data, ICollection<ComputeEvent> events )
+        {
+            Read( image, blocking, offset, region, image.RowPitch, image.SlicePitch, data, events );
         }
 
         /// <summary>
@@ -773,6 +872,32 @@ namespace Cloo
                 if( events != null )
                     events.Add( new ComputeEvent( newEventHandle, this ) );
             }
+        }
+
+        /// <summary>
+        /// Enqueues a command to write data to an image.
+        /// </summary>
+        /// <param name="image">The image to write to.</param>
+        /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
+        /// <param name="data">The content written to the image.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Write( ComputeImage image, bool blocking, IntPtr data, ICollection<ComputeEvent> events )
+        {
+            Write( image, blocking, new long[]{ 0, 0, 0 }, new long[]{ image.Width, image.Height, image.Depth }, data, events );
+        }
+
+        /// <summary>
+        /// Enqueues a command to write data to an image.
+        /// </summary>
+        /// <param name="image">The image to write to.</param>
+        /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
+        /// <param name="offset">The (x, y, z) offset in pixels where writing starts.</param>
+        /// <param name="region">The region (width, height, depth) in pixels to write.</param>
+        /// <param name="data">The content written to the image.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Write( ComputeImage image, bool blocking, long[] offset, long[] region, IntPtr data, ICollection<ComputeEvent> events )
+        {
+            Write( image, blocking, offset, region, image.RowPitch, image.SlicePitch, data, events );
         }
 
         /// <summary>
