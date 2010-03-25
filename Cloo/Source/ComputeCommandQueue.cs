@@ -392,7 +392,7 @@ namespace Cloo
         /// </summary>
         /// <param name="kernel">The kernel to execute.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
-        public void Execute( ComputeKernel kernel, ICollection<ComputeEvent> events )
+        public void ExecuteTask( ComputeKernel kernel, ICollection<ComputeEvent> events )
         {
             unsafe
             {
