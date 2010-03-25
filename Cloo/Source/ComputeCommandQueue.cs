@@ -516,6 +516,32 @@ namespace Cloo
         }
 
         /// <summary>
+        /// Enqueues a blocking command to read data from a buffer.
+        /// </summary>
+        /// <param name="buffer">The buffer to read from.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public T[] Read<T>( ComputeBuffer<T> buffer, ICollection<ComputeEvent> events ) where T : struct
+        {
+            return Read( buffer, 0, buffer.Count, events );
+        }
+
+        /// <summary>
+        /// Enqueues a blocking command to read data from a buffer.
+        /// </summary>
+        /// <param name="buffer">The buffer to read from.</param>
+        /// <param name="offset">The offset in elements where reading starts.</param>
+        /// <param name="count">The number of elements to read.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public T[] Read<T>( ComputeBuffer<T> buffer, long offset, long count, ICollection<ComputeEvent> events ) where T : struct
+        {
+            T[] data = new T[ count ];
+            GCHandle dataHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
+            try { Read( buffer, true, offset, count, dataHandle.AddrOfPinnedObject(), events ); }
+            finally { dataHandle.Free(); }
+            return data;
+        }
+
+        /// <summary>
         /// Enqueues a command to read data from a buffer.
         /// </summary>
         /// <param name="buffer">The buffer to read from.</param>
@@ -684,6 +710,32 @@ namespace Cloo
                     ComputeException.ThrowOnError( error );
                 }
             }
+        }
+
+        /// <summary>
+        /// Enqueues a blocking command to write data to a buffer.
+        /// </summary>
+        /// <param name="buffer">The buffer to write to.</param>
+        /// <param name="data">The content written to the buffer.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Write<T>( ComputeBuffer<T> buffer, T[] data, ICollection<ComputeEvent> events ) where T : struct
+        {
+            Write( buffer, 0, data.Length, data, events );
+        }
+
+        /// <summary>
+        /// Enqueues a blocking command to write data to a buffer.
+        /// </summary>
+        /// <param name="buffer">The buffer to write to.</param>
+        /// <param name="offset">The offset in elements where writing starts.</param>
+        /// <param name="count">The number of elements to write.</param>
+        /// <param name="data">The content written to the buffer.</param>
+        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        public void Write<T>( ComputeBuffer<T> buffer, long offset, long count, T[] data, ICollection<ComputeEvent> events ) where T : struct
+        {
+            GCHandle dataHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
+            try { Write( buffer, true, offset, count, dataHandle.AddrOfPinnedObject(), events ); }
+            finally { dataHandle.Free(); }
         }
 
         /// <summary>
