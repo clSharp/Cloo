@@ -69,9 +69,9 @@ namespace Clootils
 
         void platformComboBox_SelectedIndexChanged( object sender, EventArgs e )
         {
-            Platform = ComputePlatform.Platforms[ platformComboBox.SelectedIndex ];
-            object[] availableDevices = new object[ Platform.Devices.Count ];
-            for( int i = 0; i < availableDevices.Length; i++ ) availableDevices[ i ] = Platform.Devices[ i ].Name;
+            ComputePlatform platform = ComputePlatform.Platforms[ platformComboBox.SelectedIndex ];
+            object[] availableDevices = new object[ platform.Devices.Count ];
+            for( int i = 0; i < availableDevices.Length; i++ ) availableDevices[ i ] = platform.Devices[ i ].Name;
             deviceCheckList.Items.Clear();
             deviceCheckList.Items.AddRange( availableDevices );
             deviceCheckList.SetItemChecked( 0, true );
