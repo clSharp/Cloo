@@ -118,8 +118,10 @@ namespace Clootils
 
             Platform = ComputePlatform.Platforms[ platformComboBox.SelectedIndex ];
             Devices = new ComputeDevice[ deviceCheckList.CheckedItems.Count ];
-            for( int i = 0; i < Devices.Length; i++ )
-                if( deviceCheckList.GetItemChecked( i ) ) Devices[ i ] = Platform.Devices[ i ];
+            int k = 0;
+            for( int i = 0; k < Devices.Length && i < Platform.Devices.Count; i++ )
+                if( deviceCheckList.GetItemChecked( i ) )
+                    Devices[ k++ ] = Platform.Devices[ i ];
             Options = optionsTextBox.Text;
         }
     }
