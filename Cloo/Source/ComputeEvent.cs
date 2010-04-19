@@ -35,7 +35,7 @@ namespace Cloo
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
 
-    public class ComputeEvent: ComputeResource
+    public class ComputeEvent : ComputeResource
     {
         #region Fields
 
@@ -65,7 +65,7 @@ namespace Cloo
         {
             get
             {
-                return commandType; 
+                return commandType;
             }
         }
 
@@ -79,7 +79,7 @@ namespace Cloo
                 unsafe
                 {
                     return GetInfo<ComputeCommandProfilingInfo, long>(
-                        ComputeCommandProfilingInfo.Ended, CL10.GetEventProfilingInfo );
+                        ComputeCommandProfilingInfo.Ended, CL10.GetEventProfilingInfo);
                 }
             }
         }
@@ -93,8 +93,8 @@ namespace Cloo
             {
                 unsafe
                 {
-                    return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
-                        ComputeCommandProfilingInfo.Queued, CL10.GetEventProfilingInfo );
+                    return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
+                        ComputeCommandProfilingInfo.Queued, CL10.GetEventProfilingInfo);
                 }
             }
         }
@@ -108,8 +108,8 @@ namespace Cloo
             {
                 unsafe
                 {
-                    return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
-                        ComputeCommandProfilingInfo.Started, CL10.GetEventProfilingInfo );
+                    return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
+                        ComputeCommandProfilingInfo.Started, CL10.GetEventProfilingInfo);
                 }
             }
         }
@@ -123,8 +123,8 @@ namespace Cloo
             {
                 unsafe
                 {
-                    return ( long )GetInfo<ComputeCommandProfilingInfo, ulong>(
-                        ComputeCommandProfilingInfo.Submitted, CL10.GetEventProfilingInfo );
+                    return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
+                        ComputeCommandProfilingInfo.Submitted, CL10.GetEventProfilingInfo);
                 }
             }
         }
@@ -138,8 +138,8 @@ namespace Cloo
             {
                 unsafe
                 {
-                    return ( ComputeCommandExecutionStatus )GetInfo<ComputeEventInfo, int>(
-                        ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo );
+                    return (ComputeCommandExecutionStatus)GetInfo<ComputeEventInfo, int>(
+                        ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo);
                 }
             }
         }
@@ -148,14 +148,14 @@ namespace Cloo
 
         #region Constructors
 
-        internal ComputeEvent( IntPtr handle, ComputeCommandQueue queue )
+        internal ComputeEvent(IntPtr handle, ComputeCommandQueue queue)
         {
             unsafe
             {
                 Handle = handle;
                 commandQueue = queue;
-                commandType = ( ComputeCommandType )GetInfo<ComputeEventInfo, uint>(
-                    ComputeEventInfo.CommandType, CL10.GetEventInfo );
+                commandType = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
+                    ComputeEventInfo.CommandType, CL10.GetEventInfo);
             }
         }
 
@@ -177,26 +177,26 @@ namespace Cloo
 
         internal void FreeGCHandle()
         {
-            if( !gcHandle.IsAllocated && gcHandle.Target == null ) return;
+            if (!gcHandle.IsAllocated && gcHandle.Target == null) return;
             gcHandle.Free();
         }
 
-        internal void TrackGCHandle( GCHandle handle )
+        internal void TrackGCHandle(GCHandle handle)
         {
             gcHandle = handle;
         }
 
         #endregion
-        
+
         #region Protected methods
 
-        protected override void Dispose( bool manual )
+        protected override void Dispose(bool manual)
         {
-            if( Handle != IntPtr.Zero )
+            if (Handle != IntPtr.Zero)
             {
-                CL10.ReleaseEvent( Handle );
+                CL10.ReleaseEvent(Handle);
                 Handle = IntPtr.Zero;
-            }            
+            }
         }
 
         #endregion

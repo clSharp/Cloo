@@ -33,7 +33,7 @@ namespace Cloo
 {
     using System;
 
-    public enum ComputeErrorCode: int
+    public enum ComputeErrorCode : int
     {
         Success = 0,
         DeviceNotFound = -1,
@@ -85,18 +85,18 @@ namespace Cloo
         CL_PLATFORM_NOT_FOUND_KHR = -1001,
     }
 
-    public enum OpenCLVersion: int
+    public enum OpenCLVersion : int
     {
         Version_1_0 = 1
     }
 
-    public enum ComputeBoolean: int
+    public enum ComputeBoolean : int
     {
         False = 0,
         True = 1
     }
 
-    public enum ComputePlatformInfo: int
+    public enum ComputePlatformInfo : int
     {
         Profile = 0x0900,
         Version = 0x0901,
@@ -107,7 +107,7 @@ namespace Cloo
     }
 
     [Flags]
-    public enum ComputeDeviceTypes: long
+    public enum ComputeDeviceTypes : long
     {
         Default = 1 << 0,
         Cpu = 1 << 1,
@@ -116,7 +116,7 @@ namespace Cloo
         All = 0xFFFFFFFF
     }
 
-    public enum ComputeDeviceInfo: int
+    public enum ComputeDeviceInfo : int
     {
         Type = 0x1000,
         VendorId = 0x1001,
@@ -173,44 +173,44 @@ namespace Cloo
     }
 
     [Flags]
-    public enum ComputeDeviceSingleCapabilities: long
+    public enum ComputeDeviceSingleCapabilities : long
     {
-        Denorm = 1 << 0 ,
-        InfNan = 1 << 1 ,
-        RoundToNearest = 1 << 2 ,
-        RoundToZero = 1 << 3 ,
-        RoundToInf = 1 << 4 ,
-        Fma = 1 << 5 ,
+        Denorm = 1 << 0,
+        InfNan = 1 << 1,
+        RoundToNearest = 1 << 2,
+        RoundToZero = 1 << 3,
+        RoundToInf = 1 << 4,
+        Fma = 1 << 5,
     }
 
-    public enum ComputeDeviceMemoryCacheType: int
+    public enum ComputeDeviceMemoryCacheType : int
     {
         None = 0x0,
         ReadOnlyCache = 0x1,
         ReadWriteCache = 0x2,
     }
 
-    public enum ComputeDeviceLocalMemoryType: int
+    public enum ComputeDeviceLocalMemoryType : int
     {
         Local = 0x1,
         Global = 0x2
     }
 
-    public enum ComputeDeviceExecutionCapabilities: int
+    public enum ComputeDeviceExecutionCapabilities : int
     {
         OpenCLKernel = 1 << 0,
         NativeKernel = 1 << 1
     }
 
     [Flags]
-    public enum ComputeCommandQueueFlags: long
+    public enum ComputeCommandQueueFlags : long
     {
         None = 0,
         OutOfOrderExecution = 1 << 0,
-        Profiling = 1 << 1 
+        Profiling = 1 << 1
     }
 
-    public enum ComputeContextInfo: int
+    public enum ComputeContextInfo : int
     {
         ReferenceCount = 0x1080,
         Devices = 0x1081,
@@ -218,7 +218,7 @@ namespace Cloo
         Platform = 0x1084,
     }
 
-    public enum ComputeContextPropertyName: int
+    public enum ComputeContextPropertyName : int
     {
         Platform = ComputeContextInfo.Platform,
         CL_GL_CONTEXT_KHR = 0x2008,
@@ -228,7 +228,7 @@ namespace Cloo
         CL_CGL_SHAREGROUP_KHR = 0x200C,
     }
 
-    public enum ComputeCommandQueueInfo: int
+    public enum ComputeCommandQueueInfo : int
     {
         Context = 0x1090,
         Device = 0x1091,
@@ -237,7 +237,7 @@ namespace Cloo
     }
 
     [Flags]
-    public enum ComputeMemoryFlags: long
+    public enum ComputeMemoryFlags : long
     {
         None = 0,
         ReadWrite = 1 << 0,
@@ -245,10 +245,10 @@ namespace Cloo
         ReadOnly = 1 << 2,
         UseHostPointer = 1 << 3,
         AllocateHostPointer = 1 << 4,
-        CopyHostPointer = 1 << 5 
+        CopyHostPointer = 1 << 5
     }
 
-    public enum ComputeImageChannelOrder: int
+    public enum ComputeImageChannelOrder : int
     {
         R = 0x10B0,
         A = 0x10B1,
@@ -262,7 +262,7 @@ namespace Cloo
         Luminance = 0x10B9
     }
 
-    public enum ComputeImageChannelType: int
+    public enum ComputeImageChannelType : int
     {
         SNormInt8 = 0x10D0,
         SNormInt16 = 0x10D1,
@@ -281,14 +281,14 @@ namespace Cloo
         Float = 0x10DE,
     }
 
-    public enum ComputeMemoryType: int
+    public enum ComputeMemoryType : int
     {
         Buffer = 0x10F0,
         Image2D = 0x10F1,
         Image3D = 0x10F2
     }
 
-    public enum ComputeMemoryInfo: int
+    public enum ComputeMemoryInfo : int
     {
         Type = 0x1100,
         Flags = 0x1101,
@@ -299,7 +299,7 @@ namespace Cloo
         Context = 0x1106
     }
 
-    public enum ComputeImageInfo: int
+    public enum ComputeImageInfo : int
     {
         Format = 0x1110,
         ElementSize = 0x1111,
@@ -310,7 +310,7 @@ namespace Cloo
         Depth = 0x1116
     }
 
-    public enum ComputeImageAddressing: int
+    public enum ComputeImageAddressing : int
     {
         None = 0x1130,
         ClampToEdge = 0x1131,
@@ -318,13 +318,13 @@ namespace Cloo
         Repeat = 0x1133
     }
 
-    public enum ComputeImageFiltering: int
+    public enum ComputeImageFiltering : int
     {
         Nearest = 0x1140,
         Linear = 0x1141
     }
 
-    public enum ComputeSamplerInfo: int
+    public enum ComputeSamplerInfo : int
     {
         ReferenceCount = 0x1150,
         Context = 0x1151,
@@ -334,13 +334,13 @@ namespace Cloo
     }
 
     [Flags]
-    public enum ComputeMemoryMappingFlags: long
+    public enum ComputeMemoryMappingFlags : long
     {
         Read = 1 << 0,
-        Write = 1 << 1 
+        Write = 1 << 1
     }
 
-    public enum ComputeProgramInfo: int
+    public enum ComputeProgramInfo : int
     {
         ReferenceCount = 0x1160,
         Context = 0x1161,
@@ -351,14 +351,14 @@ namespace Cloo
         Binaries = 0x1166
     }
 
-    public enum ComputeProgramBuildInfo: int
+    public enum ComputeProgramBuildInfo : int
     {
         Status = 0x1181,
         Options = 0x1182,
         BuildLog = 0x1183
     }
 
-    public enum ComputeProgramBuildStatus: int
+    public enum ComputeProgramBuildStatus : int
     {
         Success = 0,
         None = -1,
@@ -366,7 +366,7 @@ namespace Cloo
         InProgress = -3
     }
 
-    public enum ComputeKernelInfo: int
+    public enum ComputeKernelInfo : int
     {
         FunctionName = 0x1190,
         ArgumentCount = 0x1191,
@@ -375,14 +375,14 @@ namespace Cloo
         Program = 0x1194
     }
 
-    public enum ComputeKernelWorkGroupInfo: int
+    public enum ComputeKernelWorkGroupInfo : int
     {
         WorkGroupSize = 0x11B0,
         CompileWorkGroupSize = 0x11B1,
         LocalMemorySize = 0x11B2
     }
 
-    public enum ComputeEventInfo: int
+    public enum ComputeEventInfo : int
     {
         CommandQueue = 0x11D0,
         CommandType = 0x11D1,
@@ -390,7 +390,7 @@ namespace Cloo
         ExecutionStatus = 0x11D3
     }
 
-    public enum ComputeCommandType: int
+    public enum ComputeCommandType : int
     {
         NDRangeKernel = 0x11F0,
         Task = 0x11F1,
@@ -411,7 +411,7 @@ namespace Cloo
         ReleaseGLObjects = 0x1200
     }
 
-    public enum ComputeCommandExecutionStatus: int
+    public enum ComputeCommandExecutionStatus : int
     {
         Complete = 0x0,
         Running = 0x1,
@@ -419,7 +419,7 @@ namespace Cloo
         Queued = 0x3
     }
 
-    public enum ComputeCommandProfilingInfo: int
+    public enum ComputeCommandProfilingInfo : int
     {
         Queued = 0x1280,
         Submitted = 0x1281,
@@ -430,7 +430,7 @@ namespace Cloo
     /**************************************************************************************/
     // CL/GL Sharing API
 
-    public enum ComputeGLObjectType: int
+    public enum ComputeGLObjectType : int
     {
         Buffer = 0x2000,
         Texture2D = 0x2001,
@@ -438,13 +438,13 @@ namespace Cloo
         Renderbuffer = 0x2003
     }
 
-    public enum ComputeGLTextureInfo: int
+    public enum ComputeGLTextureInfo : int
     {
         TextureTarget = 0x2004,
         MipMapLevel = 0x2005
     }
 
-    public enum ComputeGLContextInfo: int
+    public enum ComputeGLContextInfo : int
     {
         CL_CURRENT_DEVICE_FOR_GL_CONTEXT_KHR = 0x2006,
         CL_DEVICES_FOR_GL_CONTEXT_KHR = 0x2007

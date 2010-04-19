@@ -38,7 +38,7 @@ namespace Cloo
     public class ComputeContextPropertyList
     {
         #region Fields
-        
+
         private ComputePlatform platform;
         private IList<ComputeContextProperty> properties;
 
@@ -50,28 +50,28 @@ namespace Cloo
         /// Creates a new property list.
         /// </summary>
         /// <param name="platform">A platform property for this list. Can be null.</param>
-        public ComputeContextPropertyList( ComputePlatform platform )
-        {            
+        public ComputeContextPropertyList(ComputePlatform platform)
+        {
             this.platform = platform;
 
             properties = new List<ComputeContextProperty>();
-            
-            if( platform != null )
-                properties.Add( new ComputeContextProperty( ComputeContextPropertyName.Platform, platform.Handle ) );
+
+            if (platform != null)
+                properties.Add(new ComputeContextProperty(ComputeContextPropertyName.Platform, platform.Handle));
         }
 
         /// <summary>
         /// Creates a new property list.
         /// </summary>
         /// <param name="properties">A collection of ComputeContextProperty items.</param>
-        public ComputeContextPropertyList( IEnumerable<ComputeContextProperty> properties )
+        public ComputeContextPropertyList(IEnumerable<ComputeContextProperty> properties)
         {
-            this.properties = new List<ComputeContextProperty>( properties );
+            this.properties = new List<ComputeContextProperty>(properties);
 
-            foreach( ComputeContextProperty property in properties )
-                if( property.Name == ComputeContextPropertyName.Platform )
+            foreach (ComputeContextProperty property in properties)
+                if (property.Name == ComputeContextPropertyName.Platform)
                 {
-                    platform = ComputePlatform.GetByHandle( property.Value );
+                    platform = ComputePlatform.GetByHandle(property.Value);
                     break;
                 }
         }
@@ -80,12 +80,12 @@ namespace Cloo
 
         #region Public methods
 
-        public ComputeContextProperty GetByName( ComputeContextPropertyName name )
+        public ComputeContextProperty GetByName(ComputeContextPropertyName name)
         {
-            foreach( ComputeContextProperty property in properties )
-                if( property.Name == name )
+            foreach (ComputeContextProperty property in properties)
+                if (property.Name == name)
                     return property;
-            
+
             return null;
         }
 
@@ -95,13 +95,13 @@ namespace Cloo
 
         internal IntPtr[] ToIntPtrArray()
         {
-            IntPtr[] result = new IntPtr[ 2 * properties.Count + 1 ];
-            for( int i = 0; i < properties.Count; i++ )
+            IntPtr[] result = new IntPtr[2 * properties.Count + 1];
+            for (int i = 0; i < properties.Count; i++)
             {
-                result[ 2 * i ] = new IntPtr( ( int )properties[ i ].Name );
-                result[ 2 * i + 1 ] = properties[ i ].Value;
+                result[2 * i] = new IntPtr((int)properties[i].Name);
+                result[2 * i + 1] = properties[i].Value;
             }
-            result[ result.Length - 1 ] = IntPtr.Zero;
+            result[result.Length - 1] = IntPtr.Zero;
             return result;
         }
 

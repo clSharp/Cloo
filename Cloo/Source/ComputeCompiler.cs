@@ -34,7 +34,7 @@ namespace Cloo
     using Cloo.Bindings;
 
     public class ComputeCompiler
-    {        
+    {
         #region Public methods
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Cloo
         public static void Unload()
         {
             ComputeErrorCode error = CL10.UnloadCompiler();
-            ComputeException.ThrowOnError( error );
+            ComputeException.ThrowOnError(error);
         }
 
         #endregion

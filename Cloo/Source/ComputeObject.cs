@@ -35,12 +35,12 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
-    public abstract class ComputeObject: IEquatable<ComputeObject>
+    public abstract class ComputeObject : IEquatable<ComputeObject>
     {
         #region Fields
 
         private IntPtr handle;
-        
+
         #endregion
 
         #region Properties
@@ -61,24 +61,24 @@ namespace Cloo
 
         #region Public methods
 
-        public new static bool Equals( object objA, object objB )
+        public new static bool Equals(object objA, object objB)
         {
-            if( objA == objB ) return true;
-            if( objA == null || objB == null ) return false;
-            return objA.Equals( objB );
+            if (objA == objB) return true;
+            if (objA == null || objB == null) return false;
+            return objA.Equals(objB);
         }
 
-        public override bool Equals( object obj )
+        public override bool Equals(object obj)
         {
-            if( obj == null ) return false;
-            if( !( obj is ComputeObject ) ) return false;
-            return Equals( obj as ComputeObject );
+            if (obj == null) return false;
+            if (!(obj is ComputeObject)) return false;
+            return Equals(obj as ComputeObject);
         }
 
-        public bool Equals( ComputeObject obj )
+        public bool Equals(ComputeObject obj)
         {
-            if( obj == null ) return false;
-            if( !Handle.Equals( obj.Handle ) ) return false;
+            if (obj == null) return false;
+            if (!Handle.Equals(obj.Handle)) return false;
             return true;
         }
 
@@ -113,9 +113,9 @@ namespace Cloo
                 ComputeErrorCode error;
                 QueriedType[] buffer;
                 IntPtr bufferSizeRet;
-                getInfoDelegate( handle, paramName, IntPtr.Zero, IntPtr.Zero, &bufferSizeRet );
-                buffer = new QueriedType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( QueriedType ) ) ];
-                GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
+                getInfoDelegate(handle, paramName, IntPtr.Zero, IntPtr.Zero, &bufferSizeRet);
+                buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
                 try
                 {
                     error = getInfoDelegate(
@@ -123,8 +123,8 @@ namespace Cloo
                         paramName,
                         bufferSizeRet,
                         gcHandle.AddrOfPinnedObject(),
-                        null );
-                    ComputeException.ThrowOnError( error );
+                        null);
+                    ComputeException.ThrowOnError(error);
                 }
                 finally
                 {
@@ -146,9 +146,9 @@ namespace Cloo
                 ComputeErrorCode error;
                 QueriedType[] buffer;
                 IntPtr bufferSizeRet;
-                error = getInfoDelegate( handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, &bufferSizeRet );
-                buffer = new QueriedType[ bufferSizeRet.ToInt64() / Marshal.SizeOf( typeof( QueriedType ) ) ];
-                GCHandle gcHandle = GCHandle.Alloc( buffer, GCHandleType.Pinned );
+                error = getInfoDelegate(handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, &bufferSizeRet);
+                buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
                 try
                 {
                     error = getInfoDelegate(
@@ -157,8 +157,8 @@ namespace Cloo
                         paramName,
                         bufferSizeRet,
                         gcHandle.AddrOfPinnedObject(),
-                        null );
-                    ComputeException.ThrowOnError( error );
+                        null);
+                    ComputeException.ThrowOnError(error);
                 }
                 finally
                 {
@@ -174,8 +174,8 @@ namespace Cloo
                 GetInfoDelegate<InfoEnum> getInfoDelegate
             )
         {
-            int result = GetInfo<InfoEnum, int>( paramName, getInfoDelegate );
-            return ( result == ( int )ComputeBoolean.True ) ? true : false;
+            int result = GetInfo<InfoEnum, int>(paramName, getInfoDelegate);
+            return (result == (int)ComputeBoolean.True) ? true : false;
         }
 
         protected QueriedType GetInfo<InfoEnum, QueriedType>
@@ -183,26 +183,26 @@ namespace Cloo
                 InfoEnum paramName,
                 GetInfoDelegate<InfoEnum> getInfoDelegate
             )
-            where QueriedType: struct             
+            where QueriedType : struct
         {
             unsafe
             {
                 ComputeErrorCode error;
                 QueriedType result = new QueriedType();
-                GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
+                GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
                 try
                 {
                     error = getInfoDelegate(
                         handle,
                         paramName,
-                        ( IntPtr )Marshal.SizeOf( result ),
+                        (IntPtr)Marshal.SizeOf(result),
                         gcHandle.AddrOfPinnedObject(),
-                        null );
-                    ComputeException.ThrowOnError( error );
+                        null);
+                    ComputeException.ThrowOnError(error);
                 }
                 finally
                 {
-                    result = ( QueriedType )gcHandle.Target;
+                    result = (QueriedType)gcHandle.Target;
                     gcHandle.Free();
                 }
                 return result;
@@ -220,21 +220,21 @@ namespace Cloo
             unsafe
             {
                 QueriedType result = new QueriedType();
-                GCHandle gcHandle = GCHandle.Alloc( result, GCHandleType.Pinned );
+                GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
                 try
                 {
                     ComputeErrorCode error = getInfoDelegate(
                         handle,
                         secondaryObject.handle,
                         paramName,
-                        new IntPtr( Marshal.SizeOf( result ) ),
+                        new IntPtr(Marshal.SizeOf(result)),
                         gcHandle.AddrOfPinnedObject(),
-                        null );
-                    ComputeException.ThrowOnError( error );
+                        null);
+                    ComputeException.ThrowOnError(error);
                 }
                 finally
                 {
-                    result = ( QueriedType )gcHandle.Target;
+                    result = (QueriedType)gcHandle.Target;
                     gcHandle.Free();
                 }
 
@@ -242,26 +242,26 @@ namespace Cloo
             }
         }
 
-        protected string GetStringInfo<InfoEnum>( InfoEnum paramName, GetInfoDelegate<InfoEnum> getInfoDelegate )
+        protected string GetStringInfo<InfoEnum>(InfoEnum paramName, GetInfoDelegate<InfoEnum> getInfoDelegate)
         {
             unsafe
             {
                 string result = null;
-                sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>( paramName, getInfoDelegate );
-                fixed( sbyte* bufferPtr = buffer )
-                    result = new string( bufferPtr );
+                sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>(paramName, getInfoDelegate);
+                fixed (sbyte* bufferPtr = buffer)
+                    result = new string(bufferPtr);
                 return result;
             }
         }
 
-        protected string GetStringInfo<InfoEnum>( ComputeObject secondaryObject, InfoEnum paramName, GetInfoDelegateEx<InfoEnum> getInfoDelegate )
+        protected string GetStringInfo<InfoEnum>(ComputeObject secondaryObject, InfoEnum paramName, GetInfoDelegateEx<InfoEnum> getInfoDelegate)
         {
             unsafe
             {
                 string result = null;
-                sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>( secondaryObject, paramName, getInfoDelegate );
-                fixed( sbyte* bufferPtr = buffer )
-                    result = new string( bufferPtr );
+                sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>(secondaryObject, paramName, getInfoDelegate);
+                fixed (sbyte* bufferPtr = buffer)
+                    result = new string(bufferPtr);
 
                 return result;
             }

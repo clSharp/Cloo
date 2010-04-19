@@ -31,12 +31,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Cloo
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
-    using System;
 
-    public abstract class ComputeImage: ComputeMemory
+    public abstract class ComputeImage : ComputeMemory
     {
         #region Properties
 
@@ -51,8 +51,8 @@ namespace Cloo
 
         #region Constructors
 
-        protected ComputeImage( ComputeContext context, ComputeMemoryFlags flags )
-            : base( context, flags )
+        protected ComputeImage(ComputeContext context, ComputeMemoryFlags flags)
+            : base(context, flags)
         { }
 
         #endregion
@@ -71,22 +71,22 @@ namespace Cloo
 
         #region Protected methods
 
-        protected static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type )
+        protected static ICollection<ComputeImageFormat> GetSupportedFormats(ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type)
         {
             unsafe
             {
                 int formatCountRet = 0;
-                ComputeErrorCode error = CL10.GetSupportedImageFormats( context.Handle, flags, type, 0, null, &formatCountRet );
-                ComputeException.ThrowOnError( error );
+                ComputeErrorCode error = CL10.GetSupportedImageFormats(context.Handle, flags, type, 0, null, &formatCountRet);
+                ComputeException.ThrowOnError(error);
 
-                ComputeImageFormat[] formats = new ComputeImageFormat[ formatCountRet ];
-                fixed( ComputeImageFormat* formatsPtr = formats )
+                ComputeImageFormat[] formats = new ComputeImageFormat[formatCountRet];
+                fixed (ComputeImageFormat* formatsPtr = formats)
                 {
-                    error = CL10.GetSupportedImageFormats( context.Handle, flags, type, formatCountRet, formatsPtr, null );
-                    ComputeException.ThrowOnError( error );
+                    error = CL10.GetSupportedImageFormats(context.Handle, flags, type, formatCountRet, formatsPtr, null);
+                    ComputeException.ThrowOnError(error);
                 }
 
-                return new Collection<ComputeImageFormat>( formats );
+                return new Collection<ComputeImageFormat>(formats);
             }
         }
 
@@ -94,13 +94,13 @@ namespace Cloo
         {
             unsafe
             {
-                Depth = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Depth, CL10.GetImageInfo );
-                ElementSize = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.ElementSize, CL10.GetImageInfo );
-                Height = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Height, CL10.GetImageInfo );
-                RowPitch = ( long )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.RowPitch, CL10.GetImageInfo );
-                Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
-                SlicePitch = ( long )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.SlicePitch, CL10.GetImageInfo );
-                Width = ( int )GetInfo<ComputeImageInfo, IntPtr>( ComputeImageInfo.Width, CL10.GetImageInfo );
+                Depth = (int)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.Depth, CL10.GetImageInfo);
+                ElementSize = (int)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.ElementSize, CL10.GetImageInfo);
+                Height = (int)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.Height, CL10.GetImageInfo);
+                RowPitch = (long)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.RowPitch, CL10.GetImageInfo);
+                Size = (long)GetInfo<ComputeMemoryInfo, IntPtr>(ComputeMemoryInfo.Size, CL10.GetMemObjectInfo);
+                SlicePitch = (long)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.SlicePitch, CL10.GetImageInfo);
+                Width = (int)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.Width, CL10.GetImageInfo);
             }
         }
 

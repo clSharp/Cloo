@@ -39,40 +39,40 @@ namespace Cloo
     {
         #region Internal methods
 
-        internal static IntPtr[] ConvertArray( long[] array )
+        internal static IntPtr[] ConvertArray(long[] array)
         {
-            if( array == null ) return null;
+            if (array == null) return null;
 
             NumberFormatInfo nfi = new NumberFormatInfo();
 
-            IntPtr[] result = new IntPtr[ array.Length ];
-            for( long i = 0; i < array.Length; i++ )
-                result[ i ] = new IntPtr( array[ i ] );
+            IntPtr[] result = new IntPtr[array.Length];
+            for (long i = 0; i < array.Length; i++)
+                result[i] = new IntPtr(array[i]);
             return result;
         }
 
-        internal static long[] ConvertArray( IntPtr[] array )
+        internal static long[] ConvertArray(IntPtr[] array)
         {
-            if( array == null ) return null;
+            if (array == null) return null;
 
             NumberFormatInfo nfi = new NumberFormatInfo();
 
-            long[] result = new long[ array.Length ];
-            for( long i = 0; i < array.Length; i++ )
-                result[ i ] = array[ i ].ToInt64();
+            long[] result = new long[array.Length];
+            for (long i = 0; i < array.Length; i++)
+                result[i] = array[i].ToInt64();
             return result;
         }
 
-        internal static IntPtr[] ExtractHandles<T>( ICollection<T> computeObjects ) where T: ComputeObject
+        internal static IntPtr[] ExtractHandles<T>(ICollection<T> computeObjects) where T : ComputeObject
         {
-            if( computeObjects == null )
-                return new IntPtr[ 0 ];
+            if (computeObjects == null)
+                return new IntPtr[0];
 
-            IntPtr[] result = new IntPtr[ computeObjects.Count ];
+            IntPtr[] result = new IntPtr[computeObjects.Count];
             int i = 0;
-            foreach( T computeObj in computeObjects )
+            foreach (T computeObj in computeObjects)
             {
-                result[ i ] = computeObj.Handle;
+                result[i] = computeObj.Handle;
                 i++;
             }
             return result;

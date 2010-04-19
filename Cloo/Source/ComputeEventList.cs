@@ -37,12 +37,12 @@ namespace Cloo
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
 
-    public class ComputeEventList: IList<ComputeEvent>
+    public class ComputeEventList : IList<ComputeEvent>
     {
         #region Fields
-        
+
         private readonly List<ComputeEvent> events;
-        
+
         #endregion
 
         #region Constructors
@@ -59,9 +59,9 @@ namespace Cloo
         /// Initializes a new instance as a wrapper for the specified list.
         /// </summary>
         /// <param name="events">The list that is wrapped by the new list.</param>
-        public ComputeEventList( IList<ComputeEvent> events )
+        public ComputeEventList(IList<ComputeEvent> events)
         {
-            events = new Collection<ComputeEvent>( events );
+            events = new Collection<ComputeEvent>(events);
         }
 
         #endregion
@@ -75,10 +75,10 @@ namespace Cloo
         {
             unsafe
             {
-                fixed( IntPtr* eventHandlesPtr = Tools.ExtractHandles( events ) )
+                fixed (IntPtr* eventHandlesPtr = Tools.ExtractHandles(events))
                 {
-                    ComputeErrorCode error = CL10.WaitForEvents( events.Count, eventHandlesPtr );
-                    ComputeException.ThrowOnError( error );
+                    ComputeErrorCode error = CL10.WaitForEvents(events.Count, eventHandlesPtr);
+                    ComputeException.ThrowOnError(error);
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace Cloo
 
         internal void FreeGCHandles()
         {
-            foreach( ComputeEvent ev in this )
+            foreach (ComputeEvent ev in this)
                 ev.FreeGCHandle();
         }
 
@@ -97,30 +97,30 @@ namespace Cloo
 
         #region IList<ComputeEvent> Members
 
-        public int IndexOf( ComputeEvent item )
+        public int IndexOf(ComputeEvent item)
         {
-            return events.IndexOf( item );
+            return events.IndexOf(item);
         }
 
-        public void Insert( int index, ComputeEvent item )
+        public void Insert(int index, ComputeEvent item)
         {
-            events.Insert( index, item );
+            events.Insert(index, item);
         }
 
-        public void RemoveAt( int index )
+        public void RemoveAt(int index)
         {
-            events.RemoveAt( index );
+            events.RemoveAt(index);
         }
 
-        public ComputeEvent this[ int index ]
+        public ComputeEvent this[int index]
         {
             get
             {
-                return events[ index ];
+                return events[index];
             }
             set
             {
-                events[ index ] = value;
+                events[index] = value;
             }
         }
 
@@ -128,9 +128,9 @@ namespace Cloo
 
         #region ICollection<ComputeEvent> Members
 
-        public void Add( ComputeEvent item )
+        public void Add(ComputeEvent item)
         {
-            events.Add( item );
+            events.Add(item);
         }
 
         public void Clear()
@@ -138,14 +138,14 @@ namespace Cloo
             events.Clear();
         }
 
-        public bool Contains( ComputeEvent item )
+        public bool Contains(ComputeEvent item)
         {
-            return events.Contains( item );
+            return events.Contains(item);
         }
 
-        public void CopyTo( ComputeEvent[] array, int arrayIndex )
+        public void CopyTo(ComputeEvent[] array, int arrayIndex)
         {
-            events.CopyTo( array, arrayIndex );
+            events.CopyTo(array, arrayIndex);
         }
 
         public int Count
@@ -158,9 +158,9 @@ namespace Cloo
             get { return false; }
         }
 
-        public bool Remove( ComputeEvent item )
+        public bool Remove(ComputeEvent item)
         {
-            return events.Remove( item );
+            return events.Remove(item);
         }
 
         #endregion
@@ -169,7 +169,7 @@ namespace Cloo
 
         public IEnumerator<ComputeEvent> GetEnumerator()
         {
-            return ( ( IEnumerable<ComputeEvent> )events ).GetEnumerator();
+            return ((IEnumerable<ComputeEvent>)events).GetEnumerator();
         }
 
         #endregion
@@ -178,9 +178,9 @@ namespace Cloo
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ( ( IEnumerable )events ).GetEnumerator();
+            return ((IEnumerable)events).GetEnumerator();
         }
 
-        #endregion        
+        #endregion
     }
 }

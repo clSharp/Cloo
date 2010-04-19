@@ -34,10 +34,10 @@ namespace Cloo
     using System;
     using Cloo.Bindings;
 
-    public class ComputeSampler: ComputeResource
+    public class ComputeSampler : ComputeResource
     {
         #region Fields
-        
+
         private readonly ComputeContext context;
         private readonly ComputeImageAddressing addressing;
         private readonly ComputeImageFiltering filtering;
@@ -102,18 +102,18 @@ namespace Cloo
         /// <param name="normalizedCoords">Determines if the image coordinates specified are normalized or not.</param>
         /// <param name="addressing">Specifies how out-of-range image coordinates are handled when reading from an image.</param>
         /// <param name="filtering">Specifies the Type of filter that must be applied when reading an image.</param>
-        public ComputeSampler( ComputeContext context, bool normalizedCoords, ComputeImageAddressing addressing, ComputeImageFiltering filtering )
+        public ComputeSampler(ComputeContext context, bool normalizedCoords, ComputeImageAddressing addressing, ComputeImageFiltering filtering)
         {
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
                 Handle = CL10.CreateSampler(
                     context.Handle,
-                    ( normalizedCoords ) ? ComputeBoolean.True : ComputeBoolean.False,
+                    (normalizedCoords) ? ComputeBoolean.True : ComputeBoolean.False,
                     addressing,
                     filtering,
-                    &error );
-                ComputeException.ThrowOnError( error );
+                    &error);
+                ComputeException.ThrowOnError(error);
                 this.addressing = addressing;
                 this.context = context;
                 this.filtering = filtering;
@@ -125,12 +125,12 @@ namespace Cloo
 
         #region Protected methods
 
-        protected override void Dispose( bool manual )
+        protected override void Dispose(bool manual)
         {
             // free native resources
-            if( Handle != IntPtr.Zero )
+            if (Handle != IntPtr.Zero)
             {
-                CL10.ReleaseSampler( Handle );
+                CL10.ReleaseSampler(Handle);
                 Handle = IntPtr.Zero;
             }
         }

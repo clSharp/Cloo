@@ -35,7 +35,7 @@ namespace Cloo
     using System.Collections.Generic;
     using Cloo.Bindings;
 
-    public class ComputeImage2D: ComputeImage
+    public class ComputeImage2D : ComputeImage
     {
         #region Constructors
 
@@ -49,8 +49,8 @@ namespace Cloo
         /// <param name="height">Height of the image in pixels.</param>
         /// <param name="rowPitch">The scan-line pitch in bytes.</param>
         /// <param name="data">The image data that may be already allocated by the application.</param>
-        public ComputeImage2D( ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, long rowPitch, IntPtr data )
-            : base( context, flags )
+        public ComputeImage2D(ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, long rowPitch, IntPtr data)
+            : base(context, flags)
         {
             unsafe
             {
@@ -59,22 +59,22 @@ namespace Cloo
                     context.Handle,
                     flags,
                     &format,
-                    new IntPtr( width ),
-                    new IntPtr( height ),
-                    new IntPtr( rowPitch ),
+                    new IntPtr(width),
+                    new IntPtr(height),
+                    new IntPtr(rowPitch),
                     data,
-                    &error );
-                ComputeException.ThrowOnError( error );
+                    &error);
+                ComputeException.ThrowOnError(error);
 
                 Init();
-            }            
+            }
         }
 
-        private ComputeImage2D( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
-            : base( context, flags )
+        private ComputeImage2D(IntPtr handle, ComputeContext context, ComputeMemoryFlags flags)
+            : base(context, flags)
         {
             Handle = handle;
-            
+
             Init();
         }
 
@@ -82,7 +82,7 @@ namespace Cloo
 
         #region Public methods
 
-        public static ComputeImage2D CreateFromGLRenderbuffer( ComputeContext context, ComputeMemoryFlags flags, int renderbufferId )
+        public static ComputeImage2D CreateFromGLRenderbuffer(ComputeContext context, ComputeMemoryFlags flags, int renderbufferId)
         {
             unsafe
             {
@@ -91,14 +91,14 @@ namespace Cloo
                     context.Handle,
                     flags,
                     renderbufferId,
-                    &error );
-                ComputeException.ThrowOnError( error );
+                    &error);
+                ComputeException.ThrowOnError(error);
 
-                return new ComputeImage2D( image, context, flags );
+                return new ComputeImage2D(image, context, flags);
             }
         }
 
-        public static ComputeImage2D CreateFromGLTexture2D( ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId )
+        public static ComputeImage2D CreateFromGLTexture2D(ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId)
         {
             unsafe
             {
@@ -109,10 +109,10 @@ namespace Cloo
                     textureTarget,
                     mipLevel,
                     textureId,
-                    &error );
-                ComputeException.ThrowOnError( error );
+                    &error);
+                ComputeException.ThrowOnError(error);
 
-                return new ComputeImage2D( image, context, flags );
+                return new ComputeImage2D(image, context, flags);
             }
         }
 
@@ -121,9 +121,9 @@ namespace Cloo
         /// </summary>
         /// <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
-        public static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
+        public static ICollection<ComputeImageFormat> GetSupportedFormats(ComputeContext context, ComputeMemoryFlags flags)
         {
-            return GetSupportedFormats( context, flags, ComputeMemoryType.Image2D );
+            return GetSupportedFormats(context, flags, ComputeMemoryType.Image2D);
         }
 
         #endregion

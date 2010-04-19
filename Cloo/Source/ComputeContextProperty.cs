@@ -69,7 +69,7 @@ namespace Cloo
         /// </summary>
         /// <param name="name">The name of the created property.</param>
         /// <param name="value">The value of the created property.</param>
-        public ComputeContextProperty( ComputeContextPropertyName name, IntPtr value )
+        public ComputeContextProperty(ComputeContextPropertyName name, IntPtr value)
         {
             this.name = name;
             this.value = value;

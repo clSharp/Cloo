@@ -34,10 +34,10 @@ namespace Cloo
     using System;
     using Cloo.Bindings;
 
-    public abstract class ComputeMemory: ComputeResource
+    public abstract class ComputeMemory : ComputeResource
     {
         #region Fields
-        
+
         private readonly ComputeContext context;
         private readonly ComputeMemoryFlags flags;
         private long size;
@@ -81,7 +81,7 @@ namespace Cloo
 
         #region Constructors
 
-        protected ComputeMemory( ComputeContext context, ComputeMemoryFlags flags )
+        protected ComputeMemory(ComputeContext context, ComputeMemoryFlags flags)
         {
             this.context = context;
             this.flags = flags;
@@ -91,11 +91,11 @@ namespace Cloo
 
         #region Protected methods
 
-        protected override void Dispose( bool manual )
-        {            
-            if( Handle != IntPtr.Zero )
+        protected override void Dispose(bool manual)
+        {
+            if (Handle != IntPtr.Zero)
             {
-                CL10.ReleaseMemObject( Handle );
+                CL10.ReleaseMemObject(Handle);
                 Handle = IntPtr.Zero;
             }
         }

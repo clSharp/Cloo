@@ -36,7 +36,7 @@ namespace Cloo
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
 
-    public class ComputeImage3D: ComputeImage
+    public class ComputeImage3D : ComputeImage
     {
         #region Constructors
 
@@ -52,8 +52,8 @@ namespace Cloo
         /// <param name="rowPitch">The scan-line pitch in bytes.</param>
         /// <param name="slicePitch">The size in bytes of each 2D slice in the 3D image.</param>
         /// <param name="data">The image data that may be already allocated by the application.</param>
-        public ComputeImage3D( ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int depth, long rowPitch, long slicePitch, IntPtr data )
-            : base( context, flags )
+        public ComputeImage3D(ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int depth, long rowPitch, long slicePitch, IntPtr data)
+            : base(context, flags)
         {
             unsafe
             {
@@ -62,21 +62,21 @@ namespace Cloo
                     context.Handle,
                     flags,
                     &format,
-                    new IntPtr( width ),
-                    new IntPtr( height ),
-                    new IntPtr( depth ),
-                    new IntPtr( rowPitch ),
-                    new IntPtr( slicePitch ),
+                    new IntPtr(width),
+                    new IntPtr(height),
+                    new IntPtr(depth),
+                    new IntPtr(rowPitch),
+                    new IntPtr(slicePitch),
                     data,
-                    &error );
-                ComputeException.ThrowOnError( error );
-                
+                    &error);
+                ComputeException.ThrowOnError(error);
+
                 Init();
             }
         }
 
-        private ComputeImage3D( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
-            : base( context, flags )
+        private ComputeImage3D(IntPtr handle, ComputeContext context, ComputeMemoryFlags flags)
+            : base(context, flags)
         {
             Handle = handle;
 
@@ -87,7 +87,7 @@ namespace Cloo
 
         #region Public methods
 
-        public static ComputeImage3D CreateFromGLTexture3D( ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId )
+        public static ComputeImage3D CreateFromGLTexture3D(ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId)
         {
             IntPtr image = IntPtr.Zero;
             unsafe
@@ -99,10 +99,10 @@ namespace Cloo
                     textureTarget,
                     mipLevel,
                     textureId,
-                    &error );
-                ComputeException.ThrowOnError( error );
+                    &error);
+                ComputeException.ThrowOnError(error);
             }
-            return new ComputeImage3D( image, context, flags );
+            return new ComputeImage3D(image, context, flags);
         }
 
         /// <summary>
@@ -110,9 +110,9 @@ namespace Cloo
         /// </summary>
         /// <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
-        public static ICollection<ComputeImageFormat> GetSupportedFormats( ComputeContext context, ComputeMemoryFlags flags )
+        public static ICollection<ComputeImageFormat> GetSupportedFormats(ComputeContext context, ComputeMemoryFlags flags)
         {
-            return GetSupportedFormats( context, flags, ComputeMemoryType.Image3D );
+            return GetSupportedFormats(context, flags, ComputeMemoryType.Image3D);
         }
 
         #endregion

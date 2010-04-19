@@ -33,29 +33,29 @@ namespace Cloo
 {
     using System;
 
-    public abstract class ComputeResource: ComputeObject, IDisposable
+    public abstract class ComputeResource : ComputeObject, IDisposable
     {
         #region Public methods
 
         public void Dispose()
         {
-            Dispose( true );
-            GC.SuppressFinalize( this );
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion
 
         #region Protected methods
 
-        protected abstract void Dispose( bool manual );
-        
+        protected abstract void Dispose(bool manual);
+
         #endregion
 
         #region Private methods
 
         ~ComputeResource()
         {
-            Dispose( false );
+            Dispose(false);
         }
 
         #endregion

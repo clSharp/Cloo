@@ -35,7 +35,7 @@ namespace Cloo
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
 
-    public class ComputeBuffer<T>: ComputeMemory where T: struct
+    public class ComputeBuffer<T> : ComputeMemory where T : struct
     {
         #region Fields
 
@@ -52,7 +52,7 @@ namespace Cloo
         {
             get
             {
-                return count; 
+                return count;
             }
         }
 
@@ -66,22 +66,22 @@ namespace Cloo
         /// <param name="context">A valid OpenCL context used to create this buffer.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
         /// <param name="count">The number of elements this buffer will contain.</param>
-        public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, long count )
-            : base( context, flags )
+        public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, long count)
+            : base(context, flags)
         {
             unsafe
             {
                 this.count = count;
-                Size = count * Marshal.SizeOf( typeof( T ) );
+                Size = count * Marshal.SizeOf(typeof(T));
 
                 ComputeErrorCode error = ComputeErrorCode.Success;
                 Handle = CL10.CreateBuffer(
                     context.Handle,
                     flags,
-                    new IntPtr( Size ),
+                    new IntPtr(Size),
                     IntPtr.Zero,
-                    &error );
-                ComputeException.ThrowOnError( error );
+                    &error);
+                ComputeException.ThrowOnError(error);
             }
         }
 
@@ -92,8 +92,8 @@ namespace Cloo
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
         /// <param name="size">The size in bytes of this buffer object.</param>
         /// <param name="dataPtr">A pointer to the data this buffer will contain.</param>
-        public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, long size, IntPtr dataPtr )
-            : base( context, flags )
+        public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, long size, IntPtr dataPtr)
+            : base(context, flags)
         {
             unsafe
             {
@@ -101,13 +101,13 @@ namespace Cloo
                 Handle = CL10.CreateBuffer(
                     context.Handle,
                     flags,
-                    new IntPtr( size ),
+                    new IntPtr(size),
                     dataPtr,
-                    &error );
-                ComputeException.ThrowOnError( error );
+                    &error);
+                ComputeException.ThrowOnError(error);
 
-                Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
-                count = Size / Marshal.SizeOf( typeof( T ) );
+                Size = (long)GetInfo<ComputeMemoryInfo, IntPtr>(ComputeMemoryInfo.Size, CL10.GetMemObjectInfo);
+                count = Size / Marshal.SizeOf(typeof(T));
             }
         }
 
@@ -117,25 +117,25 @@ namespace Cloo
         /// <param name="context">A valid OpenCL context used to create this buffer.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
         /// <param name="data">The elements this buffer will contain.</param>
-        public ComputeBuffer( ComputeContext context, ComputeMemoryFlags flags, T[] data )
-            : base( context, flags )
+        public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, T[] data)
+            : base(context, flags)
         {
             unsafe
             {
                 count = data.Length;
-                Size = count * Marshal.SizeOf( typeof( T ) );
+                Size = count * Marshal.SizeOf(typeof(T));
 
-                GCHandle dataPtr = GCHandle.Alloc( data, GCHandleType.Pinned );
+                GCHandle dataPtr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
                     Handle = CL10.CreateBuffer(
                         context.Handle,
                         flags,
-                        new IntPtr( Size ),
+                        new IntPtr(Size),
                         dataPtr.AddrOfPinnedObject(),
-                        &error );
-                    ComputeException.ThrowOnError( error );
+                        &error);
+                    ComputeException.ThrowOnError(error);
                 }
                 finally
                 {
@@ -144,15 +144,15 @@ namespace Cloo
             }
         }
 
-        private ComputeBuffer( IntPtr handle, ComputeContext context, ComputeMemoryFlags flags )
-            : base( context, flags )
+        private ComputeBuffer(IntPtr handle, ComputeContext context, ComputeMemoryFlags flags)
+            : base(context, flags)
         {
             unsafe
             {
                 Handle = handle;
 
-                Size = ( long )GetInfo<ComputeMemoryInfo, IntPtr>( ComputeMemoryInfo.Size, CL10.GetMemObjectInfo );
-                count = Size / Marshal.SizeOf( typeof( T ) );
+                Size = (long)GetInfo<ComputeMemoryInfo, IntPtr>(ComputeMemoryInfo.Size, CL10.GetMemObjectInfo);
+                count = Size / Marshal.SizeOf(typeof(T));
             }
         }
 
@@ -167,7 +167,7 @@ namespace Cloo
         /// <param name="context">A compute context with enabled CL/GL sharing.</param>
         /// <param name="flags">A bit field that is used to specify allocation and usage information.</param>
         /// <param name="bufferId">The OpenGL buffer object to create this buffer from.</param>
-        public static ComputeBuffer<T> CreateFromGLBuffer<T>( ComputeContext context, ComputeMemoryFlags flags, int bufferId ) where T: struct
+        public static ComputeBuffer<T> CreateFromGLBuffer<T>(ComputeContext context, ComputeMemoryFlags flags, int bufferId) where T : struct
         {
             unsafe
             {
@@ -176,10 +176,10 @@ namespace Cloo
                     context.Handle,
                     flags,
                     bufferId,
-                    &error );
-                ComputeException.ThrowOnError( error );
+                    &error);
+                ComputeException.ThrowOnError(error);
 
-                return new ComputeBuffer<T>( handle, context, flags );
+                return new ComputeBuffer<T>(handle, context, flags);
             }
         }
 

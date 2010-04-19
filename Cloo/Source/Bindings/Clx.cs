@@ -33,7 +33,7 @@ namespace Cloo.Bindings
 {
     using System;
     using System.Runtime.InteropServices;
-    
+
     public class Clx
     {
         internal static class Delegates
@@ -43,28 +43,28 @@ namespace Cloo.Bindings
                 ComputeGLContextInfo param_name,
                 IntPtr param_value_size,
                 IntPtr param_value,
-                IntPtr* param_value_size_ret );
+                IntPtr* param_value_size_ret);
         }
 
         private readonly Delegates.clGetGLContextInfoKHR clGetGLContextInfoKHR;
-        
+
         public unsafe ComputeErrorCode GetGLContextInfoKHR(
                 IntPtr* properties,
                 ComputeGLContextInfo param_name,
                 IntPtr param_value_size,
                 IntPtr param_value,
-                IntPtr* param_value_size_ret )
+                IntPtr* param_value_size_ret)
         {
-            if( clGetGLContextInfoKHR == null ) throw new EntryPointNotFoundException();
-            return clGetGLContextInfoKHR( properties, param_name, param_value_size, param_value, param_value_size_ret );
+            if (clGetGLContextInfoKHR == null) throw new EntryPointNotFoundException();
+            return clGetGLContextInfoKHR(properties, param_name, param_value_size, param_value, param_value_size_ret);
         }
 
-        public Clx( ComputePlatform platform )
+        public Clx(ComputePlatform platform)
         {
-            if( platform.Extensions.Contains( "cl_khr_gl_sharing" ) )
-                clGetGLContextInfoKHR = ( Delegates.clGetGLContextInfoKHR )Marshal.GetDelegateForFunctionPointer(
-                    CL10.GetExtensionFunctionAddress( "clGetGLContextInfoKHR" ),
-                    typeof( Delegates.clGetGLContextInfoKHR ) );
+            if (platform.Extensions.Contains("cl_khr_gl_sharing"))
+                clGetGLContextInfoKHR = (Delegates.clGetGLContextInfoKHR)Marshal.GetDelegateForFunctionPointer(
+                    CL10.GetExtensionFunctionAddress("clGetGLContextInfoKHR"),
+                    typeof(Delegates.clGetGLContextInfoKHR));
             else
                 clGetGLContextInfoKHR = null;
         }
