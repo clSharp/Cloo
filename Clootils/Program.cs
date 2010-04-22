@@ -40,29 +40,29 @@ namespace Clootils
 {
     public class Program
     {
-        [DllImport( "kernel32" )]
+        [DllImport("kernel32")]
         static extern bool AllocConsole();
 
-        [DllImport( "kernel32.dll" )]
-        public static extern bool FreeConsole();
+        [DllImport("kernel32.dll")]
+        static extern bool FreeConsole();
 
         [STAThread]
         public static void Main()
         {
-            bool runningWin32NT = ( Environment.OSVersion.Platform == PlatformID.Win32NT ) ? true : false;
+            bool runningWin32NT = (Environment.OSVersion.Platform == PlatformID.Win32NT) ? true : false;
             bool consoleAllocated = false;
 
             try
             {
-                if( runningWin32NT ) consoleAllocated = AllocConsole();
-                Application.Run( new MainForm() );                
+                if (runningWin32NT) consoleAllocated = AllocConsole();
+                Application.Run(new MainForm());
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
-                MessageBox.Show( ex.ToString(), "Clootils Error" );
+                MessageBox.Show(ex.ToString(), "Clootils Error");
             }
-            
-            if( runningWin32NT && consoleAllocated ) FreeConsole();
+
+            if (runningWin32NT && consoleAllocated) FreeConsole();
         }
     }
 }

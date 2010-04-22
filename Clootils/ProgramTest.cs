@@ -35,7 +35,7 @@ using Cloo;
 
 namespace Clootils
 {
-    class ProgramTest: TestBase
+    class ProgramTest : TestBase
     {
         private string kernelSource = @"
 kernel void Test( void )
@@ -44,16 +44,16 @@ kernel void Test( void )
 ";
 
         public ProgramTest()
-            : base( "Program Test" )
+            : base("Program Test")
         { }
 
         protected override void RunInternal()
         {
-            ComputeProgram program = new ComputeProgram( context, new string[]{ kernelSource } );
-            program.Build( null, null, null, IntPtr.Zero );
-            byte[] bytes = program.Binaries[ 0 ];
-            Console.WriteLine( "Compiled program head:" );
-            Console.WriteLine( BitConverter.ToString( bytes, 0, 16 ) + "..." );            
+            ComputeProgram program = new ComputeProgram(context, new string[] { kernelSource });
+            program.Build(null, null, null, IntPtr.Zero);
+            byte[] bytes = program.Binaries[0];
+            Console.WriteLine("Compiled program head:");
+            Console.WriteLine(BitConverter.ToString(bytes, 0, 16) + "...");
         }
     }
 }

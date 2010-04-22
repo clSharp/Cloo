@@ -35,7 +35,7 @@ using Cloo;
 
 namespace Clootils
 {
-    public class KernelsTest: TestBase
+    public class KernelsTest : TestBase
     {
         /* nVidia
         string kernelSources = @"
@@ -85,22 +85,22 @@ namespace Clootils
 ";
 
         public KernelsTest()
-            : base( "Kernels Test" )
+            : base("Kernels Test")
         { }
 
         protected override void RunInternal()
-        {            
-            ComputeProgram program = new ComputeProgram( context, new string[]{ kernelSources } );
-            program.Build( null, null, notify, IntPtr.Zero );
-            Console.WriteLine( "Program successfully built." );
+        {
+            ComputeProgram program = new ComputeProgram(context, new string[] { kernelSources });
+            program.Build(null, null, notify, IntPtr.Zero);
+            Console.WriteLine("Program successfully built.");
 
-            List<ComputeKernel> kernels = new List<ComputeKernel>( program.CreateAllKernels() );
-            Console.WriteLine( "Kernels successfully created." );            
+            List<ComputeKernel> kernels = new List<ComputeKernel>(program.CreateAllKernels());
+            Console.WriteLine("Kernels successfully created.");
         }
 
-        private void notify( IntPtr programHandle, IntPtr userDataPtr )
+        private void notify(IntPtr programHandle, IntPtr userDataPtr)
         {
-            Console.WriteLine( "Program build notification." );
+            Console.WriteLine("Program build notification.");
         }
     }
 }

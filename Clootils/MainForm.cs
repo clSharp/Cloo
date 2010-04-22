@@ -40,7 +40,7 @@ using Clootils.Properties;
 
 namespace Clootils
 {
-    public partial class MainForm: Form
+    public partial class MainForm : Form
     {
         ConfigForm settingsForm;
 
@@ -48,7 +48,7 @@ namespace Clootils
         {
             InitializeComponent();
             InitializeSettings();
-            editorTextBox.Font = Settings.Default.EditorFont;            
+            editorTextBox.Font = Settings.Default.EditorFont;
             fontDialog.FontMustExist = true;
             logTextBox.Font = Settings.Default.LogFont;
             openFileDialog.Multiselect = false;
@@ -58,43 +58,43 @@ namespace Clootils
 
         private void InitializeSettings()
         {
-            if( Settings.Default.EditorFont == null )
-                Settings.Default.EditorFont = new Font( FontFamily.GenericMonospace, 10 );
+            if (Settings.Default.EditorFont == null)
+                Settings.Default.EditorFont = new Font(FontFamily.GenericMonospace, 10);
 
-            if( Settings.Default.LogFont == null )
-                Settings.Default.LogFont = new Font( FontFamily.GenericMonospace, 10 );
+            if (Settings.Default.LogFont == null)
+                Settings.Default.LogFont = new Font(FontFamily.GenericMonospace, 10);
 
             Settings.Default.Save();
         }
 
-        private void openFileMenuItem_Click( object sender, EventArgs e )
+        private void openFileMenuItem_Click(object sender, EventArgs e)
         {
-            if( openFileDialog.ShowDialog() == DialogResult.OK )
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                FileStream file = new FileStream( openFileDialog.FileName, FileMode.Open, FileAccess.Read );
-                StreamReader reader = new StreamReader( file );
-                editorTextBox.Lines = ParseLines( reader.ReadToEnd() );
+                FileStream file = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
+                StreamReader reader = new StreamReader(file);
+                editorTextBox.Lines = ParseLines(reader.ReadToEnd());
                 reader.Close();
                 file.Close();
             }
         }
 
-        private void saveFileMenuItem_Click( object sender, EventArgs e )
+        private void saveFileMenuItem_Click(object sender, EventArgs e)
         {
-            if( saveFileDialog.ShowDialog() == DialogResult.OK )
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                FileStream file = new FileStream( saveFileDialog.FileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None );
-                StreamWriter writer = new StreamWriter( file );
+                FileStream file = new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+                StreamWriter writer = new StreamWriter(file);
 
-                foreach( string line in editorTextBox.Lines )
-                    writer.WriteLine( line );
+                foreach (string line in editorTextBox.Lines)
+                    writer.WriteLine(line);
 
                 writer.Close();
                 file.Close();
             }
         }
 
-        private void buildProgramMenuItem_Click( object sender, EventArgs e )
+        private void buildProgramMenuItem_Click(object sender, EventArgs e)
         {
             if (editorTextBox.Text.Length == 0)
             {
@@ -104,32 +104,32 @@ namespace Clootils
 
             string[] logContent;
 
-            ComputeContextPropertyList properties = new ComputeContextPropertyList( settingsForm.Platform );
-            ComputeContext context = new ComputeContext( settingsForm.Devices, properties, null, IntPtr.Zero );
-            ComputeProgram program = new ComputeProgram( context, editorTextBox.Text );
+            ComputeContextPropertyList properties = new ComputeContextPropertyList(settingsForm.Platform);
+            ComputeContext context = new ComputeContext(settingsForm.Devices, properties, null, IntPtr.Zero);
+            ComputeProgram program = new ComputeProgram(context, editorTextBox.Text);
             try
             {
-                program.Build( settingsForm.Devices, settingsForm.Options, null, IntPtr.Zero );
+                program.Build(settingsForm.Devices, settingsForm.Options, null, IntPtr.Zero);
                 logContent = new string[] { "Build succeeded." };
             }
-            catch( Exception exception )
+            catch (Exception exception)
             {
                 List<string> lineList = new List<string>();
-                foreach( ComputeDevice device in context.Devices )
+                foreach (ComputeDevice device in context.Devices)
                 {
                     string header = "PLATFORM: " + settingsForm.Platform.Name + ", DEVICE: " + device.Name;
-                    lineList.Add( header );
+                    lineList.Add(header);
 
-                    StringReader reader = new StringReader( program.GetBuildLog( device ) );                    
+                    StringReader reader = new StringReader(program.GetBuildLog(device));
                     string line = reader.ReadLine();
-                    while( line != null )
+                    while (line != null)
                     {
-                        lineList.Add( line );
+                        lineList.Add(line);
                         line = reader.ReadLine();
                     }
 
-                    lineList.Add( "" );
-                    lineList.Add( exception.GetType().ToString() + ": " + exception.Message );
+                    lineList.Add("");
+                    lineList.Add(exception.GetType().ToString() + ": " + exception.Message);
                 }
                 logContent = lineList.ToArray();
             }
@@ -137,10 +137,10 @@ namespace Clootils
             logTextBox.Lines = logContent;
         }
 
-        private void editorFontMenuItem_Click( object sender, EventArgs e )
+        private void editorFontMenuItem_Click(object sender, EventArgs e)
         {
             fontDialog.Font = editorTextBox.Font;
-            if( fontDialog.ShowDialog() == DialogResult.OK )
+            if (fontDialog.ShowDialog() == DialogResult.OK)
             {
                 editorTextBox.Font = fontDialog.Font;
                 Settings.Default.EditorFont = fontDialog.Font;
@@ -148,10 +148,10 @@ namespace Clootils
             }
         }
 
-        private void logFontMenuItem_Click( object sender, EventArgs e )
+        private void logFontMenuItem_Click(object sender, EventArgs e)
         {
             fontDialog.Font = logTextBox.Font;
-            if( fontDialog.ShowDialog() == DialogResult.OK )
+            if (fontDialog.ShowDialog() == DialogResult.OK)
             {
                 logTextBox.Font = fontDialog.Font;
                 Settings.Default.LogFont = fontDialog.Font;
@@ -159,92 +159,92 @@ namespace Clootils
             }
         }
 
-        private string[] ParseLines( string text )
+        private string[] ParseLines(string text)
         {
             List<string> lineList = new List<string>();
-            StringReader reader = new StringReader( text );
+            StringReader reader = new StringReader(text);
             string line = reader.ReadLine();
-            while( line != null )
+            while (line != null)
             {
-                lineList.Add( line );
+                lineList.Add(line);
                 line = reader.ReadLine();
             }
             return lineList.ToArray();
         }
 
-        private void copyButton_Click( object sender, EventArgs e )
+        private void copyButton_Click(object sender, EventArgs e)
         {
             Clipboard.Clear();
-            Clipboard.SetText( logTextBox.Text );
+            Clipboard.SetText(logTextBox.Text);
         }
 
-        private void buildDeviceMenuItem_Click( object sender, EventArgs e )
+        private void buildDeviceMenuItem_Click(object sender, EventArgs e)
         {
-            settingsForm.ShowDialog( this );
+            settingsForm.ShowDialog(this);
         }
 
-        private void showInfoToolStripMenuItem_Click( object sender, EventArgs e )
+        private void showInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StringBuilder info = new StringBuilder();
 
-            info.AppendLine( "[HOST INFO]" );
-            info.AppendLine( "Operating system: " + Environment.OSVersion );
+            info.AppendLine("[HOST INFO]");
+            info.AppendLine("Operating system: " + Environment.OSVersion);
 
             info.AppendLine();
-            info.AppendLine( "[OPENCL PLATFORMS]" );
+            info.AppendLine("[OPENCL PLATFORMS]");
 
-            foreach( ComputePlatform platform in ComputePlatform.Platforms )
+            foreach (ComputePlatform platform in ComputePlatform.Platforms)
             {
-                info.AppendLine( "Name: " + platform.Name );
-                info.AppendLine( "Vendor: " + platform.Vendor );
-                info.AppendLine( "Version: " + platform.Version );
-                info.AppendLine( "Profile: " + platform.Profile );
-                info.AppendLine( "Extensions:" );
+                info.AppendLine("Name: " + platform.Name);
+                info.AppendLine("Vendor: " + platform.Vendor);
+                info.AppendLine("Version: " + platform.Version);
+                info.AppendLine("Profile: " + platform.Profile);
+                info.AppendLine("Extensions:");
 
-                foreach( string extension in platform.Extensions )
-                    info.AppendLine( " + " + extension );
+                foreach (string extension in platform.Extensions)
+                    info.AppendLine(" + " + extension);
 
                 info.AppendLine();
 
-                info.AppendLine( "Devices:" );
+                info.AppendLine("Devices:");
 
-                foreach( ComputeDevice device in platform.Devices )
+                foreach (ComputeDevice device in platform.Devices)
                 {
-                    info.AppendLine( "\tName: " + device.Name );
-                    info.AppendLine( "\tVendor: " + device.Vendor );
-                    info.AppendLine( "\tDriver version: " + device.DriverVersion );
-                    info.AppendLine( "\tCompute units: " + device.MaxComputeUnits );
-                    info.AppendLine( "\tGlobal memory: " + device.GlobalMemorySize );
-                    info.AppendLine( "\tLocal memory: " + device.LocalMemorySize );
-                    info.AppendLine( "\tImage support: " + device.ImageSupport );
-                    info.AppendLine( "\tExtensions:" );
+                    info.AppendLine("\tName: " + device.Name);
+                    info.AppendLine("\tVendor: " + device.Vendor);
+                    info.AppendLine("\tDriver version: " + device.DriverVersion);
+                    info.AppendLine("\tCompute units: " + device.MaxComputeUnits);
+                    info.AppendLine("\tGlobal memory: " + device.GlobalMemorySize);
+                    info.AppendLine("\tLocal memory: " + device.LocalMemorySize);
+                    info.AppendLine("\tImage support: " + device.ImageSupport);
+                    info.AppendLine("\tExtensions:");
 
-                    foreach( string extension in device.Extensions )
-                        info.AppendLine( "\t + " + extension );
+                    foreach (string extension in device.Extensions)
+                        info.AppendLine("\t + " + extension);
 
                     info.AppendLine();
                 }
                 info.AppendLine();
             }
 
-            logTextBox.Lines = ParseLines( info.ToString() );
+            logTextBox.Lines = ParseLines(info.ToString());
         }
 
-        private void runTestsToolStripMenuItem_Click( object sender, EventArgs e )
+        private void runTestsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StringBuilder output = new StringBuilder();
-            StringWriter writer = new StringWriter( output );
+            StringWriter writer = new StringWriter(output);
 
-            Console.SetOut( writer );
+            Console.SetOut(writer);
 
-            ComputeContextPropertyList properties = new ComputeContextPropertyList( settingsForm.Platform );
-            ComputeContext context = new ComputeContext( settingsForm.Devices, properties, null, IntPtr.Zero );
-            TestBase.SetContext( context );
+            ComputeContextPropertyList properties = new ComputeContextPropertyList(settingsForm.Platform);
+            ComputeContext context = new ComputeContext(settingsForm.Devices, properties, null, IntPtr.Zero);
+            TestBase.SetContext(context);
 
-            Console.WriteLine( "Platform: " + context.Platform.Name );
-            Console.Write( "Devices:" );
-            foreach( ComputeDevice device in context.Devices )
-                Console.Write( " " + device.Name + "    " );
+            Console.WriteLine("Platform: " + context.Platform.Name);
+            Console.Write("Devices:");
+            foreach (ComputeDevice device in context.Devices)
+                Console.Write(" " + device.Name + "    ");
             Console.WriteLine();
 
             new DummyTest().Run();
@@ -253,10 +253,10 @@ namespace Clootils
             new KernelsTest().Run();
             new VectorAddTest().Run();
 
-            Console.SetOut( Console.Out );
+            Console.SetOut(Console.Out);
             writer.Close();
 
-            logTextBox.Lines = ParseLines( output.ToString() );
+            logTextBox.Lines = ParseLines(output.ToString());
         }
     }
 }

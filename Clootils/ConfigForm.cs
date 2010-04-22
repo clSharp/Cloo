@@ -37,13 +37,13 @@ using System.Collections.Generic;
 
 namespace Clootils
 {
-    public partial class ConfigForm: Form
+    public partial class ConfigForm : Form
     {
         public string Options { get; private set; }
         public ComputeDevice[] Devices { get; private set; }
         public ComputePlatform Platform { get; private set; }
 
-        private bool[] devicesBackup = new bool[ 0 ];
+        private bool[] devicesBackup = new bool[0];
         private int platformBackup = 0;
         private string optionsBackup = "";
 
@@ -54,40 +54,40 @@ namespace Clootils
 
             deviceCheckList.CheckOnClick = true;
 
-            Platform = ComputePlatform.Platforms[ 0 ];
-            platformComboBox.SelectedIndexChanged += new EventHandler( platformComboBox_SelectedIndexChanged );
+            Platform = ComputePlatform.Platforms[0];
+            platformComboBox.SelectedIndexChanged += new EventHandler(platformComboBox_SelectedIndexChanged);
 
-            object[] availablePlatforms = new object[ ComputePlatform.Platforms.Count ];
-            for( int i = 0; i < availablePlatforms.Length; i++ ) availablePlatforms[ i ] = ComputePlatform.Platforms[ i ].Name;
-            platformComboBox.Items.AddRange( availablePlatforms );
+            object[] availablePlatforms = new object[ComputePlatform.Platforms.Count];
+            for (int i = 0; i < availablePlatforms.Length; i++) availablePlatforms[i] = ComputePlatform.Platforms[i].Name;
+            platformComboBox.Items.AddRange(availablePlatforms);
             platformComboBox.SelectedIndex = 0;
 
             StoreState();
 
-            Shown += new EventHandler( SettingsForm_Shown );
+            Shown += new EventHandler(SettingsForm_Shown);
         }
 
-        void platformComboBox_SelectedIndexChanged( object sender, EventArgs e )
+        void platformComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComputePlatform platform = ComputePlatform.Platforms[ platformComboBox.SelectedIndex ];
-            object[] availableDevices = new object[ platform.Devices.Count ];
-            for( int i = 0; i < availableDevices.Length; i++ ) availableDevices[ i ] = platform.Devices[ i ].Name;
+            ComputePlatform platform = ComputePlatform.Platforms[platformComboBox.SelectedIndex];
+            object[] availableDevices = new object[platform.Devices.Count];
+            for (int i = 0; i < availableDevices.Length; i++) availableDevices[i] = platform.Devices[i].Name;
             deviceCheckList.Items.Clear();
-            deviceCheckList.Items.AddRange( availableDevices );
-            deviceCheckList.SetItemChecked( 0, true );
+            deviceCheckList.Items.AddRange(availableDevices);
+            deviceCheckList.SetItemChecked(0, true);
         }
 
-        void SettingsForm_Shown( object sender, EventArgs e )
+        void SettingsForm_Shown(object sender, EventArgs e)
         {
             LoadState();
         }
 
-        private void okButton_Click( object sender, EventArgs e )
+        private void okButton_Click(object sender, EventArgs e)
         {
             StoreState();
         }
 
-        private void cancelButton_Click( object sender, EventArgs e )
+        private void cancelButton_Click(object sender, EventArgs e)
         {
             LoadState();
         }
@@ -96,8 +96,8 @@ namespace Clootils
         {
             platformComboBox.SelectedIndex = platformBackup;
 
-            for( int i = 0; i < devicesBackup.Length; i++ )
-                deviceCheckList.SetItemChecked( i, devicesBackup[ i ] );
+            for (int i = 0; i < devicesBackup.Length; i++)
+                deviceCheckList.SetItemChecked(i, devicesBackup[i]);
 
             optionsTextBox.Text = optionsBackup;
         }
@@ -105,23 +105,23 @@ namespace Clootils
         private void StoreState()
         {
             platformBackup = platformComboBox.SelectedIndex;
-            
-            devicesBackup = new bool[ deviceCheckList.Items.Count ];
-            for( int i = 0; i < devicesBackup.Length; i++ )
+
+            devicesBackup = new bool[deviceCheckList.Items.Count];
+            for (int i = 0; i < devicesBackup.Length; i++)
             {
-                devicesBackup[ i ] = false;
-                if( deviceCheckList.GetItemChecked( i ) )
-                    devicesBackup[ i ] = true;
+                devicesBackup[i] = false;
+                if (deviceCheckList.GetItemChecked(i))
+                    devicesBackup[i] = true;
             }
 
             optionsBackup = optionsTextBox.Text;
 
-            Platform = ComputePlatform.Platforms[ platformComboBox.SelectedIndex ];
-            Devices = new ComputeDevice[ deviceCheckList.CheckedItems.Count ];
+            Platform = ComputePlatform.Platforms[platformComboBox.SelectedIndex];
+            Devices = new ComputeDevice[deviceCheckList.CheckedItems.Count];
             int k = 0;
-            for( int i = 0; k < Devices.Length && i < Platform.Devices.Count; i++ )
-                if( deviceCheckList.GetItemChecked( i ) )
-                    Devices[ k++ ] = Platform.Devices[ i ];
+            for (int i = 0; k < Devices.Length && i < Platform.Devices.Count; i++)
+                if (deviceCheckList.GetItemChecked(i))
+                    Devices[k++] = Platform.Devices[i];
             Options = optionsTextBox.Text;
         }
     }

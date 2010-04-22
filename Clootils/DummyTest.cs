@@ -31,10 +31,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Clootils
 {
-    public class DummyTest: TestBase
+    public class DummyTest : TestBase
     {
         public DummyTest()
-            : base( "Dummy Test" )
+            : base("Dummy Test")
         { }
 
         protected override void RunInternal()

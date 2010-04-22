@@ -39,7 +39,7 @@ namespace Clootils
         private readonly string name;
         protected static ComputeContext context;
 
-        protected TestBase( string name )
+        protected TestBase(string name)
         {
             this.name = name;
         }
@@ -51,28 +51,28 @@ namespace Clootils
             {
                 RunInternal();
             }
-            catch( Exception e )
+            catch (Exception e)
             {
-                Console.WriteLine( e.ToString() );
+                Console.WriteLine(e.ToString());
             }
             EndRun();
         }
 
-        public static void SetContext( ComputeContext context )
+        public static void SetContext(ComputeContext context)
         {
             TestBase.context = context;
         }
 
         protected void StartRun()
         {
-            Console.WriteLine( "\n------------------| Start {0} |------------------", name );
+            Console.WriteLine("\n------------------| Start {0} |------------------", name);
         }
 
         protected abstract void RunInternal();
 
         protected void EndRun()
         {
-            Console.WriteLine( "-------------------| End {0} |-------------------\n", name );
+            Console.WriteLine("-------------------| End {0} |-------------------\n", name);
         }
     }
 }
