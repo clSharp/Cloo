@@ -1,3 +1,22 @@
+[0.7.2] -----------------------------------------------------------------------
+Breaking changes:
+None.
+
+New functionality:
+None.
+
+Bugfixes:
+Changing platform in Clootils configuration doesn't update device list.
+Clootils crash on certain device selections for multidevice platforms.
+Clootils syntax checking cripples source before sending it to the compiler.
+
+Internals:
+Reformatted Cloo source to match Visual Studio default formatting.
+
+Documentation:
+None.
+
+
 [0.7.1] -----------------------------------------------------------------------
 Breaking changes:
 Removed ComputeContextPropertyList.Platform property.
