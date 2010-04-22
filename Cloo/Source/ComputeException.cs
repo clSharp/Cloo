@@ -53,6 +53,7 @@ namespace Cloo
         #region Constructors
 
         public ComputeException(ComputeErrorCode code)
+            : base("OpenCL error code detected: " + code.ToString() + ".")
         {
             this.code = code;
         }
