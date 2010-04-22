@@ -96,17 +96,21 @@ namespace Clootils
 
         private void buildProgramMenuItem_Click( object sender, EventArgs e )
         {
-            if( editorTextBox.Text.Length < 1 ) return;
+            if (editorTextBox.Text.Length == 0)
+            {
+                logTextBox.Text = "No source.";
+                return;
+            }
 
             string[] logContent;
 
             ComputeContextPropertyList properties = new ComputeContextPropertyList( settingsForm.Platform );
             ComputeContext context = new ComputeContext( settingsForm.Devices, properties, null, IntPtr.Zero );
-            ComputeProgram program = new ComputeProgram( context, editorTextBox.Lines );
+            ComputeProgram program = new ComputeProgram( context, editorTextBox.Text );
             try
             {
                 program.Build( settingsForm.Devices, settingsForm.Options, null, IntPtr.Zero );
-                logContent = new string[] { "build succeeded" };
+                logContent = new string[] { "Build succeeded." };
             }
             catch( Exception exception )
             {
