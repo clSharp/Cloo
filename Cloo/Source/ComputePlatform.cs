@@ -41,7 +41,7 @@ namespace Cloo
     {
         #region Fields
 
-        private readonly ReadOnlyCollection<ComputeDevice> devices;
+        private ReadOnlyCollection<ComputeDevice> devices;
         private readonly ReadOnlyCollection<string> extensions;
         private readonly string name;
         private static ReadOnlyCollection<ComputePlatform> platforms;
@@ -141,8 +141,7 @@ namespace Cloo
         {
             unsafe
             {
-                Handle = handle;
-                devices = new ReadOnlyCollection<ComputeDevice>(GetDevices());
+                Handle = handle;                
 
                 string extensionString = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Extensions, CL10.GetPlatformInfo);
                 extensions = new ReadOnlyCollection<string>(extensionString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
@@ -151,6 +150,7 @@ namespace Cloo
                 profile = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Profile, CL10.GetPlatformInfo);
                 vendor = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Vendor, CL10.GetPlatformInfo);
                 version = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Version, CL10.GetPlatformInfo);
+                QueryDevices();
             }
         }
 
@@ -223,18 +223,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a string representation of this platform.
+        /// Queries the available devices on this platform.
         /// </summary>
-        public override string ToString()
-        {
-            return "ComputePlatform" + base.ToString();
-        }
-
-        #endregion
-
-        #region Private methods
-
-        private ComputeDevice[] GetDevices()
+        /// <returns>The list of devices available on this platform.</returns>
+        public ReadOnlyCollection<ComputeDevice> QueryDevices()
         {
             unsafe
             {
@@ -253,8 +245,18 @@ namespace Cloo
                 for (int i = 0; i < handlesLength; i++)
                     devices[i] = new ComputeDevice(this, handles[i]);
 
-                return devices;
+                this.devices = new ReadOnlyCollection<ComputeDevice>(devices);
+
+                return this.devices;
             }
+        }
+
+        /// <summary>
+        /// Gets a string representation of this platform.
+        /// </summary>
+        public override string ToString()
+        {
+            return "ComputePlatform" + base.ToString();
         }
 
         #endregion

@@ -32,8 +32,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Windows.Forms;
 using Cloo;
-using Clootils.Properties;
-using System.Collections.Generic;
 
 namespace Clootils
 {

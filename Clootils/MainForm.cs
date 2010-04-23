@@ -129,7 +129,7 @@ namespace Clootils
                     }
 
                     lineList.Add("");
-                    lineList.Add(exception.GetType().ToString() + ": " + exception.Message);
+                    lineList.Add(exception.Message);
                 }
                 logContent = lineList.ToArray();
             }
