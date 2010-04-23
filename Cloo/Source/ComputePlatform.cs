@@ -158,6 +158,10 @@ namespace Cloo
 
         #region Public methods
 
+        /// <summary>
+        /// Gets a platform of a matching handle.
+        /// </summary>
+        /// <param name="handle">The handle of the queried platform.</param>
         public static ComputePlatform GetByHandle(IntPtr handle)
         {
             foreach (ComputePlatform platform in Platforms)
