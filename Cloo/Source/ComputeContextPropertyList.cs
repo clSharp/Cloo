@@ -32,14 +32,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
 
-    public class ComputeContextPropertyList
+    public class ComputeContextPropertyList: IEnumerable<ComputeContextProperty>
     {
         #region Fields
 
-        private ComputePlatform platform;
         private IList<ComputeContextProperty> properties;
 
         #endregion
@@ -52,12 +51,8 @@ namespace Cloo
         /// <param name="platform">A platform property for this list. Can be null.</param>
         public ComputeContextPropertyList(ComputePlatform platform)
         {
-            this.platform = platform;
-
             properties = new List<ComputeContextProperty>();
-
-            if (platform != null)
-                properties.Add(new ComputeContextProperty(ComputeContextPropertyName.Platform, platform.Handle));
+            properties.Add(new ComputeContextProperty(ComputeContextPropertyName.Platform, platform.Handle));
         }
 
         /// <summary>
@@ -67,13 +62,6 @@ namespace Cloo
         public ComputeContextPropertyList(IEnumerable<ComputeContextProperty> properties)
         {
             this.properties = new List<ComputeContextProperty>(properties);
-
-            foreach (ComputeContextProperty property in properties)
-                if (property.Name == ComputeContextPropertyName.Platform)
-                {
-                    platform = ComputePlatform.GetByHandle(property.Value);
-                    break;
-                }
         }
 
         #endregion
@@ -103,6 +91,24 @@ namespace Cloo
             }
             result[result.Length - 1] = IntPtr.Zero;
             return result;
+        }
+
+        #endregion
+
+        #region IEnumerable<ComputeContextProperty> Members
+
+        public IEnumerator<ComputeContextProperty> GetEnumerator()
+        {
+            return ((IEnumerable<ComputeContextProperty>)properties).GetEnumerator();
+        }
+
+        #endregion
+
+        #region IEnumerable Members
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)properties).GetEnumerator();
         }
 
         #endregion

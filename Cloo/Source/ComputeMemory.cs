@@ -40,7 +40,6 @@ namespace Cloo
 
         private readonly ComputeContext context;
         private readonly ComputeMemoryFlags flags;
-        private long size;
 
         #endregion
 
