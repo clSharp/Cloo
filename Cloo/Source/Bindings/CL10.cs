@@ -170,7 +170,7 @@ namespace Cloo.Bindings
             /* void* */ IntPtr host_ptr,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dll, EntryPoint = "clCreateImage2D")]
+        [DllImport(dll, EntryPoint = "clCreateImage3D")]
         public extern static unsafe IntPtr
         CreateImage3D(
             IntPtr context,
