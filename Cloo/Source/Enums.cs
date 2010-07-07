@@ -48,6 +48,8 @@ namespace Cloo
         ImageFormatNotSupported = -10,
         BuildProgramFailure = -11,
         MapFailure = -12,
+        MisalignedSubBufferOffset = -13,
+        ExecutionStatusErrorForEventsInWaitList = -14,
         InvalidValue = -30,
         InvalidDeviceType = -31,
         InvalidPlatform = -32,
@@ -81,13 +83,15 @@ namespace Cloo
         InvalidGLObject = -60,
         InvalidBufferSize = -61,
         InvalidMipLevel = -62,
+        InvalidGlobalWorkSize = -63,
         CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR = -1000,
         CL_PLATFORM_NOT_FOUND_KHR = -1001,
     }
 
     public enum OpenCLVersion : int
     {
-        Version_1_0 = 1
+        Version_1_0 = 1,
+        Version_1_1 = 1
     }
 
     public enum ComputeBoolean : int
@@ -170,6 +174,16 @@ namespace Cloo
         Platform = 0x1031,
         CL_DEVICE_DOUBLE_FP_CONFIG = 0x1032,
         CL_DEVICE_HALF_FP_CONFIG = 0x1033,
+        PreferredVectorWidthHalf = 0x1034,
+        HostUnifiedMemory = 0x1035,
+        NativeVectorWidthChar = 0x1036,
+        NativeVectorWidthShort = 0x1037,
+        NativeVectorWidthInt = 0x1038,
+        NativeVectorWidthLong = 0x1039,
+        NativeVectorWidthFloat = 0x103A,
+        NativeVectorWidthDouble = 0x103B,
+        NativeVectorWidthHalf = 0x103C,
+        OpenCLCVersion = 0x103D
     }
 
     [Flags]
@@ -181,6 +195,7 @@ namespace Cloo
         RoundToZero = 1 << 3,
         RoundToInf = 1 << 4,
         Fma = 1 << 5,
+        SoftFloat = 1 << 6
     }
 
     public enum ComputeDeviceMemoryCacheType : int
@@ -215,6 +230,7 @@ namespace Cloo
         ReferenceCount = 0x1080,
         Devices = 0x1081,
         Properties = 0x1082,
+        NumDevices = 0x1083,
         Platform = 0x1084,
     }
 
@@ -259,7 +275,10 @@ namespace Cloo
         Bgra = 0x10B6,
         Argb = 0x10B7,
         Intensity = 0x10B8,
-        Luminance = 0x10B9
+        Luminance = 0x10B9,
+        RX = 0x10BA,
+        Rgx = 0x10BB,
+        Rgbx = 0x10BC
     }
 
     public enum ComputeImageChannelType : int
@@ -296,7 +315,9 @@ namespace Cloo
         HostPointer = 0x1103,
         MapppingCount = 0x1104,
         ReferenceCount = 0x1105,
-        Context = 0x1106
+        Context = 0x1106,
+        AssociatedMemoryObject = 0x1107,
+        Offset = 0x1108
     }
 
     public enum ComputeImageInfo : int
@@ -315,7 +336,8 @@ namespace Cloo
         None = 0x1130,
         ClampToEdge = 0x1131,
         Clamp = 0x1132,
-        Repeat = 0x1133
+        Repeat = 0x1133,
+        MirroredRepeat = 0x1134
     }
 
     public enum ComputeImageFiltering : int
@@ -379,7 +401,9 @@ namespace Cloo
     {
         WorkGroupSize = 0x11B0,
         CompileWorkGroupSize = 0x11B1,
-        LocalMemorySize = 0x11B2
+        LocalMemorySize = 0x11B2,
+        PreferredWorkGroupSizeMultiple = 0x11B3,
+        PrivateMemorySize = 0x11B4
     }
 
     public enum ComputeEventInfo : int
@@ -387,7 +411,8 @@ namespace Cloo
         CommandQueue = 0x11D0,
         CommandType = 0x11D1,
         ReferenceCount = 0x11D2,
-        ExecutionStatus = 0x11D3
+        ExecutionStatus = 0x11D3,
+        Context = 0x11D4
     }
 
     public enum ComputeCommandType : int
@@ -408,7 +433,11 @@ namespace Cloo
         UnmapMemory = 0x11FD,
         Marker = 0x11FE,
         AcquireGLObjects = 0x11FF,
-        ReleaseGLObjects = 0x1200
+        ReleaseGLObjects = 0x1200,
+        ReadBufferRectangle = 0x1201,
+        WriteBufferRectangle = 0x1202,
+        CopyBufferRectangle = 0x1203,
+        User = 0x1204
     }
 
     public enum ComputeCommandExecutionStatus : int
@@ -417,6 +446,11 @@ namespace Cloo
         Running = 0x1,
         Submitted = 0x2,
         Queued = 0x3
+    }
+
+    public enum ComputeBufferCreateType : int
+    {
+        Region = 0x1220
     }
 
     public enum ComputeCommandProfilingInfo : int

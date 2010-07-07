@@ -37,7 +37,7 @@ namespace Cloo.Bindings
 
     public class CL10
     {
-        const string dll = "opencl.dll";
+        protected const string dll = "opencl.dll";
 
         // $Revision: 9283 $ on $Date: 2009-10-14 10:18:57 -0700 (Wed, 14 Oct 2009) $ 
 
@@ -81,9 +81,9 @@ namespace Cloo.Bindings
         [DllImport(dll, EntryPoint = "clCreateContext")]
         public extern static unsafe IntPtr
         CreateContext(
-            /* const */ IntPtr* properties,
+            IntPtr* properties,
             Int32 num_devices,
-            /* const */ IntPtr* devices,
+            IntPtr* devices,
             /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ IntPtr pfn_notify,
             /* void* */ IntPtr user_data,
             ComputeErrorCode* errcode_ret);
@@ -91,7 +91,7 @@ namespace Cloo.Bindings
         [DllImport(dll, EntryPoint = "clCreateContextFromType")]
         public extern static unsafe IntPtr
         CreateContextFromType(
-            /* const */ IntPtr* properties,
+            IntPtr* properties,
             ComputeDeviceTypes device_type,
             /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ IntPtr pfn_notify,
             /* void* */ IntPtr user_data,
@@ -163,7 +163,7 @@ namespace Cloo.Bindings
         CreateImage2D(
             IntPtr context,
             ComputeMemoryFlags flags,
-            /* const */ ComputeImageFormat* image_format,
+            ComputeImageFormat* image_format,
             IntPtr image_width,
             IntPtr image_height,
             IntPtr image_row_pitch,
@@ -175,7 +175,7 @@ namespace Cloo.Bindings
         CreateImage3D(
             IntPtr context,
             ComputeMemoryFlags flags,
-            /* const */ ComputeImageFormat* image_format,
+            ComputeImageFormat* image_format,
             IntPtr image_width,
             IntPtr image_height,
             IntPtr image_depth,
@@ -254,7 +254,7 @@ namespace Cloo.Bindings
             IntPtr context,
             Int32 count,
             String[] strings,
-            /* const */ IntPtr* lengths,
+            IntPtr* lengths,
             ComputeErrorCode* errcode_ret);
 
         [DllImport(dll, EntryPoint = "clCreateProgramWithBinary")]
@@ -262,9 +262,9 @@ namespace Cloo.Bindings
         CreateProgramWithBinary(
             IntPtr context,
             Int32 num_devices,
-            /* const */ IntPtr* device_list,
-            /* const */ IntPtr* lengths,
-            /* const */ Byte** binaries,
+            IntPtr* device_list,
+            IntPtr* lengths,
+            Byte** binaries,
             Int32* binary_status,
             ComputeErrorCode* errcode_ret);
 
@@ -281,8 +281,8 @@ namespace Cloo.Bindings
         BuildProgram(
             IntPtr program,
             Int32 num_devices,
-            /* const */ IntPtr* device_list,
-            /* const */ String options,
+            IntPtr* device_list,
+            String options,
             /* void (*pfn_notify)(cl_program program , IntPtr user_data ) */ IntPtr pfn_notify,
             /* void* */ IntPtr user_data);
 
@@ -314,7 +314,7 @@ namespace Cloo.Bindings
         public extern static unsafe IntPtr
         CreateKernel(
             IntPtr program,
-            /* const */ String kernel_name,
+            String kernel_name,
             ComputeErrorCode* errcode_ret);
 
         [DllImport(dll, EntryPoint = "clCreateKernelsInProgram")]
@@ -365,7 +365,7 @@ namespace Cloo.Bindings
         public extern static unsafe ComputeErrorCode
         WaitForEvents(
             Int32 num_events,
-            /* const */ IntPtr* event_list);
+            IntPtr* event_list);
 
         [DllImport(dll, EntryPoint = "clGetEventInfo")]
         public extern static unsafe ComputeErrorCode
@@ -414,8 +414,8 @@ namespace Cloo.Bindings
             IntPtr cb,
             /* void* */ IntPtr ptr,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueWriteBuffer")]
         public extern static unsafe ComputeErrorCode
@@ -427,8 +427,8 @@ namespace Cloo.Bindings
             IntPtr cb,
             /* const void* */ IntPtr ptr,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueCopyBuffer")]
         public extern static unsafe ComputeErrorCode
@@ -440,8 +440,8 @@ namespace Cloo.Bindings
             IntPtr dst_offset,
             IntPtr cb,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueReadImage")]
         public extern static unsafe ComputeErrorCode
@@ -449,14 +449,14 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr image,
             ComputeBoolean blocking_read,
-            /* const */ IntPtr* origin,
-            /* const */ IntPtr* region,
+            IntPtr* origin,
+            IntPtr* region,
             IntPtr row_pitch,
             IntPtr slice_pitch,
             /* void* */ IntPtr ptr,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueWriteImage")]
         public extern static unsafe ComputeErrorCode
@@ -464,14 +464,14 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr image,
             ComputeBoolean blocking_write,
-            /* const */ IntPtr* origin,
-            /* const */ IntPtr* region,
+            IntPtr* origin,
+            IntPtr* region,
             IntPtr input_row_pitch,
             IntPtr input_slice_pitch,
             /* const void* */ IntPtr ptr,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueCopyImage")]
         public extern static unsafe ComputeErrorCode
@@ -479,12 +479,12 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr src_image,
             IntPtr dst_image,
-            /* const */ IntPtr* src_origin,
-            /* const */ IntPtr* dst_origin,
-            /* const */ IntPtr* region,
+            IntPtr* src_origin,
+            IntPtr* dst_origin,
+            IntPtr* region,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueCopyImageToBuffer")]
         public extern static unsafe ComputeErrorCode
@@ -492,12 +492,12 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr src_image,
             IntPtr dst_buffer,
-            /* const */ IntPtr* src_origin,
-            /* const */ IntPtr* region,
+            IntPtr* src_origin,
+            IntPtr* region,
             IntPtr dst_offset,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueCopyBufferToImage")]
         public extern static unsafe ComputeErrorCode
@@ -506,11 +506,11 @@ namespace Cloo.Bindings
             IntPtr src_buffer,
             IntPtr dst_image,
             IntPtr src_offset,
-            /* const */ IntPtr* dst_origin,
-            /* const */ IntPtr* region,
+            IntPtr* dst_origin,
+            IntPtr* region,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueMapBuffer")]
         public extern static unsafe /* void* */ IntPtr
@@ -522,8 +522,8 @@ namespace Cloo.Bindings
             IntPtr offset,
             IntPtr cb,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent,
+            IntPtr* event_wait_list,
+            IntPtr* new_event,
             ComputeErrorCode* errcode_ret);
 
         [DllImport(dll, EntryPoint = "clEnqueueMapImage")]
@@ -533,13 +533,13 @@ namespace Cloo.Bindings
             IntPtr image,
             ComputeBoolean blocking_map,
             ComputeMemoryMappingFlags map_flags,
-            /* const */ IntPtr* origin,
-            /* const */ IntPtr* region,
+            IntPtr* origin,
+            IntPtr* region,
             IntPtr* image_row_pitch,
             IntPtr* image_slice_pitch,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent,
+            IntPtr* event_wait_list,
+            IntPtr* new_event,
             ComputeErrorCode* errcode_ret);
 
         [DllImport(dll, EntryPoint = "clEnqueueUnmapMemObject")]
@@ -549,8 +549,8 @@ namespace Cloo.Bindings
             IntPtr memobj,
             /* void* */ IntPtr mapped_ptr,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueNDRangeKernel")]
         public extern static unsafe ComputeErrorCode
@@ -558,12 +558,12 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr kernel,
             Int32 work_dim,
-            /* const */ IntPtr* global_work_offset,
-            /* const */ IntPtr* global_work_size,
-            /* const */ IntPtr* local_work_size,
+            IntPtr* global_work_offset,
+            IntPtr* global_work_size,
+            IntPtr* local_work_size,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueTask")]
         public extern static unsafe ComputeErrorCode
@@ -571,8 +571,8 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr kernel,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueNativeKernel")]
         public extern static unsafe ComputeErrorCode
@@ -582,24 +582,24 @@ namespace Cloo.Bindings
             /* void* */ IntPtr args,
             IntPtr cb_args,
             Int32 num_mem_objects,
-            /* const */ IntPtr* mem_list,
+            IntPtr* mem_list,
             /* const void* */ IntPtr* args_mem_loc,
             Int32 num_events_in_wait_list,
-            /* const */ IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* event_wait_list,
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueMarker")]
         public extern static unsafe ComputeErrorCode
         EnqueueMarker(
             IntPtr command_queue,
-            IntPtr* newEvent);
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueWaitForEvents")]
         public extern static unsafe ComputeErrorCode
         EnqueueWaitForEvents(
             IntPtr command_queue,
             Int32 num_events,
-            /* const */ IntPtr* event_list);
+            IntPtr* event_list);
 
         [DllImport(dll, EntryPoint = "clEnqueueBarrier")]
         public extern static unsafe ComputeErrorCode
@@ -614,7 +614,7 @@ namespace Cloo.Bindings
         //
         [DllImport(dll, EntryPoint = "clGetExtensionFunctionAddress")]
         public extern static unsafe /* void* */ IntPtr
-        GetExtensionFunctionAddress(/* const */ String func_name);
+        GetExtensionFunctionAddress(String func_name);
 
         /**************************************************************************************/
         // CL/GL Sharing API
@@ -679,7 +679,7 @@ namespace Cloo.Bindings
             IntPtr* mem_objects,
             Int32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* new_event);
 
         [DllImport(dll, EntryPoint = "clEnqueueReleaseGLObjects")]
         public extern static unsafe ComputeErrorCode
@@ -689,6 +689,6 @@ namespace Cloo.Bindings
             IntPtr* mem_objects,
             Int32 num_events_in_wait_list,
             IntPtr* event_wait_list,
-            IntPtr* newEvent);
+            IntPtr* new_event);
     }
 }
