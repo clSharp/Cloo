@@ -654,8 +654,6 @@ namespace Cloo
         /// </summary>
         /// <param name="image">The image to read from.</param>
         /// <param name="blocking">Indicates if this operation is blocking or non-blocking.</param>
-        /// <param name="offset">The (x, y, z) offset in pixels where reading starts.</param>
-        /// <param name="region">The region (width, height, depth) in pixels to read.</param>
         /// <param name="data">A preallocated memory area to read the data into.</param>
         /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
         public void Read(ComputeImage image, bool blocking, IntPtr data, ICollection<ComputeEvent> events)
