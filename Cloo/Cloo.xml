@@ -151,10 +151,19 @@
             <param name="dataSize">Specifies the size of the argument value in bytes.</param>
             <param name="dataAddr">A pointer to data that should be used as the argument value for argument specified by index.</param>
         </member>
+        <member name="M:Cloo.ComputeKernel.SetLocalArgument(System.Int32,System.Int64)">
+            <summary>
+            Sets the size of the argument specfied with the local address space qualifier.
+            </summary>
+            <param name="index">The argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n - 1, where n is the total number of arguments declared by a kernel.</param>
+            <param name="size">The size of the argument.</param>
+        </member>
         <member name="M:Cloo.ComputeKernel.SetMemoryArgument(System.Int32,Cloo.ComputeMemory)">
             <summary>
             Set the argument value for a specific argument of a kernel.
             </summary>
+            <param name="index">The argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n - 1, where n is the total number of arguments declared by a kernel.</param>
+            <param name="memObj">The memory object that is passed as the argument to the kernel.</param>
         </member>
         <member name="M:Cloo.ComputeKernel.SetMemoryArgument(System.Int32,Cloo.ComputeMemory,System.Boolean)">
             <summary>
@@ -168,6 +177,8 @@
             <summary>
             Sets the specified kernel argument.
             </summary>
+            <param name="index">The argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n - 1, where n is the total number of arguments declared by a kernel.</param>
+            <param name="sampler">The sampler object that is passed as the argument to the kernel.</param>
         </member>
         <member name="M:Cloo.ComputeKernel.SetSamplerArgument(System.Int32,Cloo.ComputeSampler,System.Boolean)">
             <summary>

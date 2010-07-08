@@ -69,12 +69,12 @@ namespace Cloo.Bindings
         [DllImport(dll, EntryPoint = "clSetUserEventStatus")]
         public extern static unsafe ComputeErrorCode SetUserEventStatus(
             IntPtr @event,
-            int execution_status);
+            Int32 execution_status);
 
         [DllImport(dll, EntryPoint = "clSetEventCallback")]
         public extern static unsafe ComputeErrorCode SetEventCallback(
             IntPtr @event,
-            int command_exec_callback_type,
+            Int32 command_exec_callback_type,
             /* void (CL_CALLBACK * pfn_notify)(cl_event, cl_int, void *) */ IntPtr pfn_notify,
             /* void * */ IntPtr user_data);
 
@@ -91,7 +91,7 @@ namespace Cloo.Bindings
             IntPtr host_row_pitch,
             IntPtr host_slice_pitch,
             IntPtr ptr,
-            int num_events_in_wait_list,
+            Int32 num_events_in_wait_list,
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
@@ -108,7 +108,7 @@ namespace Cloo.Bindings
             IntPtr host_row_pitch,
             IntPtr host_slice_pitch,
             IntPtr ptr,
-            int num_events_in_wait_list,
+            Int32 num_events_in_wait_list,
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
@@ -124,7 +124,7 @@ namespace Cloo.Bindings
             IntPtr src_slice_pitch,
             IntPtr dst_row_pitch,
             IntPtr dst_slice_pitch,
-            int num_events_in_wait_list,
+            Int32 num_events_in_wait_list,
             IntPtr* event_wait_list,
             IntPtr* new_event);
     }
