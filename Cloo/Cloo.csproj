@@ -71,11 +71,6 @@
     <Compile Include="Source\Enums.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Documentation\license.txt" />
-    <Content Include="Documentation\readme.txt" />
-    <Content Include="Documentation\changelog.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Cloo.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
