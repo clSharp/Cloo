@@ -35,8 +35,14 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
-    using System.Reflection;
 
+    /// <summary>
+    /// Represents an OpenCL platform.
+    /// </summary>
+    /// <remarks> The host plus a collection of devices managed by the OpenCL framework that allow an application to share resources and execute kernels on devices in the platform. </remarks>
+    /// <seealso cref="ComputeDevice"/>
+    /// <seealso cref="ComputeKernel"/>
+    /// <seealso cref="ComputeResource"/>
     public class ComputePlatform : ComputeObject
     {
         #region Fields

@@ -35,6 +35,14 @@ namespace Cloo
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents an OpenCL device.
+    /// </summary>
+    /// <remarks> A device is a collection of compute units. A command-queue is used to queue commands to a device. Examples of commands include executing kernels, or reading and writing memory objects. OpenCL devices typically correspond to a GPU, a multi-core CPU, and other processors such as DSPs and the Cell/B.E. processor. </remarks>
+    /// <seealso cref="ComputeCommandQueue"/>
+    /// <seealso cref="ComputeKernel"/>
+    /// <seealso cref="ComputeMemory"/>
+    /// <seealso cref="ComputePlatform"/>
     public class ComputeDevice : ComputeObject
     {
         #region Fields

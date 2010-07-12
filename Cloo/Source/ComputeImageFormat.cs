@@ -33,6 +33,11 @@ namespace Cloo
 {
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// Represents an OpenCL image format.
+    /// </summary>
+    /// <remarks> This structure defines the type, count and size of the image channels. </remarks>
+    /// <seealso cref="ComputeImage"/>
     [StructLayout(LayoutKind.Sequential)]
     public struct ComputeImageFormat
     {

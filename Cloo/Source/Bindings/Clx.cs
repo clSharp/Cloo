@@ -34,6 +34,10 @@ namespace Cloo.Bindings
     using System;
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// Contains bindings to the OpenCL extension functions.
+    /// </summary>
+    /// <remarks>See the Khronos OpenCL API extensions registry for documentation regarding these functions.</remarks>
     public class Clx
     {
         internal static class Delegates

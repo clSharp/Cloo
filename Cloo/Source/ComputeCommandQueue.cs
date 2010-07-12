@@ -36,6 +36,12 @@ namespace Cloo
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents an OpenCL command queue.
+    /// </summary>
+    /// <remarks> An object that holds commands that will be executed on a specific device. The command-queue is created on a specific device in a context.  Commands to a command-queue are queued in-order but may be executed in-order or out-of-order. </remarks>
+    /// <seealso cref="ComputeContext"/>
+    /// <seealso cref="ComputeDevice"/>
     public class ComputeCommandQueue : ComputeResource
     {
         #region Fields

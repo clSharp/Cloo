@@ -33,6 +33,9 @@ namespace Cloo
 {
     using System;
 
+    /// <summary>
+    /// Represents an OpenCL context property name and value.
+    /// </summary>
     public class ComputeContextProperty
     {
         #region Fields

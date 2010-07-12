@@ -37,6 +37,11 @@ namespace Cloo
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents an OpenCL program.
+    /// </summary>
+    /// <remarks> An OpenCL program consists of a set of kernels. Programs may also contain auxiliary functions called by the __kernel functions and constant data. </remarks>
+    /// <seealso cref="ComputeKernel"/>
     public class ComputeProgram : ComputeResource
     {
         #region Fields

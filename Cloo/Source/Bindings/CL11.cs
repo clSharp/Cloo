@@ -34,6 +34,10 @@ namespace Cloo.Bindings
     using System;
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// Contains bindings to the OpenCL 1.1 functions.
+    /// </summary>
+    /// <remarks>See the OpenCL specification for documentation regarding these functions.</remarks>
     public class CL11 : CL10
     {
         [Obsolete("This function has been deprecated in OpenCL 1.1", true)]
@@ -47,7 +51,7 @@ namespace Cloo.Bindings
             throw new NotSupportedException("This function has been deprecated in OpenCL 1.1");
         }
 
-        [DllImport(dll, EntryPoint="clCreateSubBuffer")]
+        [DllImport(dllName, EntryPoint="clCreateSubBuffer")]
         public extern static unsafe IntPtr CreateSubBuffer(
             IntPtr buffer,
             ComputeMemoryFlags flags,
@@ -55,30 +59,30 @@ namespace Cloo.Bindings
             /* const void * */ IntPtr buffer_create_info,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dll, EntryPoint="clSetMemObjectDestructorCallback")]
+        [DllImport(dllName, EntryPoint="clSetMemObjectDestructorCallback")]
         public extern static unsafe ComputeErrorCode SetMemObjectDestructorCallback( 
             IntPtr memobj, 
             /* void (CL_CALLBACK * pfn_notify)(cl_mem memobj, void* user_data)*/ IntPtr pfn_notify, 
             /* void * */ IntPtr user_data);
 
-        [DllImport(dll, EntryPoint = "clCreateUserEvent")]
+        [DllImport(dllName, EntryPoint = "clCreateUserEvent")]
         public extern static unsafe IntPtr CreateUserEvent(
             IntPtr context,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dll, EntryPoint = "clSetUserEventStatus")]
+        [DllImport(dllName, EntryPoint = "clSetUserEventStatus")]
         public extern static unsafe ComputeErrorCode SetUserEventStatus(
             IntPtr @event,
             int execution_status);
 
-        [DllImport(dll, EntryPoint = "clSetEventCallback")]
+        [DllImport(dllName, EntryPoint = "clSetEventCallback")]
         public extern static unsafe ComputeErrorCode SetEventCallback(
             IntPtr @event,
             int command_exec_callback_type,
             /* void (CL_CALLBACK * pfn_notify)(cl_event, cl_int, void *) */ IntPtr pfn_notify,
             /* void * */ IntPtr user_data);
 
-        [DllImport(dll, EntryPoint = "clEnqueueReadBufferRect")]
+        [DllImport(dllName, EntryPoint = "clEnqueueReadBufferRect")]
         public extern static unsafe ComputeErrorCode EnqueueReadBufferRect(
             IntPtr command_queue,
             IntPtr buffer,
@@ -95,7 +99,7 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dll, EntryPoint = "clEnqueueWriteBufferRect")]
+        [DllImport(dllName, EntryPoint = "clEnqueueWriteBufferRect")]
         public extern static unsafe ComputeErrorCode EnqueueWriteBufferRect(
             IntPtr command_queue,
             IntPtr buffer,
@@ -112,7 +116,7 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dll, EntryPoint = "clEnqueueCopyBufferRect")]
+        [DllImport(dllName, EntryPoint = "clEnqueueCopyBufferRect")]
         public extern static unsafe ComputeErrorCode EnqueueCopyBufferRect(
             IntPtr command_queue,
             IntPtr src_buffer,

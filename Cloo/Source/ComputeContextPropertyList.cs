@@ -35,6 +35,10 @@ namespace Cloo
     using System.Collections;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Represents a list of ComputeContextProperties.
+    /// </summary>
+    /// <remarks> A <c>ComputeContextPropertyList</c> is used to specify properties of an OpenCL context when creating a <c>ComputeContext</c> instance. </remarks>
     public class ComputeContextPropertyList: IEnumerable<ComputeContextProperty>
     {
         #region Fields

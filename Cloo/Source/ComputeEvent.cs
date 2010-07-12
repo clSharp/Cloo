@@ -35,6 +35,12 @@ namespace Cloo
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents an OpenCL event.
+    /// </summary>
+    /// <remarks> An event object encapsulates the status of an operation such as a command. It can be used to synchronize operations in a context. </remarks>
+    /// <seealso cref="ComputeCommandQueue"/>
+    /// <seealso cref="ComputeContext"/>
     public class ComputeEvent : ComputeResource
     {
         #region Fields

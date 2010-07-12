@@ -33,6 +33,10 @@ namespace Cloo
 {
     using System;
 
+    /// <summary>
+    /// Represents an error that has occurred while executing an OpenCL API call.
+    /// </summary>
+    /// <seealso cref="ComputeErrorCode"/>
     public class ComputeException : ApplicationException
     {
         #region Fields
@@ -75,9 +79,9 @@ namespace Cloo
         /// Checks for an error and throws an exception if such is encountered.
         /// </summary>
         /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
-        public static void ThrowOnError(ComputeErrorCode error)
+        public static void ThrowOnError(ComputeErrorCode errorCode)
         {
-            switch (error)
+            switch (errorCode)
             {
                 case ComputeErrorCode.Success:
                     return;
@@ -218,7 +222,7 @@ namespace Cloo
                     throw new InvalidMipLevelComputeException();
 
                 default:
-                    throw new ComputeException(error);
+                    throw new ComputeException(errorCode);
             }
         }
 

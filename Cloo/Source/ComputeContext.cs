@@ -37,6 +37,11 @@ namespace Cloo
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents an OpenCL context.
+    /// </summary>
+    /// <remarks> The environment within which the kernels execute and the domain in which synchronization and memory management is defined. </remarks>
+    /// <seealso cref="ComputeKernel"/>
     public class ComputeContext : ComputeResource
     {
         #region Fields
@@ -92,6 +97,7 @@ namespace Cloo
         /// <param name="devices">A list of devices to associate with this context.</param>
         /// <param name="properties">A descriptor of this context properties.</param>
         /// <param name="notify">A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered.</param>
+        /// <param name="notifyDataPtr">Optional user data to pass to the callback function.</param>
         public ComputeContext(ICollection<ComputeDevice> devices, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr notifyDataPtr)
         {
             unsafe

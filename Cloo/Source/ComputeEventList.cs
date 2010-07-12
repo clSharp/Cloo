@@ -37,6 +37,11 @@ namespace Cloo
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents a list of <c>ComputeEvent</c>s.
+    /// </summary>
+    /// <seealso cref="ComputeCommandQueue"/>
+    /// <seealso cref="ComputeEvent"/>
     public class ComputeEventList : IList<ComputeEvent>
     {
         #region Fields
@@ -69,7 +74,7 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Waits on the host thread for events contained in this collection to complete.
+        /// Waits on the host thread for events in this list to complete.
         /// </summary>
         public void Wait()
         {

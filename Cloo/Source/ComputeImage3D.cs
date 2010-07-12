@@ -36,6 +36,10 @@ namespace Cloo
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents a 3D OpenCL image.
+    /// </summary>
+    /// <seealso cref="ComputeImage"/>
     public class ComputeImage3D : ComputeImage
     {
         #region Constructors

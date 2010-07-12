@@ -35,6 +35,14 @@ namespace Cloo
     using System.Runtime.InteropServices;
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents an OpenCL buffer.
+    /// </summary>
+    /// <typeparam name="T"> The type of the elements of this <c>ComputeBuffer</c>. </typeparam>
+    /// <remarks> A memory object that stores a linear collection of bytes. Buffer objects are accessible using a pointer in a kernel executing on a device. </remarks>
+    /// <seealso cref="ComputeDevice"/>
+    /// <seealso cref="ComputeKernel"/>
+    /// <seealso cref="ComputeMemory"/>
     public class ComputeBuffer<T> : ComputeMemory where T : struct
     {
         #region Fields
@@ -46,7 +54,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// The number of items this buffer contains.
+        /// The number of elements of this <c>ComputeBuffer</c>.
         /// </summary>
         public long Count
         {
@@ -61,22 +69,22 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new buffer object.
+        /// Creates a new <c>ComputeBuffer</c> instance.
         /// </summary>
-        /// <param name="context">A valid OpenCL context used to create this buffer.</param>
+        /// <param name="context">A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
-        /// <param name="count">The number of elements this buffer will contain.</param>
+        /// <param name="count">The number of elements the <c>ComputeBuffer</c> will contain.</param>
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, long count)
             : this(context, flags, count, IntPtr.Zero)
-        {}
+        { }
 
         /// <summary>
-        /// Creates a new buffer object.
+        /// Creates a new <c>ComputeBuffer</c> instance.
         /// </summary>
-        /// <param name="context">A valid OpenCL context used to create this buffer.</param>
+        /// <param name="context">A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
-        /// <param name="count">The number of elements this buffer will contain.</param>
-        /// <param name="dataPtr">A pointer to the data this buffer will contain.</param>
+        /// <param name="count">The number of elements the <c>ComputeBuffer</c> will contain.</param>
+        /// <param name="dataPtr">A pointer to the data the <c>ComputeBuffer</c> will contain.</param>
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, long count, IntPtr dataPtr)
             : base(context, flags)
         {
@@ -97,11 +105,11 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new buffer object.
+        /// Creates a new <c>ComputeBuffer</c> instance.
         /// </summary>
-        /// <param name="context">A valid OpenCL context used to create this buffer.</param>
+        /// <param name="context">A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>.</param>
         /// <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
-        /// <param name="data">The elements this buffer will contain.</param>
+        /// <param name="data">The data the <c>ComputeBuffer</c> will contain.</param>
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, T[] data)
             : base(context, flags)
         {
@@ -146,12 +154,13 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Creates a new buffer from an existing OpenGL buffer.
+        /// Creates a new <c>ComputeBuffer</c> instance from an existing OpenGL buffer.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of this buffer.</typeparam>
-        /// <param name="context">A compute context with enabled CL/GL sharing.</param>
-        /// <param name="flags">A bit field that is used to specify allocation and usage information.</param>
-        /// <param name="bufferId">The OpenGL buffer object to create this buffer from.</param>
+        /// <typeparam name="T">The type of the elements of the <c>ComputeBuffer</c>.</typeparam>
+        /// <param name="context">A <c>ComputeContext</c> with enabled CL/GL sharing.</param>
+        /// <param name="flags">A bit field that is used to specify usage information about the new <c>ComputeBuffer</c>.</param>
+        /// <param name="bufferId">The OpenGL buffer object to use for the creation of the <c>ComputeBuffer</c>.</param>
+        /// <returns>The created <c>ComputeBuffer</c>.</returns>
         public static ComputeBuffer<T> CreateFromGLBuffer<T>(ComputeContext context, ComputeMemoryFlags flags, int bufferId) where T : struct
         {
             unsafe
@@ -169,9 +178,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a string representation of this buffer.
+        /// Gets a string representation of this <c>ComputeBuffer</c>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The string representation of this <c>ComputeBuffer</c>.</returns>
         public override string ToString()
         {
             return "ComputeBuffer" + base.ToString();

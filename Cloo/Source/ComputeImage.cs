@@ -36,6 +36,12 @@ namespace Cloo
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents an OpenCL image.
+    /// </summary>
+    /// <remarks> A memory object that stores a two- or three- dimensional structured array. Image data can only be accessed with read and write functions. The read functions use a sampler. </remarks>
+    /// <seealso cref="ComputeMemory"/>
+    /// <seealso cref="ComputeSampler"/>
     public abstract class ComputeImage : ComputeMemory
     {
         #region Properties

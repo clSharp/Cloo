@@ -35,6 +35,10 @@ namespace Cloo
     using System.Collections.Generic;
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents a 2D OpenCL image.
+    /// </summary>
+    /// <seealso cref="ComputeImage"/>
     public class ComputeImage2D : ComputeImage
     {
         #region Constructors

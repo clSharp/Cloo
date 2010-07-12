@@ -34,6 +34,12 @@ namespace Cloo
     using System;
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents an OpenCL memory object.
+    /// </summary>
+    /// <remarks> A memory object is a handle to a reference counted region of global memory. </remarks>
+    /// <seealso cref="ComputeBuffer"/>
+    /// <seealso cref="ComputeImage"/>
     public abstract class ComputeMemory : ComputeResource
     {
         #region Fields

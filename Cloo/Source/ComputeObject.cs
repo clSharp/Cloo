@@ -35,6 +35,10 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// Represents an OpenCL object.
+    /// </summary>
+    /// <remarks> For the purposes of Cloo an OpenCL object is an object that is identified by its handle in the OpenCL framework. </remarks>
     public abstract class ComputeObject : IEquatable<ComputeObject>
     {
         #region Fields
@@ -45,6 +49,9 @@ namespace Cloo
 
         #region Properties
 
+        /// <summary>
+        /// The handle of the OpenCL object.
+        /// </summary>
         public IntPtr Handle
         {
             get
@@ -61,6 +68,12 @@ namespace Cloo
 
         #region Public methods
 
+        /// <summary>
+        /// Checks if two <c>object</c>s are equal. These <c>object</c>s must be cast from <c>ComputeObject</c>s.
+        /// </summary>
+        /// <param name="objA">The first <c>object</c> to compare.</param>
+        /// <param name="objB">The second <c>object</c> to compare.</param>
+        /// <returns><c>true</c> if the <c>object</c>s are equal otherwise <c>false</c>.</returns>
         public new static bool Equals(object objA, object objB)
         {
             if (objA == objB) return true;
@@ -68,6 +81,11 @@ namespace Cloo
             return objA.Equals(objB);
         }
 
+        /// <summary>
+        /// Checks if this <c>ComputeObject</c> is equal to a given <c>ComputeObject</c> cast to an <c>object</c>.
+        /// </summary>
+        /// <param name="obj">The <c>object</c> to compare this <c>ComputeObject</c> with.</param>
+        /// <returns><c>true</c> if this <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
@@ -75,6 +93,11 @@ namespace Cloo
             return Equals(obj as ComputeObject);
         }
 
+        /// <summary>
+        /// Checks if this <c>ComputeObject</c> is equal to a given <c>ComputeObject</c>.
+        /// </summary>
+        /// <param name="obj">The instance to compare this <c>ComputeObject</c> with.</param>
+        /// <returns><c>true</c> if this <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
         public bool Equals(ComputeObject obj)
         {
             if (obj == null) return false;
@@ -83,16 +106,18 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the hash code for this compute object.
+        /// Gets the hash code of this <c>ComputeObject</c>.
         /// </summary>
+        /// <returns>The hash code of this <c>ComputeObject</c>.</returns>
         public override int GetHashCode()
         {
             return Handle.GetHashCode();
         }
 
         /// <summary>
-        /// Gets a string representation for this object.
+        /// Gets the string representation of this <c>ComputeObject</c>.
         /// </summary>
+        /// <returns>The string representation of this <c>ComputeObject</c>.</returns>
         public override string ToString()
         {
             return "(" + Handle.ToString() + ")";
@@ -102,10 +127,10 @@ namespace Cloo
 
         #region Protected methods
 
-        protected QueriedType[] GetArrayInfo<InfoEnum, QueriedType>
+        protected QueriedType[] GetArrayInfo<InfoType, QueriedType>
             (
-                InfoEnum paramName,
-                GetInfoDelegate<InfoEnum> getInfoDelegate
+                InfoType paramName,
+                GetInfoDelegate<InfoType> getInfoDelegate
             )
         {
             unsafe
@@ -134,11 +159,11 @@ namespace Cloo
             }
         }
 
-        protected QueriedType[] GetArrayInfo<InfoEnum, QueriedType>
+        protected QueriedType[] GetArrayInfo<InfoType, QueriedType>
             (
                 ComputeObject secondaryObject,
-                InfoEnum paramName,
-                GetInfoDelegateEx<InfoEnum> getInfoDelegate
+                InfoType paramName,
+                GetInfoDelegateEx<InfoType> getInfoDelegate
             )
         {
             unsafe
@@ -168,20 +193,20 @@ namespace Cloo
             }
         }
 
-        protected bool GetBoolInfo<InfoEnum>
+        protected bool GetBoolInfo<InfoType>
             (
-                InfoEnum paramName,
-                GetInfoDelegate<InfoEnum> getInfoDelegate
+                InfoType paramName,
+                GetInfoDelegate<InfoType> getInfoDelegate
             )
         {
-            int result = GetInfo<InfoEnum, int>(paramName, getInfoDelegate);
+            int result = GetInfo<InfoType, int>(paramName, getInfoDelegate);
             return (result == (int)ComputeBoolean.True) ? true : false;
         }
 
-        protected QueriedType GetInfo<InfoEnum, QueriedType>
+        protected QueriedType GetInfo<InfoType, QueriedType>
             (
-                InfoEnum paramName,
-                GetInfoDelegate<InfoEnum> getInfoDelegate
+                InfoType paramName,
+                GetInfoDelegate<InfoType> getInfoDelegate
             )
             where QueriedType : struct
         {
@@ -209,11 +234,11 @@ namespace Cloo
             }
         }
 
-        protected QueriedType GetInfo<InfoEnum, QueriedType>
+        protected QueriedType GetInfo<InfoType, QueriedType>
             (
                 ComputeObject secondaryObject,
-                InfoEnum paramName,
-                GetInfoDelegateEx<InfoEnum> getInfoDelegate
+                InfoType paramName,
+                GetInfoDelegateEx<InfoType> getInfoDelegate
             )
             where QueriedType : struct
         {
@@ -242,24 +267,24 @@ namespace Cloo
             }
         }
 
-        protected string GetStringInfo<InfoEnum>(InfoEnum paramName, GetInfoDelegate<InfoEnum> getInfoDelegate)
+        protected string GetStringInfo<InfoType>(InfoType paramName, GetInfoDelegate<InfoType> getInfoDelegate)
         {
             unsafe
             {
                 string result = null;
-                sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>(paramName, getInfoDelegate);
+                sbyte[] buffer = GetArrayInfo<InfoType, sbyte>(paramName, getInfoDelegate);
                 fixed (sbyte* bufferPtr = buffer)
                     result = new string(bufferPtr);
                 return result;
             }
         }
 
-        protected string GetStringInfo<InfoEnum>(ComputeObject secondaryObject, InfoEnum paramName, GetInfoDelegateEx<InfoEnum> getInfoDelegate)
+        protected string GetStringInfo<InfoType>(ComputeObject secondaryObject, InfoType paramName, GetInfoDelegateEx<InfoType> getInfoDelegate)
         {
             unsafe
             {
                 string result = null;
-                sbyte[] buffer = GetArrayInfo<InfoEnum, sbyte>(secondaryObject, paramName, getInfoDelegate);
+                sbyte[] buffer = GetArrayInfo<InfoType, sbyte>(secondaryObject, paramName, getInfoDelegate);
                 fixed (sbyte* bufferPtr = buffer)
                     result = new string(bufferPtr);
 
@@ -271,20 +296,20 @@ namespace Cloo
 
         #region Delegates
 
-        protected unsafe delegate ComputeErrorCode GetInfoDelegate<InfoEnum>
+        protected unsafe delegate ComputeErrorCode GetInfoDelegate<InfoType>
             (
                 IntPtr objectHandle,
-                InfoEnum paramName,
+                InfoType paramName,
                 IntPtr paramValueSize,
                 IntPtr paramValue,
                 IntPtr* paramValueSizeRet
             );
 
-        protected unsafe delegate ComputeErrorCode GetInfoDelegateEx<InfoEnum>
+        protected unsafe delegate ComputeErrorCode GetInfoDelegateEx<InfoType>
             (
                 IntPtr mainObjectHandle,
                 IntPtr secondaryObjectHandle,
-                InfoEnum paramName,
+                InfoType paramName,
                 IntPtr paramValueSize,
                 IntPtr paramValue,
                 IntPtr* paramValueSizeRet

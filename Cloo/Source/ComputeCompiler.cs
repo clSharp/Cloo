@@ -33,6 +33,9 @@ namespace Cloo
 {
     using Cloo.Bindings;
 
+    /// <summary>
+    /// Represents the OpenCL compiler.
+    /// </summary>
     public class ComputeCompiler
     {
         #region Public methods

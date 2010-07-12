@@ -35,6 +35,9 @@ namespace Cloo
     using System.Globalization;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Contains various helper methods.
+    /// </summary>
     public class Tools
     {
         #region Internal methods
