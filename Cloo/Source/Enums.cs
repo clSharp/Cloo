@@ -276,7 +276,7 @@ namespace Cloo
         Argb = 0x10B7,
         Intensity = 0x10B8,
         Luminance = 0x10B9,
-        RX = 0x10BA,
+        Rx = 0x10BA,
         Rgx = 0x10BB,
         Rgbx = 0x10BC
     }
