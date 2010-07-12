@@ -1,6 +1,6 @@
 
-[Oo]pen[Cc][Ll].dll
 *.zip
+Documentation/html/*
 
 #ignore thumbnails created by windows
 Thumbs.db
