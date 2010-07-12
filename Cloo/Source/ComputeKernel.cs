@@ -179,8 +179,20 @@ namespace Cloo
         }
 
         /// <summary>
+        /// Sets the size of the argument specfied with the local address space qualifier.
+        /// </summary>
+        /// <param name="index">The argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n - 1, where n is the total number of arguments declared by a kernel.</param>
+        /// <param name="size">The size of the argument.</param>
+        public void SetLocalArgument(int index, long size)
+        {
+            SetArgument(index, new IntPtr(size), IntPtr.Zero);
+        }
+
+        /// <summary>
         /// Set the argument value for a specific argument of a kernel.
         /// </summary>
+        /// <param name="index">The argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n - 1, where n is the total number of arguments declared by a kernel.</param>
+        /// <param name="memObj">The memory object that is passed as the argument to the kernel.</param>
         public void SetMemoryArgument(int index, ComputeMemory memObj)
         {
             SetMemoryArgument(index, memObj, true);
@@ -202,6 +214,8 @@ namespace Cloo
         /// <summary>
         /// Sets the specified kernel argument.
         /// </summary>
+        /// <param name="index">The argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n - 1, where n is the total number of arguments declared by a kernel.</param>
+        /// <param name="sampler">The sampler object that is passed as the argument to the kernel.</param>
         public void SetSamplerArgument(int index, ComputeSampler sampler)
         {
             SetSamplerArgument(index, sampler, true);
