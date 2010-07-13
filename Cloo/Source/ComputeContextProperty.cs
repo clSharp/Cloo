@@ -69,10 +69,10 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new context property.
+        /// Creates a new <c>ComputeContextProperty</c>.
         /// </summary>
-        /// <param name="name">The name of the created property.</param>
-        /// <param name="value">The value of the created property.</param>
+        /// <param name="name"> The name of the <c>ComputeContextProperty</c>. </param>
+        /// <param name="value"> The value of the created <c>ComputeContextProperty</c>. </param>
         public ComputeContextProperty(ComputeContextPropertyName name, IntPtr value)
         {
             this.name = name;

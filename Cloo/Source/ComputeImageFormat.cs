@@ -71,10 +71,10 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new ComputeImageFormat.
+        /// Creates a new <c>ComputeImageFormat</c>.
         /// </summary>
-        /// <param name="channelOrder">Specifies the number of channels and the channel layout i.e. the memory layout in which channels are stored in the image.</param>
-        /// <param name="channelType">Describes the type of the channel data. The number of bits per element determined by the channelType and channelOrder must be a power of two.</param>
+        /// <param name="channelOrder"> The number of channels and the channel layout i.e. the memory layout in which channels are stored in the <c>ComputeImage</c>. </param>
+        /// <param name="channelType"> The type of the channel data. The number of bits per element determined by the <paramref name="channelType"/> and <paramref name="channelOrder"/> must be a power of two. </param>
         public ComputeImageFormat(ComputeImageChannelOrder channelOrder, ComputeImageChannelType channelType)
         {
             this.channelOrder = channelOrder;

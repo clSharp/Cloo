@@ -53,7 +53,7 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance that is empty.
+        /// Creates an empty <c>ComputeEventList</c>.
         /// </summary>
         public ComputeEventList()
         {
@@ -61,9 +61,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Initializes a new instance as a wrapper for the specified list.
+        /// Creates a new <c>ComputeEventList</c> from an existing list of <c>ComputeEvent</c>s.
         /// </summary>
-        /// <param name="events">The list that is wrapped by the new list.</param>
+        /// <param name="events"> A list of <c>ComputeEvent</c>s. </param>
         public ComputeEventList(IList<ComputeEvent> events)
         {
             events = new Collection<ComputeEvent>(events);

@@ -59,6 +59,10 @@ namespace Cloo
 
         #region Constructors
 
+        /// <summary>
+        /// Creates a new <c>ComputeException</c> with a given <c>ComputeErrorCode</c>.
+        /// </summary>
+        /// <param name="code"> A <c>ComputeErrorCode</c>. </param>
         public ComputeException(ComputeErrorCode code)
             : base("OpenCL error code detected: " + code.ToString() + ".")
         {

@@ -52,9 +52,9 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new property list.
+        /// Creates a new <c>ComputeContextPropertyList</c> which contains a single item specifying a <c>ComputePlatform</c>.
         /// </summary>
-        /// <param name="platform">A platform property for this list. Can be null.</param>
+        /// <param name="platform"> A <c>ComputePlatform</c>. </param>
         public ComputeContextPropertyList(ComputePlatform platform)
         {
             properties = new List<ComputeContextProperty>();
@@ -62,9 +62,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new property list.
+        /// Creates a new <c>ComputeContextPropertyList</c> which contains the specified <c>ComputeContextProperty</c>'s.
         /// </summary>
-        /// <param name="properties">A collection of ComputeContextProperty items.</param>
+        /// <param name="properties"> An enumerable of <c>ComputeContextProperty</c>'s. </param>
         public ComputeContextPropertyList(IEnumerable<ComputeContextProperty> properties)
         {
             this.properties = new List<ComputeContextProperty>(properties);

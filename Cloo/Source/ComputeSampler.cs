@@ -100,12 +100,12 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a sampler object.
+        /// Creates a new <c>ComputeSampler</c>.
         /// </summary>
-        /// <param name="context">A valid OpenCL context.</param>
-        /// <param name="normalizedCoords">Determines if the image coordinates specified are normalized or not.</param>
-        /// <param name="addressing">Specifies how out-of-range image coordinates are handled when reading from an image.</param>
-        /// <param name="filtering">Specifies the Type of filter that must be applied when reading an image.</param>
+        /// <param name="context"> A <c>ComputeContext</c>. </param>
+        /// <param name="normalizedCoords"> The usage state of normalized coordinates when accessing a <c>ComputeImage</c> in a <c>ComputeKernel</c>. </param>
+        /// <param name="addressing"> The <c>ComputeImageAddressing</c> mode of the <c>ComputeSampler</c>. Specifies how out-of-range image coordinates are handled while reading. </param>
+        /// <param name="filtering"> The <c>ComputeImageFiltering</c> mode of the <c>ComputeSampler</c>. Specifies the type of filter that must be applied when reading data from an image. </param>
         public ComputeSampler(ComputeContext context, bool normalizedCoords, ComputeImageAddressing addressing, ComputeImageFiltering filtering)
         {
             unsafe

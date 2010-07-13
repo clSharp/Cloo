@@ -110,12 +110,12 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates an OpenCL context with one or more associated devices.
+        /// Creates a new <c>ComputeContext</c> on a collection of <c>ComputeDevice</c>s.
         /// </summary>
-        /// <param name="devices"> A list of devices to associate with this context. </param>
-        /// <param name="properties"> A descriptor of this context properties. </param>
-        /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered. </param>
-        /// <param name="notifyDataPtr"> Optional user data to pass to the callback function. </param>
+        /// <param name="devices"> A collection of <c>ComputeDevice</c>s to associate with the <c>ComputeContext</c>. </param>
+        /// <param name="properties"> A <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>. </param>
+        /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is null, no callback function is registered. </param>
+        /// <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public ComputeContext(ICollection<ComputeDevice> devices, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr notifyDataPtr)
         {
             unsafe
@@ -144,12 +144,12 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates an OpenCL context from a device type that identifies the specific device(s) to use.
+        /// Creates a new <c>ComputeContext</c> on all the <c>ComputeDevice</c>s that match the specified <c>ComputeDeviceTypes</c>.
         /// </summary>
-        /// <param name="deviceType"> A bit-field that identifies the type of device to associate with this context. </param>
-        /// <param name="properties"> A descriptor of this context properties. </param>
-        /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered. </param>
-        /// <param name="notifyDataPtr"> Optional user data to pass to the callback function. </param>
+        /// <param name="deviceType"> A bit-field that identifies the type of <c>ComputeDevice</c> to associate with the <c>ComputeContext</c>. </param>
+        /// <param name="properties"> A <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>. </param>
+        /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is null, no callback function is registered. </param>
+        /// <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public ComputeContext(ComputeDeviceTypes deviceType, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr notifyDataPtr)
         {
             unsafe

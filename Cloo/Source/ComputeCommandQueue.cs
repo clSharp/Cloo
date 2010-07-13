@@ -118,7 +118,7 @@ namespace Cloo
         /// </summary>
         /// <param name="context"> A <c>ComputeContext</c>. </param>
         /// <param name="device"> A <c>ComputeDevice</c> associated with the <paramref name="context"/>. It can either be one of <c>ComputeContext.Devices</c> or have the same <c>ComputeDeviceTypes</c> as the <paramref name="device"/> specified when the <paramref name="context"/> is created. </param>
-        /// <param name="properties"> A list of properties of the <c>ComputeCommandQueue</c>. </param>
+        /// <param name="properties"> The properties for the <c>ComputeCommandQueue</c>. </param>
         public ComputeCommandQueue(ComputeContext context, ComputeDevice device, ComputeCommandQueueFlags properties)
         {
             unsafe

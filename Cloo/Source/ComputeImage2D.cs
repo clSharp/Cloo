@@ -36,7 +36,7 @@ namespace Cloo
     using Cloo.Bindings;
 
     /// <summary>
-    /// Represents a 2D OpenCL image.
+    /// Represents an OpenCL 2D image.
     /// </summary>
     /// <seealso cref="ComputeImage"/>
     public class ComputeImage2D : ComputeImage
@@ -44,15 +44,15 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new 2D image.
+        /// Creates a new <c>ComputeImage2D</c>.
         /// </summary>
-        /// <param name="context">A valid OpenCL context on which the image object is to be created.</param>
-        /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image.</param>
-        /// <param name="format">A structure that describes the format properties of the image.</param>
-        /// <param name="width">Width of the image in pixels.</param>
-        /// <param name="height">Height of the image in pixels.</param>
-        /// <param name="rowPitch">The scan-line pitch in bytes.</param>
-        /// <param name="data">The image data that may be already allocated by the application.</param>
+        /// <param name="context"> A valid <c>ComputeContext</c> in which the <c>ComputeImage2D</c> is to be created. </param>
+        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeImage2D</c>. </param>
+        /// <param name="format"> A structure that describes the format properties of the <c>ComputeImage2D</c>. </param>
+        /// <param name="width"> The width of the <c>ComputeImage2D</c> in pixels. </param>
+        /// <param name="height"> The height of the <c>ComputeImage2D</c> in pixels. </param>
+        /// <param name="rowPitch"> The size in bytes of each row of elements of the <c>ComputeImage2D</c>. If left zero, OpenCL will compute the proper value based on <c>ComputeImage.Width</c> and <c>ComputeImage.ElementSize</c>. </param>
+        /// <param name="data"> The data to initialize the <c>ComputeImage2D</c>. Can be <c>IntPtr.Zero</c>. </param>
         public ComputeImage2D(ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, long rowPitch, IntPtr data)
             : base(context, flags)
         {
@@ -121,10 +121,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a collection of supported 2D image formats with the given context.
+        /// Gets a collection of supported 2D <c>ComputeImage</c> formats with the given context.
         /// </summary>
-        /// <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
-        /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
+        /// <param name="context">A valid OpenCL context on which the <c>ComputeImage</c> object(s) will be created.</param>
+        /// <param name="flags">A bit-field that is used to specify allocation and usage information about the <c>ComputeImage</c> object(s) that will be created.</param>
         public static ICollection<ComputeImageFormat> GetSupportedFormats(ComputeContext context, ComputeMemoryFlags flags)
         {
             return GetSupportedFormats(context, flags, ComputeMemoryType.Image2D);

@@ -119,10 +119,11 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a program for a context, using the source code specified. The devices associated with the program are the devices associated with context.
+        /// Creates a new <c>ComputeProgram</c> from a specified source code.
         /// </summary>
-        /// <param name="context">A valid OpenCL context.</param>
-        /// <param name="source">The source code for this program.</param>
+        /// <param name="context"> A <c>ComputeContext</c>. </param>
+        /// <param name="source"> The source code for the <c>ComputeProgram</c>. </param>
+        /// <remarks> The created <c>ComputeProgram</c> is associated with the <c>ComputeContext.Devices</c>. </remarks>
         public ComputeProgram(ComputeContext context, string source)
         {
             unsafe
@@ -143,10 +144,11 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a program for a context, using the source code specified. The devices associated with the program are the devices associated with context.
+        /// Creates a new <c>ComputeProgram</c> from a specified source code.
         /// </summary>
-        /// <param name="context">A valid OpenCL context.</param>
-        /// <param name="source">The source code for this program.</param>
+        /// <param name="context"> A <c>ComputeContext</c>. </param>
+        /// <param name="source"> The source code lines for the <c>ComputeProgram</c>. </param>
+        /// <remarks> The created <c>ComputeProgram</c> is associated with the <c>ComputeContext.Devices</c>. </remarks>
         public ComputeProgram(ComputeContext context, string[] source)
         {
             unsafe
@@ -172,11 +174,11 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a program for a context, using the binaries specified.
+        /// Creates a new <c>ComputeProgram</c> from a specified list of binaries.
         /// </summary>
-        /// <param name="context">A valid OpenCL context.</param>
-        /// <param name="binaries">The binaries to be assigned to the devices.</param>
-        /// <param name="devices">A subset of the devices associated with the context or null for all the devices associated with the context.</param>
+        /// <param name="context"> A <c>ComputeContext</c>. </param>
+        /// <param name="binaries"> A list of binaries that will match the <paramref name="devices"/>. </param>
+        /// <param name="devices"> A subset of the <c>ComputeContext.Devices</c>. If left null, OpenCL will associate every binary from <c>ComputeProgram.Binaries</c> with a corresponding <c>ComputeDevice</c> in <c>ComputeContext.Devices</c>. </param>
         public ComputeProgram(ComputeContext context, IList<byte[]> binaries, IList<ComputeDevice> devices)
         {
             unsafe

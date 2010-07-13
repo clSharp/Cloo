@@ -72,8 +72,8 @@ namespace Cloo
         /// Creates a new <c>ComputeBuffer</c>.
         /// </summary>
         /// <param name="context"> A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>. </param>
-        /// <param name="flags"> A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used. </param>
-        /// <param name="count"> The number of elements the <c>ComputeBuffer</c> will contain. </param>
+        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
+        /// <param name="count"> The number of elements of the <c>ComputeBuffer</c>. </param>
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, long count)
             : this(context, flags, count, IntPtr.Zero)
         { }
@@ -82,9 +82,9 @@ namespace Cloo
         /// Creates a new <c>ComputeBuffer</c>.
         /// </summary>
         /// <param name="context"> A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>. </param>
-        /// <param name="flags"> A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used. </param>
-        /// <param name="count"> The number of elements the <c>ComputeBuffer</c> will contain. </param>
-        /// <param name="dataPtr"> A pointer to the data the <c>ComputeBuffer</c> will contain. </param>
+        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
+        /// <param name="count"> The number of elements of the <c>ComputeBuffer</c>. </param>
+        /// <param name="dataPtr"> A pointer to the data for the <c>ComputeBuffer</c>. </param>
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, long count, IntPtr dataPtr)
             : base(context, flags)
         {
@@ -108,8 +108,8 @@ namespace Cloo
         /// Creates a new <c>ComputeBuffer</c>.
         /// </summary>
         /// <param name="context"> A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>. </param>
-        /// <param name="flags"> A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used. </param>
-        /// <param name="data"> The data the <c>ComputeBuffer</c> will contain. </param>
+        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
+        /// <param name="data"> The data for the <c>ComputeBuffer</c>. </param>
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, T[] data)
             : base(context, flags)
         {
@@ -158,7 +158,7 @@ namespace Cloo
         /// </summary>
         /// <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. </typeparam>
         /// <param name="context"> A <c>ComputeContext</c> with enabled CL/GL sharing. </param>
-        /// <param name="flags"> A bit field that is used to specify usage information about the <c>ComputeBuffer</c>. </param>
+        /// <param name="flags"> A bit-field that is used to specify usage information about the <c>ComputeBuffer</c>. </param>
         /// <param name="bufferId"> The OpenGL buffer object to use for the creation of the <c>ComputeBuffer</c>. </param>
         /// <returns> The created <c>ComputeBuffer</c>. </returns>
         public static ComputeBuffer<T> CreateFromGLBuffer<T>(ComputeContext context, ComputeMemoryFlags flags, int bufferId) where T : struct
