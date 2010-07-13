@@ -33,6 +33,9 @@ namespace Cloo
 {
     using System;
 
+    /// <summary>
+    /// The OpenCL error codes.
+    /// </summary>
     public enum ComputeErrorCode : int
     {
         Success = 0,
@@ -88,18 +91,27 @@ namespace Cloo
         CL_PLATFORM_NOT_FOUND_KHR = -1001,
     }
 
+    /// <summary>
+    /// The OpenCL version.
+    /// </summary>
     public enum OpenCLVersion : int
     {
         Version_1_0 = 1,
         Version_1_1 = 1
     }
 
+    /// <summary>
+    /// The OpenCL boolean values expressed as ints.
+    /// </summary>
     public enum ComputeBoolean : int
     {
         False = 0,
         True = 1
     }
 
+    /// <summary>
+    /// The platform info query symbols.
+    /// </summary>
     public enum ComputePlatformInfo : int
     {
         Profile = 0x0900,
@@ -110,6 +122,9 @@ namespace Cloo
         CL_PLATFORM_ICD_SUFFIX_KHR = 0x0920,
     }
 
+    /// <summary>
+    /// The types of devices.
+    /// </summary>
     [Flags]
     public enum ComputeDeviceTypes : long
     {
@@ -120,6 +135,9 @@ namespace Cloo
         All = 0xFFFFFFFF
     }
 
+    /// <summary>
+    /// The device info query symbols.
+    /// </summary>
     public enum ComputeDeviceInfo : int
     {
         Type = 0x1000,
@@ -225,6 +243,9 @@ namespace Cloo
         Profiling = 1 << 1
     }
 
+    /// <summary>
+    /// The context info query symbols.
+    /// </summary>
     public enum ComputeContextInfo : int
     {
         ReferenceCount = 0x1080,
@@ -244,6 +265,9 @@ namespace Cloo
         CL_CGL_SHAREGROUP_KHR = 0x200C,
     }
 
+    /// <summary>
+    /// The command-queue info query symbols.
+    /// </summary>
     public enum ComputeCommandQueueInfo : int
     {
         Context = 0x1090,
@@ -307,6 +331,9 @@ namespace Cloo
         Image3D = 0x10F2
     }
 
+    /// <summary>
+    /// The memory info query symbols.
+    /// </summary>
     public enum ComputeMemoryInfo : int
     {
         Type = 0x1100,
@@ -320,6 +347,9 @@ namespace Cloo
         Offset = 0x1108
     }
 
+    /// <summary>
+    /// The image info query symbols.
+    /// </summary>
     public enum ComputeImageInfo : int
     {
         Format = 0x1110,
@@ -346,6 +376,9 @@ namespace Cloo
         Linear = 0x1141
     }
 
+    /// <summary>
+    /// The sampler info query symbols.
+    /// </summary>
     public enum ComputeSamplerInfo : int
     {
         ReferenceCount = 0x1150,
@@ -362,6 +395,9 @@ namespace Cloo
         Write = 1 << 1
     }
 
+    /// <summary>
+    /// The program info query symbols.
+    /// </summary>
     public enum ComputeProgramInfo : int
     {
         ReferenceCount = 0x1160,
@@ -373,6 +409,9 @@ namespace Cloo
         Binaries = 0x1166
     }
 
+    /// <summary>
+    /// The program build info query symbols.
+    /// </summary>
     public enum ComputeProgramBuildInfo : int
     {
         Status = 0x1181,
@@ -388,6 +427,9 @@ namespace Cloo
         InProgress = -3
     }
 
+    /// <summary>
+    /// The kernel info query symbols.
+    /// </summary>
     public enum ComputeKernelInfo : int
     {
         FunctionName = 0x1190,
@@ -397,6 +439,9 @@ namespace Cloo
         Program = 0x1194
     }
 
+    /// <summary>
+    /// The kernel work-group info query symbols.
+    /// </summary>
     public enum ComputeKernelWorkGroupInfo : int
     {
         WorkGroupSize = 0x11B0,
@@ -406,6 +451,9 @@ namespace Cloo
         PrivateMemorySize = 0x11B4
     }
 
+    /// <summary>
+    /// The event info query symbols.
+    /// </summary>
     public enum ComputeEventInfo : int
     {
         CommandQueue = 0x11D0,
@@ -453,6 +501,9 @@ namespace Cloo
         Region = 0x1220
     }
 
+    /// <summary>
+    /// The command profiling info query symbols.
+    /// </summary>
     public enum ComputeCommandProfilingInfo : int
     {
         Queued = 0x1280,
@@ -472,12 +523,18 @@ namespace Cloo
         Renderbuffer = 0x2003
     }
 
+    /// <summary>
+    /// The shared CL/GL image/texture info query symbols.
+    /// </summary>
     public enum ComputeGLTextureInfo : int
     {
         TextureTarget = 0x2004,
         MipMapLevel = 0x2005
     }
 
+    /// <summary>
+    /// The shared CL/GL context info query symbols.
+    /// </summary>
     public enum ComputeGLContextInfo : int
     {
         CL_CURRENT_DEVICE_FOR_GL_CONTEXT_KHR = 0x2006,

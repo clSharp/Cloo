@@ -37,7 +37,7 @@ namespace Cloo
     using Cloo.Bindings;
 
     /// <summary>
-    /// Represents an OpenCL kernel object.
+    /// Represents an OpenCL kernel.
     /// </summary>
     /// <remarks> A kernel object encapsulates a specific __kernel function declared in a program and the argument values to be used when executing this __kernel function. </remarks>
     /// <seealso cref="ComputeCommandQueue"/>
