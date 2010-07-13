@@ -127,6 +127,19 @@ namespace Cloo
 
         #endregion
 
+        #region Public methods
+
+        /// <summary>
+        /// Gets the string representation of this <c>ComputeSampler</c>.
+        /// </summary>
+        /// <returns> The string representation of this <c>ComputeSampler</c>. </returns>
+        public override string ToString()
+        {
+            return "ComputeSampler" + base.ToString();
+        }
+
+        #endregion
+
         #region Protected methods
 
         protected override void Dispose(bool manual)
