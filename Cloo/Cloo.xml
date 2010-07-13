@@ -992,6 +992,11 @@
             </summary>
             <remarks> Is true if the <c>ComputeDevice</c> is available and false if the <c>ComputeDevice</c> is not available. </remarks>
         </member>
+        <member name="P:Cloo.ComputeDevice.CommandQueueFlags">
+            <summary>
+            Gets the <c>ComputeCommandQueueFlags</c> supported by the <c>ComputeDevice</c>.
+            </summary>
+        </member>
         <member name="P:Cloo.ComputeDevice.CompilerAvailable">
             <summary>
             Gets the availability state of the OpenCL compiler of the <c>ComputeDevice.Platform</c>.
@@ -1240,11 +1245,6 @@
         <member name="P:Cloo.ComputeDevice.ProfilingTimerResolution">
             <summary>
             Gets the resolution of the <c>ComputeDevice</c> timer in nanoseconds.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeDevice.ComputeCommandQueueFlags">
-            <summary>
-            Gets the <c>ComputeCommandQueueFlags</c> supported by the <c>ComputeDevice</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.SingleCapabilites">

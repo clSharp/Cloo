@@ -127,6 +127,17 @@ namespace Cloo
         }
 
         /// <summary>
+        /// Gets the <c>ComputeCommandQueueFlags</c> supported by the <c>ComputeDevice</c>.
+        /// </summary>
+        public ComputeCommandQueueFlags CommandQueueFlags
+        {
+            get
+            {
+                return queueProperties;
+            }
+        }
+
+        /// <summary>
         /// Gets the availability state of the OpenCL compiler of the <c>ComputeDevice.Platform</c>.
         /// </summary>
         /// <remarks> Is false if the implementation does not have a compiler available to compile the program source. Is true if the compiler is available. This can be false for the embededed platform profile only. </remarks>
@@ -625,17 +636,6 @@ namespace Cloo
             get
             {
                 return profilingTimerResolution;
-            }
-        }
-
-        /// <summary>
-        /// Gets the <c>ComputeCommandQueueFlags</c> supported by the <c>ComputeDevice</c>.
-        /// </summary>
-        public ComputeCommandQueueFlags ComputeCommandQueueFlags
-        {
-            get
-            {
-                return queueProperties;
             }
         }
 
