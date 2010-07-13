@@ -50,7 +50,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// The handle of the OpenCL object.
+        /// Gets or sets (protected) the handle of the <c>ComputeObject</c>.
         /// </summary>
         public IntPtr Handle
         {
@@ -82,10 +82,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Checks if this <c>ComputeObject</c> is equal to a given <c>ComputeObject</c> cast to an <c>object</c>.
+        /// Checks if the <c>ComputeObject</c> is equal to a given <c>ComputeObject</c> cast to an <c>object</c>.
         /// </summary>
-        /// <param name="obj">The <c>object</c> to compare this <c>ComputeObject</c> with.</param>
-        /// <returns><c>true</c> if this <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
+        /// <param name="obj">The <c>object</c> to compare the <c>ComputeObject</c> with.</param>
+        /// <returns><c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
@@ -94,10 +94,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Checks if this <c>ComputeObject</c> is equal to a given <c>ComputeObject</c>.
+        /// Checks if the <c>ComputeObject</c> is equal to a given <c>ComputeObject</c>.
         /// </summary>
-        /// <param name="obj">The instance to compare this <c>ComputeObject</c> with.</param>
-        /// <returns><c>true</c> if this <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
+        /// <param name="obj">The instance to compare the <c>ComputeObject</c> with.</param>
+        /// <returns><c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
         public bool Equals(ComputeObject obj)
         {
             if (obj == null) return false;
@@ -106,18 +106,18 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the hash code of this <c>ComputeObject</c>.
+        /// Gets the hash code of the <c>ComputeObject</c>.
         /// </summary>
-        /// <returns>The hash code of this <c>ComputeObject</c>.</returns>
+        /// <returns>The hash code of the <c>ComputeObject</c>.</returns>
         public override int GetHashCode()
         {
             return Handle.GetHashCode();
         }
 
         /// <summary>
-        /// Gets the string representation of this <c>ComputeObject</c>.
+        /// Gets the string representation of the <c>ComputeObject</c>.
         /// </summary>
-        /// <returns>The string representation of this <c>ComputeObject</c>.</returns>
+        /// <returns>The string representation of the <c>ComputeObject</c>.</returns>
         public override string ToString()
         {
             return "(" + Handle.ToString() + ")";

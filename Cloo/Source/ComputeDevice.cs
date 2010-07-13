@@ -103,8 +103,9 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// The default compute device address space size specified as an unsigned integer value in bits. Currently supported values are 32 or 64 bits.
+        /// Gets the default <c>ComputeDevice</c> address space size in bits.
         /// </summary>
+        /// <remarks> Currently supported values are 32 or 64 bits. </remarks>
         public long AddressBits
         {
             get
@@ -114,8 +115,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Is true if the device is available and false if the device is not available.
+        /// Gets the availability state of the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> Is true if the <c>ComputeDevice</c> is available and false if the <c>ComputeDevice</c> is not available. </remarks>
         public bool Available
         {
             get
@@ -125,8 +127,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Is false if the implementation does not have a compiler available to compile the program source. Is true if the compiler is available. This can be false for the embededed platform profile only.
+        /// Gets the availability state of the OpenCL compiler of the <c>ComputeDevice.Platform</c>.
         /// </summary>
+        /// <remarks> Is false if the implementation does not have a compiler available to compile the program source. Is true if the compiler is available. This can be false for the embededed platform profile only. </remarks>
         public bool CompilerAvailable
         {
             get
@@ -136,8 +139,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// OpenCL software driver version string in the form major_number.minor_number.
+        /// Gets the OpenCL software driver version string of the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> The version string is in the form <c>major_number.minor_number</c>. </remarks>
         public string DriverVersion
         {
             get
@@ -147,8 +151,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Is true if the OpenCL device is a little endian device and false otherwise.
+        /// Gets the endianness of the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> Is true if the <c>ComputeDevice</c> is a little endian device and false otherwise. </remarks>
         public bool EndianLittle
         {
             get
@@ -158,8 +163,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Is true if the device implements error correction for the memories, caches, registers etc. in the device. Is false if the device does not implement error correction. This can be a requirement for certain clients of OpenCL.
+        /// Gets the error correction support state of the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> Is true if the <c>ComputeDevice</c> implements error correction for the memories, caches, registers etc. Is false if the <c>ComputeDevice</c> does not implement error correction. This can be a requirement for certain clients of OpenCL. </remarks>
         public bool ErrorCorrectionSupport
         {
             get
@@ -169,7 +175,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Describes the execution capabilities of the device. This is a bit-field that describes one or more of the following values: ExecKernel - The OpenCL device can execute OpenCL kernels. ExecNativeKernel - The OpenCL device can execute native kernels. The mandated minimum capability is ExecKernel.
+        /// Gets the <c>ComputeDeviceExecutionCapabilities</c> of the <c>ComputeDevice</c>.
         /// </summary>
         public ComputeDeviceExecutionCapabilities ExecutionCapabilities
         {
@@ -180,7 +186,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Returns a collection of extension names.
+        /// Gets a read-only collection of names of extensions that the <c>ComputeDevice</c> supports.
         /// </summary>
         public ReadOnlyCollection<string> Extensions
         {
@@ -191,7 +197,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Size of global memory cache line in bytes.
+        /// Gets the size of the global <c>ComputeDevice</c> memory cache line in bytes.
         /// </summary>
         public long GlobalMemoryCacheLineSize
         {
@@ -202,7 +208,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Size of global memory cache in bytes.
+        /// Gets the size of the global <c>ComputeDevice</c> memory cache in bytes.
         /// </summary>
         public long GlobalMemoryCacheSize
         {
@@ -213,7 +219,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Type of global memory cache supported. Valid values are: None, ReadOnlyCache and ReadWriteCache.
+        /// Gets the <c>ComputeDeviceMemoryCacheType</c> of the <c>ComputeDevice</c>.
         /// </summary>
         public ComputeDeviceMemoryCacheType GlobalMemoryCacheType
         {
@@ -224,7 +230,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Size of global device memory in bytes.
+        /// Gets the size of the global <c>ComputeDevice</c> memory in bytes.
         /// </summary>
         public long GlobalMemorySize
         {
@@ -235,8 +241,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Max height of 2D image in pixels. The minimum value is 8192 if ImageSupport is true.
+        /// Maximum height of 2D images that the <c>ComputeDevice</c> supports in pixels.
         /// </summary>
+        /// <remarks> The minimum value is 8192 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         public long Image2DMaxHeight
         {
             get
@@ -246,8 +253,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Max width of 2D image in pixels. The minimum value is 8192 if ImageSupport is true.
+        /// Maximum width of 2D image that the <c>ComputeDevice</c> supports in pixels.
         /// </summary>
+        /// <remarks> The minimum value is 8192 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         public long Image2DMaxWidth
         {
             get
@@ -257,8 +265,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Max depth of 3D image in pixels. The minimum value is 2048 if ImageSupport is true.
+        /// Maximum depth of 3D image the <c>ComputeDevice</c> supports in pixels.
         /// </summary>
+        /// <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         public long Image3DMaxDepth
         {
             get
@@ -268,8 +277,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Max height of 3D image in pixels. The minimum value is 2048 if ImageSupport is true.
+        /// Max height of 3D image the <c>ComputeDevice</c> supports in pixels.
         /// </summary>
+        /// <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         public long Image3DMaxHeight
         {
             get
@@ -279,8 +289,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Max width of 3D image in pixels. The minimum value is 2048 if ImageSupport is true.
+        /// Max width of 3D image the <c>ComputeDevice</c> supports in pixels.
         /// </summary>
+        /// <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         public long Image3DMaxWidth
         {
             get
@@ -290,8 +301,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Is true if images are supported by the OpenCL device and false otherwise.
+        /// Gets the state of image support of the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> Is true if <c>ComputeImage</c>s are supported by the <c>ComputeDevice</c> and false otherwise. </remarks>
         public bool ImageSupport
         {
             get
@@ -301,8 +313,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Size of local memory arena in bytes. The minimum value is 16 KB.
+        /// Gets the size of local memory are of the <c>ComputeDevice</c> in bytes.
         /// </summary>
+        /// <remarks> The minimum value is 16 KB. </remarks>
         public long LocalMemorySize
         {
             get
@@ -312,7 +325,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Type of local memory supported. This can be set to Local implying dedicated local memory storage such as SRAM, or Global.
+        /// Gets the <c>ComputeDeviceLocalMemoryType</c> that is supported on the <c>ComputeDevice</c>.
         /// </summary>
         public ComputeDeviceLocalMemoryType LocalMemoryType
         {
@@ -323,7 +336,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Maximum configured clock frequency of the device in MHz.
+        /// Gets the maximum configured clock frequency of the <c>ComputeDevice</c> in MHz.
         /// </summary>
         public long MaxClockFrequency
         {
@@ -334,8 +347,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The number of parallel compute cores on the OpenCL device. The minimum value is 1.
+        /// Gets the number of parallel compute cores on the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> The minimum value is 1. </remarks>
         public long MaxComputeUnits
         {
             get
@@ -345,8 +359,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Max number of arguments declared with the __constant qualifier in a kernel. The minimum value is 8.
+        /// Gets the maximum number of arguments declared with the __constant qualifier in a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> The minimum value is 8. </remarks>
         public long MaxConstantArguments
         {
             get
@@ -356,8 +371,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Max size in bytes of a constant buffer allocation. The minimum value is 64 KB.
+        /// Gets the maximum size in bytes of a constant buffer allocation in the <c>ComputeDevice</c> memory.
         /// </summary>
+        /// <remarks>  The minimum value is 64 KB. </remarks>
         public long MaxConstantBufferSize
         {
             get
@@ -367,8 +383,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Max size of memory object allocation in bytes. The minimum value is max(GlobalMemorySize/4, 128*1024*1024).
+        /// Gets the maximum size of memory object allocation in the <c>ComputeDevice</c> memory in bytes.
         /// </summary>
+        /// <remarks> The minimum value is <c>max(ComputeDevice.GlobalMemorySize/4, 128*1024*1024)</c>. </remarks>
         public long MaxMemoryAllocationSize
         {
             get
@@ -378,8 +395,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Max size in bytes of the arguments that can be passed to a kernel. The minimum value is 256.
+        /// Gets the maximum size in bytes of the arguments that can be passed to a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> The minimum value is 256. </remarks>
         public long MaxParameterSize
         {
             get
@@ -389,8 +407,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Max number of simultaneous image objects that can be read by a kernel. The minimum value is 128 if ImageSupport is true.
+        /// Gets the maximum number of simultaneous <c>ComputeImage</c>s that can be read by a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> The minimum value is 128 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         public long MaxReadImageArguments
         {
             get
@@ -400,8 +419,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Maximum number of samplers that can be used in a kernel. The minimum value is 16 if ImageSupport is true.
+        /// Gets the maximum number of <c>ComputeSampler</c>s that can be used in a <c>ComputeKernel</c>.
         /// </summary>
+        /// <remarks> The minimum value is 16 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         public long MaxSamplers
         {
             get
@@ -411,8 +431,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Maximum number of work-items in a work-group executing a kernel using the data parallel execution model. The minimum value is 1.
+        /// Gets the maximum number of work-items in a work-group executing a <c>ComputeKernel</c> in a <c>ComputeDevice</c> using the data parallel execution model.
         /// </summary>
+        /// <remarks> The minimum value is 1. </remarks>
         public long MaxWorkGroupSize
         {
             get
@@ -422,8 +443,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Maximum dimensions that specify the global and local work-item IDs used by the data parallel execution model. The minimum value is 3.
+        /// Gets the maximum number of dimensions that specify the global and local work-item IDs used by the data parallel execution model.
         /// </summary>
+        /// <remarks> The minimum value is 3. </remarks>
         public long MaxWorkItemDimensions
         {
             get
@@ -433,7 +455,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Maximum number of work-items that can be specified in each dimension of the globalWorkSize to ComputeCommandQueue.Execute(...).
+        /// Gets the maximum number of work-items that can be specified in each dimension of the <paramref name="globalWorkSize"/> argument of <c>ComputeCommandQueue.Execute</c>.
         /// </summary>
         public ReadOnlyCollection<long> MaxWorkItemSizes
         {
@@ -444,8 +466,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Max number of simultaneous image objects that can be written to by a kernel. The minimum value is 8 if  ImageSupport is true.
+        /// Gets the maximum number of simultaneous <c>ComputeImage</c>s that can be written to by a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> The minimum value is 8 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         public long MaxWriteImageArguments
         {
             get
@@ -455,7 +478,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Describes the alignment in bits of the base address of any allocated memory object.
+        /// Gets the alignment in bits of the base address of any <c>ComputeMemory</c> allocated in the <c>ComputeDevice</c> memory.
         /// </summary>
         public long MemoryBaseAddressAlignment
         {
@@ -466,7 +489,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The smallest alignment in bytes which can be used for any data type.
+        /// Gets the smallest alignment in bytes which can be used for any data type allocated in the <c>ComputeDevice</c> memory.
         /// </summary>
         public long MinDataTypeAlignmentSize
         {
@@ -477,7 +500,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Device name string.
+        /// Gets the name of the <c>ComputeDevice</c>.
         /// </summary>
         public string Name
         {
@@ -488,7 +511,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The platform associated with this device.
+        /// Gets the <c>ComputePlatform</c> associated with the <c>ComputeDevice</c>.
         /// </summary>
         public ComputePlatform Platform
         {
@@ -499,8 +522,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>double</c>s.
         /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthDouble
         {
             get
@@ -510,8 +534,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>float</c>s.
         /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthFloat
         {
             get
@@ -521,8 +546,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>char</c>s.
         /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthChar
         {
             get
@@ -532,8 +558,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>int</c>s.
         /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthInt
         {
             get
@@ -543,8 +570,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>long</c>s.
         /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthLong
         {
             get
@@ -554,8 +582,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>short</c>s.
         /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthShort
         {
             get
@@ -565,8 +594,21 @@ namespace Cloo
         }
 
         /// <summary>
-        /// OpenCL profile string. Returns the profile name supported by the device (see note). The profile name returned can be one of the following strings: FULL_PROFILE - if the device supports the OpenCL specification (functionality defined as part of the core specification and does not require any extensions to be supported). EMBEDDED_PROFILE - if the device supports the OpenCL embedded profile.
+        /// Gets the OpenCL profile name supported by the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> 
+        /// The profile name returned can be one of the following strings:
+        /// <list type="bullets">
+        /// <item>
+        ///     <term> FULL_PROFILE </term>
+        ///     <description> The <c>ComputeDevice</c> supports the OpenCL specification (functionality defined as part of the core specification and does not require any extensions to be supported). </description>
+        /// </item>
+        /// <item>
+        ///     <term> EMBEDDED_PROFILE </term>
+        ///     <description> The <c>ComputeDevice</c> supports the OpenCL embedded profile. </description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         public string Profile
         {
             get
@@ -576,7 +618,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Describes the resolution of device timer. This is measured in nanoseconds.
+        /// Gets the resolution of the <c>ComputeDevice</c> timer in nanoseconds.
         /// </summary>
         public long ProfilingTimerResolution
         {
@@ -587,7 +629,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Describes the command-queue properties supported by the device.
+        /// Gets the <c>ComputeCommandQueueFlags</c> supported by the <c>ComputeDevice</c>.
         /// </summary>
         public ComputeCommandQueueFlags ComputeCommandQueueFlags
         {
@@ -598,7 +640,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Describes single precision floating-point capability of the device.
+        /// Gets the <c>ComputeDeviceSingleCapabilities</c> of the <c>ComputeDevice</c>.
         /// </summary>
         public ComputeDeviceSingleCapabilities SingleCapabilites
         {
@@ -609,7 +651,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The OpenCL device type. Currently supported values are one of or a combination of: Cpu, Gpu, Accelerator, or Default.
+        /// Gets the <c>ComputeDeviceTypes</c> of the <c>ComputeDevice</c>.
         /// </summary>
         public ComputeDeviceTypes Type
         {
@@ -620,7 +662,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Vendor name string.
+        /// Gets the <c>ComputeDevice</c> vendor name string.
         /// </summary>
         public string Vendor
         {
@@ -631,8 +673,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// A unique device vendor identifier. An example of a unique device identifier could be the PCIe ID.
+        /// Gets a unique <c>ComputeDevice</c> vendor identifier.
         /// </summary>
+        /// <remarks> An example of a unique device identifier could be the PCIe ID. </remarks>
         public long VendorId
         {
             get
@@ -642,8 +685,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// OpenCL version string. Returns the OpenCL version supported by the device. This version string has the following format: OpenCL[space][major_version.minor_version][space][vendor-specific information]
+        /// Gets the OpenCL version supported by the <c>ComputeDevice</c>.
         /// </summary>
+        /// <remarks> This version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c> </remarks>
         public string Version
         {
             get
@@ -723,11 +767,12 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets a string representation of this device.
+        /// Gets the string representation of the <c>ComputeDevice</c>.
         /// </summary>
+        /// <returns>The string representation of the <c>ComputeDevice</c>.</returns>
         public override string ToString()
         {
-            return "ComputeDevice" + base.ToString();
+            return "ComputeDevice(" + Name + ")";
         }
 
         #endregion

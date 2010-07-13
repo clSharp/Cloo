@@ -54,7 +54,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Return the ComputeCommandQueue associated with event.
+        /// Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
         /// </summary>
         public ComputeCommandQueue CommandQueue
         {
@@ -65,7 +65,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Return the command type associated with event.
+        /// Gets the <c>ComputeCommandType</c> associated with the <c>ComputeEvent</c>.
         /// </summary>
         public ComputeCommandType CommandType
         {
@@ -76,7 +76,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event has finished execution on the device.
+        /// Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the command identified by the <c>ComputeEvent</c> has finished execution.
         /// </summary>
         public long CommandFinishTime
         {
@@ -91,7 +91,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event is enqueued in a command-queue by the host.
+        /// Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the command identified by the <c>ComputeEvent</c> is enqueued in the <c>ComputeEvent.CommandQueue</c> by the host.
         /// </summary>
         public long CommandEnqueueTime
         {
@@ -106,7 +106,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event starts execution on the device.
+        /// Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the command identified by the <c>ComputeEvent</c> starts execution.
         /// </summary>
         public long CommandStartTime
         {
@@ -121,7 +121,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event that has been enqueued is submitted by the host to the device associated with the command-queue.
+        /// Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the command identified by the <c>ComputeEvent</c> that has been enqueued is submitted by the host to the <c>ComputeEvent.CommandQueue.Device</c>.
         /// </summary>
         public long CommandSubmitTime
         {
@@ -136,7 +136,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Return the execution status of the command identified by event.
+        /// Gets the execution status of the command identified by the <c>ComputeEvent</c>.
         /// </summary>
         public ComputeCommandExecutionStatus ExecutionStatus
         {
@@ -170,8 +170,9 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets the string representation of this event.
+        /// Gets the string representation of the <c>ComputeEvent</c>.
         /// </summary>
+        /// <returns> The string representation of the <c>ComputeEvent</c>. </returns>
         public override string ToString()
         {
             return "ComputeEvent" + base.ToString();

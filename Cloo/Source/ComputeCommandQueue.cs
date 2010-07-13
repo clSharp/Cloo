@@ -39,7 +39,7 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL command queue.
     /// </summary>
-    /// <remarks> An object that holds commands that will be executed on a specific device. The command-queue is created on a specific device in a context.  Commands to a command-queue are queued in-order but may be executed in-order or out-of-order. </remarks>
+    /// <remarks> An object that holds commands that will be executed on a specific device. The command-queue is created on a specific device in a context. Commands to a command-queue are queued in-order but may be executed in-order or out-of-order. </remarks>
     /// <seealso cref="ComputeContext"/>
     /// <seealso cref="ComputeDevice"/>
     public class ComputeCommandQueue : ComputeResource
@@ -56,7 +56,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the context specified when the command-queue is created.
+        /// Gets the <c>ComputeContext</c> of the <c>ComputeCommandQueue</c>.
         /// </summary>
         public ComputeContext Context
         {
@@ -67,7 +67,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the device specified when the command-queue is created.
+        /// Gets the <c>ComputeDevice</c> of the <c>ComputeCommandQueue</c>.
         /// </summary>
         public ComputeDevice Device
         {
@@ -78,7 +78,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets or sets the execution order of commands in the command-queue.
+        /// Enables or disables out-of-order execution of the commands in the <c>ComputeCommandQueue</c>.
         /// </summary>
         public bool OutOfOrderExecution
         {
@@ -94,7 +94,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Enable or disable profiling of commands in the command-queue.
+        /// Enables or disables profiling of the commands in the <c>ComputeCommandQueue</c>.
         /// </summary>
         public bool Profiling
         {
@@ -114,11 +114,11 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new command-queue.
+        /// Creates a new <c>ComputeCommandQueue</c>.
         /// </summary>
-        /// <param name="context">Must be a valid OpenCL context.</param>
-        /// <param name="device">Must be a device associated with context. It can either be in the list of devices or have the same Type as the device specified when the contex is created.</param>
-        /// <param name="properties">A list of properties for the command-queue.</param>
+        /// <param name="context"> A <c>ComputeContext</c>. </param>
+        /// <param name="device"> A <c>ComputeDevice</c> associated with the <paramref name="context"/>. It can either be one of <c>ComputeContext.Devices</c> or have the same <c>ComputeDeviceTypes</c> as the <paramref name="device"/> specified when the <paramref name="context"/> is created. </param>
+        /// <param name="properties"> A list of properties of the <c>ComputeCommandQueue</c>. </param>
         public ComputeCommandQueue(ComputeContext context, ComputeDevice device, ComputeCommandQueueFlags properties)
         {
             unsafe
@@ -140,8 +140,8 @@ namespace Cloo
         /// <summary>
         /// Acquire OpenCL memory objects that have been created from OpenGL objects.
         /// </summary>
-        /// <param name="memObjs">A list of CL memory objects that correspond to GL objects.</param>
-        /// <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+        /// <param name="memObjs"> A list of CL memory objects that correspond to GL objects. </param>
+        /// <param name="events"> Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list. </param>
         public void AcquireGLObjects(ICollection<ComputeMemory> memObjs, ICollection<ComputeEvent> events)
         {
             unsafe
@@ -755,8 +755,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a string representation of this queue.
+        /// Gets the string representation of the <c>ComputeCommandQueue</c>.
         /// </summary>
+        /// <returns> The string representation of the <c>ComputeCommandQueue</c>. </returns>
         public override string ToString()
         {
             return "ComputeQueue" + base.ToString();
@@ -795,7 +796,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Enqueues a wait for a list of events to complete before any future commands queued in the command-queue are executed.
+        /// Enqueues a wait for a list of events to complete before any future commands queued in the <c>ComputeCommandQueue</c> are executed.
         /// </summary>
         /// <param name="events">The events that will be waited for.</param>
         public void Wait(ICollection<ComputeEvent> events)

@@ -47,6 +47,9 @@ namespace Cloo
 
         #region Properties
 
+        /// <summary>
+        /// Gets the <c>ComputeErrorCode</c> of the <c>ComputeException</c>.
+        /// </summary>
         public ComputeErrorCode ComputeErrorCode
         {
             get { return code; }

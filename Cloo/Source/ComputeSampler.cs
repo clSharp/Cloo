@@ -52,7 +52,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Return the context specified when the sampler is created.
+        /// Gets the <c>ComputeContext</c> of the <c>ComputeSampler</c>.
         /// </summary>
         public ComputeContext Context
         {
@@ -63,7 +63,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Return the value specified by addressing argument when the sampler is created.
+        /// Gets the <c>ComputeImageAddressing</c> mode of the <c>ComputeSampler</c>.
         /// </summary>
         public ComputeImageAddressing Addressing
         {
@@ -74,7 +74,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Return the value specified by filtering argument when the sampler is created.
+        /// Gets the <c>ComputeImageFiltering</c> mode of the <c>ComputeSampler</c>.
         /// </summary>
         public ComputeImageFiltering Filtering
         {
@@ -85,7 +85,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Return the value specified by normalizedCoords when the sampler is created.
+        /// Gets the state of usage of normalized x, y and z coordinates when accessing a <c>ComputeImage</c> in a <c>ComputeKernel</c> through the <c>ComputeSampler</c>.
         /// </summary>
         public bool NormalizedCoords
         {
@@ -130,9 +130,9 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets the string representation of this <c>ComputeSampler</c>.
+        /// Gets the string representation of the <c>ComputeSampler</c>.
         /// </summary>
-        /// <returns> The string representation of this <c>ComputeSampler</c>. </returns>
+        /// <returns> The string representation of the <c>ComputeSampler</c>. </returns>
         public override string ToString()
         {
             return "ComputeSampler" + base.ToString();

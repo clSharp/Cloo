@@ -4,22 +4,30 @@
         <name>Cloo</name>
     </assembly>
     <members>
+        <member name="T:Cloo.ComputeEvent">
+            <summary>
+            Represents an OpenCL event.
+            </summary>
+            <remarks> An event object encapsulates the status of an operation such as a command. It can be used to synchronize operations in a context. </remarks>
+            <seealso cref="T:Cloo.ComputeCommandQueue"/>
+            <seealso cref="T:Cloo.ComputeContext"/>
+        </member>
         <member name="T:Cloo.ComputeResource">
             <summary>
             Represents an OpenCL resource.
             </summary>
-            <remarks>An OpenCL resource is an OpenCL object that can be created and destroyed by the application.</remarks>
+            <remarks> An OpenCL resource is an OpenCL object that can be created and destroyed by the application. </remarks>
             <seealso cref="T:Cloo.ComputeObject"/>
         </member>
         <member name="T:Cloo.ComputeObject">
             <summary>
             Represents an OpenCL object.
             </summary>
-            <remarks>An OpenCL object is identified by its handle.</remarks>
+            <remarks> For the purposes of Cloo an OpenCL object is an object that is identified by its handle in the OpenCL framework. </remarks>
         </member>
         <member name="M:Cloo.ComputeObject.Equals(System.Object,System.Object)">
             <summary>
-            Checks if two <c>ComputeObject</c>s cast to <c>object</c>s are equal.
+            Checks if two <c>object</c>s are equal. These <c>object</c>s must be cast from <c>ComputeObject</c>s.
             </summary>
             <param name="objA">The first <c>object</c> to compare.</param>
             <param name="objB">The second <c>object</c> to compare.</param>
@@ -27,98 +35,152 @@
         </member>
         <member name="M:Cloo.ComputeObject.Equals(System.Object)">
             <summary>
-            Checks if this <c>ComputeObject</c> is equal to a given <c>ComputeObject</c> cast to an <c>object</c>.
+            Checks if the <c>ComputeObject</c> is equal to a given <c>ComputeObject</c> cast to an <c>object</c>.
             </summary>
-            <param name="obj">The <c>object</c> to compare this <c>ComputeObject</c> with.</param>
-            <returns><c>true</c> if this <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
+            <param name="obj">The <c>object</c> to compare the <c>ComputeObject</c> with.</param>
+            <returns><c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
         </member>
         <member name="M:Cloo.ComputeObject.Equals(Cloo.ComputeObject)">
             <summary>
-            Checks if this <c>ComputeObject</c> is equal to a given <c>ComputeObject</c>.
+            Checks if the <c>ComputeObject</c> is equal to a given <c>ComputeObject</c>.
             </summary>
-            <param name="obj">The instance to compare this <c>ComputeObject</c> with.</param>
-            <returns><c>true</c> if this <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
+            <param name="obj">The instance to compare the <c>ComputeObject</c> with.</param>
+            <returns><c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
         </member>
         <member name="M:Cloo.ComputeObject.GetHashCode">
             <summary>
-            Gets the hash code of this <c>ComputeObject</c>.
+            Gets the hash code of the <c>ComputeObject</c>.
             </summary>
-            <returns>The hash code of this <c>ComputeObject</c>.</returns>
+            <returns>The hash code of the <c>ComputeObject</c>.</returns>
         </member>
         <member name="M:Cloo.ComputeObject.ToString">
             <summary>
-            Gets the string representation of this <c>ComputeObject</c>.
+            Gets the string representation of the <c>ComputeObject</c>.
             </summary>
-            <returns>The string representation of this <c>ComputeObject</c>.</returns>
+            <returns>The string representation of the <c>ComputeObject</c>.</returns>
         </member>
         <member name="P:Cloo.ComputeObject.Handle">
             <summary>
-            The handle of the underlying OpenCL object.
+            Gets or sets (protected) the handle of the <c>ComputeObject</c>.
             </summary>
         </member>
         <member name="M:Cloo.ComputeResource.Dispose">
             <summary>
-            Destroys this <c>ComputeResource</c> and frees its accompanying OpenCL resources.
+            Destroys the <c>ComputeResource</c> and frees its accompanying OpenCL resources.
             </summary>
         </member>
         <member name="M:Cloo.ComputeEvent.ToString">
             <summary>
-            Gets the string representation of this event.
+            Gets the string representation of the <c>ComputeEvent</c>.
             </summary>
+            <returns> The string representation of the <c>ComputeEvent</c>. </returns>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandQueue">
             <summary>
-            Return the ComputeCommandQueue associated with event.
+            Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandType">
             <summary>
-            Return the command type associated with event.
+            Gets the <c>ComputeCommandType</c> associated with the <c>ComputeEvent</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandFinishTime">
             <summary>
-            A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event has finished execution on the device.
+            Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the command identified by the <c>ComputeEvent</c> has finished execution.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandEnqueueTime">
             <summary>
-            A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event is enqueued in a command-queue by the host.
+            Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the command identified by the <c>ComputeEvent</c> is enqueued in the <c>ComputeEvent.CommandQueue</c> by the host.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandStartTime">
             <summary>
-            A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event starts execution on the device.
+            Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the command identified by the <c>ComputeEvent</c> starts execution.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandSubmitTime">
             <summary>
-            A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event that has been enqueued is submitted by the host to the device associated with the command-queue.
+            Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the command identified by the <c>ComputeEvent</c> that has been enqueued is submitted by the host to the <c>ComputeEvent.CommandQueue.Device</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEvent.ExecutionStatus">
             <summary>
-            Return the execution status of the command identified by event.
+            Gets the execution status of the command identified by the <c>ComputeEvent</c>.
             </summary>
+        </member>
+        <member name="T:Cloo.ComputeImage2D">
+            <summary>
+            Represents a 2D OpenCL image.
+            </summary>
+            <seealso cref="T:Cloo.ComputeImage"/>
+        </member>
+        <member name="T:Cloo.ComputeImage">
+            <summary>
+            Represents an OpenCL image.
+            </summary>
+            <remarks> A memory object that stores a two- or three- dimensional structured array. Image data can only be accessed with read and write functions. The read functions use a sampler. </remarks>
+            <seealso cref="T:Cloo.ComputeMemory"/>
+            <seealso cref="T:Cloo.ComputeSampler"/>
+        </member>
+        <member name="T:Cloo.ComputeMemory">
+            <summary>
+            Represents an OpenCL memory object.
+            </summary>
+            <remarks> A memory object is a handle to a reference counted region of global memory. </remarks>
+            <seealso cref="!:ComputeBuffer"/>
+            <seealso cref="T:Cloo.ComputeImage"/>
         </member>
         <member name="P:Cloo.ComputeMemory.Context">
             <summary>
-            The context of this memory object.
+            Gets the <c>ComputeContext</c> of the <c>ComputeMemory</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeMemory.Flags">
             <summary>
-            The flags of this memory object as specified when created.
+            Gets the <c>ComputeMemoryFlags</c> of the <c>ComputeMemory</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeMemory.Size">
             <summary>
-            The size of this memory object in bytes.
+            Gets or sets (protected) the size in bytes of the <c>ComputeMemory</c>.
             </summary>
         </member>
         <member name="M:Cloo.ComputeImage.ToString">
             <summary>
-            Gets a string representation of this ComputeImage.
+            Gets the string representation of the <c>ComputeImage</c>.
+            </summary>
+            <returns> The string representation of the <c>ComputeImage</c>. </returns>
+        </member>
+        <member name="P:Cloo.ComputeImage.Depth">
+            <summary>
+            Gets or sets (protected) the depth in pixels of the <c>ComputeImage</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeImage.ElementSize">
+            <summary>
+            Gets or sets (protected) the size of the elements (pixels) of the <c>ComputeImage</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeImage.Height">
+            <summary>
+            Gets or sets (protected) the height in pixels of the <c>ComputeImage</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeImage.RowPitch">
+            <summary>
+            Gets or sets (protected) the size in bytes of a row of elements of the <c>ComputeImage</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeImage.SlicePitch">
+            <summary>
+            Gets or sets (protected) the size in bytes of a 2D slice of a <c>ComputeImage3D</c>. For a <c>ComputeImage2D</c> this value is 0.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeImage.Width">
+            <summary>
+            Gets or sets (protected) the width in pixels of the <c>ComputeImage</c>.
             </summary>
         </member>
         <member name="M:Cloo.ComputeImage2D.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat,System.Int32,System.Int32,System.Int64,System.IntPtr)">
@@ -139,6 +201,12 @@
             </summary>
             <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
             <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
+        </member>
+        <member name="T:Cloo.ComputeImage3D">
+            <summary>
+            Represents a 3D OpenCL image.
+            </summary>
+            <seealso cref="T:Cloo.ComputeImage"/>
         </member>
         <member name="M:Cloo.ComputeImage3D.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat,System.Int32,System.Int32,System.Int32,System.Int64,System.Int64,System.IntPtr)">
             <summary>
@@ -161,47 +229,54 @@
             <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
             <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
         </member>
+        <member name="T:Cloo.ComputeCompiler">
+            <summary>
+            Represents the OpenCL compiler.
+            </summary>
+        </member>
         <member name="M:Cloo.ComputeCompiler.Unload">
             <summary>
             Unloads the OpenCL compiler.
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "T:Cloo.ComputeContext" -->
         <member name="M:Cloo.ComputeContext.#ctor(System.Collections.Generic.ICollection{Cloo.ComputeDevice},Cloo.ComputeContextPropertyList,Cloo.ComputeContextNotifier,System.IntPtr)">
             <summary>
             Creates an OpenCL context with one or more associated devices.
             </summary>
-            <param name="devices">A list of devices to associate with this context.</param>
-            <param name="properties">A descriptor of this context properties.</param>
-            <param name="notify">A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered.</param>
-            <param name="notifyDataPtr">Optional user data to pass to the callback function.</param>
+            <param name="devices"> A list of devices to associate with this context. </param>
+            <param name="properties"> A descriptor of this context properties. </param>
+            <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered. </param>
+            <param name="notifyDataPtr"> Optional user data to pass to the callback function. </param>
         </member>
         <member name="M:Cloo.ComputeContext.#ctor(Cloo.ComputeDeviceTypes,Cloo.ComputeContextPropertyList,Cloo.ComputeContextNotifier,System.IntPtr)">
             <summary>
             Creates an OpenCL context from a device type that identifies the specific device(s) to use.
             </summary>
-            <param name="deviceType">A bit-field that identifies the Type of device to associate with this context.</param>
-            <param name="properties">A descriptor of this context properties.</param>
-            <param name="notify">A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered.</param>
-            <param name="notifyDataPtr">Passed as the userDataPtr argument when notify is called. userDataPtr can be IntPtr.Zero.</param>
+            <param name="deviceType"> A bit-field that identifies the type of device to associate with this context. </param>
+            <param name="properties"> A descriptor of this context properties. </param>
+            <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in this context. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If notify is null, no callback function is registered. </param>
+            <param name="notifyDataPtr"> Optional user data to pass to the callback function. </param>
         </member>
         <member name="M:Cloo.ComputeContext.ToString">
             <summary>
-            Gets a string representation of this context.
+            Gets the string representation of the <c>ComputeContext</c>.
             </summary>
+            <returns> The string representation of the <c>ComputeContext</c>. </returns>
         </member>
         <member name="P:Cloo.ComputeContext.Devices">
             <summary>
-            The devices associated with this context.
+            Gets a read-only collection of the <c>ComputeDevice</c>s of the <c>ComputeContext</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeContext.Platform">
             <summary>
-            The platform associated with this context.
+            Gets the <c>ComputePlatform</c> of the <c>ComputeContext</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeContext.Properties">
             <summary>
-            The properties of the context as specified on context creation.
+            Gets the <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>.
             </summary>
         </member>
         <member name="T:Cloo.ComputeContextNotifier">
@@ -212,6 +287,12 @@
             <param name="clDataPtr">A pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error.</param>
             <param name="clDataSize">The size of the binary data that is returned by the OpenCL.</param>
             <param name="userDataPtr">A pointer to user supplied data.</param>
+        </member>
+        <member name="T:Cloo.ComputeContextProperty">
+            <summary>
+            Represents an OpenCL context property.
+            </summary>
+            <remarks> An OpenCL context property is a (name, value) data pair. </remarks>
         </member>
         <member name="M:Cloo.ComputeContextProperty.#ctor(Cloo.ComputeContextPropertyName,System.IntPtr)">
             <summary>
@@ -227,13 +308,21 @@
         </member>
         <member name="P:Cloo.ComputeContextProperty.Name">
             <summary>
-            The name of this property.
+            Gets the <c>ComputeContextPropertyName</c> of the <c>ComputeContextProperty</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeContextProperty.Value">
             <summary>
-            The value of this property.
+            Gets the value of the <c>ComputeContextProperty</c>.
             </summary>
+        </member>
+        <member name="T:Cloo.ComputeKernel">
+            <summary>
+            Represents an OpenCL kernel object.
+            </summary>
+            <remarks> A kernel object encapsulates a specific __kernel function declared in a program and the argument values to be used when executing this __kernel function. </remarks>
+            <seealso cref="T:Cloo.ComputeCommandQueue"/>
+            <seealso cref="T:Cloo.ComputeProgram"/>
         </member>
         <member name="M:Cloo.ComputeKernel.GetLocalMemorySize(Cloo.ComputeDevice)">
             <summary>
@@ -305,23 +394,31 @@
         </member>
         <member name="M:Cloo.ComputeKernel.ToString">
             <summary>
-            Gets a string representation of this kernel.
+            Gets the string representation of the <c>ComputeKernel</c>.
             </summary>
+            <returns> The string representation of the <c>ComputeKernel</c>. </returns>
         </member>
         <member name="P:Cloo.ComputeKernel.Context">
             <summary>
-            The ComputeContext associated with the kernel.
+            Gets the <c>ComputeContext</c> associated with the <c>ComputeKernel</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeKernel.FunctionName">
             <summary>
-            The kernel function name.
+            Gets the function name of the <c>ComputeKernel</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeKernel.Program">
             <summary>
-            The ComputeProgram associated with kernel.
+            Gets the <c>ComputeProgram</c> that this <c>ComputeKernel</c> belongs to.
             </summary>
+        </member>
+        <member name="T:Cloo.ComputeEventList">
+            <summary>
+            Represents a list of <c>ComputeEvent</c>s.
+            </summary>
+            <seealso cref="T:Cloo.ComputeCommandQueue"/>
+            <seealso cref="T:Cloo.ComputeEvent"/>
         </member>
         <member name="M:Cloo.ComputeEventList.#ctor">
             <summary>
@@ -336,7 +433,7 @@
         </member>
         <member name="M:Cloo.ComputeEventList.Wait">
             <summary>
-            Waits on the host thread for events contained in this collection to complete.
+            Waits on the host thread for events in this list to complete.
             </summary>
         </member>
         <member name="T:Cloo.Bindings.CL11">
@@ -351,20 +448,33 @@
             </summary>
             <remarks>See the OpenCL specification for documentation regarding these functions.</remarks>
         </member>
+        <member name="T:Cloo.Tools">
+            <summary>
+            Contains various helper methods.
+            </summary>
+        </member>
+        <member name="T:Cloo.ComputeCommandQueue">
+            <summary>
+            Represents an OpenCL command queue.
+            </summary>
+            <remarks> An object that holds commands that will be executed on a specific device. The command-queue is created on a specific device in a context. Commands to a command-queue are queued in-order but may be executed in-order or out-of-order. </remarks>
+            <seealso cref="T:Cloo.ComputeContext"/>
+            <seealso cref="T:Cloo.ComputeDevice"/>
+        </member>
         <member name="M:Cloo.ComputeCommandQueue.#ctor(Cloo.ComputeContext,Cloo.ComputeDevice,Cloo.ComputeCommandQueueFlags)">
             <summary>
-            Creates a new command-queue.
+            Creates a new <c>ComputeCommandQueue</c>.
             </summary>
-            <param name="context">Must be a valid OpenCL context.</param>
-            <param name="device">Must be a device associated with context. It can either be in the list of devices or have the same Type as the device specified when the contex is created.</param>
-            <param name="properties">A list of properties for the command-queue.</param>
+            <param name="context"> A <c>ComputeContext</c>. </param>
+            <param name="device"> A <c>ComputeDevice</c> associated with the <paramref name="context"/>. It can either be one of <c>ComputeContext.Devices</c> or have the same <c>ComputeDeviceTypes</c> as the <paramref name="device"/> specified when the <paramref name="context"/> is created. </param>
+            <param name="properties"> A list of properties of the <c>ComputeCommandQueue</c>. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.AcquireGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
             <summary>
             Acquire OpenCL memory objects that have been created from OpenGL objects.
             </summary>
-            <param name="memObjs">A list of CL memory objects that correspond to GL objects.</param>
-            <param name="events">Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list.</param>
+            <param name="memObjs"> A list of CL memory objects that correspond to GL objects. </param>
+            <param name="events"> Specify events that need to complete before this particular command can be executed. If events is not null a new event identifying this command is attached to the end of the list. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.AddBarrier">
             <summary>
@@ -588,8 +698,9 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ToString">
             <summary>
-            Gets a string representation of this queue.
+            Gets the string representation of the <c>ComputeCommandQueue</c>.
             </summary>
+            <returns> The string representation of the <c>ComputeCommandQueue</c>. </returns>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Unmap(Cloo.ComputeMemory,System.IntPtr@,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
             <summary>
@@ -601,7 +712,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Wait(System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
             <summary>
-            Enqueues a wait for a list of events to complete before any future commands queued in the command-queue are executed.
+            Enqueues a wait for a list of events to complete before any future commands queued in the <c>ComputeCommandQueue</c> are executed.
             </summary>
             <param name="events">The events that will be waited for.</param>
         </member>
@@ -669,76 +780,86 @@
         </member>
         <member name="P:Cloo.ComputeCommandQueue.Context">
             <summary>
-            Gets the context specified when the command-queue is created.
+            Gets the <c>ComputeContext</c> of the <c>ComputeCommandQueue</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeCommandQueue.Device">
             <summary>
-            Gets the device specified when the command-queue is created.
+            Gets the <c>ComputeDevice</c> of the <c>ComputeCommandQueue</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeCommandQueue.OutOfOrderExecution">
             <summary>
-            Gets or sets the execution order of commands in the command-queue.
+            Enables or disables out-of-order execution of the commands in the <c>ComputeCommandQueue</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeCommandQueue.Profiling">
             <summary>
-            Enable or disable profiling of commands in the command-queue.
+            Enables or disables profiling of the commands in the <c>ComputeCommandQueue</c>.
             </summary>
         </member>
         <member name="T:Cloo.ComputeBuffer`1">
             <summary>
-            Represents an OpenCL buffer object.
+            Represents an OpenCL buffer.
             </summary>
-            <typeparam name="T">The type of the elements of this <c>ComputeBuffer</c>.</typeparam>
-            <remarks>An OpenCL buffer object represents a linear collection of elements accessible through simple indexation in OpenCL C.</remarks>
+            <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. </typeparam>
+            <remarks> A memory object that stores a linear collection of bytes. Buffer objects are accessible using a pointer in a kernel executing on a device. </remarks>
+            <seealso cref="T:Cloo.ComputeDevice"/>
+            <seealso cref="T:Cloo.ComputeKernel"/>
+            <seealso cref="T:Cloo.ComputeMemory"/>
         </member>
         <member name="M:Cloo.ComputeBuffer`1.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,System.Int64)">
             <summary>
-            Creates a new <c>ComputeBuffer</c> instance.
+            Creates a new <c>ComputeBuffer</c>.
             </summary>
-            <param name="context">A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>.</param>
-            <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
-            <param name="count">The number of elements the <c>ComputeBuffer</c> will contain.</param>
+            <param name="context"> A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>. </param>
+            <param name="flags"> A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used. </param>
+            <param name="count"> The number of elements the <c>ComputeBuffer</c> will contain. </param>
         </member>
         <member name="M:Cloo.ComputeBuffer`1.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,System.Int64,System.IntPtr)">
             <summary>
-            Creates a new <c>ComputeBuffer</c> instance.
+            Creates a new <c>ComputeBuffer</c>.
             </summary>
-            <param name="context">A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>.</param>
-            <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
-            <param name="count">The number of elements the <c>ComputeBuffer</c> will contain.</param>
-            <param name="dataPtr">A pointer to the data the <c>ComputeBuffer</c> will contain.</param>
+            <param name="context"> A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>. </param>
+            <param name="flags"> A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used. </param>
+            <param name="count"> The number of elements the <c>ComputeBuffer</c> will contain. </param>
+            <param name="dataPtr"> A pointer to the data the <c>ComputeBuffer</c> will contain. </param>
         </member>
         <member name="M:Cloo.ComputeBuffer`1.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,`0[])">
             <summary>
-            Creates a new <c>ComputeBuffer</c> instance.
+            Creates a new <c>ComputeBuffer</c>.
             </summary>
-            <param name="context">A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>.</param>
-            <param name="flags">A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used.</param>
-            <param name="data">The data the <c>ComputeBuffer</c> will contain.</param>
+            <param name="context"> A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>. </param>
+            <param name="flags"> A bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer and how it will be used. </param>
+            <param name="data"> The data the <c>ComputeBuffer</c> will contain. </param>
         </member>
         <member name="M:Cloo.ComputeBuffer`1.CreateFromGLBuffer``1(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,System.Int32)">
             <summary>
-            Creates a new <c>ComputeBuffer</c> instance from an existing OpenGL buffer.
+            Creates a new <c>ComputeBuffer</c> from an existing OpenGL buffer.
             </summary>
-            <typeparam name="T">The type of the elements of the <c>ComputeBuffer</c>.</typeparam>
-            <param name="context">A <c>ComputeContext</c> with enabled CL/GL sharing.</param>
-            <param name="flags">A bit field that is used to specify usage information about the new <c>ComputeBuffer</c>.</param>
-            <param name="bufferId">The OpenGL buffer object to use for the creation of the <c>ComputeBuffer</c>.</param>
-            <returns>The created <c>ComputeBuffer</c>.</returns>
+            <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. </typeparam>
+            <param name="context"> A <c>ComputeContext</c> with enabled CL/GL sharing. </param>
+            <param name="flags"> A bit field that is used to specify usage information about the <c>ComputeBuffer</c>. </param>
+            <param name="bufferId"> The OpenGL buffer object to use for the creation of the <c>ComputeBuffer</c>. </param>
+            <returns> The created <c>ComputeBuffer</c>. </returns>
         </member>
         <member name="M:Cloo.ComputeBuffer`1.ToString">
             <summary>
-            Gets a string representation of this <c>ComputeBuffer</c>.
+            Gets the string representation of the <c>ComputeBuffer</c>.
             </summary>
-            <returns>The string representation of this <c>ComputeBuffer</c>.</returns>
+            <returns> The string representation of the <c>ComputeBuffer</c>. </returns>
         </member>
         <member name="P:Cloo.ComputeBuffer`1.Count">
             <summary>
-            The number of elements of this <c>ComputeBuffer</c>.
+            Gets the number of elements in the <c>ComputeBuffer</c>.
             </summary>
+        </member>
+        <member name="T:Cloo.ComputeProgram">
+            <summary>
+            Represents an OpenCL program.
+            </summary>
+            <remarks> An OpenCL program consists of a set of kernels. Programs may also contain auxiliary functions called by the __kernel functions and constant data. </remarks>
+            <seealso cref="T:Cloo.ComputeKernel"/>
         </member>
         <member name="M:Cloo.ComputeProgram.#ctor(Cloo.ComputeContext,System.String)">
             <summary>
@@ -793,33 +914,38 @@
         </member>
         <member name="M:Cloo.ComputeProgram.ToString">
             <summary>
-            Gets a string representation of this program.
+            Gets the string representation of the <c>ComputeProgram</c>.
             </summary>
+            <returns> The string representation of the <c>ComputeProgram</c>. </returns>
         </member>
         <member name="P:Cloo.ComputeProgram.Binaries">
             <summary>
-            Return the program binaries for all devices associated with program. he bits returned can be an implementation-specific intermediate representation (a.k.a. IR) or device specific executable bits or both. The decision on which information is returned in the binary is up to the OpenCL implementation.
+            Gets a read-only collection of program binaries associated with the <c>ComputeProgram.Devices</c>.
             </summary>
+            <remarks> The bits returned can be an implementation-specific intermediate representation (a.k.a. IR) or device specific executable bits or both. The decision on which information is returned in the binary is up to the OpenCL implementation. </remarks>
         </member>
         <member name="P:Cloo.ComputeProgram.BuildOptions">
             <summary>
-            Return the build options specified by the options argument when the program is created.
+            Gets the <c>ComputeProgram</c> build options as specified in <paramref name="options"/> argument of <c>ComputeProgram.Build</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeProgram.Context">
             <summary>
-            Return the context specified when the program object is created
+            Gets the <c>ComputeContext</c> of the <c>ComputeProgram</c>.
             </summary>
         </member>
-        <member name="P:Cloo.ComputeProgram.Devices">
-            <summary>
-            Return the list of devices associated with the program object. This can be the devices associated with context on which the program object has been created or can be a subset of devices that are specified when a progam object is created from binaries.
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "P:Cloo.ComputeProgram.Devices" -->
         <member name="P:Cloo.ComputeProgram.Source">
             <summary>
-            Return the program source code specified when creating the program. null if program was created from binaries.
+            Gets a read-only collection of program source code strings specified when creating the <c>ComputeProgram</c> or null if <c>ComputeProgram</c> was created using program binaries.
             </summary>
+        </member>
+        <member name="T:Cloo.ComputeImageFormat">
+            <summary>
+            Represents an OpenCL image format.
+            </summary>
+            <remarks> This structure defines the type, count and size of the image channels. </remarks>
+            <seealso cref="T:Cloo.ComputeImage"/>
         </member>
         <member name="M:Cloo.ComputeImageFormat.#ctor(Cloo.ComputeImageChannelOrder,Cloo.ComputeImageChannelType)">
             <summary>
@@ -830,268 +956,323 @@
         </member>
         <member name="P:Cloo.ComputeImageFormat.ChannelOrder">
             <summary>
-            Gets the number of channels and the channel layout i.e. the memory layout in which channels are stored in the image.
+            Gets the <c>ComputeImageChannleOrder</c> of the <c>ComputeImage</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeImageFormat.ChannelType">
             <summary>
-            Gets the type of the channel data.
+            Gets the <c>ComputeImageChannelType</c> of the <c>ComputeImage</c>.
             </summary>
+        </member>
+        <member name="T:Cloo.ComputeDevice">
+            <summary>
+            Represents an OpenCL device.
+            </summary>
+            <remarks> A device is a collection of compute units. A command-queue is used to queue commands to a device. Examples of commands include executing kernels, or reading and writing memory objects. OpenCL devices typically correspond to a GPU, a multi-core CPU, and other processors such as DSPs and the Cell/B.E. processor. </remarks>
+            <seealso cref="T:Cloo.ComputeCommandQueue"/>
+            <seealso cref="T:Cloo.ComputeKernel"/>
+            <seealso cref="T:Cloo.ComputeMemory"/>
+            <seealso cref="T:Cloo.ComputePlatform"/>
         </member>
         <member name="M:Cloo.ComputeDevice.ToString">
             <summary>
-            Gets a string representation of this device.
+            Gets the string representation of the <c>ComputeDevice</c>.
             </summary>
+            <returns>The string representation of the <c>ComputeDevice</c>.</returns>
         </member>
         <member name="P:Cloo.ComputeDevice.AddressBits">
             <summary>
-            The default compute device address space size specified as an unsigned integer value in bits. Currently supported values are 32 or 64 bits.
+            Gets the default <c>ComputeDevice</c> address space size in bits.
             </summary>
+            <remarks> Currently supported values are 32 or 64 bits. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Available">
             <summary>
-            Is true if the device is available and false if the device is not available.
+            Gets the availability state of the <c>ComputeDevice</c>.
             </summary>
+            <remarks> Is true if the <c>ComputeDevice</c> is available and false if the <c>ComputeDevice</c> is not available. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.CompilerAvailable">
             <summary>
-            Is false if the implementation does not have a compiler available to compile the program source. Is true if the compiler is available. This can be false for the embededed platform profile only.
+            Gets the availability state of the OpenCL compiler of the <c>ComputeDevice.Platform</c>.
             </summary>
+            <remarks> Is false if the implementation does not have a compiler available to compile the program source. Is true if the compiler is available. This can be false for the embededed platform profile only. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.DriverVersion">
             <summary>
-            OpenCL software driver version string in the form major_number.minor_number.
+            Gets the OpenCL software driver version string of the <c>ComputeDevice</c>.
             </summary>
+            <remarks> The version string is in the form <c>major_number.minor_number</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.EndianLittle">
             <summary>
-            Is true if the OpenCL device is a little endian device and false otherwise.
+            Gets the endianness of the <c>ComputeDevice</c>.
             </summary>
+            <remarks> Is true if the <c>ComputeDevice</c> is a little endian device and false otherwise. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.ErrorCorrectionSupport">
             <summary>
-            Is true if the device implements error correction for the memories, caches, registers etc. in the device. Is false if the device does not implement error correction. This can be a requirement for certain clients of OpenCL.
+            Gets the error correction support state of the <c>ComputeDevice</c>.
             </summary>
+            <remarks> Is true if the <c>ComputeDevice</c> implements error correction for the memories, caches, registers etc. Is false if the <c>ComputeDevice</c> does not implement error correction. This can be a requirement for certain clients of OpenCL. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.ExecutionCapabilities">
             <summary>
-            Describes the execution capabilities of the device. This is a bit-field that describes one or more of the following values: ExecKernel - The OpenCL device can execute OpenCL kernels. ExecNativeKernel - The OpenCL device can execute native kernels. The mandated minimum capability is ExecKernel.
+            Gets the <c>ComputeDeviceExecutionCapabilities</c> of the <c>ComputeDevice</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.Extensions">
             <summary>
-            Returns a collection of extension names.
+            Gets a read-only collection of names of extensions that the <c>ComputeDevice</c> supports.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.GlobalMemoryCacheLineSize">
             <summary>
-            Size of global memory cache line in bytes.
+            Gets the size of the global <c>ComputeDevice</c> memory cache line in bytes.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.GlobalMemoryCacheSize">
             <summary>
-            Size of global memory cache in bytes.
+            Gets the size of the global <c>ComputeDevice</c> memory cache in bytes.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.GlobalMemoryCacheType">
             <summary>
-            Type of global memory cache supported. Valid values are: None, ReadOnlyCache and ReadWriteCache.
+            Gets the <c>ComputeDeviceMemoryCacheType</c> of the <c>ComputeDevice</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.GlobalMemorySize">
             <summary>
-            Size of global device memory in bytes.
+            Gets the size of the global <c>ComputeDevice</c> memory in bytes.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.Image2DMaxHeight">
             <summary>
-            Max height of 2D image in pixels. The minimum value is 8192 if ImageSupport is true.
+            Maximum height of 2D images that the <c>ComputeDevice</c> supports in pixels.
             </summary>
+            <remarks> The minimum value is 8192 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Image2DMaxWidth">
             <summary>
-            Max width of 2D image in pixels. The minimum value is 8192 if ImageSupport is true.
+            Maximum width of 2D image that the <c>ComputeDevice</c> supports in pixels.
             </summary>
+            <remarks> The minimum value is 8192 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxDepth">
             <summary>
-            Max depth of 3D image in pixels. The minimum value is 2048 if ImageSupport is true.
+            Maximum depth of 3D image the <c>ComputeDevice</c> supports in pixels.
             </summary>
+            <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxHeight">
             <summary>
-            Max height of 3D image in pixels. The minimum value is 2048 if ImageSupport is true.
+            Max height of 3D image the <c>ComputeDevice</c> supports in pixels.
             </summary>
+            <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxWidth">
             <summary>
-            Max width of 3D image in pixels. The minimum value is 2048 if ImageSupport is true.
+            Max width of 3D image the <c>ComputeDevice</c> supports in pixels.
             </summary>
+            <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.ImageSupport">
             <summary>
-            Is true if images are supported by the OpenCL device and false otherwise.
+            Gets the state of image support of the <c>ComputeDevice</c>.
             </summary>
+            <remarks> Is true if <c>ComputeImage</c>s are supported by the <c>ComputeDevice</c> and false otherwise. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.LocalMemorySize">
             <summary>
-            Size of local memory arena in bytes. The minimum value is 16 KB.
+            Gets the size of local memory are of the <c>ComputeDevice</c> in bytes.
             </summary>
+            <remarks> The minimum value is 16 KB. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.LocalMemoryType">
             <summary>
-            Type of local memory supported. This can be set to Local implying dedicated local memory storage such as SRAM, or Global.
+            Gets the <c>ComputeDeviceLocalMemoryType</c> that is supported on the <c>ComputeDevice</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxClockFrequency">
             <summary>
-            Maximum configured clock frequency of the device in MHz.
+            Gets the maximum configured clock frequency of the <c>ComputeDevice</c> in MHz.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxComputeUnits">
             <summary>
-            The number of parallel compute cores on the OpenCL device. The minimum value is 1.
+            Gets the number of parallel compute cores on the <c>ComputeDevice</c>.
             </summary>
+            <remarks> The minimum value is 1. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxConstantArguments">
             <summary>
-            Max number of arguments declared with the __constant qualifier in a kernel. The minimum value is 8.
+            Gets the maximum number of arguments declared with the __constant qualifier in a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
             </summary>
+            <remarks> The minimum value is 8. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxConstantBufferSize">
             <summary>
-            Max size in bytes of a constant buffer allocation. The minimum value is 64 KB.
+            Gets the maximum size in bytes of a constant buffer allocation in the <c>ComputeDevice</c> memory.
             </summary>
+            <remarks>  The minimum value is 64 KB. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxMemoryAllocationSize">
             <summary>
-            Max size of memory object allocation in bytes. The minimum value is max(GlobalMemorySize/4, 128*1024*1024).
+            Gets the maximum size of memory object allocation in the <c>ComputeDevice</c> memory in bytes.
             </summary>
+            <remarks> The minimum value is <c>max(ComputeDevice.GlobalMemorySize/4, 128*1024*1024)</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxParameterSize">
             <summary>
-            Max size in bytes of the arguments that can be passed to a kernel. The minimum value is 256.
+            Gets the maximum size in bytes of the arguments that can be passed to a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
             </summary>
+            <remarks> The minimum value is 256. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxReadImageArguments">
             <summary>
-            Max number of simultaneous image objects that can be read by a kernel. The minimum value is 128 if ImageSupport is true.
+            Gets the maximum number of simultaneous <c>ComputeImage</c>s that can be read by a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
             </summary>
+            <remarks> The minimum value is 128 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxSamplers">
             <summary>
-            Maximum number of samplers that can be used in a kernel. The minimum value is 16 if ImageSupport is true.
+            Gets the maximum number of <c>ComputeSampler</c>s that can be used in a <c>ComputeKernel</c>.
             </summary>
+            <remarks> The minimum value is 16 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxWorkGroupSize">
             <summary>
-            Maximum number of work-items in a work-group executing a kernel using the data parallel execution model. The minimum value is 1.
+            Gets the maximum number of work-items in a work-group executing a <c>ComputeKernel</c> in a <c>ComputeDevice</c> using the data parallel execution model.
             </summary>
+            <remarks> The minimum value is 1. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxWorkItemDimensions">
             <summary>
-            Maximum dimensions that specify the global and local work-item IDs used by the data parallel execution model. The minimum value is 3.
+            Gets the maximum number of dimensions that specify the global and local work-item IDs used by the data parallel execution model.
             </summary>
+            <remarks> The minimum value is 3. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxWorkItemSizes">
             <summary>
-            Maximum number of work-items that can be specified in each dimension of the globalWorkSize to ComputeCommandQueue.Execute(...).
+            Gets the maximum number of work-items that can be specified in each dimension of the <paramref name="globalWorkSize"/> argument of <c>ComputeCommandQueue.Execute</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxWriteImageArguments">
             <summary>
-            Max number of simultaneous image objects that can be written to by a kernel. The minimum value is 8 if  ImageSupport is true.
+            Gets the maximum number of simultaneous <c>ComputeImage</c>s that can be written to by a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
             </summary>
+            <remarks> The minimum value is 8 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MemoryBaseAddressAlignment">
             <summary>
-            Describes the alignment in bits of the base address of any allocated memory object.
+            Gets the alignment in bits of the base address of any <c>ComputeMemory</c> allocated in the <c>ComputeDevice</c> memory.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.MinDataTypeAlignmentSize">
             <summary>
-            The smallest alignment in bytes which can be used for any data type.
+            Gets the smallest alignment in bytes which can be used for any data type allocated in the <c>ComputeDevice</c> memory.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.Name">
             <summary>
-            Device name string.
+            Gets the name of the <c>ComputeDevice</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.Platform">
             <summary>
-            The platform associated with this device.
+            Gets the <c>ComputePlatform</c> associated with the <c>ComputeDevice</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthDouble">
             <summary>
-            Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+            Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>double</c>s.
             </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthFloat">
             <summary>
-            Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+            Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>float</c>s.
             </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthChar">
             <summary>
-            Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+            Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>char</c>s.
             </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthInt">
             <summary>
-            Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+            Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>int</c>s.
             </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthLong">
             <summary>
-            Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+            Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>long</c>s.
             </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthShort">
             <summary>
-            Preferred native vector width size for built-in scalar types that can be put into vectors. The vector width is defined as the number of scalar elements that can be stored in the vector.
+            Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>short</c>s.
             </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Profile">
             <summary>
-            OpenCL profile string. Returns the profile name supported by the device (see note). The profile name returned can be one of the following strings: FULL_PROFILE - if the device supports the OpenCL specification (functionality defined as part of the core specification and does not require any extensions to be supported). EMBEDDED_PROFILE - if the device supports the OpenCL embedded profile.
+            Gets the OpenCL profile name supported by the <c>ComputeDevice</c>.
             </summary>
+            <remarks> 
+            The profile name returned can be one of the following strings:
+            <list type="bullets">
+            <item>
+                <term> FULL_PROFILE </term>
+                <description> The <c>ComputeDevice</c> supports the OpenCL specification (functionality defined as part of the core specification and does not require any extensions to be supported). </description>
+            </item>
+            <item>
+                <term> EMBEDDED_PROFILE </term>
+                <description> The <c>ComputeDevice</c> supports the OpenCL embedded profile. </description>
+            </item>
+            </list>
+            </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.ProfilingTimerResolution">
             <summary>
-            Describes the resolution of device timer. This is measured in nanoseconds.
+            Gets the resolution of the <c>ComputeDevice</c> timer in nanoseconds.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.ComputeCommandQueueFlags">
             <summary>
-            Describes the command-queue properties supported by the device.
+            Gets the <c>ComputeCommandQueueFlags</c> supported by the <c>ComputeDevice</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.SingleCapabilites">
             <summary>
-            Describes single precision floating-point capability of the device.
+            Gets the <c>ComputeDeviceSingleCapabilities</c> of the <c>ComputeDevice</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.Type">
             <summary>
-            The OpenCL device type. Currently supported values are one of or a combination of: Cpu, Gpu, Accelerator, or Default.
+            Gets the <c>ComputeDeviceTypes</c> of the <c>ComputeDevice</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.Vendor">
             <summary>
-            Vendor name string.
+            Gets the <c>ComputeDevice</c> vendor name string.
             </summary>
         </member>
         <member name="P:Cloo.ComputeDevice.VendorId">
             <summary>
-            A unique device vendor identifier. An example of a unique device identifier could be the PCIe ID.
+            Gets a unique <c>ComputeDevice</c> vendor identifier.
             </summary>
+            <remarks> An example of a unique device identifier could be the PCIe ID. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Version">
             <summary>
-            OpenCL version string. Returns the OpenCL version supported by the device. This version string has the following format: OpenCL[space][major_version.minor_version][space][vendor-specific information]
+            Gets the OpenCL version supported by the <c>ComputeDevice</c>.
             </summary>
+            <remarks> This version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c> </remarks>
         </member>
         <member name="T:Cloo.Bindings.Clx">
             <summary>
@@ -1103,6 +1284,10 @@
             <summary>
             Represents an OpenCL platform.
             </summary>
+            <remarks> The host plus a collection of devices managed by the OpenCL framework that allow an application to share resources and execute kernels on devices in the platform. </remarks>
+            <seealso cref="T:Cloo.ComputeDevice"/>
+            <seealso cref="T:Cloo.ComputeKernel"/>
+            <seealso cref="T:Cloo.ComputeResource"/>
         </member>
         <member name="M:Cloo.ComputePlatform.GetByHandle(System.IntPtr)">
             <summary>
@@ -1122,56 +1307,65 @@
             </summary>
             <param name="platformVendor">The vendor of the queried platform.</param>
         </member>
-        <member name="M:Cloo.ComputePlatform.Initialize">
-            <summary>
-            Retrieves all the available platforms and their devices.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputePlatform.QueryDevices">
+        <member name="M:Cloo.ComputePlatform.GetDevices">
             <summary>
             Queries the available devices on this platform.
             </summary>
             <returns>The list of devices available on this platform.</returns>
         </member>
+        <member name="M:Cloo.ComputePlatform.Initialize">
+            <summary>
+            Retrieves all the available platforms and their devices.
+            </summary>
+        </member>
         <member name="M:Cloo.ComputePlatform.ToString">
             <summary>
-            Gets a string representation of this platform.
+            Gets the string representation of the <c>ComputePlatform</c>.
             </summary>
+            <returns>The string representation of the <c>ComputePlatform</c>.</returns>
         </member>
         <member name="P:Cloo.ComputePlatform.Devices">
             <summary>
-            A list of devices available on this platform.
+            Gets a read-only collection of <c>ComputeDevice</c>s available on the <c>ComputePlatform</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputePlatform.Extensions">
             <summary>
-            A list of extension names supported by the platform.
+            Gets a read-only collection of extension names supported by the <c>ComputePlatform</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputePlatform.Name">
             <summary>
-            Platform name.
+            Gets the <c>ComputePlatform</c> name.
             </summary>
         </member>
         <member name="P:Cloo.ComputePlatform.Platforms">
             <summary>
-            A list of available platforms.
+            Gets a read-only collection of available <c>ComputePlatform</c>s.
             </summary>
         </member>
         <member name="P:Cloo.ComputePlatform.Profile">
             <summary>
-            The profile name supported by this platform.
+            Gets the name of the profile supported by the <c>ComputePlatform</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputePlatform.Vendor">
             <summary>
-            Platform vendor.
+            Gets the <c>ComputePlatform</c> vendor.
             </summary>
         </member>
         <member name="P:Cloo.ComputePlatform.Version">
             <summary>
-            The OpenCL version supported by this platform.
+            Gets the OpenCL version supported by the <c>ComputePlatform</c>.
             </summary>
+        </member>
+        <member name="T:Cloo.ComputeContextPropertyList">
+            <summary>
+            Represents a list of <c>ComputeContextProperty</c>s.
+            </summary>
+            <remarks> A <c>ComputeContextPropertyList</c> is used to specify the properties of a <c>ComputeContext</c>. </remarks>
+            <seealso cref="T:Cloo.ComputeContext"/>
+            <seealso cref="T:Cloo.ComputeContextProperty"/>
         </member>
         <member name="M:Cloo.ComputeContextPropertyList.#ctor(Cloo.ComputePlatform)">
             <summary>
@@ -1185,6 +1379,12 @@
             </summary>
             <param name="properties">A collection of ComputeContextProperty items.</param>
         </member>
+        <member name="T:Cloo.ComputeSampler">
+            <summary>
+            Represents an OpenCL sampler.
+            </summary>
+            <remarks> An object that describes how to sample an image when the image is read in the kernel. The image read functions take a sampler as an argument. The sampler specifies the image addressing-mode i.e. how out-of-range image coordinates are handled, the filtering mode, and whether the input image coordinate is a normalized or unnormalized value. </remarks>
+        </member>
         <member name="M:Cloo.ComputeSampler.#ctor(Cloo.ComputeContext,System.Boolean,Cloo.ComputeImageAddressing,Cloo.ComputeImageFiltering)">
             <summary>
             Creates a sampler object.
@@ -1194,25 +1394,37 @@
             <param name="addressing">Specifies how out-of-range image coordinates are handled when reading from an image.</param>
             <param name="filtering">Specifies the Type of filter that must be applied when reading an image.</param>
         </member>
+        <member name="M:Cloo.ComputeSampler.ToString">
+            <summary>
+            Gets the string representation of the <c>ComputeSampler</c>.
+            </summary>
+            <returns> The string representation of the <c>ComputeSampler</c>. </returns>
+        </member>
         <member name="P:Cloo.ComputeSampler.Context">
             <summary>
-            Return the context specified when the sampler is created.
+            Gets the <c>ComputeContext</c> of the <c>ComputeSampler</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeSampler.Addressing">
             <summary>
-            Return the value specified by addressing argument when the sampler is created.
+            Gets the <c>ComputeImageAddressing</c> mode of the <c>ComputeSampler</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeSampler.Filtering">
             <summary>
-            Return the value specified by filtering argument when the sampler is created.
+            Gets the <c>ComputeImageFiltering</c> mode of the <c>ComputeSampler</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeSampler.NormalizedCoords">
             <summary>
-            Return the value specified by normalizedCoords when the sampler is created.
+            Gets the state of usage of normalized x, y and z coordinates when accessing a <c>ComputeImage</c> in a <c>ComputeKernel</c> through the <c>ComputeSampler</c>.
             </summary>
+        </member>
+        <member name="T:Cloo.ComputeException">
+            <summary>
+            Represents an error that has occurred while executing an OpenCL API call.
+            </summary>
+            <seealso cref="P:Cloo.ComputeException.ComputeErrorCode"/>
         </member>
         <member name="M:Cloo.ComputeException.ThrowOnError(System.Int32)">
             <summary>
@@ -1225,6 +1437,11 @@
             Checks for an error and throws an exception if such is encountered.
             </summary>
             <param name="errorCode">The value to be checked for an OpenCL error.</param>
+        </member>
+        <member name="P:Cloo.ComputeException.ComputeErrorCode">
+            <summary>
+            Gets the <c>ComputeErrorCode</c> of the <c>ComputeException</c>.
+            </summary>
         </member>
     </members>
 </doc>

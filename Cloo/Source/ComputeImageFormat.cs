@@ -51,7 +51,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the number of channels and the channel layout i.e. the memory layout in which channels are stored in the image.
+        /// Gets the <c>ComputeImageChannleOrder</c> of the <c>ComputeImage</c>.
         /// </summary>
         public ComputeImageChannelOrder ChannelOrder
         {
@@ -59,7 +59,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the type of the channel data.
+        /// Gets the <c>ComputeImageChannelType</c> of the <c>ComputeImage</c>.
         /// </summary>
         public ComputeImageChannelType ChannelType
         {

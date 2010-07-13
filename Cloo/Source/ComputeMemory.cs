@@ -52,7 +52,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// The context of this memory object.
+        /// Gets the <c>ComputeContext</c> of the <c>ComputeMemory</c>.
         /// </summary>
         public ComputeContext Context
         {
@@ -63,7 +63,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The flags of this memory object as specified when created.
+        /// Gets the <c>ComputeMemoryFlags</c> of the <c>ComputeMemory</c>.
         /// </summary>
         public ComputeMemoryFlags Flags
         {
@@ -74,7 +74,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The size of this memory object in bytes.
+        /// Gets or sets (protected) the size in bytes of the <c>ComputeMemory</c>.
         /// </summary>
         public long Size
         {

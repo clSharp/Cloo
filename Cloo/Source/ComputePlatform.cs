@@ -60,7 +60,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// A list of devices available on this platform.
+        /// Gets a read-only collection of <c>ComputeDevice</c>s available on the <c>ComputePlatform</c>.
         /// </summary>
         public ReadOnlyCollection<ComputeDevice> Devices
         {
@@ -71,7 +71,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// A list of extension names supported by the platform.
+        /// Gets a read-only collection of extension names supported by the <c>ComputePlatform</c>.
         /// </summary>
         public ReadOnlyCollection<string> Extensions
         {
@@ -82,7 +82,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Platform name.
+        /// Gets the <c>ComputePlatform</c> name.
         /// </summary>
         public string Name
         {
@@ -93,7 +93,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// A list of available platforms.
+        /// Gets a read-only collection of available <c>ComputePlatform</c>s.
         /// </summary>
         public static ReadOnlyCollection<ComputePlatform> Platforms
         {
@@ -107,7 +107,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The profile name supported by this platform.
+        /// Gets the name of the profile supported by the <c>ComputePlatform</c>.
         /// </summary>
         public string Profile
         {
@@ -118,7 +118,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Platform vendor.
+        /// Gets the <c>ComputePlatform</c> vendor.
         /// </summary>
         public string Vendor
         {
@@ -129,7 +129,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The OpenCL version supported by this platform.
+        /// Gets the OpenCL version supported by the <c>ComputePlatform</c>.
         /// </summary>
         public string Version
         {
@@ -156,7 +156,7 @@ namespace Cloo
                 profile = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Profile, CL10.GetPlatformInfo);
                 vendor = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Vendor, CL10.GetPlatformInfo);
                 version = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Version, CL10.GetPlatformInfo);
-                QueryDevices();
+                GetDevices();
             }
         }
 
@@ -204,6 +204,35 @@ namespace Cloo
         }
 
         /// <summary>
+        /// Queries the available devices on this platform.
+        /// </summary>
+        /// <returns>The list of devices available on this platform.</returns>
+        public ReadOnlyCollection<ComputeDevice> GetDevices()
+        {
+            unsafe
+            {
+                int handlesLength = 0;
+                ComputeErrorCode error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, 0, null, &handlesLength);
+                ComputeException.ThrowOnError(error);
+
+                IntPtr[] handles = new IntPtr[handlesLength];
+                fixed (IntPtr* devicesPtr = handles)
+                {
+                    error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, handlesLength, devicesPtr, null);
+                    ComputeException.ThrowOnError(error);
+                }
+
+                ComputeDevice[] devices = new ComputeDevice[handlesLength];
+                for (int i = 0; i < handlesLength; i++)
+                    devices[i] = new ComputeDevice(this, handles[i]);
+
+                this.devices = new ReadOnlyCollection<ComputeDevice>(devices);
+
+                return this.devices;
+            }
+        }
+
+        /// <summary>
         /// Retrieves all the available platforms and their devices.
         /// </summary>
         private static void Initialize()
@@ -233,40 +262,12 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Queries the available devices on this platform.
+        /// Gets the string representation of the <c>ComputePlatform</c>.
         /// </summary>
-        /// <returns>The list of devices available on this platform.</returns>
-        public ReadOnlyCollection<ComputeDevice> QueryDevices()
-        {
-            unsafe
-            {
-                int handlesLength = 0;
-                ComputeErrorCode error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, 0, null, &handlesLength);
-                ComputeException.ThrowOnError(error);
-
-                IntPtr[] handles = new IntPtr[handlesLength];
-                fixed (IntPtr* devicesPtr = handles)
-                {
-                    error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, handlesLength, devicesPtr, null);
-                    ComputeException.ThrowOnError(error);
-                }
-
-                ComputeDevice[] devices = new ComputeDevice[handlesLength];
-                for (int i = 0; i < handlesLength; i++)
-                    devices[i] = new ComputeDevice(this, handles[i]);
-
-                this.devices = new ReadOnlyCollection<ComputeDevice>(devices);
-
-                return this.devices;
-            }
-        }
-
-        /// <summary>
-        /// Gets a string representation of this platform.
-        /// </summary>
+        /// <returns>The string representation of the <c>ComputePlatform</c>.</returns>
         public override string ToString()
         {
-            return "ComputePlatform" + base.ToString();
+            return "ComputePlatform(" + Name + ")";
         }
 
         #endregion

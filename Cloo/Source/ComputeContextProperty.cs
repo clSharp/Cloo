@@ -34,8 +34,9 @@ namespace Cloo
     using System;
 
     /// <summary>
-    /// Represents an OpenCL context property name and value.
+    /// Represents an OpenCL context property.
     /// </summary>
+    /// <remarks> An OpenCL context property is a (name, value) data pair. </remarks>
     public class ComputeContextProperty
     {
         #region Fields
@@ -48,7 +49,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// The name of this property.
+        /// Gets the <c>ComputeContextPropertyName</c> of the <c>ComputeContextProperty</c>.
         /// </summary>
         public ComputeContextPropertyName Name
         {
@@ -56,7 +57,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The value of this property.
+        /// Gets the value of the <c>ComputeContextProperty</c>.
         /// </summary>
         public IntPtr Value
         {

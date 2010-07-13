@@ -58,8 +58,9 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Return the program binaries for all devices associated with program. he bits returned can be an implementation-specific intermediate representation (a.k.a. IR) or device specific executable bits or both. The decision on which information is returned in the binary is up to the OpenCL implementation.
+        /// Gets a read-only collection of program binaries associated with the <c>ComputeProgram.Devices</c>.
         /// </summary>
+        /// <remarks> The bits returned can be an implementation-specific intermediate representation (a.k.a. IR) or device specific executable bits or both. The decision on which information is returned in the binary is up to the OpenCL implementation. </remarks>
         public ReadOnlyCollection<byte[]> Binaries
         {
             get
@@ -69,7 +70,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Return the build options specified by the options argument when the program is created.
+        /// Gets the <c>ComputeProgram</c> build options as specified in <paramref name="options"/> argument of <c>ComputeProgram.Build</c>.
         /// </summary>
         public string BuildOptions
         {
@@ -80,7 +81,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Return the context specified when the program object is created
+        /// Gets the <c>ComputeContext</c> of the <c>ComputeProgram</c>.
         /// </summary>
         public ComputeContext Context
         {
@@ -91,8 +92,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Return the list of devices associated with the program object. This can be the devices associated with context on which the program object has been created or can be a subset of devices that are specified when a progam object is created from binaries.
+        /// Gets a read-only collection of <c>ComputeDevice</c>s associated with the <c>ComputeProgram</c>.
         /// </summary>
+        /// <remarks> This collection contains <c>ComputeDevice</c>s from <c>ComputeProgram.Context.Devices</c>.
         public ReadOnlyCollection<ComputeDevice> Devices
         {
             get
@@ -102,7 +104,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Return the program source code specified when creating the program. null if program was created from binaries.
+        /// Gets a read-only collection of program source code strings specified when creating the <c>ComputeProgram</c> or null if <c>ComputeProgram</c> was created using program binaries.
         /// </summary>
         public ReadOnlyCollection<string> Source
         {
@@ -338,8 +340,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a string representation of this program.
+        /// Gets the string representation of the <c>ComputeProgram</c>.
         /// </summary>
+        /// <returns> The string representation of the <c>ComputeProgram</c>. </returns>
         public override string ToString()
         {
             return "ComputeProgram" + base.ToString();
@@ -384,7 +387,6 @@ namespace Cloo
                         binaries.Add(binary);
                     }
 
-                    IntPtr ret;
                     ComputeErrorCode error = CL10.GetProgramInfo(
                         Handle,
                         ComputeProgramInfo.Binaries,

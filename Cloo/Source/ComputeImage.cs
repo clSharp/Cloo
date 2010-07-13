@@ -46,11 +46,34 @@ namespace Cloo
     {
         #region Properties
 
+        /// <summary>
+        /// Gets or sets (protected) the depth in pixels of the <c>ComputeImage</c>.
+        /// </summary>
         public int Depth { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets (protected) the size of the elements (pixels) of the <c>ComputeImage</c>.
+        /// </summary>
         public int ElementSize { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets (protected) the height in pixels of the <c>ComputeImage</c>.
+        /// </summary>
         public int Height { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets (protected) the size in bytes of a row of elements of the <c>ComputeImage</c>.
+        /// </summary>
         public long RowPitch { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets (protected) the size in bytes of a 2D slice of a <c>ComputeImage3D</c>. For a <c>ComputeImage2D</c> this value is 0.
+        /// </summary>
         public long SlicePitch { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets (protected) the width in pixels of the <c>ComputeImage</c>.
+        /// </summary>
         public int Width { get; protected set; }
 
         #endregion
@@ -66,8 +89,9 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets a string representation of this ComputeImage.
+        /// Gets the string representation of the <c>ComputeImage</c>.
         /// </summary>
+        /// <returns> The string representation of the <c>ComputeImage</c>. </returns>
         public override string ToString()
         {
             return "ComputeImage" + base.ToString();

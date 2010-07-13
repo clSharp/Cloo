@@ -56,7 +56,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// The ComputeContext associated with the kernel.
+        /// Gets the <c>ComputeContext</c> associated with the <c>ComputeKernel</c>.
         /// </summary>
         public ComputeContext Context
         {
@@ -67,7 +67,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The kernel function name.
+        /// Gets the function name of the <c>ComputeKernel</c>.
         /// </summary>
         public string FunctionName
         {
@@ -78,7 +78,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// The ComputeProgram associated with kernel.
+        /// Gets the <c>ComputeProgram</c> that this <c>ComputeKernel</c> belongs to.
         /// </summary>
         public ComputeProgram Program
         {
@@ -257,8 +257,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a string representation of this kernel.
+        /// Gets the string representation of the <c>ComputeKernel</c>.
         /// </summary>
+        /// <returns> The string representation of the <c>ComputeKernel</c>. </returns>
         public override string ToString()
         {
             return "ComputeKernel" + base.ToString();
