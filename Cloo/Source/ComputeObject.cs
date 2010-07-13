@@ -38,7 +38,7 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL object.
     /// </summary>
-    /// <remarks> For the purposes of Cloo an OpenCL object is an object that is identified by its handle in the OpenCL framework. </remarks>
+    /// <remarks> For the purposes of Cloo an OpenCL object is an object that is identified by its handle in the OpenCL environment. </remarks>
     public abstract class ComputeObject : IEquatable<ComputeObject>
     {
         #region Fields
@@ -71,9 +71,9 @@ namespace Cloo
         /// <summary>
         /// Checks if two <c>object</c>s are equal. These <c>object</c>s must be cast from <c>ComputeObject</c>s.
         /// </summary>
-        /// <param name="objA">The first <c>object</c> to compare.</param>
-        /// <param name="objB">The second <c>object</c> to compare.</param>
-        /// <returns><c>true</c> if the <c>object</c>s are equal otherwise <c>false</c>.</returns>
+        /// <param name="objA"> The first <c>object</c> to compare.</param>
+        /// <param name="objB"> The second <c>object</c> to compare.</param>
+        /// <returns> <c>true</c> if the <c>object</c>s are equal otherwise <c>false</c>. </returns>
         public new static bool Equals(object objA, object objB)
         {
             if (objA == objB) return true;
@@ -84,8 +84,8 @@ namespace Cloo
         /// <summary>
         /// Checks if the <c>ComputeObject</c> is equal to a given <c>ComputeObject</c> cast to an <c>object</c>.
         /// </summary>
-        /// <param name="obj">The <c>object</c> to compare the <c>ComputeObject</c> with.</param>
-        /// <returns><c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
+        /// <param name="obj"> The given <c>object</c> to compare the <c>ComputeObject</c> with. </param>
+        /// <returns> <c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>. </returns>
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
@@ -96,8 +96,8 @@ namespace Cloo
         /// <summary>
         /// Checks if the <c>ComputeObject</c> is equal to a given <c>ComputeObject</c>.
         /// </summary>
-        /// <param name="obj">The instance to compare the <c>ComputeObject</c> with.</param>
-        /// <returns><c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
+        /// <param name="obj"> The given <c>ComputeObject</c> to compare the <c>ComputeObject</c> with.</param>
+        /// <returns> <c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>. </returns>
         public bool Equals(ComputeObject obj)
         {
             if (obj == null) return false;
@@ -108,7 +108,7 @@ namespace Cloo
         /// <summary>
         /// Gets the hash code of the <c>ComputeObject</c>.
         /// </summary>
-        /// <returns>The hash code of the <c>ComputeObject</c>.</returns>
+        /// <returns> The hash code of the <c>ComputeObject</c>. </returns>
         public override int GetHashCode()
         {
             return Handle.GetHashCode();
@@ -117,7 +117,7 @@ namespace Cloo
         /// <summary>
         /// Gets the string representation of the <c>ComputeObject</c>.
         /// </summary>
-        /// <returns>The string representation of the <c>ComputeObject</c>.</returns>
+        /// <returns> The string representation of the <c>ComputeObject</c>. </returns>
         public override string ToString()
         {
             return "(" + Handle.ToString() + ")";

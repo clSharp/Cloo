@@ -37,7 +37,7 @@ namespace Cloo.Bindings
     /// <summary>
     /// Contains bindings to the OpenCL 1.1 functions.
     /// </summary>
-    /// <remarks>See the OpenCL specification for documentation regarding these functions.</remarks>
+    /// <remarks> See the OpenCL specification for documentation regarding these functions. </remarks>
     public class CL11 : CL10
     {
         [Obsolete("This function has been deprecated in OpenCL 1.1", true)]

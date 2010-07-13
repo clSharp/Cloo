@@ -23,41 +23,41 @@
             <summary>
             Represents an OpenCL object.
             </summary>
-            <remarks> For the purposes of Cloo an OpenCL object is an object that is identified by its handle in the OpenCL framework. </remarks>
+            <remarks> For the purposes of Cloo an OpenCL object is an object that is identified by its handle in the OpenCL environment. </remarks>
         </member>
         <member name="M:Cloo.ComputeObject.Equals(System.Object,System.Object)">
             <summary>
             Checks if two <c>object</c>s are equal. These <c>object</c>s must be cast from <c>ComputeObject</c>s.
             </summary>
-            <param name="objA">The first <c>object</c> to compare.</param>
-            <param name="objB">The second <c>object</c> to compare.</param>
-            <returns><c>true</c> if the <c>object</c>s are equal otherwise <c>false</c>.</returns>
+            <param name="objA"> The first <c>object</c> to compare.</param>
+            <param name="objB"> The second <c>object</c> to compare.</param>
+            <returns> <c>true</c> if the <c>object</c>s are equal otherwise <c>false</c>. </returns>
         </member>
         <member name="M:Cloo.ComputeObject.Equals(System.Object)">
             <summary>
             Checks if the <c>ComputeObject</c> is equal to a given <c>ComputeObject</c> cast to an <c>object</c>.
             </summary>
-            <param name="obj">The <c>object</c> to compare the <c>ComputeObject</c> with.</param>
-            <returns><c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
+            <param name="obj"> The given <c>object</c> to compare the <c>ComputeObject</c> with. </param>
+            <returns> <c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>. </returns>
         </member>
         <member name="M:Cloo.ComputeObject.Equals(Cloo.ComputeObject)">
             <summary>
             Checks if the <c>ComputeObject</c> is equal to a given <c>ComputeObject</c>.
             </summary>
-            <param name="obj">The instance to compare the <c>ComputeObject</c> with.</param>
-            <returns><c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>.</returns>
+            <param name="obj"> The given <c>ComputeObject</c> to compare the <c>ComputeObject</c> with.</param>
+            <returns> <c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>. </returns>
         </member>
         <member name="M:Cloo.ComputeObject.GetHashCode">
             <summary>
             Gets the hash code of the <c>ComputeObject</c>.
             </summary>
-            <returns>The hash code of the <c>ComputeObject</c>.</returns>
+            <returns> The hash code of the <c>ComputeObject</c>. </returns>
         </member>
         <member name="M:Cloo.ComputeObject.ToString">
             <summary>
             Gets the string representation of the <c>ComputeObject</c>.
             </summary>
-            <returns>The string representation of the <c>ComputeObject</c>.</returns>
+            <returns> The string representation of the <c>ComputeObject</c>. </returns>
         </member>
         <member name="P:Cloo.ComputeObject.Handle">
             <summary>
@@ -440,13 +440,13 @@
             <summary>
             Contains bindings to the OpenCL 1.1 functions.
             </summary>
-            <remarks>See the OpenCL specification for documentation regarding these functions.</remarks>
+            <remarks> See the OpenCL specification for documentation regarding these functions. </remarks>
         </member>
         <member name="T:Cloo.Bindings.CL10">
             <summary>
             Contains bindings to the OpenCL 1.0 functions.
             </summary>
-            <remarks>See the OpenCL specification for documentation regarding these functions.</remarks>
+            <remarks> See the OpenCL specification for documentation regarding these functions. </remarks>
         </member>
         <member name="T:Cloo.Tools">
             <summary>
@@ -1280,7 +1280,7 @@
             <summary>
             Contains bindings to the OpenCL extension functions.
             </summary>
-            <remarks>See the Khronos OpenCL API extensions registry for documentation regarding these functions.</remarks>
+            <remarks> See the Khronos OpenCL API extensions registry for documentation regarding these functions. </remarks>
         </member>
         <member name="T:Cloo.ComputePlatform">
             <summary>

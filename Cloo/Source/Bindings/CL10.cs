@@ -38,7 +38,7 @@ namespace Cloo.Bindings
     /// <summary>
     /// Contains bindings to the OpenCL 1.0 functions.
     /// </summary>
-    /// <remarks>See the OpenCL specification for documentation regarding these functions.</remarks>
+    /// <remarks> See the OpenCL specification for documentation regarding these functions. </remarks>
     public class CL10
     {
         protected const string dllName = "opencl.dll";

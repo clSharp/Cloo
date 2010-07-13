@@ -37,7 +37,7 @@ namespace Cloo.Bindings
     /// <summary>
     /// Contains bindings to the OpenCL extension functions.
     /// </summary>
-    /// <remarks>See the Khronos OpenCL API extensions registry for documentation regarding these functions.</remarks>
+    /// <remarks> See the Khronos OpenCL API extensions registry for documentation regarding these functions. </remarks>
     public class Clx
     {
         internal static class Delegates
