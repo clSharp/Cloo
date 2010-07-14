@@ -41,6 +41,7 @@ namespace Cloo
     /// Represents an OpenCL context.
     /// </summary>
     /// <remarks> The environment within which the kernels execute and the domain in which synchronization and memory management is defined. </remarks>
+    /// <br/>
     /// <example> 
     /// This example shows how to create a <c>ComputeContext</c> that is able to share data with an OpenGL context in a Microsoft Windows OS:
     /// <code>

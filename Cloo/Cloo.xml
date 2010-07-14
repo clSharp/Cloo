@@ -129,7 +129,7 @@
             Represents an OpenCL memory object.
             </summary>
             <remarks> A memory object is a handle to a region of global memory. </remarks>
-            <seealso cref="T:Cloo.ComputeBuffer`1"/>
+            <seealso cref="!:ComputeBuffer"/>
             <seealso cref="T:Cloo.ComputeImage"/>
         </member>
         <member name="P:Cloo.ComputeMemory.Context">
@@ -863,6 +863,7 @@
             <param name="context"> A <c>ComputeContext</c>. </param>
             <param name="source"> The source code for the <c>ComputeProgram</c>. </param>
             <remarks> The created <c>ComputeProgram</c> is associated with the <c>ComputeContext.Devices</c>. </remarks>
+            <seealso cref="T:Cloo.ComputeKernel"/>
         </member>
         <member name="M:Cloo.ComputeProgram.#ctor(Cloo.ComputeContext,System.String[])">
             <summary>
@@ -1493,6 +1494,7 @@
             Represents an OpenCL sampler.
             </summary>
             <remarks> An object that describes how to sample an image when the image is read in the kernel. The image read functions take a sampler as an argument. The sampler specifies the image addressing-mode i.e. how out-of-range image coordinates are handled, the filtering mode, and whether the input image coordinate is a normalized or unnormalized value. </remarks>
+            <seealso cref="T:Cloo.ComputeImage"/>
         </member>
         <member name="M:Cloo.ComputeSampler.#ctor(Cloo.ComputeContext,System.Boolean,Cloo.ComputeImageAddressing,Cloo.ComputeImageFiltering)">
             <summary>

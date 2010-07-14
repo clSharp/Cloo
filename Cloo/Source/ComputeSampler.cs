@@ -38,6 +38,7 @@ namespace Cloo
     /// Represents an OpenCL sampler.
     /// </summary>
     /// <remarks> An object that describes how to sample an image when the image is read in the kernel. The image read functions take a sampler as an argument. The sampler specifies the image addressing-mode i.e. how out-of-range image coordinates are handled, the filtering mode, and whether the input image coordinate is a normalized or unnormalized value. </remarks>
+    /// <seealso cref="ComputeImage"/>
     public class ComputeSampler : ComputeResource
     {
         #region Fields
