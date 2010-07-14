@@ -71,8 +71,8 @@ namespace Cloo
         /// <summary>
         /// Checks if two <c>object</c>s are equal. These <c>object</c>s must be cast from <c>ComputeObject</c>s.
         /// </summary>
-        /// <param name="objA"> The first <c>object</c> to compare.</param>
-        /// <param name="objB"> The second <c>object</c> to compare.</param>
+        /// <param name="objA"> The first <c>object</c> to compare. </param>
+        /// <param name="objB"> The second <c>object</c> to compare. </param>
         /// <returns> <c>true</c> if the <c>object</c>s are equal otherwise <c>false</c>. </returns>
         public new static bool Equals(object objA, object objB)
         {
@@ -82,9 +82,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Checks if the <c>ComputeObject</c> is equal to a given <c>ComputeObject</c> cast to an <c>object</c>.
+        /// Checks if the <c>ComputeObject</c> is equal to a specified <c>ComputeObject</c> cast to an <c>object</c>.
         /// </summary>
-        /// <param name="obj"> The given <c>object</c> to compare the <c>ComputeObject</c> with. </param>
+        /// <param name="obj"> The specified <c>object</c> to compare the <c>ComputeObject</c> with. </param>
         /// <returns> <c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>. </returns>
         public override bool Equals(object obj)
         {
@@ -94,9 +94,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Checks if the <c>ComputeObject</c> is equal to a given <c>ComputeObject</c>.
+        /// Checks if the <c>ComputeObject</c> is equal to a specified <c>ComputeObject</c>.
         /// </summary>
-        /// <param name="obj"> The given <c>ComputeObject</c> to compare the <c>ComputeObject</c> with.</param>
+        /// <param name="obj"> The specified <c>ComputeObject</c> to compare the <c>ComputeObject</c> with. </param>
         /// <returns> <c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>. </returns>
         public bool Equals(ComputeObject obj)
         {

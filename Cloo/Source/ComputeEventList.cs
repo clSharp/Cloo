@@ -74,7 +74,7 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Waits on the host thread for events in this list to complete.
+        /// Waits on the host thread for the <c>ComputeEvent</c>s in the <c>ComputeEventList</c> to complete.
         /// </summary>
         public void Wait()
         {

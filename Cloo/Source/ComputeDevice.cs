@@ -769,7 +769,7 @@ namespace Cloo
         /// <summary>
         /// Gets the string representation of the <c>ComputeDevice</c>.
         /// </summary>
-        /// <returns>The string representation of the <c>ComputeDevice</c>.</returns>
+        /// <returns> The string representation of the <c>ComputeDevice</c>. </returns>
         public override string ToString()
         {
             return "ComputeDevice(" + Name + ")";

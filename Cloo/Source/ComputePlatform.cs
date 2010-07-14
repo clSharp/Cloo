@@ -165,9 +165,9 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets a platform of a matching handle.
+        /// Gets a <c>ComputePlatform</c> of a specified handle.
         /// </summary>
-        /// <param name="handle">The handle of the queried platform.</param>
+        /// <param name="handle"> The handle of the queried <c>ComputePlatform</c>. </param>
         public static ComputePlatform GetByHandle(IntPtr handle)
         {
             foreach (ComputePlatform platform in Platforms)
@@ -178,9 +178,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a platform of a matching name.
+        /// Gets the first matching <c>ComputePlatform</c> of a specified name.
         /// </summary>
-        /// <param name="platformName">The name of the queried platform.</param>
+        /// <param name="platformName"> The name of the queried <c>ComputePlatform</c>. </param>
         public static ComputePlatform GetByName(string platformName)
         {
             foreach (ComputePlatform platform in Platforms)
@@ -191,9 +191,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a platform of a matching vendor.
+        /// Gets the first matching <c>ComputePlatform</c> of a specified vendor.
         /// </summary>
-        /// <param name="platformVendor">The vendor of the queried platform.</param>
+        /// <param name="platformVendor"> The vendor of the queried <c>ComputePlatform</c>. </param>
         public static ComputePlatform GetByVendor(string platformVendor)
         {
             foreach (ComputePlatform platform in Platforms)
@@ -204,9 +204,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Queries the available devices on this platform.
+        /// Gets a read-only collection of available <c>ComputeDevice</c>s on the <c>ComputePlatform</c>.
         /// </summary>
-        /// <returns>The list of devices available on this platform.</returns>
+        /// <returns> The read-only collection of available <c>ComputeDevice</c>s on the <c>ComputePlatform</c>. </returns>
         public ReadOnlyCollection<ComputeDevice> GetDevices()
         {
             unsafe
@@ -232,9 +232,6 @@ namespace Cloo
             }
         }
 
-        /// <summary>
-        /// Retrieves all the available platforms and their devices.
-        /// </summary>
         private static void Initialize()
         {
             if (platforms != null) return;
@@ -264,7 +261,7 @@ namespace Cloo
         /// <summary>
         /// Gets the string representation of the <c>ComputePlatform</c>.
         /// </summary>
-        /// <returns>The string representation of the <c>ComputePlatform</c>.</returns>
+        /// <returns> The string representation of the <c>ComputePlatform</c>. </returns>
         public override string ToString()
         {
             return "ComputePlatform(" + Name + ")";

@@ -154,12 +154,12 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Creates a new <c>ComputeBuffer</c> from an existing OpenGL buffer.
+        /// Creates a new <c>ComputeBuffer</c> from an existing OpenGL buffer object.
         /// </summary>
-        /// <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. </typeparam>
+        /// <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. It is recommended, though not required, that <typeparamref name="T"/> matches the type of the elements in the OpenGL buffer. </typeparam>
         /// <param name="context"> A <c>ComputeContext</c> with enabled CL/GL sharing. </param>
-        /// <param name="flags"> A bit-field that is used to specify usage information about the <c>ComputeBuffer</c>. </param>
-        /// <param name="bufferId"> The OpenGL buffer object to use for the creation of the <c>ComputeBuffer</c>. </param>
+        /// <param name="flags"> A bit-field that is used to specify usage information about the <c>ComputeBuffer</c>. Only <c>ComputeMemoryFlags.ReadOnly</c>, <c>ComputeMemoryFlags.WriteOnly</c> and <c>ComputeMemoryFlags.ReadWrite</c> are allowed. </param>
+        /// <param name="bufferId"> The OpenGL buffer object id to use for the creation of the <c>ComputeBuffer</c>. </param>
         /// <returns> The created <c>ComputeBuffer</c>. </returns>
         public static ComputeBuffer<T> CreateFromGLBuffer<T>(ComputeContext context, ComputeMemoryFlags flags, int bufferId) where T : struct
         {

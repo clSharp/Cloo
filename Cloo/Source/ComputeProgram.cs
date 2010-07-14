@@ -244,9 +244,9 @@ namespace Cloo
         /// <summary>
         /// Builds (compiles and links) a program executable from the program source or binary for all the devices or some specific devices in the OpenCL context associated with program.
         /// </summary>
-        /// <param name="devices">A list of devices associated with program. If the list is null, the program executable is built for all devices associated with program for which a source or a binary has been loaded.</param>
-        /// <param name="options">A set of options for the OpenCL compiler.</param>
-        /// <param name="notify">A notification routine. The notification routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If notify is not null, ComputeProgram.Build does not need to wait for the build to complete and can return immediately. If notify is null, ComputeProgram.Build does not return until the build has completed. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.</param>
+        /// <param name="devices"> A list of devices associated with program. If the list is null, the program executable is built for all devices associated with program for which a source or a binary has been loaded. </param>
+        /// <param name="options"> A set of options for the OpenCL compiler. </param>
+        /// <param name="notify"> A notification routine. The notification routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If notify is not null, ComputeProgram.Build does not need to wait for the build to complete and can return immediately. If notify is null, ComputeProgram.Build does not return until the build has completed. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </param>
         /// <param name="notifyDataPtr">Passed as an argument when notify is called. notifyDataPtr can be IntPtr.Zero. </param>
         public void Build(ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr)
         {
@@ -411,6 +411,11 @@ namespace Cloo
         #endregion
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="programHandle"></param>
+    /// <param name="userDataPtr"></param>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void ComputeProgramBuildNotifier(IntPtr programHandle, IntPtr userDataPtr);
 }

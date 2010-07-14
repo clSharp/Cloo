@@ -62,7 +62,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new <c>ComputeContextPropertyList</c> which contains the specified <c>ComputeContextProperty</c>'s.
+        /// Creates a new <c>ComputeContextPropertyList</c> which contains the specified <c>ComputeContextProperty</c>s.
         /// </summary>
         /// <param name="properties"> An enumerable of <c>ComputeContextProperty</c>'s. </param>
         public ComputeContextPropertyList(IEnumerable<ComputeContextProperty> properties)
@@ -74,6 +74,11 @@ namespace Cloo
 
         #region Public methods
 
+        /// <summary>
+        /// Gets a <c>ComputeContextProperty</c> of a specified <c>ComputeContextPropertyName</c>.
+        /// </summary>
+        /// <param name="name"> The <c>ComputeContextPropertyName</c> of the <c>ComputeContextProperty</c>. </param>
+        /// <returns> The requested <c>ComputeContextProperty</c> or <c>null</c> if no such <c>ComputeContextProperty</c> exists in the <c>ComputeContextPropertyList</c>. </returns>
         public ComputeContextProperty GetByName(ComputeContextPropertyName name)
         {
             foreach (ComputeContextProperty property in properties)

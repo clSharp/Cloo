@@ -60,7 +60,7 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeException</c> with a given <c>ComputeErrorCode</c>.
+        /// Creates a new <c>ComputeException</c> with a specified <c>ComputeErrorCode</c>.
         /// </summary>
         /// <param name="code"> A <c>ComputeErrorCode</c>. </param>
         public ComputeException(ComputeErrorCode code)
@@ -74,18 +74,18 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Checks for an error and throws an exception if such is encountered.
+        /// Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
         /// </summary>
-        /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
+        /// <param name="errorCode"> The value to be checked for an OpenCL error. </param>
         public static void ThrowOnError(int errorCode)
         {
             ThrowOnError((ComputeErrorCode)errorCode);
         }
 
         /// <summary>
-        /// Checks for an error and throws an exception if such is encountered.
+        /// Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
         /// </summary>
-        /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
+        /// <param name="errorCode"> The value to be checked for an OpenCL error. </param>
         public static void ThrowOnError(ComputeErrorCode errorCode)
         {
             switch (errorCode)
