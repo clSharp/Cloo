@@ -191,9 +191,9 @@ namespace Cloo
         /// <param name="index"> The argument index. </param>
         /// <param name="dataSize"> The size of the argument data in bytes. </param>
         /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
-        public void SetLocalArgument(int index, long size)
+        public void SetLocalArgument(int index, long dataSize)
         {
-            SetArgument(index, new IntPtr(size), IntPtr.Zero);
+            SetArgument(index, new IntPtr(dataSize), IntPtr.Zero);
         }
 
         /// <summary>

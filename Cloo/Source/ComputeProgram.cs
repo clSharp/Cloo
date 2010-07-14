@@ -178,7 +178,7 @@ namespace Cloo
         /// </summary>
         /// <param name="context"> A <c>ComputeContext</c>. </param>
         /// <param name="binaries"> A list of binaries that will match the <paramref name="devices"/>. </param>
-        /// <param name="devices"> A subset of the <c>ComputeContext.Devices</c>. If left null, OpenCL will associate every binary from <c>ComputeProgram.Binaries</c> with a corresponding <c>ComputeDevice</c> in <c>ComputeContext.Devices</c>. </param>
+        /// <param name="devices"> A subset of the <c>ComputeContext.Devices</c>. If <paramref name="devices"/> is <c>null</c>, OpenCL will associate every binary from <c>ComputeProgram.Binaries</c> with a corresponding <c>ComputeDevice</c> from <c>ComputeContext.Devices</c>. </param>
         public ComputeProgram(ComputeContext context, IList<byte[]> binaries, IList<ComputeDevice> devices)
         {
             unsafe
