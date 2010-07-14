@@ -412,10 +412,11 @@ namespace Cloo
     }
 
     /// <summary>
-    /// 
+    /// A callback function that can be registered by the application to report the <c>ComputeProgram</c> build status.
     /// </summary>
-    /// <param name="programHandle"></param>
-    /// <param name="userDataPtr"></param>
+    /// <param name="programHandle"> The handle of the <c>ComputeProgram</c> being built. </param>
+    /// <param name="userDataPtr"> The pointer to the optional user data specified in <paramref name="userDataPtr"/> argument of <c>ComputeProgram.Build</c>. </param>
+    /// <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void ComputeProgramBuildNotifier(IntPtr programHandle, IntPtr userDataPtr);
 }
