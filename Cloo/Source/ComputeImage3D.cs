@@ -53,8 +53,8 @@ namespace Cloo
         /// <param name="width"> The width of the <c>ComputeImage3D</c> in pixels. </param>
         /// <param name="height"> The height of the <c>ComputeImage3D</c> in pixels. </param>
         /// <param name="depth"> The depth of the <c>ComputeImage3D</c> in pixels. </param>
-        /// <param name="rowPitch"> The size in bytes of each row of elements of the <c>ComputeImage3D</c>. If left zero, OpenCL will compute the proper value based on <c>ComputeImage.Width</c> and <c>ComputeImage.ElementSize</c>. </param>
-        /// <param name="slicePitch"> The size in bytes of each 2D slice in the <c>ComputeImage3D</c>. If left zero, OpenCL will compute the proper value based on <c>ComputeImage.RowPitch</c> and <c>ComputeImage.Height</c>. </param>
+        /// <param name="rowPitch"> The size in bytes of each row of elements of the <c>ComputeImage3D</c>. If <paramref name="rowPitch"/> is zero, OpenCL will compute the proper value based on <c>ComputeImage.Width</c> and <c>ComputeImage.ElementSize</c>. </param>
+        /// <param name="slicePitch"> The size in bytes of each 2D slice in the <c>ComputeImage3D</c>. If <paramref name="slicePitch"/> is zero, OpenCL will compute the proper value based on <c>ComputeImage.RowPitch</c> and <c>ComputeImage.Height</c>. </param>
         /// <param name="data"> The data to initialize the <c>ComputeImage3D</c>. Can be <c>IntPtr.Zero</c>. </param>
         public ComputeImage3D(ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int depth, long rowPitch, long slicePitch, IntPtr data)
             : base(context, flags)

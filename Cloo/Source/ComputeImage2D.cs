@@ -51,7 +51,7 @@ namespace Cloo
         /// <param name="format"> A structure that describes the format properties of the <c>ComputeImage2D</c>. </param>
         /// <param name="width"> The width of the <c>ComputeImage2D</c> in pixels. </param>
         /// <param name="height"> The height of the <c>ComputeImage2D</c> in pixels. </param>
-        /// <param name="rowPitch"> The size in bytes of each row of elements of the <c>ComputeImage2D</c>. If left zero, OpenCL will compute the proper value based on <c>ComputeImage.Width</c> and <c>ComputeImage.ElementSize</c>. </param>
+        /// <param name="rowPitch"> The size in bytes of each row of elements of the <c>ComputeImage2D</c>. If <paramref name="rowPitch"/> is zero, OpenCL will compute the proper value based on <c>ComputeImage.Width</c> and <c>ComputeImage.ElementSize</c>. </param>
         /// <param name="data"> The data to initialize the <c>ComputeImage2D</c>. Can be <c>IntPtr.Zero</c>. </param>
         public ComputeImage2D(ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, long rowPitch, IntPtr data)
             : base(context, flags)

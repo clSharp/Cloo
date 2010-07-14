@@ -242,12 +242,12 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Builds (compiles and links) a program executable from the program source or binary for all the devices or some specific devices in the OpenCL context associated with program.
+        /// Builds (compiles and links) a program executable from the program source or binary for all or some of the <c>ComputeProgram.Devices</c>.
         /// </summary>
-        /// <param name="devices"> A list of devices associated with program. If the list is null, the program executable is built for all devices associated with program for which a source or a binary has been loaded. </param>
+        /// <param name="devices"> A subset or all of the <c>ComputeProgram.Devices</c>. If <paramref name="devices"/> is <c>null</c>, the executable is built for every item of the <c>ComputeProgram.Devices</c> for which a source or a binary has been loaded. </param>
         /// <param name="options"> A set of options for the OpenCL compiler. </param>
-        /// <param name="notify"> A notification routine. The notification routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If notify is not null, ComputeProgram.Build does not need to wait for the build to complete and can return immediately. If notify is null, ComputeProgram.Build does not return until the build has completed. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </param>
-        /// <param name="notifyDataPtr">Passed as an argument when notify is called. notifyDataPtr can be IntPtr.Zero. </param>
+        /// <param name="notify"> A notification routine. The notification routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If <paramref name="notify"/> is not null, <c>ComputeProgram.Build</c> does not need to wait for the build to complete and can return immediately. If <paramref name="notify"/> is null, <c>ComputeProgram.Build</c> does not return until the build has completed. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </param>
+        /// <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public void Build(ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr)
         {
             if (built) return; // prevent building multiple times which causes memory leaks in the drivers
@@ -275,8 +275,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates kernel objects for all kernel functions in program. Kernel objects are not created for any __kernel functions in program that do not have the same function definition across all devices for which a program executable has been successfully built.
+        /// Creates a <c>ComputeKernel</c> for every <c>kernel</c> function in <c>ComputeProgram</c>.
         /// </summary>
+        /// <remarks> <c>ComputeKernel</c>s are not created for any <c>kernel</c> functions in <c>ComputeProgram</c> that do not have the same function definition across all <c>ComputeProgram.Devices</c> for which a program executable has been successfully built. </remarks>
+        /// <returns> The collection of created <c>ComputeKernel</c>s. </returns>
         public ICollection<ComputeKernel> CreateAllKernels()
         {
             unsafe
@@ -306,16 +308,19 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a kernel object for the kernel function specified by the function name.
+        /// Creates a <c>ComputeKernel</c> for a kernel function of a specified name.
         /// </summary>
+        /// <returns> The created <c>ComputeKernel</c>. </returns>
         public ComputeKernel CreateKernel(string functionName)
         {
             return new ComputeKernel(functionName, this);
         }
 
         /// <summary>
-        /// Gets the build log of program for the specified device.
+        /// Gets the build log of the <c>ComputeProgram</c> for a specified <c>ComputeDevice</c>.
         /// </summary>
+        /// <param name="device"> The <c>ComputeDevice</c> building the <c>ComputeProgram</c>. Must be one of <c>ComputeProgram.Devices</c>. </param>
+        /// <returns> The build log of the <c>ComputeProgram</c> for <paramref name="device"/>. </returns>
         public string GetBuildLog(ComputeDevice device)
         {
             unsafe
@@ -328,8 +333,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the build status of program for the specified device.
+        /// Gets the <c>ComputeProgramBuildStatus</c> of the <c>ComputeProgram</c> for a specified <c>ComputeDevice</c>.
         /// </summary>
+        /// <param name="device"> The <c>ComputeDevice</c> building the <c>ComputeProgram</c>. Must be one of <c>ComputeProgram.Devices</c>. </param>
+        /// <returns> The <c>ComputeProgramBuildStatus</c> of the <c>ComputeProgram</c> for <paramref name="device"/>. </returns>
         public ComputeProgramBuildStatus GetBuildStatus(ComputeDevice device)
         {
             unsafe
@@ -415,8 +422,8 @@ namespace Cloo
     /// A callback function that can be registered by the application to report the <c>ComputeProgram</c> build status.
     /// </summary>
     /// <param name="programHandle"> The handle of the <c>ComputeProgram</c> being built. </param>
-    /// <param name="userDataPtr"> The pointer to the optional user data specified in <paramref name="userDataPtr"/> argument of <c>ComputeProgram.Build</c>. </param>
+    /// <param name="notifyDataPtr"> The pointer to the optional user data specified in <paramref name="notifyDataPtr"/> argument of <c>ComputeProgram.Build</c>. </param>
     /// <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void ComputeProgramBuildNotifier(IntPtr programHandle, IntPtr userDataPtr);
+    public delegate void ComputeProgramBuildNotifier(IntPtr programHandle, IntPtr notifyDataPtr);
 }
