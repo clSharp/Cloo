@@ -51,7 +51,6 @@ namespace Cloo
         private readonly ReadOnlyCollection<string> source;
         private ReadOnlyCollection<byte[]> binaries;
         private string buildOptions;
-        private bool built = false;
 
         #endregion
 
@@ -124,6 +123,7 @@ namespace Cloo
         /// <param name="context"> A <c>ComputeContext</c>. </param>
         /// <param name="source"> The source code for the <c>ComputeProgram</c>. </param>
         /// <remarks> The created <c>ComputeProgram</c> is associated with the <c>ComputeContext.Devices</c>. </remarks>
+        /// <seealso cref="ComputeKernel"/>
         public ComputeProgram(ComputeContext context, string source)
         {
             unsafe
@@ -250,8 +250,6 @@ namespace Cloo
         /// <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public void Build(ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr)
         {
-            if (built) return; // prevent building multiple times which causes memory leaks in the drivers
-
             unsafe
             {
                 IntPtr[] deviceHandles = Tools.ExtractHandles(devices);
@@ -270,7 +268,6 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
                 binaries = GetBinaries();
-                built = true;
             }
         }
 
