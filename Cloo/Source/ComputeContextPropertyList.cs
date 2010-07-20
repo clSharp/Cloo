@@ -41,7 +41,7 @@ namespace Cloo
     /// <remarks> A <c>ComputeContextPropertyList</c> is used to specify the properties of a <c>ComputeContext</c>. </remarks>
     /// <seealso cref="ComputeContext"/>
     /// <seealso cref="ComputeContextProperty"/>
-    public class ComputeContextPropertyList: IEnumerable<ComputeContextProperty>
+    public class ComputeContextPropertyList: ICollection<ComputeContextProperty>
     {
         #region Fields
 
@@ -102,6 +102,45 @@ namespace Cloo
             }
             result[result.Length - 1] = IntPtr.Zero;
             return result;
+        }
+
+        #endregion
+
+        #region ICollection<ComputeContextProperty> Members
+
+        public void Add(ComputeContextProperty item)
+        {
+            properties.Add(item);
+        }
+
+        public void Clear()
+        {
+            properties.Clear();
+        }
+
+        public bool Contains(ComputeContextProperty item)
+        {
+            return properties.Contains(item);
+        }
+
+        public void CopyTo(ComputeContextProperty[] array, int arrayIndex)
+        {
+            properties.CopyTo(array, arrayIndex);
+        }
+
+        public int Count
+        {
+            get { return properties.Count; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        public bool Remove(ComputeContextProperty item)
+        {
+            return properties.Remove(item);
         }
 
         #endregion
