@@ -309,7 +309,7 @@
         </member>
         <member name="P:Cloo.ComputeContext.Properties">
             <summary>
-            Gets the <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>.
+            Gets a collection of <c>ComputeContextProperty</c>s of the <c>ComputeContext</c>.
             </summary>
         </member>
         <member name="T:Cloo.ComputeContextNotifier">
@@ -1533,7 +1533,7 @@
         </member>
         <member name="T:Cloo.ComputeException">
             <summary>
-            Represents an error that has occurred while executing an OpenCL API call.
+            Represents an error state that occurred while executing an OpenCL API call.
             </summary>
             <seealso cref="P:Cloo.ComputeException.ComputeErrorCode"/>
         </member>
@@ -1553,7 +1553,7 @@
             <summary>
             Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
             </summary>
-            <param name="errorCode"> The value to be checked for an OpenCL error. </param>
+            <param name="errorCode"> The OpenCL error code. </param>
         </member>
         <member name="P:Cloo.ComputeException.ComputeErrorCode">
             <summary>

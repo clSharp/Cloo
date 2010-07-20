@@ -84,7 +84,7 @@ namespace Cloo
         public ComputePlatform Platform { get { return platform; } }
 
         /// <summary>
-        /// Gets the <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>.
+        /// Gets a collection of <c>ComputeContextProperty</c>s of the <c>ComputeContext</c>.
         /// </summary>
         public ComputeContextPropertyList Properties { get { return properties; } }
 

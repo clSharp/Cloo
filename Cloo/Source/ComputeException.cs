@@ -32,9 +32,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Diagnostics;
+    using System.Reflection;
 
     /// <summary>
-    /// Represents an error that has occurred while executing an OpenCL API call.
+    /// Represents an error state that occurred while executing an OpenCL API call.
     /// </summary>
     /// <seealso cref="ComputeErrorCode"/>
     public class ComputeException : ApplicationException
@@ -82,7 +84,7 @@ namespace Cloo
         /// <summary>
         /// Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
         /// </summary>
-        /// <param name="errorCode"> The value to be checked for an OpenCL error. </param>
+        /// <param name="errorCode"> The OpenCL error code. </param>
         public static void ThrowOnError(ComputeErrorCode errorCode)
         {
             switch (errorCode)
@@ -100,7 +102,7 @@ namespace Cloo
                     throw new CompilerNotAvailableComputeException();
 
                 case ComputeErrorCode.MemoryObjectAllocationFailure:
-                    throw new MemoryObjectAllocationComputeException();
+                    throw new MemoryObjectAllocationFailureComputeException();
 
                 case ComputeErrorCode.OutOfResources:
                     throw new OutOfResourcesComputeException();
@@ -244,8 +246,8 @@ namespace Cloo
     public class CompilerNotAvailableComputeException : ComputeException
     { public CompilerNotAvailableComputeException() : base(ComputeErrorCode.CompilerNotAvailable) { } }
 
-    public class MemoryObjectAllocationComputeException : ComputeException
-    { public MemoryObjectAllocationComputeException() : base(ComputeErrorCode.MemoryObjectAllocationFailure) { } }
+    public class MemoryObjectAllocationFailureComputeException : ComputeException
+    { public MemoryObjectAllocationFailureComputeException() : base(ComputeErrorCode.MemoryObjectAllocationFailure) { } }
 
     public class OutOfResourcesComputeException : ComputeException
     { public OutOfResourcesComputeException() : base(ComputeErrorCode.OutOfResources) { } }
