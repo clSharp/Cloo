@@ -58,34 +58,19 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeContext</c> of the <c>ComputeCommandQueue</c>.
         /// </summary>
-        public ComputeContext Context
-        {
-            get
-            {
-                return context;
-            }
-        }
+        public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets the <c>ComputeDevice</c> of the <c>ComputeCommandQueue</c>.
         /// </summary>
-        public ComputeDevice Device
-        {
-            get
-            {
-                return device;
-            }
-        }
+        public ComputeDevice Device { get { return device; } }
 
         /// <summary>
         /// Gets or sets the out-of-order execution mode of the commands in the <c>ComputeCommandQueue</c>.
         /// </summary>
         public bool OutOfOrderExecution
         {
-            get
-            {
-                return outOfOrderExec;
-            }
+            get { return outOfOrderExec; }
             set
             {
                 SetProperty(ComputeCommandQueueFlags.OutOfOrderExecution, value);
@@ -98,10 +83,7 @@ namespace Cloo
         /// </summary>
         public bool Profiling
         {
-            get
-            {
-                return profiling;
-            }
+            get { return profiling; }
             set
             {
                 SetProperty(ComputeCommandQueueFlags.Profiling, value);

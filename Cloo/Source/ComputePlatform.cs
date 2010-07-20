@@ -62,35 +62,17 @@ namespace Cloo
         /// <summary>
         /// Gets a read-only collection of <c>ComputeDevice</c>s available on the <c>ComputePlatform</c>.
         /// </summary>
-        public ReadOnlyCollection<ComputeDevice> Devices
-        {
-            get
-            {
-                return devices;
-            }
-        }
+        public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
 
         /// <summary>
         /// Gets a read-only collection of extension names supported by the <c>ComputePlatform</c>.
         /// </summary>
-        public ReadOnlyCollection<string> Extensions
-        {
-            get
-            {
-                return extensions;
-            }
-        }
+        public ReadOnlyCollection<string> Extensions { get { return extensions; } }
 
         /// <summary>
         /// Gets the <c>ComputePlatform</c> name.
         /// </summary>
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public string Name { get { return name; } }
 
         /// <summary>
         /// Gets a read-only collection of available <c>ComputePlatform</c>s.
@@ -109,35 +91,17 @@ namespace Cloo
         /// <summary>
         /// Gets the name of the profile supported by the <c>ComputePlatform</c>.
         /// </summary>
-        public string Profile
-        {
-            get
-            {
-                return profile;
-            }
-        }
+        public string Profile { get { return profile; } }
 
         /// <summary>
         /// Gets the <c>ComputePlatform</c> vendor.
         /// </summary>
-        public string Vendor
-        {
-            get
-            {
-                return vendor;
-            }
-        }
+        public string Vendor { get { return vendor; } }
 
         /// <summary>
         /// Gets the OpenCL version supported by the <c>ComputePlatform</c>.
         /// </summary>
-        public string Version
-        {
-            get
-            {
-                return version;
-            }
-        }
+        public string Version { get { return version; } }
 
         #endregion
 

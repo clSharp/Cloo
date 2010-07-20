@@ -55,46 +55,22 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeContext</c> of the <c>ComputeSampler</c>.
         /// </summary>
-        public ComputeContext Context
-        {
-            get
-            {
-                return context;
-            }
-        }
+        public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets the <c>ComputeImageAddressing</c> mode of the <c>ComputeSampler</c>.
         /// </summary>
-        public ComputeImageAddressing Addressing
-        {
-            get
-            {
-                return addressing;
-            }
-        }
+        public ComputeImageAddressing Addressing { get { return addressing; } }
 
         /// <summary>
         /// Gets the <c>ComputeImageFiltering</c> mode of the <c>ComputeSampler</c>.
         /// </summary>
-        public ComputeImageFiltering Filtering
-        {
-            get
-            {
-                return filtering;
-            }
-        }
+        public ComputeImageFiltering Filtering { get { return filtering; } }
 
         /// <summary>
         /// Gets the state of usage of normalized x, y and z coordinates when accessing a <c>ComputeImage</c> in a <c>ComputeKernel</c> through the <c>ComputeSampler</c>.
         /// </summary>
-        public bool NormalizedCoords
-        {
-            get
-            {
-                return normalizedCoords;
-            }
-        }
+        public bool NormalizedCoords { get { return normalizedCoords; } }
 
         #endregion
 

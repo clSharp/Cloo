@@ -279,7 +279,7 @@
             </summary>
             <param name="devices"> A collection of <c>ComputeDevice</c>s to associate with the <c>ComputeContext</c>. </param>
             <param name="properties"> A <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>. </param>
-            <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is null, no callback function is registered. </param>
+            <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
             <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         </member>
         <member name="M:Cloo.ComputeContext.#ctor(Cloo.ComputeDeviceTypes,Cloo.ComputeContextPropertyList,Cloo.ComputeContextNotifier,System.IntPtr)">
@@ -288,7 +288,7 @@
             </summary>
             <param name="deviceType"> A bit-field that identifies the type of <c>ComputeDevice</c> to associate with the <c>ComputeContext</c>. </param>
             <param name="properties"> A <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>. </param>
-            <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is null, no callback function is registered. </param>
+            <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
             <param name="userDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         </member>
         <member name="M:Cloo.ComputeContext.ToString">
@@ -355,7 +355,7 @@
             <summary>
             Represents an OpenCL kernel.
             </summary>
-            <remarks> A kernel object encapsulates a specific __kernel function declared in a program and the argument values to be used when executing this __kernel function. </remarks>
+            <remarks> A kernel object encapsulates a specific kernel function declared in a program and the argument values to be used when executing this kernel function. </remarks>
             <seealso cref="T:Cloo.ComputeCommandQueue"/>
             <seealso cref="T:Cloo.ComputeProgram"/>
         </member>
@@ -368,10 +368,10 @@
         </member>
         <member name="M:Cloo.ComputeKernel.GetCompileWorkGroupSize(Cloo.ComputeDevice)">
             <summary>
-            Gets the compile work-group size specified by the __attribute__((reqd_work_group_size(X, Y, Z))) qualifier.
+            Gets the compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier.
             </summary>
             <param name="device"> One of the <c>ComputeKernel.Program.Device</c>s. </param>
-            <returns> The compile work-group size specified by the __attribute__((reqd_work_group_size(X, Y, Z))) qualifier. If such qualifier is not specified, (0, 0, 0) is returned. </returns>
+            <returns> The compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier. If such qualifier is not specified, (0, 0, 0) is returned. </returns>
         </member>
         <member name="M:Cloo.ComputeKernel.GetWorkGroupSize(Cloo.ComputeDevice)">
             <summary>
@@ -853,7 +853,7 @@
             <summary>
             Represents an OpenCL program.
             </summary>
-            <remarks> An OpenCL program consists of a set of kernels. Programs may also contain auxiliary functions called by the __kernel functions and constant data. </remarks>
+            <remarks> An OpenCL program consists of a set of kernels. Programs may also contain auxiliary functions called by the kernel functions and constant data. </remarks>
             <seealso cref="T:Cloo.ComputeKernel"/>
         </member>
         <member name="M:Cloo.ComputeProgram.#ctor(Cloo.ComputeContext,System.String)">
@@ -887,7 +887,7 @@
             </summary>
             <param name="devices"> A subset or all of the <c>ComputeProgram.Devices</c>. If <paramref name="devices"/> is <c>null</c>, the executable is built for every item of the <c>ComputeProgram.Devices</c> for which a source or a binary has been loaded. </param>
             <param name="options"> A set of options for the OpenCL compiler. </param>
-            <param name="notify"> A notification routine. The notification routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If <paramref name="notify"/> is not null, <c>ComputeProgram.Build</c> does not need to wait for the build to complete and can return immediately. If <paramref name="notify"/> is null, <c>ComputeProgram.Build</c> does not return until the build has completed. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </param>
+            <param name="notify"> A notification routine. The notification routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If <paramref name="notify"/> is not <c>null</c>, <c>ComputeProgram.Build</c> does not need to wait for the build to complete and can return immediately. If <paramref name="notify"/> is <c>null</c>, <c>ComputeProgram.Build</c> does not return until the build has completed. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </param>
             <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         </member>
         <member name="M:Cloo.ComputeProgram.CreateAllKernels">
@@ -942,7 +942,7 @@
         <!-- Badly formed XML comment ignored for member "P:Cloo.ComputeProgram.Devices" -->
         <member name="P:Cloo.ComputeProgram.Source">
             <summary>
-            Gets a read-only collection of program source code strings specified when creating the <c>ComputeProgram</c> or null if <c>ComputeProgram</c> was created using program binaries.
+            Gets a read-only collection of program source code strings specified when creating the <c>ComputeProgram</c> or <c>null</c> if <c>ComputeProgram</c> was created using program binaries.
             </summary>
         </member>
         <member name="T:Cloo.ComputeProgramBuildNotifier">
@@ -1003,7 +1003,7 @@
             <summary>
             Gets the availability state of the <c>ComputeDevice</c>.
             </summary>
-            <remarks> Is true if the <c>ComputeDevice</c> is available and false if the <c>ComputeDevice</c> is not available. </remarks>
+            <remarks> Is <c>true</c> if the <c>ComputeDevice</c> is available and <c>false</c> if the <c>ComputeDevice</c> is not available. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.CommandQueueFlags">
             <summary>
@@ -1014,7 +1014,7 @@
             <summary>
             Gets the availability state of the OpenCL compiler of the <c>ComputeDevice.Platform</c>.
             </summary>
-            <remarks> Is false if the implementation does not have a compiler available to compile the program source. Is true if the compiler is available. This can be false for the embededed platform profile only. </remarks>
+            <remarks> Is <c>false</c> if the implementation does not have a compiler available to compile the program source. Is <c>true</c> if the compiler is available. This can be <c>false</c> for the embededed platform profile only. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.DriverVersion">
             <summary>
@@ -1026,13 +1026,13 @@
             <summary>
             Gets the endianness of the <c>ComputeDevice</c>.
             </summary>
-            <remarks> Is true if the <c>ComputeDevice</c> is a little endian device and false otherwise. </remarks>
+            <remarks> Is <c>true</c> if the <c>ComputeDevice</c> is a little endian device and <c>false</c> otherwise. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.ErrorCorrectionSupport">
             <summary>
             Gets the error correction support state of the <c>ComputeDevice</c>.
             </summary>
-            <remarks> Is true if the <c>ComputeDevice</c> implements error correction for the memories, caches, registers etc. Is false if the <c>ComputeDevice</c> does not implement error correction. This can be a requirement for certain clients of OpenCL. </remarks>
+            <remarks> Is <c>true</c> if the <c>ComputeDevice</c> implements error correction for the memories, caches, registers etc. Is <c>false</c> if the <c>ComputeDevice</c> does not implement error correction. This can be a requirement for certain clients of OpenCL. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.ExecutionCapabilities">
             <summary>
@@ -1068,37 +1068,37 @@
             <summary>
             Maximum height of 2D images that the <c>ComputeDevice</c> supports in pixels.
             </summary>
-            <remarks> The minimum value is 8192 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
+            <remarks> The minimum value is 8192 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Image2DMaxWidth">
             <summary>
             Maximum width of 2D image that the <c>ComputeDevice</c> supports in pixels.
             </summary>
-            <remarks> The minimum value is 8192 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
+            <remarks> The minimum value is 8192 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxDepth">
             <summary>
             Maximum depth of 3D image the <c>ComputeDevice</c> supports in pixels.
             </summary>
-            <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
+            <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxHeight">
             <summary>
             Max height of 3D image the <c>ComputeDevice</c> supports in pixels.
             </summary>
-            <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
+            <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxWidth">
             <summary>
             Max width of 3D image the <c>ComputeDevice</c> supports in pixels.
             </summary>
-            <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
+            <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.ImageSupport">
             <summary>
             Gets the state of image support of the <c>ComputeDevice</c>.
             </summary>
-            <remarks> Is true if <c>ComputeImage</c>s are supported by the <c>ComputeDevice</c> and false otherwise. </remarks>
+            <remarks> Is <c>true</c> if <c>ComputeImage</c>s are supported by the <c>ComputeDevice</c> and <c>false</c> otherwise. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.LocalMemorySize">
             <summary>
@@ -1124,7 +1124,7 @@
         </member>
         <member name="P:Cloo.ComputeDevice.MaxConstantArguments">
             <summary>
-            Gets the maximum number of arguments declared with the __constant qualifier in a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
+            Gets the maximum number of arguments declared with the <c>__constant</c> or <c>constant</c> qualifier in a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
             </summary>
             <remarks> The minimum value is 8. </remarks>
         </member>
@@ -1150,13 +1150,13 @@
             <summary>
             Gets the maximum number of simultaneous <c>ComputeImage</c>s that can be read by a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
             </summary>
-            <remarks> The minimum value is 128 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
+            <remarks> The minimum value is 128 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxSamplers">
             <summary>
             Gets the maximum number of <c>ComputeSampler</c>s that can be used in a <c>ComputeKernel</c>.
             </summary>
-            <remarks> The minimum value is 16 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
+            <remarks> The minimum value is 16 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxWorkGroupSize">
             <summary>
@@ -1179,7 +1179,7 @@
             <summary>
             Gets the maximum number of simultaneous <c>ComputeImage</c>s that can be written to by a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
             </summary>
-            <remarks> The minimum value is 8 if <c>ComputeDevice.ImageSupport</c> is true. </remarks>
+            <remarks> The minimum value is 8 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.MemoryBaseAddressAlignment">
             <summary>

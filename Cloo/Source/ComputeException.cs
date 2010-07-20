@@ -50,10 +50,7 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeErrorCode</c> of the <c>ComputeException</c>.
         /// </summary>
-        public ComputeErrorCode ComputeErrorCode
-        {
-            get { return code; }
-        }
+        public ComputeErrorCode ComputeErrorCode { get { return code; } }
 
         #endregion
 

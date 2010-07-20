@@ -39,7 +39,7 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL kernel.
     /// </summary>
-    /// <remarks> A kernel object encapsulates a specific __kernel function declared in a program and the argument values to be used when executing this __kernel function. </remarks>
+    /// <remarks> A kernel object encapsulates a specific kernel function declared in a program and the argument values to be used when executing this kernel function. </remarks>
     /// <seealso cref="ComputeCommandQueue"/>
     /// <seealso cref="ComputeProgram"/>
     public class ComputeKernel : ComputeResource
@@ -58,35 +58,17 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeContext</c> associated with the <c>ComputeKernel</c>.
         /// </summary>
-        public ComputeContext Context
-        {
-            get
-            {
-                return context;
-            }
-        }
+        public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets the function name of the <c>ComputeKernel</c>.
         /// </summary>
-        public string FunctionName
-        {
-            get
-            {
-                return functionName;
-            }
-        }
+        public string FunctionName { get { return functionName; } }
 
         /// <summary>
         /// Gets the <c>ComputeProgram</c> that the <c>ComputeKernel</c> belongs to.
         /// </summary>
-        public ComputeProgram Program
-        {
-            get
-            {
-                return program;
-            }
-        }
+        public ComputeProgram Program { get { return program; } }
 
         #endregion
 
@@ -140,10 +122,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the compile work-group size specified by the __attribute__((reqd_work_group_size(X, Y, Z))) qualifier.
+        /// Gets the compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier.
         /// </summary>
         /// <param name="device"> One of the <c>ComputeKernel.Program.Device</c>s. </param>
-        /// <returns> The compile work-group size specified by the __attribute__((reqd_work_group_size(X, Y, Z))) qualifier. If such qualifier is not specified, (0, 0, 0) is returned. </returns>
+        /// <returns> The compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier. If such qualifier is not specified, (0, 0, 0) is returned. </returns>
         public long[] GetCompileWorkGroupSize(ComputeDevice device)
         {
             unsafe

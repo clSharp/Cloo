@@ -51,18 +51,12 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeContextPropertyName</c> of the <c>ComputeContextProperty</c>.
         /// </summary>
-        public ComputeContextPropertyName Name
-        {
-            get { return name; }
-        }
+        public ComputeContextPropertyName Name { get { return name; } }
 
         /// <summary>
         /// Gets the value of the <c>ComputeContextProperty</c>.
         /// </summary>
-        public IntPtr Value
-        {
-            get { return value; }
-        }
+        public IntPtr Value { get { return value; } }
 
         #endregion
 

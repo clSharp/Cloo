@@ -56,13 +56,7 @@ namespace Cloo
         /// <summary>
         /// Gets the number of elements in the <c>ComputeBuffer</c>.
         /// </summary>
-        public long Count
-        {
-            get
-            {
-                return count;
-            }
-        }
+        public long Count { get { return count; } }
 
         #endregion
 

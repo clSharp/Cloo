@@ -40,7 +40,7 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL program.
     /// </summary>
-    /// <remarks> An OpenCL program consists of a set of kernels. Programs may also contain auxiliary functions called by the __kernel functions and constant data. </remarks>
+    /// <remarks> An OpenCL program consists of a set of kernels. Programs may also contain auxiliary functions called by the kernel functions and constant data. </remarks>
     /// <seealso cref="ComputeKernel"/>
     public class ComputeProgram : ComputeResource
     {
@@ -60,58 +60,28 @@ namespace Cloo
         /// Gets a read-only collection of program binaries associated with the <c>ComputeProgram.Devices</c>.
         /// </summary>
         /// <remarks> The bits returned can be an implementation-specific intermediate representation (a.k.a. IR) or device specific executable bits or both. The decision on which information is returned in the binary is up to the OpenCL implementation. </remarks>
-        public ReadOnlyCollection<byte[]> Binaries
-        {
-            get
-            {
-                return binaries;
-            }
-        }
+        public ReadOnlyCollection<byte[]> Binaries { get { return binaries; } }
 
         /// <summary>
         /// Gets the <c>ComputeProgram</c> build options as specified in <paramref name="options"/> argument of <c>ComputeProgram.Build</c>.
         /// </summary>
-        public string BuildOptions
-        {
-            get
-            {
-                return buildOptions;
-            }
-        }
+        public string BuildOptions { get { return buildOptions; } }
 
         /// <summary>
         /// Gets the <c>ComputeContext</c> of the <c>ComputeProgram</c>.
         /// </summary>
-        public ComputeContext Context
-        {
-            get
-            {
-                return context;
-            }
-        }
+        public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets a read-only collection of <c>ComputeDevice</c>s associated with the <c>ComputeProgram</c>.
         /// </summary>
         /// <remarks> This collection contains <c>ComputeDevice</c>s from <c>ComputeProgram.Context.Devices</c>.
-        public ReadOnlyCollection<ComputeDevice> Devices
-        {
-            get
-            {
-                return devices;
-            }
-        }
+        public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
 
         /// <summary>
-        /// Gets a read-only collection of program source code strings specified when creating the <c>ComputeProgram</c> or null if <c>ComputeProgram</c> was created using program binaries.
+        /// Gets a read-only collection of program source code strings specified when creating the <c>ComputeProgram</c> or <c>null</c> if <c>ComputeProgram</c> was created using program binaries.
         /// </summary>
-        public ReadOnlyCollection<string> Source
-        {
-            get
-            {
-                return source;
-            }
-        }
+        public ReadOnlyCollection<string> Source { get { return source; } }
 
         #endregion
 
@@ -246,7 +216,7 @@ namespace Cloo
         /// </summary>
         /// <param name="devices"> A subset or all of the <c>ComputeProgram.Devices</c>. If <paramref name="devices"/> is <c>null</c>, the executable is built for every item of the <c>ComputeProgram.Devices</c> for which a source or a binary has been loaded. </param>
         /// <param name="options"> A set of options for the OpenCL compiler. </param>
-        /// <param name="notify"> A notification routine. The notification routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If <paramref name="notify"/> is not null, <c>ComputeProgram.Build</c> does not need to wait for the build to complete and can return immediately. If <paramref name="notify"/> is null, <c>ComputeProgram.Build</c> does not return until the build has completed. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </param>
+        /// <param name="notify"> A notification routine. The notification routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If <paramref name="notify"/> is not <c>null</c>, <c>ComputeProgram.Build</c> does not need to wait for the build to complete and can return immediately. If <paramref name="notify"/> is <c>null</c>, <c>ComputeProgram.Build</c> does not return until the build has completed. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </param>
         /// <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public void Build(ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr)
         {

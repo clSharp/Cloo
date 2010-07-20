@@ -54,14 +54,8 @@ namespace Cloo
         /// </summary>
         public IntPtr Handle
         {
-            get
-            {
-                return handle;
-            }
-            protected set
-            {
-                handle = value;
-            }
+            get { return handle; }
+            protected set { handle = value; }
         }
 
         #endregion
