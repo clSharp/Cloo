@@ -1,3 +1,31 @@
+[0.7.3] -----------------------------------------------------------------------
+Breaking changes:
+Renamed ComputeDevice.ComputeCommmandQueueFlags to CommandQueueFlags.
+Renamed MemoryObjectAllocationComputeException to MemoryObjectAllocationFailureComputeException.
+
+New functionality:
+Added OpenCL 1.1 raw bindings and enum tokens.
+Added OpenCL error code to ComputeException.Message.
+Added ComputePlatform.QueryDevices().
+ComputeContextPropertyList now implements ICollection<ComputeContextProperty>.
+Added ComputeKernel.SetLocalArgument().
+Added ComputeSampler.ToString().
+Added check to prevent modifying of read-only event collections of events passed as arguments to ComputeCommandQueue methods.
+Added extensions cl_khr_migrate_memobject and cl_khr_icd.
+
+Bugfixes:
+CL10.CreateImage3D() calls clCreateImage2D().
+Missing Cloo.xml documentation file.
+
+Internals:
+Reformatted Clootils code to match Visual Studio default formatting.
+ComputeProgram.Build() won't prevent from building the same program multiple times anymore.   
+
+Documentation:
+Revised documentation for most of the public bits of the library.
+Added doxygen generated documentation.
+
+
 [0.7.2] -----------------------------------------------------------------------
 Breaking changes:
 None.
