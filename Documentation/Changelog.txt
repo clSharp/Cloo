@@ -17,6 +17,9 @@ Bugfixes:
 CL10.CreateImage3D() calls clCreateImage2D().
 Missing Cloo.xml documentation file.
 
+Deprecated bits:
+Some of the ComputeCommandQueue methods are marked as deprecated and shouldn't be used any more. Starting with 0.8.0 they will be removed in order to avoid confusion with the new OpenCL 1.1 related CommandQueue functionality.  
+ 
 Internals:
 Reformatted Clootils code to match Visual Studio default formatting.
 ComputeProgram.Build() won't prevent from building the same program multiple times anymore.   
