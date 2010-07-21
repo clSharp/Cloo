@@ -77,16 +77,7 @@ namespace Cloo
         /// <summary>
         /// Gets a read-only collection of available <c>ComputePlatform</c>s.
         /// </summary>
-        public static ReadOnlyCollection<ComputePlatform> Platforms
-        {
-            get
-            {
-                if (platforms == null)
-                    Initialize();
-
-                return platforms;
-            }
-        }
+        public static ReadOnlyCollection<ComputePlatform> Platforms { get { return platforms; } }
 
         /// <summary>
         /// Gets the name of the profile supported by the <c>ComputePlatform</c>.
@@ -107,6 +98,30 @@ namespace Cloo
 
         #region Constructors
 
+        static ComputePlatform()
+        {
+            unsafe
+            {
+                IntPtr[] handles;
+                int handlesLength = 0;
+                ComputeErrorCode error = CL10.GetPlatformIDs(0, null, &handlesLength);
+                ComputeException.ThrowOnError(error);
+                handles = new IntPtr[handlesLength];
+
+                fixed (IntPtr* handlesPtr = handles)
+                {
+                    error = CL10.GetPlatformIDs(handlesLength, handlesPtr, null);
+                    ComputeException.ThrowOnError(error);
+                }
+
+                List<ComputePlatform> platformList = new List<ComputePlatform>(handlesLength);
+                foreach (IntPtr handle in handles)
+                    platformList.Add(new ComputePlatform(handle));
+
+                platforms = platformList.AsReadOnly();
+            }
+        }
+
         private ComputePlatform(IntPtr handle)
         {
             unsafe
@@ -120,7 +135,7 @@ namespace Cloo
                 profile = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Profile, CL10.GetPlatformInfo);
                 vendor = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Vendor, CL10.GetPlatformInfo);
                 version = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Version, CL10.GetPlatformInfo);
-                GetDevices();
+                QueryDevices();
             }
         }
 
@@ -132,6 +147,7 @@ namespace Cloo
         /// Gets a <c>ComputePlatform</c> of a specified handle.
         /// </summary>
         /// <param name="handle"> The handle of the queried <c>ComputePlatform</c>. </param>
+        /// <returns> The <c>ComputePlatform</c> of the matching handle or <c>null</c> if none matches. </returns>
         public static ComputePlatform GetByHandle(IntPtr handle)
         {
             foreach (ComputePlatform platform in Platforms)
@@ -145,6 +161,7 @@ namespace Cloo
         /// Gets the first matching <c>ComputePlatform</c> of a specified name.
         /// </summary>
         /// <param name="platformName"> The name of the queried <c>ComputePlatform</c>. </param>
+        /// <returns> The first <c>ComputePlatform</c> of the specified name or <c>null</c> if none matches. </returns>
         public static ComputePlatform GetByName(string platformName)
         {
             foreach (ComputePlatform platform in Platforms)
@@ -158,6 +175,7 @@ namespace Cloo
         /// Gets the first matching <c>ComputePlatform</c> of a specified vendor.
         /// </summary>
         /// <param name="platformVendor"> The vendor of the queried <c>ComputePlatform</c>. </param>
+        /// <returns> The first <c>ComputePlatform</c> of the specified vendor or <c>null</c> if none matches. </returns>
         public static ComputePlatform GetByVendor(string platformVendor)
         {
             foreach (ComputePlatform platform in Platforms)
@@ -170,8 +188,9 @@ namespace Cloo
         /// <summary>
         /// Gets a read-only collection of available <c>ComputeDevice</c>s on the <c>ComputePlatform</c>.
         /// </summary>
-        /// <returns> The read-only collection of available <c>ComputeDevice</c>s on the <c>ComputePlatform</c>. </returns>
-        public ReadOnlyCollection<ComputeDevice> GetDevices()
+        /// <returns> A read-only collection of the available <c>ComputeDevice</c>s on the <c>ComputePlatform</c>. </returns>
+        /// <remarks> This method resets the <c>ComputePlatform.Devices</c>. This is useful if one or more of them become unavailable (<c>ComputeDevice.Available</c> is <c>false</c>) after a <c>ComputeContext</c> and <c>ComputeCommandQueue</c>s that use the <c>ComputeDevice</c> have been created and commands have been queued to them. Further calls will trigger an <c>OutOfResourcesComputeException</c> until this method is executed. You will also need to recreate any <c>ComputeResource</c> that was created on the no longer available <c>ComputeDevice</c>. </remarks>
+        public ReadOnlyCollection<ComputeDevice> QueryDevices()
         {
             unsafe
             {
@@ -193,32 +212,6 @@ namespace Cloo
                 this.devices = new ReadOnlyCollection<ComputeDevice>(devices);
 
                 return this.devices;
-            }
-        }
-
-        private static void Initialize()
-        {
-            if (platforms != null) return;
-
-            unsafe
-            {
-                IntPtr[] handles;
-                int handlesLength = 0;
-                ComputeErrorCode error = CL10.GetPlatformIDs(0, null, &handlesLength);
-                ComputeException.ThrowOnError(error);
-                handles = new IntPtr[handlesLength];
-
-                fixed (IntPtr* handlesPtr = handles)
-                {
-                    error = CL10.GetPlatformIDs(handlesLength, handlesPtr, null);
-                    ComputeException.ThrowOnError(error);
-                }
-
-                List<ComputePlatform> platformList = new List<ComputePlatform>(handlesLength);
-                foreach (IntPtr handle in handles)
-                    platformList.Add(new ComputePlatform(handle));
-
-                platforms = platformList.AsReadOnly();
             }
         }
 

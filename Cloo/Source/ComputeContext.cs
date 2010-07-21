@@ -55,8 +55,6 @@ namespace Cloo
     /// ComputeContextProperty p3 = new ComputeContextProperty(ComputeContextPropertyName.CL_WGL_HDC_KHR, deviceContextHandle);
     /// ComputeContextPropertyList cpl = new ComputeContextPropertyList(new ComputeContextProperty[] { p1, p2, p3 });
     /// ComputeContext context = new ComputeContext(ComputeDeviceTypes.Gpu, cpl, null, IntPtr.Zero);
-    /// // creating a shared CL/GL ComputeBuffer
-    /// ComputeBuffer<T> clBuffer = ComputeBuffer.CreateFromGLBuffer<T>(context, flags, glBufferId);
     /// </code>
     /// </example>
     /// <seealso cref="ComputeDevice"/>

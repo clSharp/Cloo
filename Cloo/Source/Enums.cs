@@ -485,7 +485,8 @@ namespace Cloo
         ReadBufferRectangle = 0x1201,
         WriteBufferRectangle = 0x1202,
         CopyBufferRectangle = 0x1203,
-        User = 0x1204
+        User = 0x1204,
+        CL_COMMAND_MIGRATE_MEM_OBJECT_EXT = 0x4040
     }
 
     public enum ComputeCommandExecutionStatus : int
@@ -539,5 +540,91 @@ namespace Cloo
     {
         CL_CURRENT_DEVICE_FOR_GL_CONTEXT_KHR = 0x2006,
         CL_DEVICES_FOR_GL_CONTEXT_KHR = 0x2007
+    }
+
+    [Flags]
+    public enum cl_mem_migration_flags_ext
+    {
+        None = 0,
+        CL_MIGRATE_MEM_OBJECT_HOST_EXT = 0x1,
+    }
+
+    internal enum CLFunctionNames
+    {
+        Unknown,
+        GetPlatformIDs,
+        GetPlatformInfo,
+        GetDeviceIDs,
+        GetDeviceInfo,
+        CreateContext,
+        CreateContextFromType,
+        RetainContext,
+        ReleaseContext,
+        GetContextInfo,
+        CreateCommandQueue,
+        RetainCommandQueue,
+        ReleaseCommandQueue,
+        GetCommandQueueInfo,
+        SetCommandQueueProperty,
+        CreateBuffer,
+        CreateImage2D,
+        CreateImage3D,
+        RetainMemObject,
+        ReleaseMemObject,
+        GetSupportedImageFormats,
+        GetMemObjectInfo,
+        GetImageInfo,
+        CreateSampler,
+        RetainSampler,
+        ReleaseSampler,
+        GetSamplerInfo,
+        CreateProgramWithSource,
+        CreateProgramWithBinary,
+        RetainProgram,
+        ReleaseProgram,
+        BuildProgram,
+        UnloadCompiler,
+        GetProgramInfo,
+        GetProgramBuildInfo,
+        CreateKernel,
+        CreateKernelsInProgram,
+        RetainKernel,
+        ReleaseKernel,
+        SetKernelArg,
+        GetKernelInfo,
+        GetKernelWorkGroupInfo,
+        WaitForEvents,
+        GetEventInfo,
+        RetainEvent,
+        ReleaseEvent,
+        GetEventProfilingInfo,
+        Flush,
+        Finish,
+        EnqueueReadBuffer,
+        EnqueueWriteBuffer,
+        EnqueueCopyBuffer,
+        EnqueueReadImage,
+        EnqueueWriteImage,
+        EnqueueCopyImage,
+        EnqueueCopyImageToBuffer,
+        EnqueueCopyBufferToImage,
+        EnqueueMapBuffer,
+        EnqueueMapImage,
+        EnqueueUnmapMemObject,
+        EnqueueNDRangeKernel,
+        EnqueueTask,
+        EnqueueNativeKernel,
+        EnqueueMarker,
+        EnqueueWaitForEvents,
+        EnqueueBarrier,
+        GetExtensionFunctionAddress,
+        CreateFromGLBuffer,
+        CreateFromGLTexture2D,
+        CreateFromGLTexture3D,
+        CreateFromGLRenderbuffer,
+        GetGLObjectInfo,
+        GetGLTextureInfo,
+        EnqueueAcquireGLObjects,
+        EnqueueReleaseGLObjects,
     }
 }

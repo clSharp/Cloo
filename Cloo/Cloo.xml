@@ -272,7 +272,30 @@
             Unloads the OpenCL compiler.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:Cloo.ComputeContext" -->
+        <member name="T:Cloo.ComputeContext">
+            <summary>
+            Represents an OpenCL context.
+            </summary>
+            <remarks> The environment within which the kernels execute and the domain in which synchronization and memory management is defined. </remarks>
+            <br/>
+            <example> 
+            This example shows how to create a <c>ComputeContext</c> that is able to share data with an OpenGL context in a Microsoft Windows OS:
+            <code>
+            [DllImport("opengl32.dll")]
+            extern static IntPtr wglGetCurrentDC();
+            // ...
+            IntPtr deviceContextHandle = wglGetCurrentDC();
+            ComputePlatform platform = ComputePlatform.GetByName(nameOfPlatformCapableOfCLGLInterop);
+            ComputeContextProperty p1 = new ComputeContextProperty(ComputeContextPropertyName.Platform, platform.Handle);
+            ComputeContextProperty p2 = new ComputeContextProperty(ComputeContextPropertyName.CL_GL_CONTEXT_KHR, openGLContextHandle);
+            ComputeContextProperty p3 = new ComputeContextProperty(ComputeContextPropertyName.CL_WGL_HDC_KHR, deviceContextHandle);
+            ComputeContextPropertyList cpl = new ComputeContextPropertyList(new ComputeContextProperty[] { p1, p2, p3 });
+            ComputeContext context = new ComputeContext(ComputeDeviceTypes.Gpu, cpl, null, IntPtr.Zero);
+            </code>
+            </example>
+            <seealso cref="T:Cloo.ComputeDevice"/>
+            <seealso cref="T:Cloo.ComputePlatform"/>
+        </member>
         <member name="M:Cloo.ComputeContext.#ctor(System.Collections.Generic.ICollection{Cloo.ComputeDevice},Cloo.ComputeContextPropertyList,Cloo.ComputeContextNotifier,System.IntPtr)">
             <summary>
             Creates a new <c>ComputeContext</c> on a collection of <c>ComputeDevice</c>s.
@@ -397,7 +420,14 @@
             <param name="dataSize"> The size of the argument data in bytes. </param>
             <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Cloo.ComputeKernel.SetMemoryArgument(System.Int32,Cloo.ComputeMemory)" -->
+        <member name="M:Cloo.ComputeKernel.SetMemoryArgument(System.Int32,Cloo.ComputeMemory)">
+            <summary>
+            Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <c>ComputeKernel</c>.
+            </summary>
+            <param name="index"> The argument index. </param>
+            <param name="memObj"> The <c>ComputeMemory</c> that is passed as the argument. </param>
+            <remarks> This method will automatically track <paramref name="memObj"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
+        </member>
         <member name="M:Cloo.ComputeKernel.SetMemoryArgument(System.Int32,Cloo.ComputeMemory,System.Boolean)">
             <summary>
             Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <c>ComputeKernel</c>.
@@ -858,16 +888,15 @@
         </member>
         <member name="M:Cloo.ComputeProgram.#ctor(Cloo.ComputeContext,System.String)">
             <summary>
-            Creates a new <c>ComputeProgram</c> from a specified source code.
+            Creates a new <c>ComputeProgram</c> from a source code string.
             </summary>
             <param name="context"> A <c>ComputeContext</c>. </param>
             <param name="source"> The source code for the <c>ComputeProgram</c>. </param>
             <remarks> The created <c>ComputeProgram</c> is associated with the <c>ComputeContext.Devices</c>. </remarks>
-            <seealso cref="T:Cloo.ComputeKernel"/>
         </member>
         <member name="M:Cloo.ComputeProgram.#ctor(Cloo.ComputeContext,System.String[])">
             <summary>
-            Creates a new <c>ComputeProgram</c> from a specified source code.
+            Creates a new <c>ComputeProgram</c> from an array of source code strings.
             </summary>
             <param name="context"> A <c>ComputeContext</c>. </param>
             <param name="source"> The source code lines for the <c>ComputeProgram</c>. </param>
@@ -878,7 +907,7 @@
             Creates a new <c>ComputeProgram</c> from a specified list of binaries.
             </summary>
             <param name="context"> A <c>ComputeContext</c>. </param>
-            <param name="binaries"> A list of binaries that will match the <paramref name="devices"/>. </param>
+            <param name="binaries"> A list of binaries, one for each item in <paramref name="devices"/>. </param>
             <param name="devices"> A subset of the <c>ComputeContext.Devices</c>. If <paramref name="devices"/> is <c>null</c>, OpenCL will associate every binary from <c>ComputeProgram.Binaries</c> with a corresponding <c>ComputeDevice</c> from <c>ComputeContext.Devices</c>. </param>
         </member>
         <member name="M:Cloo.ComputeProgram.Build(System.Collections.Generic.ICollection{Cloo.ComputeDevice},System.String,Cloo.ComputeProgramBuildNotifier,System.IntPtr)">
@@ -894,8 +923,8 @@
             <summary>
             Creates a <c>ComputeKernel</c> for every <c>kernel</c> function in <c>ComputeProgram</c>.
             </summary>
-            <remarks> <c>ComputeKernel</c>s are not created for any <c>kernel</c> functions in <c>ComputeProgram</c> that do not have the same function definition across all <c>ComputeProgram.Devices</c> for which a program executable has been successfully built. </remarks>
             <returns> The collection of created <c>ComputeKernel</c>s. </returns>
+            <remarks> <c>ComputeKernel</c>s are not created for any <c>kernel</c> functions in <c>ComputeProgram</c> that do not have the same function definition across all <c>ComputeProgram.Devices</c> for which a program executable has been successfully built. </remarks>
         </member>
         <member name="M:Cloo.ComputeProgram.CreateKernel(System.String)">
             <summary>
@@ -939,7 +968,12 @@
             Gets the <c>ComputeContext</c> of the <c>ComputeProgram</c>.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:Cloo.ComputeProgram.Devices" -->
+        <member name="P:Cloo.ComputeProgram.Devices">
+            <summary>
+            Gets a read-only collection of <c>ComputeDevice</c>s associated with the <c>ComputeProgram</c>.
+            </summary>
+            <remarks> This collection contains <c>ComputeDevice</c>s from <c>ComputeProgram.Context.Devices</c>. </remarks>
+        </member>
         <member name="P:Cloo.ComputeProgram.Source">
             <summary>
             Gets a read-only collection of program source code strings specified when creating the <c>ComputeProgram</c> or <c>null</c> if <c>ComputeProgram</c> was created using program binaries.
@@ -1307,24 +1341,28 @@
             Gets a <c>ComputePlatform</c> of a specified handle.
             </summary>
             <param name="handle"> The handle of the queried <c>ComputePlatform</c>. </param>
+            <returns> The <c>ComputePlatform</c> of the matching handle or <c>null</c> if none matches. </returns>
         </member>
         <member name="M:Cloo.ComputePlatform.GetByName(System.String)">
             <summary>
             Gets the first matching <c>ComputePlatform</c> of a specified name.
             </summary>
             <param name="platformName"> The name of the queried <c>ComputePlatform</c>. </param>
+            <returns> The first <c>ComputePlatform</c> of the specified name or <c>null</c> if none matches. </returns>
         </member>
         <member name="M:Cloo.ComputePlatform.GetByVendor(System.String)">
             <summary>
             Gets the first matching <c>ComputePlatform</c> of a specified vendor.
             </summary>
             <param name="platformVendor"> The vendor of the queried <c>ComputePlatform</c>. </param>
+            <returns> The first <c>ComputePlatform</c> of the specified vendor or <c>null</c> if none matches. </returns>
         </member>
-        <member name="M:Cloo.ComputePlatform.GetDevices">
+        <member name="M:Cloo.ComputePlatform.QueryDevices">
             <summary>
             Gets a read-only collection of available <c>ComputeDevice</c>s on the <c>ComputePlatform</c>.
             </summary>
-            <returns> The read-only collection of available <c>ComputeDevice</c>s on the <c>ComputePlatform</c>. </returns>
+            <returns> A read-only collection of the available <c>ComputeDevice</c>s on the <c>ComputePlatform</c>. </returns>
+            <remarks> This method resets the <c>ComputePlatform.Devices</c>. This is useful if one or more of them become unavailable (<c>ComputeDevice.Available</c> is <c>false</c>) after a <c>ComputeContext</c> and <c>ComputeCommandQueue</c>s that use the <c>ComputeDevice</c> have been created and commands have been queued to them. Further calls will trigger an <c>OutOfResourcesComputeException</c> until this method is executed. You will also need to recreate any <c>ComputeResource</c> that was created on the no longer available <c>ComputeDevice</c>. </remarks>
         </member>
         <member name="M:Cloo.ComputePlatform.ToString">
             <summary>

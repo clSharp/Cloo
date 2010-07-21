@@ -75,7 +75,7 @@ namespace Cloo
         /// <summary>
         /// Gets a read-only collection of <c>ComputeDevice</c>s associated with the <c>ComputeProgram</c>.
         /// </summary>
-        /// <remarks> This collection contains <c>ComputeDevice</c>s from <c>ComputeProgram.Context.Devices</c>.
+        /// <remarks> This collection contains <c>ComputeDevice</c>s from <c>ComputeProgram.Context.Devices</c>. </remarks>
         public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
 
         /// <summary>
@@ -88,12 +88,11 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeProgram</c> from a specified source code.
+        /// Creates a new <c>ComputeProgram</c> from a source code string.
         /// </summary>
         /// <param name="context"> A <c>ComputeContext</c>. </param>
         /// <param name="source"> The source code for the <c>ComputeProgram</c>. </param>
         /// <remarks> The created <c>ComputeProgram</c> is associated with the <c>ComputeContext.Devices</c>. </remarks>
-        /// <seealso cref="ComputeKernel"/>
         public ComputeProgram(ComputeContext context, string source)
         {
             unsafe
@@ -114,7 +113,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new <c>ComputeProgram</c> from a specified source code.
+        /// Creates a new <c>ComputeProgram</c> from an array of source code strings.
         /// </summary>
         /// <param name="context"> A <c>ComputeContext</c>. </param>
         /// <param name="source"> The source code lines for the <c>ComputeProgram</c>. </param>
@@ -147,7 +146,7 @@ namespace Cloo
         /// Creates a new <c>ComputeProgram</c> from a specified list of binaries.
         /// </summary>
         /// <param name="context"> A <c>ComputeContext</c>. </param>
-        /// <param name="binaries"> A list of binaries that will match the <paramref name="devices"/>. </param>
+        /// <param name="binaries"> A list of binaries, one for each item in <paramref name="devices"/>. </param>
         /// <param name="devices"> A subset of the <c>ComputeContext.Devices</c>. If <paramref name="devices"/> is <c>null</c>, OpenCL will associate every binary from <c>ComputeProgram.Binaries</c> with a corresponding <c>ComputeDevice</c> from <c>ComputeContext.Devices</c>. </param>
         public ComputeProgram(ComputeContext context, IList<byte[]> binaries, IList<ComputeDevice> devices)
         {
@@ -244,8 +243,8 @@ namespace Cloo
         /// <summary>
         /// Creates a <c>ComputeKernel</c> for every <c>kernel</c> function in <c>ComputeProgram</c>.
         /// </summary>
-        /// <remarks> <c>ComputeKernel</c>s are not created for any <c>kernel</c> functions in <c>ComputeProgram</c> that do not have the same function definition across all <c>ComputeProgram.Devices</c> for which a program executable has been successfully built. </remarks>
         /// <returns> The collection of created <c>ComputeKernel</c>s. </returns>
+        /// <remarks> <c>ComputeKernel</c>s are not created for any <c>kernel</c> functions in <c>ComputeProgram</c> that do not have the same function definition across all <c>ComputeProgram.Devices</c> for which a program executable has been successfully built. </remarks>
         public ICollection<ComputeKernel> CreateAllKernels()
         {
             unsafe

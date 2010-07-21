@@ -183,7 +183,7 @@ namespace Cloo
         /// </summary>
         /// <param name="index"> The argument index. </param>
         /// <param name="memObj"> The <c>ComputeMemory</c> that is passed as the argument. </param>
-        /// <remarks> <remarks> This method will automatically track <paramref name="memObj"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
+        /// <remarks> This method will automatically track <paramref name="memObj"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
         public void SetMemoryArgument(int index, ComputeMemory memObj)
         {
             SetMemoryArgument(index, memObj, true);
