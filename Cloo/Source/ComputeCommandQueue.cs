@@ -146,7 +146,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -216,7 +216,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -264,7 +264,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -314,7 +314,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -363,7 +363,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -393,7 +393,7 @@ namespace Cloo
 
                 kernel.ReferenceArguments();
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -433,7 +433,7 @@ namespace Cloo
 
                 kernel.ReferenceArguments();
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -502,7 +502,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
 
                 return mappedPtr;
@@ -557,7 +557,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
 
                 return mappedPtr;
@@ -619,7 +619,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -680,7 +680,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -711,7 +711,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -752,7 +752,7 @@ namespace Cloo
 
                 mappedPtr = IntPtr.Zero;
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -831,7 +831,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
@@ -892,7 +892,7 @@ namespace Cloo
                     ComputeException.ThrowOnError(error);
                 }
 
-                if (events != null)
+                if (events != null && !events.IsReadOnly)
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
