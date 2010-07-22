@@ -84,8 +84,9 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets a string representation of this ComputeContextProperty.
+        /// Gets the string representation of the <c>ComputeContextProperty</c>.
         /// </summary>
+        /// <remarks> The string representation of the <c>ComputeContextProperty</c>. </remarks>
         public override string ToString()
         {
             return "ComputeContextProperty(" + name + ", " + value + ")";
