@@ -53,18 +53,12 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeImageChannleOrder</c> of the <c>ComputeImage</c>.
         /// </summary>
-        public ComputeImageChannelOrder ChannelOrder
-        {
-            get { return channelOrder; }
-        }
+        public ComputeImageChannelOrder ChannelOrder { get { return channelOrder; } }
 
         /// <summary>
         /// Gets the <c>ComputeImageChannelType</c> of the <c>ComputeImage</c>.
         /// </summary>
-        public ComputeImageChannelType ChannelType
-        {
-            get { return channelType; }
-        }
+        public ComputeImageChannelType ChannelType { get { return channelType; } }
 
         #endregion
 

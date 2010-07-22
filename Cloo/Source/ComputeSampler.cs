@@ -38,6 +38,7 @@ namespace Cloo
     /// Represents an OpenCL sampler.
     /// </summary>
     /// <remarks> An object that describes how to sample an image when the image is read in the kernel. The image read functions take a sampler as an argument. The sampler specifies the image addressing-mode i.e. how out-of-range image coordinates are handled, the filtering mode, and whether the input image coordinate is a normalized or unnormalized value. </remarks>
+    /// <seealso cref="ComputeImage"/>
     public class ComputeSampler : ComputeResource
     {
         #region Fields
@@ -54,46 +55,22 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeContext</c> of the <c>ComputeSampler</c>.
         /// </summary>
-        public ComputeContext Context
-        {
-            get
-            {
-                return context;
-            }
-        }
+        public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets the <c>ComputeImageAddressing</c> mode of the <c>ComputeSampler</c>.
         /// </summary>
-        public ComputeImageAddressing Addressing
-        {
-            get
-            {
-                return addressing;
-            }
-        }
+        public ComputeImageAddressing Addressing { get { return addressing; } }
 
         /// <summary>
         /// Gets the <c>ComputeImageFiltering</c> mode of the <c>ComputeSampler</c>.
         /// </summary>
-        public ComputeImageFiltering Filtering
-        {
-            get
-            {
-                return filtering;
-            }
-        }
+        public ComputeImageFiltering Filtering { get { return filtering; } }
 
         /// <summary>
         /// Gets the state of usage of normalized x, y and z coordinates when accessing a <c>ComputeImage</c> in a <c>ComputeKernel</c> through the <c>ComputeSampler</c>.
         /// </summary>
-        public bool NormalizedCoords
-        {
-            get
-            {
-                return normalizedCoords;
-            }
-        }
+        public bool NormalizedCoords { get { return normalizedCoords; } }
 
         #endregion
 

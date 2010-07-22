@@ -41,6 +41,7 @@ namespace Cloo
     /// Represents an OpenCL context.
     /// </summary>
     /// <remarks> The environment within which the kernels execute and the domain in which synchronization and memory management is defined. </remarks>
+    /// <br/>
     /// <example> 
     /// This example shows how to create a <c>ComputeContext</c> that is able to share data with an OpenGL context in a Microsoft Windows OS:
     /// <code>
@@ -54,8 +55,6 @@ namespace Cloo
     /// ComputeContextProperty p3 = new ComputeContextProperty(ComputeContextPropertyName.CL_WGL_HDC_KHR, deviceContextHandle);
     /// ComputeContextPropertyList cpl = new ComputeContextPropertyList(new ComputeContextProperty[] { p1, p2, p3 });
     /// ComputeContext context = new ComputeContext(ComputeDeviceTypes.Gpu, cpl, null, IntPtr.Zero);
-    /// // creating a shared CL/GL ComputeBuffer
-    /// ComputeBuffer<T> clBuffer = ComputeBuffer.CreateFromGLBuffer<T>(context, flags, glBufferId);
     /// </code>
     /// </example>
     /// <seealso cref="ComputeDevice"/>
@@ -75,35 +74,17 @@ namespace Cloo
         /// <summary>
         /// Gets a read-only collection of the <c>ComputeDevice</c>s of the <c>ComputeContext</c>.
         /// </summary>
-        public ReadOnlyCollection<ComputeDevice> Devices
-        {
-            get
-            {
-                return devices;
-            }
-        }
+        public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
 
         /// <summary>
         /// Gets the <c>ComputePlatform</c> of the <c>ComputeContext</c>.
         /// </summary>
-        public ComputePlatform Platform
-        {
-            get
-            {
-                return platform;
-            }
-        }
+        public ComputePlatform Platform { get { return platform; } }
 
         /// <summary>
-        /// Gets the <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>.
+        /// Gets a collection of <c>ComputeContextProperty</c>s of the <c>ComputeContext</c>.
         /// </summary>
-        public ComputeContextPropertyList Properties
-        {
-            get
-            {
-                return properties;
-            }
-        }
+        public ComputeContextPropertyList Properties { get { return properties; } }
 
         #endregion
 
@@ -114,9 +95,9 @@ namespace Cloo
         /// </summary>
         /// <param name="devices"> A collection of <c>ComputeDevice</c>s to associate with the <c>ComputeContext</c>. </param>
         /// <param name="properties"> A <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>. </param>
-        /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is null, no callback function is registered. </param>
-        /// <param name="userDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
-        public ComputeContext(ICollection<ComputeDevice> devices, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr userDataPtr)
+        /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
+        /// <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
+        public ComputeContext(ICollection<ComputeDevice> devices, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr notifyDataPtr)
         {
             unsafe
             {
@@ -132,7 +113,7 @@ namespace Cloo
                         devices.Count,
                         deviceHandlesPtr,
                         notifyFuncPtr,
-                        userDataPtr,
+                        notifyDataPtr,
                         &error);
                 ComputeException.ThrowOnError(error);
 
@@ -148,7 +129,7 @@ namespace Cloo
         /// </summary>
         /// <param name="deviceType"> A bit-field that identifies the type of <c>ComputeDevice</c> to associate with the <c>ComputeContext</c>. </param>
         /// <param name="properties"> A <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>. </param>
-        /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is null, no callback function is registered. </param>
+        /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
         /// <param name="userDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public ComputeContext(ComputeDeviceTypes deviceType, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr userDataPtr)
         {
@@ -235,7 +216,7 @@ namespace Cloo
     /// <param name="errorInfo"> An error string. </param>
     /// <param name="clDataPtr"> A pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error.</param>
     /// <param name="clDataSize"> The size of the binary data that is returned by the OpenCL. </param>
-    /// <param name="userDataPtr"> The pointer to the optional user data specified in <paramref name="userDataPtr"/> argument of <c>ComputeContext</c> constructor. </param>
+    /// <param name="userDataPtr"> The pointer to the optional user data specified in <paramref name="notifyDataPtr"/> argument of <c>ComputeContext</c> constructor. </param>
     /// <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void ComputeContextNotifier(String errorInfo, IntPtr clDataPtr, IntPtr clDataSize, IntPtr userDataPtr);

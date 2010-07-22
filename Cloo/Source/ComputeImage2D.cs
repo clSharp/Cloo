@@ -46,12 +46,12 @@ namespace Cloo
         /// <summary>
         /// Creates a new <c>ComputeImage2D</c>.
         /// </summary>
-        /// <param name="context"> A valid <c>ComputeContext</c> in which the <c>ComputeImage2D</c> is to be created. </param>
+        /// <param name="context"> A valid <c>ComputeContext</c> in which the <c>ComputeImage2D</c> is created. </param>
         /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeImage2D</c>. </param>
         /// <param name="format"> A structure that describes the format properties of the <c>ComputeImage2D</c>. </param>
         /// <param name="width"> The width of the <c>ComputeImage2D</c> in pixels. </param>
         /// <param name="height"> The height of the <c>ComputeImage2D</c> in pixels. </param>
-        /// <param name="rowPitch"> The size in bytes of each row of elements of the <c>ComputeImage2D</c>. If left zero, OpenCL will compute the proper value based on <c>ComputeImage.Width</c> and <c>ComputeImage.ElementSize</c>. </param>
+        /// <param name="rowPitch"> The size in bytes of each row of elements of the <c>ComputeImage2D</c>. If <paramref name="rowPitch"/> is zero, OpenCL will compute the proper value based on <c>ComputeImage.Width</c> and <c>ComputeImage.ElementSize</c>. </param>
         /// <param name="data"> The data to initialize the <c>ComputeImage2D</c>. Can be <c>IntPtr.Zero</c>. </param>
         public ComputeImage2D(ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, long rowPitch, IntPtr data)
             : base(context, flags)
@@ -86,6 +86,13 @@ namespace Cloo
 
         #region Public methods
 
+        /// <summary>
+        /// Creates a new <c>ComputeImage2D</c> from an OpenGL renderbuffer object.
+        /// </summary>
+        /// <param name="context"> A <c>ComputeContext</c> with enabled CL/GL sharing. </param>
+        /// <param name="flags"> A bit-field that is used to specify usage information about the <c>ComputeImage2D</c>. Only <c>ComputeMemoryFlags.ReadOnly</c>, <c>ComputeMemoryFlags.WriteOnly</c> and <c>ComputeMemoryFlags.ReadWrite</c> are allowed. </param>
+        /// <param name="renderbufferId"> The OpenGL renderbuffer object id to use. </param>
+        /// <returns> The created <c>ComputeImage2D</c>. </returns>
         public static ComputeImage2D CreateFromGLRenderbuffer(ComputeContext context, ComputeMemoryFlags flags, int renderbufferId)
         {
             unsafe
@@ -102,6 +109,15 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// Creates a new <c>ComputeImage2D</c> from an OpenGL 2D texture object.
+        /// </summary>
+        /// <param name="context"> A <c>ComputeContext</c> with enabled CL/GL sharing. </param>
+        /// <param name="flags"> A bit-field that is used to specify usage information about the <c>ComputeImage2D</c>. Only <c>ComputeMemoryFlags.ReadOnly</c>, <c>ComputeMemoryFlags.WriteOnly</c> and <c>ComputeMemoryFlags.ReadWrite</c> are allowed. </param>
+        /// <param name="textureTarget"> One of the following values: GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, or GL_TEXTURE_RECTANGLE. Using GL_TEXTURE_RECTANGLE for texture_target requires OpenGL 3.1. Alternatively, GL_TEXTURE_RECTANGLE_ARB may be specified if the OpenGL extension GL_ARB_texture_rectangle is supported. </param>
+        /// <param name="mipLevel"> The mipmap level of the OpenGL 2D texture object to be used. </param>
+        /// <param name="textureId"> The OpenGL 2D texture object id to use. </param>
+        /// <returns> The created <c>ComputeImage2D</c>. </returns>
         public static ComputeImage2D CreateFromGLTexture2D(ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId)
         {
             unsafe
@@ -121,10 +137,11 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a collection of supported 2D <c>ComputeImage</c> formats with the given context.
+        /// Gets a collection of supported <c>ComputeImage2D</c> <c>ComputeImageFormat</c>s in a <c>ComputeContext</c>.
         /// </summary>
-        /// <param name="context">A valid OpenCL context on which the <c>ComputeImage</c> object(s) will be created.</param>
-        /// <param name="flags">A bit-field that is used to specify allocation and usage information about the <c>ComputeImage</c> object(s) that will be created.</param>
+        /// <param name="context"> The <c>ComputeContext</c> for which the collection of <c>ComputeImageFormat</c>s is queried. </param>
+        /// <param name="flags"> The <c>ComputeMemoryFlags</c> for which the collection of <c>ComputeImageFormat</c>s is queried. </param>
+        /// <returns> The collection of the required <c>ComputeImageFormat</c>s. </returns>
         public static ICollection<ComputeImageFormat> GetSupportedFormats(ComputeContext context, ComputeMemoryFlags flags)
         {
             return GetSupportedFormats(context, flags, ComputeMemoryType.Image2D);

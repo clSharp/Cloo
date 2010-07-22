@@ -45,16 +45,16 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new 3D image.
+        /// Creates a new <c>ComputeImage3D</c>.
         /// </summary>
-        /// <param name="context"> A valid OpenCL context on which the image object is to be created. </param>
-        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the image. </param>
-        /// <param name="format"> A structure that describes the format properties of the image. </param>
+        /// <param name="context"> A valid <c>ComputeContext</c> in which the <c>ComputeImage3D</c> is created. </param>
+        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeImage3D</c>. </param>
+        /// <param name="format"> A structure that describes the format properties of the <c>ComputeImage3D</c>. </param>
         /// <param name="width"> The width of the <c>ComputeImage3D</c> in pixels. </param>
         /// <param name="height"> The height of the <c>ComputeImage3D</c> in pixels. </param>
         /// <param name="depth"> The depth of the <c>ComputeImage3D</c> in pixels. </param>
-        /// <param name="rowPitch"> The size in bytes of each row of elements of the <c>ComputeImage3D</c>. If left zero, OpenCL will compute the proper value based on <c>ComputeImage.Width</c> and <c>ComputeImage.ElementSize</c>. </param>
-        /// <param name="slicePitch"> The size in bytes of each 2D slice in the <c>ComputeImage3D</c>. If left zero, OpenCL will compute the proper value based on <c>ComputeImage.RowPitch</c> and <c>ComputeImage.Height</c>. </param>
+        /// <param name="rowPitch"> The size in bytes of each row of elements of the <c>ComputeImage3D</c>. If <paramref name="rowPitch"/> is zero, OpenCL will compute the proper value based on <c>ComputeImage.Width</c> and <c>ComputeImage.ElementSize</c>. </param>
+        /// <param name="slicePitch"> The size in bytes of each 2D slice in the <c>ComputeImage3D</c>. If <paramref name="slicePitch"/> is zero, OpenCL will compute the proper value based on <c>ComputeImage.RowPitch</c> and <c>ComputeImage.Height</c>. </param>
         /// <param name="data"> The data to initialize the <c>ComputeImage3D</c>. Can be <c>IntPtr.Zero</c>. </param>
         public ComputeImage3D(ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int depth, long rowPitch, long slicePitch, IntPtr data)
             : base(context, flags)
@@ -91,6 +91,15 @@ namespace Cloo
 
         #region Public methods
 
+        /// <summary>
+        /// Creates a new <c>ComputeImage3D</c> from an OpenGL 3D texture object.
+        /// </summary>
+        /// <param name="context"> A <c>ComputeContext</c> with enabled CL/GL sharing. </param>
+        /// <param name="flags"> A bit-field that is used to specify usage information about the <c>ComputeImage3D</c>. Only <c>ComputeMemoryFlags.ReadOnly</c>, <c>ComputeMemoryFlags.WriteOnly</c> and <c>ComputeMemoryFlags.ReadWrite</c> are allowed. </param>
+        /// <param name="textureTarget"> The image type of texture. Must be GL_TEXTURE_3D. </param>
+        /// <param name="mipLevel"> The mipmap level of the OpenGL 2D texture object to be used. </param>
+        /// <param name="textureId"> The OpenGL 2D texture object id to use. </param>
+        /// <returns> The created <c>ComputeImage2D</c>. </returns>
         public static ComputeImage3D CreateFromGLTexture3D(ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId)
         {
             IntPtr image = IntPtr.Zero;
@@ -110,10 +119,11 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a collection of supported 3D image formats with the given context.
+        /// Gets a collection of supported <c>ComputeImage3D</c> <c>ComputeImageFormat</c>s in a <c>ComputeContext</c>.
         /// </summary>
-        /// <param name="context">A valid OpenCL context on which the image object(s) will be created.</param>
-        /// <param name="flags">A bit-field that is used to specify allocation and usage information about the image object(s) that will be created.</param>
+        /// <param name="context"> The <c>ComputeContext</c> for which the collection of <c>ComputeImageFormat</c>s is queried. </param>
+        /// <param name="flags"> The <c>ComputeMemoryFlags</c> for which the collection of <c>ComputeImageFormat</c>s is queried. </param>
+        /// <returns> The collection of the required <c>ComputeImageFormat</c>s. </returns>
         public static ICollection<ComputeImageFormat> GetSupportedFormats(ComputeContext context, ComputeMemoryFlags flags)
         {
             return GetSupportedFormats(context, flags, ComputeMemoryType.Image3D);

@@ -37,7 +37,7 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL memory object.
     /// </summary>
-    /// <remarks> A memory object is a handle to a reference counted region of global memory. </remarks>
+    /// <remarks> A memory object is a handle to a region of global memory. </remarks>
     /// <seealso cref="ComputeBuffer"/>
     /// <seealso cref="ComputeImage"/>
     public abstract class ComputeMemory : ComputeResource
@@ -54,33 +54,17 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeContext</c> of the <c>ComputeMemory</c>.
         /// </summary>
-        public ComputeContext Context
-        {
-            get
-            {
-                return context;
-            }
-        }
+        public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets the <c>ComputeMemoryFlags</c> of the <c>ComputeMemory</c>.
         /// </summary>
-        public ComputeMemoryFlags Flags
-        {
-            get
-            {
-                return flags;
-            }
-        }
+        public ComputeMemoryFlags Flags { get { return flags; } }
 
         /// <summary>
         /// Gets or sets (protected) the size in bytes of the <c>ComputeMemory</c>.
         /// </summary>
-        public long Size
-        {
-            get;
-            protected set;
-        }
+        public long Size { get; protected set; }
 
         #endregion
 

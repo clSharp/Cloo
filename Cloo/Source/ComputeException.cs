@@ -32,9 +32,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Diagnostics;
+    using System.Reflection;
 
     /// <summary>
-    /// Represents an error that has occurred while executing an OpenCL API call.
+    /// Represents an error state that occurred while executing an OpenCL API call.
     /// </summary>
     /// <seealso cref="ComputeErrorCode"/>
     public class ComputeException : ApplicationException
@@ -50,17 +52,14 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeErrorCode</c> of the <c>ComputeException</c>.
         /// </summary>
-        public ComputeErrorCode ComputeErrorCode
-        {
-            get { return code; }
-        }
+        public ComputeErrorCode ComputeErrorCode { get { return code; } }
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeException</c> with a given <c>ComputeErrorCode</c>.
+        /// Creates a new <c>ComputeException</c> with a specified <c>ComputeErrorCode</c>.
         /// </summary>
         /// <param name="code"> A <c>ComputeErrorCode</c>. </param>
         public ComputeException(ComputeErrorCode code)
@@ -74,18 +73,18 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Checks for an error and throws an exception if such is encountered.
+        /// Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
         /// </summary>
-        /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
+        /// <param name="errorCode"> The value to be checked for an OpenCL error. </param>
         public static void ThrowOnError(int errorCode)
         {
             ThrowOnError((ComputeErrorCode)errorCode);
         }
 
         /// <summary>
-        /// Checks for an error and throws an exception if such is encountered.
+        /// Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
         /// </summary>
-        /// <param name="errorCode">The value to be checked for an OpenCL error.</param>
+        /// <param name="errorCode"> The OpenCL error code. </param>
         public static void ThrowOnError(ComputeErrorCode errorCode)
         {
             switch (errorCode)
@@ -103,7 +102,7 @@ namespace Cloo
                     throw new CompilerNotAvailableComputeException();
 
                 case ComputeErrorCode.MemoryObjectAllocationFailure:
-                    throw new MemoryObjectAllocationComputeException();
+                    throw new MemoryObjectAllocationFailureComputeException();
 
                 case ComputeErrorCode.OutOfResources:
                     throw new OutOfResourcesComputeException();
@@ -247,8 +246,8 @@ namespace Cloo
     public class CompilerNotAvailableComputeException : ComputeException
     { public CompilerNotAvailableComputeException() : base(ComputeErrorCode.CompilerNotAvailable) { } }
 
-    public class MemoryObjectAllocationComputeException : ComputeException
-    { public MemoryObjectAllocationComputeException() : base(ComputeErrorCode.MemoryObjectAllocationFailure) { } }
+    public class MemoryObjectAllocationFailureComputeException : ComputeException
+    { public MemoryObjectAllocationFailureComputeException() : base(ComputeErrorCode.MemoryObjectAllocationFailure) { } }
 
     public class OutOfResourcesComputeException : ComputeException
     { public OutOfResourcesComputeException() : base(ComputeErrorCode.OutOfResources) { } }

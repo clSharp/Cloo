@@ -56,24 +56,12 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
         /// </summary>
-        public ComputeCommandQueue CommandQueue
-        {
-            get
-            {
-                return commandQueue;
-            }
-        }
+        public ComputeCommandQueue CommandQueue { get { return commandQueue; } }
 
         /// <summary>
         /// Gets the <c>ComputeCommandType</c> associated with the <c>ComputeEvent</c>.
         /// </summary>
-        public ComputeCommandType CommandType
-        {
-            get
-            {
-                return commandType;
-            }
-        }
+        public ComputeCommandType CommandType { get { return commandType; } }
 
         /// <summary>
         /// Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the command identified by the <c>ComputeEvent</c> has finished execution.
@@ -95,13 +83,13 @@ namespace Cloo
         /// </summary>
         public long CommandEnqueueTime
         {
-            get
+            get 
             {
-                unsafe
-                {
+                unsafe 
+                { 
                     return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
-                        ComputeCommandProfilingInfo.Queued, CL10.GetEventProfilingInfo);
-                }
+                        ComputeCommandProfilingInfo.Queued, CL10.GetEventProfilingInfo); 
+                } 
             }
         }
 

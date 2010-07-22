@@ -41,7 +41,7 @@ namespace Cloo
     /// <remarks> A <c>ComputeContextPropertyList</c> is used to specify the properties of a <c>ComputeContext</c>. </remarks>
     /// <seealso cref="ComputeContext"/>
     /// <seealso cref="ComputeContextProperty"/>
-    public class ComputeContextPropertyList: IEnumerable<ComputeContextProperty>
+    public class ComputeContextPropertyList: ICollection<ComputeContextProperty>
     {
         #region Fields
 
@@ -62,7 +62,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new <c>ComputeContextPropertyList</c> which contains the specified <c>ComputeContextProperty</c>'s.
+        /// Creates a new <c>ComputeContextPropertyList</c> which contains the specified <c>ComputeContextProperty</c>s.
         /// </summary>
         /// <param name="properties"> An enumerable of <c>ComputeContextProperty</c>'s. </param>
         public ComputeContextPropertyList(IEnumerable<ComputeContextProperty> properties)
@@ -74,6 +74,11 @@ namespace Cloo
 
         #region Public methods
 
+        /// <summary>
+        /// Gets a <c>ComputeContextProperty</c> of a specified <c>ComputeContextPropertyName</c>.
+        /// </summary>
+        /// <param name="name"> The <c>ComputeContextPropertyName</c> of the <c>ComputeContextProperty</c>. </param>
+        /// <returns> The requested <c>ComputeContextProperty</c> or <c>null</c> if no such <c>ComputeContextProperty</c> exists in the <c>ComputeContextPropertyList</c>. </returns>
         public ComputeContextProperty GetByName(ComputeContextPropertyName name)
         {
             foreach (ComputeContextProperty property in properties)
@@ -97,6 +102,45 @@ namespace Cloo
             }
             result[result.Length - 1] = IntPtr.Zero;
             return result;
+        }
+
+        #endregion
+
+        #region ICollection<ComputeContextProperty> Members
+
+        public void Add(ComputeContextProperty item)
+        {
+            properties.Add(item);
+        }
+
+        public void Clear()
+        {
+            properties.Clear();
+        }
+
+        public bool Contains(ComputeContextProperty item)
+        {
+            return properties.Contains(item);
+        }
+
+        public void CopyTo(ComputeContextProperty[] array, int arrayIndex)
+        {
+            properties.CopyTo(array, arrayIndex);
+        }
+
+        public int Count
+        {
+            get { return properties.Count; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        public bool Remove(ComputeContextProperty item)
+        {
+            return properties.Remove(item);
         }
 
         #endregion
