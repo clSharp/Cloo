@@ -393,7 +393,7 @@ namespace Cloo
         /// <summary>
         /// Gets the OpenCL version supported by the <c>ComputeDevice</c>.
         /// </summary>
-        /// <remarks> This version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c> </remarks>
+        /// <remarks> This version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
         public string Version { get { return version; } }
 
         #endregion
