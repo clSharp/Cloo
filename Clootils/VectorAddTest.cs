@@ -32,6 +32,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 using Cloo;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Clootils
 {
@@ -80,7 +82,7 @@ kernel void VectorAdd(
 
             ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
 
-            ComputeEventList events = new ComputeEventList();
+            ICollection<ComputeEvent> events = new Collection<ComputeEvent>();
 
             commands.Execute(kernel, null, new long[] { count }, null, events);
 
