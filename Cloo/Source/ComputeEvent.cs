@@ -48,6 +48,14 @@ namespace Cloo
         private readonly ComputeCommandQueue commandQueue;
         private readonly ComputeCommandType commandType;
         private GCHandle gcHandle;
+        private RawNotifier rawNotifier;
+
+        #endregion
+
+        #region Events
+        
+        public event ComputeEventNotifier CommandCompleted;
+        public event ComputeEventNotifier CommandInterrupted;
 
         #endregion
 
@@ -156,6 +164,28 @@ namespace Cloo
                 commandType = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
                     ComputeEventInfo.CommandType, CL10.GetEventInfo);
                 Context = queue.Context;
+                
+                if (Tools.ParseVersionString(commandQueue.Device.Version) == new Version(1, 1))
+                {
+                    rawNotifier = Notify;
+                    IntPtr notifyPtr = Marshal.GetFunctionPointerForDelegate(rawNotifier);
+                    CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifyPtr, IntPtr.Zero);
+                }
+            }
+        }
+
+        private void Notify(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData)
+        {
+            switch (cmdExecStatusOrErr)
+            {
+                case (int)ComputeCommandExecutionStatus.Complete:
+                    if (CommandCompleted != null) 
+                        CommandCompleted(this, new EventArgs());
+                    break;
+                default:
+                    if (CommandInterrupted != null) 
+                        CommandInterrupted(this, new EventArgs());
+                    break;
             }
         }
 
@@ -201,5 +231,9 @@ namespace Cloo
         }
 
         #endregion
+
+        delegate void RawNotifier(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData);
     }
+
+    public delegate void ComputeEventNotifier(object sender, EventArgs e);
 }
