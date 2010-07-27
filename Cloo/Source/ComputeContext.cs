@@ -95,7 +95,7 @@ namespace Cloo
         /// </summary>
         /// <param name="devices"> A collection of <c>ComputeDevice</c>s to associate with the <c>ComputeContext</c>. </param>
         /// <param name="properties"> A <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>. </param>
-        /// <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
+        /// <param name="notify"> A delegate instance that represents a reference to a notification routine. This routine is a callback function that will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. The callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe and that the delegate instance doesn't get collected by the Garbage Collector until <c>ComputeContext</c> is disposed. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
         /// <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public ComputeContext(ICollection<ComputeDevice> devices, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr notifyDataPtr)
         {

@@ -40,6 +40,21 @@ namespace Cloo
     /// </summary>
     public class Tools
     {
+        #region Public methods
+
+        /// <summary>
+        /// Parses an OpenCL version string.
+        /// </summary>
+        /// <param name="versionString"> The version string to parse. Must be in the format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </param>
+        /// <returns> A <c>Version</c> instance containing the major and minor version from <paramref name="versionString"/>. </returns>
+        public static Version ParseVersionString(String versionString)
+        {
+            string[] verstring = versionString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            return new Version(verstring[1]);
+        }
+
+        #endregion
+
         #region Internal methods
 
         internal static IntPtr[] ConvertArray(long[] array)
