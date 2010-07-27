@@ -172,6 +172,32 @@ namespace Cloo
         }
 
         /// <summary>
+        /// Creates a new sub buffer. A sub buffer is a <c>ComputeBuffer</c> that represents a memory area of another <c>ComputeBuffer</c>.
+        /// </summary>
+        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
+        /// <param name="offset"> The starting element of the sub buffer. </param>
+        /// <param name="count"> The number of elements to include in the sub buffer. </param>
+        /// <returns> The newly created sub buffer. </returns>
+        /// <remarks> Creating a sub buffer from another sub buffer results into an invalid operation. OpenCL 1.1 required. </remarks>
+        public ComputeBuffer<T> CreateSubBuffer(ComputeMemoryFlags flags, long offset, long count)
+        {
+            unsafe
+            {
+                ComputeBufferRegion region = new ComputeBufferRegion(offset * Marshal.SizeOf(typeof(T)), count * Marshal.SizeOf(typeof(T)));
+                ComputeErrorCode error;
+                IntPtr handle = CL11.CreateSubBuffer(
+                    Handle,
+                    flags,
+                    ComputeBufferCreateType.Region,
+                    new IntPtr(&region),
+                    &error);
+                ComputeException.ThrowOnError(error);
+
+                return new ComputeBuffer<T>(handle, Context, flags);
+            }
+        }
+
+        /// <summary>
         /// Gets the string representation of the <c>ComputeBuffer</c>.
         /// </summary>
         /// <returns> The string representation of the <c>ComputeBuffer</c>. </returns>
