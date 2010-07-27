@@ -38,7 +38,7 @@ namespace Cloo.Bindings
     /// Contains bindings to the OpenCL extension functions.
     /// </summary>
     /// <remarks> See the Khronos OpenCL API extensions registry for documentation regarding these functions. </remarks>
-    public class Clx
+    public class CLx
     {
         private readonly Delegates.clEnqueueMigrateMemObjectEXT clEnqueueMigrateMemObjectEXT = null;
         private readonly Delegates.clGetGLContextInfoKHR clGetGLContextInfoKHR = null;
@@ -62,7 +62,7 @@ namespace Cloo.Bindings
             return clIcdGetPlatformIDsKHR(num_entries, platforms, num_platforms);
         }
 
-        public Clx(ComputePlatform platform)
+        public CLx(ComputePlatform platform)
         {
             if (platform.Extensions.Contains("cl_ext_migrate_memobject")) clEnqueueMigrateMemObjectEXT = (Delegates.clEnqueueMigrateMemObjectEXT)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clEnqueueMigrateMemObjectEXT"), typeof(Delegates.clEnqueueMigrateMemObjectEXT));
             if (platform.Extensions.Contains("cl_khr_gl_sharing")) clGetGLContextInfoKHR = (Delegates.clGetGLContextInfoKHR)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clGetGLContextInfoKHR"), typeof(Delegates.clGetGLContextInfoKHR));
