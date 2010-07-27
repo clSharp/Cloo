@@ -148,7 +148,7 @@ namespace Cloo
         /// <summary>
         /// Gets the execution status of the command identified by the <c>ComputeEvent</c>.
         /// </summary>
-        public ComputeCommandExecutionStatus ExecutionStatus
+        public ComputeCommandExecutionStatus CommandExecutionStatus
         {
             get
             {

@@ -1595,7 +1595,7 @@
             Gets the <c>ComputeContext</c> associated with the <c>ComputeEvent</c>
             </summary>
         </member>
-        <member name="P:Cloo.ComputeEvent.ExecutionStatus">
+        <member name="P:Cloo.ComputeEvent.CommandExecutionStatus">
             <summary>
             Gets the execution status of the command identified by the <c>ComputeEvent</c>.
             </summary>
