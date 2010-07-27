@@ -1536,16 +1536,34 @@
             <seealso cref="T:Cloo.ComputeCommandQueue"/>
             <seealso cref="T:Cloo.ComputeContext"/>
         </member>
+        <member name="M:Cloo.ComputeEvent.#ctor(Cloo.ComputeContext)">
+            <summary>
+            Creates a new user defined <c>ComputeEvent</c>.
+            </summary>
+            <param name="context"> The <c>ComputeContext</c> in which the <c>ComputeEvent</c> is created. </param>
+            <remarks> Requires: OpenCL 1.1 </remarks>
+        </member>
         <member name="M:Cloo.ComputeEvent.ToString">
             <summary>
             Gets the string representation of the <c>ComputeEvent</c>.
             </summary>
             <returns> The string representation of the <c>ComputeEvent</c>. </returns>
         </member>
+        <member name="E:Cloo.ComputeEvent.CommandCompleted">
+            <summary>
+            Occurrs when <c>ComputeEvent.ExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
+            </summary>
+        </member>
+        <member name="E:Cloo.ComputeEvent.CommandInterrupted">
+            <summary>
+            Occurrs when the command associated with the <c>ComputeEvent</c> is abnormally terminated.
+            </summary>
+        </member>
         <member name="P:Cloo.ComputeEvent.CommandQueue">
             <summary>
             Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
             </summary>
+            <remarks> For user defined <c>ComputeEvent</c>s no <c>ComputeCommandQueue</c> is defined and this property is <c>null</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandType">
             <summary>

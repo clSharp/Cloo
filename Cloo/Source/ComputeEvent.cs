@@ -47,6 +47,7 @@ namespace Cloo
 
         private readonly ComputeCommandQueue commandQueue;
         private readonly ComputeCommandType commandType;
+        private readonly ComputeContext context;
         private GCHandle gcHandle;
         private RawNotifier rawNotifier;
 
@@ -54,7 +55,14 @@ namespace Cloo
 
         #region Events
         
+        /// <summary>
+        /// Occurrs when <c>ComputeEvent.ExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
+        /// </summary>
         public event ComputeEventNotifier CommandCompleted;
+
+        /// <summary>
+        /// Occurrs when the command associated with the <c>ComputeEvent</c> is abnormally terminated.
+        /// </summary>
         public event ComputeEventNotifier CommandInterrupted;
 
         #endregion
@@ -64,6 +72,7 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
         /// </summary>
+        /// <remarks> For user defined <c>ComputeEvent</c>s no <c>ComputeCommandQueue</c> is defined and this property is <c>null</c>. </remarks>
         public ComputeCommandQueue CommandQueue { get { return commandQueue; } }
 
         /// <summary>
@@ -134,7 +143,7 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeContext</c> associated with the <c>ComputeEvent</c>
         /// </summary>
-        public ComputeContext Context { get; private set; }
+        public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets the execution status of the command identified by the <c>ComputeEvent</c>.
@@ -155,6 +164,28 @@ namespace Cloo
 
         #region Constructors
 
+        /// <summary>
+        /// Creates a new user defined <c>ComputeEvent</c>.
+        /// </summary>
+        /// <param name="context"> The <c>ComputeContext</c> in which the <c>ComputeEvent</c> is created. </param>
+        /// <remarks> Requires: OpenCL 1.1 </remarks>
+        public ComputeEvent(ComputeContext context)
+        {
+            unsafe
+            {
+                ComputeErrorCode error;
+                Handle = CL11.CreateUserEvent(context.Handle, &error);
+                ComputeException.ThrowOnError(error);
+                commandType = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
+                    ComputeEventInfo.CommandType, CL10.GetEventInfo);
+                this.context = context;
+                
+                rawNotifier = Notify;
+                IntPtr notifyPtr = Marshal.GetFunctionPointerForDelegate(rawNotifier);
+                CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifyPtr, IntPtr.Zero);
+            }
+        }
+
         internal ComputeEvent(IntPtr handle, ComputeCommandQueue queue)
         {
             unsafe
@@ -163,7 +194,7 @@ namespace Cloo
                 commandQueue = queue;
                 commandType = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
                     ComputeEventInfo.CommandType, CL10.GetEventInfo);
-                Context = queue.Context;
+                context = queue.Context;
                 
                 if (Tools.ParseVersionString(commandQueue.Device.Version) == new Version(1, 1))
                 {
