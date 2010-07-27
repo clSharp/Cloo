@@ -60,7 +60,7 @@ namespace Cloo
 
         #region Constructors
 
-        internal ComputeBufferRegion(long origin, long size)
+        public ComputeBufferRegion(long origin, long size)
         {
             this.origin = new IntPtr(origin);
             this.size = new IntPtr(size);

@@ -56,14 +56,14 @@ namespace Cloo
         #region Events
         
         /// <summary>
-        /// Occurrs when <c>ComputeEvent.ExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
+        /// Occurrs when <c>ComputeEvent.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
         /// </summary>
         public event ComputeEventNotifier CommandCompleted;
 
         /// <summary>
         /// Occurrs when the <c>ComputeEvent</c>'s command is abnormally terminated.
         /// </summary>
-        public event ComputeEventNotifier CommandInterrupted;
+        public event ComputeEventNotifier CommandTerminated;
 
         #endregion
 
@@ -72,7 +72,7 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
         /// </summary>
-        /// <remarks> Is <c>null</c> for user created <c>ComputeEvent</c>s. </remarks>
+        /// <remarks> Is <c>null</c> for user <c>ComputeEvent</c>s. </remarks>
         public ComputeCommandQueue CommandQueue { get { return commandQueue; } }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Cloo
         public ComputeCommandType CommandType { get { return commandType; } }
 
         /// <summary>
-        /// Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the <c>ComputeEvent</c>'s command has finished execution.
+        /// Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command has finished execution.
         /// </summary>
         public long CommandFinishTime
         {
@@ -96,7 +96,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the <c>ComputeEvent</c>'s command is enqueued in the <c>ComputeEvent.CommandQueue</c> by the host.
+        /// Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command is enqueued in the <c>ComputeEvent.CommandQueue</c> by the host.
         /// </summary>
         public long CommandEnqueueTime
         {
@@ -113,7 +113,7 @@ namespace Cloo
         /// <summary>
         /// Gets or sets (OpenCL 1.1 required) the execution status of the <c>ComputeEvent</c>'s command.
         /// </summary>
-        /// <remarks> Is negative if the <c>ComputeEvent</c>'s command was abnormally terminated. Note that only user defined <c>ComputeEvent</c>s can have their status changed. </remarks>
+        /// <remarks> Is negative if the <c>ComputeEvent</c>'s command was abnormally terminated. Note that only user <c>ComputeEvent</c>s can have their status explicitly changed. </remarks>
         public ComputeCommandExecutionStatus CommandExecutionStatus
         {
             get
@@ -135,7 +135,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the <c>ComputeEvent</c>'s command starts execution.
+        /// Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command starts execution.
         /// </summary>
         public long CommandStartTime
         {
@@ -150,7 +150,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the <c>ComputeEvent</c>'s command that has been enqueued is submitted by the host to the <c>ComputeEvent.CommandQueue.Device</c>.
+        /// Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command that has been enqueued is submitted by the host to the <c>ComputeEvent.CommandQueue.Device</c>.
         /// </summary>
         public long CommandSubmitTime
         {
@@ -174,7 +174,7 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new user defined <c>ComputeEvent</c>.
+        /// Creates a new user <c>ComputeEvent</c>.
         /// </summary>
         /// <param name="context"> The <c>ComputeContext</c> in which the <c>ComputeEvent</c> is created. </param>
         /// <remarks> OpenCL 1.1 required. </remarks>
@@ -223,8 +223,8 @@ namespace Cloo
                         CommandCompleted(this, new EventArgs());
                     break;
                 default:
-                    if (CommandInterrupted != null) 
-                        CommandInterrupted(this, new EventArgs());
+                    if (CommandTerminated != null) 
+                        CommandTerminated(this, new EventArgs());
                     break;
             }
         }

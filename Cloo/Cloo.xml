@@ -1038,6 +1038,16 @@
             <param name="bufferId"> The OpenGL buffer object id to use for the creation of the <c>ComputeBuffer</c>. </param>
             <returns> The created <c>ComputeBuffer</c>. </returns>
         </member>
+        <member name="M:Cloo.ComputeBuffer`1.CreateSubBuffer(Cloo.ComputeMemoryFlags,System.Int64,System.Int64)">
+            <summary>
+            Creates a new sub buffer. A sub buffer is a <c>ComputeBuffer</c> that represents a memory area of another <c>ComputeBuffer</c>.
+            </summary>
+            <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
+            <param name="offset"> The starting index of the sub buffer. </param>
+            <param name="count"> The number of elements to include in the sub buffer. </param>
+            <returns> The created sub buffer. </returns>
+            <remarks> OpenCL 1.1 required. </remarks>
+        </member>
         <member name="M:Cloo.ComputeBuffer`1.ToString">
             <summary>
             Gets the string representation of the <c>ComputeBuffer</c>.
@@ -1049,7 +1059,7 @@
             Gets the number of elements in the <c>ComputeBuffer</c>.
             </summary>
         </member>
-        <member name="T:Cloo.Bindings.Clx">
+        <member name="T:Cloo.Bindings.CLx">
             <summary>
             Contains bindings to the OpenCL extension functions.
             </summary>
@@ -1538,7 +1548,7 @@
         </member>
         <member name="M:Cloo.ComputeEvent.#ctor(Cloo.ComputeContext)">
             <summary>
-            Creates a new user defined <c>ComputeEvent</c>.
+            Creates a new user <c>ComputeEvent</c>.
             </summary>
             <param name="context"> The <c>ComputeContext</c> in which the <c>ComputeEvent</c> is created. </param>
             <remarks> OpenCL 1.1 required. </remarks>
@@ -1551,10 +1561,10 @@
         </member>
         <member name="E:Cloo.ComputeEvent.CommandCompleted">
             <summary>
-            Occurrs when <c>ComputeEvent.ExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
+            Occurrs when <c>ComputeEvent.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
             </summary>
         </member>
-        <member name="E:Cloo.ComputeEvent.CommandInterrupted">
+        <member name="E:Cloo.ComputeEvent.CommandTerminated">
             <summary>
             Occurrs when the <c>ComputeEvent</c>'s command is abnormally terminated.
             </summary>
@@ -1563,7 +1573,7 @@
             <summary>
             Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
             </summary>
-            <remarks> Is <c>null</c> for user created <c>ComputeEvent</c>s. </remarks>
+            <remarks> Is <c>null</c> for user <c>ComputeEvent</c>s. </remarks>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandType">
             <summary>
@@ -1572,34 +1582,34 @@
         </member>
         <member name="P:Cloo.ComputeEvent.CommandFinishTime">
             <summary>
-            Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the <c>ComputeEvent</c>'s command has finished execution.
+            Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command has finished execution.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandEnqueueTime">
             <summary>
-            Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the <c>ComputeEvent</c>'s command is enqueued in the <c>ComputeEvent.CommandQueue</c> by the host.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeEvent.CommandStartTime">
-            <summary>
-            Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the <c>ComputeEvent</c>'s command starts execution.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeEvent.CommandSubmitTime">
-            <summary>
-            Gets a 64-bit value that describes the current <c>ComputeEvent.CommandQueue.Device</c> time counter in nanoseconds when the <c>ComputeEvent</c>'s command that has been enqueued is submitted by the host to the <c>ComputeEvent.CommandQueue.Device</c>.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeEvent.Context">
-            <summary>
-            Gets the <c>ComputeContext</c> associated with the <c>ComputeEvent</c>
+            Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command is enqueued in the <c>ComputeEvent.CommandQueue</c> by the host.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandExecutionStatus">
             <summary>
             Gets or sets (OpenCL 1.1 required) the execution status of the <c>ComputeEvent</c>'s command.
             </summary>
-            <remarks> Is negative if the <c>ComputeEvent</c>'s command was abnormally terminated. Note that only user defined <c>ComputeEvent</c>s can have their status changed. </remarks>
+            <remarks> Is negative if the <c>ComputeEvent</c>'s command was abnormally terminated. Note that only user <c>ComputeEvent</c>s can have their status explicitly changed. </remarks>
+        </member>
+        <member name="P:Cloo.ComputeEvent.CommandStartTime">
+            <summary>
+            Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command starts execution.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeEvent.CommandSubmitTime">
+            <summary>
+            Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command that has been enqueued is submitted by the host to the <c>ComputeEvent.CommandQueue.Device</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeEvent.Context">
+            <summary>
+            Gets the <c>ComputeContext</c> associated with the <c>ComputeEvent</c>
+            </summary>
         </member>
         <member name="T:Cloo.ComputeContextProperty">
             <summary>
