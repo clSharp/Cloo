@@ -593,7 +593,7 @@ namespace Cloo
         /// <param name="blocking"> The mode of operation of this call. </param>
         /// <param name="offset"> The offset in elements where reading starts. </param>
         /// <param name="count"> The number of elements to read. </param>
-        /// <param name="data"> A preallocated memory area to read the data into. </param>
+        /// <param name="data"> A pointer to a preallocated memory area to read the data into. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
         public void Read<T>(ComputeBuffer<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEvent> events) where T : struct
@@ -651,7 +651,7 @@ namespace Cloo
         /// <param name="region"> The region (width, height, depth) in pixels to read. </param>
         /// <param name="rowPitch"> The <c>ComputeImage.RowPitch</c> or 0. </param>
         /// <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
-        /// <param name="data"> A preallocated memory area to read the data into. </param>
+        /// <param name="data"> A pointer to a preallocated memory area to read the data into. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
         public void Read(ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events)
