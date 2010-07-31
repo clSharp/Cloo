@@ -1,3 +1,23 @@
+[0.7.4] -----------------------------------------------------------------------
+Breaking changes:
+None.
+
+New functionality:
+Added ComputeEvent.Context property.
+Added Tools.ParseVersionString().
+
+Bugfixes:
+
+Deprecation:
+Don't issue a compile-time error if deprecated CommandQueue methods are used.
+
+Internals:
+None.
+
+Documentation:
+Minor edits.
+
+
 [0.7.3] -----------------------------------------------------------------------
 Breaking changes:
 Renamed ComputeDevice.ComputeCommmandQueueFlags to CommandQueueFlags.
