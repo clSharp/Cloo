@@ -922,14 +922,13 @@ namespace Cloo
 
         private void SetProperty(ComputeCommandQueueFlags flags, bool enable)
         {
-            ComputeCommandQueueFlags oldProperties = 0;
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            error = CL10.SetCommandQueueProperty(
-                Handle,
-                flags,
-                (enable) ? ComputeBoolean.True : ComputeBoolean.False,
-                out oldProperties);
-            ComputeException.ThrowOnError(error);
+            unsafe
+            {
+                ComputeCommandQueueFlags oldProperties = 0;
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                error = CL10.SetCommandQueueProperty(Handle, flags, enable ? ComputeBoolean.True : ComputeBoolean.False, &oldProperties);
+                ComputeException.ThrowOnError(error);
+            }
         }
 
         #endregion

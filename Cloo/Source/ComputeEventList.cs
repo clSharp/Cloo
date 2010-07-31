@@ -80,11 +80,8 @@ namespace Cloo
         {
             unsafe
             {
-                fixed (IntPtr* eventHandlesPtr = Tools.ExtractHandles(events))
-                {
-                    ComputeErrorCode error = CL10.WaitForEvents(events.Count, eventHandlesPtr);
-                    ComputeException.ThrowOnError(error);
-                }
+                ComputeErrorCode error = CL10.WaitForEvents(events.Count, Tools.ExtractHandles(events));
+                ComputeException.ThrowOnError(error);
             }
         }
 

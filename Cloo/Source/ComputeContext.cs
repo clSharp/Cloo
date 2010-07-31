@@ -102,19 +102,11 @@ namespace Cloo
             unsafe
             {
                 IntPtr[] deviceHandles = Tools.ExtractHandles(devices);
-                IntPtr[] propertiesList = (properties != null) ? properties.ToIntPtrArray() : null;
+                IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
                 IntPtr notifyFuncPtr = (notify != null) ? Marshal.GetFunctionPointerForDelegate(notify) : IntPtr.Zero;
 
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                fixed (IntPtr* propertiesPtr = propertiesList)
-                fixed (IntPtr* deviceHandlesPtr = deviceHandles)
-                    Handle = CL10.CreateContext(
-                        propertiesPtr,
-                        devices.Count,
-                        deviceHandlesPtr,
-                        notifyFuncPtr,
-                        notifyDataPtr,
-                        &error);
+                Handle = CL10.CreateContext(propertyArray, devices.Count, deviceHandles, notifyFuncPtr, notifyDataPtr, &error);
                 ComputeException.ThrowOnError(error);
 
                 this.properties = properties;
@@ -135,17 +127,11 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] propertiesList = (properties != null) ? properties.ToIntPtrArray() : null;
+                IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
                 IntPtr notifyFuncPtr = (notify != null) ? Marshal.GetFunctionPointerForDelegate(notify) : IntPtr.Zero;
 
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                fixed (IntPtr* propertiesPtr = propertiesList)
-                    Handle = CL10.CreateContextFromType(
-                        propertiesPtr,
-                        deviceType,
-                        notifyFuncPtr,
-                        userDataPtr,
-                        &error);
+                Handle = CL10.CreateContextFromType(propertyArray, deviceType, notifyFuncPtr, userDataPtr, &error);
                 ComputeException.ThrowOnError(error);
 
                 this.properties = properties;

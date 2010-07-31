@@ -109,11 +109,8 @@ namespace Cloo
                 ComputeException.ThrowOnError(error);
                 handles = new IntPtr[handlesLength];
 
-                fixed (IntPtr* handlesPtr = handles)
-                {
-                    error = CL10.GetPlatformIDs(handlesLength, handlesPtr, null);
-                    ComputeException.ThrowOnError(error);
-                }
+                error = CL10.GetPlatformIDs(handlesLength, handles, null);
+                ComputeException.ThrowOnError(error);
 
                 List<ComputePlatform> platformList = new List<ComputePlatform>(handlesLength);
                 foreach (IntPtr handle in handles)
@@ -200,11 +197,8 @@ namespace Cloo
                 ComputeException.ThrowOnError(error);
 
                 IntPtr[] handles = new IntPtr[handlesLength];
-                fixed (IntPtr* devicesPtr = handles)
-                {
-                    error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, handlesLength, devicesPtr, null);
-                    ComputeException.ThrowOnError(error);
-                }
+                error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, handlesLength, handles, null);
+                ComputeException.ThrowOnError(error);
 
                 ComputeDevice[] devices = new ComputeDevice[handlesLength];
                 for (int i = 0; i < handlesLength; i++)

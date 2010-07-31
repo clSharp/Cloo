@@ -48,7 +48,7 @@ namespace Cloo.Bindings
         public extern static unsafe ComputeErrorCode
         GetPlatformIDs(
             Int32 num_entries,
-            IntPtr* platforms,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] platforms,
             Int32* num_platforms);
 
         [DllImport(dllName, EntryPoint = "clGetPlatformInfo")]
@@ -67,7 +67,7 @@ namespace Cloo.Bindings
             IntPtr platform,
             ComputeDeviceTypes device_type,
             Int32 num_entries,
-            IntPtr* devices,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] devices,
             Int32* num_devices);
 
         [DllImport(dllName, EntryPoint = "clGetDeviceInfo")]
@@ -83,9 +83,9 @@ namespace Cloo.Bindings
         [DllImport(dllName, EntryPoint = "clCreateContext")]
         public extern static unsafe IntPtr
         CreateContext(
-            IntPtr* properties,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] properties,
             Int32 num_devices,
-            IntPtr* devices,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] devices,
             /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ IntPtr pfn_notify,
             /* void* */ IntPtr user_data,
             ComputeErrorCode* errcode_ret);
@@ -93,7 +93,7 @@ namespace Cloo.Bindings
         [DllImport(dllName, EntryPoint = "clCreateContextFromType")]
         public extern static unsafe IntPtr
         CreateContextFromType(
-            IntPtr* properties,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] properties,
             ComputeDeviceTypes device_type,
             /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ IntPtr pfn_notify,
             /* void* */ IntPtr user_data,
@@ -148,7 +148,7 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             ComputeCommandQueueFlags properties,
             ComputeBoolean enable,
-            out ComputeCommandQueueFlags old_properties);
+            ComputeCommandQueueFlags* old_properties);
 
         // Memory Object APIs
         [DllImport(dllName, EntryPoint = "clCreateBuffer")]
@@ -256,7 +256,7 @@ namespace Cloo.Bindings
             IntPtr context,
             Int32 count,
             String[] strings,
-            IntPtr* lengths,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] lengths,
             ComputeErrorCode* errcode_ret);
 
         [DllImport(dllName, EntryPoint = "clCreateProgramWithBinary")]
@@ -264,8 +264,8 @@ namespace Cloo.Bindings
         CreateProgramWithBinary(
             IntPtr context,
             Int32 num_devices,
-            IntPtr* device_list,
-            IntPtr* lengths,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] device_list,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] lengths,
             Byte** binaries,
             Int32* binary_status,
             ComputeErrorCode* errcode_ret);
@@ -367,7 +367,7 @@ namespace Cloo.Bindings
         public extern static unsafe ComputeErrorCode
         WaitForEvents(
             Int32 num_events,
-            IntPtr* event_list);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_list);
 
         [DllImport(dllName, EntryPoint = "clGetEventInfo")]
         public extern static unsafe ComputeErrorCode

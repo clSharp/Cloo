@@ -176,15 +176,13 @@ namespace Cloo
                     }
 
                     byte** binariesPtr = (byte**)binariesPtrGCHandle.AddrOfPinnedObject();
-                    fixed (IntPtr* binariesLengthsPtr = binariesLengths)
-                    fixed (IntPtr* deviceHandlesPtr = deviceHandles)
                     fixed (int* binaryStatusPtr = binariesStats)
                     {
                         Handle = CL10.CreateProgramWithBinary(
                             context.Handle,
                             count,
-                            deviceHandlesPtr,
-                            binariesLengthsPtr,
+                            deviceHandles,
+                            binariesLengths,
                             binariesPtr,
                             binaryStatusPtr,
                             &error);
