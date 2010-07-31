@@ -36,14 +36,14 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL resource.
     /// </summary>
-    /// <remarks> An OpenCL resource is an OpenCL object that can be created and destroyed by the application. </remarks>
+    /// <remarks> An OpenCL resource is an OpenCL object that can be created and deleted by the application. </remarks>
     /// <seealso cref="ComputeObject"/>
     public abstract class ComputeResource : ComputeObject, IDisposable
     {
         #region Public methods
 
         /// <summary>
-        /// Destroys the <c>ComputeResource</c> and frees its accompanying OpenCL resources.
+        /// Deletes the <c>ComputeResource</c> and frees its accompanying OpenCL resources.
         /// </summary>
         public void Dispose()
         {

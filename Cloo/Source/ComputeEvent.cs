@@ -58,12 +58,12 @@ namespace Cloo
         /// <summary>
         /// Occurrs when <c>ComputeEvent.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
         /// </summary>
-        public event ComputeEventNotifier CommandCompleted;
+        public event ComputeEventNotifier Completed;
 
         /// <summary>
-        /// Occurrs when the <c>ComputeEvent</c>'s command is abnormally terminated.
+        /// Occurrs when the operation that generated this <c>ComputeEvent</c> is abnormally terminated.
         /// </summary>
-        public event ComputeEventNotifier CommandTerminated;
+        public event ComputeEventNotifier Terminated;
 
         #endregion
 
@@ -219,12 +219,12 @@ namespace Cloo
             switch (cmdExecStatusOrErr)
             {
                 case (int)ComputeCommandExecutionStatus.Complete:
-                    if (CommandCompleted != null) 
-                        CommandCompleted(this, new EventArgs());
+                    if (Completed != null) 
+                        Completed(this, new EventArgs());
                     break;
                 default:
-                    if (CommandTerminated != null) 
-                        CommandTerminated(this, new EventArgs());
+                    if (Terminated != null) 
+                        Terminated(this, new EventArgs());
                     break;
             }
         }

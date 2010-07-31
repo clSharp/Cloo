@@ -16,7 +16,7 @@
             <summary>
             Represents an OpenCL resource.
             </summary>
-            <remarks> An OpenCL resource is an OpenCL object that can be created and destroyed by the application. </remarks>
+            <remarks> An OpenCL resource is an OpenCL object that can be created and deleted by the application. </remarks>
             <seealso cref="T:Cloo.ComputeObject"/>
         </member>
         <member name="T:Cloo.ComputeObject">
@@ -66,7 +66,7 @@
         </member>
         <member name="M:Cloo.ComputeResource.Dispose">
             <summary>
-            Destroys the <c>ComputeResource</c> and frees its accompanying OpenCL resources.
+            Deletes the <c>ComputeResource</c> and frees its accompanying OpenCL resources.
             </summary>
         </member>
         <member name="M:Cloo.ComputeEvent.#ctor(Cloo.ComputeContext)">
@@ -82,14 +82,14 @@
             </summary>
             <returns> The string representation of the <c>ComputeEvent</c>. </returns>
         </member>
-        <member name="E:Cloo.ComputeEvent.CommandCompleted">
+        <member name="E:Cloo.ComputeEvent.Completed">
             <summary>
             Occurrs when <c>ComputeEvent.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
             </summary>
         </member>
-        <member name="E:Cloo.ComputeEvent.CommandTerminated">
+        <member name="E:Cloo.ComputeEvent.Terminated">
             <summary>
-            Occurrs when the <c>ComputeEvent</c>'s command is abnormally terminated.
+            Occurrs when the operation that generated this <c>ComputeEvent</c> is abnormally terminated.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandQueue">
@@ -326,7 +326,7 @@
             </summary>
             <param name="devices"> A collection of <c>ComputeDevice</c>s to associate with the <c>ComputeContext</c>. </param>
             <param name="properties"> A <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>. </param>
-            <param name="notify"> A delegate instance that represents a reference to a notification routine. This routine is a callback function that will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. The callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe and that the delegate instance doesn't get collected by the Garbage Collector until <c>ComputeContext</c> is disposed. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
+            <param name="notify"> A delegate instance that refers to a notification routine. This routine is a callback function that will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. The callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe and that the delegate instance doesn't get collected by the Garbage Collector until <c>ComputeContext</c> is disposed. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
             <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         </member>
         <member name="M:Cloo.ComputeContext.#ctor(Cloo.ComputeDeviceTypes,Cloo.ComputeContextPropertyList,Cloo.ComputeContextNotifier,System.IntPtr)">
@@ -335,7 +335,7 @@
             </summary>
             <param name="deviceType"> A bit-field that identifies the type of <c>ComputeDevice</c> to associate with the <c>ComputeContext</c>. </param>
             <param name="properties"> A <c>ComputeContextPropertyList</c> of the <c>ComputeContext</c>. </param>
-            <param name="notify"> A callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
+            <param name="notify"> A delegate instance that refers to a notification routine. This routine is a callback function that will be used by the OpenCL implementation to report information on errors that occur in the <c>ComputeContext</c>. The callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe and that the delegate instance doesn't get collected by the Garbage Collector until <c>ComputeContext</c> is disposed. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
             <param name="userDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         </member>
         <member name="M:Cloo.ComputeContext.ToString">
@@ -662,7 +662,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
             <summary>
-            Enqueues a command to parallely execute a range of <c>ComputeKernel</c>s.
+            Enqueues a command to execute a range of <c>ComputeKernel</c>s in parallel.
             </summary>
             <param name="kernel"> The <c>ComputeKernel</c> to execute. </param>
             <param name="globalWorkOffset"> An array of values that describe the offset used to calculate the global ID of a work-item instead of having the global IDs always start at offset (0, 0,... 0). </param>
@@ -672,14 +672,14 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Finish">
             <summary>
-            Blocks until all previously queued OpenCL commands in the <c>ComputeCommandQueue</c> are issued to the <c>ComputeCommandQueue.Device</c> and have completed.
+            Blocks until all previously enqueued commands are issued to the <c>ComputeCommandQueue.Device</c> and have completed.
             </summary>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Flush">
             <summary>
-            Issues all previously queued OpenCL commands in the <c>ComputeCommandQueue</c> to the <c>ComputeCommandQueue.Device</c>.
+            Issues all previously enqueued commands to the <c>ComputeCommandQueue.Device</c>.
             </summary>
-            <remarks> This method only guarantees that all queued commands get issued to the OpenCL device. There is no guarantee that they will be complete after this method returns. </remarks>
+            <remarks> This method only guarantees that all previously enqueued commands get issued to the OpenCL device. There is no guarantee that they will be complete after this method returns. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Map``1(Cloo.ComputeBuffer{``0},System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
             <summary>
@@ -696,7 +696,7 @@
             <param name="offset"> The <paramref name="source"/> offset in elements where mapping starts. </param>
             <param name="count"> The number of elements to map. </param>
             <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
             <summary>
@@ -713,7 +713,7 @@
             <param name="offset"> The <paramref name="source"/> (x, y, z) offset in pixels where mapping starts. </param>
             <param name="region"> The region (width, height, depth) in pixels to map. </param>
             <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBuffer{``0},System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
             <summary>
@@ -735,7 +735,7 @@
             <param name="count"> The number of elements to read. </param>
             <param name="data"> A pointer to a preallocated memory area to read the data into. </param>
             <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
             <summary>
@@ -759,7 +759,7 @@
             <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
             <param name="data"> A pointer to a preallocated memory area to read the data into. </param>
             <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReleaseGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
             <summary>
@@ -808,7 +808,7 @@
             <param name="count"> The number of elements to write. </param>
             <param name="data"> The content written to the <c>ComputeBuffer</c>. </param>
             <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
             <summary>
@@ -832,7 +832,7 @@
             <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
             <param name="data"> The content written to the <c>ComputeImage</c>. </param>
             <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="P:Cloo.ComputeCommandQueue.Context">
             <summary>
@@ -904,7 +904,7 @@
             Creates a new sub-buffer. A sub-buffer is a <c>ComputeBuffer</c> that represents a memory area of another <c>ComputeBuffer</c>.
             </summary>
             <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
-            <param name="offset"> The starting element of the sub-buffer. </param>
+            <param name="offset"> The index of the element of the <c>ComputeBuffer</c>, where the sub-buffer starts. </param>
             <param name="count"> The number of elements to include in the sub-buffer. </param>
             <returns> The new sub-buffer. </returns>
             <remarks> Creating a sub-buffer from another sub-buffer results into an invalid operation. OpenCL 1.1 required. </remarks>

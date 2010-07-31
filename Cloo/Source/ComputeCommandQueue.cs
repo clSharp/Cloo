@@ -399,7 +399,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Enqueues a command to parallely execute a range of <c>ComputeKernel</c>s.
+        /// Enqueues a command to execute a range of <c>ComputeKernel</c>s in parallel.
         /// </summary>
         /// <param name="kernel"> The <c>ComputeKernel</c> to execute. </param>
         /// <param name="globalWorkOffset"> An array of values that describe the offset used to calculate the global ID of a work-item instead of having the global IDs always start at offset (0, 0,... 0). </param>
@@ -439,7 +439,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Blocks until all previously queued OpenCL commands in the <c>ComputeCommandQueue</c> are issued to the <c>ComputeCommandQueue.Device</c> and have completed.
+        /// Blocks until all previously enqueued commands are issued to the <c>ComputeCommandQueue.Device</c> and have completed.
         /// </summary>
         public void Finish()
         {
@@ -448,9 +448,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Issues all previously queued OpenCL commands in the <c>ComputeCommandQueue</c> to the <c>ComputeCommandQueue.Device</c>.
+        /// Issues all previously enqueued commands to the <c>ComputeCommandQueue.Device</c>.
         /// </summary>
-        /// <remarks> This method only guarantees that all queued commands get issued to the OpenCL device. There is no guarantee that they will be complete after this method returns. </remarks>
+        /// <remarks> This method only guarantees that all previously enqueued commands get issued to the OpenCL device. There is no guarantee that they will be complete after this method returns. </remarks>
         public void Flush()
         {
             ComputeErrorCode error = CL10.Flush(Handle);
@@ -475,7 +475,7 @@ namespace Cloo
         /// <param name="offset"> The <paramref name="source"/> offset in elements where mapping starts. </param>
         /// <param name="count"> The number of elements to map. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         public IntPtr Map<T>(ComputeBuffer<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, long offset, long count, ICollection<ComputeEvent> events) where T : struct
         {
             unsafe
@@ -527,7 +527,7 @@ namespace Cloo
         /// <param name="offset"> The <paramref name="source"/> (x, y, z) offset in pixels where mapping starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to map. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         public IntPtr Map(ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, ICollection<ComputeEvent> events)
         {
             unsafe
@@ -595,7 +595,7 @@ namespace Cloo
         /// <param name="count"> The number of elements to read. </param>
         /// <param name="data"> A pointer to a preallocated memory area to read the data into. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         public void Read<T>(ComputeBuffer<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEvent> events) where T : struct
         {
             unsafe
@@ -653,7 +653,7 @@ namespace Cloo
         /// <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
         /// <param name="data"> A pointer to a preallocated memory area to read the data into. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         public void Read(ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events)
         {
             unsafe
@@ -807,7 +807,7 @@ namespace Cloo
         /// <param name="count"> The number of elements to write. </param>
         /// <param name="data"> The content written to the <c>ComputeBuffer</c>. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         public void Write<T>(ComputeBuffer<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEvent> events) where T : struct
         {
             unsafe
@@ -865,7 +865,7 @@ namespace Cloo
         /// <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
         /// <param name="data"> The content written to the <c>ComputeImage</c>. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after enqueueing the command in the <c>ComputeCommandQueue</c>. </remarks>
+        /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         public void Write(ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events)
         {
             unsafe

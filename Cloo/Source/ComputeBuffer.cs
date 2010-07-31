@@ -175,7 +175,7 @@ namespace Cloo
         /// Creates a new sub-buffer. A sub-buffer is a <c>ComputeBuffer</c> that represents a memory area of another <c>ComputeBuffer</c>.
         /// </summary>
         /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
-        /// <param name="offset"> The starting element of the sub-buffer. </param>
+        /// <param name="offset"> The index of the element of the <c>ComputeBuffer</c>, where the sub-buffer starts. </param>
         /// <param name="count"> The number of elements to include in the sub-buffer. </param>
         /// <returns> The new sub-buffer. </returns>
         /// <remarks> Creating a sub-buffer from another sub-buffer results into an invalid operation. OpenCL 1.1 required. </remarks>
