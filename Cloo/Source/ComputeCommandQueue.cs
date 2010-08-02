@@ -178,7 +178,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public void Copy<T>(ComputeBuffer<T> source, ComputeBuffer<T> destination, ICollection<ComputeEvent> events) where T : struct
         {
             Copy(source, destination, 0, 0, source.Count, events);
@@ -224,7 +224,8 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        
+
         public void Copy<T>(ComputeBuffer<T> source, ComputeImage destination, ICollection<ComputeEvent> events) where T : struct
         {
             Copy(source, destination, 0, new long[] { 0, 0, 0 }, new long[] { destination.Width, destination.Height, destination.Depth }, events);
@@ -273,7 +274,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public void Copy<T>(ComputeImage source, ComputeBuffer<T> destination, ICollection<ComputeEvent> events) where T : struct
         {
             Copy(source, destination, new long[] { 0, 0, 0 }, 0, new long[] { source.Width, source.Height, source.Depth }, events);
@@ -322,7 +323,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public void Copy(ComputeImage source, ComputeImage destination, ICollection<ComputeEvent> events)
         {
             long[] offset = new long[] { 0, 0, 0 };
@@ -460,7 +461,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public IntPtr Map<T>(ComputeBuffer<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEvent> events) where T : struct
         {
             return Map(buffer, blocking, flags, 0, buffer.Count, events);
@@ -512,7 +513,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public IntPtr Map(ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEvent> events)
         {
             return Map(image, blocking, flags, new long[] { 0, 0, 0 }, new long[] { image.Width, image.Height, image.Depth }, events);
@@ -567,7 +568,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public T[] Read<T>(ComputeBuffer<T> buffer, ICollection<ComputeEvent> events) where T : struct
         {
             return Read(buffer, 0, buffer.Count, events);
@@ -576,7 +577,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public T[] Read<T>(ComputeBuffer<T> buffer, long offset, long count, ICollection<ComputeEvent> events) where T : struct
         {
             T[] data = new T[count];
@@ -627,7 +628,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public void Read(ComputeImage image, bool blocking, IntPtr data, ICollection<ComputeEvent> events)
         {
             Read(image, blocking, new long[] { 0, 0, 0 }, new long[] { image.Width, image.Height, image.Depth }, image.RowPitch, image.SlicePitch, data, events);
@@ -636,7 +637,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public void Read(ComputeImage image, bool blocking, long[] offset, long[] region, IntPtr data, ICollection<ComputeEvent> events)
         {
             Read(image, blocking, offset, region, image.RowPitch, image.SlicePitch, data, events);
@@ -781,7 +782,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public void Write<T>(ComputeBuffer<T> buffer, T[] data, ICollection<ComputeEvent> events) where T : struct
         {
             Write(buffer, 0, data.Length, data, events);
@@ -790,7 +791,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public void Write<T>(ComputeBuffer<T> buffer, long offset, long count, T[] data, ICollection<ComputeEvent> events) where T : struct
         {
             GCHandle dataHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
@@ -839,7 +840,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public void Write(ComputeImage image, bool blocking, IntPtr data, ICollection<ComputeEvent> events)
         {
             Write(image, blocking, new long[] { 0, 0, 0 }, new long[] { image.Width, image.Height, image.Depth }, data, events);
@@ -848,7 +849,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        [Obsolete("Deprecated. Use the full version instead.", true)]
+        [Obsolete("Deprecated. You should use the full version instead.", false)]
         public void Write(ComputeImage image, bool blocking, long[] offset, long[] region, IntPtr data, ICollection<ComputeEvent> events)
         {
             Write(image, blocking, offset, region, image.RowPitch, image.SlicePitch, data, events);
