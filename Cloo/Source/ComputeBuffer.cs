@@ -38,7 +38,7 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL buffer.
     /// </summary>
-    /// <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. </typeparam>
+    /// <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. <typeparamref name="T"/> is restricted to value types and <c>struct</c>s containing such types. </typeparam>
     /// <remarks> A memory object that stores a linear collection of bytes. Buffer objects are accessible using a pointer in a kernel executing on a device. </remarks>
     /// <seealso cref="ComputeDevice"/>
     /// <seealso cref="ComputeKernel"/>
