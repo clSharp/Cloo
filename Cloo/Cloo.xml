@@ -858,7 +858,7 @@
             <summary>
             Represents an OpenCL buffer.
             </summary>
-            <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. </typeparam>
+            <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. <typeparamref name="T"/> is restricted to value types and <c>struct</c>s containing such types. </typeparam>
             <remarks> A memory object that stores a linear collection of bytes. Buffer objects are accessible using a pointer in a kernel executing on a device. </remarks>
             <seealso cref="T:Cloo.ComputeDevice"/>
             <seealso cref="T:Cloo.ComputeKernel"/>
@@ -955,7 +955,7 @@
             <summary>
             Builds (compiles and links) a program executable from the program source or binary for all or some of the <c>ComputeProgram.Devices</c>.
             </summary>
-            <param name="devices"> A subset or all of the <c>ComputeProgram.Devices</c>. If <paramref name="devices"/> is <c>null</c>, the executable is built for every item of the <c>ComputeProgram.Devices</c> for which a source or a binary has been loaded. </param>
+            <param name="devices"> A subset or all of <c>ComputeProgram.Devices</c>. If <paramref name="devices"/> is <c>null</c>, the executable is built for every item of <c>ComputeProgram.Devices</c> for which a source or a binary has been loaded. </param>
             <param name="options"> A set of options for the OpenCL compiler. </param>
             <param name="notify"> A delegate instance that represents a reference to a notification routine. This routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If <paramref name="notify"/> is not <c>null</c>, <c>ComputeProgram.Build</c> does not need to wait for the build to complete and can return immediately. If <paramref name="notify"/> is <c>null</c>, <c>ComputeProgram.Build</c> does not return until the build has completed. The callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe and that the delegate instance doesn't get collected by the Garbage Collector until the build operation triggers the callback. </param>
             <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>

@@ -272,6 +272,7 @@ namespace Cloo
 
         #endregion
 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         delegate void RawNotifier(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData);
     }
 

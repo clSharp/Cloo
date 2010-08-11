@@ -45,18 +45,19 @@ namespace Clootils
         private int platformBackup = 0;
         private string optionsBackup = "";
 
-
         public ConfigForm()
         {
             InitializeComponent();
 
             deviceCheckList.CheckOnClick = true;
+            deviceCheckList.SelectedIndexChanged += new EventHandler(deviceCheckList_SelectedIndexChanged);
 
             Platform = ComputePlatform.Platforms[0];
             platformComboBox.SelectedIndexChanged += new EventHandler(platformComboBox_SelectedIndexChanged);
 
             object[] availablePlatforms = new object[ComputePlatform.Platforms.Count];
-            for (int i = 0; i < availablePlatforms.Length; i++) availablePlatforms[i] = ComputePlatform.Platforms[i].Name;
+            for (int i = 0; i < availablePlatforms.Length; i++) 
+                availablePlatforms[i] = ComputePlatform.Platforms[i].Name;
             platformComboBox.Items.AddRange(availablePlatforms);
             platformComboBox.SelectedIndex = 0;
 
@@ -65,11 +66,23 @@ namespace Clootils
             Shown += new EventHandler(SettingsForm_Shown);
         }
 
+        void deviceCheckList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (deviceCheckList.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("No device specified!\n\nSelect one or more devices from the list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                okButton.Enabled = false;
+            }
+            else
+                okButton.Enabled = true;
+        }
+
         void platformComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComputePlatform platform = ComputePlatform.Platforms[platformComboBox.SelectedIndex];
             object[] availableDevices = new object[platform.Devices.Count];
-            for (int i = 0; i < availableDevices.Length; i++) availableDevices[i] = platform.Devices[i].Name;
+            for (int i = 0; i < availableDevices.Length; i++) 
+                availableDevices[i] = platform.Devices[i].Name;
             deviceCheckList.Items.Clear();
             deviceCheckList.Items.AddRange(availableDevices);
             deviceCheckList.SetItemChecked(0, true);
@@ -98,6 +111,8 @@ namespace Clootils
                 deviceCheckList.SetItemChecked(i, devicesBackup[i]);
 
             optionsTextBox.Text = optionsBackup;
+            
+            okButton.Enabled = true;
         }
 
         private void StoreState()
@@ -120,6 +135,7 @@ namespace Clootils
             for (int i = 0; k < Devices.Length && i < Platform.Devices.Count; i++)
                 if (deviceCheckList.GetItemChecked(i))
                     Devices[k++] = Platform.Devices[i];
+
             Options = optionsTextBox.Text;
         }
     }
