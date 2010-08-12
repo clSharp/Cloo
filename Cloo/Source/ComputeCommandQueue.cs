@@ -723,7 +723,7 @@ namespace Cloo
         /// <returns> The string representation of the <c>ComputeCommandQueue</c>. </returns>
         public override string ToString()
         {
-            return "ComputeQueue" + base.ToString();
+            return "ComputeCommandQueue" + base.ToString();
         }
 
         /// <summary>

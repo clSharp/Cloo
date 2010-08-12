@@ -72,7 +72,7 @@ kernel void VectorAdd(
             ComputeBuffer<float> b = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrB);
             ComputeBuffer<float> c = new ComputeBuffer<float>(context, ComputeMemoryFlags.WriteOnly, arrC.Length);
 
-            ComputeProgram program = new ComputeProgram(context, new string[] { kernelSource });
+            ComputeProgram program = new ComputeProgram(context, kernelSource);
             program.Build(null, null, null, IntPtr.Zero);
 
             ComputeKernel kernel = program.CreateKernel("VectorAdd");
