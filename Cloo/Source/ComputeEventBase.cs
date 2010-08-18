@@ -41,6 +41,8 @@ namespace Cloo
     /// <remarks> An event object encapsulates the status of an operation such as a command. It can be used to synchronize operations in a context. </remarks>
     /// <seealso cref="ComputeCommandQueue"/>
     /// <seealso cref="ComputeContext"/>
+    /// <seealso cref="ComputeEvent"/>
+    /// <seealso cref="ComputeUserEvent"/>
     public class ComputeEventBase : ComputeResource
     {
         #region Fields
@@ -53,12 +55,12 @@ namespace Cloo
         #region Events
 
         /// <summary>
-        /// Occurrs when <c>ComputeEvent.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
+        /// Occurrs when <c>ComputeEventBase.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
         /// </summary>
         public event ComputeEventNotifier Completed;
 
         /// <summary>
-        /// Occurrs when the operation that generated this <c>ComputeEvent</c> is abnormally terminated.
+        /// Occurrs when the operation that generated the event is abnormally terminated.
         /// </summary>
         public event ComputeEventNotifier Terminated;
 
@@ -67,12 +69,12 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the <c>ComputeCommandType</c> associated with the <c>ComputeEvent</c>.
+        /// Gets the <c>ComputeCommandType</c> associated with the event.
         /// </summary>
         public ComputeCommandType CommandType { get; protected set; }
 
         /// <summary>
-        /// Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command has finished execution.
+        /// Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command has finished execution.
         /// </summary>
         public long CommandFinishTime
         {
@@ -87,7 +89,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command is enqueued in the <c>ComputeEvent.CommandQueue</c> by the host.
+        /// Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command is enqueued in the <c>ComputeCommandQueue</c> by the host.
         /// </summary>
         public long CommandEnqueueTime
         {
@@ -102,9 +104,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets or sets (OpenCL 1.1 required) the execution status of the <c>ComputeEvent</c>'s command.
+        /// Gets the execution status of the associated command.
         /// </summary>
-        /// <remarks> Is negative if the <c>ComputeEvent</c>'s command was abnormally terminated. Note that only user <c>ComputeEvent</c>s can have their status explicitly changed. </remarks>
+        /// <remarks> Is negative if the command's execution was abnormally terminated. </remarks>
         public ComputeCommandExecutionStatus CommandExecutionStatus
         {
             get
@@ -118,7 +120,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command starts execution.
+        /// Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command starts execution.
         /// </summary>
         public long CommandStartTime
         {
@@ -133,7 +135,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command that has been enqueued is submitted by the host to the <c>ComputeEvent.CommandQueue.Device</c>.
+        /// Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
         /// </summary>
         public long CommandSubmitTime
         {
@@ -148,7 +150,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the <c>ComputeContext</c> associated with the <c>ComputeEvent</c>
+        /// Gets the <c>ComputeContext</c> associated with the event.
         /// </summary>
         public ComputeContext Context { get; protected set; }
 
@@ -157,9 +159,9 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputeEvent</c>.
+        /// Gets the string representation of the <c>ComputeEventBase</c>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputeEvent</c>. </returns>
+        /// <returns> The string representation of the <c>ComputeEventBase</c>. </returns>
         public override string ToString()
         {
             return "ComputeEvent" + base.ToString();

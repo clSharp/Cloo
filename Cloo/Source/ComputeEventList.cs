@@ -41,7 +41,6 @@ namespace Cloo
     /// Represents a list of <c>ComputeEvent</c>s.
     /// </summary>
     /// <seealso cref="ComputeCommandQueue"/>
-    /// <seealso cref="ComputeEvent"/>
     public class ComputeEventList : IList<ComputeEvent>
     {
         #region Fields

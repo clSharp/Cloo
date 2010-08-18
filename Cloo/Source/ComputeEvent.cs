@@ -39,6 +39,7 @@ namespace Cloo
     /// Represents an OpenCL event.
     /// </summary>
     /// <remarks> An event object encapsulates the status of an operation such as a command. It can be used to synchronize operations in a context. </remarks>
+    /// <seealso cref="ComputeUserEvent"/>
     /// <seealso cref="ComputeCommandQueue"/>
     /// <seealso cref="ComputeContext"/>
     public class ComputeEvent : ComputeEventBase
@@ -48,7 +49,6 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
         /// </summary>
-        /// <remarks> Is <c>null</c> for user <c>ComputeEvent</c>s. </remarks>
         public ComputeCommandQueue CommandQueue { get; private set; }
 
         #endregion

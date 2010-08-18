@@ -201,57 +201,59 @@
             <remarks> An event object encapsulates the status of an operation such as a command. It can be used to synchronize operations in a context. </remarks>
             <seealso cref="T:Cloo.ComputeCommandQueue"/>
             <seealso cref="T:Cloo.ComputeContext"/>
+            <seealso cref="T:Cloo.ComputeEvent"/>
+            <seealso cref="T:Cloo.ComputeUserEvent"/>
         </member>
         <member name="M:Cloo.ComputeEventBase.ToString">
             <summary>
-            Gets the string representation of the <c>ComputeEvent</c>.
+            Gets the string representation of the <c>ComputeEventBase</c>.
             </summary>
-            <returns> The string representation of the <c>ComputeEvent</c>. </returns>
+            <returns> The string representation of the <c>ComputeEventBase</c>. </returns>
         </member>
         <member name="E:Cloo.ComputeEventBase.Completed">
             <summary>
-            Occurrs when <c>ComputeEvent.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
+            Occurrs when <c>ComputeEventBase.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
             </summary>
         </member>
         <member name="E:Cloo.ComputeEventBase.Terminated">
             <summary>
-            Occurrs when the operation that generated this <c>ComputeEvent</c> is abnormally terminated.
+            Occurrs when the operation that generated the event is abnormally terminated.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEventBase.CommandType">
             <summary>
-            Gets the <c>ComputeCommandType</c> associated with the <c>ComputeEvent</c>.
+            Gets the <c>ComputeCommandType</c> associated with the event.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEventBase.CommandFinishTime">
             <summary>
-            Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command has finished execution.
+            Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command has finished execution.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEventBase.CommandEnqueueTime">
             <summary>
-            Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command is enqueued in the <c>ComputeEvent.CommandQueue</c> by the host.
+            Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command is enqueued in the <c>ComputeCommandQueue</c> by the host.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEventBase.CommandExecutionStatus">
             <summary>
-            Gets or sets (OpenCL 1.1 required) the execution status of the <c>ComputeEvent</c>'s command.
+            Gets the execution status of the associated command.
             </summary>
-            <remarks> Is negative if the <c>ComputeEvent</c>'s command was abnormally terminated. Note that only user <c>ComputeEvent</c>s can have their status explicitly changed. </remarks>
+            <remarks> Is negative if the command's execution was abnormally terminated. </remarks>
         </member>
         <member name="P:Cloo.ComputeEventBase.CommandStartTime">
             <summary>
-            Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command starts execution.
+            Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command starts execution.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEventBase.CommandSubmitTime">
             <summary>
-            Gets a 64-bit value that describes <c>ComputeEvent.CommandQueue.Device</c>'s time counter in nanoseconds when the <c>ComputeEvent</c>'s command that has been enqueued is submitted by the host to the <c>ComputeEvent.CommandQueue.Device</c>.
+            Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEventBase.Context">
             <summary>
-            Gets the <c>ComputeContext</c> associated with the <c>ComputeEvent</c>
+            Gets the <c>ComputeContext</c> associated with the event.
             </summary>
         </member>
         <member name="T:Cloo.ComputeEventList">
@@ -259,7 +261,6 @@
             Represents a list of <c>ComputeEvent</c>s.
             </summary>
             <seealso cref="T:Cloo.ComputeCommandQueue"/>
-            <seealso cref="T:Cloo.ComputeEvent"/>
         </member>
         <member name="M:Cloo.ComputeEventList.#ctor">
             <summary>
@@ -274,9 +275,9 @@
         </member>
         <member name="M:Cloo.ComputeEventList.Wait(System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Waits on the host thread for the specified <c>ComputeEvent</c>s to complete.
+            Waits on the host thread for the specified events to complete.
             </summary>
-            <param name="events"> The <c>ComputeEvent</c>s to be waited for completition. </param>
+            <param name="events"> The events to be waited for completition. </param>
         </member>
         <member name="M:Cloo.ComputeEventList.Wait">
             <summary>
@@ -1634,6 +1635,7 @@
             Represents an OpenCL event.
             </summary>
             <remarks> An event object encapsulates the status of an operation such as a command. It can be used to synchronize operations in a context. </remarks>
+            <seealso cref="T:Cloo.ComputeUserEvent"/>
             <seealso cref="T:Cloo.ComputeCommandQueue"/>
             <seealso cref="T:Cloo.ComputeContext"/>
         </member>
@@ -1641,7 +1643,6 @@
             <summary>
             Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
             </summary>
-            <remarks> Is <c>null</c> for user <c>ComputeEvent</c>s. </remarks>
         </member>
         <member name="T:Cloo.ComputeContextProperty">
             <summary>
