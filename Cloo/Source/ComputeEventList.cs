@@ -74,6 +74,19 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
+        /// Waits on the host thread for the specified events to complete.
+        /// </summary>
+        /// <param name="events"> The events to be waited for completition. </param>
+        public static void Wait(ICollection<ComputeEventBase> events)
+        {
+            unsafe
+            {
+                ComputeErrorCode error = CL10.WaitForEvents(events.Count, Tools.ExtractHandles(events));
+                ComputeException.ThrowOnError(error);
+            }
+        }
+
+        /// <summary>
         /// Waits on the host thread for the <c>ComputeEvent</c>s in the <c>ComputeEventList</c> to complete.
         /// </summary>
         public void Wait()

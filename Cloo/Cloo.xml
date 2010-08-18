@@ -272,6 +272,12 @@
             </summary>
             <param name="events"> A list of <c>ComputeEvent</c>s. </param>
         </member>
+        <member name="M:Cloo.ComputeEventList.Wait(System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Waits on the host thread for the specified <c>ComputeEvent</c>s to complete.
+            </summary>
+            <param name="events"> The <c>ComputeEvent</c>s to be waited for completition. </param>
+        </member>
         <member name="M:Cloo.ComputeEventList.Wait">
             <summary>
             Waits on the host thread for the <c>ComputeEvent</c>s in the <c>ComputeEventList</c> to complete.
