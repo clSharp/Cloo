@@ -52,6 +52,7 @@
     <Compile Include="Source\ComputeContextProperty.cs" />
     <Compile Include="Source\ComputeDevice.cs" />
     <Compile Include="Source\ComputeEvent.cs" />
+    <Compile Include="Source\ComputeEventBase.cs" />
     <Compile Include="Source\ComputeEventList.cs" />
     <Compile Include="Source\ComputeException.cs" />
     <Compile Include="Source\ComputeImage.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Source\ComputeCommandQueue.cs" />
     <Compile Include="Source\ComputeResource.cs" />
     <Compile Include="Source\ComputeSampler.cs" />
+    <Compile Include="Source\ComputeUserEvent.cs" />
     <Compile Include="Source\SysIntX2.cs" />
     <Compile Include="Source\SysIntX3.cs" />
     <Compile Include="Source\Tools.cs" />

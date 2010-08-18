@@ -224,8 +224,6 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        
-
         public void Copy<T>(ComputeBuffer<T> source, ComputeImage destination, ICollection<ComputeEvent> events) where T : struct
         {
             Copy(source, destination, 0, new long[] { 0, 0, 0 }, new long[] { destination.Width, destination.Height, destination.Depth }, events);
