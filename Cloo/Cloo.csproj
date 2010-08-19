@@ -45,7 +45,8 @@
     <Compile Include="Source\Bindings\CL11.cs" />
     <Compile Include="Source\Bindings\CLx.cs" />
     <Compile Include="Source\ComputeBuffer.cs" />
-    <Compile Include="Source\ComputeBufferRegion.cs" />
+    <Compile Include="Source\ComputeBufferBase.cs" />
+    <Compile Include="Source\BufferRegion.cs" />
     <Compile Include="Source\ComputeCompiler.cs" />
     <Compile Include="Source\ComputeContext.cs" />
     <Compile Include="Source\ComputeContextPropertyList.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Source\ComputeCommandQueue.cs" />
     <Compile Include="Source\ComputeResource.cs" />
     <Compile Include="Source\ComputeSampler.cs" />
+    <Compile Include="Source\ComputeSubBuffer.cs" />
     <Compile Include="Source\ComputeUserEvent.cs" />
     <Compile Include="Source\SysIntX2.cs" />
     <Compile Include="Source\SysIntX3.cs" />

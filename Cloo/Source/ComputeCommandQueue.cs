@@ -179,7 +179,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Copy<T>(ComputeBuffer<T> source, ComputeBuffer<T> destination, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, ICollection<ComputeEvent> events) where T : struct
         {
             Copy(source, destination, 0, 0, source.Count, events);
         }
@@ -193,7 +193,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
         /// <param name="count"> The number of elements to copy. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Copy<T>(ComputeBuffer<T> source, ComputeBuffer<T> destination, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEvent> events) where T : struct
         {
             unsafe
             {
@@ -224,7 +224,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        public void Copy<T>(ComputeBuffer<T> source, ComputeImage destination, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, ICollection<ComputeEvent> events) where T : struct
         {
             Copy(source, destination, 0, new long[] { 0, 0, 0 }, new long[] { destination.Width, destination.Height, destination.Depth }, events);
         }
@@ -238,7 +238,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to copy. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Copy<T>(ComputeBuffer<T> source, ComputeImage destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events) where T : struct
         {
             unsafe
             {
@@ -273,7 +273,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Copy<T>(ComputeImage source, ComputeBuffer<T> destination, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, ICollection<ComputeEvent> events) where T : struct
         {
             Copy(source, destination, new long[] { 0, 0, 0 }, 0, new long[] { source.Width, source.Height, source.Depth }, events);
 
@@ -288,7 +288,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to copy. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Copy<T>(ComputeImage source, ComputeBuffer<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> events) where T : struct
         {
             unsafe
             {
@@ -460,7 +460,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public IntPtr Map<T>(ComputeBuffer<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEvent> events) where T : struct
+        public IntPtr Map<T>(ComputeBufferBase<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEvent> events) where T : struct
         {
             return Map(buffer, blocking, flags, 0, buffer.Count, events);
         }
@@ -475,7 +475,7 @@ namespace Cloo
         /// <param name="count"> The number of elements to map. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public IntPtr Map<T>(ComputeBuffer<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, long offset, long count, ICollection<ComputeEvent> events) where T : struct
+        public IntPtr Map<T>(ComputeBufferBase<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, long offset, long count, ICollection<ComputeEvent> events) where T : struct
         {
             unsafe
             {
@@ -567,7 +567,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public T[] Read<T>(ComputeBuffer<T> buffer, ICollection<ComputeEvent> events) where T : struct
+        public T[] Read<T>(ComputeBufferBase<T> buffer, ICollection<ComputeEvent> events) where T : struct
         {
             return Read(buffer, 0, buffer.Count, events);
         }
@@ -576,7 +576,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public T[] Read<T>(ComputeBuffer<T> buffer, long offset, long count, ICollection<ComputeEvent> events) where T : struct
+        public T[] Read<T>(ComputeBufferBase<T> buffer, long offset, long count, ICollection<ComputeEvent> events) where T : struct
         {
             T[] data = new T[count];
             GCHandle dataHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
@@ -595,7 +595,7 @@ namespace Cloo
         /// <param name="data"> A pointer to a preallocated memory area to read the data into. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public void Read<T>(ComputeBuffer<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEvent> events) where T : struct
+        public void Read<T>(ComputeBufferBase<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEvent> events) where T : struct
         {
             unsafe
             {
@@ -781,7 +781,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Write<T>(ComputeBuffer<T> buffer, T[] data, ICollection<ComputeEvent> events) where T : struct
+        public void Write<T>(ComputeBufferBase<T> buffer, T[] data, ICollection<ComputeEvent> events) where T : struct
         {
             Write(buffer, 0, data.Length, data, events);
         }
@@ -790,7 +790,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Write<T>(ComputeBuffer<T> buffer, long offset, long count, T[] data, ICollection<ComputeEvent> events) where T : struct
+        public void Write<T>(ComputeBufferBase<T> buffer, long offset, long count, T[] data, ICollection<ComputeEvent> events) where T : struct
         {
             GCHandle dataHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
             try { Write(buffer, true, offset, count, dataHandle.AddrOfPinnedObject(), events); }
@@ -807,7 +807,7 @@ namespace Cloo
         /// <param name="data"> The content written to the <c>ComputeBuffer</c>. </param>
         /// <param name="events"> A collection of <c>ComputeEvent</c>s that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public void Write<T>(ComputeBuffer<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEvent> events) where T : struct
+        public void Write<T>(ComputeBufferBase<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEvent> events) where T : struct
         {
             unsafe
             {

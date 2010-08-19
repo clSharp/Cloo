@@ -33,37 +33,40 @@ namespace Cloo
 {
     using System;
     using System.Runtime.InteropServices;
+    using Cloo.Bindings;
 
-    [StructLayout(LayoutKind.Sequential)]
-    internal struct ComputeBufferRegion
+    /// <summary>
+    /// Represents the parent type to any Cloo buffer types.
+    /// </summary>
+    /// <typeparam name="T"> The type of the elements of the buffer. </typeparam>
+    public class ComputeBufferBase<T> : ComputeMemory where T : struct
     {
-        #region Fields
-        
-        private readonly IntPtr origin;
-        private readonly IntPtr size;
-        
-        #endregion
-
         #region Properties
-        
-        public long Origin
-        {
-            get { return origin.ToInt64(); }
-        }
 
-        public long Size
-        {
-            get { return size.ToInt64(); }
-        }
+        /// <summary>
+        /// Gets the number of elements in the buffer.
+        /// </summary>
+        public long Count { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        public ComputeBufferRegion(long origin, long size)
+        protected ComputeBufferBase(ComputeContext context, ComputeMemoryFlags flags)
+            : base(context, flags)
+        { }
+
+        #endregion
+
+        #region Protected methods
+
+        protected void Init()
         {
-            this.origin = new IntPtr(origin);
-            this.size = new IntPtr(size);
+            unsafe
+            {
+                Size = (long)GetInfo<ComputeMemoryInfo, IntPtr>(ComputeMemoryInfo.Size, CL10.GetMemObjectInfo);
+                Count = Size / Marshal.SizeOf(typeof(T));
+            }
         }
 
         #endregion

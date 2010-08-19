@@ -43,23 +43,8 @@ namespace Cloo
     /// <seealso cref="ComputeDevice"/>
     /// <seealso cref="ComputeKernel"/>
     /// <seealso cref="ComputeMemory"/>
-    public class ComputeBuffer<T> : ComputeMemory where T : struct
+    public class ComputeBuffer<T> : ComputeBufferBase<T> where T : struct
     {
-        #region Fields
-
-        private readonly long count;
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets the number of elements in the <c>ComputeBuffer</c>.
-        /// </summary>
-        public long Count { get { return count; } }
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -84,17 +69,11 @@ namespace Cloo
         {
             unsafe
             {
-                this.count = count;
-                Size = count * Marshal.SizeOf(typeof(T));
-
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateBuffer(
-                    context.Handle,
-                    flags,
-                    new IntPtr(Size),
-                    dataPtr,
-                    &error);
+                Handle = CL10.CreateBuffer(context.Handle, flags, new IntPtr(Size), dataPtr, &error);
                 ComputeException.ThrowOnError(error);
+
+                Init();
             }
         }
 
@@ -109,25 +88,19 @@ namespace Cloo
         {
             unsafe
             {
-                count = data.Length;
-                Size = count * Marshal.SizeOf(typeof(T));
-
                 GCHandle dataPtr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
-                    Handle = CL10.CreateBuffer(
-                        context.Handle,
-                        flags,
-                        new IntPtr(Size),
-                        dataPtr.AddrOfPinnedObject(),
-                        &error);
+                    Handle = CL10.CreateBuffer(context.Handle, flags, new IntPtr(Size), dataPtr.AddrOfPinnedObject(), &error);
                     ComputeException.ThrowOnError(error);
                 }
                 finally
                 {
                     dataPtr.Free();
                 }
+
+                Init();
             }
         }
 
@@ -137,9 +110,7 @@ namespace Cloo
             unsafe
             {
                 Handle = handle;
-
-                Size = (long)GetInfo<ComputeMemoryInfo, IntPtr>(ComputeMemoryInfo.Size, CL10.GetMemObjectInfo);
-                count = Size / Marshal.SizeOf(typeof(T));
+                Init();
             }
         }
 
@@ -160,40 +131,10 @@ namespace Cloo
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                IntPtr handle = CL10.CreateFromGLBuffer(
-                    context.Handle,
-                    flags,
-                    bufferId,
-                    &error);
+                IntPtr handle = CL10.CreateFromGLBuffer(context.Handle, flags, bufferId, &error);
                 ComputeException.ThrowOnError(error);
 
                 return new ComputeBuffer<T>(handle, context, flags);
-            }
-        }
-
-        /// <summary>
-        /// Creates a new sub-buffer. A sub-buffer is a <c>ComputeBuffer</c> that represents a memory area of another <c>ComputeBuffer</c>.
-        /// </summary>
-        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
-        /// <param name="offset"> The index of the element of the <c>ComputeBuffer</c>, where the sub-buffer starts. </param>
-        /// <param name="count"> The number of elements to include in the sub-buffer. </param>
-        /// <returns> The new sub-buffer. </returns>
-        /// <remarks> Creating a sub-buffer from another sub-buffer results into an invalid operation. OpenCL 1.1 required. </remarks>
-        public ComputeBuffer<T> CreateSubBuffer(ComputeMemoryFlags flags, long offset, long count)
-        {
-            unsafe
-            {
-                ComputeBufferRegion region = new ComputeBufferRegion(offset * Marshal.SizeOf(typeof(T)), count * Marshal.SizeOf(typeof(T)));
-                ComputeErrorCode error;
-                IntPtr handle = CL11.CreateSubBuffer(
-                    Handle,
-                    flags,
-                    ComputeBufferCreateType.Region,
-                    new IntPtr(&region),
-                    &error);
-                ComputeException.ThrowOnError(error);
-
-                return new ComputeBuffer<T>(handle, Context, flags);
             }
         }
 
