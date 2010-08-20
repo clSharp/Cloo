@@ -38,7 +38,7 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL event.
     /// </summary>
-    /// <remarks> An event object encapsulates the status of an operation such as a command. It can be used to synchronize operations in a context. </remarks>
+    /// <remarks> An event encapsulates the status of an operation such as a command. It can be used to synchronize operations in a context. </remarks>
     /// <seealso cref="ComputeUserEvent"/>
     /// <seealso cref="ComputeCommandQueue"/>
     /// <seealso cref="ComputeContext"/>

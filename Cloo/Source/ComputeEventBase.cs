@@ -36,11 +36,8 @@ namespace Cloo
     using Cloo.Bindings;
 
     /// <summary>
-    /// Represents an OpenCL event.
+    /// Represents the parent type to any Cloo event types.
     /// </summary>
-    /// <remarks> An event object encapsulates the status of an operation such as a command. It can be used to synchronize operations in a context. </remarks>
-    /// <seealso cref="ComputeCommandQueue"/>
-    /// <seealso cref="ComputeContext"/>
     /// <seealso cref="ComputeEvent"/>
     /// <seealso cref="ComputeUserEvent"/>
     public class ComputeEventBase : ComputeResource
@@ -212,8 +209,12 @@ namespace Cloo
 
         #endregion
 
+        #region Delegates
+
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         protected delegate void RawNotifier(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData);
+
+        #endregion
     }
 
     public delegate void ComputeEventNotifier(object sender, EventArgs e);

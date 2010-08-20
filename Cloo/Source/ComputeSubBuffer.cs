@@ -38,7 +38,7 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL sub-buffer.
     /// </summary>
-    /// <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. <typeparamref name="T"/> is restricted to value types and <c>struct</c>s containing such types. </typeparam>
+    /// <typeparam name="T"> The type of the elements of the <c>ComputeSubBuffer</c>. <typeparamref name="T"/> is restricted to value types and <c>struct</c>s containing such types. </typeparam>
     /// <remarks> A sub-buffer is created from a standard buffer and represents all or part of its data content. <br/> OpenCL 1.1 required. </remarks>
     public class ComputeSubBuffer<T> : ComputeBufferBase<T> where T : struct
     {
@@ -50,7 +50,7 @@ namespace Cloo
         /// <param name="buffer"> The buffer to create the <c>ComputeSubBuffer</c> from. </param>
         /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
         /// <param name="offset"> The index of the element of <paramref name="buffer"/>, where the <c>ComputeSubBuffer</c> starts. </param>
-        /// <param name="count"> The number of elements of <paramref name="bufer"/> to include in the <c>ComputeSubBuffer</c>. </param>
+        /// <param name="count"> The number of elements of <paramref name="buffer"/> to include in the <c>ComputeSubBuffer</c>. </param>
         public ComputeSubBuffer(ComputeBuffer<T> buffer, ComputeMemoryFlags flags, long offset, long count)
             : base(buffer.Context, flags)
         {

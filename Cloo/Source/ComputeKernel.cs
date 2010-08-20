@@ -125,7 +125,7 @@ namespace Cloo
         /// Gets the compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier.
         /// </summary>
         /// <param name="device"> One of the <c>ComputeKernel.Program.Device</c>s. </param>
-        /// <returns> The compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier. If such qualifier is not specified, (0, 0, 0) is returned. </returns>
+        /// <returns> The compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier. If no such qualifier is specified, (0, 0, 0) is returned. </returns>
         public long[] GetCompileWorkGroupSize(ComputeDevice device)
         {
             unsafe
@@ -151,12 +151,12 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets a value argument of the <c>ComputeKernel</c>.
+        /// Sets an argument of the <c>ComputeKernel</c>.
         /// </summary>
         /// <param name="index"> The argument index. </param>
         /// <param name="dataSize"> The size of the argument data in bytes. </param>
         /// <param name="dataAddr"> A pointer to the data that should be used as the argument value. </param>
-        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetArgument(int index, IntPtr dataSize, IntPtr dataAddr)
         {
             ComputeErrorCode error = CL10.SetKernelArg(
@@ -168,11 +168,11 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets the size in bytes of an argument specfied with the <c>local</c> address space qualifier.
+        /// Sets the size in bytes of an argument specfied with the <c>local</c> or <c>__local</c> address space qualifier.
         /// </summary>
         /// <param name="index"> The argument index. </param>
         /// <param name="dataSize"> The size of the argument data in bytes. </param>
-        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetLocalArgument(int index, long dataSize)
         {
             SetArgument(index, new IntPtr(dataSize), IntPtr.Zero);
@@ -183,7 +183,7 @@ namespace Cloo
         /// </summary>
         /// <param name="index"> The argument index. </param>
         /// <param name="memObj"> The <c>ComputeMemory</c> that is passed as the argument. </param>
-        /// <remarks> This method will automatically track <paramref name="memObj"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
+        /// <remarks> This method will automatically track <paramref name="memObj"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetMemoryArgument(int index, ComputeMemory memObj)
         {
             SetMemoryArgument(index, memObj, true);
@@ -195,7 +195,7 @@ namespace Cloo
         /// <param name="index"> The argument index. </param>
         /// <param name="memObj"> The <c>ComputeMemory</c> that is passed as the argument. </param>
         /// <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="memObj"/> until <c>ComputeKernel</c> execution. This is useful if the application code doesn't refer to <paramref name="memObj"/> after this call or forces a <c>GC.Collect()</c> between this call and the <c>ComputeKernel</c> execution. </param>
-        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetMemoryArgument(int index, ComputeMemory memObj, bool track)
         {
             if (track) tracker[index] = memObj;
@@ -208,7 +208,7 @@ namespace Cloo
         /// </summary>
         /// <param name="index"> The argument index. </param>
         /// <param name="sampler"> The <c>ComputeSampler</c> that is passed as the argument. </param>
-        /// <remarks> This method will automatically track <paramref name="sampler"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
+        /// <remarks> This method will automatically track <paramref name="sampler"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetSamplerArgument(int index, ComputeSampler sampler)
         {
             SetSamplerArgument(index, sampler, true);
@@ -220,7 +220,7 @@ namespace Cloo
         /// <param name="index"> The argument index. </param>
         /// <param name="sampler"> The <c>ComputeSampler</c> that is passed as the argument. </param>
         /// <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="sampler"/> until <c>ComputeKernel</c> execution. This is useful if the application code doesn't refer to <paramref name="sampler"/> after this call or forces a <c>GC.Collect()</c> between this call and the <c>ComputeKernel</c> execution. </param>
-        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetSamplerArgument(int index, ComputeSampler sampler, bool track)
         {
             if (track) tracker[index] = sampler;
@@ -234,7 +234,7 @@ namespace Cloo
         /// <typeparam name="T"> The type of the argument. </typeparam>
         /// <param name="index"> The argument index. </param>
         /// <param name="data"> The data that is passed as the argument value. </param>
-        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by a kernel. </remarks>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetValueArgument<T>(int index, T data) where T : struct
         {
             GCHandle gcHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
