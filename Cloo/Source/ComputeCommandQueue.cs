@@ -66,30 +66,14 @@ namespace Cloo
         public ComputeDevice Device { get { return device; } }
 
         /// <summary>
-        /// Gets or sets the out-of-order execution mode of the commands in the <c>ComputeCommandQueue</c>.
+        /// Gets the out-of-order execution mode of the commands in the <c>ComputeCommandQueue</c>.
         /// </summary>
-        public bool OutOfOrderExecution
-        {
-            get { return outOfOrderExec; }
-            set
-            {
-                SetProperty(ComputeCommandQueueFlags.OutOfOrderExecution, value);
-                outOfOrderExec = value;
-            }
-        }
+        public bool OutOfOrderExecution { get { return outOfOrderExec; } }
 
         /// <summary>
-        /// Gets or sets the profiling mode of the commands in the <c>ComputeCommandQueue</c>.
+        /// Gets the profiling mode of the commands in the <c>ComputeCommandQueue</c>.
         /// </summary>
-        public bool Profiling
-        {
-            get { return profiling; }
-            set
-            {
-                SetProperty(ComputeCommandQueueFlags.Profiling, value);
-                profiling = value;
-            }
-        }
+        public bool Profiling { get { return profiling; } }
 
         #endregion
 
@@ -728,7 +712,7 @@ namespace Cloo
         /// Enqueues a command to unmap a <c>ComputeBuffer</c> or a <c>ComputeImage</c> from the host address space.
         /// </summary>
         /// <param name="memory"> The <c>ComputeMemory</c>. </param>
-        /// <param name="mappedPtr"> The host address returned by a previous call to <c>ComputeCommandQueue.Map</c>. </param>
+        /// <param name="mappedPtr"> The host address returned by a previous call to <c>ComputeCommandQueue.Map</c>. This pointer is <c>IntPtr.Zero</c> after this method returns. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         public void Unmap(ComputeMemory memory, ref IntPtr mappedPtr, ICollection<ComputeEvent> events)
         {
@@ -929,6 +913,12 @@ namespace Cloo
                 ComputeException.ThrowOnError(error);
             }
         }
+
+        #endregion
+
+        #region Deprecated
+
+
 
         #endregion
     }
