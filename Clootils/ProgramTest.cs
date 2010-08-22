@@ -30,30 +30,29 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
-using System.Text;
+using System.IO;
 using Cloo;
 
 namespace Clootils
 {
     class ProgramTest : TestBase
     {
-        private string kernelSource = @"
+        private static string kernelSource = @"
 kernel void Test( void )
 {
 }
 ";
-
-        public ProgramTest()
-            : base("Program Test")
-        { }
-
-        protected override void RunInternal()
+        public static void Run(TextWriter log, ComputeContext context)
         {
-            ComputeProgram program = new ComputeProgram(context, new string[] { kernelSource });
+            StartRun(log, "Program test");
+
+            ComputeProgram program = new ComputeProgram(context, kernelSource);
             program.Build(null, null, null, IntPtr.Zero);
             byte[] bytes = program.Binaries[0];
-            Console.WriteLine("Compiled program head:");
-            Console.WriteLine(BitConverter.ToString(bytes, 0, 16) + "...");
+            log.WriteLine("Compiled program head:");
+            log.WriteLine(BitConverter.ToString(bytes, 0, 16) + "...");
+
+            EndRun(log, "Program test");
         }
     }
 }

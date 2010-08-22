@@ -42,7 +42,7 @@ namespace Clootils
 {
     public partial class MainForm : Form
     {
-        ConfigForm settingsForm;
+        ConfigForm configForm;
 
         public MainForm()
         {
@@ -53,7 +53,7 @@ namespace Clootils
             logTextBox.Font = Settings.Default.LogFont;
             openFileDialog.Multiselect = false;
             saveFileDialog.OverwritePrompt = true;
-            settingsForm = new ConfigForm();
+            configForm = new ConfigForm();
         }
 
         private void InitializeSettings()
@@ -104,12 +104,12 @@ namespace Clootils
 
             string[] logContent;
 
-            ComputeContextPropertyList properties = new ComputeContextPropertyList(settingsForm.Platform);
-            ComputeContext context = new ComputeContext(settingsForm.Devices, properties, null, IntPtr.Zero);
+            ComputeContextPropertyList properties = new ComputeContextPropertyList(configForm.Platform);
+            ComputeContext context = new ComputeContext(configForm.Devices, properties, null, IntPtr.Zero);
             ComputeProgram program = new ComputeProgram(context, editorTextBox.Text);
             try
             {
-                program.Build(settingsForm.Devices, settingsForm.Options, null, IntPtr.Zero);
+                program.Build(configForm.Devices, configForm.Options, null, IntPtr.Zero);
                 logContent = new string[] { "Build succeeded." };
             }
             catch (Exception exception)
@@ -117,7 +117,7 @@ namespace Clootils
                 List<string> lineList = new List<string>();
                 foreach (ComputeDevice device in context.Devices)
                 {
-                    string header = "PLATFORM: " + settingsForm.Platform.Name + ", DEVICE: " + device.Name;
+                    string header = "PLATFORM: " + configForm.Platform.Name + ", DEVICE: " + device.Name;
                     lineList.Add(header);
 
                     StringReader reader = new StringReader(program.GetBuildLog(device));
@@ -180,7 +180,7 @@ namespace Clootils
 
         private void buildDeviceMenuItem_Click(object sender, EventArgs e)
         {
-            settingsForm.ShowDialog(this);
+            configForm.ShowDialog(this);
         }
 
         private void showInfoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -233,13 +233,12 @@ namespace Clootils
         private void runTestsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StringBuilder output = new StringBuilder();
-            StringWriter writer = new StringWriter(output);
+            StringWriter log = new StringWriter(output);
 
-            Console.SetOut(writer);
+            Console.SetOut(log);
 
-            ComputeContextPropertyList properties = new ComputeContextPropertyList(settingsForm.Platform);
-            ComputeContext context = new ComputeContext(settingsForm.Devices, properties, null, IntPtr.Zero);
-            TestBase.SetContext(context);
+            ComputeContextPropertyList properties = new ComputeContextPropertyList(configForm.Platform);
+            ComputeContext context = new ComputeContext(configForm.Devices, properties, null, IntPtr.Zero);
 
             Console.WriteLine("Platform: " + context.Platform.Name);
             Console.Write("Devices:");
@@ -247,14 +246,14 @@ namespace Clootils
                 Console.Write(" " + device.Name + "    ");
             Console.WriteLine();
 
-            new DummyTest().Run();
-            new MappingTest().Run();
-            new ProgramTest().Run();
-            new KernelsTest().Run();
-            new VectorAddTest().Run();
+            DummyTest.Run(log);
+            MappingTest.Run(log, context);
+            ProgramTest.Run(log, context);
+            KernelsTest.Run(log, context);
+            VectorAddTest.Run(log, context);
 
             Console.SetOut(Console.Out);
-            writer.Close();
+            log.Close();
 
             logTextBox.Lines = ParseLines(output.ToString());
         }

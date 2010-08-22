@@ -29,17 +29,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+using System.IO;
+
 namespace Clootils
 {
     public class DummyTest : TestBase
     {
-        public DummyTest()
-            : base("Dummy Test")
-        { }
-
-        protected override void RunInternal()
+        public static void Run(TextWriter log)
         {
-            // here goes testing code
+            StartRun(log, "Dummy test");
+            EndRun(log, "Dummy test");
         }
     }
 }

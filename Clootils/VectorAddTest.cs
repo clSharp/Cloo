@@ -30,16 +30,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using Cloo;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Clootils
 {
     class VectorAddTest : TestBase
     {
-        private string kernelSource = @"
+        private static string kernelSource = @"
 kernel void VectorAdd(
     global read_only float* a,
     global read_only float* b,
@@ -49,12 +48,10 @@ kernel void VectorAdd(
     c[index] = a[index] + b[index];
 }
 ";
-        public VectorAddTest()
-            : base("VectorAdd Test")
-        { }
-
-        protected override void RunInternal()
+        public static void Run(TextWriter log, ComputeContext context)
         {
+            StartRun(log, "Vector addition test");
+
             int count = 10;
             float[] arrA = new float[count];
             float[] arrB = new float[count];
@@ -95,7 +92,9 @@ kernel void VectorAdd(
             arrCHandle.Free();
 
             for (int i = 0; i < count; i++)
-                Console.WriteLine("{0} + {1} = {2}", arrA[i], arrB[i], arrC[i]);
+                log.WriteLine("{0} + {1} = {2}", arrA[i], arrB[i], arrC[i]);
+
+            EndRun(log, "Vector addition test");
         }
     }
 }

@@ -62,7 +62,7 @@ namespace Clootils
                 MessageBox.Show(ex.ToString(), "Clootils Error");
             }
 
-            if (runningWin32NT && consoleAllocated) FreeConsole();
+            if (consoleAllocated) FreeConsole();
         }
     }
 }

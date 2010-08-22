@@ -32,20 +32,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 using Cloo;
+using System.IO;
 
 namespace Clootils
 {
     public class MappingTest : TestBase
     {
-        public MappingTest()
-            : base("Mapping Test")
-        { }
-
-        protected override void RunInternal()
+        public static void Run(TextWriter log, ComputeContext context)
         {
-            ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.Profiling);
+            StartRun(log, "Dummy test");
 
-            Console.WriteLine("Original content:");
+            ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
+
+            log.WriteLine("Original content:");
 
             Random rand = new Random();
             int count = 6;
@@ -53,22 +52,24 @@ namespace Clootils
             for (int i = 0; i < count; i++)
             {
                 bufferContent[i] = (long)(rand.NextDouble() * long.MaxValue);
-                Console.WriteLine("\t" + bufferContent[i]);
+                log.WriteLine("\t" + bufferContent[i]);
             }
 
             ComputeBuffer<long> buffer = new ComputeBuffer<long>(context, ComputeMemoryFlags.CopyHostPointer, bufferContent);
             IntPtr mappedPtr = commands.Map(buffer, false, ComputeMemoryMappingFlags.Read, 0, bufferContent.Length, null);
             commands.Finish();
 
-            Console.WriteLine("Mapped content:");
+            log.WriteLine("Mapped content:");
 
             for (int i = 0; i < bufferContent.Length; i++)
             {
                 IntPtr ptr = new IntPtr(mappedPtr.ToInt64() + i * sizeof(long));
-                Console.WriteLine("\t" + Marshal.ReadInt64(ptr));
+                log.WriteLine("\t" + Marshal.ReadInt64(ptr));
             }
 
             commands.Unmap(buffer, ref mappedPtr, null);
+            
+            EndRun(log, "Dummy test");
         }
     }
 }

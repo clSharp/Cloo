@@ -32,37 +32,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using Cloo;
+using System.IO;
 
 namespace Clootils
 {
     public class KernelsTest : TestBase
     {
-        /* nVidia
-        string kernelSources = @"
-    kernel void k01(          float     num ) {}
-//  kernel void k02(          float *   num ) {}
-    kernel void k03(          image3d_t img ) {}
-    kernel void k04(          sampler_t smp ) {}
-
-//  kernel void k05( constant float     num ) {}
-    kernel void k06( constant float *   num ) {}
-//  kernel void k07( constant image3d_t img ) {}
-//  kernel void k08( constant sampler_t smp ) {}
-
-//  kernel void k09( global   float     num ) {}
-    kernel void k10( global   float *   num ) {}
-    kernel void k11( global   image3d_t img ) {}
-//  kernel void k12( global   sampler_t smp ) {}
-
-//  kernel void k13( local    float     num ) {}
-    kernel void k14( local    float *   num ) {}
-//  kernel void k15( local    image3d_t img ) {}
-//  kernel void k16( local    sampler_t smp ) {}
-";
-         */
-
-        //ATi
-        string kernelSources = @"
+        static TextWriter log;
+        static string kernelSources = @"
     kernel void k01(          float     num ) {}
 //  kernel void k02(          float *   num ) {}
 //  kernel void k03(          image3d_t img ) {}
@@ -84,23 +61,25 @@ namespace Clootils
 //  kernel void k16( local    sampler_t smp ) {}
 ";
 
-        public KernelsTest()
-            : base("Kernels Test")
-        { }
-
-        protected override void RunInternal()
+        public static void Run(TextWriter log, ComputeContext context)
         {
+            KernelsTest.log = log;
+
+            StartRun(log, "Kernels test");
+
             ComputeProgram program = new ComputeProgram(context, new string[] { kernelSources });
             program.Build(null, null, notify, IntPtr.Zero);
-            Console.WriteLine("Program successfully built.");
+            log.WriteLine("Program successfully built.");
 
             List<ComputeKernel> kernels = new List<ComputeKernel>(program.CreateAllKernels());
-            Console.WriteLine("Kernels successfully created.");
+            log.WriteLine("Kernels successfully created.");
+
+            EndRun(log, "Kernels test");
         }
 
-        private void notify(IntPtr programHandle, IntPtr userDataPtr)
+        private static void notify(IntPtr programHandle, IntPtr userDataPtr)
         {
-            Console.WriteLine("Program build notification.");
+            log.WriteLine("Program build notification.");
         }
     }
 }

@@ -30,49 +30,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
-using Cloo;
+using System.IO;
 
 namespace Clootils
 {
-    public abstract class TestBase
+    public class TestBase
     {
-        private readonly string name;
-        protected static ComputeContext context;
-
-        protected TestBase(string name)
+        protected static void StartRun(TextWriter log, String name)
         {
-            this.name = name;
+            log.WriteLine(log.NewLine + "------------------| Start {0} |------------------", name);
         }
 
-        public void Run()
+        protected static void EndRun(TextWriter log, String name)
         {
-            StartRun();
-            try
-            {
-                RunInternal();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            EndRun();
-        }
-
-        public static void SetContext(ComputeContext context)
-        {
-            TestBase.context = context;
-        }
-
-        protected void StartRun()
-        {
-            Console.WriteLine("\n------------------| Start {0} |------------------", name);
-        }
-
-        protected abstract void RunInternal();
-
-        protected void EndRun()
-        {
-            Console.WriteLine("-------------------| End {0} |-------------------\n", name);
+            log.WriteLine("-------------------| End {0} |-------------------" + log.NewLine, name);
+            log.Flush();
         }
     }
 }
