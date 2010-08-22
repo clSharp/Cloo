@@ -70,7 +70,7 @@ namespace Cloo
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateBuffer(context.Handle, flags, new IntPtr(Size), dataPtr, &error);
+                Handle = CL10.CreateBuffer(context.Handle, flags, new IntPtr(Marshal.SizeOf(typeof(T)) * count), dataPtr, &error);
                 ComputeException.ThrowOnError(error);
 
                 Init();
@@ -92,7 +92,7 @@ namespace Cloo
                 try
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
-                    Handle = CL10.CreateBuffer(context.Handle, flags, new IntPtr(Size), dataPtr.AddrOfPinnedObject(), &error);
+                    Handle = CL10.CreateBuffer(context.Handle, flags, new IntPtr(Marshal.SizeOf(typeof(T)) * data.Length), dataPtr.AddrOfPinnedObject(), &error);
                     ComputeException.ThrowOnError(error);
                 }
                 finally
