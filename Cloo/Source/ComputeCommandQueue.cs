@@ -108,7 +108,7 @@ namespace Cloo
         /// </summary>
         /// <param name="memObjs"> A collection of <c>ComputeMemory</c>s that correspond to OpenGL memory objects. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void AcquireGLObjects(ICollection<ComputeMemory> memObjs, ICollection<ComputeEvent> events)
+        public void AcquireGLObjects(ICollection<ComputeMemory> memObjs, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
@@ -163,7 +163,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, ICollection<ComputeEventBase> events) where T : struct
         {
             Copy(source, destination, 0, 0, source.Count, events);
         }
@@ -177,7 +177,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
         /// <param name="count"> The number of elements to copy. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -208,7 +208,7 @@ namespace Cloo
         /// <summary>
         /// Deprecated. Use the full version instead.
         /// </summary>
-        public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, ICollection<ComputeEventBase> events) where T : struct
         {
             Copy(source, destination, 0, new long[] { 0, 0, 0 }, new long[] { destination.Width, destination.Height, destination.Depth }, events);
         }
@@ -222,7 +222,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to copy. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -257,7 +257,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, ICollection<ComputeEventBase> events) where T : struct
         {
             Copy(source, destination, new long[] { 0, 0, 0 }, 0, new long[] { source.Width, source.Height, source.Depth }, events);
 
@@ -272,7 +272,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to copy. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEvent> events) where T : struct
+        public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -306,7 +306,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Copy(ComputeImage source, ComputeImage destination, ICollection<ComputeEvent> events)
+        public void Copy(ComputeImage source, ComputeImage destination, ICollection<ComputeEventBase> events)
         {
             long[] offset = new long[] { 0, 0, 0 };
             Copy(source, destination, offset, offset, new long[] { source.Width, source.Height, source.Depth }, events);
@@ -321,7 +321,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to copy. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Copy(ComputeImage source, ComputeImage destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEvent> events)
+        public void Copy(ComputeImage source, ComputeImage destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
@@ -356,7 +356,7 @@ namespace Cloo
         /// </summary>
         /// <param name="kernel"> The <c>ComputeKernel</c> to execute. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void ExecuteTask(ComputeKernel kernel, ICollection<ComputeEvent> events)
+        public void ExecuteTask(ComputeKernel kernel, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
@@ -389,7 +389,7 @@ namespace Cloo
         /// <param name="globalWorkSize"> An array of values that describe the number of global work-items in dimensions that will execute the kernel function. The total number of global work-items is computed as global_work_size[0] *...* global_work_size[work_dim - 1]. </param>
         /// <param name="localWorkSize"> An array of values that describe the number of work-items that make up a work-group (also referred to as the size of the work-group) that will execute the <paramref name="kernel"/>. The total number of work-items in a work-group is computed as local_work_size[0] *... * local_work_size[work_dim - 1]. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Execute(ComputeKernel kernel, long[] globalWorkOffset, long[] globalWorkSize, long[] localWorkSize, ICollection<ComputeEvent> events)
+        public void Execute(ComputeKernel kernel, long[] globalWorkOffset, long[] globalWorkSize, long[] localWorkSize, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
@@ -444,7 +444,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public IntPtr Map<T>(ComputeBufferBase<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEvent> events) where T : struct
+        public IntPtr Map<T>(ComputeBufferBase<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEventBase> events) where T : struct
         {
             return Map(buffer, blocking, flags, 0, buffer.Count, events);
         }
@@ -459,7 +459,7 @@ namespace Cloo
         /// <param name="count"> The number of elements to map. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public IntPtr Map<T>(ComputeBufferBase<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, long offset, long count, ICollection<ComputeEvent> events) where T : struct
+        public IntPtr Map<T>(ComputeBufferBase<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, long offset, long count, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -496,7 +496,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public IntPtr Map(ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEvent> events)
+        public IntPtr Map(ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEventBase> events)
         {
             return Map(image, blocking, flags, new long[] { 0, 0, 0 }, new long[] { image.Width, image.Height, image.Depth }, events);
         }
@@ -511,7 +511,7 @@ namespace Cloo
         /// <param name="region"> The region (width, height, depth) in pixels to map. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public IntPtr Map(ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, ICollection<ComputeEvent> events)
+        public IntPtr Map(ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
@@ -551,7 +551,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public T[] Read<T>(ComputeBufferBase<T> buffer, ICollection<ComputeEvent> events) where T : struct
+        public T[] Read<T>(ComputeBufferBase<T> buffer, ICollection<ComputeEventBase> events) where T : struct
         {
             return Read(buffer, 0, buffer.Count, events);
         }
@@ -560,7 +560,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public T[] Read<T>(ComputeBufferBase<T> buffer, long offset, long count, ICollection<ComputeEvent> events) where T : struct
+        public T[] Read<T>(ComputeBufferBase<T> buffer, long offset, long count, ICollection<ComputeEventBase> events) where T : struct
         {
             T[] data = new T[count];
             GCHandle dataHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
@@ -579,7 +579,7 @@ namespace Cloo
         /// <param name="data"> A pointer to a preallocated memory area to read the data into. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public void Read<T>(ComputeBufferBase<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEvent> events) where T : struct
+        public void Read<T>(ComputeBufferBase<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -611,7 +611,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Read(ComputeImage image, bool blocking, IntPtr data, ICollection<ComputeEvent> events)
+        public void Read(ComputeImage image, bool blocking, IntPtr data, ICollection<ComputeEventBase> events)
         {
             Read(image, blocking, new long[] { 0, 0, 0 }, new long[] { image.Width, image.Height, image.Depth }, image.RowPitch, image.SlicePitch, data, events);
         }
@@ -620,7 +620,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Read(ComputeImage image, bool blocking, long[] offset, long[] region, IntPtr data, ICollection<ComputeEvent> events)
+        public void Read(ComputeImage image, bool blocking, long[] offset, long[] region, IntPtr data, ICollection<ComputeEventBase> events)
         {
             Read(image, blocking, offset, region, image.RowPitch, image.SlicePitch, data, events);
         }
@@ -637,7 +637,7 @@ namespace Cloo
         /// <param name="data"> A pointer to a preallocated memory area to read the data into. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public void Read(ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events)
+        public void Read(ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
@@ -673,7 +673,7 @@ namespace Cloo
         /// </summary>
         /// <param name="memObjs"> A collection of <c>ComputeMemory</c>s that correspond to OpenGL memory objects. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void ReleaseGLObjects(ICollection<ComputeMemory> memObjs, ICollection<ComputeEvent> events)
+        public void ReleaseGLObjects(ICollection<ComputeMemory> memObjs, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
@@ -714,7 +714,7 @@ namespace Cloo
         /// <param name="memory"> The <c>ComputeMemory</c>. </param>
         /// <param name="mappedPtr"> The host address returned by a previous call to <c>ComputeCommandQueue.Map</c>. This pointer is <c>IntPtr.Zero</c> after this method returns. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Unmap(ComputeMemory memory, ref IntPtr mappedPtr, ICollection<ComputeEvent> events)
+        public void Unmap(ComputeMemory memory, ref IntPtr mappedPtr, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
@@ -744,7 +744,7 @@ namespace Cloo
         /// Enqueues a wait command for a collection of <c>ComputeEvent</c>s to complete before any future commands queued in the <c>ComputeCommandQueue</c> are executed.
         /// </summary>
         /// <param name="events"> The <c>ComputeEvent</c>s that this command will wait for. </param>
-        public void Wait(ICollection<ComputeEvent> events)
+        public void Wait(ICollection<ComputeEventBase> events)
         {
             unsafe
             {
@@ -765,7 +765,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Write<T>(ComputeBufferBase<T> buffer, T[] data, ICollection<ComputeEvent> events) where T : struct
+        public void Write<T>(ComputeBufferBase<T> buffer, T[] data, ICollection<ComputeEventBase> events) where T : struct
         {
             Write(buffer, 0, data.Length, data, events);
         }
@@ -774,7 +774,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Write<T>(ComputeBufferBase<T> buffer, long offset, long count, T[] data, ICollection<ComputeEvent> events) where T : struct
+        public void Write<T>(ComputeBufferBase<T> buffer, long offset, long count, T[] data, ICollection<ComputeEventBase> events) where T : struct
         {
             GCHandle dataHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
             try { Write(buffer, true, offset, count, dataHandle.AddrOfPinnedObject(), events); }
@@ -791,7 +791,7 @@ namespace Cloo
         /// <param name="data"> The content written to the <c>ComputeBuffer</c>. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public void Write<T>(ComputeBufferBase<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEvent> events) where T : struct
+        public void Write<T>(ComputeBufferBase<T> buffer, bool blocking, long offset, long count, IntPtr data, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -823,7 +823,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Write(ComputeImage image, bool blocking, IntPtr data, ICollection<ComputeEvent> events)
+        public void Write(ComputeImage image, bool blocking, IntPtr data, ICollection<ComputeEventBase> events)
         {
             Write(image, blocking, new long[] { 0, 0, 0 }, new long[] { image.Width, image.Height, image.Depth }, data, events);
         }
@@ -832,7 +832,7 @@ namespace Cloo
         /// Deprecated. Use the full version instead.
         /// </summary>
         [Obsolete("You should use the full version instead.", false)]
-        public void Write(ComputeImage image, bool blocking, long[] offset, long[] region, IntPtr data, ICollection<ComputeEvent> events)
+        public void Write(ComputeImage image, bool blocking, long[] offset, long[] region, IntPtr data, ICollection<ComputeEventBase> events)
         {
             Write(image, blocking, offset, region, image.RowPitch, image.SlicePitch, data, events);
         }
@@ -849,7 +849,7 @@ namespace Cloo
         /// <param name="data"> The content written to the <c>ComputeImage</c>. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public void Write(ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEvent> events)
+        public void Write(ComputeImage image, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr data, ICollection<ComputeEventBase> events)
         {
             unsafe
             {

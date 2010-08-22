@@ -289,7 +289,7 @@
         </member>
         <member name="T:Cloo.ComputeEventList">
             <summary>
-            Represents a list of <c>ComputeEvent</c>s.
+            Represents a list of OpenCL or user events.
             </summary>
             <seealso cref="T:Cloo.ComputeCommandQueue"/>
         </member>
@@ -298,11 +298,11 @@
             Creates an empty <c>ComputeEventList</c>.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeEventList.#ctor(System.Collections.Generic.IList{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeEventList.#ctor(System.Collections.Generic.IList{Cloo.ComputeEventBase})">
             <summary>
-            Creates a new <c>ComputeEventList</c> from an existing list of <c>ComputeEvent</c>s.
+            Creates a new <c>ComputeEventList</c> from an existing list of <c>ComputeEventBase</c>s.
             </summary>
-            <param name="events"> A list of <c>ComputeEvent</c>s. </param>
+            <param name="events"> A list of <c>ComputeEventBase</c>s. </param>
         </member>
         <member name="M:Cloo.ComputeEventList.Wait(System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
@@ -312,7 +312,7 @@
         </member>
         <member name="M:Cloo.ComputeEventList.Wait">
             <summary>
-            Waits on the host thread for the <c>ComputeEvent</c>s in the <c>ComputeEventList</c> to complete.
+            Waits on the host thread for the <c>ComputeEventBase</c>s in the <c>ComputeEventList</c> to complete.
             </summary>
         </member>
         <member name="T:Cloo.ComputeKernel">
@@ -1362,7 +1362,7 @@
             <param name="device"> A <c>ComputeDevice</c> associated with the <paramref name="context"/>. It can either be one of <c>ComputeContext.Devices</c> or have the same <c>ComputeDeviceTypes</c> as the <paramref name="device"/> specified when the <paramref name="context"/> is created. </param>
             <param name="properties"> The properties for the <c>ComputeCommandQueue</c>. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.AcquireGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.AcquireGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to acquire a collection of <c>ComputeMemory</c>s that have been previously created from OpenGL objects.
             </summary>
@@ -1380,12 +1380,12 @@
             Enqueues a marker.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to copy data between <c>ComputeBuffer</c>s.
             </summary>
@@ -1396,12 +1396,12 @@
             <param name="count"> The number of elements to copy. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Int64,System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Int64,System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to copy data from <c>ComputeBuffer</c> to <c>ComputeImage</c>.
             </summary>
@@ -1412,12 +1412,12 @@
             <param name="region"> The region (width, height, depth) in pixels to copy. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},System.Int64[],System.Int64,System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},System.Int64[],System.Int64,System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to copy data from <c>ComputeImage</c> to <c>ComputeBuffer</c>.
             </summary>
@@ -1428,12 +1428,12 @@
             <param name="region"> The region (width, height, depth) in pixels to copy. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy(Cloo.ComputeImage,Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Copy(Cloo.ComputeImage,Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy(Cloo.ComputeImage,Cloo.ComputeImage,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Copy(Cloo.ComputeImage,Cloo.ComputeImage,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to copy data between <c>ComputeImage</c>s.
             </summary>
@@ -1444,14 +1444,14 @@
             <param name="region"> The region (width, height, depth) in pixels to copy. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.ExecuteTask(Cloo.ComputeKernel,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.ExecuteTask(Cloo.ComputeKernel,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to execute a single <c>ComputeKernel</c>.
             </summary>
             <param name="kernel"> The <c>ComputeKernel</c> to execute. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to execute a range of <c>ComputeKernel</c>s in parallel.
             </summary>
@@ -1472,12 +1472,12 @@
             </summary>
             <remarks> This method only guarantees that all previously enqueued commands get issued to the OpenCL device. There is no guarantee that they will be complete after this method returns. </remarks>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Map``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Map``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Map``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Map``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to map a part of a <c>ComputeBuffer</c> into the host address space.
             </summary>
@@ -1489,12 +1489,12 @@
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to map a part of a <c>ComputeImage</c> into the host address space.
             </summary>
@@ -1506,17 +1506,17 @@
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to read data from a <c>ComputeBuffer</c>.
             </summary>
@@ -1528,17 +1528,17 @@
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to read data from a <c>ComputeImage</c>.
             </summary>
@@ -1552,7 +1552,7 @@
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.ReleaseGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.ReleaseGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to release <c>ComputeMemory</c>s that have been created from OpenGL objects.
             </summary>
@@ -1565,7 +1565,7 @@
             </summary>
             <returns> The string representation of the <c>ComputeCommandQueue</c>. </returns>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Unmap(Cloo.ComputeMemory,System.IntPtr@,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Unmap(Cloo.ComputeMemory,System.IntPtr@,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to unmap a <c>ComputeBuffer</c> or a <c>ComputeImage</c> from the host address space.
             </summary>
@@ -1573,23 +1573,23 @@
             <param name="mappedPtr"> The host address returned by a previous call to <c>ComputeCommandQueue.Map</c>. This pointer is <c>IntPtr.Zero</c> after this method returns. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Wait(System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Wait(System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a wait command for a collection of <c>ComputeEvent</c>s to complete before any future commands queued in the <c>ComputeCommandQueue</c> are executed.
             </summary>
             <param name="events"> The <c>ComputeEvent</c>s that this command will wait for. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},``0[],System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},``0[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,``0[],System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,``0[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to write data to a <c>ComputeBuffer</c>.
             </summary>
@@ -1601,17 +1601,17 @@
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Deprecated. Use the full version instead.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEvent})">
+        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to write data to a <c>ComputeImage</c>.
             </summary>

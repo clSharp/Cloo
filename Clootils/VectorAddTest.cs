@@ -82,7 +82,7 @@ kernel void VectorAdd(
 
             ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
 
-            ICollection<ComputeEvent> events = new Collection<ComputeEvent>();
+            ComputeEventList events = new ComputeEventList();
 
             commands.Execute(kernel, null, new long[] { count }, null, events);
 

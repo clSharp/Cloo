@@ -38,14 +38,14 @@ namespace Cloo
     using Cloo.Bindings;
 
     /// <summary>
-    /// Represents a list of <c>ComputeEvent</c>s.
+    /// Represents a list of OpenCL or user events.
     /// </summary>
     /// <seealso cref="ComputeCommandQueue"/>
-    public class ComputeEventList : IList<ComputeEvent>
+    public class ComputeEventList : IList<ComputeEventBase>
     {
         #region Fields
 
-        private readonly List<ComputeEvent> events;
+        private readonly List<ComputeEventBase> events;
 
         #endregion
 
@@ -56,16 +56,16 @@ namespace Cloo
         /// </summary>
         public ComputeEventList()
         {
-            events = new List<ComputeEvent>();
+            events = new List<ComputeEventBase>();
         }
 
         /// <summary>
-        /// Creates a new <c>ComputeEventList</c> from an existing list of <c>ComputeEvent</c>s.
+        /// Creates a new <c>ComputeEventList</c> from an existing list of <c>ComputeEventBase</c>s.
         /// </summary>
-        /// <param name="events"> A list of <c>ComputeEvent</c>s. </param>
-        public ComputeEventList(IList<ComputeEvent> events)
+        /// <param name="events"> A list of <c>ComputeEventBase</c>s. </param>
+        public ComputeEventList(IList<ComputeEventBase> events)
         {
-            events = new Collection<ComputeEvent>(events);
+            events = new Collection<ComputeEventBase>(events);
         }
 
         #endregion
@@ -86,7 +86,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Waits on the host thread for the <c>ComputeEvent</c>s in the <c>ComputeEventList</c> to complete.
+        /// Waits on the host thread for the <c>ComputeEventBase</c>s in the <c>ComputeEventList</c> to complete.
         /// </summary>
         public void Wait()
         {
@@ -103,20 +103,20 @@ namespace Cloo
 
         internal void FreeGCHandles()
         {
-            foreach (ComputeEvent ev in this)
+            foreach (ComputeEventBase ev in this)
                 ev.FreeGCHandle();
         }
 
         #endregion
 
-        #region IList<ComputeEvent> Members
+        #region IList<ComputeEventBase> Members
 
-        public int IndexOf(ComputeEvent item)
+        public int IndexOf(ComputeEventBase item)
         {
             return events.IndexOf(item);
         }
 
-        public void Insert(int index, ComputeEvent item)
+        public void Insert(int index, ComputeEventBase item)
         {
             events.Insert(index, item);
         }
@@ -126,7 +126,7 @@ namespace Cloo
             events.RemoveAt(index);
         }
 
-        public ComputeEvent this[int index]
+        public ComputeEventBase this[int index]
         {
             get
             {
@@ -140,9 +140,9 @@ namespace Cloo
 
         #endregion
 
-        #region ICollection<ComputeEvent> Members
+        #region ICollection<ComputeEventBase> Members
 
-        public void Add(ComputeEvent item)
+        public void Add(ComputeEventBase item)
         {
             events.Add(item);
         }
@@ -152,12 +152,12 @@ namespace Cloo
             events.Clear();
         }
 
-        public bool Contains(ComputeEvent item)
+        public bool Contains(ComputeEventBase item)
         {
             return events.Contains(item);
         }
 
-        public void CopyTo(ComputeEvent[] array, int arrayIndex)
+        public void CopyTo(ComputeEventBase[] array, int arrayIndex)
         {
             events.CopyTo(array, arrayIndex);
         }
@@ -172,18 +172,18 @@ namespace Cloo
             get { return false; }
         }
 
-        public bool Remove(ComputeEvent item)
+        public bool Remove(ComputeEventBase item)
         {
             return events.Remove(item);
         }
 
         #endregion
 
-        #region IEnumerable<ComputeEvent> Members
+        #region IEnumerable<ComputeEventBase> Members
 
-        public IEnumerator<ComputeEvent> GetEnumerator()
+        public IEnumerator<ComputeEventBase> GetEnumerator()
         {
-            return ((IEnumerable<ComputeEvent>)events).GetEnumerator();
+            return ((IEnumerable<ComputeEventBase>)events).GetEnumerator();
         }
 
         #endregion
