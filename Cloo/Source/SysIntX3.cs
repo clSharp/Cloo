@@ -39,7 +39,7 @@ namespace Cloo
     {
         #region Fields
 
-        public readonly IntPtr X, Y, Z;
+        public IntPtr X, Y, Z;
 
         #endregion
 
@@ -65,5 +65,10 @@ namespace Cloo
         }
 
         #endregion
+
+        public static SysIntX3 operator *(int scalar, SysIntX3 x3)
+        {
+            return new SysIntX3(scalar * x3.X.ToInt32(), scalar * x3.Y.ToInt32(), scalar * x3.Z.ToInt32());
+        }
     }
 }

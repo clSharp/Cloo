@@ -266,7 +266,7 @@ namespace Cloo
     }
 
     /// <summary>
-    /// The command-queue info query symbols.
+    /// The command queue info query symbols.
     /// </summary>
     public enum ComputeCommandQueueInfo : int
     {

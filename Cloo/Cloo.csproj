@@ -47,6 +47,7 @@
     <Compile Include="Source\ComputeBuffer.cs" />
     <Compile Include="Source\ComputeBufferBase.cs" />
     <Compile Include="Source\BufferRegion.cs" />
+    <Compile Include="Source\ComputeCommandQueue.Obsolete.cs" />
     <Compile Include="Source\ComputeCompiler.cs" />
     <Compile Include="Source\ComputeContext.cs" />
     <Compile Include="Source\ComputeContextPropertyList.cs" />

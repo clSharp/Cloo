@@ -38,7 +38,7 @@ namespace Cloo
     /// <summary>
     /// Represents an user created event.
     /// </summary>
-    /// <remarks> OpenCL 1.1 required. </remarks>
+    /// <remarks> Requires OpenCL 1.1. </remarks>
     public class ComputeUserEvent : ComputeEventBase
     {
         #region Constructors
@@ -47,7 +47,7 @@ namespace Cloo
         /// Creates a new <c>ComputeUserEvent</c>.
         /// </summary>
         /// <param name="context"> The <c>ComputeContext</c> in which the <c>ComputeUserEvent</c> is created. </param>
-        /// <remarks> OpenCL 1.1 required. </remarks>
+        /// <remarks> Requires OpenCL 1.1. </remarks>
         public ComputeUserEvent(ComputeContext context)
         {
             unsafe

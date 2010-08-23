@@ -39,7 +39,7 @@ namespace Cloo
     /// Represents an OpenCL sub-buffer.
     /// </summary>
     /// <typeparam name="T"> The type of the elements of the <c>ComputeSubBuffer</c>. <typeparamref name="T"/> is restricted to value types and <c>struct</c>s containing such types. </typeparam>
-    /// <remarks> A sub-buffer is created from a standard buffer and represents all or part of its data content. <br/> OpenCL 1.1 required. </remarks>
+    /// <remarks> A sub-buffer is created from a standard buffer and represents all or part of its data content. <br/> Requires OpenCL 1.1. </remarks>
     public class ComputeSubBuffer<T> : ComputeBufferBase<T> where T : struct
     {
         #region Constructors
