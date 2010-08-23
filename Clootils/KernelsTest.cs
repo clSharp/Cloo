@@ -65,7 +65,7 @@ namespace Clootils
         {
             KernelsTest.log = log;
 
-            StartRun(log, "Kernels test");
+            StartTest(log, "Kernels test");
 
             ComputeProgram program = new ComputeProgram(context, new string[] { kernelSources });
             program.Build(null, null, notify, IntPtr.Zero);
@@ -74,7 +74,7 @@ namespace Clootils
             List<ComputeKernel> kernels = new List<ComputeKernel>(program.CreateAllKernels());
             log.WriteLine("Kernels successfully created.");
 
-            EndRun(log, "Kernels test");
+            EndTest(log, "Kernels test");
         }
 
         private static void notify(IntPtr programHandle, IntPtr userDataPtr)

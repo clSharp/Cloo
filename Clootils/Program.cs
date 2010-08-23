@@ -30,17 +30,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
-using System.Windows.Forms;
-using Cloo;
-using System.IO;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Clootils
 {
     public class Program
     {
-        [DllImport("kernel32")]
+        [DllImport("kernel32.dll")]
         static extern bool AllocConsole();
 
         [DllImport("kernel32.dll")]
@@ -57,9 +54,9 @@ namespace Clootils
                 if (runningWin32NT) consoleAllocated = AllocConsole();
                 Application.Run(new MainForm());
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show(ex.ToString(), "Clootils Error");
+                MessageBox.Show(exception.ToString(), "Clootils Error");
             }
 
             if (consoleAllocated) FreeConsole();

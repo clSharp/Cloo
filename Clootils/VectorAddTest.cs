@@ -40,8 +40,8 @@ namespace Clootils
     {
         private static string kernelSource = @"
 kernel void VectorAdd(
-    global read_only float* a,
-    global read_only float* b,
+    global  read_only float* a,
+    global  read_only float* b,
     global write_only float* c )
 {
     int index = get_global_id(0);
@@ -50,7 +50,7 @@ kernel void VectorAdd(
 ";
         public static void Run(TextWriter log, ComputeContext context)
         {
-            StartRun(log, "Vector addition test");
+            StartTest(log, "Vector addition test");
 
             int count = 10;
             float[] arrA = new float[count];
@@ -94,7 +94,7 @@ kernel void VectorAdd(
             for (int i = 0; i < count; i++)
                 log.WriteLine("{0} + {1} = {2}", arrA[i], arrB[i], arrC[i]);
 
-            EndRun(log, "Vector addition test");
+            EndTest(log, "Vector addition test");
         }
     }
 }

@@ -37,14 +37,11 @@ namespace Clootils
 {
     class ProgramTest : TestBase
     {
-        private static string kernelSource = @"
-kernel void Test( void )
-{
-}
-";
+        private static string kernelSource = @"kernel void Test(void) { }";
+
         public static void Run(TextWriter log, ComputeContext context)
         {
-            StartRun(log, "Program test");
+            StartTest(log, "Program test");
 
             ComputeProgram program = new ComputeProgram(context, kernelSource);
             program.Build(null, null, null, IntPtr.Zero);
@@ -52,7 +49,7 @@ kernel void Test( void )
             log.WriteLine("Compiled program head:");
             log.WriteLine(BitConverter.ToString(bytes, 0, 16) + "...");
 
-            EndRun(log, "Program test");
+            EndTest(log, "Program test");
         }
     }
 }

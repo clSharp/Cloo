@@ -37,8 +37,8 @@ namespace Clootils
     {
         public static void Run(TextWriter log)
         {
-            StartRun(log, "Dummy test");
-            EndRun(log, "Dummy test");
+            StartTest(log, "Dummy test");
+            EndTest(log, "Dummy test");
         }
     }
 }

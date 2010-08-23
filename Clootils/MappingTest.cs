@@ -40,7 +40,7 @@ namespace Clootils
     {
         public static void Run(TextWriter log, ComputeContext context)
         {
-            StartRun(log, "Dummy test");
+            StartTest(log, "Dummy test");
 
             ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
 
@@ -69,7 +69,7 @@ namespace Clootils
 
             commands.Unmap(buffer, ref mappedPtr, null);
             
-            EndRun(log, "Dummy test");
+            EndTest(log, "Dummy test");
         }
     }
 }

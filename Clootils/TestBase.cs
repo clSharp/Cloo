@@ -36,12 +36,12 @@ namespace Clootils
 {
     public class TestBase
     {
-        protected static void StartRun(TextWriter log, String name)
+        protected static void StartTest(TextWriter log, String name)
         {
             log.WriteLine(log.NewLine + "------------------| Start {0} |------------------", name);
         }
 
-        protected static void EndRun(TextWriter log, String name)
+        protected static void EndTest(TextWriter log, String name)
         {
             log.WriteLine("-------------------| End {0} |-------------------" + log.NewLine, name);
             log.Flush();
