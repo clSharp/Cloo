@@ -40,16 +40,16 @@ namespace Cloo
         #region Obsolete
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, ICollection<ComputeEventBase> events) where T : struct
         {
             Copy(source, destination, 0, 0, source.Count, events);
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
         public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, ICollection<ComputeEventBase> events) where T : struct
         {
@@ -57,9 +57,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, ICollection<ComputeEventBase> events) where T : struct
         {
             Copy(source, destination, new long[] { 0, 0, 0 }, 0, new long[] { source.Width, source.Height, source.Depth }, events);
@@ -67,9 +67,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public void Copy(ComputeImage source, ComputeImage destination, ICollection<ComputeEventBase> events)
         {
             long[] offset = new long[] { 0, 0, 0 };
@@ -77,36 +77,36 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public IntPtr Map<T>(ComputeBufferBase<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEventBase> events) where T : struct
         {
             return Map(buffer, blocking, flags, 0, buffer.Count, events);
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public IntPtr Map(ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEventBase> events)
         {
             return Map(image, blocking, flags, new long[] { 0, 0, 0 }, new long[] { image.Width, image.Height, image.Depth }, events);
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public T[] Read<T>(ComputeBufferBase<T> buffer, ICollection<ComputeEventBase> events) where T : struct
         {
             return Read(buffer, 0, buffer.Count, events);
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public T[] Read<T>(ComputeBufferBase<T> buffer, long offset, long count, ICollection<ComputeEventBase> events) where T : struct
         {
             T[] data = new T[count];
@@ -117,36 +117,36 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public void Read(ComputeImage image, bool blocking, IntPtr destination, ICollection<ComputeEventBase> events)
         {
             Read(image, blocking, new long[] { 0, 0, 0 }, new long[] { image.Width, image.Height, image.Depth }, image.RowPitch, image.SlicePitch, destination, events);
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public void Read(ComputeImage image, bool blocking, long[] offset, long[] region, IntPtr destination, ICollection<ComputeEventBase> events)
         {
             Read(image, blocking, offset, region, image.RowPitch, image.SlicePitch, destination, events);
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public void Write<T>(ComputeBufferBase<T> buffer, T[] source, ICollection<ComputeEventBase> events) where T : struct
         {
             Write(buffer, 0, source.Length, source, events);
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public void Write<T>(ComputeBufferBase<T> buffer, long offset, long count, T[] source, ICollection<ComputeEventBase> events) where T : struct
         {
             GCHandle dataHandle = GCHandle.Alloc(source, GCHandleType.Pinned);
@@ -155,18 +155,18 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public void Write(ComputeImage image, bool blocking, IntPtr source, ICollection<ComputeEventBase> events)
         {
             Write(image, blocking, new long[] { 0, 0, 0 }, new long[] { image.Width, image.Height, image.Depth }, source, events);
         }
 
         /// <summary>
-        /// Obsolete. You should use the full version instead.
+        /// Obsolete.
         /// </summary>
-        [Obsolete("You should use the full version instead.", false)]
+        [Obsolete]
         public void Write(ComputeImage destination, bool blocking, long[] offset, long[] region, IntPtr source, ICollection<ComputeEventBase> events)
         {
             Write(destination, blocking, offset, region, destination.RowPitch, destination.SlicePitch, source, events);

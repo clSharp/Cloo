@@ -1346,6 +1346,49 @@
             </summary>
             <param name="status"> The new status of the <c>ComputeUserEvent</c>. Allowed value is any negative integer.</param>
         </member>
+        <member name="T:Cloo.ComputeEvent">
+            <summary>
+            Represents an OpenCL event.
+            </summary>
+            <remarks> An event encapsulates the status of an operation such as a command. It can be used to synchronize operations in a context. </remarks>
+            <seealso cref="T:Cloo.ComputeUserEvent"/>
+            <seealso cref="T:Cloo.ComputeCommandQueue"/>
+            <seealso cref="T:Cloo.ComputeContext"/>
+        </member>
+        <member name="P:Cloo.ComputeEvent.CommandQueue">
+            <summary>
+            Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
+            </summary>
+        </member>
+        <member name="T:Cloo.ComputeContextProperty">
+            <summary>
+            Represents an OpenCL context property.
+            </summary>
+            <remarks> An OpenCL context property is a (name, value) data pair. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeContextProperty.#ctor(Cloo.ComputeContextPropertyName,System.IntPtr)">
+            <summary>
+            Creates a new <c>ComputeContextProperty</c>.
+            </summary>
+            <param name="name"> The name of the <c>ComputeContextProperty</c>. </param>
+            <param name="value"> The value of the created <c>ComputeContextProperty</c>. </param>
+        </member>
+        <member name="M:Cloo.ComputeContextProperty.ToString">
+            <summary>
+            Gets the string representation of the <c>ComputeContextProperty</c>.
+            </summary>
+            <returns> The string representation of the <c>ComputeContextProperty</c>. </returns>
+        </member>
+        <member name="P:Cloo.ComputeContextProperty.Name">
+            <summary>
+            Gets the <c>ComputeContextPropertyName</c> of the <c>ComputeContextProperty</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeContextProperty.Value">
+            <summary>
+            Gets the value of the <c>ComputeContextProperty</c>.
+            </summary>
+        </member>
         <member name="T:Cloo.ComputeCommandQueue">
             <summary>
             Represents an OpenCL command queue.
@@ -1353,6 +1396,76 @@
             <remarks> A command queue is an object that holds commands that will be executed on a specific device. The command queue is created on a specific device in a context. Commands to a command queue are queued in-order but may be executed in-order or out-of-order. </remarks>
             <seealso cref="T:Cloo.ComputeContext"/>
             <seealso cref="T:Cloo.ComputeDevice"/>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy(Cloo.ComputeImage,Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Map``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},``0[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,``0[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.#ctor(Cloo.ComputeContext,Cloo.ComputeDevice,Cloo.ComputeCommandQueueFlags)">
             <summary>
@@ -1608,76 +1721,6 @@
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy(Cloo.ComputeImage,Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Map``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},``0[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,``0[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete. You should use the full version instead.
-            </summary>
-        </member>
         <member name="P:Cloo.ComputeCommandQueue.Context">
             <summary>
             Gets the <c>ComputeContext</c> of the <c>ComputeCommandQueue</c>.
@@ -1696,49 +1739,6 @@
         <member name="P:Cloo.ComputeCommandQueue.Profiling">
             <summary>
             Gets the profiling mode of the commands in the <c>ComputeCommandQueue</c>.
-            </summary>
-        </member>
-        <member name="T:Cloo.ComputeEvent">
-            <summary>
-            Represents an OpenCL event.
-            </summary>
-            <remarks> An event encapsulates the status of an operation such as a command. It can be used to synchronize operations in a context. </remarks>
-            <seealso cref="T:Cloo.ComputeUserEvent"/>
-            <seealso cref="T:Cloo.ComputeCommandQueue"/>
-            <seealso cref="T:Cloo.ComputeContext"/>
-        </member>
-        <member name="P:Cloo.ComputeEvent.CommandQueue">
-            <summary>
-            Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
-            </summary>
-        </member>
-        <member name="T:Cloo.ComputeContextProperty">
-            <summary>
-            Represents an OpenCL context property.
-            </summary>
-            <remarks> An OpenCL context property is a (name, value) data pair. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeContextProperty.#ctor(Cloo.ComputeContextPropertyName,System.IntPtr)">
-            <summary>
-            Creates a new <c>ComputeContextProperty</c>.
-            </summary>
-            <param name="name"> The name of the <c>ComputeContextProperty</c>. </param>
-            <param name="value"> The value of the created <c>ComputeContextProperty</c>. </param>
-        </member>
-        <member name="M:Cloo.ComputeContextProperty.ToString">
-            <summary>
-            Gets the string representation of the <c>ComputeContextProperty</c>.
-            </summary>
-            <returns> The string representation of the <c>ComputeContextProperty</c>. </returns>
-        </member>
-        <member name="P:Cloo.ComputeContextProperty.Name">
-            <summary>
-            Gets the <c>ComputeContextPropertyName</c> of the <c>ComputeContextProperty</c>.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeContextProperty.Value">
-            <summary>
-            Gets the value of the <c>ComputeContextProperty</c>.
             </summary>
         </member>
     </members>
