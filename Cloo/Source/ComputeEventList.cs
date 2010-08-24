@@ -70,6 +70,15 @@ namespace Cloo
 
         #endregion
 
+        #region Properties
+
+        /// <summary>
+        /// Gets the last event on the list.
+        /// </summary>
+        public ComputeEventBase Last { get { return events[events.Count - 1]; } }
+
+        #endregion
+
         #region Public methods
 
         /// <summary>
@@ -95,16 +104,6 @@ namespace Cloo
                 ComputeErrorCode error = CL10.WaitForEvents(events.Count, Tools.ExtractHandles(events));
                 ComputeException.ThrowOnError(error);
             }
-        }
-
-        #endregion
-
-        #region Internal methods
-
-        internal void FreeGCHandles()
-        {
-            foreach (ComputeEventBase ev in this)
-                ev.FreeGCHandle();
         }
 
         #endregion
