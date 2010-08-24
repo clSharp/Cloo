@@ -251,6 +251,7 @@ namespace Clootils
             ProgramTest.Run(log, context);
             KernelsTest.Run(log, context);
             VectorAddTest.Run(log, context);
+            AsyncReadTest.Run(log, context);
 
             Console.SetOut(Console.Out);
             log.Close();
