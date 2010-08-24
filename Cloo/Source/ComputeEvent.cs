@@ -44,6 +44,13 @@ namespace Cloo
     /// <seealso cref="ComputeContext"/>
     public class ComputeEvent : ComputeEventBase
     {
+        #region Fields
+
+        private GCHandle gcHandle;
+        private Array array;
+        
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -72,6 +79,51 @@ namespace Cloo
                     CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifyPtr, IntPtr.Zero);
                 }
             }
+
+            Completed += new ComputeEventNotifier(ComputeEvent_Fired);
+            Terminated += new ComputeEventNotifier(ComputeEvent_Fired);
+        }
+
+        #endregion
+
+        #region Internal methods
+
+        internal void FreeResources()
+        {
+            if (gcHandle.IsAllocated || gcHandle.Target != null) gcHandle.Free();
+            array = null;
+        }
+
+        internal void Track(GCHandle handle)
+        {
+            gcHandle = handle;
+        }
+
+        internal void Track(Array array)
+        {
+            this.array = array;
+        }
+
+        #endregion
+
+        #region Protected methods
+
+        protected override void Dispose(bool manual)
+        {
+            if (manual) FreeResources();
+            base.Dispose(manual);
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void ComputeEvent_Fired(object sender, EventArgs e)
+        {
+            FreeResources();
+            int eventIndex = CommandQueue.events.IndexOf(this);
+            if (eventIndex < 0) return;
+            CommandQueue.events.RemoveAt(eventIndex);
         }
 
         #endregion

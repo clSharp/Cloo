@@ -45,7 +45,6 @@ namespace Cloo
         #region Fields
 
         protected RawNotifier notifier;
-        private GCHandle gcHandle;
 
         #endregion
 
@@ -162,21 +161,6 @@ namespace Cloo
         public override string ToString()
         {
             return "ComputeEvent" + base.ToString();
-        }
-
-        #endregion
-
-        #region Internal methods
-
-        internal void FreeGCHandle()
-        {
-            if (!gcHandle.IsAllocated && gcHandle.Target == null) return;
-            gcHandle.Free();
-        }
-
-        internal void TrackGCHandle(GCHandle handle)
-        {
-            gcHandle = handle;
         }
 
         #endregion
