@@ -52,47 +52,53 @@ kernel void VectorAdd(
         {
             StartTest(log, "Vector addition test");
 
-            int count = 10;
-            float[] arrA = new float[count];
-            float[] arrB = new float[count];
-            float[] arrC = new float[count];
-
-            Random rand = new Random();
-
-            for (int i = 0; i < count; i++)
+            try
             {
-                arrA[i] = (float)(rand.NextDouble() * 100);
-                arrB[i] = (float)(rand.NextDouble() * 100);
+                int count = 10;
+                float[] arrA = new float[count];
+                float[] arrB = new float[count];
+                float[] arrC = new float[count];
+
+                Random rand = new Random();
+
+                for (int i = 0; i < count; i++)
+                {
+                    arrA[i] = (float)(rand.NextDouble() * 100);
+                    arrB[i] = (float)(rand.NextDouble() * 100);
+                }
+
+                ComputeBuffer<float> a = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrA);
+                ComputeBuffer<float> b = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrB);
+                ComputeBuffer<float> c = new ComputeBuffer<float>(context, ComputeMemoryFlags.WriteOnly, arrC.Length);
+
+                ComputeProgram program = new ComputeProgram(context, kernelSource);
+                program.Build(null, null, null, IntPtr.Zero);
+
+                ComputeKernel kernel = program.CreateKernel("VectorAdd");
+                kernel.SetMemoryArgument(0, a);
+                kernel.SetMemoryArgument(1, b);
+                kernel.SetMemoryArgument(2, c);
+
+                ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
+
+                ComputeEventList events = new ComputeEventList();
+
+                commands.Execute(kernel, null, new long[] { count }, null, events);
+
+                arrC = new float[count];
+                GCHandle arrCHandle = GCHandle.Alloc(arrC, GCHandleType.Pinned);
+
+                commands.Read(c, true, 0, count, arrCHandle.AddrOfPinnedObject(), events);
+
+                arrCHandle.Free();
+
+                for (int i = 0; i < count; i++)
+                    log.WriteLine("{0} + {1} = {2}", arrA[i], arrB[i], arrC[i]);
             }
-
-            ComputeBuffer<float> a = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrA);
-            ComputeBuffer<float> b = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrB);
-            ComputeBuffer<float> c = new ComputeBuffer<float>(context, ComputeMemoryFlags.WriteOnly, arrC.Length);
-
-            ComputeProgram program = new ComputeProgram(context, kernelSource);
-            program.Build(null, null, null, IntPtr.Zero);
-
-            ComputeKernel kernel = program.CreateKernel("VectorAdd");
-            kernel.SetMemoryArgument(0, a);
-            kernel.SetMemoryArgument(1, b);
-            kernel.SetMemoryArgument(2, c);
-
-            ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
-
-            ComputeEventList events = new ComputeEventList();
-
-            commands.Execute(kernel, null, new long[] { count }, null, events);
-
-            arrC = new float[count];
-            GCHandle arrCHandle = GCHandle.Alloc(arrC, GCHandleType.Pinned);
-
-            commands.Read(c, false, 0, count, arrCHandle.AddrOfPinnedObject(), events);
-            commands.Finish();
-
-            arrCHandle.Free();
-
-            for (int i = 0; i < count; i++)
-                log.WriteLine("{0} + {1} = {2}", arrA[i], arrB[i], arrC[i]);
+            catch (Exception e)
+            {
+                log.WriteLine(e.ToString());
+            }
 
             EndTest(log, "Vector addition test");
         }

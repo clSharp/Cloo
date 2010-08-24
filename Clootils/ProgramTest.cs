@@ -42,12 +42,19 @@ namespace Clootils
         public static void Run(TextWriter log, ComputeContext context)
         {
             StartTest(log, "Program test");
-
-            ComputeProgram program = new ComputeProgram(context, kernelSource);
-            program.Build(null, null, null, IntPtr.Zero);
-            byte[] bytes = program.Binaries[0];
-            log.WriteLine("Compiled program head:");
-            log.WriteLine(BitConverter.ToString(bytes, 0, 16) + "...");
+            
+            try
+            {
+                ComputeProgram program = new ComputeProgram(context, kernelSource);
+                program.Build(null, null, null, IntPtr.Zero);
+                byte[] bytes = program.Binaries[0];
+                log.WriteLine("Compiled program head:");
+                log.WriteLine(BitConverter.ToString(bytes, 0, 16) + "...");
+            }
+            catch (Exception e)
+            {
+                log.WriteLine(e.ToString());
+            }
 
             EndTest(log, "Program test");
         }

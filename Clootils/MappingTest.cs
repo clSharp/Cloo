@@ -42,33 +42,40 @@ namespace Clootils
         {
             StartTest(log, "Dummy test");
 
-            ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
-
-            log.WriteLine("Original content:");
-
-            Random rand = new Random();
-            int count = 6;
-            long[] bufferContent = new long[count];
-            for (int i = 0; i < count; i++)
+            try
             {
-                bufferContent[i] = (long)(rand.NextDouble() * long.MaxValue);
-                log.WriteLine("\t" + bufferContent[i]);
+                ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
+
+                log.WriteLine("Original content:");
+
+                Random rand = new Random();
+                int count = 6;
+                long[] bufferContent = new long[count];
+                for (int i = 0; i < count; i++)
+                {
+                    bufferContent[i] = (long)(rand.NextDouble() * long.MaxValue);
+                    log.WriteLine("\t" + bufferContent[i]);
+                }
+
+                ComputeBuffer<long> buffer = new ComputeBuffer<long>(context, ComputeMemoryFlags.CopyHostPointer, bufferContent);
+                IntPtr mappedPtr = commands.Map(buffer, false, ComputeMemoryMappingFlags.Read, 0, bufferContent.Length, null);
+                commands.Finish();
+
+                log.WriteLine("Mapped content:");
+
+                for (int i = 0; i < bufferContent.Length; i++)
+                {
+                    IntPtr ptr = new IntPtr(mappedPtr.ToInt64() + i * sizeof(long));
+                    log.WriteLine("\t" + Marshal.ReadInt64(ptr));
+                }
+
+                commands.Unmap(buffer, ref mappedPtr, null);
+            }
+            catch (Exception e)
+            {
+                log.WriteLine(e.ToString());
             }
 
-            ComputeBuffer<long> buffer = new ComputeBuffer<long>(context, ComputeMemoryFlags.CopyHostPointer, bufferContent);
-            IntPtr mappedPtr = commands.Map(buffer, false, ComputeMemoryMappingFlags.Read, 0, bufferContent.Length, null);
-            commands.Finish();
-
-            log.WriteLine("Mapped content:");
-
-            for (int i = 0; i < bufferContent.Length; i++)
-            {
-                IntPtr ptr = new IntPtr(mappedPtr.ToInt64() + i * sizeof(long));
-                log.WriteLine("\t" + Marshal.ReadInt64(ptr));
-            }
-
-            commands.Unmap(buffer, ref mappedPtr, null);
-            
             EndTest(log, "Dummy test");
         }
     }

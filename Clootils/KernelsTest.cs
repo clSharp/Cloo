@@ -66,13 +66,20 @@ namespace Clootils
             KernelsTest.log = log;
 
             StartTest(log, "Kernels test");
+            
+            try
+            {
+                ComputeProgram program = new ComputeProgram(context, new string[] { kernelSources });
+                program.Build(null, null, notify, IntPtr.Zero);
+                log.WriteLine("Program successfully built.");
 
-            ComputeProgram program = new ComputeProgram(context, new string[] { kernelSources });
-            program.Build(null, null, notify, IntPtr.Zero);
-            log.WriteLine("Program successfully built.");
-
-            List<ComputeKernel> kernels = new List<ComputeKernel>(program.CreateAllKernels());
-            log.WriteLine("Kernels successfully created.");
+                List<ComputeKernel> kernels = new List<ComputeKernel>(program.CreateAllKernels());
+                log.WriteLine("Kernels successfully created.");
+            }
+            catch (Exception e)
+            {
+                log.WriteLine(e.ToString());
+            }
 
             EndTest(log, "Kernels test");
         }
