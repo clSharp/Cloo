@@ -50,6 +50,7 @@ namespace Cloo
         private readonly ComputeDevice device;
         private bool outOfOrderExec;
         private bool profiling;
+        internal IList<ComputeEvent> events;
 
         #endregion
 
@@ -96,6 +97,8 @@ namespace Cloo
                 this.context = context;
                 outOfOrderExec = ((properties & ComputeCommandQueueFlags.OutOfOrderExecution) == ComputeCommandQueueFlags.OutOfOrderExecution);
                 profiling = ((properties & ComputeCommandQueueFlags.Profiling) == ComputeCommandQueueFlags.Profiling);
+
+                events = new List<ComputeEvent>();
             }
         }
 

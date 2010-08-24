@@ -45,8 +45,8 @@ namespace Cloo
 
         #region Constructors
 
-        public SysIntX3(SysIntX2 s, IntPtr z)
-            : this(s.X, s.Y, z)
+        public SysIntX3(SysIntX2 s, long z)
+            : this(s.X, s.Y, new IntPtr(z))
         { }
 
         public SysIntX3(int x, int y, int z)
@@ -65,6 +65,11 @@ namespace Cloo
         }
 
         #endregion
+
+        public static implicit operator long[](SysIntX3 x3)
+        {
+            return new long[] { x3.X.ToInt64(), x3.Y.ToInt64(), x3.Z.ToInt64() };
+        }
 
         public static SysIntX3 operator *(int scalar, SysIntX3 x3)
         {

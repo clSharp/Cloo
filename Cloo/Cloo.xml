@@ -253,6 +253,358 @@
             Gets the <c>ComputeContext</c> associated with the event.
             </summary>
         </member>
+        <member name="T:Cloo.ComputeCommandQueue">
+            <summary>
+            Represents an OpenCL command queue.
+            </summary>
+            <remarks> A command queue is an object that holds commands that will be executed on a specific device. The command queue is created on a specific device in a context. Commands to a command queue are queued in-order but may be executed in-order or out-of-order. </remarks>
+            <seealso cref="T:Cloo.ComputeContext"/>
+            <seealso cref="T:Cloo.ComputeDevice"/>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy(Cloo.ComputeImage,Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Map``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},``0[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,``0[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Obsolete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.#ctor(Cloo.ComputeContext,Cloo.ComputeDevice,Cloo.ComputeCommandQueueFlags)">
+            <summary>
+            Creates a new <c>ComputeCommandQueue</c>.
+            </summary>
+            <param name="context"> A <c>ComputeContext</c>. </param>
+            <param name="device"> A <c>ComputeDevice</c> associated with the <paramref name="context"/>. It can either be one of <c>ComputeContext.Devices</c> or have the same <c>ComputeDeviceTypes</c> as the <paramref name="device"/> specified when the <paramref name="context"/> is created. </param>
+            <param name="properties"> The properties for the <c>ComputeCommandQueue</c>. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.AcquireGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to acquire a collection of <c>ComputeMemory</c>s that have been previously created from OpenGL objects.
+            </summary>
+            <param name="memObjs"> A collection of <c>ComputeMemory</c>s that correspond to OpenGL memory objects. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.AddBarrier">
+            <summary>
+            Enqueues a barrier.
+            </summary>
+            <remarks> A barrier ensures that all queued commands have finished execution before the next batch of commands can begin execution. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.AddMarker">
+            <summary>
+            Enqueues a marker.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to copy data between buffers.
+            </summary>
+            <param name="source"> The buffer to copy from. </param>
+            <param name="destination"> The buffer to copy to. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
+            <param name="count"> The number of elements to copy. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to copy a 2D or 3D region of elements between two buffers.
+            </summary>
+            <typeparam name="T"> The type of the elements of the buffer. </typeparam>
+            <param name="source"> The buffer to copy from. </param>
+            <param name="destination"> The buffer to copy to. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
+            <param name="region"> The region of the elements to copy. </param>
+            <param name="sourceRowPitch"> The size of the source buffer row in bytes. If set to zero then <paramref name="sourceRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
+            <param name="sourceSlicePitch"> The size of the source buffer 2D slice in bytes. If set to zero then <paramref name="sourceSlicePitch"/> equals <c>region.Y * sizeof(T) * sourceRowPitch</c>. </param>
+            <param name="destinationRowPitch"> The size of the destination buffer row in bytes. If set to zero then <paramref name="destinationRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
+            <param name="destinationSlicePitch"> The size of the destination buffer 2D slice in bytes. If set to zero then <paramref name="destinationSlicePitch"/> equals <c>region.Y * sizeof(T) * destinationRowPitch</c>. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+            <remarks> Requires OpenCL 1.1. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Int64,System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to copy data from buffer to <c>ComputeImage</c>.
+            </summary>
+            <param name="source"> The buffer to copy from. </param>
+            <param name="destination"> The <c>ComputeImage</c> to copy to. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
+            <param name="region"> The region (width, height, depth) in pixels to copy. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},System.Int64[],System.Int64,System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to copy data from <c>ComputeImage</c> to buffer.
+            </summary>
+            <param name="source"> The <c>ComputeImage</c> to copy from. </param>
+            <param name="destination"> The buffer to copy to. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> (x, y, z) offset in pixels where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
+            <param name="region"> The region (width, height, depth) in pixels to copy. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Copy(Cloo.ComputeImage,Cloo.ComputeImage,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to copy data between <c>ComputeImage</c>s.
+            </summary>
+            <param name="source"> The <c>ComputeImage</c> to copy from. </param>
+            <param name="destination"> The <c>ComputeImage</c> to copy to. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> (x, y, z) offset in pixels where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
+            <param name="region"> The region (width, height, depth) in pixels to copy. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.ExecuteTask(Cloo.ComputeKernel,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to execute a single <c>ComputeKernel</c>.
+            </summary>
+            <param name="kernel"> The <c>ComputeKernel</c> to execute. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to execute a range of <c>ComputeKernel</c>s in parallel.
+            </summary>
+            <param name="kernel"> The <c>ComputeKernel</c> to execute. </param>
+            <param name="globalWorkOffset"> An array of values that describe the offset used to calculate the global ID of a work-item instead of having the global IDs always start at offset (0, 0,... 0). </param>
+            <param name="globalWorkSize"> An array of values that describe the number of global work-items in dimensions that will execute the kernel function. The total number of global work-items is computed as global_work_size[0] *...* global_work_size[work_dim - 1]. </param>
+            <param name="localWorkSize"> An array of values that describe the number of work-items that make up a work-group (also referred to as the size of the work-group) that will execute the <paramref name="kernel"/>. The total number of work-items in a work-group is computed as local_work_size[0] *... * local_work_size[work_dim - 1]. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Finish">
+            <summary>
+            Blocks until all previously enqueued commands are issued to the <c>ComputeCommandQueue.Device</c> and have completed.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Flush">
+            <summary>
+            Issues all previously enqueued commands to the <c>ComputeCommandQueue.Device</c>.
+            </summary>
+            <remarks> This method only guarantees that all previously enqueued commands get issued to the OpenCL device. There is no guarantee that they will be complete after this method returns. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Map``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to map a part of a buffer into the host address space.
+            </summary>
+            <param name="buffer"> The buffer to map. </param>
+            <param name="blocking">  The mode of operation of this call. </param>
+            <param name="flags"> A list of properties for the mapping mode. </param>
+            <param name="offset"> The <paramref name="source"/> offset in elements where mapping starts. </param>
+            <param name="count"> The number of elements to map. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to map a part of a <c>ComputeImage</c> into the host address space.
+            </summary>
+            <param name="image"> The <c>ComputeImage</c> to map. </param>
+            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
+            <param name="flags"> A list of properties for the mapping mode. </param>
+            <param name="offset"> The <paramref name="source"/> (x, y, z) offset in pixels where mapping starts. </param>
+            <param name="region"> The region (width, height, depth) in pixels to map. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to read data from a buffer.
+            </summary>
+            <param name="source"> The buffer to read from. </param>
+            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
+            <param name="offset"> The offset in elements where reading starts. </param>
+            <param name="count"> The number of elements to read. </param>
+            <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to read a 2D or 3D region of elements from a buffer.
+            </summary>
+            <typeparam name="T"> The type of the elements of the buffer. </typeparam>
+            <param name="source"> The buffer to read from. </param>
+            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
+            <param name="sourceOffset"> The <paramref name="buffer"/> offset in elements where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
+            <param name="region"> The region of the elements to copy. </param>
+            <param name="sourceRowPitch"> The size of the source buffer row in bytes. If set to zero then <paramref name="sourceRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
+            <param name="sourceSlicePitch"> The size of the source buffer 2D slice in bytes. If set to zero then <paramref name="sourceSlicePitch"/> equals <c>region.Y * sizeof(T) * sourceRowPitch</c>. </param>
+            <param name="destinationRowPitch"> The size of the destination buffer row in bytes. If set to zero then <paramref name="destinationRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
+            <param name="destinationSlicePitch"> The size of the destination buffer 2D slice in bytes. If set to zero then <paramref name="destinationSlicePitch"/> equals <c>region.Y * sizeof(T) * destinationRowPitch</c>. </param>
+            <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+            <remarks> Requires OpenCL 1.1. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to read data from a <c>ComputeImage</c>.
+            </summary>
+            <param name="source"> The <c>ComputeImage</c> to read from. </param>
+            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
+            <param name="offset"> The (x, y, z) offset in pixels where reading starts. </param>
+            <param name="region"> The region (width, height, depth) in pixels to read. </param>
+            <param name="rowPitch"> The <c>ComputeImage.RowPitch</c> or 0. </param>
+            <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
+            <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.ReleaseGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to release <c>ComputeMemory</c>s that have been created from OpenGL objects.
+            </summary>
+            <param name="memObjs"> A collection of <c>ComputeMemory</c>s that correspond to OpenGL memory objects. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.ToString">
+            <summary>
+            Gets the string representation of the <c>ComputeCommandQueue</c>.
+            </summary>
+            <returns> The string representation of the <c>ComputeCommandQueue</c>. </returns>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Unmap(Cloo.ComputeMemory,System.IntPtr@,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to unmap a buffer or a <c>ComputeImage</c> from the host address space.
+            </summary>
+            <param name="memory"> The <c>ComputeMemory</c>. </param>
+            <param name="mappedPtr"> The host address returned by a previous call to <c>ComputeCommandQueue.Map</c>. This pointer is <c>IntPtr.Zero</c> after this method returns. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Wait(System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a wait command for a collection of <c>ComputeEvent</c>s to complete before any future commands queued in the <c>ComputeCommandQueue</c> are executed.
+            </summary>
+            <param name="events"> The <c>ComputeEvent</c>s that this command will wait for. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to write data to a buffer.
+            </summary>
+            <param name="destination"> The buffer to write to. </param>
+            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
+            <param name="offset"> The offset in elements where writing starts. </param>
+            <param name="count"> The number of elements to write. </param>
+            <param name="source"> The data written to the buffer. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to write a 2D or 3D region of elements to a buffer.
+            </summary>
+            <typeparam name="T"> The type of the elements of the buffer. </typeparam>
+            <param name="destination"> The buffer to write to. </param>
+            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
+            <param name="region"> The region of the elements to copy. </param>
+            <param name="destinationRowPitch"> The size of the destination buffer row in bytes. If set to zero then <paramref name="destinationRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
+            <param name="destinationSlicePitch"> The size of the destination buffer 2D slice in bytes. If set to zero then <paramref name="destinationSlicePitch"/> equals <c>region.Y * sizeof(T) * destinationRowPitch</c>. </param>
+            <param name="sourceRowPitch"> The size of the memory area row in bytes. If set to zero then <paramref name="sourceRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
+            <param name="sourceSlicePitch"> The size of the memory area 2D slice in bytes. If set to zero then <paramref name="sourceSlicePitch"/> equals <c>region.Y * sizeof(T) * sourceRowPitch</c>. </param>
+            <param name="source"> The data written to the buffer. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+            <remarks> Requires OpenCL 1.1. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to write data to a <c>ComputeImage</c>.
+            </summary>
+            <param name="destination"> The <c>ComputeImage</c> to write to. </param>
+            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
+            <param name="offset"> The (x, y, z) offset in pixels where writing starts. </param>
+            <param name="region"> The region (width, height, depth) in pixels to write. </param>
+            <param name="rowPitch"> The <c>ComputeImage.RowPitch</c> or 0. </param>
+            <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
+            <param name="source"> The content written to the <c>ComputeImage</c>. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
+        </member>
+        <member name="P:Cloo.ComputeCommandQueue.Context">
+            <summary>
+            Gets the <c>ComputeContext</c> of the <c>ComputeCommandQueue</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeCommandQueue.Device">
+            <summary>
+            Gets the <c>ComputeDevice</c> of the <c>ComputeCommandQueue</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeCommandQueue.OutOfOrderExecution">
+            <summary>
+            Gets the out-of-order execution mode of the commands in the <c>ComputeCommandQueue</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeCommandQueue.Profiling">
+            <summary>
+            Gets the profiling mode of the commands in the <c>ComputeCommandQueue</c>.
+            </summary>
+        </member>
         <member name="T:Cloo.ComputeBufferBase`1">
             <summary>
             Represents the parent type to any Cloo buffer types.
@@ -313,6 +665,11 @@
         <member name="M:Cloo.ComputeEventList.Wait">
             <summary>
             Waits on the host thread for the <c>ComputeEventBase</c>s in the <c>ComputeEventList</c> to complete.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeEventList.Last">
+            <summary>
+            Gets the last event on the list.
             </summary>
         </member>
         <member name="T:Cloo.ComputeKernel">
@@ -1387,358 +1744,6 @@
         <member name="P:Cloo.ComputeContextProperty.Value">
             <summary>
             Gets the value of the <c>ComputeContextProperty</c>.
-            </summary>
-        </member>
-        <member name="T:Cloo.ComputeCommandQueue">
-            <summary>
-            Represents an OpenCL command queue.
-            </summary>
-            <remarks> A command queue is an object that holds commands that will be executed on a specific device. The command queue is created on a specific device in a context. Commands to a command queue are queued in-order but may be executed in-order or out-of-order. </remarks>
-            <seealso cref="T:Cloo.ComputeContext"/>
-            <seealso cref="T:Cloo.ComputeDevice"/>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy(Cloo.ComputeImage,Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Map``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},``0[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,``0[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.#ctor(Cloo.ComputeContext,Cloo.ComputeDevice,Cloo.ComputeCommandQueueFlags)">
-            <summary>
-            Creates a new <c>ComputeCommandQueue</c>.
-            </summary>
-            <param name="context"> A <c>ComputeContext</c>. </param>
-            <param name="device"> A <c>ComputeDevice</c> associated with the <paramref name="context"/>. It can either be one of <c>ComputeContext.Devices</c> or have the same <c>ComputeDeviceTypes</c> as the <paramref name="device"/> specified when the <paramref name="context"/> is created. </param>
-            <param name="properties"> The properties for the <c>ComputeCommandQueue</c>. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.AcquireGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to acquire a collection of <c>ComputeMemory</c>s that have been previously created from OpenGL objects.
-            </summary>
-            <param name="memObjs"> A collection of <c>ComputeMemory</c>s that correspond to OpenGL memory objects. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.AddBarrier">
-            <summary>
-            Enqueues a barrier.
-            </summary>
-            <remarks> A barrier ensures that all queued commands have finished execution before the next batch of commands can begin execution. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.AddMarker">
-            <summary>
-            Enqueues a marker.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to copy data between buffers.
-            </summary>
-            <param name="source"> The buffer to copy from. </param>
-            <param name="destination"> The buffer to copy to. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
-            <param name="count"> The number of elements to copy. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to copy a 2D or 3D region of elements between two buffers.
-            </summary>
-            <typeparam name="T"> The type of the elements of the buffer. </typeparam>
-            <param name="source"> The buffer to copy from. </param>
-            <param name="destination"> The buffer to copy to. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
-            <param name="region"> The region of the elements to copy. </param>
-            <param name="sourceRowPitch"> The size of the source buffer row in bytes. If set to zero then <paramref name="sourceRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
-            <param name="sourceSlicePitch"> The size of the source buffer 2D slice in bytes. If set to zero then <paramref name="sourceSlicePitch"/> equals <c>region.Y * sizeof(T) * sourceRowPitch</c>. </param>
-            <param name="destinationRowPitch"> The size of the destination buffer row in bytes. If set to zero then <paramref name="destinationRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
-            <param name="destinationSlicePitch"> The size of the destination buffer 2D slice in bytes. If set to zero then <paramref name="destinationSlicePitch"/> equals <c>region.Y * sizeof(T) * destinationRowPitch</c>. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> Requires OpenCL 1.1. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Int64,System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to copy data from buffer to <c>ComputeImage</c>.
-            </summary>
-            <param name="source"> The buffer to copy from. </param>
-            <param name="destination"> The <c>ComputeImage</c> to copy to. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
-            <param name="region"> The region (width, height, depth) in pixels to copy. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},System.Int64[],System.Int64,System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to copy data from <c>ComputeImage</c> to buffer.
-            </summary>
-            <param name="source"> The <c>ComputeImage</c> to copy from. </param>
-            <param name="destination"> The buffer to copy to. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> (x, y, z) offset in pixels where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
-            <param name="region"> The region (width, height, depth) in pixels to copy. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Copy(Cloo.ComputeImage,Cloo.ComputeImage,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to copy data between <c>ComputeImage</c>s.
-            </summary>
-            <param name="source"> The <c>ComputeImage</c> to copy from. </param>
-            <param name="destination"> The <c>ComputeImage</c> to copy to. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> (x, y, z) offset in pixels where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
-            <param name="region"> The region (width, height, depth) in pixels to copy. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.ExecuteTask(Cloo.ComputeKernel,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to execute a single <c>ComputeKernel</c>.
-            </summary>
-            <param name="kernel"> The <c>ComputeKernel</c> to execute. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to execute a range of <c>ComputeKernel</c>s in parallel.
-            </summary>
-            <param name="kernel"> The <c>ComputeKernel</c> to execute. </param>
-            <param name="globalWorkOffset"> An array of values that describe the offset used to calculate the global ID of a work-item instead of having the global IDs always start at offset (0, 0,... 0). </param>
-            <param name="globalWorkSize"> An array of values that describe the number of global work-items in dimensions that will execute the kernel function. The total number of global work-items is computed as global_work_size[0] *...* global_work_size[work_dim - 1]. </param>
-            <param name="localWorkSize"> An array of values that describe the number of work-items that make up a work-group (also referred to as the size of the work-group) that will execute the <paramref name="kernel"/>. The total number of work-items in a work-group is computed as local_work_size[0] *... * local_work_size[work_dim - 1]. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Finish">
-            <summary>
-            Blocks until all previously enqueued commands are issued to the <c>ComputeCommandQueue.Device</c> and have completed.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Flush">
-            <summary>
-            Issues all previously enqueued commands to the <c>ComputeCommandQueue.Device</c>.
-            </summary>
-            <remarks> This method only guarantees that all previously enqueued commands get issued to the OpenCL device. There is no guarantee that they will be complete after this method returns. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Map``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to map a part of a buffer into the host address space.
-            </summary>
-            <param name="buffer"> The buffer to map. </param>
-            <param name="blocking">  The mode of operation of this call. </param>
-            <param name="flags"> A list of properties for the mapping mode. </param>
-            <param name="offset"> The <paramref name="source"/> offset in elements where mapping starts. </param>
-            <param name="count"> The number of elements to map. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to map a part of a <c>ComputeImage</c> into the host address space.
-            </summary>
-            <param name="image"> The <c>ComputeImage</c> to map. </param>
-            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="flags"> A list of properties for the mapping mode. </param>
-            <param name="offset"> The <paramref name="source"/> (x, y, z) offset in pixels where mapping starts. </param>
-            <param name="region"> The region (width, height, depth) in pixels to map. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to read data from a buffer.
-            </summary>
-            <param name="source"> The buffer to read from. </param>
-            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="offset"> The offset in elements where reading starts. </param>
-            <param name="count"> The number of elements to read. </param>
-            <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to read a 2D or 3D region of elements from a buffer.
-            </summary>
-            <typeparam name="T"> The type of the elements of the buffer. </typeparam>
-            <param name="source"> The buffer to read from. </param>
-            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="sourceOffset"> The <paramref name="buffer"/> offset in elements where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
-            <param name="region"> The region of the elements to copy. </param>
-            <param name="sourceRowPitch"> The size of the source buffer row in bytes. If set to zero then <paramref name="sourceRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
-            <param name="sourceSlicePitch"> The size of the source buffer 2D slice in bytes. If set to zero then <paramref name="sourceSlicePitch"/> equals <c>region.Y * sizeof(T) * sourceRowPitch</c>. </param>
-            <param name="destinationRowPitch"> The size of the destination buffer row in bytes. If set to zero then <paramref name="destinationRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
-            <param name="destinationSlicePitch"> The size of the destination buffer 2D slice in bytes. If set to zero then <paramref name="destinationSlicePitch"/> equals <c>region.Y * sizeof(T) * destinationRowPitch</c>. </param>
-            <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> Requires OpenCL 1.1. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to read data from a <c>ComputeImage</c>.
-            </summary>
-            <param name="source"> The <c>ComputeImage</c> to read from. </param>
-            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="offset"> The (x, y, z) offset in pixels where reading starts. </param>
-            <param name="region"> The region (width, height, depth) in pixels to read. </param>
-            <param name="rowPitch"> The <c>ComputeImage.RowPitch</c> or 0. </param>
-            <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
-            <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.ReleaseGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to release <c>ComputeMemory</c>s that have been created from OpenGL objects.
-            </summary>
-            <param name="memObjs"> A collection of <c>ComputeMemory</c>s that correspond to OpenGL memory objects. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.ToString">
-            <summary>
-            Gets the string representation of the <c>ComputeCommandQueue</c>.
-            </summary>
-            <returns> The string representation of the <c>ComputeCommandQueue</c>. </returns>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Unmap(Cloo.ComputeMemory,System.IntPtr@,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to unmap a buffer or a <c>ComputeImage</c> from the host address space.
-            </summary>
-            <param name="memory"> The <c>ComputeMemory</c>. </param>
-            <param name="mappedPtr"> The host address returned by a previous call to <c>ComputeCommandQueue.Map</c>. This pointer is <c>IntPtr.Zero</c> after this method returns. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Wait(System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a wait command for a collection of <c>ComputeEvent</c>s to complete before any future commands queued in the <c>ComputeCommandQueue</c> are executed.
-            </summary>
-            <param name="events"> The <c>ComputeEvent</c>s that this command will wait for. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to write data to a buffer.
-            </summary>
-            <param name="destination"> The buffer to write to. </param>
-            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="offset"> The offset in elements where writing starts. </param>
-            <param name="count"> The number of elements to write. </param>
-            <param name="source"> The data written to the buffer. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to write a 2D or 3D region of elements to a buffer.
-            </summary>
-            <typeparam name="T"> The type of the elements of the buffer. </typeparam>
-            <param name="destination"> The buffer to write to. </param>
-            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
-            <param name="region"> The region of the elements to copy. </param>
-            <param name="destinationRowPitch"> The size of the destination buffer row in bytes. If set to zero then <paramref name="destinationRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
-            <param name="destinationSlicePitch"> The size of the destination buffer 2D slice in bytes. If set to zero then <paramref name="destinationSlicePitch"/> equals <c>region.Y * sizeof(T) * destinationRowPitch</c>. </param>
-            <param name="sourceRowPitch"> The size of the memory area row in bytes. If set to zero then <paramref name="sourceRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
-            <param name="sourceSlicePitch"> The size of the memory area 2D slice in bytes. If set to zero then <paramref name="sourceSlicePitch"/> equals <c>region.Y * sizeof(T) * sourceRowPitch</c>. </param>
-            <param name="source"> The data written to the buffer. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> Requires OpenCL 1.1. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,System.Int64[],System.Int64[],System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to write data to a <c>ComputeImage</c>.
-            </summary>
-            <param name="destination"> The <c>ComputeImage</c> to write to. </param>
-            <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="offset"> The (x, y, z) offset in pixels where writing starts. </param>
-            <param name="region"> The region (width, height, depth) in pixels to write. </param>
-            <param name="rowPitch"> The <c>ComputeImage.RowPitch</c> or 0. </param>
-            <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
-            <param name="source"> The content written to the <c>ComputeImage</c>. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-            <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        </member>
-        <member name="P:Cloo.ComputeCommandQueue.Context">
-            <summary>
-            Gets the <c>ComputeContext</c> of the <c>ComputeCommandQueue</c>.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeCommandQueue.Device">
-            <summary>
-            Gets the <c>ComputeDevice</c> of the <c>ComputeCommandQueue</c>.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeCommandQueue.OutOfOrderExecution">
-            <summary>
-            Gets the out-of-order execution mode of the commands in the <c>ComputeCommandQueue</c>.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeCommandQueue.Profiling">
-            <summary>
-            Gets the profiling mode of the commands in the <c>ComputeCommandQueue</c>.
             </summary>
         </member>
     </members>
