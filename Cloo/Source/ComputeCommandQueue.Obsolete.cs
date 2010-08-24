@@ -34,6 +34,7 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using Cloo.Bindings;
 
     public partial class ComputeCommandQueue
     {
@@ -51,6 +52,7 @@ namespace Cloo
         /// <summary>
         /// Obsolete.
         /// </summary>
+        [Obsolete]
         public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, ICollection<ComputeEventBase> events) where T : struct
         {
             Copy(source, destination, 0, new long[] { 0, 0, 0 }, new long[] { destination.Width, destination.Height, destination.Depth }, events);
@@ -64,6 +66,81 @@ namespace Cloo
         {
             Copy(source, destination, new long[] { 0, 0, 0 }, 0, new long[] { source.Width, source.Height, source.Depth }, events);
 
+        }
+
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
+        public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEventBase> events) where T : struct
+        {
+            unsafe
+            {
+                int sizeofT = Marshal.SizeOf(typeof(T));
+                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                IntPtr newEventHandle = IntPtr.Zero;
+
+                fixed (IntPtr* destinationOffsetPtr = Tools.ConvertArray(destinationOffset))
+                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
+                fixed (IntPtr* eventHandlesPtr = eventHandles)
+                {
+                    ComputeErrorCode error = CL10.EnqueueCopyBufferToImage(Handle, source.Handle, destination.Handle, new IntPtr(sourceOffset * sizeofT), destinationOffsetPtr, regionPtr, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeException.ThrowOnError(error);
+                }
+
+                if (events != null && !events.IsReadOnly)
+                    events.Add(new ComputeEvent(newEventHandle, this));
+            }
+        }
+
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
+        public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEventBase> events) where T : struct
+        {
+            unsafe
+            {
+                int sizeofT = Marshal.SizeOf(typeof(T));
+                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                IntPtr newEventHandle = IntPtr.Zero;
+
+                fixed (IntPtr* sourceOffsetPtr = Tools.ConvertArray(sourceOffset))
+                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
+                fixed (IntPtr* eventHandlesPtr = eventHandles)
+                {
+                    ComputeErrorCode error = CL10.EnqueueCopyImageToBuffer(Handle, source.Handle, destination.Handle, sourceOffsetPtr, regionPtr, new IntPtr(destinationOffset * sizeofT), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeException.ThrowOnError(error);
+                }
+
+                if (events != null && !events.IsReadOnly)
+                    events.Add(new ComputeEvent(newEventHandle, this));
+            }
+        }
+
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
+        public void Copy(ComputeImage source, ComputeImage destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEventBase> events)
+        {
+            unsafe
+            {
+                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                IntPtr newEventHandle = IntPtr.Zero;
+
+                fixed (IntPtr* sourceOffsetPtr = Tools.ConvertArray(sourceOffset))
+                fixed (IntPtr* destinationOffsetPtr = Tools.ConvertArray(destinationOffset))
+                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
+                fixed (IntPtr* eventHandlesPtr = eventHandles)
+                {
+                    ComputeErrorCode error = CL10.EnqueueCopyImage(Handle, source.Handle, destination.Handle, sourceOffsetPtr, destinationOffsetPtr, regionPtr, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeException.ThrowOnError(error);
+                }
+
+                if (events != null && !events.IsReadOnly)
+                    events.Add(new ComputeEvent(newEventHandle, this));
+            }
         }
 
         /// <summary>
@@ -92,6 +169,34 @@ namespace Cloo
         public IntPtr Map(ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, ICollection<ComputeEventBase> events)
         {
             return Map(image, blocking, flags, new long[] { 0, 0, 0 }, new long[] { image.Width, image.Height, image.Depth }, events);
+        }
+
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
+        public IntPtr Map(ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, ICollection<ComputeEventBase> events)
+        {
+            unsafe
+            {
+                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                IntPtr newEventHandle = IntPtr.Zero;
+                IntPtr mappedPtr;
+
+                fixed (IntPtr* offsetPtr = Tools.ConvertArray(offset))
+                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
+                fixed (IntPtr* eventHandlesPtr = eventHandles)
+                {
+                    ComputeErrorCode error = ComputeErrorCode.Success;
+                    mappedPtr = CL10.EnqueueMapImage(Handle, image.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, flags, offsetPtr, regionPtr, null, null, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null, &error);
+                    ComputeException.ThrowOnError(error);
+                }
+
+                if (events != null && !events.IsReadOnly)
+                    events.Add(new ComputeEvent(newEventHandle, this));
+
+                return mappedPtr;
+            }
         }
 
         /// <summary>
@@ -138,6 +243,30 @@ namespace Cloo
         /// Obsolete.
         /// </summary>
         [Obsolete]
+        public void Read(ComputeImage source, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr destination, ICollection<ComputeEventBase> events)
+        {
+            unsafe
+            {
+                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                IntPtr newEventHandle = IntPtr.Zero;
+
+                fixed (IntPtr* offsetPtr = Tools.ConvertArray(offset))
+                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
+                fixed (IntPtr* eventHandlesPtr = eventHandles)
+                {
+                    ComputeErrorCode error = CL10.EnqueueReadImage(Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, offsetPtr, regionPtr, new IntPtr(rowPitch), new IntPtr(slicePitch), destination, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeException.ThrowOnError(error);
+                }
+
+                if (events != null && !events.IsReadOnly)
+                    events.Add(new ComputeEvent(newEventHandle, this));
+            }
+        }
+
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
         public void Write<T>(ComputeBufferBase<T> buffer, T[] source, ICollection<ComputeEventBase> events) where T : struct
         {
             Write(buffer, 0, source.Length, source, events);
@@ -170,6 +299,30 @@ namespace Cloo
         public void Write(ComputeImage destination, bool blocking, long[] offset, long[] region, IntPtr source, ICollection<ComputeEventBase> events)
         {
             Write(destination, blocking, offset, region, destination.RowPitch, destination.SlicePitch, source, events);
+        }
+
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
+        public void Write(ComputeImage destination, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr source, ICollection<ComputeEventBase> events)
+        {
+            unsafe
+            {
+                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                IntPtr newEventHandle = IntPtr.Zero;
+
+                fixed (IntPtr* offsetPtr = Tools.ConvertArray(offset))
+                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
+                fixed (IntPtr* eventHandlesPtr = eventHandles)
+                {
+                    ComputeErrorCode error = CL10.EnqueueWriteImage(Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, offsetPtr, regionPtr, new IntPtr(rowPitch), new IntPtr(slicePitch), source, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeException.ThrowOnError(error);
+                }
+
+                if (events != null && !events.IsReadOnly)
+                    events.Add(new ComputeEvent(newEventHandle, this));
+            }
         }
 
         #endregion

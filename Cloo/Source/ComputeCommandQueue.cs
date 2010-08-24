@@ -258,7 +258,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to copy. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, long sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEventBase> events) where T : struct
+        public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, long sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -266,8 +266,6 @@ namespace Cloo
                 IntPtr[] eventHandles = Tools.ExtractHandles(events);
                 IntPtr newEventHandle = IntPtr.Zero;
 
-                fixed (IntPtr* destinationOffsetPtr = Tools.ConvertArray(destinationOffset))
-                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = CL10.EnqueueCopyBufferToImage(
@@ -275,8 +273,8 @@ namespace Cloo
                         source.Handle,
                         destination.Handle,
                         new IntPtr(sourceOffset * sizeofT),
-                        destinationOffsetPtr,
-                        regionPtr,
+                        &(destinationOffset.X),
+                        &(region.X),
                         eventHandles.Length,
                         eventHandlesPtr,
                         (events != null) ? &newEventHandle : null);
@@ -297,7 +295,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to copy. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, long[] sourceOffset, long destinationOffset, long[] region, ICollection<ComputeEventBase> events) where T : struct
+        public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, SysIntX3 sourceOffset, long destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -305,16 +303,14 @@ namespace Cloo
                 IntPtr[] eventHandles = Tools.ExtractHandles(events);
                 IntPtr newEventHandle = IntPtr.Zero;
 
-                fixed (IntPtr* sourceOffsetPtr = Tools.ConvertArray(sourceOffset))
-                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = CL10.EnqueueCopyImageToBuffer(
                         Handle,
                         source.Handle,
                         destination.Handle,
-                        sourceOffsetPtr,
-                        regionPtr,
+                        &(sourceOffset.X),
+                        &(region.X),
                         new IntPtr(destinationOffset * sizeofT),
                         eventHandles.Length,
                         eventHandlesPtr,
@@ -336,25 +332,22 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to copy. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void Copy(ComputeImage source, ComputeImage destination, long[] sourceOffset, long[] destinationOffset, long[] region, ICollection<ComputeEventBase> events)
+        public void Copy(ComputeImage source, ComputeImage destination, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
                 IntPtr[] eventHandles = Tools.ExtractHandles(events);
                 IntPtr newEventHandle = IntPtr.Zero;
 
-                fixed (IntPtr* sourceOffsetPtr = Tools.ConvertArray(sourceOffset))
-                fixed (IntPtr* destinationOffsetPtr = Tools.ConvertArray(destinationOffset))
-                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = CL10.EnqueueCopyImage(
                         Handle,
                         source.Handle,
                         destination.Handle,
-                        sourceOffsetPtr,
-                        destinationOffsetPtr,
-                        regionPtr,
+                        &(sourceOffset.X),
+                        &(destinationOffset.X),
+                        &(region.X),
                         eventHandles.Length,
                         eventHandlesPtr,
                         (events != null) ? &newEventHandle : null);
@@ -508,7 +501,7 @@ namespace Cloo
         /// <param name="region"> The region (width, height, depth) in pixels to map. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public IntPtr Map(ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, long[] offset, long[] region, ICollection<ComputeEventBase> events)
+        public IntPtr Map(ComputeImage image, bool blocking, ComputeMemoryMappingFlags flags, SysIntX3 offset, SysIntX3 region, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
@@ -516,8 +509,6 @@ namespace Cloo
                 IntPtr newEventHandle = IntPtr.Zero;
                 IntPtr mappedPtr;
 
-                fixed (IntPtr* offsetPtr = Tools.ConvertArray(offset))
-                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
@@ -526,8 +517,8 @@ namespace Cloo
                         image.Handle,
                         (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
                         flags,
-                        offsetPtr,
-                        regionPtr,
+                        &(offset.X),
+                        &(region.X),
                         null,
                         null,
                         eventHandles.Length,
@@ -646,23 +637,21 @@ namespace Cloo
         /// <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public void Read(ComputeImage source, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr destination, ICollection<ComputeEventBase> events)
+        public void Read(ComputeImage source, bool blocking, SysIntX3 offset, SysIntX3 region, long rowPitch, long slicePitch, IntPtr destination, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
                 IntPtr[] eventHandles = Tools.ExtractHandles(events);
                 IntPtr newEventHandle = IntPtr.Zero;
 
-                fixed (IntPtr* offsetPtr = Tools.ConvertArray(offset))
-                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = CL10.EnqueueReadImage(
                         Handle,
                         source.Handle,
                         (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        offsetPtr,
-                        regionPtr,
+                        &(offset.X),
+                        &(region.X),
                         new IntPtr(rowPitch),
                         new IntPtr(slicePitch),
                         destination,
@@ -865,30 +854,28 @@ namespace Cloo
         /// </summary>
         /// <param name="destination"> The <c>ComputeImage</c> to write to. </param>
         /// <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-        /// <param name="offset"> The (x, y, z) offset in pixels where writing starts. </param>
+        /// <param name="destinationOffset"> The (x, y, z) offset in pixels where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to write. </param>
         /// <param name="rowPitch"> The <c>ComputeImage.RowPitch</c> or 0. </param>
         /// <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
         /// <param name="source"> The content written to the <c>ComputeImage</c>. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public void Write(ComputeImage destination, bool blocking, long[] offset, long[] region, long rowPitch, long slicePitch, IntPtr source, ICollection<ComputeEventBase> events)
+        public void Write(ComputeImage destination, bool blocking, SysIntX3 destinationOffset, SysIntX3 region, long rowPitch, long slicePitch, IntPtr source, ICollection<ComputeEventBase> events)
         {
             unsafe
             {
                 IntPtr[] eventHandles = Tools.ExtractHandles(events);
                 IntPtr newEventHandle = IntPtr.Zero;
 
-                fixed (IntPtr* offsetPtr = Tools.ConvertArray(offset))
-                fixed (IntPtr* regionPtr = Tools.ConvertArray(region))
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = CL10.EnqueueWriteImage(
                         Handle,
                         destination.Handle,
                         (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        offsetPtr,
-                        regionPtr,
+                        &(destinationOffset.X),
+                        &(region.X),
                         new IntPtr(rowPitch),
                         new IntPtr(slicePitch),
                         source,

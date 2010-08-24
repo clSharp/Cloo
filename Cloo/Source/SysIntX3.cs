@@ -66,11 +66,6 @@ namespace Cloo
 
         #endregion
 
-        public static implicit operator long[](SysIntX3 x3)
-        {
-            return new long[] { x3.X.ToInt64(), x3.Y.ToInt64(), x3.Z.ToInt64() };
-        }
-
         public static SysIntX3 operator *(int scalar, SysIntX3 x3)
         {
             return new SysIntX3(scalar * x3.X.ToInt32(), scalar * x3.Y.ToInt32(), scalar * x3.Z.ToInt32());

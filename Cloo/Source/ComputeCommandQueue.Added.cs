@@ -31,8 +31,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Cloo
 {
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
     public partial class ComputeCommandQueue
@@ -62,7 +62,7 @@ namespace Cloo
         #region CopyBufferToImage
 
         public void CopyBufferToImage<T>(ComputeBufferBase<T> source, ComputeImage destination) where T : struct
-        { Copy(source, destination, 0, new long[] { 0, 0, 0 }, new long[] { destination.Width, destination.Height, destination.Depth }, null); }
+        { Copy(source, destination, 0, new SysIntX3(), new SysIntX3(destination.Width, destination.Height, destination.Depth), null); }
 
         public void CopyBufferToImage<T>(ComputeBufferBase<T> source, ComputeImage2D destination, long sourceOffset, SysIntX2 destinationOffset, SysIntX2 destinationRegion) where T : struct
         { Copy(source, destination, sourceOffset, new SysIntX3(destinationOffset, 0), new SysIntX3(destinationRegion, 1), null); }
