@@ -39,7 +39,7 @@ namespace Cloo
     {
         #region Fields
 
-        public readonly IntPtr X, Y;
+        public IntPtr X, Y;
 
         #endregion
 

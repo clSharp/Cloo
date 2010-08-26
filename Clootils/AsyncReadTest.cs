@@ -58,7 +58,7 @@ namespace Clootils
                 ComputeBuffer<float> buffer = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrA);
                 ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
 
-                commands.ReadFromBuffer(buffer, ref arrB, false);
+                commands.ReadFromBuffer(buffer, ref arrB, true, null);
                 commands.Finish();
 
                 for (int i = 0; i < count; i++)
