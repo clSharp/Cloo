@@ -76,7 +76,9 @@ namespace Cloo
                 {
                     notifier = Notify;
                     IntPtr notifyPtr = Marshal.GetFunctionPointerForDelegate(notifier);
-                    CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifyPtr, IntPtr.Zero);
+                    // BUG: ATI Stream 2.2 exception here
+                    //ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifyPtr, IntPtr.Zero);
+                    //ComputeException.ThrowOnError(error);
                 }
             }
 
@@ -88,10 +90,13 @@ namespace Cloo
 
         #region Internal methods
 
-        internal void FreeResources()
+        internal void FreeTracks()
         {
-            if (gcHandle.IsAllocated || gcHandle.Target != null) gcHandle.Free();
-            array = null;
+            if (gcHandle.IsAllocated && gcHandle.Target != null)
+            {
+                gcHandle.Free();
+                array = null;
+            }
         }
 
         internal void Track(GCHandle handle)
@@ -110,7 +115,7 @@ namespace Cloo
 
         protected override void Dispose(bool manual)
         {
-            if (manual) FreeResources();
+            FreeTracks();
             base.Dispose(manual);
         }
 
@@ -120,7 +125,7 @@ namespace Cloo
 
         private void ComputeEvent_Fired(object sender, EventArgs e)
         {
-            FreeResources();
+            FreeTracks();
             int eventIndex = CommandQueue.events.IndexOf(this);
             if (eventIndex < 0) return;
             CommandQueue.events.RemoveAt(eventIndex);

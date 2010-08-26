@@ -30,6 +30,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.InteropServices;
 using Cloo;
@@ -73,7 +75,6 @@ kernel void VectorAdd(
 
                 ComputeProgram program = new ComputeProgram(context, kernelSource);
                 program.Build(null, null, null, IntPtr.Zero);
-
                 ComputeKernel kernel = program.CreateKernel("VectorAdd");
                 kernel.SetMemoryArgument(0, a);
                 kernel.SetMemoryArgument(1, b);
@@ -81,9 +82,11 @@ kernel void VectorAdd(
 
                 ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
 
-                ComputeEventList events = new ComputeEventList();
-
-                commands.Execute(kernel, null, new long[] { count }, null, events);
+                ICollection<ComputeEventBase> events = new Collection<ComputeEventBase>();
+                
+                // BUG: ATI Stream v2.2 crash if event list not null.
+                //commands.Execute(kernel, null, new long[] { count }, null, events);
+                commands.Execute(kernel, null, new long[] { count }, null, null);
 
                 arrC = new float[count];
                 GCHandle arrCHandle = GCHandle.Alloc(arrC, GCHandleType.Pinned);
