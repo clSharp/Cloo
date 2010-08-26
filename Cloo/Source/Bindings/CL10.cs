@@ -86,7 +86,7 @@ namespace Cloo.Bindings
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] properties,
             Int32 num_devices,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] devices,
-            /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ IntPtr pfn_notify,
+            /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ ComputeContextNotifier pfn_notify,
             /* void* */ IntPtr user_data,
             ComputeErrorCode* errcode_ret);
 
@@ -95,7 +95,7 @@ namespace Cloo.Bindings
         CreateContextFromType(
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] properties,
             ComputeDeviceTypes device_type,
-            /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ IntPtr pfn_notify,
+            /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ ComputeContextNotifier pfn_notify,
             /* void* */ IntPtr user_data,
             ComputeErrorCode* errcode_ret);
 
@@ -285,7 +285,7 @@ namespace Cloo.Bindings
             Int32 num_devices,
             IntPtr* device_list,
             String options,
-            /* void (*pfn_notify)(cl_program program , IntPtr user_data ) */ IntPtr pfn_notify,
+            /* void (*pfn_notify)(cl_program program , IntPtr user_data ) */ ComputeProgramBuildNotifier pfn_notify,
             /* void* */ IntPtr user_data);
 
         [DllImport(dllName, EntryPoint = "clUnloadCompiler")]

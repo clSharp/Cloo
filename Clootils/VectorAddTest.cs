@@ -85,8 +85,8 @@ kernel void VectorAdd(
                 ICollection<ComputeEventBase> events = new Collection<ComputeEventBase>();
                 
                 // BUG: ATI Stream v2.2 crash if event list not null.
-                //commands.Execute(kernel, null, new long[] { count }, null, events);
-                commands.Execute(kernel, null, new long[] { count }, null, null);
+                commands.Execute(kernel, null, new long[] { count }, null, events);
+                //commands.Execute(kernel, null, new long[] { count }, null, null);
 
                 arrC = new float[count];
                 GCHandle arrCHandle = GCHandle.Alloc(arrC, GCHandleType.Pinned);

@@ -80,7 +80,7 @@ namespace Clootils
                 log.WriteLine("done.");
 
                 log.Write("Writing to buffer (linear)... ");
-                commands.WriteToBuffer(linearIn, buffer, true, null);
+                commands.WriteToBuffer(linearIn, buffer, false, null);
                 log.WriteLine("done.");
 
                 log.Write("Reading from buffer (linear)... ");

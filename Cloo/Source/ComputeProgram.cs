@@ -51,6 +51,7 @@ namespace Cloo
         private readonly ReadOnlyCollection<string> source;
         private ReadOnlyCollection<byte[]> binaries;
         private string buildOptions;
+        private ComputeProgramBuildNotifier buildCallback;
 
         #endregion
 
@@ -221,7 +222,7 @@ namespace Cloo
             {
                 IntPtr[] deviceHandles = Tools.ExtractHandles(devices);
                 buildOptions = (options != null) ? options : "";
-                IntPtr notifyPtr = (notify != null) ? Marshal.GetFunctionPointerForDelegate(notify) : IntPtr.Zero;
+                buildCallback = notify;
 
                 fixed (IntPtr* deviceHandlesPtr = deviceHandles)
                 {
@@ -230,7 +231,7 @@ namespace Cloo
                         deviceHandles.Length,
                         deviceHandlesPtr,
                         options,
-                        notifyPtr,
+                        buildCallback,
                         notifyDataPtr);
                     ComputeException.ThrowOnError(error);
                 }
@@ -388,6 +389,6 @@ namespace Cloo
     /// <param name="programHandle"> The handle of the <c>ComputeProgram</c> being built. </param>
     /// <param name="notifyDataPtr"> The pointer to the optional user data specified in <paramref name="notifyDataPtr"/> argument of <c>ComputeProgram.Build</c>. </param>
     /// <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    //[UnmanagedFunctionPointer(CallingConvention.Cdecl)] // BUG: Cdecl not working on Win+Stream v2.2
     public delegate void ComputeProgramBuildNotifier(IntPtr programHandle, IntPtr notifyDataPtr);
 }

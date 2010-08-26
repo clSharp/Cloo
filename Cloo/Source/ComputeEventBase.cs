@@ -44,7 +44,7 @@ namespace Cloo
     {
         #region Fields
 
-        protected RawNotifier notifier;
+        protected ComputeEventCallbackRaw notifier;
 
         #endregion
 
@@ -53,12 +53,12 @@ namespace Cloo
         /// <summary>
         /// Occurrs when <c>ComputeEventBase.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
         /// </summary>
-        public event ComputeEventNotifier Completed;
+        public event ComputeEventCallback Completed;
 
         /// <summary>
         /// Occurrs when the operation that generated the event is abnormally terminated.
         /// </summary>
-        public event ComputeEventNotifier Terminated;
+        public event ComputeEventCallback Terminated;
 
         #endregion
 
@@ -192,14 +192,11 @@ namespace Cloo
         }
 
         #endregion
-
-        #region Delegates
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        protected delegate void RawNotifier(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData);
-
-        #endregion
     }
 
-    public delegate void ComputeEventNotifier(object sender, EventArgs e);
+    //[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    public delegate void ComputeEventCallbackRaw(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData);
+
+    //[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    public delegate void ComputeEventCallback(object sender, EventArgs e);
 }

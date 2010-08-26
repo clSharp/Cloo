@@ -59,9 +59,8 @@ namespace Cloo
                     ComputeEventInfo.CommandType, CL10.GetEventInfo);
                 Context = context;
 
-                notifier = Notify;
-                IntPtr notifyPtr = Marshal.GetFunctionPointerForDelegate(notifier);
-                CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifyPtr, IntPtr.Zero);
+                notifier = new ComputeEventCallbackRaw(Notify);
+                CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifier, IntPtr.Zero);
             }
         }
 

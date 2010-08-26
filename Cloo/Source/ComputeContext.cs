@@ -66,6 +66,7 @@ namespace Cloo
         private readonly ReadOnlyCollection<ComputeDevice> devices;
         private readonly ComputePlatform platform;
         private readonly ComputeContextPropertyList properties;
+        private ComputeContextNotifier callback;
 
         #endregion
 
@@ -103,10 +104,10 @@ namespace Cloo
             {
                 IntPtr[] deviceHandles = Tools.ExtractHandles(devices);
                 IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
-                IntPtr notifyFuncPtr = (notify != null) ? Marshal.GetFunctionPointerForDelegate(notify) : IntPtr.Zero;
+                callback = notify;
 
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateContext(propertyArray, devices.Count, deviceHandles, notifyFuncPtr, notifyDataPtr, &error);
+                Handle = CL10.CreateContext(propertyArray, devices.Count, deviceHandles, notify, notifyDataPtr, &error);
                 ComputeException.ThrowOnError(error);
 
                 this.properties = properties;
@@ -128,10 +129,10 @@ namespace Cloo
             unsafe
             {
                 IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
-                IntPtr notifyFuncPtr = (notify != null) ? Marshal.GetFunctionPointerForDelegate(notify) : IntPtr.Zero;
+                callback = notify;
 
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateContextFromType(propertyArray, deviceType, notifyFuncPtr, userDataPtr, &error);
+                Handle = CL10.CreateContextFromType(propertyArray, deviceType, notify, userDataPtr, &error);
                 ComputeException.ThrowOnError(error);
 
                 this.properties = properties;

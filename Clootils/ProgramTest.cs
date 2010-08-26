@@ -49,9 +49,7 @@ namespace Clootils
             try
             {
                 ComputeProgram program = new ComputeProgram(context, clSource);
-                // BUG: ATI Stream 2.2 crash if third argument set to "notify(...)"
-                //program.Build(null, null, notify, IntPtr.Zero);
-                program.Build(null, null, null, IntPtr.Zero);
+                program.Build(null, null, notify, IntPtr.Zero);
                 byte[] bytes = program.Binaries[0];
                 log.WriteLine("Compiled program head:");
                 log.WriteLine(BitConverter.ToString(bytes, 0, 16) + "...");

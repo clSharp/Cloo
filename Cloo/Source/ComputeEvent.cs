@@ -74,16 +74,14 @@ namespace Cloo
 
                 if (Tools.ParseVersionString(CommandQueue.Device.Version) == new Version(1, 1))
                 {
-                    notifier = Notify;
-                    IntPtr notifyPtr = Marshal.GetFunctionPointerForDelegate(notifier);
-                    // BUG: ATI Stream 2.2 exception here
-                    //ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifyPtr, IntPtr.Zero);
-                    //ComputeException.ThrowOnError(error);
+                    notifier = new ComputeEventCallbackRaw(Notify);
+                    ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifier, IntPtr.Zero);
+                    ComputeException.ThrowOnError(error);
                 }
             }
 
-            Completed += new ComputeEventNotifier(ComputeEvent_Fired);
-            Terminated += new ComputeEventNotifier(ComputeEvent_Fired);
+            Completed += new ComputeEventCallback(ComputeEvent_Fired);
+            Terminated += new ComputeEventCallback(ComputeEvent_Fired);
         }
 
         #endregion
