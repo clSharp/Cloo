@@ -222,6 +222,7 @@ namespace Cloo
                 SysIntX3 srcOffsetBytes = sizeofT * sourceOffset;
                 SysIntX3 dstOffsetBytes = sizeofT * destinationOffset;
                 SysIntX3 regionBytes = sizeofT * region;
+                regionBytes.Z = (region.Z.ToInt64() == 1) ? new IntPtr(1) : regionBytes.Z;
                 IntPtr[] eventHandles = Tools.ExtractHandles(events);
                 IntPtr newEventHandle = IntPtr.Zero;
 
@@ -231,9 +232,9 @@ namespace Cloo
                         this.Handle,
                         source.Handle,
                         destination.Handle,
-                        &(srcOffsetBytes.X),
-                        &(dstOffsetBytes.X),
-                        &(regionBytes.X),
+                        &(srcOffsetBytes),
+                        &(dstOffsetBytes),
+                        &(regionBytes),
                         new IntPtr(sourceRowPitch),
                         new IntPtr(sourceSlicePitch),
                         new IntPtr(destinationRowPitch),
@@ -597,6 +598,7 @@ namespace Cloo
                 SysIntX3 srcOffsetBytes = sizeofT * sourceOffset;
                 SysIntX3 dstOffsetBytes = sizeofT * destinationOffset;
                 SysIntX3 regionBytes = sizeofT * region;
+                regionBytes.Z = (region.Z.ToInt64() == 1) ? new IntPtr(1) : regionBytes.Z;
                 IntPtr[] eventHandles = Tools.ExtractHandles(events);
                 IntPtr newEventHandle = IntPtr.Zero;
 
@@ -606,9 +608,9 @@ namespace Cloo
                         this.Handle,
                         source.Handle,
                         (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        &(srcOffsetBytes.X),
-                        &(dstOffsetBytes.X),
-                        &(regionBytes.X),
+                        &(srcOffsetBytes),
+                        &(dstOffsetBytes),
+                        &(regionBytes),
                         new IntPtr(sourceRowPitch),
                         new IntPtr(sourceSlicePitch),
                         new IntPtr(destinationRowPitch),
@@ -821,6 +823,7 @@ namespace Cloo
                 SysIntX3 dstOffsetBytes = sizeofT * destinationOffset;
                 SysIntX3 srcOffsetBytes = sizeofT * sourceOffset;
                 SysIntX3 regionBytes = sizeofT * region;
+                regionBytes.Z = (region.Z.ToInt64() == 1) ? new IntPtr(1) : regionBytes.Z;
                 IntPtr[] eventHandles = Tools.ExtractHandles(events);
                 IntPtr newEventHandle = IntPtr.Zero;
 
@@ -830,9 +833,9 @@ namespace Cloo
                         this.Handle,
                         destination.Handle,
                         (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        &(dstOffsetBytes.X),
-                        &(srcOffsetBytes.X),
-                        &(regionBytes.X),
+                        &(dstOffsetBytes),
+                        &(srcOffsetBytes),
+                        &(regionBytes),
                         new IntPtr(destinationRowPitch),
                         new IntPtr(destinationSlicePitch),
                         new IntPtr(sourceRowPitch),
