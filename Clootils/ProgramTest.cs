@@ -37,15 +37,20 @@ namespace Clootils
 {
     class ProgramTest : TestBase
     {
-        private static string kernelSource = @"kernel void Test(void) { }";
+        static TextWriter log;
+        private static string clSource = @"kernel void Test(void) { }";
 
         public static void Run(TextWriter log, ComputeContext context)
         {
             StartTest(log, "Program test");
             
+            ProgramTest.log = log;
+            
             try
             {
-                ComputeProgram program = new ComputeProgram(context, kernelSource);
+                ComputeProgram program = new ComputeProgram(context, clSource);
+                // BUG: ATI Stream 2.2 crash if third argument set to "notify(...)"
+                //program.Build(null, null, notify, IntPtr.Zero);
                 program.Build(null, null, null, IntPtr.Zero);
                 byte[] bytes = program.Binaries[0];
                 log.WriteLine("Compiled program head:");
@@ -57,6 +62,11 @@ namespace Clootils
             }
 
             EndTest(log, "Program test");
+        }
+
+        private static void notify(IntPtr programHandle, IntPtr userDataPtr)
+        {
+            log.WriteLine("Program build notification.");
         }
     }
 }

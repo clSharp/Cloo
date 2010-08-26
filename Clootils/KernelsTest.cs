@@ -33,12 +33,12 @@ using System;
 using System.Collections.Generic;
 using Cloo;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Clootils
 {
     public class KernelsTest : TestBase
     {
-        static TextWriter log;
         static string kernelSources = @"
     kernel void k01(          float     num ) {}
 //  kernel void k02(          float *   num ) {}
@@ -63,17 +63,15 @@ namespace Clootils
 
         public static void Run(TextWriter log, ComputeContext context)
         {
-            KernelsTest.log = log;
-
             StartTest(log, "Kernels test");
             
             try
             {
-                ComputeProgram program = new ComputeProgram(context, new string[] { kernelSources });
-                program.Build(null, null, notify, IntPtr.Zero);
+                ComputeProgram program = new ComputeProgram(context, kernelSources);
+                program.Build(null, null, null, IntPtr.Zero);
                 log.WriteLine("Program successfully built.");
 
-                List<ComputeKernel> kernels = new List<ComputeKernel>(program.CreateAllKernels());
+                program.CreateAllKernels();
                 log.WriteLine("Kernels successfully created.");
             }
             catch (Exception e)
@@ -82,11 +80,6 @@ namespace Clootils
             }
 
             EndTest(log, "Kernels test");
-        }
-
-        private static void notify(IntPtr programHandle, IntPtr userDataPtr)
-        {
-            log.WriteLine("Program build notification.");
         }
     }
 }
