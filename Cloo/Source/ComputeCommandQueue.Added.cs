@@ -40,74 +40,110 @@ namespace Cloo
         #region CopyBuffer
 
         public void CopyBuffer<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, 0, 0, source.Count, events); }
+        {
+            Copy(source, destination, 0, 0, source.Count, events);
+        }
 
         public void CopyBuffer<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, sourceOffset, destinationOffset, count, events); }
+        {
+            Copy(source, destination, sourceOffset, destinationOffset, count, events);
+        }
 
         public void CopyBuffer<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), 0, 0, 0, 0, events); }
+        {
+            Copy(source, destination, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), 0, 0, 0, 0, events);
+        }
 
         public void CopyBuffer<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, sourceOffset, destinationOffset, region, 0, 0, 0, 0, events); }
+        {
+            Copy(source, destination, sourceOffset, destinationOffset, region, 0, 0, 0, 0, events);
+        }
 
         public void CopyBuffer<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, long sourceRowPitch, long destinationRowPitch, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, events); }
+        {
+            Copy(source, destination, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, events);
+        }
 
         public void CopyBuffer<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long sourceRowPitch, long destinationRowPitch, long sourceSlicePitch, long destinationSlicePitch, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, events); }
+        {
+            Copy(source, destination, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, events);
+        }
 
         #endregion
 
         #region CopyBufferToImage
 
         public void CopyBufferToImage<T>(ComputeBufferBase<T> source, ComputeImage destination, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, 0, new SysIntX3(), new SysIntX3(destination.Width, destination.Height, destination.Depth), events); }
+        {
+            Copy(source, destination, 0, new SysIntX3(), new SysIntX3(destination.Width, destination.Height, destination.Depth), events);
+        }
 
-        public void CopyBufferToImage<T>(ComputeBufferBase<T> source, ComputeImage2D destination, long sourceOffset, SysIntX2 destinationOffset, SysIntX2 destinationRegion, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, sourceOffset, new SysIntX3(destinationOffset, 0), new SysIntX3(destinationRegion, 1), events); }
+        public void CopyBufferToImage<T>(ComputeBufferBase<T> source, ComputeImage2D destination, long sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, ICollection<ComputeEventBase> events) where T : struct
+        {
+            Copy(source, destination, sourceOffset, new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), events);
+        }
 
-        public void CopyBufferToImage<T>(ComputeBufferBase<T> source, ComputeImage3D destination, long sourceOffset, SysIntX3 destinationOffset, SysIntX3 destinationRegion, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, sourceOffset, destinationOffset, destinationRegion, events); }
+        public void CopyBufferToImage<T>(ComputeBufferBase<T> source, ComputeImage3D destination, long sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
+        {
+            Copy(source, destination, sourceOffset, destinationOffset, region, events);
+        }
 
         #endregion
 
         #region CopyImage
 
         public void CopyImage(ComputeImage source, ComputeImage destination, ICollection<ComputeEventBase> events)
-        { Copy(source, destination, new SysIntX3(), new SysIntX3(), new SysIntX3(source.Width, source.Height, (source.Depth == 0 || destination.Depth == 0) ? 1 : source.Depth), events); }
+        {
+            Copy(source, destination, new SysIntX3(), new SysIntX3(), new SysIntX3(source.Width, source.Height, (source.Depth == 0 || destination.Depth == 0) ? 1 : source.Depth), events);
+        }
 
         public void CopyImage(ComputeImage2D source, ComputeImage2D destination, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, ICollection<ComputeEventBase> events)
-        { Copy(source, destination, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), events); }
+        {
+            Copy(source, destination, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), events);
+        }
 
         public void CopyImage(ComputeImage2D source, ComputeImage3D destination, SysIntX2 sourceOffset, SysIntX3 destinationOffset, SysIntX2 region, ICollection<ComputeEventBase> events)
-        { Copy(source, destination, new SysIntX3(sourceOffset, 0), destinationOffset, new SysIntX3(region, 1), events); }
+        {
+            Copy(source, destination, new SysIntX3(sourceOffset, 0), destinationOffset, new SysIntX3(region, 1), events);
+        }
 
         public void CopyImage(ComputeImage3D source, ComputeImage2D destination, SysIntX3 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, ICollection<ComputeEventBase> events)
-        { Copy(source, destination, sourceOffset, new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), null); }
+        {
+            Copy(source, destination, sourceOffset, new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), null);
+        }
 
         public void CopyImage(ComputeImage3D source, ComputeImage3D destination, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events)
-        { Copy(source, destination, sourceOffset, destinationOffset, region, events); }
+        {
+            Copy(source, destination, sourceOffset, destinationOffset, region, events);
+        }
 
         #endregion
 
         #region CopyImageToBuffer
 
         public void CopyImageToBuffer<T>(ComputeImage source, ComputeBufferBase<T> destination, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, new SysIntX3(), 0, new SysIntX3(source.Width, source.Height, (source.Depth == 0) ? 1 : source.Depth), events); }
+        {
+            Copy(source, destination, new SysIntX3(), 0, new SysIntX3(source.Width, source.Height, (source.Depth == 0) ? 1 : source.Depth), events);
+        }
 
-        public void CopyImageToBuffer<T>(ComputeImage2D source, ComputeBufferBase<T> destination, SysIntX2 sourceOffset, long destinationOffset, SysIntX2 sourceRegion, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, new SysIntX3(sourceOffset, 0), destinationOffset, new SysIntX3(sourceRegion, 1), events); }
+        public void CopyImageToBuffer<T>(ComputeImage2D source, ComputeBufferBase<T> destination, SysIntX2 sourceOffset, long destinationOffset, SysIntX2 region, ICollection<ComputeEventBase> events) where T : struct
+        {
+            Copy(source, destination, new SysIntX3(sourceOffset, 0), destinationOffset, new SysIntX3(region, 1), events);
+        }
 
-        public void CopyImageToBuffer<T>(ComputeImage3D source, ComputeBufferBase<T> destination, SysIntX3 sourceOffset, long destinationOffset, SysIntX3 sourceRegion, ICollection<ComputeEventBase> events) where T : struct
-        { Copy(source, destination, sourceOffset, destinationOffset, sourceRegion, events); }
+        public void CopyImageToBuffer<T>(ComputeImage3D source, ComputeBufferBase<T> destination, SysIntX3 sourceOffset, long destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
+        {
+            Copy(source, destination, sourceOffset, destinationOffset, region, events);
+        }
 
         #endregion
 
         #region ReadFromBuffer
 
         public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[] destination, bool blocking, ICollection<ComputeEventBase> events) where T : struct
-        { ReadFromBuffer(source, ref destination, blocking, 0, 0, source.Count, events); }
+        {
+            ReadFromBuffer(source, ref destination, blocking, 0, 0, source.Count, events);
+        }
 
         public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[] destination, bool blocking, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEventBase> events) where T : struct
         {
@@ -130,10 +166,14 @@ namespace Cloo
         }
 
         public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[,] destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, ICollection<ComputeEventBase> events) where T : struct
-        { ReadFromBuffer(source, ref destination, blocking, sourceOffset, destinationOffset, region, 0, 0, events); }
+        {
+            ReadFromBuffer(source, ref destination, blocking, sourceOffset, destinationOffset, region, 0, 0, events);
+        }
 
         public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[, ,] destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
-        { ReadFromBuffer(source, ref destination, blocking, sourceOffset, destinationOffset, region, 0, 0, 0, 0, events); }
+        {
+            ReadFromBuffer(source, ref destination, blocking, sourceOffset, destinationOffset, region, 0, 0, 0, 0, events);
+        }
 
         public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[,] destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, long sourceRowPitch, long destinationRowPitch, ICollection<ComputeEventBase> events) where T : struct
         {
@@ -178,26 +218,38 @@ namespace Cloo
         #region ReadFromImage
 
         public void ReadFromImage(ComputeImage source, ref IntPtr destination, bool blocking, ICollection<ComputeEventBase> events)
-        { throw new NotImplementedException(); }
+        {
+            Read(source, blocking, new SysIntX3(), new SysIntX3(source.Width, source.Height, source.Depth), 0, 0, destination, events);
+        }
 
         public void ReadFromImage(ComputeImage2D source, ref IntPtr destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 region, ICollection<ComputeEventBase> events)
-        { throw new NotImplementedException(); }
+        {
+            Read(source, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(region, 1), 0, 0, destination, events);
+        }
 
         public void ReadFromImage(ComputeImage3D source, ref IntPtr destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 region, ICollection<ComputeEventBase> events)
-        { throw new NotImplementedException(); }
+        {
+            Read(source, blocking, sourceOffset, region, 0, 0, destination, events);
+        }
 
         public void ReadFromImage(ComputeImage2D source, ref IntPtr destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 region, long sourceRowPitch, ICollection<ComputeEventBase> events)
-        { throw new NotImplementedException(); }
+        {
+            Read(source, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destination, events);
+        }
 
         public void ReadFromImage(ComputeImage3D source, ref IntPtr destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 region, long sourceRowPitch, long sourceSlicePitch, ICollection<ComputeEventBase> events)
-        { throw new NotImplementedException(); }
+        {
+            Read(source, blocking, sourceOffset, region, sourceRowPitch, sourceSlicePitch, destination, events);
+        }
 
         #endregion
 
         #region WriteToBuffer
 
         public void WriteToBuffer<T>(T[] source, ComputeBufferBase<T> destination, bool blocking, ICollection<ComputeEventBase> events) where T : struct
-        { WriteToBuffer(source, destination, blocking, 0, 0, destination.Count, events); }
+        {
+            WriteToBuffer(source, destination, blocking, 0, 0, destination.Count, events);
+        }
 
         public void WriteToBuffer<T>(T[] source, ComputeBufferBase<T> destination, bool blocking, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEventBase> events) where T : struct
         {
@@ -220,10 +272,14 @@ namespace Cloo
         }
 
         public void WriteToBuffer<T>(T[,] source, ComputeBufferBase<T> destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, ICollection<ComputeEventBase> events) where T : struct
-        { WriteToBuffer(source, destination, blocking, sourceOffset, destinationOffset, region, 0, 0, events); }
+        {
+            WriteToBuffer(source, destination, blocking, sourceOffset, destinationOffset, region, 0, 0, events);
+        }
 
         public void WriteToBuffer<T>(T[, ,] source, ComputeBufferBase<T> destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
-        { WriteToBuffer(source, destination, blocking, sourceOffset, destinationOffset, region, 0, 0, 0, 0, events); }
+        {
+            WriteToBuffer(source, destination, blocking, sourceOffset, destinationOffset, region, 0, 0, 0, 0, events);
+        }
 
         public void WriteToBuffer<T>(T[,] source, ComputeBufferBase<T> destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, long sourceRowPitch, long destinationRowPitch, ICollection<ComputeEventBase> events) where T : struct
         {
@@ -268,19 +324,29 @@ namespace Cloo
         #region WriteToImage
 
         public void WriteToImage(IntPtr source, ComputeImage destination, bool blocking, ICollection<ComputeEventBase> events)
-        { throw new NotImplementedException(); }
+        {
+            Write(destination, blocking, new SysIntX3(), new SysIntX3(destination.Width, destination.Height, destination.Depth), 0, 0, source, events);
+        }
 
         public void WriteToImage(IntPtr source, ComputeImage2D destination, bool blocking, SysIntX2 destinationOffset, SysIntX2 region, ICollection<ComputeEventBase> events)
-        { throw new NotImplementedException(); }
+        {
+            Write(destination, blocking, new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), 0, 0, source, events);
+        }
 
         public void WriteToImage(IntPtr source, ComputeImage3D destination, bool blocking, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events)
-        { throw new NotImplementedException(); }
+        {
+            Write(destination, blocking, destinationOffset, region, 0, 0, source, events);
+        }
 
         public void WriteToImage(IntPtr source, ComputeImage2D destination, bool blocking, SysIntX2 destinationOffset, SysIntX2 region, long destinationRowPitch, ICollection<ComputeEventBase> events)
-        { throw new NotImplementedException(); }
+        {
+            Write(destination, blocking, new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), destinationRowPitch, 0, source, events);
+        }
 
         public void WriteToImage(IntPtr source, ComputeImage3D destination, bool blocking, SysIntX3 destinationOffset, SysIntX3 region, long destinationRowPitch, long destinationSlicePitch, ICollection<ComputeEventBase> events)
-        { throw new NotImplementedException(); }
+        {
+            Write(destination, blocking, destinationOffset, region, destinationRowPitch, destinationSlicePitch, source, events);
+        }
 
         #endregion
     }
