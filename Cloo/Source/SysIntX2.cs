@@ -60,5 +60,18 @@ namespace Cloo
         }
 
         #endregion
+
+        #region Public methods
+
+        /// <summary>
+        /// Gets the string representation of the SysIntX2.
+        /// </summary>
+        /// <returns> The string representation of the SysIntX2. </returns>
+        public override string ToString()
+        {
+            return X + " " + Y;
+        }
+
+        #endregion
     }
 }

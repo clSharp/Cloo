@@ -66,9 +66,22 @@ namespace Cloo
 
         #endregion
 
+        #region Public methods
+
         public static SysIntX3 operator *(int scalar, SysIntX3 x3)
         {
             return new SysIntX3(scalar * x3.X.ToInt64(), scalar * x3.Y.ToInt64(), scalar * x3.Z.ToInt64());
         }
+
+        /// <summary>
+        /// Gets the string representation of the SysIntX2.
+        /// </summary>
+        /// <returns> The string representation of the SysIntX2. </returns>
+        public override string ToString()
+        {
+            return X + " " + Y + " " + Z;
+        }
+
+        #endregion
     }
 }
