@@ -235,25 +235,22 @@ namespace Clootils
             StringBuilder output = new StringBuilder();
             StringWriter log = new StringWriter(output);
 
-            Console.SetOut(log);
-
             ComputeContextPropertyList properties = new ComputeContextPropertyList(configForm.Platform);
             ComputeContext context = new ComputeContext(configForm.Devices, properties, null, IntPtr.Zero);
 
-            Console.WriteLine("Platform: " + context.Platform.Name);
-            Console.Write("Devices:");
+            log.WriteLine("Platform: " + context.Platform.Name);
+            log.Write("Devices:");
             foreach (ComputeDevice device in context.Devices)
-                Console.Write(" " + device.Name + "    ");
-            Console.WriteLine();
+                log.Write(" " + device.Name + "    ");
+            log.WriteLine();
 
             DummyTest.Run(log);
             MappingTest.Run(log, context);
             ProgramTest.Run(log, context);
             KernelsTest.Run(log, context);
             VectorAddTest.Run(log, context);
-            AsyncReadTest.Run(log, context);
+            CL11Test.Run(log, context);
 
-            Console.SetOut(Console.Out);
             log.Close();
 
             logTextBox.Lines = ParseLines(output.ToString());

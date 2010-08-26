@@ -122,7 +122,6 @@ namespace Cloo
             }
             else
             {
-                // TODO: Check if cast (List<ComputeEventBase>)events works.
                 IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
                 Read(source, blocking, sourceOffset, count, destinationOffsetPtr, evlist);
                 ((ComputeEvent)evlist[evlist.Count - 1]).Track(destinationGCHandle);
@@ -148,7 +147,6 @@ namespace Cloo
             }
             else
             {
-                // TODO: Check if cast (List<ComputeEventBase>)events works.
                 IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
                 Read(source, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, destinationGCHandle.AddrOfPinnedObject(), evlist);
                 ((ComputeEvent)evlist[0]).Track(destinationGCHandle);
@@ -168,7 +166,6 @@ namespace Cloo
             }
             else
             {
-                // TODO: Check if cast (List<ComputeEventBase>)events works.
                 IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
                 Read(source, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, destinationGCHandle.AddrOfPinnedObject(), evlist);
                 ((ComputeEvent)evlist[0]).Track(destinationGCHandle);
@@ -214,7 +211,6 @@ namespace Cloo
             }
             else
             {
-                // TODO: Check if cast (List<ComputeEventBase>)events works.
                 IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
                 Write(destination, blocking, destinationOffset, count, sourceOffsetPtr, evlist);
                 ((ComputeEvent)evlist[0]).Track(sourceGCHandle);
@@ -240,7 +236,6 @@ namespace Cloo
             }
             else
             {
-                // TODO: Check if cast (List<ComputeEventBase>)events works.
                 IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
                 Write(destination, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), evlist);
                 ((ComputeEvent)evlist[0]).Track(sourceGCHandle);
@@ -260,7 +255,6 @@ namespace Cloo
             }
             else
             {
-                // TODO: Check if cast (List<ComputeEventBase>)events works.
                 IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
                 Write(destination, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), evlist);
                 ((ComputeEvent)evlist[0]).Track(sourceGCHandle);

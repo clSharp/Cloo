@@ -219,10 +219,9 @@ namespace Cloo
             unsafe
             {
                 int sizeofT = Marshal.SizeOf(typeof(T));
-                SysIntX3 srcOffsetBytes = sizeofT * sourceOffset;
-                SysIntX3 dstOffsetBytes = sizeofT * destinationOffset;
-                SysIntX3 regionBytes = sizeofT * region;
-                regionBytes.Z = (region.Z.ToInt64() == 1) ? new IntPtr(1) : regionBytes.Z;
+                sourceOffset.X = new IntPtr(sourceOffset.X.ToInt64() * sizeofT);
+                destinationOffset.X = new IntPtr(destinationOffset.X.ToInt64() * sizeofT);
+                region.X = new IntPtr(region.X.ToInt64() * sizeofT);
                 IntPtr[] eventHandles = Tools.ExtractHandles(events);
                 IntPtr newEventHandle = IntPtr.Zero;
 
@@ -232,9 +231,9 @@ namespace Cloo
                         this.Handle,
                         source.Handle,
                         destination.Handle,
-                        &(srcOffsetBytes),
-                        &(dstOffsetBytes),
-                        &(regionBytes),
+                        &(sourceOffset),
+                        &(destinationOffset),
+                        &(region),
                         new IntPtr(sourceRowPitch),
                         new IntPtr(sourceSlicePitch),
                         new IntPtr(destinationRowPitch),
@@ -595,10 +594,9 @@ namespace Cloo
             unsafe
             {
                 int sizeofT = Marshal.SizeOf(typeof(T));
-                SysIntX3 srcOffsetBytes = sizeofT * sourceOffset;
-                SysIntX3 dstOffsetBytes = sizeofT * destinationOffset;
-                SysIntX3 regionBytes = sizeofT * region;
-                regionBytes.Z = (region.Z.ToInt64() == 1) ? new IntPtr(1) : regionBytes.Z;
+                sourceOffset.X = new IntPtr(sourceOffset.X.ToInt64() * sizeofT);
+                destinationOffset.X = new IntPtr(destinationOffset.X.ToInt64() * sizeofT);
+                region.X = new IntPtr(region.X.ToInt64() * sizeofT);
                 IntPtr[] eventHandles = Tools.ExtractHandles(events);
                 IntPtr newEventHandle = IntPtr.Zero;
 
@@ -608,9 +606,9 @@ namespace Cloo
                         this.Handle,
                         source.Handle,
                         (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        &(srcOffsetBytes),
-                        &(dstOffsetBytes),
-                        &(regionBytes),
+                        &(sourceOffset),
+                        &(destinationOffset),
+                        &(region),
                         new IntPtr(sourceRowPitch),
                         new IntPtr(sourceSlicePitch),
                         new IntPtr(destinationRowPitch),
@@ -820,22 +818,21 @@ namespace Cloo
             unsafe
             {
                 int sizeofT = Marshal.SizeOf(typeof(T));
-                SysIntX3 dstOffsetBytes = sizeofT * destinationOffset;
-                SysIntX3 srcOffsetBytes = sizeofT * sourceOffset;
-                SysIntX3 regionBytes = sizeofT * region;
-                regionBytes.Z = (region.Z.ToInt64() == 1) ? new IntPtr(1) : regionBytes.Z;
+                sourceOffset.X = new IntPtr(sourceOffset.X.ToInt64() * sizeofT);
+                destinationOffset.X = new IntPtr(destinationOffset.X.ToInt64() * sizeofT);
+                region.X = new IntPtr(region.X.ToInt64() * sizeofT);
                 IntPtr[] eventHandles = Tools.ExtractHandles(events);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL11.EnqueueReadBufferRect(
+                    ComputeErrorCode error = CL11.EnqueueWriteBufferRect(
                         this.Handle,
                         destination.Handle,
                         (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        &(dstOffsetBytes),
-                        &(srcOffsetBytes),
-                        &(regionBytes),
+                        &(destinationOffset),
+                        &(sourceOffset),
+                        &(region),
                         new IntPtr(destinationRowPitch),
                         new IntPtr(destinationSlicePitch),
                         new IntPtr(sourceRowPitch),
