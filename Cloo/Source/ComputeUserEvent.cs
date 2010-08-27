@@ -55,11 +55,11 @@ namespace Cloo
                 ComputeErrorCode error;
                 Handle = CL11.CreateUserEvent(context.Handle, &error);
                 ComputeException.ThrowOnError(error);
-                CommandType = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
+                Type = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
                     ComputeEventInfo.CommandType, CL10.GetEventInfo);
                 Context = context;
 
-                HookStatusNotifier();
+                HookNotifier();
             }
         }
 

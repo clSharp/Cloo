@@ -68,15 +68,15 @@ namespace Cloo
             {
                 Handle = handle;
                 CommandQueue = queue;
-                CommandType = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
+                Type = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
                     ComputeEventInfo.CommandType, CL10.GetEventInfo);
                 Context = queue.Context;
 
                 if (Tools.ParseVersionString(CommandQueue.Device.Version) == new Version(1, 1))
-                    HookStatusNotifier();
+                    HookNotifier();
 
-                Completed += new ComputeEventStatusChanged(ComputeEvent_Fired);
-                Terminated += new ComputeEventStatusChanged(ComputeEvent_Fired);
+                Completed += new ComputeCommandStatusChanged(ComputeEvent_Fired);
+                Terminated += new ComputeCommandStatusChanged(ComputeEvent_Fired);
             }
         }
 

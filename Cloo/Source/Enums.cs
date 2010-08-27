@@ -101,7 +101,7 @@ namespace Cloo
     }
 
     /// <summary>
-    /// The OpenCL boolean values expressed as ints.
+    /// The OpenCL boolean values expressed as integers.
     /// </summary>
     public enum ComputeBoolean : int
     {

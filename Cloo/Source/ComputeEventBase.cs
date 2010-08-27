@@ -44,21 +44,21 @@ namespace Cloo
     {
         #region Fields
 
-        private ComputeEventCallback notifier;
+        private ComputeEventCallback statusNotify;
 
         #endregion
 
         #region Events
 
         /// <summary>
-        /// Occurrs when <c>ComputeEventBase.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
+        /// Occurrs when <c>ComputeEventBase.Status</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
         /// </summary>
-        public event ComputeEventStatusChanged Completed;
+        public event ComputeCommandStatusChanged Completed;
 
         /// <summary>
         /// Occurrs when the operation associated with the event is abnormally terminated.
         /// </summary>
-        public event ComputeEventStatusChanged Terminated;
+        public event ComputeCommandStatusChanged Terminated;
 
         #endregion
 
@@ -67,12 +67,13 @@ namespace Cloo
         /// <summary>
         /// Gets the <c>ComputeCommandType</c> associated with the event.
         /// </summary>
-        public ComputeCommandType CommandType { get; protected set; }
+        public ComputeCommandType Type { get; protected set; }
+        [Obsolete] public ComputeCommandType CommandType { get; protected set; }
 
         /// <summary>
         /// Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command has finished execution.
         /// </summary>
-        public long CommandFinishTime
+        public long FinishTime
         {
             get
             {
@@ -83,11 +84,12 @@ namespace Cloo
                 }
             }
         }
+        [Obsolete] public long CommandFinishTime { get { return FinishTime; } }
 
         /// <summary>
         /// Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command is enqueued in the <c>ComputeCommandQueue</c> by the host.
         /// </summary>
-        public long CommandEnqueueTime
+        public long EnqueueTime
         {
             get
             {
@@ -98,12 +100,13 @@ namespace Cloo
                 }
             }
         }
+        [Obsolete] public long CommandEnqueueTime { get { return EnqueueTime; } }
 
         /// <summary>
         /// Gets the execution status of the associated command.
         /// </summary>
         /// <remarks> Is negative if the command's execution was abnormally terminated. </remarks>
-        public ComputeCommandExecutionStatus CommandExecutionStatus
+        public ComputeCommandExecutionStatus Status
         {
             get
             {
@@ -114,11 +117,12 @@ namespace Cloo
                 }
             }
         }
+        [Obsolete] public ComputeCommandExecutionStatus CommandExecutionStatus { get { return Status; } }
 
         /// <summary>
         /// Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command starts execution.
         /// </summary>
-        public long CommandStartTime
+        public long StartTime
         {
             get
             {
@@ -129,11 +133,12 @@ namespace Cloo
                 }
             }
         }
+        [Obsolete] public long CommandStartTime { get { return StartTime; } }
 
         /// <summary>
         /// Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
         /// </summary>
-        public long CommandSubmitTime
+        public long SubmitTime
         {
             get
             {
@@ -144,6 +149,7 @@ namespace Cloo
                 }
             }
         }
+        [Obsolete] public long CommandSubmitTime { get { return SubmitTime; } }
 
         /// <summary>
         /// Gets the <c>ComputeContext</c> associated with the event.
@@ -176,20 +182,20 @@ namespace Cloo
             }
         }
 
-        protected void HookStatusNotifier()
+        protected void HookNotifier()
         {
-            notifier = new ComputeEventCallback(Notify);
-            ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifier, IntPtr.Zero);
+            statusNotify = new ComputeEventCallback(StatusNotify);
+            ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, statusNotify, IntPtr.Zero);
             ComputeException.ThrowOnError(error);
         }
 
-        protected virtual void OnCompleted(object sender, EventArgs evArgs)
+        protected virtual void OnCompleted(object sender, ComputeCommandStatusArgs evArgs)
         {
             if (Completed != null)
                 Completed(sender, evArgs);
         }
 
-        protected virtual void OnTerminated(object sender, EventArgs evArgs)
+        protected virtual void OnTerminated(object sender, ComputeCommandStatusArgs evArgs)
         {
             if (Terminated != null)
                 Terminated(sender, evArgs);
@@ -199,21 +205,59 @@ namespace Cloo
 
         #region Private methods
 
-        private void Notify(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData)
+        private void StatusNotify(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData)
         {
+            ComputeCommandStatusArgs statusArgs = new ComputeCommandStatusArgs(this, (ComputeCommandExecutionStatus)cmdExecStatusOrErr);
             switch (cmdExecStatusOrErr)
             {
-                case (int)ComputeCommandExecutionStatus.Complete: OnCompleted(this, new EventArgs()); break;
-                default: OnTerminated(this, new EventArgs()); break;
+                case (int)ComputeCommandExecutionStatus.Complete: OnCompleted(this, statusArgs); break;
+                default: OnTerminated(this, statusArgs); break;
             }
         }
 
         #endregion
     }
 
+    /// <summary>
+    /// Represents the arguments of a command execution status change.
+    /// </summary>
+    public class ComputeCommandStatusArgs : EventArgs
+    {
+        /// <summary>
+        /// Gets the event of the command that had its status changed.
+        /// </summary>
+        public ComputeEventBase Event { get; private set; }
+
+        /// <summary>
+        /// Gets the execution status of the command associated with the event.
+        /// </summary>
+        /// <remarks> Will return a negative integer if the command was abnormally terminated. </remarks>
+        public ComputeCommandExecutionStatus Status { get; private set; }
+
+        /// <summary>
+        /// Creates a new <c>ComputeCommandStatusArgs</c> instance.
+        /// </summary>
+        /// <param name="ev"> The event of the command that had its status changed. </param>
+        /// <param name="status"> The status of the command. </param>
+        public ComputeCommandStatusArgs(ComputeEventBase ev, ComputeCommandExecutionStatus status)
+        {
+            Event = ev;
+            Status = status;
+        }
+
+        /// <summary>
+        /// Creates a new <c>ComputeCommandStatusArgs</c> instance.
+        /// </summary>
+        /// <param name="ev"> The event of the command that had its status changed. </param>
+        /// <param name="status"> The status of the command. </param>
+        public ComputeCommandStatusArgs(ComputeEventBase ev, int status)
+            : this(ev, (ComputeCommandExecutionStatus)status)
+        { }
+    }
+
     //[UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate void ComputeEventCallback(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData);
 
     //[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public delegate void ComputeEventStatusChanged(object sender, EventArgs e);
+    public delegate void ComputeCommandStatusChanged(object sender, ComputeCommandStatusArgs args);
 }

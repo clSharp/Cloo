@@ -34,6 +34,9 @@ namespace Cloo
     using System;
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// Represents a structure of two integers of platform specific size.
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct SysIntX2
     {

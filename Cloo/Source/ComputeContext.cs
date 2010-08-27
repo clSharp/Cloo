@@ -205,6 +205,6 @@ namespace Cloo
     /// <param name="clDataSize"> The size of the binary data that is returned by the OpenCL. </param>
     /// <param name="userDataPtr"> The pointer to the optional user data specified in <paramref name="notifyDataPtr"/> argument of <c>ComputeContext</c> constructor. </param>
     /// <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    //[UnmanagedFunctionPointer(CallingConvention.Cdecl)] //Cdecl calling convention may cause problems on ATI Stream 2.2+
     public delegate void ComputeContextNotifier(String errorInfo, IntPtr clDataPtr, IntPtr clDataSize, IntPtr userDataPtr);
 }

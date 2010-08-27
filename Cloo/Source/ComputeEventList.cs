@@ -38,7 +38,7 @@ namespace Cloo
     using Cloo.Bindings;
 
     /// <summary>
-    /// Represents a list of OpenCL or user events.
+    /// Represents a list of OpenCL generated or user created events.
     /// </summary>
     /// <seealso cref="ComputeCommandQueue"/>
     public class ComputeEventList : IList<ComputeEventBase>

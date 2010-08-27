@@ -209,41 +209,41 @@
         </member>
         <member name="E:Cloo.ComputeEventBase.Completed">
             <summary>
-            Occurrs when <c>ComputeEventBase.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
+            Occurrs when <c>ComputeEventBase.Status</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
             </summary>
         </member>
         <member name="E:Cloo.ComputeEventBase.Terminated">
             <summary>
-            Occurrs when the operation associated with the event is abnormally terminated.
+            Occurrs when the operation associated with the event is abnormally terminated. The status of the 
             </summary>
         </member>
-        <member name="P:Cloo.ComputeEventBase.CommandType">
+        <member name="P:Cloo.ComputeEventBase.Type">
             <summary>
             Gets the <c>ComputeCommandType</c> associated with the event.
             </summary>
         </member>
-        <member name="P:Cloo.ComputeEventBase.CommandFinishTime">
+        <member name="P:Cloo.ComputeEventBase.FinishTime">
             <summary>
             Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command has finished execution.
             </summary>
         </member>
-        <member name="P:Cloo.ComputeEventBase.CommandEnqueueTime">
+        <member name="P:Cloo.ComputeEventBase.EnqueueTime">
             <summary>
             Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command is enqueued in the <c>ComputeCommandQueue</c> by the host.
             </summary>
         </member>
-        <member name="P:Cloo.ComputeEventBase.CommandExecutionStatus">
+        <member name="P:Cloo.ComputeEventBase.Status">
             <summary>
             Gets the execution status of the associated command.
             </summary>
             <remarks> Is negative if the command's execution was abnormally terminated. </remarks>
         </member>
-        <member name="P:Cloo.ComputeEventBase.CommandStartTime">
+        <member name="P:Cloo.ComputeEventBase.StartTime">
             <summary>
             Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command starts execution.
             </summary>
         </member>
-        <member name="P:Cloo.ComputeEventBase.CommandSubmitTime">
+        <member name="P:Cloo.ComputeEventBase.SubmitTime">
             <summary>
             Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
             </summary>
@@ -252,6 +252,36 @@
             <summary>
             Gets the <c>ComputeContext</c> associated with the event.
             </summary>
+        </member>
+        <member name="T:Cloo.ComputeCommandStatusArgs">
+            <summary>
+            Represents the arguments of a command execution status change.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeCommandStatusArgs.#ctor(Cloo.ComputeEventBase,Cloo.ComputeCommandExecutionStatus)">
+            <summary>
+            Creates a new <c>ComputeCommandStatusArgs</c> instance.
+            </summary>
+            <param name="ev"> The event of the command that had its status changed. </param>
+            <param name="status"> The status of the command. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandStatusArgs.#ctor(Cloo.ComputeEventBase,System.Int32)">
+            <summary>
+            Creates a new <c>ComputeCommandStatusArgs</c> instance.
+            </summary>
+            <param name="ev"> The event of the command that had its status changed. </param>
+            <param name="status"> The status of the command. </param>
+        </member>
+        <member name="P:Cloo.ComputeCommandStatusArgs.Event">
+            <summary>
+            Gets the event of the command that had its status changed.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeCommandStatusArgs.Status">
+            <summary>
+            Gets the execution status of the command associated with the event.
+            </summary>
+            <remarks> Will return a negative integer if the command was abnormally terminated. </remarks>
         </member>
         <member name="T:Cloo.ComputeCommandQueue">
             <summary>
@@ -1113,7 +1143,7 @@
             Represents an OpenCL memory object.
             </summary>
             <remarks> A memory object is a handle to a region of global memory. </remarks>
-            <seealso cref="!:ComputeBuffer"/>
+            <seealso cref="T:Cloo.ComputeBuffer`1"/>
             <seealso cref="T:Cloo.ComputeImage"/>
         </member>
         <member name="P:Cloo.ComputeMemory.Context">
@@ -1138,7 +1168,7 @@
         </member>
         <member name="T:Cloo.ComputeEventList">
             <summary>
-            Represents a list of OpenCL or user events.
+            Represents a list of OpenCL generated or user created events.
             </summary>
             <seealso cref="T:Cloo.ComputeCommandQueue"/>
         </member>
@@ -1432,7 +1462,7 @@
         </member>
         <member name="T:Cloo.ComputeBoolean">
             <summary>
-            The OpenCL boolean values expressed as ints.
+            The OpenCL boolean values expressed as integers.
             </summary>
         </member>
         <member name="T:Cloo.ComputePlatformInfo">
@@ -2040,6 +2070,11 @@
             Gets the <c>ComputeErrorCode</c> of the <c>ComputeException</c>.
             </summary>
         </member>
+        <member name="T:Cloo.SysIntX3">
+            <summary>
+            Represents a structure of three integers of platform specific size.
+            </summary>
+        </member>
         <member name="M:Cloo.SysIntX3.ToString">
             <summary>
             Gets the string representation of the SysIntX2.
@@ -2180,6 +2215,11 @@
             </summary>
             <param name="name"> The <c>ComputeContextPropertyName</c> of the <c>ComputeContextProperty</c>. </param>
             <returns> The requested <c>ComputeContextProperty</c> or <c>null</c> if no such <c>ComputeContextProperty</c> exists in the <c>ComputeContextPropertyList</c>. </returns>
+        </member>
+        <member name="T:Cloo.SysIntX2">
+            <summary>
+            Represents a structure of two integers of platform specific size.
+            </summary>
         </member>
         <member name="M:Cloo.SysIntX2.ToString">
             <summary>
