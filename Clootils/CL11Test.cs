@@ -84,32 +84,38 @@ namespace Clootils
                 log.WriteLine("done.");
 
                 log.Write("Reading from buffer (linear)... ");
-                commands.ReadFromBuffer(buffer, ref linearOut, true, null);
+                commands.ReadFromBuffer(buffer, ref linearOut, false, null);
                 log.WriteLine("done.");
+
+                commands.Finish();
 
                 log.Write("Comparing data... ");
                 Compare(linearIn, linearOut);
                 log.WriteLine("passed.");
                 
                 log.Write("Writing to buffer (rectangular)... ");
-                commands.WriteToBuffer(rectIn, buffer, true, new SysIntX2(), new SysIntX2(), rectSize, null);
+                commands.WriteToBuffer(rectIn, buffer, false, new SysIntX2(), new SysIntX2(), rectSize, null);
                 log.WriteLine("done.");
 
                 log.Write("Reading from buffer (rectangular)... ");
-                commands.ReadFromBuffer(buffer, ref rectOut, true, new SysIntX2(), new SysIntX2(), rectSize, null);
+                commands.ReadFromBuffer(buffer, ref rectOut, false, new SysIntX2(), new SysIntX2(), rectSize, null);
                 log.WriteLine("done.");
+
+                commands.Finish();
 
                 log.Write("Comparing data... ");
                 Compare(rectIn, rectOut);
                 log.WriteLine("passed.");
 
                 log.Write("Writing to buffer (cubic)... ");
-                commands.WriteToBuffer(cubicIn, buffer, true, new SysIntX3(), new SysIntX3(), cubicSize, null);
+                commands.WriteToBuffer(cubicIn, buffer, false, new SysIntX3(), new SysIntX3(), cubicSize, null);
                 log.WriteLine("done.");
 
                 log.Write("Reading from buffer (cubic)... ");
-                commands.ReadFromBuffer(buffer, ref cubicOut, true, new SysIntX3(), new SysIntX3(), cubicSize, null);
+                commands.ReadFromBuffer(buffer, ref cubicOut, false, new SysIntX3(), new SysIntX3(), cubicSize, null);
                 log.WriteLine("done.");
+
+                commands.Finish();
 
                 log.Write("Comparing data... ");
                 Compare(cubicIn, cubicOut);
@@ -127,7 +133,7 @@ namespace Clootils
         {
             for (int i = 0; i < a1.Length; i++)
                 if (!a1[i].Equals(a2[i]))
-                    throw new Exception("Mismatch detected!");
+                    throw new Exception("FAILED!");
         }
 
         private static void Compare<T>(T[,] a1, T[,] a2)
@@ -135,7 +141,7 @@ namespace Clootils
             for (int i = 0; i < a1.GetLength(0); i++)
                 for (int j = 0; j < a1.GetLength(1); j++)
                     if (!a1[i, j].Equals(a2[i, j]))
-                        throw new Exception("Mismatch detected!");
+                        throw new Exception("FAILED!");
         }
 
         private static void Compare<T>(T[, ,] a1, T[, ,] a2)
@@ -144,7 +150,7 @@ namespace Clootils
                 for (int j = 0; j < a1.GetLength(1); j++)
                     for (int k = 0; k < a1.GetLength(2); k++)
                         if (!a1[i, j, k].Equals(a2[i, j, k]))
-                            throw new Exception("Mismatch detected!");
+                            throw new Exception("FAILED!");
         }
     }
 }

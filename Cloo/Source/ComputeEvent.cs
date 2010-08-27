@@ -73,15 +73,11 @@ namespace Cloo
                 Context = queue.Context;
 
                 if (Tools.ParseVersionString(CommandQueue.Device.Version) == new Version(1, 1))
-                {
-                    notifier = new ComputeEventCallbackRaw(Notify);
-                    ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifier, IntPtr.Zero);
-                    ComputeException.ThrowOnError(error);
-                }
-            }
+                    HookStatusNotifier();
 
-            Completed += new ComputeEventCallback(ComputeEvent_Fired);
-            Terminated += new ComputeEventCallback(ComputeEvent_Fired);
+                Completed += new ComputeEventStatusChanged(ComputeEvent_Fired);
+                Terminated += new ComputeEventStatusChanged(ComputeEvent_Fired);
+            }
         }
 
         #endregion

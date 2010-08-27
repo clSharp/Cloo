@@ -214,7 +214,7 @@
         </member>
         <member name="E:Cloo.ComputeEventBase.Terminated">
             <summary>
-            Occurrs when the operation that generated the event is abnormally terminated.
+            Occurrs when the operation associated with the event is abnormally terminated.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEventBase.CommandType">
@@ -1741,9 +1741,9 @@
         </member>
         <member name="M:Cloo.ComputeUserEvent.SetStatus(System.Int32)">
             <summary>
-            Sets the status of the of the <c>ComputeUserEvent</c>.
+            Sets the status of the <c>ComputeUserEvent</c>.
             </summary>
-            <param name="status"> The new status of the <c>ComputeUserEvent</c>. Allowed value is any negative integer.</param>
+            <param name="status"> The new status of the <c>ComputeUserEvent</c>. </param>
         </member>
         <member name="T:Cloo.ComputeEvent">
             <summary>

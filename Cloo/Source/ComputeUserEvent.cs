@@ -59,8 +59,7 @@ namespace Cloo
                     ComputeEventInfo.CommandType, CL10.GetEventInfo);
                 Context = context;
 
-                notifier = new ComputeEventCallbackRaw(Notify);
-                CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifier, IntPtr.Zero);
+                HookStatusNotifier();
             }
         }
 
@@ -78,9 +77,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets the status of the of the <c>ComputeUserEvent</c>.
+        /// Sets the status of the <c>ComputeUserEvent</c>.
         /// </summary>
-        /// <param name="status"> The new status of the <c>ComputeUserEvent</c>. Allowed value is any negative integer.</param>
+        /// <param name="status"> The new status of the <c>ComputeUserEvent</c>. </param>
         public void SetStatus(int status)
         {
             unsafe

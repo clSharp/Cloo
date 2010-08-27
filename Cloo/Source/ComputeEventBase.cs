@@ -44,7 +44,7 @@ namespace Cloo
     {
         #region Fields
 
-        protected ComputeEventCallbackRaw notifier;
+        private ComputeEventCallback notifier;
 
         #endregion
 
@@ -53,12 +53,12 @@ namespace Cloo
         /// <summary>
         /// Occurrs when <c>ComputeEventBase.CommandExecutionStatus</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
         /// </summary>
-        public event ComputeEventCallback Completed;
+        public event ComputeEventStatusChanged Completed;
 
         /// <summary>
-        /// Occurrs when the operation that generated the event is abnormally terminated.
+        /// Occurrs when the operation associated with the event is abnormally terminated.
         /// </summary>
-        public event ComputeEventCallback Terminated;
+        public event ComputeEventStatusChanged Terminated;
 
         #endregion
 
@@ -176,18 +176,35 @@ namespace Cloo
             }
         }
 
-        protected void Notify(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData)
+        protected void HookStatusNotifier()
+        {
+            notifier = new ComputeEventCallback(Notify);
+            ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, notifier, IntPtr.Zero);
+            ComputeException.ThrowOnError(error);
+        }
+
+        protected virtual void OnCompleted(object sender, EventArgs evArgs)
+        {
+            if (Completed != null)
+                Completed(sender, evArgs);
+        }
+
+        protected virtual void OnTerminated(object sender, EventArgs evArgs)
+        {
+            if (Terminated != null)
+                Terminated(sender, evArgs);
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void Notify(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData)
         {
             switch (cmdExecStatusOrErr)
             {
-                case (int)ComputeCommandExecutionStatus.Complete:
-                    if (Completed != null)
-                        Completed(this, new EventArgs());
-                    break;
-                default:
-                    if (Terminated != null)
-                        Terminated(this, new EventArgs());
-                    break;
+                case (int)ComputeCommandExecutionStatus.Complete: OnCompleted(this, new EventArgs()); break;
+                default: OnTerminated(this, new EventArgs()); break;
             }
         }
 
@@ -195,8 +212,8 @@ namespace Cloo
     }
 
     //[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public delegate void ComputeEventCallbackRaw(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData);
+    public delegate void ComputeEventCallback(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData);
 
     //[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public delegate void ComputeEventCallback(object sender, EventArgs e);
+    public delegate void ComputeEventStatusChanged(object sender, EventArgs e);
 }

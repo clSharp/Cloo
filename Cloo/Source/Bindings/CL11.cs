@@ -77,7 +77,7 @@ namespace Cloo.Bindings
         public extern static unsafe ComputeErrorCode SetEventCallback(
             IntPtr @event,
             Int32 command_exec_callback_type,
-            /* void (CL_CALLBACK * pfn_notify)(cl_event, cl_int, void *) */ ComputeEventCallbackRaw pfn_notify,
+            /* void (CL_CALLBACK * pfn_notify)(cl_event, cl_int, void *) */ ComputeEventCallback pfn_notify,
             /* void * */ IntPtr user_data);
 
         [DllImport(dllName, EntryPoint = "clEnqueueReadBufferRect")]
