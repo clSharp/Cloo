@@ -51,7 +51,7 @@ namespace Cloo
         private readonly ReadOnlyCollection<string> source;
         private ReadOnlyCollection<byte[]> binaries;
         private string buildOptions;
-        private ComputeProgramBuildNotifier buildCallback;
+        private ComputeProgramBuildNotifier buildNotify;
 
         #endregion
 
@@ -222,7 +222,7 @@ namespace Cloo
             {
                 IntPtr[] deviceHandles = Tools.ExtractHandles(devices);
                 buildOptions = (options != null) ? options : "";
-                buildCallback = notify;
+                buildNotify = notify;
 
                 fixed (IntPtr* deviceHandlesPtr = deviceHandles)
                 {
@@ -231,7 +231,7 @@ namespace Cloo
                         deviceHandles.Length,
                         deviceHandlesPtr,
                         options,
-                        buildCallback,
+                        buildNotify,
                         notifyDataPtr);
                     ComputeException.ThrowOnError(error);
                 }

@@ -214,7 +214,7 @@
         </member>
         <member name="E:Cloo.ComputeEventBase.Terminated">
             <summary>
-            Occurrs when the operation associated with the event is abnormally terminated. The status of the 
+            Occurrs when the command associated with the event is abnormally terminated.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEventBase.Type">
@@ -255,7 +255,7 @@
         </member>
         <member name="T:Cloo.ComputeCommandStatusArgs">
             <summary>
-            Represents the arguments of a command execution status change.
+            Represents the arguments of a command status change.
             </summary>
         </member>
         <member name="M:Cloo.ComputeCommandStatusArgs.#ctor(Cloo.ComputeEventBase,Cloo.ComputeCommandExecutionStatus)">

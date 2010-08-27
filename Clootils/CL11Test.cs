@@ -77,6 +77,8 @@ namespace Clootils
                 ComputeBuffer<float> buffer = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadWrite, linearSize);
                 log.WriteLine("done.");
 
+                GC.Collect();
+
                 log.Write("Writing to buffer (linear)... ");
                 commands.WriteToBuffer(linearIn, buffer, false, null);
                 log.WriteLine("done.");
@@ -85,19 +87,27 @@ namespace Clootils
                 commands.ReadFromBuffer(buffer, ref linearOut, false, null);
                 log.WriteLine("done.");
 
+                GC.Collect();
+
                 commands.Finish();
 
                 log.Write("Comparing data... ");
                 Compare(linearIn, linearOut);
                 log.WriteLine("passed.");
-                
+
+                GC.Collect();
+
                 log.Write("Writing to buffer (rectangular)... ");
                 commands.WriteToBuffer(rectIn, buffer, false, new SysIntX2(), new SysIntX2(), rectSize, null);
                 log.WriteLine("done.");
 
+                GC.Collect();
+
                 log.Write("Reading from buffer (rectangular)... ");
                 commands.ReadFromBuffer(buffer, ref rectOut, false, new SysIntX2(), new SysIntX2(), rectSize, null);
                 log.WriteLine("done.");
+
+                GC.Collect();
 
                 commands.Finish();
 
@@ -105,14 +115,20 @@ namespace Clootils
                 Compare(rectIn, rectOut);
                 log.WriteLine("passed.");
 
+                GC.Collect();
+                
                 log.Write("Writing to buffer (cubic)... ");
                 commands.WriteToBuffer(cubicIn, buffer, false, new SysIntX3(), new SysIntX3(), cubicSize, null);
                 log.WriteLine("done.");
 
+                GC.Collect();
+                
                 log.Write("Reading from buffer (cubic)... ");
                 commands.ReadFromBuffer(buffer, ref cubicOut, false, new SysIntX3(), new SysIntX3(), cubicSize, null);
                 log.WriteLine("done.");
 
+                GC.Collect();
+                
                 commands.Finish();
 
                 log.Write("Comparing data... ");

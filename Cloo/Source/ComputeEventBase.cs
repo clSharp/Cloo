@@ -56,7 +56,7 @@ namespace Cloo
         public event ComputeCommandStatusChanged Completed;
 
         /// <summary>
-        /// Occurrs when the operation associated with the event is abnormally terminated.
+        /// Occurrs when the command associated with the event is abnormally terminated.
         /// </summary>
         public event ComputeCommandStatusChanged Terminated;
 
@@ -219,7 +219,7 @@ namespace Cloo
     }
 
     /// <summary>
-    /// Represents the arguments of a command execution status change.
+    /// Represents the arguments of a command status change.
     /// </summary>
     public class ComputeCommandStatusArgs : EventArgs
     {
