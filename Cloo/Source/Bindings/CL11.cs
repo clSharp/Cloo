@@ -40,15 +40,6 @@ namespace Cloo.Bindings
     /// <remarks> See the OpenCL specification for documentation regarding these functions. </remarks>
     public class CL11 : CL10
     {
-        [Obsolete("This function has been deprecated in OpenCL 1.1", false)]
-        [DllImport(dllName, EntryPoint = "clSetCommandQueueProperty")]
-        new public extern static unsafe ComputeErrorCode
-        SetCommandQueueProperty(
-            IntPtr command_queue,
-            ComputeCommandQueueFlags properties,
-            ComputeBoolean enable,
-            out ComputeCommandQueueFlags old_properties);
-
         [DllImport(dllName, EntryPoint="clCreateSubBuffer")]
         public extern static unsafe IntPtr CreateSubBuffer(
             IntPtr buffer,
@@ -129,5 +120,16 @@ namespace Cloo.Bindings
             Int32 num_events_in_wait_list,
             IntPtr* event_wait_list,
             IntPtr* new_event);
+
+        [Obsolete("This function has been deprecated in OpenCL 1.1.")]
+        new public static unsafe ComputeErrorCode
+        SetCommandQueueProperty(
+            IntPtr command_queue,
+            ComputeCommandQueueFlags properties,
+            ComputeBoolean enable,
+            out ComputeCommandQueueFlags old_properties)
+        {
+            throw new NotSupportedException("This function has been deprecated in OpenCL 1.1.");
+        }
     }
 }
