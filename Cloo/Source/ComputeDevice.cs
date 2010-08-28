@@ -86,6 +86,7 @@ namespace Cloo
         private readonly long preferredVectorWidthChar;
         private readonly long preferredVectorWidthDouble;
         private readonly long preferredVectorWidthFloat;
+        private readonly long preferredVectorWidthHalf;
         private readonly long preferredVectorWidthInt;
         private readonly long preferredVectorWidthLong;
         private readonly long preferredVectorWidthShort;
@@ -311,7 +312,13 @@ namespace Cloo
         public ComputePlatform Platform { get { return platform; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>double</c>s.
+        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>char</c>s.
+        /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+        public long PreferredVectorWidthChar { get { return preferredVectorWidthChar; } }
+
+        /// <summary>
+        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>double</c>s or 0 if the cl_khr_fp64 format is not supported..
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthDouble { get { return preferredVectorWidthDouble; } }
@@ -323,10 +330,10 @@ namespace Cloo
         public long PreferredVectorWidthFloat { get { return preferredVectorWidthFloat; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>char</c>s.
+        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>half</c>s or 0 if the cl_khr_fp16 format is not supported..
         /// </summary>
-        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
-        public long PreferredVectorWidthChar { get { return preferredVectorWidthChar; } }
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. Returns 0 if the cl_khr_fp16 extension is not supported. </remarks>
+        public long PreferredVectorWidthHalf { get { return preferredVectorWidthHalf; } }
 
         /// <summary>
         /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>int</c>s.
@@ -395,6 +402,77 @@ namespace Cloo
         /// </summary>
         /// <remarks> This version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
         public string Version { get { return version; } }
+
+        //////////////////////////////////
+        // OpenCL 1.1 device properties //
+        //////////////////////////////////
+
+        /// <summary>
+        /// Gets the native ISA vector width size for vector of <c>char</c>s.
+        /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+        /// <remarks> Requires OpenCL 1.1 </remarks>
+        public long NativeVectorWidthChar { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthChar); } }
+
+        /// <summary>
+        /// Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the cl_khr_fp64 format is not supported.
+        /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+        /// <remarks> Requires OpenCL 1.1 </remarks>
+        public long NativeVectorWidthDouble { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthDouble); } }
+
+        /// <summary>
+        /// Gets the native ISA vector width size for vector of <c>float</c>s.
+        /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+        /// <remarks> Requires OpenCL 1.1 </remarks>
+        public long NativeVectorWidthFloat { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthFloat); } }
+
+        /// <summary>
+        /// Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the cl_khr_fp16 format is not supported.
+        /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+        /// <remarks> Requires OpenCL 1.1 </remarks>
+        public long NativeVectorWidthHalf { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthHalf); } }
+
+        /// <summary>
+        /// Gets the native ISA vector width size for vector of <c>int</c>s.
+        /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+        /// <remarks> Requires OpenCL 1.1 </remarks>
+        public long NativeVectorWidthInt { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthInt); } }
+
+        /// <summary>
+        /// Gets the native ISA vector width size for vector of <c>long</c>s.
+        /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+        /// <remarks> Requires OpenCL 1.1 </remarks>
+        public long NativeVectorWidthLong { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthLong); } }
+
+        /// <summary>
+        /// Gets the native ISA vector width size for vector of <c>short</c>s.
+        /// </summary>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+        /// <remarks> Requires OpenCL 1.1 </remarks>
+        public long NativeVectorWidthShort { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthShort); } }
+
+        /// <summary>
+        /// Returns <c>true</c> if the <c>ComputeDevice</c> and the host have a unified memory subsystem and <c>false</c> otherwise.
+        /// </summary>
+        /// <remarks> Requires OpenCL 1.1 </remarks>
+        public bool HostUnifiedMemory { get { return GetBoolInfo(ComputeDeviceInfo.HostUnifiedMemory); } }
+
+        /// <summary>
+        /// Gets the OpenCL C version supported by the <c>ComputeDevice</c>.
+        /// </summary>
+        /// <remarks> Is 1.1 if <c>ComputeDevice.Version</c> is 1.1. Can be 1.0 or 1.1 if <c>ComputeDevice.Version</c> is 1.0. </remarks>
+        public Version OpenCLCVersion { get { return Tools.ParseVersionString(OpenCLCVersionString, 2); } }
+
+        /// <summary>
+        /// Gets the OpenCL C version string supported by the <c>ComputeDevice</c>.
+        /// </summary>
+        /// <remarks> This version string has the following format: <c>OpenCL[space]C[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
+        public string OpenCLCVersionString { get { return GetStringInfo(ComputeDeviceInfo.OpenCLCVersion); } }
 
         #endregion
 

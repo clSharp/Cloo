@@ -133,11 +133,11 @@
             Contains various helper methods.
             </summary>
         </member>
-        <member name="M:Cloo.Tools.ParseVersionString(System.String)">
+        <member name="M:Cloo.Tools.ParseVersionString(System.String,System.Int32)">
             <summary>
             Parses an OpenCL version string.
             </summary>
-            <param name="versionString"> The version string to parse. Must be in the format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </param>
+            <param name="versionString"> The version string to parse. Must be in the format: <c>Substring[space][major_version].[minor_version][space]Substring</c>. </param>
             <returns> A <c>Version</c> instance containing the major and minor version from <paramref name="versionString"/>. </returns>
         </member>
         <member name="T:Cloo.ComputeSampler">
@@ -1793,9 +1793,15 @@
             Gets the <c>ComputePlatform</c> associated with the <c>ComputeDevice</c>.
             </summary>
         </member>
+        <member name="P:Cloo.ComputeDevice.PreferredVectorWidthChar">
+            <summary>
+            Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>char</c>s.
+            </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+        </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthDouble">
             <summary>
-            Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>double</c>s.
+            Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>double</c>s or 0 if the cl_khr_fp64 format is not supported..
             </summary>
             <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
@@ -1805,11 +1811,11 @@
             </summary>
             <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
-        <member name="P:Cloo.ComputeDevice.PreferredVectorWidthChar">
+        <member name="P:Cloo.ComputeDevice.PreferredVectorWidthHalf">
             <summary>
-            Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>char</c>s.
+            Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>half</c>s or 0 if the cl_khr_fp16 format is not supported..
             </summary>
-            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. Returns 0 if the cl_khr_fp16 extension is not supported. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthInt">
             <summary>
@@ -1878,6 +1884,73 @@
             Gets the OpenCL version supported by the <c>ComputeDevice</c>.
             </summary>
             <remarks> This version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
+        </member>
+        <member name="P:Cloo.ComputeDevice.NativeVectorWidthChar">
+            <summary>
+            Gets the native ISA vector width size for vector of <c>char</c>s.
+            </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+            <remarks> Requires OpenCL 1.1 </remarks>
+        </member>
+        <member name="P:Cloo.ComputeDevice.NativeVectorWidthDouble">
+            <summary>
+            Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the cl_khr_fp64 format is not supported.
+            </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+            <remarks> Requires OpenCL 1.1 </remarks>
+        </member>
+        <member name="P:Cloo.ComputeDevice.NativeVectorWidthFloat">
+            <summary>
+            Gets the native ISA vector width size for vector of <c>float</c>s.
+            </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+            <remarks> Requires OpenCL 1.1 </remarks>
+        </member>
+        <member name="P:Cloo.ComputeDevice.NativeVectorWidthHalf">
+            <summary>
+            Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the cl_khr_fp16 format is not supported.
+            </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+            <remarks> Requires OpenCL 1.1 </remarks>
+        </member>
+        <member name="P:Cloo.ComputeDevice.NativeVectorWidthInt">
+            <summary>
+            Gets the native ISA vector width size for vector of <c>int</c>s.
+            </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+            <remarks> Requires OpenCL 1.1 </remarks>
+        </member>
+        <member name="P:Cloo.ComputeDevice.NativeVectorWidthLong">
+            <summary>
+            Gets the native ISA vector width size for vector of <c>long</c>s.
+            </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+            <remarks> Requires OpenCL 1.1 </remarks>
+        </member>
+        <member name="P:Cloo.ComputeDevice.NativeVectorWidthShort">
+            <summary>
+            Gets the native ISA vector width size for vector of <c>short</c>s.
+            </summary>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
+            <remarks> Requires OpenCL 1.1 </remarks>
+        </member>
+        <member name="P:Cloo.ComputeDevice.HostUnifiedMemory">
+            <summary>
+            Returns <c>true</c> if the <c>ComputeDevice</c> and the host have a unified memory subsystem and <c>false</c> otherwise.
+            </summary>
+            <remarks> Requires OpenCL 1.1 </remarks>
+        </member>
+        <member name="P:Cloo.ComputeDevice.OpenCLCVersion">
+            <summary>
+            Gets the OpenCL C version supported by the <c>ComputeDevice</c>.
+            </summary>
+            <remarks> Is 1.1 if <c>ComputeDevice.Version</c> is 1.1. Can be 1.0 or 1.1 if <c>ComputeDevice.Version</c> is 1.0. </remarks>
+        </member>
+        <member name="P:Cloo.ComputeDevice.OpenCLCVersionString">
+            <summary>
+            Gets the OpenCL C version string supported by the <c>ComputeDevice</c>.
+            </summary>
+            <remarks> This version string has the following format: <c>OpenCL[space]C[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
         </member>
         <member name="T:Cloo.ComputeContext">
             <summary>

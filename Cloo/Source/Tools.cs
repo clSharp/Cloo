@@ -45,12 +45,12 @@ namespace Cloo
         /// <summary>
         /// Parses an OpenCL version string.
         /// </summary>
-        /// <param name="versionString"> The version string to parse. Must be in the format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </param>
+        /// <param name="versionString"> The version string to parse. Must be in the format: <c>Substring[space][major_version].[minor_version][space]Substring</c>. </param>
         /// <returns> A <c>Version</c> instance containing the major and minor version from <paramref name="versionString"/>. </returns>
-        public static Version ParseVersionString(String versionString)
+        public static Version ParseVersionString(String versionString, int substringIndex)
         {
             string[] verstring = versionString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            return new Version(verstring[1]);
+            return new Version(verstring[substringIndex]);
         }
 
         #endregion

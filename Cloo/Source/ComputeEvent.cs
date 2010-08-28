@@ -72,7 +72,7 @@ namespace Cloo
                     ComputeEventInfo.CommandType, CL10.GetEventInfo);
                 Context = queue.Context;
 
-                if (Tools.ParseVersionString(CommandQueue.Device.Version) == new Version(1, 1))
+                if (Tools.ParseVersionString(CommandQueue.Device.Version, 1) == new Version(1, 1))
                     HookNotifier();
 
                 Completed += new ComputeCommandStatusChanged(ComputeEvent_Fired);
