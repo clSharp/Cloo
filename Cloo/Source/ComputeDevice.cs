@@ -213,7 +213,7 @@ namespace Cloo
         /// <summary>
         /// Gets the size of local memory are of the <c>ComputeDevice</c> in bytes.
         /// </summary>
-        /// <remarks> The minimum value is 16 KB. </remarks>
+        /// <remarks> The minimum value is 16 KB (OpenCL 1.0) or 32 KB (OpenCL 1.1). </remarks>
         public long LocalMemorySize { get { return localMemorySize; } }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace Cloo
         /// <summary>
         /// Gets the maximum size in bytes of the arguments that can be passed to a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
         /// </summary>
-        /// <remarks> The minimum value is 256. </remarks>
+        /// <remarks> The minimum value is 256 (OpenCL 1.0) or 1024 (OpenCL 1.1). </remarks>
         public long MaxParameterSize { get { return maxParameterSize; } }
 
         /// <summary>
@@ -413,6 +413,12 @@ namespace Cloo
         //////////////////////////////////
 
         /// <summary>
+        /// Returns <c>true</c> if the <c>ComputeDevice</c> and the host have a unified memory subsystem and <c>false</c> otherwise.
+        /// </summary>
+        /// <remarks> Requires OpenCL 1.1 </remarks>
+        public bool HostUnifiedMemory { get { return GetBoolInfo(ComputeDeviceInfo.HostUnifiedMemory); } }
+
+        /// <summary>
         /// Gets the native ISA vector width size for vector of <c>char</c>s.
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
@@ -460,12 +466,6 @@ namespace Cloo
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         /// <remarks> Requires OpenCL 1.1 </remarks>
         public long NativeVectorWidthShort { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthShort); } }
-
-        /// <summary>
-        /// Returns <c>true</c> if the <c>ComputeDevice</c> and the host have a unified memory subsystem and <c>false</c> otherwise.
-        /// </summary>
-        /// <remarks> Requires OpenCL 1.1 </remarks>
-        public bool HostUnifiedMemory { get { return GetBoolInfo(ComputeDeviceInfo.HostUnifiedMemory); } }
 
         /// <summary>
         /// Gets the OpenCL C version supported by the <c>ComputeDevice</c>.

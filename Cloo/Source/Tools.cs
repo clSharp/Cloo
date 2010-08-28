@@ -45,7 +45,8 @@ namespace Cloo
         /// <summary>
         /// Parses an OpenCL version string.
         /// </summary>
-        /// <param name="versionString"> The version string to parse. Must be in the format: <c>Substring[space][major_version].[minor_version][space]Substring</c>. </param>
+        /// <param name="versionString"> The version string to parse. Must be in the format: <c>Additional substrings[space][major_version].[minor_version][space]Additional substrings</c>. </param>
+        /// <param name="substringIndex"> The index of the substring that specifies the OpenCL version. </param>
         /// <returns> A <c>Version</c> instance containing the major and minor version from <paramref name="versionString"/>. </returns>
         public static Version ParseVersionString(String versionString, int substringIndex)
         {

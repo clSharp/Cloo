@@ -137,6 +137,22 @@ namespace Cloo
         }
 
         /// <summary>
+        /// Gets the preferred multiple of workgroup size for launch. 
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
+        /// <remarks> The returned value is a performance hint. Specifying a workgroup size that is not a multiple of the value returned by this query as the value of the local work size argument to ComputeCommandQueue.Execute will not fail to enqueue the kernel for execution unless the work-group size specified is larger than the device maximum. </remarks>
+        /// <remarks> Requires OpenCL 1.1. </remarks>
+        public long GetPreferredWorkGroupSizeMultiple(ComputeDevice device)
+        {
+            unsafe
+            {
+                return (long)GetInfo<ComputeKernelWorkGroupInfo, IntPtr>(
+                    device, ComputeKernelWorkGroupInfo.PreferredWorkGroupSizeMultiple, CL10.GetKernelWorkGroupInfo);
+            }
+        }
+
+        /// <summary>
         /// Gets the maximum work-group size that can be used to execute the <c>ComputeKernel</c> on a <c>ComputeDevice</c>.
         /// </summary>
         /// <param name="device"> One of the <c>ComputeKernel.Program.Device</c>s. </param>
