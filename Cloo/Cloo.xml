@@ -1883,7 +1883,12 @@
             <summary>
             Gets the OpenCL version supported by the <c>ComputeDevice</c>.
             </summary>
-            <remarks> This version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
+        </member>
+        <member name="P:Cloo.ComputeDevice.VersionString">
+            <summary>
+            Gets the OpenCL version string supported by the <c>ComputeDevice</c>.
+            </summary>
+            <remarks> The version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.NativeVectorWidthChar">
             <summary>
@@ -1950,7 +1955,7 @@
             <summary>
             Gets the OpenCL C version string supported by the <c>ComputeDevice</c>.
             </summary>
-            <remarks> This version string has the following format: <c>OpenCL[space]C[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
+            <remarks> The version string has the following format: <c>OpenCL[space]C[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
         </member>
         <member name="T:Cloo.ComputeContext">
             <summary>

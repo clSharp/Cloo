@@ -400,8 +400,13 @@ namespace Cloo
         /// <summary>
         /// Gets the OpenCL version supported by the <c>ComputeDevice</c>.
         /// </summary>
-        /// <remarks> This version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
-        public string Version { get { return version; } }
+        public Version Version { get { return Tools.ParseVersionString(VersionString, 1); } }
+
+        /// <summary>
+        /// Gets the OpenCL version string supported by the <c>ComputeDevice</c>.
+        /// </summary>
+        /// <remarks> The version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
+        public string VersionString { get { return version; } }
 
         //////////////////////////////////
         // OpenCL 1.1 device properties //
@@ -471,7 +476,7 @@ namespace Cloo
         /// <summary>
         /// Gets the OpenCL C version string supported by the <c>ComputeDevice</c>.
         /// </summary>
-        /// <remarks> This version string has the following format: <c>OpenCL[space]C[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
+        /// <remarks> The version string has the following format: <c>OpenCL[space]C[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
         public string OpenCLCVersionString { get { return GetStringInfo(ComputeDeviceInfo.OpenCLCVersion); } }
 
         #endregion
