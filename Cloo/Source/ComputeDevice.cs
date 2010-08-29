@@ -531,6 +531,7 @@ namespace Cloo
                 preferredVectorWidthChar = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthChar);
                 preferredVectorWidthDouble = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthDouble);
                 preferredVectorWidthFloat = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthFloat);
+                preferredVectorWidthHalf = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthHalf);
                 preferredVectorWidthInt = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthInt);
                 preferredVectorWidthLong = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthLong);
                 preferredVectorWidthShort = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthShort);

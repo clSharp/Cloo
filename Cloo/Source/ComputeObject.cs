@@ -121,6 +121,15 @@ namespace Cloo
 
         #region Protected methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="QueriedType"></typeparam>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
+        [CLSCompliant(false)]
         protected QueriedType[] GetArrayInfo<InfoType, QueriedType>
             (
                 InfoType paramName,
@@ -153,6 +162,16 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="QueriedType"></typeparam>
+        /// <param name="secondaryObject"></param>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
+        [CLSCompliant(false)]
         protected QueriedType[] GetArrayInfo<InfoType, QueriedType>
             (
                 ComputeObject secondaryObject,
@@ -187,6 +206,14 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
+        [CLSCompliant(false)]
         protected bool GetBoolInfo<InfoType>
             (
                 InfoType paramName,
@@ -197,6 +224,15 @@ namespace Cloo
             return (result == (int)ComputeBoolean.True) ? true : false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="QueriedType"></typeparam>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
+        [CLSCompliant(false)]
         protected QueriedType GetInfo<InfoType, QueriedType>
             (
                 InfoType paramName,
@@ -228,6 +264,16 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="QueriedType"></typeparam>
+        /// <param name="secondaryObject"></param>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
+        [CLSCompliant(false)]
         protected QueriedType GetInfo<InfoType, QueriedType>
             (
                 ComputeObject secondaryObject,
@@ -261,6 +307,14 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
+        [CLSCompliant(false)]
         protected string GetStringInfo<InfoType>(InfoType paramName, GetInfoDelegate<InfoType> getInfoDelegate)
         {
             unsafe
@@ -273,6 +327,15 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <param name="secondaryObject"></param>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
+        [CLSCompliant(false)]
         protected string GetStringInfo<InfoType>(ComputeObject secondaryObject, InfoType paramName, GetInfoDelegateEx<InfoType> getInfoDelegate)
         {
             unsafe
@@ -290,6 +353,17 @@ namespace Cloo
 
         #region Delegates
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <param name="objectHandle"></param>
+        /// <param name="paramName"></param>
+        /// <param name="paramValueSize"></param>
+        /// <param name="paramValue"></param>
+        /// <param name="paramValueSizeRet"></param>
+        /// <returns></returns>
+        [CLSCompliant(false)]
         protected unsafe delegate ComputeErrorCode GetInfoDelegate<InfoType>
             (
                 IntPtr objectHandle,
@@ -299,6 +373,18 @@ namespace Cloo
                 IntPtr* paramValueSizeRet
             );
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <param name="mainObjectHandle"></param>
+        /// <param name="secondaryObjectHandle"></param>
+        /// <param name="paramName"></param>
+        /// <param name="paramValueSize"></param>
+        /// <param name="paramValue"></param>
+        /// <param name="paramValueSizeRet"></param>
+        /// <returns></returns>
+        [CLSCompliant(false)]
         protected unsafe delegate ComputeErrorCode GetInfoDelegateEx<InfoType>
             (
                 IntPtr mainObjectHandle,

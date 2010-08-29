@@ -108,36 +108,64 @@ namespace Cloo
 
         #region ICollection<ComputeContextProperty> Members
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         public void Add(ComputeContextProperty item)
         {
             properties.Add(item);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Clear()
         {
             properties.Clear();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Contains(ComputeContextProperty item)
         {
             return properties.Contains(item);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="arrayIndex"></param>
         public void CopyTo(ComputeContextProperty[] array, int arrayIndex)
         {
             properties.CopyTo(array, arrayIndex);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int Count
         {
             get { return properties.Count; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsReadOnly
         {
             get { return false; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Remove(ComputeContextProperty item)
         {
             return properties.Remove(item);
@@ -147,6 +175,10 @@ namespace Cloo
 
         #region IEnumerable<ComputeContextProperty> Members
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<ComputeContextProperty> GetEnumerator()
         {
             return ((IEnumerable<ComputeContextProperty>)properties).GetEnumerator();

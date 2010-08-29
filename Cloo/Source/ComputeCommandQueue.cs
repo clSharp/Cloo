@@ -728,6 +728,10 @@ namespace Cloo
 
         #region Protected methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manual"></param>
         protected override void Dispose(bool manual)
         {
             if (manual)

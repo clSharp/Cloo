@@ -41,17 +41,27 @@ namespace Cloo.Bindings
     /// <remarks> See the OpenCL specification for documentation regarding these functions. </remarks>
     public class CL10
     {
-        protected const string dllName = "opencl.dll";
+        /// <summary>
+        /// The name of the library that contains the available OpenCL function points.
+        /// </summary>
+        protected const string libName = "opencl.dll";
 
-        // Platform API
-        [DllImport(dllName, EntryPoint = "clGetPlatformIDs")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetPlatformIDs")]
         public extern static unsafe ComputeErrorCode
         GetPlatformIDs(
             Int32 num_entries,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] platforms,
             Int32* num_platforms);
 
-        [DllImport(dllName, EntryPoint = "clGetPlatformInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetPlatformInfo")]
         public extern static unsafe ComputeErrorCode
         GetPlatformInfo(
             IntPtr platform,
@@ -60,8 +70,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        // Device APIs
-        [DllImport(dllName, EntryPoint = "clGetDeviceIDs")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetDeviceIDs")]
         public extern static unsafe ComputeErrorCode
         GetDeviceIDs(
             IntPtr platform,
@@ -70,7 +83,11 @@ namespace Cloo.Bindings
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] devices,
             Int32* num_devices);
 
-        [DllImport(dllName, EntryPoint = "clGetDeviceInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetDeviceInfo")]
         public extern static unsafe ComputeErrorCode
         GetDeviceInfo(
             IntPtr device,
@@ -79,8 +96,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        // Context APIs
-        [DllImport(dllName, EntryPoint = "clCreateContext")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateContext")]
         public extern static unsafe IntPtr
         CreateContext(
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] properties,
@@ -90,7 +110,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr user_data,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clCreateContextFromType")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateContextFromType")]
         public extern static unsafe IntPtr
         CreateContextFromType(
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] properties,
@@ -99,15 +123,27 @@ namespace Cloo.Bindings
             /* void* */ IntPtr user_data,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clRetainContext")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clRetainContext")]
         public extern static unsafe ComputeErrorCode
         RetainContext(IntPtr context);
 
-        [DllImport(dllName, EntryPoint = "clReleaseContext")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clReleaseContext")]
         public extern static unsafe ComputeErrorCode
         ReleaseContext(IntPtr context);
 
-        [DllImport(dllName, EntryPoint = "clGetContextInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetContextInfo")]
         public extern static unsafe ComputeErrorCode
         GetContextInfo(
             IntPtr context,
@@ -116,8 +152,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        // Command Queue APIs
-        [DllImport(dllName, EntryPoint = "clCreateCommandQueue")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateCommandQueue")]
         public extern static unsafe IntPtr
         CreateCommandQueue(
             IntPtr context,
@@ -125,15 +164,27 @@ namespace Cloo.Bindings
             ComputeCommandQueueFlags properties,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clRetainCommandQueue")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clRetainCommandQueue")]
         public extern static unsafe ComputeErrorCode
         RetainCommandQueue(IntPtr command_queue);
 
-        [DllImport(dllName, EntryPoint = "clReleaseCommandQueue")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clReleaseCommandQueue")]
         public extern static unsafe ComputeErrorCode
         ReleaseCommandQueue(IntPtr command_queue);
 
-        [DllImport(dllName, EntryPoint = "clGetCommandQueueInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetCommandQueueInfo")]
         public extern static unsafe ComputeErrorCode
         GetCommandQueueInfo(
             IntPtr command_queue,
@@ -142,7 +193,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        [DllImport(dllName, EntryPoint = "clSetCommandQueueProperty")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clSetCommandQueueProperty")]
         public extern static unsafe ComputeErrorCode
         SetCommandQueueProperty(
             IntPtr command_queue,
@@ -150,8 +205,11 @@ namespace Cloo.Bindings
             ComputeBoolean enable,
             ComputeCommandQueueFlags* old_properties);
 
-        // Memory Object APIs
-        [DllImport(dllName, EntryPoint = "clCreateBuffer")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateBuffer")]
         public extern static unsafe IntPtr
         CreateBuffer(
             IntPtr context,
@@ -160,7 +218,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr host_ptr,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clCreateImage2D")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateImage2D")]
         public extern static unsafe IntPtr
         CreateImage2D(
             IntPtr context,
@@ -172,7 +234,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr host_ptr,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clCreateImage3D")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateImage3D")]
         public extern static unsafe IntPtr
         CreateImage3D(
             IntPtr context,
@@ -186,15 +252,27 @@ namespace Cloo.Bindings
             /* void* */ IntPtr host_ptr,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clRetainMemObject")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clRetainMemObject")]
         public extern static unsafe ComputeErrorCode
         RetainMemObject(IntPtr memobj);
 
-        [DllImport(dllName, EntryPoint = "clReleaseMemObject")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clReleaseMemObject")]
         public extern static unsafe ComputeErrorCode
         ReleaseMemObject(IntPtr memobj);
 
-        [DllImport(dllName, EntryPoint = "clGetSupportedImageFormats")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetSupportedImageFormats")]
         public extern static unsafe ComputeErrorCode
         GetSupportedImageFormats(
             IntPtr context,
@@ -204,7 +282,11 @@ namespace Cloo.Bindings
             ComputeImageFormat* image_formats,
             Int32* num_image_formats);
 
-        [DllImport(dllName, EntryPoint = "clGetMemObjectInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetMemObjectInfo")]
         public extern static unsafe ComputeErrorCode
         GetMemObjectInfo(
             IntPtr memobj,
@@ -213,7 +295,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        [DllImport(dllName, EntryPoint = "clGetImageInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetImageInfo")]
         public extern static unsafe ComputeErrorCode
         GetImageInfo(
             IntPtr image,
@@ -222,8 +308,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        // Sampler APIs
-        [DllImport(dllName, EntryPoint = "clCreateSampler")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateSampler")]
         public extern static unsafe IntPtr
         CreateSampler(
             IntPtr context,
@@ -232,15 +321,27 @@ namespace Cloo.Bindings
             ComputeImageFiltering filter_mode,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clRetainSampler")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clRetainSampler")]
         public extern static unsafe ComputeErrorCode
         RetainSampler(IntPtr sampler);
 
-        [DllImport(dllName, EntryPoint = "clReleaseSampler")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clReleaseSampler")]
         public extern static unsafe ComputeErrorCode
         ReleaseSampler(IntPtr sampler);
 
-        [DllImport(dllName, EntryPoint = "clGetSamplerInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetSamplerInfo")]
         public extern static unsafe ComputeErrorCode
         GetSamplerInfo(
             IntPtr sampler,
@@ -249,8 +350,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        // Program Object APIs        
-        [DllImport(dllName, EntryPoint = "clCreateProgramWithSource")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateProgramWithSource")]
         public extern static unsafe IntPtr
         CreateProgramWithSource(
             IntPtr context,
@@ -259,7 +363,11 @@ namespace Cloo.Bindings
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] lengths,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clCreateProgramWithBinary")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateProgramWithBinary")]
         public extern static unsafe IntPtr
         CreateProgramWithBinary(
             IntPtr context,
@@ -270,15 +378,27 @@ namespace Cloo.Bindings
             Int32* binary_status,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clRetainProgram")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clRetainProgram")]
         public extern static unsafe ComputeErrorCode
         RetainProgram(IntPtr program);
 
-        [DllImport(dllName, EntryPoint = "clReleaseProgram")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clReleaseProgram")]
         public extern static unsafe ComputeErrorCode
         ReleaseProgram(IntPtr program);
 
-        [DllImport(dllName, EntryPoint = "clBuildProgram")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clBuildProgram")]
         public extern static unsafe ComputeErrorCode
         BuildProgram(
             IntPtr program,
@@ -288,11 +408,19 @@ namespace Cloo.Bindings
             /* void (*pfn_notify)(cl_program program , IntPtr user_data ) */ ComputeProgramBuildNotifier pfn_notify,
             /* void* */ IntPtr user_data);
 
-        [DllImport(dllName, EntryPoint = "clUnloadCompiler")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clUnloadCompiler")]
         public extern static unsafe ComputeErrorCode
         UnloadCompiler();
 
-        [DllImport(dllName, EntryPoint = "clGetProgramInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetProgramInfo")]
         public extern static unsafe ComputeErrorCode
         GetProgramInfo(
             IntPtr program,
@@ -301,7 +429,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        [DllImport(dllName, EntryPoint = "clGetProgramBuildInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetProgramBuildInfo")]
         public extern static unsafe ComputeErrorCode
         GetProgramBuildInfo(
             IntPtr program,
@@ -311,15 +443,22 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        // Kernel Object APIs
-        [DllImport(dllName, EntryPoint = "clCreateKernel")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateKernel")]
         public extern static unsafe IntPtr
         CreateKernel(
             IntPtr program,
             String kernel_name,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clCreateKernelsInProgram")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateKernelsInProgram")]
         public extern static unsafe ComputeErrorCode
         CreateKernelsInProgram(
             IntPtr program,
@@ -327,15 +466,27 @@ namespace Cloo.Bindings
             IntPtr* kernels,
             Int32* num_kernels_ret);
 
-        [DllImport(dllName, EntryPoint = "clRetainKernel")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clRetainKernel")]
         public extern static unsafe ComputeErrorCode
         RetainKernel(IntPtr kernel);
 
-        [DllImport(dllName, EntryPoint = "clReleaseKernel")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clReleaseKernel")]
         public extern static unsafe ComputeErrorCode
         ReleaseKernel(IntPtr kernel);
 
-        [DllImport(dllName, EntryPoint = "clSetKernelArg")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clSetKernelArg")]
         public extern static unsafe ComputeErrorCode
         SetKernelArg(
             IntPtr kernel,
@@ -343,7 +494,11 @@ namespace Cloo.Bindings
             IntPtr arg_size,
             /* const void* */ IntPtr arg_value);
 
-        [DllImport(dllName, EntryPoint = "clGetKernelInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetKernelInfo")]
         public extern static unsafe ComputeErrorCode
         GetKernelInfo(
             IntPtr kernel,
@@ -352,7 +507,11 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        [DllImport(dllName, EntryPoint = "clGetKernelWorkGroupInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetKernelWorkGroupInfo")]
         public extern static unsafe ComputeErrorCode
         GetKernelWorkGroupInfo(
             IntPtr kernel,
@@ -362,14 +521,21 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        // Event Object APIs
-        [DllImport(dllName, EntryPoint = "clWaitForEvents")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clWaitForEvents")]
         public extern static unsafe ComputeErrorCode
         WaitForEvents(
             Int32 num_events,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_list);
 
-        [DllImport(dllName, EntryPoint = "clGetEventInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetEventInfo")]
         public extern static unsafe ComputeErrorCode
         GetEventInfo(
             IntPtr @event,
@@ -378,16 +544,27 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        [DllImport(dllName, EntryPoint = "clRetainEvent")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clRetainEvent")]
         public extern static unsafe ComputeErrorCode
         RetainEvent(IntPtr @event);
 
-        [DllImport(dllName, EntryPoint = "clReleaseEvent")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clReleaseEvent")]
         public extern static unsafe ComputeErrorCode
         ReleaseEvent(IntPtr @event);
 
-        // Profiling APIs
-        [DllImport(dllName, EntryPoint = "clGetEventProfilingInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetEventProfilingInfo")]
         public extern static unsafe ComputeErrorCode
         GetEventProfilingInfo(
             IntPtr @event,
@@ -396,17 +573,27 @@ namespace Cloo.Bindings
             /* void* */ IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        // Flush and Finish APIs
-        [DllImport(dllName, EntryPoint = "clFlush")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clFlush")]
         public extern static unsafe ComputeErrorCode
         Flush(IntPtr command_queue);
 
-        [DllImport(dllName, EntryPoint = "clFinish")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clFinish")]
         public extern static unsafe ComputeErrorCode
         Finish(IntPtr command_queue);
 
-        // Enqueued Commands APIs
-        [DllImport(dllName, EntryPoint = "clEnqueueReadBuffer")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueReadBuffer")]
         public extern static unsafe ComputeErrorCode
         EnqueueReadBuffer(
             IntPtr command_queue,
@@ -419,7 +606,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueWriteBuffer")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueWriteBuffer")]
         public extern static unsafe ComputeErrorCode
         EnqueueWriteBuffer(
             IntPtr command_queue,
@@ -432,7 +623,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueCopyBuffer")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueCopyBuffer")]
         public extern static unsafe ComputeErrorCode
         EnqueueCopyBuffer(
             IntPtr command_queue,
@@ -445,7 +640,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueReadImage")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueReadImage")]
         public extern static unsafe ComputeErrorCode
         EnqueueReadImage(
             IntPtr command_queue,
@@ -460,7 +659,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueWriteImage")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueWriteImage")]
         public extern static unsafe ComputeErrorCode
         EnqueueWriteImage(
             IntPtr command_queue,
@@ -475,7 +678,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueCopyImage")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueCopyImage")]
         public extern static unsafe ComputeErrorCode
         EnqueueCopyImage(
             IntPtr command_queue,
@@ -488,7 +695,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueCopyImageToBuffer")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueCopyImageToBuffer")]
         public extern static unsafe ComputeErrorCode
         EnqueueCopyImageToBuffer(
             IntPtr command_queue,
@@ -501,7 +712,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueCopyBufferToImage")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueCopyBufferToImage")]
         public extern static unsafe ComputeErrorCode
         EnqueueCopyBufferToImage(
             IntPtr command_queue,
@@ -514,7 +729,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueMapBuffer")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueMapBuffer")]
         public extern static unsafe /* void* */ IntPtr
         EnqueueMapBuffer(
             IntPtr command_queue,
@@ -528,7 +747,11 @@ namespace Cloo.Bindings
             IntPtr* new_event,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueMapImage")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueMapImage")]
         public extern static unsafe /* void* */ IntPtr
         EnqueueMapImage(
             IntPtr command_queue,
@@ -544,7 +767,11 @@ namespace Cloo.Bindings
             IntPtr* new_event,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueUnmapMemObject")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueUnmapMemObject")]
         public extern static unsafe ComputeErrorCode
         EnqueueUnmapMemObject(
             IntPtr command_queue,
@@ -554,7 +781,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueNDRangeKernel")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueNDRangeKernel")]
         public extern static unsafe ComputeErrorCode
         EnqueueNDRangeKernel(
             IntPtr command_queue,
@@ -567,7 +798,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueTask")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueTask")]
         public extern static unsafe ComputeErrorCode
         EnqueueTask(
             IntPtr command_queue,
@@ -576,7 +811,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueNativeKernel")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueNativeKernel")]
         public extern static unsafe ComputeErrorCode
         EnqueueNativeKernel(
             IntPtr command_queue,
@@ -590,38 +829,55 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueMarker")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueMarker")]
         public extern static unsafe ComputeErrorCode
         EnqueueMarker(
             IntPtr command_queue,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueWaitForEvents")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueWaitForEvents")]
         public extern static unsafe ComputeErrorCode
         EnqueueWaitForEvents(
             IntPtr command_queue,
             Int32 num_events,
             IntPtr* event_list);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueBarrier")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueBarrier")]
         public extern static unsafe ComputeErrorCode
         EnqueueBarrier(IntPtr command_queue);
 
-        // Extension function access
-        //
-        // Returns the extension function address for the given function name,
-        // or NULL if a valid function can not be found.  The ient must
-        // check to make sure the address is not NULL, before using or 
-        // calling the returned function address.
-        //
-        [DllImport(dllName, EntryPoint = "clGetExtensionFunctionAddress")]
+        
+        /// <summary>
+        /// Gets the extension function address for the given function name,
+        /// or NULL if a valid function can not be found.  The client must
+        /// check to make sure the address is not NULL, before using or 
+        /// calling the returned function address.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetExtensionFunctionAddress")]
         public extern static unsafe /* void* */ IntPtr
         GetExtensionFunctionAddress(String func_name);
 
         /**************************************************************************************/
         // CL/GL Sharing API
 
-        [DllImport(dllName, EntryPoint = "clCreateFromGLBuffer")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateFromGLBuffer")]
         public extern static unsafe IntPtr
         CreateFromGLBuffer(
             IntPtr context,
@@ -629,7 +885,11 @@ namespace Cloo.Bindings
             Int32 bufobj,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clCreateFromGLTexture2D")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateFromGLTexture2D")]
         public extern static unsafe IntPtr
         CreateFromGLTexture2D(
             IntPtr context,
@@ -639,7 +899,11 @@ namespace Cloo.Bindings
             Int32 texture,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clCreateFromGLTexture3D")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateFromGLTexture3D")]
         public extern static unsafe IntPtr
         CreateFromGLTexture3D(
             IntPtr context,
@@ -649,7 +913,11 @@ namespace Cloo.Bindings
             Int32 texture,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clCreateFromGLRenderbuffer")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clCreateFromGLRenderbuffer")]
         public extern static unsafe IntPtr
         CreateFromGLRenderbuffer(
             IntPtr context,
@@ -657,14 +925,22 @@ namespace Cloo.Bindings
             Int32 renderbuffer,
             ComputeErrorCode* errcode_ret);
 
-        [DllImport(dllName, EntryPoint = "clGetGLObjectInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetGLObjectInfo")]
         public extern static unsafe ComputeErrorCode
         GetGLObjectInfo(
             IntPtr memobj,
             ComputeGLObjectType* gl_object_type,
             Int32* gl_object_name);
 
-        [DllImport(dllName, EntryPoint = "clGetGLTextureInfo")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clGetGLTextureInfo")]
         public extern static unsafe ComputeErrorCode
         GetGLTextureInfo(
             IntPtr memobj,
@@ -673,7 +949,11 @@ namespace Cloo.Bindings
             IntPtr param_value,
             IntPtr* param_value_size_ret);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueAcquireGLObjects")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueAcquireGLObjects")]
         public extern static unsafe ComputeErrorCode
         EnqueueAcquireGLObjects(
             IntPtr command_queue,
@@ -683,7 +963,11 @@ namespace Cloo.Bindings
             IntPtr* event_wait_list,
             IntPtr* new_event);
 
-        [DllImport(dllName, EntryPoint = "clEnqueueReleaseGLObjects")]
+        /// <summary>
+        /// See OpenCL specification.
+        /// </summary>
+        [CLSCompliant(false)]
+        [DllImport(libName, EntryPoint = "clEnqueueReleaseGLObjects")]
         public extern static unsafe ComputeErrorCode
         EnqueueReleaseGLObjects(
             IntPtr command_queue,

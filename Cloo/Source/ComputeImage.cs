@@ -80,6 +80,11 @@ namespace Cloo
 
         #region Constructors
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="flags"></param>
         protected ComputeImage(ComputeContext context, ComputeMemoryFlags flags)
             : base(context, flags)
         { }
@@ -101,6 +106,13 @@ namespace Cloo
 
         #region Protected methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="flags"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         protected static ICollection<ComputeImageFormat> GetSupportedFormats(ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type)
         {
             unsafe
@@ -120,6 +132,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected void Init()
         {
             unsafe

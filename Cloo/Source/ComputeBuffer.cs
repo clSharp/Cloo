@@ -121,12 +121,12 @@ namespace Cloo
         /// <summary>
         /// Creates a new <c>ComputeBuffer</c> from an existing OpenGL buffer object.
         /// </summary>
-        /// <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. It is recommended, though not required, that <typeparamref name="T"/> matches the type of the elements in the OpenGL buffer. </typeparam>
+        /// <typeparam name="DataType"> The type of the elements of the <c>ComputeBuffer</c>. It is recommended, though not required, that <typeparamref name="T"/> matches the type of the elements in the OpenGL buffer. </typeparam>
         /// <param name="context"> A <c>ComputeContext</c> with enabled CL/GL sharing. </param>
         /// <param name="flags"> A bit-field that is used to specify usage information about the <c>ComputeBuffer</c>. Only <c>ComputeMemoryFlags.ReadOnly</c>, <c>ComputeMemoryFlags.WriteOnly</c> and <c>ComputeMemoryFlags.ReadWrite</c> are allowed. </param>
         /// <param name="bufferId"> The OpenGL buffer object id to use for the creation of the <c>ComputeBuffer</c>. </param>
         /// <returns> The created <c>ComputeBuffer</c>. </returns>
-        public static ComputeBuffer<T> CreateFromGLBuffer<T>(ComputeContext context, ComputeMemoryFlags flags, int bufferId) where T : struct
+        public static ComputeBuffer<DataType> CreateFromGLBuffer<DataType>(ComputeContext context, ComputeMemoryFlags flags, int bufferId) where DataType : struct
         {
             unsafe
             {
@@ -134,7 +134,7 @@ namespace Cloo
                 IntPtr handle = CL10.CreateFromGLBuffer(context.Handle, flags, bufferId, &error);
                 ComputeException.ThrowOnError(error);
 
-                return new ComputeBuffer<T>(handle, context, flags);
+                return new ComputeBuffer<DataType>(handle, context, flags);
             }
         }
 

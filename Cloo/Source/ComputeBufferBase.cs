@@ -52,6 +52,11 @@ namespace Cloo
 
         #region Constructors
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="flags"></param>
         protected ComputeBufferBase(ComputeContext context, ComputeMemoryFlags flags)
             : base(context, flags)
         { }
@@ -60,6 +65,9 @@ namespace Cloo
 
         #region Protected methods
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected void Init()
         {
             unsafe

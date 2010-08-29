@@ -167,6 +167,10 @@ namespace Cloo
 
         #region Protected methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manual"></param>
         protected override void Dispose(bool manual)
         {
             if (Handle != IntPtr.Zero)
@@ -176,6 +180,9 @@ namespace Cloo
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected void HookNotifier()
         {
             statusNotify = new ComputeEventCallback(StatusNotify);
@@ -183,12 +190,22 @@ namespace Cloo
             ComputeException.ThrowOnError(error);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="evArgs"></param>
         protected virtual void OnCompleted(object sender, ComputeCommandStatusArgs evArgs)
         {
             if (Completed != null)
                 Completed(sender, evArgs);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="evArgs"></param>
         protected virtual void OnAborted(object sender, ComputeCommandStatusArgs evArgs)
         {
             if (Aborted != null)
@@ -213,12 +230,41 @@ namespace Cloo
 
         #region Obsolete
 #if OBSOLETE
-        [Obsolete] public long CommandEnqueueTime { get { return EnqueueTime; } }
-        [Obsolete] public ComputeCommandExecutionStatus CommandExecutionStatus { get { return Status; } }
-        [Obsolete] public long CommandFinishTime { get { return FinishTime; } }
-        [Obsolete] public long CommandStartTime { get { return StartTime; } }
-        [Obsolete] public long CommandSubmitTime { get { return SubmitTime; } }
-        [Obsolete] public ComputeCommandType CommandType { get { return Type; } }
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
+        public long CommandEnqueueTime { get { return EnqueueTime; } }
+
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
+        public ComputeCommandExecutionStatus CommandExecutionStatus { get { return Status; } }
+
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
+        public long CommandFinishTime { get { return FinishTime; } }
+
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
+        public long CommandStartTime { get { return StartTime; } }
+
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
+        public long CommandSubmitTime { get { return SubmitTime; } }
+
+        /// <summary>
+        /// Obsolete.
+        /// </summary>
+        [Obsolete]
+        public ComputeCommandType CommandType { get { return Type; } }
 #endif
         #endregion
     }
@@ -260,9 +306,18 @@ namespace Cloo
         { }
     }
 
-    //[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="eventHandle"></param>
+    /// <param name="cmdExecStatusOrErr"></param>
+    /// <param name="userData"></param>
     public delegate void ComputeEventCallback(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData);
 
-    //[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
     public delegate void ComputeCommandStatusChanged(object sender, ComputeCommandStatusArgs args);
 }

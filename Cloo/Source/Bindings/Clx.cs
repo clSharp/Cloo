@@ -44,24 +44,34 @@ namespace Cloo.Bindings
         private readonly Delegates.clGetGLContextInfoKHR clGetGLContextInfoKHR = null;
         private readonly Delegates.clIcdGetPlatformIDsKHR clIcdGetPlatformIDsKHR = null;
 
+        /// <summary> </summary>
+        [CLSCompliant(false)]
         public unsafe ComputeErrorCode EnqueueMigrateMemObjectEXT(IntPtr command_queue, uint num_mem_objects, IntPtr* mem_objects, cl_mem_migration_flags_ext flags, uint num_events_in_wait_list, IntPtr* event_wait_list, IntPtr* new_event)
         {
             if (clEnqueueMigrateMemObjectEXT == null) throw new EntryPointNotFoundException();
             return clEnqueueMigrateMemObjectEXT(command_queue, num_mem_objects, mem_objects, flags, num_events_in_wait_list, event_wait_list, new_event);
         }
 
+        /// <summary> </summary>
+        [CLSCompliant(false)]
         public unsafe ComputeErrorCode GetGLContextInfoKHR(IntPtr* properties, ComputeGLContextInfo param_name, IntPtr param_value_size, IntPtr param_value, IntPtr* param_value_size_ret)
         {
             if (clGetGLContextInfoKHR == null) throw new EntryPointNotFoundException();
             return clGetGLContextInfoKHR(properties, param_name, param_value_size, param_value, param_value_size_ret);
         }
 
+        /// <summary> </summary>
+        [CLSCompliant(false)]
         public unsafe ComputeErrorCode IcdGetPlatformIDsKHR(uint num_entries, IntPtr* platforms, uint* num_platforms)
         {
             if (clIcdGetPlatformIDsKHR == null) throw new EntryPointNotFoundException();
             return clIcdGetPlatformIDsKHR(num_entries, platforms, num_platforms);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="platform"></param>
         public CLx(ComputePlatform platform)
         {
             if (platform.Extensions.Contains("cl_ext_migrate_memobject")) clEnqueueMigrateMemObjectEXT = (Delegates.clEnqueueMigrateMemObjectEXT)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clEnqueueMigrateMemObjectEXT"), typeof(Delegates.clEnqueueMigrateMemObjectEXT));

@@ -110,21 +110,40 @@ namespace Cloo
 
         #region IList<ComputeEventBase> Members
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public int IndexOf(ComputeEventBase item)
         {
             return events.IndexOf(item);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="item"></param>
         public void Insert(int index, ComputeEventBase item)
         {
             events.Insert(index, item);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
         public void RemoveAt(int index)
         {
             events.RemoveAt(index);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public ComputeEventBase this[int index]
         {
             get
@@ -141,36 +160,64 @@ namespace Cloo
 
         #region ICollection<ComputeEventBase> Members
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         public void Add(ComputeEventBase item)
         {
             events.Add(item);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Clear()
         {
             events.Clear();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Contains(ComputeEventBase item)
         {
             return events.Contains(item);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="arrayIndex"></param>
         public void CopyTo(ComputeEventBase[] array, int arrayIndex)
         {
             events.CopyTo(array, arrayIndex);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int Count
         {
             get { return events.Count; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsReadOnly
         {
             get { return false; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Remove(ComputeEventBase item)
         {
             return events.Remove(item);
@@ -180,6 +227,10 @@ namespace Cloo
 
         #region IEnumerable<ComputeEventBase> Members
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<ComputeEventBase> GetEnumerator()
         {
             return ((IEnumerable<ComputeEventBase>)events).GetEnumerator();

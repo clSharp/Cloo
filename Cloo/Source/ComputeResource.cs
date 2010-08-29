@@ -55,12 +55,19 @@ namespace Cloo
 
         #region Protected methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manual"></param>
         protected abstract void Dispose(bool manual);
 
         #endregion
 
         #region Private methods
 
+        /// <summary>
+        /// 
+        /// </summary>
         ~ComputeResource()
         {
             Dispose(false);

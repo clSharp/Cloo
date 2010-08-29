@@ -70,6 +70,11 @@ namespace Cloo
 
         #region Constructors
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="flags"></param>
         protected ComputeMemory(ComputeContext context, ComputeMemoryFlags flags)
         {
             this.context = context;
@@ -80,6 +85,10 @@ namespace Cloo
 
         #region Protected methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manual"></param>
         protected override void Dispose(bool manual)
         {
             if (Handle != IntPtr.Zero)

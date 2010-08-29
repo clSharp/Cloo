@@ -139,8 +139,8 @@ namespace Cloo
         /// <summary>
         /// Gets the preferred multiple of workgroup size for launch. 
         /// </summary>
-        /// <param name="device"></param>
-        /// <returns></returns>
+        /// <param name="device"> One of the <c>ComputeKernel.Program.Device</c>s. </param>
+        /// <returns> The preferred multiple of workgroup size for launch. </returns>
         /// <remarks> The returned value is a performance hint. Specifying a workgroup size that is not a multiple of the value returned by this query as the value of the local work size argument to ComputeCommandQueue.Execute will not fail to enqueue the kernel for execution unless the work-group size specified is larger than the device maximum. </remarks>
         /// <remarks> Requires OpenCL 1.1. </remarks>
         public long GetPreferredWorkGroupSizeMultiple(ComputeDevice device)
@@ -149,6 +149,21 @@ namespace Cloo
             {
                 return (long)GetInfo<ComputeKernelWorkGroupInfo, IntPtr>(
                     device, ComputeKernelWorkGroupInfo.PreferredWorkGroupSizeMultiple, CL10.GetKernelWorkGroupInfo);
+            }
+        }
+
+        /// <summary>
+        /// Gets the minimum amount of memory, in bytes, used by each work-item in the kernel.
+        /// </summary>
+        /// <param name="device"> One of the <c>ComputeKernel.Program.Device</c>s. </param>
+        /// <returns> The minimum amount of memory, in bytes, used by each work-item in the kernel. </returns>
+        /// <remarks> The returned value may include any private memory needed by an implementation to execute the kernel, including that used by the language built-ins and variable declared inside the kernel with the <c>__private</c> or <c>private</c> qualifier. </remarks>
+        public long GetPrivateMemorySize(ComputeDevice device)
+        {
+            unsafe
+            {
+                return (long)GetInfo<ComputeKernelWorkGroupInfo, ulong>(
+                    device, ComputeKernelWorkGroupInfo.PrivateMemorySize, CL10.GetKernelWorkGroupInfo);
             }
         }
 
@@ -290,6 +305,10 @@ namespace Cloo
 
         #region Protected methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manual"></param>
         protected override void Dispose(bool manual)
         {
             if (Handle != IntPtr.Zero)
