@@ -345,14 +345,14 @@
             <param name="sender"></param>
             <param name="evArgs"></param>
         </member>
-        <member name="E:Cloo.ComputeEventBase.Completed">
-            <summary>
-            Occurrs when <c>ComputeEventBase.Status</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
-            </summary>
-        </member>
         <member name="E:Cloo.ComputeEventBase.Aborted">
             <summary>
             Occurrs when the command associated with the event is abnormally terminated.
+            </summary>
+        </member>
+        <member name="E:Cloo.ComputeEventBase.Completed">
+            <summary>
+            Occurrs when <c>ComputeEventBase.Status</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEventBase.Context">

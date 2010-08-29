@@ -51,14 +51,14 @@ namespace Cloo
         #region Events
 
         /// <summary>
-        /// Occurrs when <c>ComputeEventBase.Status</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
-        /// </summary>
-        public event ComputeCommandStatusChanged Completed;
-
-        /// <summary>
         /// Occurrs when the command associated with the event is abnormally terminated.
         /// </summary>
         public event ComputeCommandStatusChanged Aborted;
+
+        /// <summary>
+        /// Occurrs when <c>ComputeEventBase.Status</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
+        /// </summary>
+        public event ComputeCommandStatusChanged Completed;
 
         #endregion
 
