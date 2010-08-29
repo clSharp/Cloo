@@ -76,7 +76,7 @@ namespace Cloo
                     HookNotifier();
 
                 Completed += new ComputeCommandStatusChanged(ComputeEvent_Fired);
-                Terminated += new ComputeCommandStatusChanged(ComputeEvent_Fired);
+                Aborted += new ComputeCommandStatusChanged(ComputeEvent_Fired);
             }
         }
 

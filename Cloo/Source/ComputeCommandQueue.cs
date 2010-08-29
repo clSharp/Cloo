@@ -109,9 +109,11 @@ namespace Cloo
         /// <summary>
         /// Enqueues a command to acquire a collection of <c>ComputeMemory</c>s that have been previously created from OpenGL objects.
         /// </summary>
-        /// <param name="memObjs"> A collection of <c>ComputeMemory</c>s that correspond to OpenGL memory objects. </param>
+        /// <typeparam name="CLMemType"> The type of <paramref name="memObjs"/>. </typeparam>
+        /// <param name="memObjs"> A collection of OpenCL memory objects that correspond to OpenGL objects. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void AcquireGLObjects(ICollection<ComputeMemory> memObjs, ICollection<ComputeEventBase> events)
+        public void AcquireGLObjects<CLMemType>(ICollection<CLMemType> memObjs, ICollection<ComputeEventBase> events)
+            where CLMemType: ComputeMemory
         {
             unsafe
             {
@@ -123,13 +125,7 @@ namespace Cloo
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
-                    error = CL10.EnqueueAcquireGLObjects(
-                        Handle,
-                        memObjHandles.Length,
-                        memObjHandlesPtr,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    error = CL10.EnqueueAcquireGLObjects(Handle, memObjHandles.Length, memObjHandlesPtr, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -165,12 +161,13 @@ namespace Cloo
         /// <summary>
         /// Enqueues a command to copy data between buffers.
         /// </summary>
+        /// <typeparam name="T"> The type of data in the buffers. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
         /// <param name="destination"> The buffer to copy to. </param>
-        /// <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
-        /// <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
+        /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
+        /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
         /// <param name="count"> The number of elements to copy. </param>
-        /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+        /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
@@ -181,16 +178,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyBuffer(
-                        Handle,
-                        source.Handle,
-                        destination.Handle,
-                        new IntPtr(sourceOffset * sizeofT),
-                        new IntPtr(destinationOffset * sizeofT),
-                        new IntPtr(count * sizeofT),
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueCopyBuffer(Handle, source.Handle, destination.Handle, new IntPtr(sourceOffset * sizeofT), new IntPtr(destinationOffset * sizeofT), new IntPtr(count * sizeofT), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -202,7 +190,7 @@ namespace Cloo
         /// <summary>
         /// Enqueues a command to copy a 2D or 3D region of elements between two buffers.
         /// </summary>
-        /// <typeparam name="T"> The type of the elements of the buffer. </typeparam>
+        /// <typeparam name="T"> The type of data in the buffers. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
         /// <param name="destination"> The buffer to copy to. </param>
         /// <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
@@ -227,20 +215,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL11.EnqueueCopyBufferRect(
-                        this.Handle,
-                        source.Handle,
-                        destination.Handle,
-                        &(sourceOffset),
-                        &(destinationOffset),
-                        &(region),
-                        new IntPtr(sourceRowPitch),
-                        new IntPtr(sourceSlicePitch),
-                        new IntPtr(destinationRowPitch),
-                        new IntPtr(destinationSlicePitch),
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL11.EnqueueCopyBufferRect(this.Handle, source.Handle, destination.Handle, &(sourceOffset), &(destinationOffset), &(region), new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -252,10 +227,11 @@ namespace Cloo
         /// <summary>
         /// Enqueues a command to copy data from buffer to <c>ComputeImage</c>.
         /// </summary>
+        /// <typeparam name="T"> The type of data in <paramref name="source"/>. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
-        /// <param name="destination"> The <c>ComputeImage</c> to copy to. </param>
-        /// <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
-        /// <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
+        /// <param name="destination"> The image to copy to. </param>
+        /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
+        /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to copy. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, long sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
@@ -268,16 +244,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyBufferToImage(
-                        Handle,
-                        source.Handle,
-                        destination.Handle,
-                        new IntPtr(sourceOffset * sizeofT),
-                        &(destinationOffset.X),
-                        &(region.X),
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueCopyBufferToImage(Handle, source.Handle, destination.Handle, new IntPtr(sourceOffset * sizeofT), &(destinationOffset.X), &(region.X), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -289,10 +256,10 @@ namespace Cloo
         /// <summary>
         /// Enqueues a command to copy data from <c>ComputeImage</c> to buffer.
         /// </summary>
-        /// <param name="source"> The <c>ComputeImage</c> to copy from. </param>
+        /// <param name="source"> The image to copy from. </param>
         /// <param name="destination"> The buffer to copy to. </param>
-        /// <param name="sourceOffset"> The <paramref name="source"/> (x, y, z) offset in pixels where reading starts. </param>
-        /// <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
+        /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
+        /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to copy. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, SysIntX3 sourceOffset, long destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
@@ -305,16 +272,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyImageToBuffer(
-                        Handle,
-                        source.Handle,
-                        destination.Handle,
-                        &(sourceOffset.X),
-                        &(region.X),
-                        new IntPtr(destinationOffset * sizeofT),
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueCopyImageToBuffer(Handle, source.Handle, destination.Handle, &(sourceOffset.X), &(region.X), new IntPtr(destinationOffset * sizeofT), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -328,8 +286,8 @@ namespace Cloo
         /// </summary>
         /// <param name="source"> The <c>ComputeImage</c> to copy from. </param>
         /// <param name="destination"> The <c>ComputeImage</c> to copy to. </param>
-        /// <param name="sourceOffset"> The <paramref name="source"/> (x, y, z) offset in pixels where reading starts. </param>
-        /// <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
+        /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
+        /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to copy. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         public void Copy(ComputeImage source, ComputeImage destination, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events)
@@ -341,16 +299,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyImage(
-                        Handle,
-                        source.Handle,
-                        destination.Handle,
-                        &(sourceOffset.X),
-                        &(destinationOffset.X),
-                        &(region.X),
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueCopyImage(Handle, source.Handle, destination.Handle, &(sourceOffset.X), &(destinationOffset.X), &(region.X), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -373,12 +322,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueTask(
-                        Handle,
-                        kernel.Handle,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueTask(Handle, kernel.Handle, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -409,16 +353,7 @@ namespace Cloo
                 fixed (IntPtr* localWorkSizePtr = Tools.ConvertArray(localWorkSize))
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueNDRangeKernel(
-                        Handle,
-                        kernel.Handle,
-                        globalWorkSize.Length,
-                        globalWorkOffsetPtr,
-                        globalWorkSizePtr,
-                        localWorkSizePtr,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueNDRangeKernel(Handle, kernel.Handle, globalWorkSize.Length, globalWorkOffsetPtr, globalWorkSizePtr, localWorkSizePtr, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -470,17 +405,7 @@ namespace Cloo
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
-                    mappedPtr = CL10.EnqueueMapBuffer(
-                        Handle,
-                        buffer.Handle,
-                        (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        flags,
-                        new IntPtr(offset * sizeofT),
-                        new IntPtr(count * sizeofT),
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null,
-                        &error);
+                    mappedPtr = CL10.EnqueueMapBuffer(Handle, buffer.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, flags, new IntPtr(offset * sizeofT), new IntPtr(count * sizeofT), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null, &error);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -497,7 +422,7 @@ namespace Cloo
         /// <param name="image"> The <c>ComputeImage</c> to map. </param>
         /// <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
         /// <param name="flags"> A list of properties for the mapping mode. </param>
-        /// <param name="offset"> The <paramref name="source"/> (x, y, z) offset in pixels where mapping starts. </param>
+        /// <param name="offset"> The <paramref name="source"/> position where reading starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to map. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
@@ -512,19 +437,7 @@ namespace Cloo
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
-                    mappedPtr = CL10.EnqueueMapImage(
-                        Handle,
-                        image.Handle,
-                        (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        flags,
-                        &(offset.X),
-                        &(region.X),
-                        null,
-                        null,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null,
-                        &error);
+                    mappedPtr = CL10.EnqueueMapImage(Handle, image.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, flags, &(offset.X), &(region.X), null, null, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null, &error);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -540,7 +453,7 @@ namespace Cloo
         /// </summary>
         /// <param name="source"> The buffer to read from. </param>
         /// <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-        /// <param name="offset"> The offset in elements where reading starts. </param>
+        /// <param name="offset"> The <paramref name="source"/> position where reading starts. </param>
         /// <param name="count"> The number of elements to read. </param>
         /// <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
@@ -555,16 +468,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueReadBuffer(
-                        Handle,
-                        source.Handle,
-                        (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        new IntPtr(offset * sizeofT),
-                        new IntPtr(count * sizeofT),
-                        destination,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueReadBuffer(Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, new IntPtr(offset * sizeofT), new IntPtr(count * sizeofT), destination, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -579,8 +483,8 @@ namespace Cloo
         /// <typeparam name="T"> The type of the elements of the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
         /// <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-        /// <param name="sourceOffset"> The <paramref name="buffer"/> offset in elements where reading starts. </param>
-        /// <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
+        /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
+        /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
         /// <param name="region"> The region of the elements to copy. </param>
         /// <param name="sourceRowPitch"> The size of the source buffer row in bytes. If set to zero then <paramref name="sourceRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
         /// <param name="sourceSlicePitch"> The size of the source buffer 2D slice in bytes. If set to zero then <paramref name="sourceSlicePitch"/> equals <c>region.Y * sizeof(T) * sourceRowPitch</c>. </param>
@@ -589,7 +493,7 @@ namespace Cloo
         /// <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> Requires OpenCL 1.1. </remarks>
-        public void Read<T>(ComputeBufferBase<T> source, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long sourceRowPitch, long sourceSlicePitch, long destinationRowPitch, long destinationSlicePitch, IntPtr destination, ICollection<ComputeEventBase> events) where T : struct
+        private void Read<T>(ComputeBufferBase<T> source, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long sourceRowPitch, long sourceSlicePitch, long destinationRowPitch, long destinationSlicePitch, IntPtr destination, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -602,21 +506,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL11.EnqueueReadBufferRect(
-                        this.Handle,
-                        source.Handle,
-                        (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        &(sourceOffset),
-                        &(destinationOffset),
-                        &(region),
-                        new IntPtr(sourceRowPitch),
-                        new IntPtr(sourceSlicePitch),
-                        new IntPtr(destinationRowPitch),
-                        new IntPtr(destinationSlicePitch),
-                        destination,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL11.EnqueueReadBufferRect(this.Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(sourceOffset), &(destinationOffset), &(region), new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), destination, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -630,7 +520,7 @@ namespace Cloo
         /// </summary>
         /// <param name="source"> The <c>ComputeImage</c> to read from. </param>
         /// <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-        /// <param name="offset"> The (x, y, z) offset in pixels where reading starts. </param>
+        /// <param name="offset"> The <paramref name="source"/> position where reading starts. </param>
         /// <param name="region"> The region (width, height, depth) in pixels to read. </param>
         /// <param name="rowPitch"> The <c>ComputeImage.RowPitch</c> or 0. </param>
         /// <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
@@ -646,18 +536,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueReadImage(
-                        Handle,
-                        source.Handle,
-                        (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        &(offset.X),
-                        &(region.X),
-                        new IntPtr(rowPitch),
-                        new IntPtr(slicePitch),
-                        destination,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueReadImage(Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(offset.X), &(region.X), new IntPtr(rowPitch), new IntPtr(slicePitch), destination, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -669,9 +548,10 @@ namespace Cloo
         /// <summary>
         /// Enqueues a command to release <c>ComputeMemory</c>s that have been created from OpenGL objects.
         /// </summary>
+        /// <typeparam name="CLMemType"> The type of <paramref name="memObjs"/>. </typeparam>
         /// <param name="memObjs"> A collection of <c>ComputeMemory</c>s that correspond to OpenGL memory objects. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
-        public void ReleaseGLObjects(ICollection<ComputeMemory> memObjs, ICollection<ComputeEventBase> events)
+        public void ReleaseGLObjects<CLMemType>(ICollection<CLMemType> memObjs, ICollection<ComputeEventBase> events) where CLMemType: ComputeMemory
         {
             unsafe
             {
@@ -682,13 +562,7 @@ namespace Cloo
                 fixed (IntPtr* memoryObjectsPtr = memObjHandles)
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueReleaseGLObjects(
-                        Handle,
-                        memObjHandles.Length,
-                        memoryObjectsPtr,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueReleaseGLObjects(Handle, memObjHandles.Length, memoryObjectsPtr, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -721,13 +595,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueUnmapMemObject(
-                        Handle,
-                        memory.Handle,
-                        mappedPtr,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueUnmapMemObject(Handle, memory.Handle, mappedPtr, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -764,12 +632,12 @@ namespace Cloo
         /// </summary>
         /// <param name="destination"> The buffer to write to. </param>
         /// <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-        /// <param name="offset"> The offset in elements where writing starts. </param>
+        /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
         /// <param name="count"> The number of elements to write. </param>
         /// <param name="source"> The data written to the buffer. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public void Write<T>(ComputeBufferBase<T> destination, bool blocking, long offset, long count, IntPtr source, ICollection<ComputeEventBase> events) where T : struct
+        public void Write<T>(ComputeBufferBase<T> destination, bool blocking, long destinationOffset, long count, IntPtr source, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -779,16 +647,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueWriteBuffer(
-                        Handle,
-                        destination.Handle,
-                        (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        new IntPtr(offset * sizeofT),
-                        new IntPtr(count * sizeofT),
-                        source,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueWriteBuffer(Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, new IntPtr(destinationOffset * sizeofT), new IntPtr(count * sizeofT), source, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -803,8 +662,8 @@ namespace Cloo
         /// <typeparam name="T"> The type of the elements of the buffer. </typeparam>
         /// <param name="destination"> The buffer to write to. </param>
         /// <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-        /// <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
-        /// <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
+        /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
+        /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
         /// <param name="region"> The region of the elements to copy. </param>
         /// <param name="destinationRowPitch"> The size of the destination buffer row in bytes. If set to zero then <paramref name="destinationRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
         /// <param name="destinationSlicePitch"> The size of the destination buffer 2D slice in bytes. If set to zero then <paramref name="destinationSlicePitch"/> equals <c>region.Y * sizeof(T) * destinationRowPitch</c>. </param>
@@ -813,7 +672,7 @@ namespace Cloo
         /// <param name="source"> The data written to the buffer. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> Requires OpenCL 1.1. </remarks>
-        public void Write<T>(ComputeBufferBase<T> destination, bool blocking, SysIntX3 destinationOffset, SysIntX3 sourceOffset, SysIntX3 region, long destinationRowPitch, long destinationSlicePitch, long sourceRowPitch, long sourceSlicePitch, IntPtr source, ICollection<ComputeEventBase> events) where T : struct
+        private void Write<T>(ComputeBufferBase<T> destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long destinationRowPitch, long destinationSlicePitch, long sourceRowPitch, long sourceSlicePitch, IntPtr source, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -826,21 +685,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL11.EnqueueWriteBufferRect(
-                        this.Handle,
-                        destination.Handle,
-                        (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        &(destinationOffset),
-                        &(sourceOffset),
-                        &(region),
-                        new IntPtr(destinationRowPitch),
-                        new IntPtr(destinationSlicePitch),
-                        new IntPtr(sourceRowPitch),
-                        new IntPtr(sourceSlicePitch),
-                        source,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL11.EnqueueWriteBufferRect(this.Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(destinationOffset), &(sourceOffset), &(region), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), source, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -870,18 +715,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueWriteImage(
-                        Handle,
-                        destination.Handle,
-                        (blocking) ? ComputeBoolean.True : ComputeBoolean.False,
-                        &(destinationOffset.X),
-                        &(region.X),
-                        new IntPtr(rowPitch),
-                        new IntPtr(slicePitch),
-                        source,
-                        eventHandles.Length,
-                        eventHandlesPtr,
-                        (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueWriteImage(Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(destinationOffset.X), &(region.X), new IntPtr(rowPitch), new IntPtr(slicePitch), source, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 

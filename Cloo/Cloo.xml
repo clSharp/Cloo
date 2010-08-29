@@ -213,14 +213,14 @@
             Occurrs when <c>ComputeEventBase.Status</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
             </summary>
         </member>
-        <member name="E:Cloo.ComputeEventBase.Terminated">
+        <member name="E:Cloo.ComputeEventBase.Aborted">
             <summary>
             Occurrs when the command associated with the event is abnormally terminated.
             </summary>
         </member>
-        <member name="P:Cloo.ComputeEventBase.Type">
+        <member name="P:Cloo.ComputeEventBase.Context">
             <summary>
-            Gets the <c>ComputeCommandType</c> associated with the event.
+            Gets the <c>ComputeContext</c> associated with the event.
             </summary>
         </member>
         <member name="P:Cloo.ComputeEventBase.FinishTime">
@@ -249,9 +249,9 @@
             Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
             </summary>
         </member>
-        <member name="P:Cloo.ComputeEventBase.Context">
+        <member name="P:Cloo.ComputeEventBase.Type">
             <summary>
-            Gets the <c>ComputeContext</c> associated with the event.
+            Gets the <c>ComputeCommandType</c> associated with the event.
             </summary>
         </member>
         <member name="T:Cloo.ComputeCommandStatusArgs">
@@ -263,7 +263,7 @@
             <summary>
             Creates a new <c>ComputeCommandStatusArgs</c> instance.
             </summary>
-            <param name="ev"> The event of the command that had its status changed. </param>
+            <param name="ev"> The event representing the command that had its status changed. </param>
             <param name="status"> The status of the command. </param>
         </member>
         <member name="M:Cloo.ComputeCommandStatusArgs.#ctor(Cloo.ComputeEventBase,System.Int32)">
@@ -275,14 +275,14 @@
         </member>
         <member name="P:Cloo.ComputeCommandStatusArgs.Event">
             <summary>
-            Gets the event of the command that had its status changed.
+            Gets the event associated with the command that had its status changed.
             </summary>
         </member>
         <member name="P:Cloo.ComputeCommandStatusArgs.Status">
             <summary>
-            Gets the execution status of the command associated with the event.
+            Gets the execution status of the command represented by the event.
             </summary>
-            <remarks> Will return a negative integer if the command was abnormally terminated. </remarks>
+            <remarks> Returns a negative integer if the command was abnormally terminated. </remarks>
         </member>
         <member name="T:Cloo.ComputeCommandQueue">
             <summary>
@@ -867,11 +867,12 @@
             <param name="device"> A <c>ComputeDevice</c> associated with the <paramref name="context"/>. It can either be one of <c>ComputeContext.Devices</c> or have the same <c>ComputeDeviceTypes</c> as the <paramref name="device"/> specified when the <paramref name="context"/> is created. </param>
             <param name="properties"> The properties for the <c>ComputeCommandQueue</c>. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.AcquireGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.AcquireGLObjects``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to acquire a collection of <c>ComputeMemory</c>s that have been previously created from OpenGL objects.
             </summary>
-            <param name="memObjs"> A collection of <c>ComputeMemory</c>s that correspond to OpenGL memory objects. </param>
+            <typeparam name="CLMemType"> The type of <paramref name="memObjs"/>. </typeparam>
+            <param name="memObjs"> A collection of OpenCL memory objects that correspond to OpenGL objects. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.AddBarrier">
@@ -889,18 +890,19 @@
             <summary>
             Enqueues a command to copy data between buffers.
             </summary>
+            <typeparam name="T"> The type of data in the buffers. </typeparam>
             <param name="source"> The buffer to copy from. </param>
             <param name="destination"> The buffer to copy to. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
             <param name="count"> The number of elements to copy. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to copy a 2D or 3D region of elements between two buffers.
             </summary>
-            <typeparam name="T"> The type of the elements of the buffer. </typeparam>
+            <typeparam name="T"> The type of data in the buffers. </typeparam>
             <param name="source"> The buffer to copy from. </param>
             <param name="destination"> The buffer to copy to. </param>
             <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
@@ -917,10 +919,11 @@
             <summary>
             Enqueues a command to copy data from buffer to <c>ComputeImage</c>.
             </summary>
+            <typeparam name="T"> The type of data in <paramref name="source"/>. </typeparam>
             <param name="source"> The buffer to copy from. </param>
-            <param name="destination"> The <c>ComputeImage</c> to copy to. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
+            <param name="destination"> The image to copy to. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
             <param name="region"> The region (width, height, depth) in pixels to copy. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         </member>
@@ -928,10 +931,10 @@
             <summary>
             Enqueues a command to copy data from <c>ComputeImage</c> to buffer.
             </summary>
-            <param name="source"> The <c>ComputeImage</c> to copy from. </param>
+            <param name="source"> The image to copy from. </param>
             <param name="destination"> The buffer to copy to. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> (x, y, z) offset in pixels where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
             <param name="region"> The region (width, height, depth) in pixels to copy. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         </member>
@@ -941,8 +944,8 @@
             </summary>
             <param name="source"> The <c>ComputeImage</c> to copy from. </param>
             <param name="destination"> The <c>ComputeImage</c> to copy to. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> (x, y, z) offset in pixels where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> (x, y, z) offset in pixels where writing starts. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
             <param name="region"> The region (width, height, depth) in pixels to copy. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         </member>
@@ -993,7 +996,7 @@
             <param name="image"> The <c>ComputeImage</c> to map. </param>
             <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
             <param name="flags"> A list of properties for the mapping mode. </param>
-            <param name="offset"> The <paramref name="source"/> (x, y, z) offset in pixels where mapping starts. </param>
+            <param name="offset"> The <paramref name="source"/> position where reading starts. </param>
             <param name="region"> The region (width, height, depth) in pixels to map. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
@@ -1004,7 +1007,7 @@
             </summary>
             <param name="source"> The buffer to read from. </param>
             <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="offset"> The offset in elements where reading starts. </param>
+            <param name="offset"> The <paramref name="source"/> position where reading starts. </param>
             <param name="count"> The number of elements to read. </param>
             <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
@@ -1017,8 +1020,8 @@
             <typeparam name="T"> The type of the elements of the buffer. </typeparam>
             <param name="source"> The buffer to read from. </param>
             <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="sourceOffset"> The <paramref name="buffer"/> offset in elements where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
             <param name="region"> The region of the elements to copy. </param>
             <param name="sourceRowPitch"> The size of the source buffer row in bytes. If set to zero then <paramref name="sourceRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
             <param name="sourceSlicePitch"> The size of the source buffer 2D slice in bytes. If set to zero then <paramref name="sourceSlicePitch"/> equals <c>region.Y * sizeof(T) * sourceRowPitch</c>. </param>
@@ -1034,7 +1037,7 @@
             </summary>
             <param name="source"> The <c>ComputeImage</c> to read from. </param>
             <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="offset"> The (x, y, z) offset in pixels where reading starts. </param>
+            <param name="offset"> The <paramref name="source"/> position where reading starts. </param>
             <param name="region"> The region (width, height, depth) in pixels to read. </param>
             <param name="rowPitch"> The <c>ComputeImage.RowPitch</c> or 0. </param>
             <param name="slicePitch"> The <c>ComputeImage.SlicePitch</c> or 0. </param>
@@ -1042,10 +1045,11 @@
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.ReleaseGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.ReleaseGLObjects``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to release <c>ComputeMemory</c>s that have been created from OpenGL objects.
             </summary>
+            <typeparam name="CLMemType"> The type of <paramref name="memObjs"/>. </typeparam>
             <param name="memObjs"> A collection of <c>ComputeMemory</c>s that correspond to OpenGL memory objects. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         </member>
@@ -1075,7 +1079,7 @@
             </summary>
             <param name="destination"> The buffer to write to. </param>
             <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="offset"> The offset in elements where writing starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
             <param name="count"> The number of elements to write. </param>
             <param name="source"> The data written to the buffer. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
@@ -1088,8 +1092,8 @@
             <typeparam name="T"> The type of the elements of the buffer. </typeparam>
             <param name="destination"> The buffer to write to. </param>
             <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> offset in elements where writing starts. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> offset in elements where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
             <param name="region"> The region of the elements to copy. </param>
             <param name="destinationRowPitch"> The size of the destination buffer row in bytes. If set to zero then <paramref name="destinationRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
             <param name="destinationSlicePitch"> The size of the destination buffer 2D slice in bytes. If set to zero then <paramref name="destinationSlicePitch"/> equals <c>region.Y * sizeof(T) * destinationRowPitch</c>. </param>

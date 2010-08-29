@@ -58,17 +58,16 @@ namespace Cloo
         /// <summary>
         /// Occurrs when the command associated with the event is abnormally terminated.
         /// </summary>
-        public event ComputeCommandStatusChanged Terminated;
+        public event ComputeCommandStatusChanged Aborted;
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// Gets the <c>ComputeCommandType</c> associated with the event.
+        /// Gets the <c>ComputeContext</c> associated with the event.
         /// </summary>
-        public ComputeCommandType Type { get; protected set; }
-        [Obsolete] public ComputeCommandType CommandType { get; protected set; }
+        public ComputeContext Context { get; protected set; }
 
         /// <summary>
         /// Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command has finished execution.
@@ -84,7 +83,6 @@ namespace Cloo
                 }
             }
         }
-        [Obsolete] public long CommandFinishTime { get { return FinishTime; } }
 
         /// <summary>
         /// Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command is enqueued in the <c>ComputeCommandQueue</c> by the host.
@@ -100,7 +98,6 @@ namespace Cloo
                 }
             }
         }
-        [Obsolete] public long CommandEnqueueTime { get { return EnqueueTime; } }
 
         /// <summary>
         /// Gets the execution status of the associated command.
@@ -117,7 +114,6 @@ namespace Cloo
                 }
             }
         }
-        [Obsolete] public ComputeCommandExecutionStatus CommandExecutionStatus { get { return Status; } }
 
         /// <summary>
         /// Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command starts execution.
@@ -133,7 +129,6 @@ namespace Cloo
                 }
             }
         }
-        [Obsolete] public long CommandStartTime { get { return StartTime; } }
 
         /// <summary>
         /// Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
@@ -149,12 +144,11 @@ namespace Cloo
                 }
             }
         }
-        [Obsolete] public long CommandSubmitTime { get { return SubmitTime; } }
 
         /// <summary>
-        /// Gets the <c>ComputeContext</c> associated with the event.
+        /// Gets the <c>ComputeCommandType</c> associated with the event.
         /// </summary>
-        public ComputeContext Context { get; protected set; }
+        public ComputeCommandType Type { get; protected set; }
 
         #endregion
         
@@ -195,10 +189,10 @@ namespace Cloo
                 Completed(sender, evArgs);
         }
 
-        protected virtual void OnTerminated(object sender, ComputeCommandStatusArgs evArgs)
+        protected virtual void OnAborted(object sender, ComputeCommandStatusArgs evArgs)
         {
-            if (Terminated != null)
-                Terminated(sender, evArgs);
+            if (Aborted != null)
+                Aborted(sender, evArgs);
         }
 
         #endregion
@@ -211,10 +205,21 @@ namespace Cloo
             switch (cmdExecStatusOrErr)
             {
                 case (int)ComputeCommandExecutionStatus.Complete: OnCompleted(this, statusArgs); break;
-                default: OnTerminated(this, statusArgs); break;
+                default: OnAborted(this, statusArgs); break;
             }
         }
 
+        #endregion
+
+        #region Obsolete
+#if OBSOLETE
+        [Obsolete] public long CommandEnqueueTime { get { return EnqueueTime; } }
+        [Obsolete] public ComputeCommandExecutionStatus CommandExecutionStatus { get { return Status; } }
+        [Obsolete] public long CommandFinishTime { get { return FinishTime; } }
+        [Obsolete] public long CommandStartTime { get { return StartTime; } }
+        [Obsolete] public long CommandSubmitTime { get { return SubmitTime; } }
+        [Obsolete] public ComputeCommandType CommandType { get { return Type; } }
+#endif
         #endregion
     }
 
@@ -224,20 +229,20 @@ namespace Cloo
     public class ComputeCommandStatusArgs : EventArgs
     {
         /// <summary>
-        /// Gets the event of the command that had its status changed.
+        /// Gets the event associated with the command that had its status changed.
         /// </summary>
         public ComputeEventBase Event { get; private set; }
 
         /// <summary>
-        /// Gets the execution status of the command associated with the event.
+        /// Gets the execution status of the command represented by the event.
         /// </summary>
-        /// <remarks> Will return a negative integer if the command was abnormally terminated. </remarks>
+        /// <remarks> Returns a negative integer if the command was abnormally terminated. </remarks>
         public ComputeCommandExecutionStatus Status { get; private set; }
 
         /// <summary>
         /// Creates a new <c>ComputeCommandStatusArgs</c> instance.
         /// </summary>
-        /// <param name="ev"> The event of the command that had its status changed. </param>
+        /// <param name="ev"> The event representing the command that had its status changed. </param>
         /// <param name="status"> The status of the command. </param>
         public ComputeCommandStatusArgs(ComputeEventBase ev, ComputeCommandExecutionStatus status)
         {

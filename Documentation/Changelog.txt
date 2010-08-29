@@ -1,3 +1,44 @@
+[0.8.0] -----------------------------------------------------------------------
+Breaking changes:
+All ComputeCommandQueue methods require an ICollection<ComputeEventBase> events argument instead of ICollection<ComputeEvent>.
+ComputeEventList now implements ICollection<ComputeEventBase> instead of IList<ComputeEvent>.
+Renamed Clx to CLx.
+Modified some CL10 functions to take arrays instead of pointers.
+Modified some CL11 functions to take SysIntX3* instead of IntPtr*.
+ComputeDevice.Version returns a System.Version instead of string.
+
+New functionality:
+Types - ComputeBufferBase, ComputeSubBuffer, ComputeEventBase, ComputeUserEvent, SysIntX2, SysIntX3, ComputeCommandStatusArgs.
+ComputeCommandQueue.{CopyBuffer()|CopyBufferToImage()|CopyImage()|CopyImageToBuffer()|ReadFromBuffer()|ReadFromImage()|WriteToBuffer()|WriteToImage()} methods.
+ComputeDevice.{NativeVectorWidth*|HostUnifiedMemory|OpenCLCVersion|OpenCLCVersionString|VersionString}
+ComputeEvent(Base) properties - Context, EnqueueTime, SubmitTime, StartTime, FinishTime, Type, Status.
+                   events - Completed, Aborted.
+ComputeEventList.{Wait()|Last}
+ComputeKernel.GetPreferredWorkGroupSizeMultiple().
+Tools.ParseVersionString().
+
+Bugfixes:
+ComputeCommandQueue.ToString() returns wrongly formatted string.
+Clootils.ConfigForm accepts an empty device list.
+
+Deprecated bits:
+Most of ComputeCommandQueue.{Read()|Write()|Copy()|Map()} methods that accept a long[3] argument.
+All of long name ComputeEvent(Base).Command* properties.
+CL11.SetCommandQueueProperty().
+
+Internals:
+Common ComputeEvent and ComputeUserEvent code moved to ComputeEventBase.
+Common ComputeBuffer and ComputeSubBuffer code moved to ComputeBufferBase.
+Removed ComputeCommandQueue.SetProperty().
+Clootils tests refactored and tweaked.
+
+Documentation:
+Synced with latest additions, changes and removals.
+
+
+[0.7.4] -----------------------------------------------------------------------
+As per community request: allow usage of deprecated ComputeCommandQueue methods.
+
 [0.7.3] -----------------------------------------------------------------------
 Breaking changes:
 Renamed ComputeDevice.ComputeCommmandQueueFlags to CommandQueueFlags.

@@ -38,8 +38,7 @@ namespace Cloo
 
     public partial class ComputeCommandQueue
     {
-        #region Obsolete
-
+#if OBSOLETE
         /// <summary>
         /// Obsolete.
         /// </summary>
@@ -324,7 +323,6 @@ namespace Cloo
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
-
-        #endregion
+#endif
     }
 }

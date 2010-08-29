@@ -9,7 +9,7 @@ The following is required for Cloo to work properly:
 [Download & Install]
 You can download the most recent version of Cloo from "http://sourceforge.net/projects/cloo/". 
 The library needs no installation or changes to your system. Just be sure the its files are "visible" to the application.
-Note: Putting Cloo into the Global Assembly Cache is not recommended. The versioning schema of the library doesn't follow the Microsoft guidelines and compatibility problems might arise during updates.
+Note: Putting Cloo into the Global Assembly Cache is not recommended. The versioning schema of the library doesn't follow the Microsoft guidelines. This can cause compatibility problems when Cloo is updated.
 
 [Contact]
 You can use the forums at "http://sourceforge.net/projects/cloo/forums" to get help, report bugs or express any wishes.
