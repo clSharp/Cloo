@@ -40,7 +40,7 @@ namespace Cloo
     /// </summary>
     /// <seealso cref="ComputeEvent"/>
     /// <seealso cref="ComputeUserEvent"/>
-    public class ComputeEventBase : ComputeResource
+    public abstract class ComputeEventBase : ComputeResource
     {
         #region Fields
 

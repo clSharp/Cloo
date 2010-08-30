@@ -39,7 +39,7 @@ namespace Cloo
     /// Represents the parent type to any Cloo buffer types.
     /// </summary>
     /// <typeparam name="T"> The type of the elements of the buffer. </typeparam>
-    public class ComputeBufferBase<T> : ComputeMemory where T : struct
+    public abstract class ComputeBufferBase<T> : ComputeMemory where T : struct
     {
         #region Properties
 
