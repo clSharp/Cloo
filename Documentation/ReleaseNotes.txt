@@ -1,9 +1,9 @@
-﻿[0.8.0]
+[0.8.0]
 Cloo 0.8 is finally out! Since the initial plans three months have passed. During this time Khronos updated the OpenCL specification and, as it happens, some (actually a lot) of the new OpenCL functions do exactly what I was going to implement myself. So, a big thank you to those guys is in place.
 
 These are some of the new bits you can expect in this version:
-- Massive rewrite of the ComputeCommandQueue class. More than 40 new methods with a consistent interface for seamless and safe data transitions between .NET arrays (1, 2, and 3 dimensional) and OpenCL buffers and images were added. Most of them provide automatic argument tracking (pinning, referencing and releasing on completition) if invoked as non-blocking calls.
-- Events fitted with... well... events, which are fired on command completition or abortion.
+- Massive rewrite of the ComputeCommandQueue class. More than 40 new methods with a consistent interface for seamless and safe data transitions between .NET arrays (1, 2, and 3 dimensional) and OpenCL buffers and images were added. Most of them provide automatic argument tracking (pinning, referencing and releasing on completion) if invoked as non-blocking calls.
+- Events fitted with... well... events, which are fired on command completion or abortion.
 - OpenCL 1.1 user events (ComputeUserEvent)
 - OpenCL 1.1 sub buffers (ComputeSubBuffer)
 - OpenCL 1.1 related ComputeKernel queries (GetPreferredWorkGroupSizeMultiple, GetPrivateMemorySize)
@@ -23,6 +23,6 @@ Note that Cloo 0.8 is NOT compatible with older releases. The main cause is the 
 Some of the existing command queue methods were deprecated. Especially methods with long[3] arguments were obsoleted in favour of methods with SysIntX3 typed arguments.
 Also, aiming for a bit of practicality, some of the event properties were replaced with shortly named ones (the originals are deprecated but still there).
 
-Last but not least: Given the amount of changes in 0.8, I will continue to maintain the 0.7 branch for those of you not willing to upgrade (either because it's too complicated or you just happen to like the previous version more). Naturally, I will focus on the newer releases, so, if you want me digging in older code you'll have to tell me (see readme.txt on how to do that). On the other hand, the deprecated parts will continue to be available accross the whole 0.8.x series.
+Last but not least: Given the amount of changes in 0.8, I will continue to maintain the 0.7 branch for those of you not willing to upgrade (either because it's too complicated or you just happen to like the previous version more). Naturally, I will focus on the newer releases, so, if you want me digging in older code you'll have to tell me (see readme.txt on how to do that). On the other hand, the deprecated parts will continue to be available across the whole 0.8.x series.
 
 Happy coding!
