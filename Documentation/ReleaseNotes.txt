@@ -1,5 +1,5 @@
 ﻿[0.8.0]
-Cloo 0.8 is finally out! Since the initial plans three months have passed. During this time Khronos updated the OpenCL specification and as it happens some (actually a lot) of the new OpenCL functions do exactly what I was going to implement myself. So, a big thank you to those guys is in place.
+Cloo 0.8 is finally out! Since the initial plans three months have passed. During this time Khronos updated the OpenCL specification and, as it happens, some (actually a lot) of the new OpenCL functions do exactly what I was going to implement myself. So, a big thank you to those guys is in place.
 
 These are some of the new bits you can expect in this version:
 - Massive rewrite of the ComputeCommandQueue class. More than 40 new methods with a consistent interface for seamless and safe data transitions between .NET arrays (1, 2, and 3 dimensional) and OpenCL buffers and images were added. Most of them provide automatic argument tracking (pinning, referencing and releasing on completition) if invoked as non-blocking calls.
@@ -11,16 +11,18 @@ These are some of the new bits you can expect in this version:
 - Two new data types: SysIntX2 and SysIntX3. They are used (and can be enforced) wherever a size_t[3] is expected in the OpenCL API.
 - Added new OpenCL 1.1 test to Clootils.
 
-Speaking of testing. It wasn't possible for me to test each and every single new method. Although, I did test the core ones, bugs might have gonne unnoticed in the others. Therefore, a sane HOWTO could look like this:
+Speaking of testing. It wasn't possible for me to test each and every single new method. Although, I did test the core ones, bugs might have gone unnoticed in the others. Therefore, a sane HOWTO upgrade could look like this:
 0) Update your drivers to support OpenCL 1.1.
 1) BACK UP YOUR CODE before upgrading to Cloo 0.8 (or use source control).
 2) Upgrade.
 3) Report any problems you find.
 4) Other messages are also welcome (no penis enlargement ads, please).
 
-Note that Cloo 0.8 is NOT compatible with older releases. The main cause is the new event type which forced a change to the existing command queue methods. They now require an ICollection<ComputeEventBase> instead of an ICollection<ComputeEvent> argument (Find&Replace should help with this). A related change affected ComputeEventList, which now implements IList<ComputeEventBase> instead of IList<ComputeEvent>. Changes also affected the raw bindings (note that they aren't the primary focus of Cloo and shouldn't be used outside testing or edge cases. Their interface may change at any time without much warning).
+Note that Cloo 0.8 is NOT compatible with older releases. The main cause is the new event type which forced a change to the existing command queue methods. They now require an ICollection<ComputeEventBase> instead of an ICollection<ComputeEvent> argument (Find&Replace should be enough for this). A related change affected ComputeEventList, which now implements IList<ComputeEventBase> instead of IList<ComputeEvent>. Changes also affected the raw bindings (note that they aren't the primary focus of Cloo and shouldn't be used outside testing or edge cases. Their interface may change at any time without much warning).
 
 Some of the existing command queue methods were deprecated. Especially methods with long[3] arguments were obsoleted in favour of methods with SysIntX3 typed arguments.
-Also, favouring a bit of practicality, some of the event properties were replaced with shortly named ones (the originals are deprecated but still there).
+Also, aiming for a bit of practicality, some of the event properties were replaced with shortly named ones (the originals are deprecated but still there).
 
 Last but not least: Given the amount of changes in 0.8, I will continue to maintain the 0.7 branch for those of you not willing to upgrade (either because it's too complicated or you just happen to like the previous version more). Naturally, I will focus on the newer releases, so, if you want me digging in older code you'll have to tell me (see readme.txt on how to do that). On the other hand, the deprecated parts will continue to be available accross the whole 0.8.x series.
+
+Happy coding!
