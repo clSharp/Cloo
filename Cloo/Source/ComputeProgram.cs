@@ -64,7 +64,7 @@ namespace Cloo
         public ReadOnlyCollection<byte[]> Binaries { get { return binaries; } }
 
         /// <summary>
-        /// Gets the <c>ComputeProgram</c> build options as specified in <paramref name="options"/> argument of <c>ComputeProgram.Build</c>.
+        /// Gets the <c>ComputeProgram</c> build options as specified in <c>ComputeProgram.Build</c> <paramref name="options"/>.
         /// </summary>
         public string BuildOptions { get { return buildOptions; } }
 

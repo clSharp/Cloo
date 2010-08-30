@@ -166,9 +166,9 @@ namespace Cloo
         /// <param name="destination"> The buffer to copy to. </param>
         /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
         /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
-        /// <param name="count"> The number of elements to copy. </param>
+        /// <param name="region"> The number of elements to copy. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, long sourceOffset, long destinationOffset, long count, ICollection<ComputeEventBase> events) where T : struct
+        public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, long sourceOffset, long destinationOffset, long region, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -178,7 +178,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyBuffer(Handle, source.Handle, destination.Handle, new IntPtr(sourceOffset * sizeofT), new IntPtr(destinationOffset * sizeofT), new IntPtr(count * sizeofT), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueCopyBuffer(Handle, source.Handle, destination.Handle, new IntPtr(sourceOffset * sizeofT), new IntPtr(destinationOffset * sizeofT), new IntPtr(region * sizeofT), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -332,6 +332,11 @@ namespace Cloo
                     events.Add(new ComputeEvent(newEventHandle, this));
             }
         }
+        
+        public void Execute(ComputeKernel kernel, long driverIndex)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Enqueues a command to execute a range of <c>ComputeKernel</c>s in parallel.
@@ -390,10 +395,10 @@ namespace Cloo
         /// <param name="blocking">  The mode of operation of this call. </param>
         /// <param name="flags"> A list of properties for the mapping mode. </param>
         /// <param name="offset"> The <paramref name="source"/> offset in elements where mapping starts. </param>
-        /// <param name="count"> The number of elements to map. </param>
+        /// <param name="region"> The number of elements to map. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public IntPtr Map<T>(ComputeBufferBase<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, long offset, long count, ICollection<ComputeEventBase> events) where T : struct
+        public IntPtr Map<T>(ComputeBufferBase<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, long offset, long region, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -405,7 +410,7 @@ namespace Cloo
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
-                    mappedPtr = CL10.EnqueueMapBuffer(Handle, buffer.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, flags, new IntPtr(offset * sizeofT), new IntPtr(count * sizeofT), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null, &error);
+                    mappedPtr = CL10.EnqueueMapBuffer(Handle, buffer.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, flags, new IntPtr(offset * sizeofT), new IntPtr(region * sizeofT), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null, &error);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -454,11 +459,11 @@ namespace Cloo
         /// <param name="source"> The buffer to read from. </param>
         /// <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
         /// <param name="offset"> The <paramref name="source"/> position where reading starts. </param>
-        /// <param name="count"> The number of elements to read. </param>
+        /// <param name="region"> The number of elements to read. </param>
         /// <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public void Read<T>(ComputeBufferBase<T> source, bool blocking, long offset, long count, IntPtr destination, ICollection<ComputeEventBase> events) where T : struct
+        public void Read<T>(ComputeBufferBase<T> source, bool blocking, long offset, long region, IntPtr destination, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -468,7 +473,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueReadBuffer(Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, new IntPtr(offset * sizeofT), new IntPtr(count * sizeofT), destination, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueReadBuffer(Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, new IntPtr(offset * sizeofT), new IntPtr(region * sizeofT), destination, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -618,10 +623,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueWaitForEvents(
-                        Handle,
-                        eventHandles.Length,
-                        eventHandlesPtr);
+                    ComputeErrorCode error = CL10.EnqueueWaitForEvents(Handle, eventHandles.Length, eventHandlesPtr);
                     ComputeException.ThrowOnError(error);
                 }
             }
@@ -633,11 +635,11 @@ namespace Cloo
         /// <param name="destination"> The buffer to write to. </param>
         /// <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
         /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
-        /// <param name="count"> The number of elements to write. </param>
+        /// <param name="region"> The number of elements to write. </param>
         /// <param name="source"> The data written to the buffer. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
-        public void Write<T>(ComputeBufferBase<T> destination, bool blocking, long destinationOffset, long count, IntPtr source, ICollection<ComputeEventBase> events) where T : struct
+        public void Write<T>(ComputeBufferBase<T> destination, bool blocking, long destinationOffset, long region, IntPtr source, ICollection<ComputeEventBase> events) where T : struct
         {
             unsafe
             {
@@ -647,7 +649,7 @@ namespace Cloo
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueWriteBuffer(Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, new IntPtr(destinationOffset * sizeofT), new IntPtr(count * sizeofT), source, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueWriteBuffer(Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, new IntPtr(destinationOffset * sizeofT), new IntPtr(region * sizeofT), source, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 

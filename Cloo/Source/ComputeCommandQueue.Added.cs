@@ -40,7 +40,7 @@ namespace Cloo
         #region CopyBuffer
 
         /// <summary>
-        /// Copies data from a source buffer to a destination buffer.
+        /// Enqueues a command to copy data from a source buffer to a destination buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffers. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
@@ -52,7 +52,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a source buffer to a destination buffer.
+        /// Enqueues a command to copy data from a source buffer to a destination buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffers. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
@@ -67,7 +67,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a source buffer to a destination buffer.
+        /// Enqueues a command to copy data from a source buffer to a destination buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffers. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
@@ -82,7 +82,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a source buffer to a destination buffer.
+        /// Enqueues a command to copy data from a source buffer to a destination buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffers. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
@@ -97,7 +97,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a source buffer to a destination buffer.
+        /// Enqueues a command to copy data from a source buffer to a destination buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffers. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
@@ -114,7 +114,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a source buffer to a destination buffer.
+        /// Enqueues a command to copy data from a source buffer to a destination buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffers. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
@@ -137,7 +137,7 @@ namespace Cloo
         #region CopyBufferToImage
 
         /// <summary>
-        /// Copies data from a buffer to an image.
+        /// Enqueues a command to copy data from a buffer to an image.
         /// </summary>
         /// <typeparam name="T"> The type of data in <paramref name="source"/>. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
@@ -149,7 +149,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a buffer to an image.
+        /// Enqueues a command to copy data from a buffer to an image.
         /// </summary>
         /// <typeparam name="T"> The type of data in <paramref name="source"/>. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
@@ -164,7 +164,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a buffer to an image.
+        /// Enqueues a command to copy data from a buffer to an image.
         /// </summary>
         /// <typeparam name="T"> The type of data in <paramref name="source"/>. </typeparam>
         /// <param name="source"> The buffer to copy from. </param>
@@ -183,7 +183,7 @@ namespace Cloo
         #region CopyImage
 
         /// <summary>
-        /// Copies data from a source image to a destination image.
+        /// Enqueues a command to copy data from a source image to a destination image.
         /// </summary>
         /// <param name="source"> The image to copy from. </param>
         /// <param name="destination"> The image to copy to. </param>
@@ -194,7 +194,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a source image to a destination image.
+        /// Enqueues a command to copy data from a source image to a destination image.
         /// </summary>
         /// <param name="source"> The image to copy from. </param>
         /// <param name="destination"> The image to copy to. </param>
@@ -208,7 +208,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a source image to a destination image.
+        /// Enqueues a command to copy data from a source image to a destination image.
         /// </summary>
         /// <param name="source"> The image to copy from. </param>
         /// <param name="destination"> The image to copy to. </param>
@@ -222,7 +222,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a source image to a destination image.
+        /// Enqueues a command to copy data from a source image to a destination image.
         /// </summary>
         /// <param name="source"> The image to copy from. </param>
         /// <param name="destination"> The image to copy to. </param>
@@ -236,7 +236,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a source image to a destination image.
+        /// Enqueues a command to copy data from a source image to a destination image.
         /// </summary>
         /// <param name="source"> The image to copy from. </param>
         /// <param name="destination"> The image to copy to. </param>
@@ -254,7 +254,7 @@ namespace Cloo
         #region CopyImageToBuffer
 
         /// <summary>
-        /// Copies data from an image to a buffer.
+        /// Enqueues a command to copy data from an image to a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in <paramref name="destination"/>. </typeparam>
         /// <param name="source"> The image to copy from. </param>
@@ -266,7 +266,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from an image to a buffer.
+        /// Enqueues a command to copy data from an image to a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in <paramref name="destination"/>. </typeparam>
         /// <param name="source"> The image to copy from. </param>
@@ -281,7 +281,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Copies data from a 3D image to a buffer.
+        /// Enqueues a command to copy data from a 3D image to a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in <paramref name="destination"/>. </typeparam>
         /// <param name="source"> The image to copy from. </param>
@@ -300,7 +300,7 @@ namespace Cloo
         #region ReadFromBuffer
 
         /// <summary>
-        /// Reads data from a buffer.
+        /// Enqueues a command to read data from a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
@@ -313,7 +313,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Reads data from a buffer.
+        /// Enqueues a command to read data from a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
@@ -344,7 +344,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Reads data from a buffer.
+        /// Enqueues a command to read data from a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
@@ -360,7 +360,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Reads data from a buffer.
+        /// Enqueues a command to read data from a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
@@ -376,7 +376,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Reads data from a buffer.
+        /// Enqueues a command to read data from a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
@@ -408,7 +408,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Reads data from a buffer.
+        /// Enqueues a command to read data from a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
@@ -446,7 +446,7 @@ namespace Cloo
         #region ReadFromImage
 
         /// <summary>
-        /// Reads data from an image.
+        /// Enqueues a command to read data from an image.
         /// </summary>
         /// <param name="source"> The image to read from. </param>
         /// <param name="destination"> A valid pointer to a preallocated memory area to write to. </param>
@@ -458,7 +458,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Reads data from an image.
+        /// Enqueues a command to read data from an image.
         /// </summary>
         /// <param name="source"> The image to read from. </param>
         /// <param name="destination"> A valid pointer to a preallocated memory area to write to. </param>
@@ -472,7 +472,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Reads data from an image.
+        /// Enqueues a command to read data from an image.
         /// </summary>
         /// <param name="source"> The image to read from. </param>
         /// <param name="destination"> A valid pointer to a preallocated memory area to write to. </param>
@@ -486,7 +486,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Reads data from an image.
+        /// Enqueues a command to read data from an image.
         /// </summary>
         /// <param name="source"> The image to read from. </param>
         /// <param name="destination"> A valid pointer to a preallocated memory area to write to. </param>
@@ -501,7 +501,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Reads data from an image.
+        /// Enqueues a command to read data from an image.
         /// </summary>
         /// <param name="source"> The image to read from. </param>
         /// <param name="destination"> A valid pointer to a preallocated memory area to write to. </param>
@@ -521,7 +521,7 @@ namespace Cloo
         #region WriteToBuffer
 
         /// <summary>
-        /// Writes data to a buffer.
+        /// Enqueues a command to write data to a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The array to read from. </param>
@@ -534,7 +534,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Writes data to a buffer.
+        /// Enqueues a command to write data to a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The array to read from. </param>
@@ -565,7 +565,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Writes data to a buffer.
+        /// Enqueues a command to write data to a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The array to read from. </param>
@@ -581,7 +581,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Writes data to a buffer.
+        /// Enqueues a command to write data to a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The array to read from. </param>
@@ -597,7 +597,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Writes data to a buffer.
+        /// Enqueues a command to write data to a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The array to read from. </param>
@@ -629,7 +629,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Writes data to a buffer.
+        /// Enqueues a command to write data to a buffer.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The array to read from. </param>
@@ -667,7 +667,7 @@ namespace Cloo
         #region WriteToImage
 
         /// <summary>
-        /// Writes data to an image.
+        /// Enqueues a command to write data to an image.
         /// </summary>
         /// <param name="source"> A pointer to a memory area to read from. </param>
         /// <param name="destination"> The image to write to. </param>
@@ -679,7 +679,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Writes data to an image.
+        /// Enqueues a command to write data to an image.
         /// </summary>
         /// <param name="source"> A pointer to a memory area to read from. </param>
         /// <param name="destination"> The image to write to. </param>
@@ -693,7 +693,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Writes data to an image.
+        /// Enqueues a command to write data to an image.
         /// </summary>
         /// <param name="source"> A pointer to a memory area to read from. </param>
         /// <param name="destination"> The image to write to. </param>
@@ -707,7 +707,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Writes data to an image.
+        /// Enqueues a command to write data to an image.
         /// </summary>
         /// <param name="source"> A pointer to a memory area to read from. </param>
         /// <param name="destination"> The image to write to. </param>
@@ -722,7 +722,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Writes data to an image.
+        /// Enqueues a command to write data to an image.
         /// </summary>
         /// <param name="source"> A pointer to a memory area to read from. </param>
         /// <param name="destination"> The image to write to. </param>

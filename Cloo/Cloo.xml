@@ -576,7 +576,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyBuffer``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a source buffer to a destination buffer.
+            Enqueues a command to copy data from a source buffer to a destination buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffers. </typeparam>
             <param name="source"> The buffer to copy from. </param>
@@ -585,7 +585,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyBuffer``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a source buffer to a destination buffer.
+            Enqueues a command to copy data from a source buffer to a destination buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffers. </typeparam>
             <param name="source"> The buffer to copy from. </param>
@@ -597,7 +597,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyBuffer``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a source buffer to a destination buffer.
+            Enqueues a command to copy data from a source buffer to a destination buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffers. </typeparam>
             <param name="source"> The buffer to copy from. </param>
@@ -609,7 +609,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyBuffer``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a source buffer to a destination buffer.
+            Enqueues a command to copy data from a source buffer to a destination buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffers. </typeparam>
             <param name="source"> The buffer to copy from. </param>
@@ -621,7 +621,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyBuffer``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a source buffer to a destination buffer.
+            Enqueues a command to copy data from a source buffer to a destination buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffers. </typeparam>
             <param name="source"> The buffer to copy from. </param>
@@ -635,7 +635,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyBuffer``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a source buffer to a destination buffer.
+            Enqueues a command to copy data from a source buffer to a destination buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffers. </typeparam>
             <param name="source"> The buffer to copy from. </param>
@@ -651,7 +651,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyBufferToImage``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a buffer to an image.
+            Enqueues a command to copy data from a buffer to an image.
             </summary>
             <typeparam name="T"> The type of data in <paramref name="source"/>. </typeparam>
             <param name="source"> The buffer to copy from. </param>
@@ -660,7 +660,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyBufferToImage``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage2D,System.Int64,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a buffer to an image.
+            Enqueues a command to copy data from a buffer to an image.
             </summary>
             <typeparam name="T"> The type of data in <paramref name="source"/>. </typeparam>
             <param name="source"> The buffer to copy from. </param>
@@ -672,7 +672,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyBufferToImage``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage3D,System.Int64,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a buffer to an image.
+            Enqueues a command to copy data from a buffer to an image.
             </summary>
             <typeparam name="T"> The type of data in <paramref name="source"/>. </typeparam>
             <param name="source"> The buffer to copy from. </param>
@@ -684,7 +684,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyImage(Cloo.ComputeImage,Cloo.ComputeImage,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a source image to a destination image.
+            Enqueues a command to copy data from a source image to a destination image.
             </summary>
             <param name="source"> The image to copy from. </param>
             <param name="destination"> The image to copy to. </param>
@@ -692,7 +692,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyImage(Cloo.ComputeImage2D,Cloo.ComputeImage2D,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a source image to a destination image.
+            Enqueues a command to copy data from a source image to a destination image.
             </summary>
             <param name="source"> The image to copy from. </param>
             <param name="destination"> The image to copy to. </param>
@@ -703,7 +703,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyImage(Cloo.ComputeImage2D,Cloo.ComputeImage3D,Cloo.SysIntX2,Cloo.SysIntX3,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a source image to a destination image.
+            Enqueues a command to copy data from a source image to a destination image.
             </summary>
             <param name="source"> The image to copy from. </param>
             <param name="destination"> The image to copy to. </param>
@@ -714,7 +714,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyImage(Cloo.ComputeImage3D,Cloo.ComputeImage2D,Cloo.SysIntX3,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a source image to a destination image.
+            Enqueues a command to copy data from a source image to a destination image.
             </summary>
             <param name="source"> The image to copy from. </param>
             <param name="destination"> The image to copy to. </param>
@@ -725,7 +725,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyImage(Cloo.ComputeImage3D,Cloo.ComputeImage3D,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a source image to a destination image.
+            Enqueues a command to copy data from a source image to a destination image.
             </summary>
             <param name="source"> The image to copy from. </param>
             <param name="destination"> The image to copy to. </param>
@@ -736,7 +736,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyImageToBuffer``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from an image to a buffer.
+            Enqueues a command to copy data from an image to a buffer.
             </summary>
             <typeparam name="T"> The type of data in <paramref name="destination"/>. </typeparam>
             <param name="source"> The image to copy from. </param>
@@ -745,7 +745,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyImageToBuffer``1(Cloo.ComputeImage2D,Cloo.ComputeBufferBase{``0},Cloo.SysIntX2,System.Int64,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from an image to a buffer.
+            Enqueues a command to copy data from an image to a buffer.
             </summary>
             <typeparam name="T"> The type of data in <paramref name="destination"/>. </typeparam>
             <param name="source"> The image to copy from. </param>
@@ -757,7 +757,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.CopyImageToBuffer``1(Cloo.ComputeImage3D,Cloo.ComputeBufferBase{``0},Cloo.SysIntX3,System.Int64,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Copies data from a 3D image to a buffer.
+            Enqueues a command to copy data from a 3D image to a buffer.
             </summary>
             <typeparam name="T"> The type of data in <paramref name="destination"/>. </typeparam>
             <param name="source"> The image to copy from. </param>
@@ -769,7 +769,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[]@,System.Boolean,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Reads data from a buffer.
+            Enqueues a command to read data from a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The buffer to read from. </param>
@@ -779,7 +779,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[]@,System.Boolean,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Reads data from a buffer.
+            Enqueues a command to read data from a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The buffer to read from. </param>
@@ -792,7 +792,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:]@,System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Reads data from a buffer.
+            Enqueues a command to read data from a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The buffer to read from. </param>
@@ -805,7 +805,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:,0:]@,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Reads data from a buffer.
+            Enqueues a command to read data from a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The buffer to read from. </param>
@@ -818,7 +818,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:]@,System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Reads data from a buffer.
+            Enqueues a command to read data from a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The buffer to read from. </param>
@@ -833,7 +833,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:,0:]@,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Reads data from a buffer.
+            Enqueues a command to read data from a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The buffer to read from. </param>
@@ -850,7 +850,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReadFromImage(Cloo.ComputeImage,System.IntPtr,System.Boolean,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Reads data from an image.
+            Enqueues a command to read data from an image.
             </summary>
             <param name="source"> The image to read from. </param>
             <param name="destination"> A valid pointer to a preallocated memory area to write to. </param>
@@ -859,7 +859,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReadFromImage(Cloo.ComputeImage2D,System.IntPtr,System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Reads data from an image.
+            Enqueues a command to read data from an image.
             </summary>
             <param name="source"> The image to read from. </param>
             <param name="destination"> A valid pointer to a preallocated memory area to write to. </param>
@@ -870,7 +870,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReadFromImage(Cloo.ComputeImage3D,System.IntPtr,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Reads data from an image.
+            Enqueues a command to read data from an image.
             </summary>
             <param name="source"> The image to read from. </param>
             <param name="destination"> A valid pointer to a preallocated memory area to write to. </param>
@@ -881,7 +881,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReadFromImage(Cloo.ComputeImage2D,System.IntPtr,System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Reads data from an image.
+            Enqueues a command to read data from an image.
             </summary>
             <param name="source"> The image to read from. </param>
             <param name="destination"> A valid pointer to a preallocated memory area to write to. </param>
@@ -893,7 +893,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReadFromImage(Cloo.ComputeImage3D,System.IntPtr,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Reads data from an image.
+            Enqueues a command to read data from an image.
             </summary>
             <param name="source"> The image to read from. </param>
             <param name="destination"> A valid pointer to a preallocated memory area to write to. </param>
@@ -906,7 +906,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[],Cloo.ComputeBufferBase{``0},System.Boolean,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Writes data to a buffer.
+            Enqueues a command to write data to a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The array to read from. </param>
@@ -916,7 +916,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[],Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Writes data to a buffer.
+            Enqueues a command to write data to a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The array to read from. </param>
@@ -929,7 +929,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Writes data to a buffer.
+            Enqueues a command to write data to a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The array to read from. </param>
@@ -942,7 +942,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Writes data to a buffer.
+            Enqueues a command to write data to a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The array to read from. </param>
@@ -955,7 +955,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Writes data to a buffer.
+            Enqueues a command to write data to a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The array to read from. </param>
@@ -970,7 +970,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Writes data to a buffer.
+            Enqueues a command to write data to a buffer.
             </summary>
             <typeparam name="T"> The type of data in the buffer. </typeparam>
             <param name="source"> The array to read from. </param>
@@ -987,7 +987,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.WriteToImage(System.IntPtr,Cloo.ComputeImage,System.Boolean,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Writes data to an image.
+            Enqueues a command to write data to an image.
             </summary>
             <param name="source"> A pointer to a memory area to read from. </param>
             <param name="destination"> The image to write to. </param>
@@ -996,7 +996,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.WriteToImage(System.IntPtr,Cloo.ComputeImage2D,System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Writes data to an image.
+            Enqueues a command to write data to an image.
             </summary>
             <param name="source"> A pointer to a memory area to read from. </param>
             <param name="destination"> The image to write to. </param>
@@ -1007,7 +1007,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.WriteToImage(System.IntPtr,Cloo.ComputeImage3D,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Writes data to an image.
+            Enqueues a command to write data to an image.
             </summary>
             <param name="source"> A pointer to a memory area to read from. </param>
             <param name="destination"> The image to write to. </param>
@@ -1018,7 +1018,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.WriteToImage(System.IntPtr,Cloo.ComputeImage2D,System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Writes data to an image.
+            Enqueues a command to write data to an image.
             </summary>
             <param name="source"> A pointer to a memory area to read from. </param>
             <param name="destination"> The image to write to. </param>
@@ -1030,7 +1030,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.WriteToImage(System.IntPtr,Cloo.ComputeImage3D,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
-            Writes data to an image.
+            Enqueues a command to write data to an image.
             </summary>
             <param name="source"> A pointer to a memory area to read from. </param>
             <param name="destination"> The image to write to. </param>
@@ -1077,7 +1077,7 @@
             <param name="destination"> The buffer to copy to. </param>
             <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
             <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
-            <param name="count"> The number of elements to copy. </param>
+            <param name="region"> The number of elements to copy. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeBufferBase{``0},Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
@@ -1167,7 +1167,7 @@
             <param name="blocking">  The mode of operation of this call. </param>
             <param name="flags"> A list of properties for the mapping mode. </param>
             <param name="offset"> The <paramref name="source"/> offset in elements where mapping starts. </param>
-            <param name="count"> The number of elements to map. </param>
+            <param name="region"> The number of elements to map. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
@@ -1190,7 +1190,7 @@
             <param name="source"> The buffer to read from. </param>
             <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
             <param name="offset"> The <paramref name="source"/> position where reading starts. </param>
-            <param name="count"> The number of elements to read. </param>
+            <param name="region"> The number of elements to read. </param>
             <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
@@ -1262,7 +1262,7 @@
             <param name="destination"> The buffer to write to. </param>
             <param name="blocking"> Specify whether this a blocking or non-blocking command. </param>
             <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
-            <param name="count"> The number of elements to write. </param>
+            <param name="region"> The number of elements to write. </param>
             <param name="source"> The data written to the buffer. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <c>ComputeEvent</c> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
@@ -3782,7 +3782,7 @@
             <param name="errorInfo"> An error string. </param>
             <param name="clDataPtr"> A pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error.</param>
             <param name="clDataSize"> The size of the binary data that is returned by the OpenCL. </param>
-            <param name="userDataPtr"> The pointer to the optional user data specified in <paramref name="notifyDataPtr"/> argument of <c>ComputeContext</c> constructor. </param>
+            <param name="userDataPtr"> The pointer to the optional user data specified in <paramref name="userDataPtr"/> argument of <c>ComputeContext</c> constructor. </param>
             <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
         </member>
         <member name="T:Cloo.ComputeBuffer`1">
@@ -4062,7 +4062,7 @@
         </member>
         <member name="P:Cloo.ComputeProgram.BuildOptions">
             <summary>
-            Gets the <c>ComputeProgram</c> build options as specified in <paramref name="options"/> argument of <c>ComputeProgram.Build</c>.
+            Gets the <c>ComputeProgram</c> build options as specified in <c>ComputeProgram.Build</c> <paramref name="options"/>.
             </summary>
         </member>
         <member name="P:Cloo.ComputeProgram.Context">
