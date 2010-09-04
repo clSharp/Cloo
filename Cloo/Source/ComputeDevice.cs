@@ -84,9 +84,7 @@ namespace Cloo
         private readonly string name;
         private readonly ComputePlatform platform;
         private readonly long preferredVectorWidthChar;
-        private readonly long preferredVectorWidthDouble;
         private readonly long preferredVectorWidthFloat;
-        private readonly long preferredVectorWidthHalf;
         private readonly long preferredVectorWidthInt;
         private readonly long preferredVectorWidthLong;
         private readonly long preferredVectorWidthShort;
@@ -321,7 +319,7 @@ namespace Cloo
         /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>double</c>s or 0 if the cl_khr_fp64 format is not supported..
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
-        public long PreferredVectorWidthDouble { get { return preferredVectorWidthDouble; } }
+        public long PreferredVectorWidthDouble { get { return GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthDouble); } }
 
         /// <summary>
         /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>float</c>s.
@@ -333,7 +331,7 @@ namespace Cloo
         /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>half</c>s or 0 if the cl_khr_fp16 format is not supported..
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. Returns 0 if the cl_khr_fp16 extension is not supported. </remarks>
-        public long PreferredVectorWidthHalf { get { return preferredVectorWidthHalf; } }
+        public long PreferredVectorWidthHalf { get { return GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthHalf); } }
 
         /// <summary>
         /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>int</c>s.
@@ -529,9 +527,7 @@ namespace Cloo
                 name = GetStringInfo(ComputeDeviceInfo.Name);
                 this.platform = platform;
                 preferredVectorWidthChar = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthChar);
-                preferredVectorWidthDouble = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthDouble);
                 preferredVectorWidthFloat = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthFloat);
-                preferredVectorWidthHalf = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthHalf);
                 preferredVectorWidthInt = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthInt);
                 preferredVectorWidthLong = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthLong);
                 preferredVectorWidthShort = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthShort);

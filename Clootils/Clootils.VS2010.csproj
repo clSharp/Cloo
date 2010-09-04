@@ -56,7 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cloo\Cloo.csproj">
+    <ProjectReference Include="..\Cloo\Cloo.VS2010.csproj">
       <Project>{656E96CE-2587-4CCC-A4DB-06D36267133A}</Project>
       <Name>Cloo</Name>
     </ProjectReference>
