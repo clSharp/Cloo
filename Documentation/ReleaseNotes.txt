@@ -1,3 +1,6 @@
+[0.8.1]
+This is a maintenance release which fixes a highly critical bug on OpenCL platforms that make use of a device without cl_krh_fp16 or cl_khr_fp64 support. The bug prevented 0.8.0 from initializing in such environments. This release also gets rid of the occasional IOException in the ComputeEvent bowels. Upgrade from 0.8.0 is strongly recommended.
+
 [0.8.0]
 Cloo 0.8 is finally out! Since the initial plans three months have passed. During this time Khronos updated the OpenCL specification and, as it happens, some (actually a lot) of the new OpenCL functions do exactly what I was going to implement myself. So, a big thank you to those guys is in place.
 

@@ -1,3 +1,24 @@
+[0.8.1] -----------------------------------------------------------------------
+Breaking changes:
+None.
+
+Additions:
+None.
+
+Bugfixes:
+(Critical) Cloo not initializing on platforms without cl_khr_fp64 or cl_khr_fp16 support.
+ComputeEvent printing debug info after Console is closed.
+
+Deprecated:
+None.
+
+Internals:
+Both VS 2010 and VS 2008 solution and project files now available.
+
+Documentation:
+None.
+
+
 [0.8.0] -----------------------------------------------------------------------
 Breaking changes:
 All ComputeCommandQueue methods require an ICollection<ComputeEventBase> events argument instead of ICollection<ComputeEvent>.
