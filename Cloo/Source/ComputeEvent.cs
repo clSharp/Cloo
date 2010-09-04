@@ -88,9 +88,6 @@ namespace Cloo
         {
             if (gcHandle.IsAllocated && gcHandle.Target != null)
             {
-#if DEBUG
-                Console.WriteLine(ToString() + ": releasing GCHandle({0}).", gcHandle.AddrOfPinnedObject());
-#endif
                 gcHandle.Free();
                 array = null;
             }
@@ -99,9 +96,6 @@ namespace Cloo
         internal void Track(GCHandle handle)
         {
             gcHandle = handle;
-#if DEBUG
-            Console.WriteLine(ToString() + ": tracking GCHandle({0}).", gcHandle.AddrOfPinnedObject());
-#endif
         }
 
         internal void Track(Array array)
