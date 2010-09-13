@@ -1708,6 +1708,15 @@
             Gets or sets (protected) the width in pixels of the <c>ComputeImage</c>.
             </summary>
         </member>
+        <member name="M:Cloo.ComputeImage2D.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,System.Drawing.Bitmap)">
+            <summary>
+            Creates a new <c>ComputeImage2D</c> from a <c>Bitmap</c>.
+            </summary>
+            <param name="context"> A valid <c>ComputeContext</c> in which the <c>ComputeImage2D</c> is created. </param>
+            <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeImage2D</c>. </param>
+            <param name="bitmap"> The bitmap to use. </param>
+            <remarks> Note that only bitmaps with <c>Alpha</c>, <c>Format16bppRgb555</c>, <c>Format16bppRgb565</c> or <c>Format32bppArgb</c> pixel formats are currently supported. </remarks>
+        </member>
         <member name="M:Cloo.ComputeImage2D.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat,System.Int32,System.Int32,System.Int64,System.IntPtr)">
             <summary>
             Creates a new <c>ComputeImage2D</c>.

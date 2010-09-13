@@ -33,6 +33,8 @@ namespace Cloo
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
+    using System.Drawing.Imaging;
     using Cloo.Bindings;
 
     /// <summary>
@@ -42,6 +44,39 @@ namespace Cloo
     public class ComputeImage2D : ComputeImage
     {
         #region Constructors
+
+        /// <summary>
+        /// Creates a new <c>ComputeImage2D</c> from a <c>Bitmap</c>.
+        /// </summary>
+        /// <param name="context"> A valid <c>ComputeContext</c> in which the <c>ComputeImage2D</c> is created. </param>
+        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeImage2D</c>. </param>
+        /// <param name="bitmap"> The bitmap to use. </param>
+        /// <remarks> Note that only bitmaps with <c>Alpha</c>, <c>Format16bppRgb555</c>, <c>Format16bppRgb565</c> or <c>Format32bppArgb</c> pixel formats are currently supported. </remarks>
+        public ComputeImage2D(ComputeContext context, ComputeMemoryFlags flags, Bitmap bitmap)
+            :base(context, flags)
+        {
+            unsafe
+            {
+                ComputeImageFormat format = Tools.ConvertImageFormat(bitmap.PixelFormat);
+                BitmapData bitmapData = bitmap.LockBits(new Rectangle(new Point(), bitmap.Size), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+                
+                ComputeErrorCode error = ComputeErrorCode.Success;
+                Handle = CL10.CreateImage2D(
+                    context.Handle,
+                    flags,
+                    &format,
+                    new IntPtr(bitmap.Width),
+                    new IntPtr(bitmap.Height),
+                    new IntPtr(bitmapData.Stride),
+                    bitmapData.Scan0,
+                    &error);
+                ComputeException.ThrowOnError(error);
+                
+                bitmap.UnlockBits(bitmapData);
+
+                Init();
+            }
+        }
 
         /// <summary>
         /// Creates a new <c>ComputeImage2D</c>.
