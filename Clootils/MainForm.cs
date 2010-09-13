@@ -250,6 +250,7 @@ namespace Clootils
             KernelsTest.Run(log, context);
             VectorAddTest.Run(log, context);
             CL11Test.Run(log, context);
+            ImageTest.Run(log, context);
 
             log.Close();
 

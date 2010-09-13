@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CL11Test.cs" />
+    <Compile Include="ImageTest.cs" />
     <Compile Include="ProgramTest.cs" />
     <Compile Include="DummyTest.cs" />
     <Compile Include="KernelsTest.cs" />
