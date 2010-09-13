@@ -333,10 +333,10 @@ namespace Cloo
             }
         }
         
-        /* TODO 0.8.1: Driven execution
-         * Executes a range of kernels depending on the type and the dimensions of the selected cl_mem argument.
-         * This argument is called the driving argument and its index is the driverIndex.
-        public void Execute(ComputeKernel kernel, long driverIndex)
+        /* TODO: Driven execution
+         * Executes a range of kernels depending on the type and dimensions of one of the kernel arguments.
+         * This argument, which must be of type <c>ComputeMemory</c> is called the driving argument and its index is the drivingArgIndex.
+        public void Execute(ComputeKernel kernel, long drivingArgIndex)
         {
             throw new NotImplementedException();
         }*/

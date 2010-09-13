@@ -182,12 +182,16 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets an argument of the <c>ComputeKernel</c>.
+        /// Sets an argument of the <c>ComputeKernel</c> (no argument tracking).
         /// </summary>
         /// <param name="index"> The argument index. </param>
         /// <param name="dataSize"> The size of the argument data in bytes. </param>
         /// <param name="dataAddr"> A pointer to the data that should be used as the argument value. </param>
-        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        /// <remarks> 
+        /// Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel.
+        /// <br/>
+        /// Note that this method does not provide argument tracking. It is up to the user to reference the kernel arguments (i.e. prevent them from being garbage collected) until the kernel has finished execution.
+        /// </remarks>
         public void SetArgument(int index, IntPtr dataSize, IntPtr dataAddr)
         {
             ComputeErrorCode error = CL10.SetKernelArg(

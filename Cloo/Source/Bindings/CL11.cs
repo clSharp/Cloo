@@ -41,7 +41,7 @@ namespace Cloo.Bindings
     public class CL11 : CL10
     {
         /// <summary>
-        /// See OpenCL specification.
+        /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateSubBuffer")]
@@ -53,7 +53,7 @@ namespace Cloo.Bindings
             ComputeErrorCode* errcode_ret);
 
         /// <summary>
-        /// See OpenCL specification.
+        /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clSetMemObjectDestructorCallback")]
@@ -63,7 +63,7 @@ namespace Cloo.Bindings
             /* void * */ IntPtr user_data);
 
         /// <summary>
-        /// See OpenCL specification.
+        /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateUserEvent")]
@@ -72,7 +72,7 @@ namespace Cloo.Bindings
             ComputeErrorCode* errcode_ret);
 
         /// <summary>
-        /// See OpenCL specification.
+        /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clSetUserEventStatus")]
@@ -81,7 +81,7 @@ namespace Cloo.Bindings
             Int32 execution_status);
 
         /// <summary>
-        /// See OpenCL specification.
+        /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clSetEventCallback")]
@@ -92,7 +92,7 @@ namespace Cloo.Bindings
             /* void * */ IntPtr user_data);
 
         /// <summary>
-        /// See OpenCL specification.
+        /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueReadBufferRect")]
@@ -113,7 +113,7 @@ namespace Cloo.Bindings
             IntPtr* new_event);
 
         /// <summary>
-        /// See OpenCL specification.
+        /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueWriteBufferRect")]
@@ -134,7 +134,7 @@ namespace Cloo.Bindings
             IntPtr* new_event);
 
         /// <summary>
-        /// See OpenCL specification.
+        /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueCopyBufferRect")]
@@ -154,7 +154,7 @@ namespace Cloo.Bindings
             IntPtr* new_event);
 
         /// <summary>
-        /// See OpenCL specification.
+        /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [Obsolete("This function has been deprecated in OpenCL 1.1.")]

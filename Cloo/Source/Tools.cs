@@ -32,8 +32,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
-    using System.Globalization;
     using System.Collections.Generic;
+    using System.Drawing.Imaging;
+    using System.Globalization;
 
     /// <summary>
     /// Contains various helper methods.
@@ -41,6 +42,28 @@ namespace Cloo
     public class Tools
     {
         #region Public methods
+
+        /// <summary>
+        /// Attempts to convert a PixelFormat to a ComputeImageFormat.
+        /// </summary>
+        /// <param name="format"> The format to convert. </param>
+        /// <returns> A <c>ComputeImageFormat</c> that matches the specified argument. </returns>
+        /// <remarks> Note that only <c>Alpha</c>, <c>Format16bppRgb555</c>, <c>Format16bppRgb565</c> and <c>Format32bppArgb</c> input values are currently supported. </remarks>
+        public static ComputeImageFormat ConvertImageFormat(PixelFormat format)
+        {
+            switch(format)
+            {
+                case PixelFormat.Alpha:
+                    return new ComputeImageFormat(ComputeImageChannelOrder.A, ComputeImageChannelType.UnsignedInt8);
+                case PixelFormat.Format16bppRgb555:
+                    return new ComputeImageFormat(ComputeImageChannelOrder.Rgb, ComputeImageChannelType.UNormShort555);
+                case PixelFormat.Format16bppRgb565:
+                    return new ComputeImageFormat(ComputeImageChannelOrder.Rgb, ComputeImageChannelType.UNormShort565);
+                case PixelFormat.Format32bppArgb:
+                    return new ComputeImageFormat(ComputeImageChannelOrder.Argb, ComputeImageChannelType.UnsignedInt8);
+                default: throw new ArgumentException("PixelFormat not supported.");
+            }
+        }
 
         /// <summary>
         /// Parses an OpenCL version string.
