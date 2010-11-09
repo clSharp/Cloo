@@ -30,10 +30,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
-using System.IO;
-using Cloo;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+using Cloo;
 
 namespace Clootils
 {

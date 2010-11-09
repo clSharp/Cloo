@@ -30,27 +30,27 @@ ComputeDevice.Version returns a System.Version instead of string.
 
 New functionality:
 Types - ComputeBufferBase, ComputeSubBuffer, ComputeEventBase, ComputeUserEvent, SysIntX2, SysIntX3, ComputeCommandStatusArgs.
-ComputeCommandQueue.{CopyBuffer()|CopyBufferToImage()|CopyImage()|CopyImageToBuffer()|ReadFromBuffer()|ReadFromImage()|WriteToBuffer()|WriteToImage()} methods.
+ComputeCommandQueue.{CopyBuffer|CopyBufferToImage|CopyImage|CopyImageToBuffer|ReadFromBuffer|ReadFromImage|WriteToBuffer|WriteToImage} methods.
 ComputeDevice.{NativeVectorWidth*|HostUnifiedMemory|OpenCLCVersion|OpenCLCVersionString|VersionString}
 ComputeEvent(Base) properties - Context, EnqueueTime, SubmitTime, StartTime, FinishTime, Type, Status.
                    events - Completed, Aborted.
-ComputeEventList.{Wait()|Last}
-ComputeKernel.GetPreferredWorkGroupSizeMultiple().
-Tools.ParseVersionString().
+ComputeEventList.{Wait|Last}
+ComputeKernel.GetPreferredWorkGroupSizeMultiple.
+Tools.ParseVersionString.
 
 Bugfixes:
-ComputeCommandQueue.ToString() returns wrongly formatted string.
+ComputeCommandQueue.ToString returns wrongly formatted string.
 Clootils.ConfigForm accepts an empty device list.
 
 Deprecated bits:
-Most of ComputeCommandQueue.{Read()|Write()|Copy()|Map()} methods that accept a long[3] argument.
+Most of ComputeCommandQueue.{Read|Write|Copy|Map} methods that accept a long[3] argument.
 All of long name ComputeEvent(Base).Command* properties.
-CL11.SetCommandQueueProperty().
+CL11.SetCommandQueueProperty.
 
 Internals:
 Common ComputeEvent and ComputeUserEvent code moved to ComputeEventBase.
 Common ComputeBuffer and ComputeSubBuffer code moved to ComputeBufferBase.
-Removed ComputeCommandQueue.SetProperty().
+Removed ComputeCommandQueue.SetProperty.
 Clootils tests refactored and tweaked.
 
 Documentation:
@@ -68,15 +68,15 @@ Renamed MemoryObjectAllocationComputeException to MemoryObjectAllocationFailureC
 New functionality:
 Added OpenCL 1.1 raw bindings and enum tokens.
 Added OpenCL error code to ComputeException.Message.
-Added ComputePlatform.QueryDevices().
+Added ComputePlatform.QueryDevices.
 ComputeContextPropertyList now implements ICollection<ComputeContextProperty>.
-Added ComputeKernel.SetLocalArgument().
-Added ComputeSampler.ToString().
+Added ComputeKernel.SetLocalArgument.
+Added ComputeSampler.ToString.
 Added check to prevent modifying of read-only event collections of events passed as arguments to ComputeCommandQueue methods.
 Added extensions cl_khr_migrate_memobject and cl_khr_icd.
 
 Bugfixes:
-CL10.CreateImage3D() calls clCreateImage2D().
+CL10.CreateImage3D calls clCreateImage2D.
 Missing Cloo.xml documentation file.
 
 Deprecated bits:
@@ -84,7 +84,7 @@ Some of the ComputeCommandQueue methods are marked as deprecated and shouldn't b
  
 Internals:
 Reformatted Clootils code to match Visual Studio default formatting.
-ComputeProgram.Build() won't prevent from building the same program multiple times anymore.   
+ComputeProgram.Build won't prevent from building the same program multiple times anymore.   
 
 Documentation:
 Revised documentation for most of the public bits of the library.
@@ -119,7 +119,7 @@ New functionality:
 Added a bunch of overload methods to ComputeCommandQueue that default hidden parameters to safe values.
 Added ComputeBuffer contstructor that accepts a pointer to the data to initialize the buffer with.
 Added ComputeContext.Platform property.
-Added ComputeContextPropertyList.GetByName() method.
+Added ComputeContextPropertyList.GetByName method.
 Added ComputeMemoryFlags.None token.
 
 Bugfixes:
@@ -135,15 +135,15 @@ Documented new overloads in ComputeCommandQueue.
 
 [0.7.0] -----------------------------------------------------------------------
 Breaking changes:
-Changes affecting ComputeCommandQueue.Read()/Write() methods in order to fix a bug concerning non-blocking calls. The responsibility of allocating/freeing memory or GC Handles is now up to the application. See VectorAddTest.cs for an example of use.
+Changes affecting ComputeCommandQueue.Read/Write methods in order to fix a bug concerning non-blocking calls. The responsibility of allocating/freeing memory or GC Handles is now up to the application. See VectorAddTest.cs for an example of use.
 
 New functionality:
 Enabled public access to the raw OpenCL bindings.
 Added enum tokens for the cl_khr_icd extension.
 
 Bugfixes:
-ComputeCommandQueue.Read() returns invalid data if invoked as non-blocking.
-ComputeCommandQueue.Unmap() doesn't append the event to the list. 
+ComputeCommandQueue.Read returns invalid data if invoked as non-blocking.
+ComputeCommandQueue.Unmap doesn't append the event to the list. 
 
 Internals:
 The bindings no longer have "out" parameters. Everything converted to pointers for consistency.
@@ -157,16 +157,16 @@ Breaking changes:
 Renamed ComputeImage.PixelSize to ElementSize.
 
 New functionality:
-Track kernel arguments until kernel execution. Added new Set*Arguments() methods for this purpose.
+Track kernel arguments until kernel execution. Added new Set*Arguments methods for this purpose.
 New ComputeProgram constructor with a single source string.
 
 Bugfixes:
-ComputeCommandQueue.Wait() calls CL10.WaitForEvents().
+ComputeCommandQueue.Wait calls CL10.WaitForEvents.
 ComputeCommandQueue.Read( ComputeImage... ) allocates wrong amount of memory.
-ComputeCommandQueue..ctor() misintereprets the flags argument.
+ComputeCommandQueue..ctor misintereprets the flags argument.
 
 Internals:
-Existing ComputeKernel.Set*Arguments() will automatically track the arguments since this is the safe option. In order to block this behaviour you can use the overloads with a bool parameter.
+Existing ComputeKernel.Set*Arguments will automatically track the arguments since this is the safe option. In order to block this behaviour you can use the overloads with a bool parameter.
 
 Documentation:
 None.
@@ -179,22 +179,22 @@ Changed signature of ComputeCommandQueue.Read( ComputeImage ).
 Changed return type of ComputeCommandQueue.Read( ComputeImage... ) from IntPtr to byte[].
 
 New functionality:
-ComputeImage.ToString().
-ComputeProgram..ctor() that takes a single string as an argument.
+ComputeImage.ToString.
+ComputeProgram..ctor that takes a single string as an argument.
 
 Bugfixes:
 ComputeCommandQueue methods causing memory leaks by creating (and not releasing) unnecessary event objects.
-ComputeCommandQueue.Read() ignores "count" parameter.
-CommandQueue.Flush() calls CL10.Finish().
+ComputeCommandQueue.Read ignores "count" parameter.
+CommandQueue.Flush calls CL10.Finish.
 Clootils not working with ATI Stream on Windows.
 
 Internals:
 Added workaround to prevent a program being built multiple times. Fixes memory leak in the drivers.
 
 Documentation:
-Added or modified: ComputeBuffer.CreateFromGLBuffer(), ComputeCommandQueue.AcquireGLObjects(), ComputeCommandQueue.Execute(),
-ComputeCommandQueue.ReleaseGLObjects(), ComputeCommandQueue.Read(), ComputeCommandQueue.Unmap(), ComputeCommandQueue.Wait(),
-ComputeContext..ctor(), ComputeContextNotifier().
+Added or modified: ComputeBuffer.CreateFromGLBuffer, ComputeCommandQueue.AcquireGLObjects, ComputeCommandQueue.Execute,
+ComputeCommandQueue.ReleaseGLObjects, ComputeCommandQueue.Read, ComputeCommandQueue.Unmap, ComputeCommandQueue.Wait,
+ComputeContext..ctor, ComputeContextNotifier.
 
 	
 [0.6.0] -----------------------------------------------------------------------
@@ -213,7 +213,7 @@ Extension loading mechanism.
 Config file for out-of-the-box Linux and MacOS support.
 
 Bugfixes:
-ComputeImage2D.GetSupportedFormats() returns a list of 3D image formats.
+ComputeImage2D.GetSupportedFormats returns a list of 3D image formats.
 
 Internals:
 Replaced OpenTK DllImports and enums with a new layer of bindings. Removes dependency on OpenTK.
@@ -227,13 +227,13 @@ Added/modified missing comments around existing bits.
 Breaking changes:
 ComputeJobQueue renamed to ComputeCommandQueue. Avoids confusion for new users.
 All ComputeEvent properties that included "Job" in their names are renamed as well.
-AddBarrier(), AddMarker() and WaitFor() of ComputeCommandQueue renamed to Barrier(), Marker() and Wait() respectively.
+AddBarrier, AddMarker and WaitFor of ComputeCommandQueue renamed to Barrier, Marker and Wait respectively.
 
 New functionality:
 None.
 
 New overloads/helpers:
-GetByName() and GetByVendor() methods in ComputePlatform.
+GetByName and GetByVendor methods in ComputePlatform.
 
 Inner changes:
 Extension queries modified in order to give an empty list of tokens instead of a list containing one empty token in case no extensions are supported.
@@ -241,8 +241,8 @@ Extension queries modified in order to give an empty list of tokens instead of a
 Bugfixes:
 Enumeration of devices of an OpenCL platform.
 Fixed bug that prevented creation of ComputeContext on ATI Stream 1.0 final in 64bit OS's.
-ComputeCommandQueue.Read( ComputeBuffer... ) now reads the specified count of items and not the whole buffer.
-Crash on ComputeCommandQueue.Wait(). 
+ComputeCommandQueue.Read(ComputeBuffer...) now reads the specified count of items and not the whole buffer.
+Crash on ComputeCommandQueue.Wait. 
 
 Documentation:
 A lot of small tweaks, fixes and new lines.
