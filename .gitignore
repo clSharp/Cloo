@@ -1,8 +1,16 @@
 
-*.zip
+#Specific files
+SAQ.txt
+
+#Folders
 Documentation/html/*
 
-#ignore thumbnails created by windows
+#File types
+*.pdf
+*.zip
+
+
+#Ignore thumbnails created by windows
 Thumbs.db
 #Ignore files build by Visual Studio
 *.obj
