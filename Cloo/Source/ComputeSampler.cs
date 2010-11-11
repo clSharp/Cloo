@@ -32,6 +32,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Diagnostics;
+    using System.Threading;
     using Cloo.Bindings;
 
     /// <summary>
@@ -100,6 +102,8 @@ namespace Cloo
                 this.filtering = filtering;
                 this.normalizedCoords = normalizedCoords;
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion
@@ -125,9 +129,9 @@ namespace Cloo
         /// <param name="manual"></param>
         protected override void Dispose(bool manual)
         {
-            // free native resources
             if (Handle != IntPtr.Zero)
             {
+                Trace.Write("Disposing " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseSampler(Handle);
                 Handle = IntPtr.Zero;
             }

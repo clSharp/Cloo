@@ -32,7 +32,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.Threading;
     using Cloo.Bindings;
 
     /// <summary>
@@ -75,6 +77,8 @@ namespace Cloo
                 Size = (long)GetInfo<ComputeMemoryInfo, IntPtr>(ComputeMemoryInfo.Size, CL10.GetMemObjectInfo);
                 Count = Size / Marshal.SizeOf(typeof(T));
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion

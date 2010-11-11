@@ -32,6 +32,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Diagnostics;
+    using System.Threading;
     using Cloo.Bindings;
 
     /// <summary>
@@ -93,6 +95,7 @@ namespace Cloo
         {
             if (Handle != IntPtr.Zero)
             {
+                Trace.Write("Disposing " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseMemObject(Handle);
                 Handle = IntPtr.Zero;
             }

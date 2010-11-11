@@ -33,7 +33,6 @@ namespace Cloo
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using Cloo.Bindings;
 
     /// <summary>

@@ -34,7 +34,8 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Runtime.InteropServices;
+    using System.Diagnostics;
+    using System.Threading;
     using Cloo.Bindings;
 
     /// <summary>
@@ -115,6 +116,8 @@ namespace Cloo
                 this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
                 this.devices = GetDevices();
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         /// <summary>
@@ -140,6 +143,8 @@ namespace Cloo
                 this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
                 this.devices = GetDevices();
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion
@@ -173,6 +178,7 @@ namespace Cloo
             // free native resources
             if (Handle != IntPtr.Zero)
             {
+                Trace.Write("Disposing " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseContext(Handle);
                 Handle = IntPtr.Zero;
             }

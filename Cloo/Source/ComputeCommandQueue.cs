@@ -33,7 +33,9 @@ namespace Cloo
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.Threading;
     using Cloo.Bindings;
 
     /// <summary>
@@ -100,6 +102,8 @@ namespace Cloo
 
                 events = new List<ComputeEvent>();
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion
@@ -747,6 +751,7 @@ namespace Cloo
             // free native resources
             if (Handle != IntPtr.Zero)
             {
+                Trace.Write("Disposing " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseCommandQueue(Handle);
                 Handle = IntPtr.Zero;
             }

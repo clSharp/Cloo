@@ -34,7 +34,9 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.Threading;
     using Cloo.Bindings;
 
     /// <summary>
@@ -111,6 +113,8 @@ namespace Cloo
                 this.devices = context.Devices;
                 this.source = new ReadOnlyCollection<string>(new string[] { source });
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         /// <summary>
@@ -141,6 +145,8 @@ namespace Cloo
                 this.devices = context.Devices;
                 this.source = new ReadOnlyCollection<string>(source);
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         /// <summary>
@@ -203,6 +209,8 @@ namespace Cloo
                 this.devices = new ReadOnlyCollection<ComputeDevice>(
                     (devices != null) ? devices : context.Devices);
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion
@@ -334,6 +342,7 @@ namespace Cloo
         {
             if (Handle != IntPtr.Zero)
             {
+                Trace.Write("Disposing " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseProgram(Handle);
                 Handle = IntPtr.Zero;
             }

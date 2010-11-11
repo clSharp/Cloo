@@ -32,8 +32,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
-    using System.Diagnostics;
-    using System.Reflection;
 
     /// <summary>
     /// Represents an error state that occurred while executing an OpenCL API call.

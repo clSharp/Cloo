@@ -33,7 +33,9 @@ namespace Cloo
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.Threading;
     using Cloo.Bindings;
 
     /// <summary>
@@ -84,6 +86,8 @@ namespace Cloo
                 this.program = program;
                 tracker = new Dictionary<int, ComputeResource>();
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         internal ComputeKernel(string functionName, ComputeProgram program)
@@ -101,6 +105,8 @@ namespace Cloo
                 this.program = program;
                 tracker = new Dictionary<int, ComputeResource>();
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion
@@ -317,6 +323,7 @@ namespace Cloo
         {
             if (Handle != IntPtr.Zero)
             {
+                Trace.Write("Disposing " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseKernel(Handle);
                 Handle = IntPtr.Zero;
             }

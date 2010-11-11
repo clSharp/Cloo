@@ -32,7 +32,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.Threading;
     using Cloo.Bindings;
 
     /// <summary>
@@ -78,6 +80,8 @@ namespace Cloo
                 Completed += new ComputeCommandStatusChanged(ComputeEvent_Fired);
                 Aborted += new ComputeCommandStatusChanged(ComputeEvent_Fired);
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion

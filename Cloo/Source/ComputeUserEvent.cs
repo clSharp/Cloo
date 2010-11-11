@@ -31,8 +31,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Cloo
 {
-    using System;
-    using System.Runtime.InteropServices;
+    using System.Diagnostics;
+    using System.Threading;
     using Cloo.Bindings;
 
     /// <summary>
@@ -61,6 +61,8 @@ namespace Cloo
 
                 HookNotifier();
             }
+
+            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion
