@@ -3,7 +3,8 @@
 SAQ.txt
 
 #Folders
-Documentation/html/*
+Documentation/Reference/*
+Documentation/Tutorials/*
 
 #File types
 *.pdf
