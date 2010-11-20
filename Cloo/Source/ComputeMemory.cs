@@ -88,14 +88,14 @@ namespace Cloo
         #region Protected methods
 
         /// <summary>
-        /// 
+        /// Releases the associated OpenCL object.
         /// </summary>
         /// <param name="manual"></param>
         protected override void Dispose(bool manual)
         {
             if (Handle != IntPtr.Zero)
             {
-                Trace.Write("Disposing " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseMemObject(Handle);
                 Handle = IntPtr.Zero;
             }

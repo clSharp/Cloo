@@ -56,7 +56,7 @@ namespace Cloo
         #region Protected methods
 
         /// <summary>
-        /// 
+        /// Releases the associated OpenCL object.
         /// </summary>
         /// <param name="manual"></param>
         protected abstract void Dispose(bool manual);

@@ -169,14 +169,14 @@ namespace Cloo
         #region Protected methods
 
         /// <summary>
-        /// 
+        /// Releases the associated OpenCL object.
         /// </summary>
         /// <param name="manual"></param>
         protected override void Dispose(bool manual)
         {
             if (Handle != IntPtr.Zero)
             {
-                Trace.Write("Disposing " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseEvent(Handle);
                 Handle = IntPtr.Zero;
             }
@@ -199,6 +199,7 @@ namespace Cloo
         /// <param name="evArgs"></param>
         protected virtual void OnCompleted(object sender, ComputeCommandStatusArgs evArgs)
         {
+            Trace.WriteLine("Completed " + Type + " operation of " + this + ".");
             if (Completed != null)
                 Completed(sender, evArgs);
         }
@@ -210,6 +211,7 @@ namespace Cloo
         /// <param name="evArgs"></param>
         protected virtual void OnAborted(object sender, ComputeCommandStatusArgs evArgs)
         {
+            Trace.WriteLine("Aborted " + Type + " operation of " + this + ".");
             if (Aborted != null)
                 Aborted(sender, evArgs);
         }

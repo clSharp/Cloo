@@ -32,7 +32,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
     /// <summary>

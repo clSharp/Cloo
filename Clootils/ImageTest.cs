@@ -48,8 +48,7 @@ namespace Clootils
                 log.Write("Creating command queue... ");
                 ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
                 log.WriteLine("done.");
-
-
+                
                 int width = 16;
                 int height = 16;
 

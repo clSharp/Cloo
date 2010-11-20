@@ -171,7 +171,7 @@
         </member>
         <member name="M:Cloo.ComputeResource.Dispose(System.Boolean)">
             <summary>
-            
+            Releases the associated OpenCL object.
             </summary>
             <param name="manual"></param>
         </member>
@@ -188,7 +188,7 @@
         </member>
         <member name="M:Cloo.ComputeEventBase.Dispose(System.Boolean)">
             <summary>
-            
+            Releases the associated OpenCL object.
             </summary>
             <param name="manual"></param>
         </member>
@@ -317,7 +317,7 @@
         </member>
         <member name="M:Cloo.ComputeEvent.Dispose(System.Boolean)">
             <summary>
-            
+            Releases the associated OpenCL object.
             </summary>
             <param name="manual"></param>
         </member>
@@ -357,7 +357,7 @@
         </member>
         <member name="M:Cloo.ComputeMemory.Dispose(System.Boolean)">
             <summary>
-            
+            Releases the associated OpenCL object.
             </summary>
             <param name="manual"></param>
         </member>
@@ -1266,7 +1266,7 @@
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Dispose(System.Boolean)">
             <summary>
-            
+            Releases the associated OpenCL object.
             </summary>
             <param name="manual"></param>
         </member>
@@ -1497,7 +1497,7 @@
         </member>
         <member name="M:Cloo.ComputeContext.Dispose(System.Boolean)">
             <summary>
-            
+            Releases the associated OpenCL object.
             </summary>
             <param name="manual"></param>
         </member>
@@ -1760,7 +1760,7 @@
         </member>
         <member name="M:Cloo.ComputeKernel.Dispose(System.Boolean)">
             <summary>
-            
+            Releases the associated OpenCL object.
             </summary>
             <param name="manual"></param>
         </member>
@@ -2492,7 +2492,7 @@
         </member>
         <member name="M:Cloo.ComputeProgram.Dispose(System.Boolean)">
             <summary>
-            
+            Releases the associated OpenCL object.
             </summary>
             <param name="manual"></param>
         </member>
@@ -4248,7 +4248,7 @@
         </member>
         <member name="M:Cloo.ComputeSampler.Dispose(System.Boolean)">
             <summary>
-            
+            Releases the associated OpenCL object.
             </summary>
             <param name="manual"></param>
         </member>

@@ -117,7 +117,7 @@ namespace Cloo
                 this.devices = GetDevices();
             }
 
-            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Cloo
                 this.devices = GetDevices();
             }
 
-            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion
@@ -165,7 +165,7 @@ namespace Cloo
         #region Protected methods
 
         /// <summary>
-        /// 
+        /// Releases the associated OpenCL object.
         /// </summary>
         /// <param name="manual"></param>
         protected override void Dispose(bool manual)
@@ -178,7 +178,7 @@ namespace Cloo
             // free native resources
             if (Handle != IntPtr.Zero)
             {
-                Trace.Write("Disposing " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseContext(Handle);
                 Handle = IntPtr.Zero;
             }

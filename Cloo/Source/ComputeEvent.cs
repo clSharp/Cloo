@@ -81,7 +81,7 @@ namespace Cloo
                 Aborted += new ComputeCommandStatusChanged(ComputeEvent_Fired);
             }
 
-            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion
@@ -112,7 +112,7 @@ namespace Cloo
         #region Protected methods
 
         /// <summary>
-        /// 
+        /// Releases the associated OpenCL object.
         /// </summary>
         /// <param name="manual"></param>
         protected override void Dispose(bool manual)
@@ -128,9 +128,12 @@ namespace Cloo
         private void ComputeEvent_Fired(object sender, EventArgs e)
         {
             FreeTracks();
-            int eventIndex = CommandQueue.events.IndexOf(this);
-            if (eventIndex < 0) return;
-            CommandQueue.events.RemoveAt(eventIndex);
+            lock (CommandQueue.events)
+            {
+                int eventIndex = CommandQueue.events.IndexOf(this);
+                if (eventIndex < 0) return;
+                CommandQueue.events.RemoveAt(eventIndex);
+            }
         }
 
         #endregion

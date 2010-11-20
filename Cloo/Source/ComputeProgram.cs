@@ -114,7 +114,7 @@ namespace Cloo
                 this.source = new ReadOnlyCollection<string>(new string[] { source });
             }
 
-            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Cloo
                 this.source = new ReadOnlyCollection<string>(source);
             }
 
-            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace Cloo
                     (devices != null) ? devices : context.Devices);
             }
 
-            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion
@@ -335,14 +335,14 @@ namespace Cloo
         #region Protected methods
 
         /// <summary>
-        /// 
+        /// Releases the associated OpenCL object.
         /// </summary>
         /// <param name="manual"></param>
         protected override void Dispose(bool manual)
         {
             if (Handle != IntPtr.Zero)
             {
-                Trace.Write("Disposing " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseProgram(Handle);
                 Handle = IntPtr.Zero;
             }

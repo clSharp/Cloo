@@ -62,7 +62,7 @@ namespace Cloo
                 HookNotifier();
             }
 
-            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion

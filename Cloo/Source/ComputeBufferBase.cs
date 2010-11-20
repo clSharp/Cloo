@@ -78,7 +78,7 @@ namespace Cloo
                 Count = Size / Marshal.SizeOf(typeof(T));
             }
 
-            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion

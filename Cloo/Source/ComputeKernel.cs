@@ -87,7 +87,7 @@ namespace Cloo
                 tracker = new Dictionary<int, ComputeResource>();
             }
 
-            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         internal ComputeKernel(string functionName, ComputeProgram program)
@@ -106,7 +106,7 @@ namespace Cloo
                 tracker = new Dictionary<int, ComputeResource>();
             }
 
-            Trace.WriteLine("Created " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion
@@ -316,14 +316,14 @@ namespace Cloo
         #region Protected methods
 
         /// <summary>
-        /// 
+        /// Releases the associated OpenCL object.
         /// </summary>
         /// <param name="manual"></param>
         protected override void Dispose(bool manual)
         {
             if (Handle != IntPtr.Zero)
             {
-                Trace.Write("Disposing " + ToString() + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseKernel(Handle);
                 Handle = IntPtr.Zero;
             }
