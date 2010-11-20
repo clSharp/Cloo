@@ -101,6 +101,12 @@ namespace Cloo
 
         static ComputePlatform()
         {
+            lock (typeof(ComputePlatform))
+            {
+                if (platforms != null)
+                    return;
+            }
+
             unsafe
             {
                 IntPtr[] handles;
