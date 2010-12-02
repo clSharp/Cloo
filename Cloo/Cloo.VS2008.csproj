@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Source\Bindings\CL10.cs" />
@@ -46,7 +47,6 @@
     <Compile Include="Source\Bindings\CLx.cs" />
     <Compile Include="Source\ComputeBuffer.cs" />
     <Compile Include="Source\ComputeBufferBase.cs" />
-    <Compile Include="Source\BufferRegion.cs" />
     <Compile Include="Source\ComputeCommandQueue.Added.cs" />
     <Compile Include="Source\ComputeCommandQueue.Obsolete.cs" />
     <Compile Include="Source\ComputeCompiler.cs" />

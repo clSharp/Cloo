@@ -56,7 +56,7 @@ namespace Cloo
         {
             unsafe
             {
-                BufferRegion region = new BufferRegion(offset * Marshal.SizeOf(typeof(T)), count * Marshal.SizeOf(typeof(T)));
+                SysIntX2 region = new SysIntX2(offset * Marshal.SizeOf(typeof(T)), count * Marshal.SizeOf(typeof(T)));
                 ComputeErrorCode error;
                 IntPtr handle = CL11.CreateSubBuffer(Handle, flags, ComputeBufferCreateType.Region, new IntPtr(&region), &error);
                 ComputeException.ThrowOnError(error);
