@@ -2949,6 +2949,9 @@
             </summary>
             <remarks> See the Khronos OpenCL API extensions registry for documentation regarding these functions. </remarks>
         </member>
+        <member name="M:Cloo.Bindings.CLx.CreateSubDevicesEXT(System.IntPtr,Cloo.cl_device_partition_property_ext*,System.UInt32,System.IntPtr*,System.UInt32*)">
+            <summary> </summary>
+        </member>
         <member name="M:Cloo.Bindings.CLx.EnqueueMigrateMemObjectEXT(System.IntPtr,System.UInt32,System.IntPtr*,Cloo.cl_mem_migration_flags_ext,System.UInt32,System.IntPtr*,System.IntPtr*)">
             <summary> </summary>
         </member>
@@ -2956,6 +2959,12 @@
             <summary> </summary>
         </member>
         <member name="M:Cloo.Bindings.CLx.IcdGetPlatformIDsKHR(System.UInt32,System.IntPtr*,System.UInt32*)">
+            <summary> </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLx.ReleaseDeviceEXT(System.IntPtr)">
+            <summary> </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLx.RetainDeviceEXT(System.IntPtr)">
             <summary> </summary>
         </member>
         <member name="M:Cloo.Bindings.CLx.#ctor(Cloo.ComputePlatform)">
@@ -3118,6 +3127,105 @@
             
             </summary>
         </member>
+        <member name="T:Cloo.ComputeSubBuffer`1">
+            <summary>
+            Represents an OpenCL sub-buffer.
+            </summary>
+            <typeparam name="T"> The type of the elements of the <c>ComputeSubBuffer</c>. <typeparamref name="T"/> is restricted to value types and <c>struct</c>s containing such types. </typeparam>
+            <remarks> A sub-buffer is created from a standard buffer and represents all or part of its data content. <br/> Requires OpenCL 1.1. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeSubBuffer`1.#ctor(Cloo.ComputeBuffer{`0},Cloo.ComputeMemoryFlags,System.Int64,System.Int64)">
+            <summary>
+            Creates a new <c>ComputeSubBuffer</c> from a specified <c>ComputeBuffer</c>.
+            </summary>
+            <param name="buffer"> The buffer to create the <c>ComputeSubBuffer</c> from. </param>
+            <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
+            <param name="offset"> The index of the element of <paramref name="buffer"/>, where the <c>ComputeSubBuffer</c> starts. </param>
+            <param name="count"> The number of elements of <paramref name="buffer"/> to include in the <c>ComputeSubBuffer</c>. </param>
+        </member>
+        <member name="M:Cloo.ComputeSubBuffer`1.ToString">
+            <summary>
+            Gets the string representation of the <c>ComputeSubBuffer</c>.
+            </summary>
+            <returns> The string representation of the <c>ComputeSubBuffer</c>. </returns>
+        </member>
+        <member name="T:Cloo.ComputeSampler">
+            <summary>
+            Represents an OpenCL sampler.
+            </summary>
+            <remarks> An object that describes how to sample an image when the image is read in the kernel. The image read functions take a sampler as an argument. The sampler specifies the image addressing-mode i.e. how out-of-range image coordinates are handled, the filtering mode, and whether the input image coordinate is a normalized or unnormalized value. </remarks>
+            <seealso cref="T:Cloo.ComputeImage"/>
+        </member>
+        <member name="M:Cloo.ComputeSampler.#ctor(Cloo.ComputeContext,System.Boolean,Cloo.ComputeImageAddressing,Cloo.ComputeImageFiltering)">
+            <summary>
+            Creates a new <c>ComputeSampler</c>.
+            </summary>
+            <param name="context"> A <c>ComputeContext</c>. </param>
+            <param name="normalizedCoords"> The usage state of normalized coordinates when accessing a <c>ComputeImage</c> in a <c>ComputeKernel</c>. </param>
+            <param name="addressing"> The <c>ComputeImageAddressing</c> mode of the <c>ComputeSampler</c>. Specifies how out-of-range image coordinates are handled while reading. </param>
+            <param name="filtering"> The <c>ComputeImageFiltering</c> mode of the <c>ComputeSampler</c>. Specifies the type of filter that must be applied when reading data from an image. </param>
+        </member>
+        <member name="M:Cloo.ComputeSampler.ToString">
+            <summary>
+            Gets the string representation of the <c>ComputeSampler</c>.
+            </summary>
+            <returns> The string representation of the <c>ComputeSampler</c>. </returns>
+        </member>
+        <member name="M:Cloo.ComputeSampler.Dispose(System.Boolean)">
+            <summary>
+            Releases the associated OpenCL object.
+            </summary>
+            <param name="manual"></param>
+        </member>
+        <member name="P:Cloo.ComputeSampler.Context">
+            <summary>
+            Gets the <c>ComputeContext</c> of the <c>ComputeSampler</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeSampler.Addressing">
+            <summary>
+            Gets the <c>ComputeImageAddressing</c> mode of the <c>ComputeSampler</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeSampler.Filtering">
+            <summary>
+            Gets the <c>ComputeImageFiltering</c> mode of the <c>ComputeSampler</c>.
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeSampler.NormalizedCoords">
+            <summary>
+            Gets the state of usage of normalized x, y and z coordinates when accessing a <c>ComputeImage</c> in a <c>ComputeKernel</c> through the <c>ComputeSampler</c>.
+            </summary>
+        </member>
+        <member name="T:Cloo.ComputeException">
+            <summary>
+            Represents an error state that occurred while executing an OpenCL API call.
+            </summary>
+            <seealso cref="P:Cloo.ComputeException.ComputeErrorCode"/>
+        </member>
+        <member name="M:Cloo.ComputeException.#ctor(Cloo.ComputeErrorCode)">
+            <summary>
+            Creates a new <c>ComputeException</c> with a specified <c>ComputeErrorCode</c>.
+            </summary>
+            <param name="code"> A <c>ComputeErrorCode</c>. </param>
+        </member>
+        <member name="M:Cloo.ComputeException.ThrowOnError(System.Int32)">
+            <summary>
+            Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
+            </summary>
+            <param name="errorCode"> The value to be checked for an OpenCL error. </param>
+        </member>
+        <member name="M:Cloo.ComputeException.ThrowOnError(Cloo.ComputeErrorCode)">
+            <summary>
+            Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
+            </summary>
+            <param name="errorCode"> The OpenCL error code. </param>
+        </member>
+        <member name="P:Cloo.ComputeException.ComputeErrorCode">
+            <summary>
+            Gets the <c>ComputeErrorCode</c> of the <c>ComputeException</c>.
+            </summary>
+        </member>
         <member name="T:Cloo.ComputeErrorCode">
             <summary>
             The OpenCL error codes.
@@ -3274,6 +3382,15 @@
             <summary> </summary>
         </member>
         <member name="F:Cloo.ComputeErrorCode.CL_PLATFORM_NOT_FOUND_KHR">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.CL_DEVICE_PARTITION_FAILED_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.CL_INVALID_PARTITION_COUNT_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.CL_INVALID_PARTITION_NAME_EXT">
             <summary> </summary>
         </member>
         <member name="T:Cloo.OpenCLVersion">
@@ -3530,6 +3647,21 @@
             <summary> </summary>
         </member>
         <member name="F:Cloo.ComputeDeviceInfo.OpenCLCVersion">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_PARENT_DEVICE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_PARITION_TYPES_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_AFFINITY_DOMAINS_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_REFERENCE_COUNT_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_PARTITION_STYLE_EXT">
             <summary> </summary>
         </member>
         <member name="T:Cloo.ComputeDeviceSingleCapabilities">
@@ -4191,6 +4323,50 @@
         <member name="F:Cloo.ComputeGLContextInfo.CL_DEVICES_FOR_GL_CONTEXT_KHR">
             <summary> </summary>
         </member>
+        <member name="T:Cloo.cl_device_partition_property_ext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_EQUALLY_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_BY_COUNTS_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_BY_NAMES_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L1_CACHE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L2_CACHE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L3_CACHE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L4_CACHE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_NUMA_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_NEXT_FISSIONABLE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_PROPERTIES_LIST_END_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_PARTITION_BY_COUNTS_LIST_END_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_PARTITION_BY_NAMES_LIST_END_EXT">
+            <summary> </summary>
+        </member>
         <member name="T:Cloo.cl_mem_migration_flags_ext">
             <summary>
             
@@ -4201,105 +4377,6 @@
         </member>
         <member name="F:Cloo.cl_mem_migration_flags_ext.CL_MIGRATE_MEM_OBJECT_HOST_EXT">
             <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeSubBuffer`1">
-            <summary>
-            Represents an OpenCL sub-buffer.
-            </summary>
-            <typeparam name="T"> The type of the elements of the <c>ComputeSubBuffer</c>. <typeparamref name="T"/> is restricted to value types and <c>struct</c>s containing such types. </typeparam>
-            <remarks> A sub-buffer is created from a standard buffer and represents all or part of its data content. <br/> Requires OpenCL 1.1. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeSubBuffer`1.#ctor(Cloo.ComputeBuffer{`0},Cloo.ComputeMemoryFlags,System.Int64,System.Int64)">
-            <summary>
-            Creates a new <c>ComputeSubBuffer</c> from a specified <c>ComputeBuffer</c>.
-            </summary>
-            <param name="buffer"> The buffer to create the <c>ComputeSubBuffer</c> from. </param>
-            <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
-            <param name="offset"> The index of the element of <paramref name="buffer"/>, where the <c>ComputeSubBuffer</c> starts. </param>
-            <param name="count"> The number of elements of <paramref name="buffer"/> to include in the <c>ComputeSubBuffer</c>. </param>
-        </member>
-        <member name="M:Cloo.ComputeSubBuffer`1.ToString">
-            <summary>
-            Gets the string representation of the <c>ComputeSubBuffer</c>.
-            </summary>
-            <returns> The string representation of the <c>ComputeSubBuffer</c>. </returns>
-        </member>
-        <member name="T:Cloo.ComputeSampler">
-            <summary>
-            Represents an OpenCL sampler.
-            </summary>
-            <remarks> An object that describes how to sample an image when the image is read in the kernel. The image read functions take a sampler as an argument. The sampler specifies the image addressing-mode i.e. how out-of-range image coordinates are handled, the filtering mode, and whether the input image coordinate is a normalized or unnormalized value. </remarks>
-            <seealso cref="T:Cloo.ComputeImage"/>
-        </member>
-        <member name="M:Cloo.ComputeSampler.#ctor(Cloo.ComputeContext,System.Boolean,Cloo.ComputeImageAddressing,Cloo.ComputeImageFiltering)">
-            <summary>
-            Creates a new <c>ComputeSampler</c>.
-            </summary>
-            <param name="context"> A <c>ComputeContext</c>. </param>
-            <param name="normalizedCoords"> The usage state of normalized coordinates when accessing a <c>ComputeImage</c> in a <c>ComputeKernel</c>. </param>
-            <param name="addressing"> The <c>ComputeImageAddressing</c> mode of the <c>ComputeSampler</c>. Specifies how out-of-range image coordinates are handled while reading. </param>
-            <param name="filtering"> The <c>ComputeImageFiltering</c> mode of the <c>ComputeSampler</c>. Specifies the type of filter that must be applied when reading data from an image. </param>
-        </member>
-        <member name="M:Cloo.ComputeSampler.ToString">
-            <summary>
-            Gets the string representation of the <c>ComputeSampler</c>.
-            </summary>
-            <returns> The string representation of the <c>ComputeSampler</c>. </returns>
-        </member>
-        <member name="M:Cloo.ComputeSampler.Dispose(System.Boolean)">
-            <summary>
-            Releases the associated OpenCL object.
-            </summary>
-            <param name="manual"></param>
-        </member>
-        <member name="P:Cloo.ComputeSampler.Context">
-            <summary>
-            Gets the <c>ComputeContext</c> of the <c>ComputeSampler</c>.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeSampler.Addressing">
-            <summary>
-            Gets the <c>ComputeImageAddressing</c> mode of the <c>ComputeSampler</c>.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeSampler.Filtering">
-            <summary>
-            Gets the <c>ComputeImageFiltering</c> mode of the <c>ComputeSampler</c>.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeSampler.NormalizedCoords">
-            <summary>
-            Gets the state of usage of normalized x, y and z coordinates when accessing a <c>ComputeImage</c> in a <c>ComputeKernel</c> through the <c>ComputeSampler</c>.
-            </summary>
-        </member>
-        <member name="T:Cloo.ComputeException">
-            <summary>
-            Represents an error state that occurred while executing an OpenCL API call.
-            </summary>
-            <seealso cref="P:Cloo.ComputeException.ComputeErrorCode"/>
-        </member>
-        <member name="M:Cloo.ComputeException.#ctor(Cloo.ComputeErrorCode)">
-            <summary>
-            Creates a new <c>ComputeException</c> with a specified <c>ComputeErrorCode</c>.
-            </summary>
-            <param name="code"> A <c>ComputeErrorCode</c>. </param>
-        </member>
-        <member name="M:Cloo.ComputeException.ThrowOnError(System.Int32)">
-            <summary>
-            Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
-            </summary>
-            <param name="errorCode"> The value to be checked for an OpenCL error. </param>
-        </member>
-        <member name="M:Cloo.ComputeException.ThrowOnError(Cloo.ComputeErrorCode)">
-            <summary>
-            Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
-            </summary>
-            <param name="errorCode"> The OpenCL error code. </param>
-        </member>
-        <member name="P:Cloo.ComputeException.ComputeErrorCode">
-            <summary>
-            Gets the <c>ComputeErrorCode</c> of the <c>ComputeException</c>.
-            </summary>
         </member>
     </members>
 </doc>

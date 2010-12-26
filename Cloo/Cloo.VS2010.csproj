@@ -97,7 +97,7 @@
     <Compile Include="Source\SysIntX3.cs" />
     <Compile Include="Source\Tools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Source\Enums.cs" />
+    <Compile Include="Source\Bindings\Enums.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Cloo.dll.config">

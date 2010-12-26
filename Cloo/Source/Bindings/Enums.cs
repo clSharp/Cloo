@@ -140,6 +140,12 @@ namespace Cloo
         CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR = -1000,
         /// <summary> </summary>
         CL_PLATFORM_NOT_FOUND_KHR = -1001,
+        /// <summary> </summary>
+        CL_DEVICE_PARTITION_FAILED_EXT = -1057,
+        /// <summary> </summary>
+        CL_INVALID_PARTITION_COUNT_EXT = -1058,
+        /// <summary> </summary>
+        CL_INVALID_PARTITION_NAME_EXT = -1059,
     }
 
     /// <summary>
@@ -329,7 +335,17 @@ namespace Cloo
         /// <summary> </summary>
         NativeVectorWidthHalf = 0x103C,
         /// <summary> </summary>
-        OpenCLCVersion = 0x103D
+        OpenCLCVersion = 0x103D,
+        /// <summary> </summary>
+        CL_DEVICE_PARENT_DEVICE_EXT = 0x4054,
+        /// <summary> </summary>
+        CL_DEVICE_PARITION_TYPES_EXT = 0x4055,
+        /// <summary> </summary>
+        CL_DEVICE_AFFINITY_DOMAINS_EXT = 0x4056,
+        /// <summary> </summary>
+        CL_DEVICE_REFERENCE_COUNT_EXT = 0x4057,
+        /// <summary> </summary>
+        CL_DEVICE_PARTITION_STYLE_EXT = 0x4058
     }
 
     /// <summary>
@@ -890,6 +906,42 @@ namespace Cloo
         CL_CURRENT_DEVICE_FOR_GL_CONTEXT_KHR = 0x2006,
         /// <summary> </summary>
         CL_DEVICES_FOR_GL_CONTEXT_KHR = 0x2007
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [Flags]
+    public enum cl_device_partition_property_ext
+    {
+        /// <summary> </summary>
+        CL_DEVICE_PARTITION_EQUALLY_EXT = 0x4050,
+        /// <summary> </summary>
+        CL_DEVICE_PARTITION_BY_COUNTS_EXT = 0x4051,
+        /// <summary> </summary>
+        CL_DEVICE_PARTITION_BY_NAMES_EXT = 0x4052,
+        /// <summary> </summary>
+        CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN_EXT = 0x4053,
+
+        /// <summary> </summary>
+        CL_AFFINITY_DOMAIN_L1_CACHE_EXT = 0x1,
+        /// <summary> </summary>
+        CL_AFFINITY_DOMAIN_L2_CACHE_EXT = 0x2,
+        /// <summary> </summary>
+        CL_AFFINITY_DOMAIN_L3_CACHE_EXT = 0x3,
+        /// <summary> </summary>
+        CL_AFFINITY_DOMAIN_L4_CACHE_EXT = 0x4,
+        /// <summary> </summary>
+        CL_AFFINITY_DOMAIN_NUMA_EXT = 0x10,
+        /// <summary> </summary>
+        CL_AFFINITY_DOMAIN_NEXT_FISSIONABLE_EXT = 0x100,
+
+        /// <summary> </summary>
+        CL_PROPERTIES_LIST_END_EXT = 0x0,
+        /// <summary> </summary>
+        CL_PARTITION_BY_COUNTS_LIST_END_EXT = 0x0,
+        /// <summary> </summary>
+        CL_PARTITION_BY_NAMES_LIST_END_EXT = -1
     }
 
     /// <summary>

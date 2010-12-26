@@ -40,9 +40,20 @@ namespace Cloo.Bindings
     /// <remarks> See the Khronos OpenCL API extensions registry for documentation regarding these functions. </remarks>
     public class CLx
     {
+        private readonly Delegates.clCreateSubDevicesEXT clCreateSubDevicesEXT = null;
         private readonly Delegates.clEnqueueMigrateMemObjectEXT clEnqueueMigrateMemObjectEXT = null;
         private readonly Delegates.clGetGLContextInfoKHR clGetGLContextInfoKHR = null;
         private readonly Delegates.clIcdGetPlatformIDsKHR clIcdGetPlatformIDsKHR = null;
+        private readonly Delegates.clReleaseDeviceEXT clReleaseDeviceEXT = null;
+        private readonly Delegates.clRetainDeviceEXT clRetainDeviceEXT = null;
+
+        /// <summary> </summary>
+        [CLSCompliant(false)]
+        public unsafe ComputeErrorCode CreateSubDevicesEXT(IntPtr in_device, cl_device_partition_property_ext* properties, uint num_entries, IntPtr* out_devices, uint* num_devices)
+        {
+            if (clCreateSubDevicesEXT == null) throw new EntryPointNotFoundException();
+            return clCreateSubDevicesEXT(in_device, properties, num_entries, out_devices, num_devices);
+        }
 
         /// <summary> </summary>
         [CLSCompliant(false)]
@@ -68,22 +79,53 @@ namespace Cloo.Bindings
             return clIcdGetPlatformIDsKHR(num_entries, platforms, num_platforms);
         }
 
+        /// <summary> </summary>
+        [CLSCompliant(false)]
+        public unsafe ComputeErrorCode ReleaseDeviceEXT(IntPtr device)
+        {
+            if (clReleaseDeviceEXT == null) throw new EntryPointNotFoundException();
+            return clReleaseDeviceEXT(device);
+        }
+
+        /// <summary> </summary>
+        [CLSCompliant(false)]
+        public unsafe ComputeErrorCode RetainDeviceEXT(IntPtr device)
+        {
+            if (clRetainDeviceEXT == null) throw new EntryPointNotFoundException();
+            return clRetainDeviceEXT(device);
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="platform"></param>
         public CLx(ComputePlatform platform)
         {
-            if (platform.Extensions.Contains("cl_ext_migrate_memobject")) clEnqueueMigrateMemObjectEXT = (Delegates.clEnqueueMigrateMemObjectEXT)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clEnqueueMigrateMemObjectEXT"), typeof(Delegates.clEnqueueMigrateMemObjectEXT));
-            if (platform.Extensions.Contains("cl_khr_gl_sharing")) clGetGLContextInfoKHR = (Delegates.clGetGLContextInfoKHR)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clGetGLContextInfoKHR"), typeof(Delegates.clGetGLContextInfoKHR));
-            if (platform.Extensions.Contains("cl_khr_icd")) clIcdGetPlatformIDsKHR = (Delegates.clIcdGetPlatformIDsKHR)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clIcdGetPlatformIDsKHR"), typeof(Delegates.clIcdGetPlatformIDsKHR));
+            if (platform.Extensions.Contains("cl_ext_device_fission"))
+            {
+                clCreateSubDevicesEXT = (Delegates.clCreateSubDevicesEXT)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clCreateSubDevicesEXT"), typeof(Delegates.clCreateSubDevicesEXT));
+                clReleaseDeviceEXT = (Delegates.clReleaseDeviceEXT)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clReleaseDeviceEXT"), typeof(Delegates.clReleaseDeviceEXT));
+                clRetainDeviceEXT = (Delegates.clRetainDeviceEXT)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clRetainDeviceEXT"), typeof(Delegates.clRetainDeviceEXT));
+            }
+
+            if (platform.Extensions.Contains("cl_ext_migrate_memobject")) 
+                clEnqueueMigrateMemObjectEXT = (Delegates.clEnqueueMigrateMemObjectEXT)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clEnqueueMigrateMemObjectEXT"), typeof(Delegates.clEnqueueMigrateMemObjectEXT));
+            
+            if (platform.Extensions.Contains("cl_khr_gl_sharing")) 
+                clGetGLContextInfoKHR = (Delegates.clGetGLContextInfoKHR)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clGetGLContextInfoKHR"), typeof(Delegates.clGetGLContextInfoKHR));
+
+            if (platform.Extensions.Contains("cl_khr_icd"))
+                clIcdGetPlatformIDsKHR = (Delegates.clIcdGetPlatformIDsKHR)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clIcdGetPlatformIDsKHR"), typeof(Delegates.clIcdGetPlatformIDsKHR));
         }
 
         internal static class Delegates
         {
+            internal unsafe delegate ComputeErrorCode clCreateSubDevicesEXT(IntPtr in_device, cl_device_partition_property_ext * properties, uint num_entries, IntPtr* out_devices, uint* num_devices);
             internal unsafe delegate ComputeErrorCode clEnqueueMigrateMemObjectEXT(IntPtr command_queue, uint num_mem_objects, IntPtr* mem_objects, cl_mem_migration_flags_ext flags, uint num_events_in_wait_list, IntPtr* event_wait_list, IntPtr* new_event);
             internal unsafe delegate ComputeErrorCode clGetGLContextInfoKHR(IntPtr* properties, ComputeGLContextInfo param_name, IntPtr param_value_size, IntPtr param_value, IntPtr* param_value_size_ret);
             internal unsafe delegate ComputeErrorCode clIcdGetPlatformIDsKHR(uint num_entries, IntPtr* platforms, uint* num_platforms);
+            internal unsafe delegate ComputeErrorCode clReleaseDeviceEXT(IntPtr device);
+            internal unsafe delegate ComputeErrorCode clRetainDeviceEXT(IntPtr device);
         }
     }
 }
