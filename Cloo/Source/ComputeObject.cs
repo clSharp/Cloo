@@ -51,6 +51,7 @@ namespace Cloo
         /// <summary>
         /// Gets or sets (protected) the handle of the <see cref="ComputeObject"/>.
         /// </summary>
+        /// <value> The handle of the <see cref="ComputeObject"/>. </value>
         public IntPtr Handle
         {
             get { return handle; }

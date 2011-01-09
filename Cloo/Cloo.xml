@@ -138,6 +138,7 @@
             <summary>
             Gets or sets (protected) the handle of the <see cref="T:Cloo.ComputeObject"/>.
             </summary>
+            <value> The handle of the <see cref="T:Cloo.ComputeObject"/>. </value>
         </member>
         <member name="T:Cloo.ComputeObject.GetInfoDelegate`1">
             <summary>
@@ -223,39 +224,45 @@
         </member>
         <member name="P:Cloo.ComputeEventBase.Context">
             <summary>
-            Gets the <see cref="T:Cloo.ComputeContext"/> associated with the event.
+            Gets the <see cref="T:Cloo.ComputeContext"/> associated with the <see cref="T:Cloo.ComputeEventBase"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeContext"/> associated with the <see cref="T:Cloo.ComputeEventBase"/>. </value>
         </member>
         <member name="P:Cloo.ComputeEventBase.FinishTime">
             <summary>
-            Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command has finished execution.
+            Gets the <see cref="T:Cloo.ComputeDevice"/> time counter in nanoseconds when the associated command has finished execution.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/> time counter in nanoseconds when the associated command has finished execution. </value>
         </member>
         <member name="P:Cloo.ComputeEventBase.EnqueueTime">
             <summary>
-            Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command is enqueued in the <see cref="T:Cloo.ComputeCommandQueue"/> by the host.
+            Gets the <see cref="T:Cloo.ComputeDevice"/> time counter in nanoseconds when the associated command is enqueued in the <see cref="T:Cloo.ComputeCommandQueue"/> by the host.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/> time counter in nanoseconds when the associated command is enqueued in the <see cref="T:Cloo.ComputeCommandQueue"/> by the host. </value>
         </member>
         <member name="P:Cloo.ComputeEventBase.Status">
             <summary>
             Gets the execution status of the associated command.
             </summary>
-            <remarks> Is negative if the command's execution was abnormally terminated. </remarks>
+            <value> The execution status of the associated command or a negative value if the execution was abnormally terminated. </value>
         </member>
         <member name="P:Cloo.ComputeEventBase.StartTime">
             <summary>
-            Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command starts execution.
+            Gets the <see cref="T:Cloo.ComputeDevice"/> time counter in nanoseconds when the associated command starts execution.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/> time counter in nanoseconds when the associated command starts execution. </value>
         </member>
         <member name="P:Cloo.ComputeEventBase.SubmitTime">
             <summary>
-            Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
+            Gets the <see cref="T:Cloo.ComputeDevice"/> time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/> time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device. </value>
         </member>
         <member name="P:Cloo.ComputeEventBase.Type">
             <summary>
-            Gets the <c>ComputeCommandType</c> associated with the event.
+            Gets the <see cref="T:Cloo.ComputeCommandType"/> associated with the event.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeCommandType"/> associated with the event. </value>
         </member>
         <member name="P:Cloo.ComputeEventBase.CommandEnqueueTime">
             <summary>
@@ -325,6 +332,7 @@
             <summary>
             Gets the <see cref="T:Cloo.ComputeCommandQueue"/> associated with the <see cref="T:Cloo.ComputeEvent"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeCommandQueue"/> associated with the <see cref="T:Cloo.ComputeEvent"/>. </value>
         </member>
         <member name="T:Cloo.ComputeImage2D">
             <summary>
@@ -365,16 +373,19 @@
             <summary>
             Gets the <see cref="T:Cloo.ComputeContext"/> of the <see cref="T:Cloo.ComputeMemory"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeContext"/> of the <see cref="T:Cloo.ComputeMemory"/>. </value>
         </member>
         <member name="P:Cloo.ComputeMemory.Flags">
             <summary>
             Gets the <see cref="T:Cloo.ComputeMemoryFlags"/> of the <see cref="T:Cloo.ComputeMemory"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeMemoryFlags"/> of the <see cref="T:Cloo.ComputeMemory"/>. </value>
         </member>
         <member name="P:Cloo.ComputeMemory.Size">
             <summary>
             Gets or sets (protected) the size in bytes of the <see cref="T:Cloo.ComputeMemory"/>.
             </summary>
+            <value> The size in bytes of the <see cref="T:Cloo.ComputeMemory"/>. </value>
         </member>
         <member name="M:Cloo.ComputeImage.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags)">
             <summary>
@@ -407,31 +418,37 @@
             <summary>
             Gets or sets (protected) the depth in pixels of the <see cref="T:Cloo.ComputeImage"/>.
             </summary>
+            <value> The depth in pixels of the <see cref="T:Cloo.ComputeImage"/>. </value>
         </member>
         <member name="P:Cloo.ComputeImage.ElementSize">
             <summary>
             Gets or sets (protected) the size of the elements (pixels) of the <see cref="T:Cloo.ComputeImage"/>.
             </summary>
+            <value> The size of the elements (pixels) of the <see cref="T:Cloo.ComputeImage"/>. </value>
         </member>
         <member name="P:Cloo.ComputeImage.Height">
             <summary>
             Gets or sets (protected) the height in pixels of the <see cref="T:Cloo.ComputeImage"/>.
             </summary>
+            <value> The height in pixels of the <see cref="T:Cloo.ComputeImage"/>. </value>
         </member>
         <member name="P:Cloo.ComputeImage.RowPitch">
             <summary>
             Gets or sets (protected) the size in bytes of a row of elements of the <see cref="T:Cloo.ComputeImage"/>.
             </summary>
+            <value> The size in bytes of a row of elements of the <see cref="T:Cloo.ComputeImage"/>. </value>
         </member>
         <member name="P:Cloo.ComputeImage.SlicePitch">
             <summary>
-            Gets or sets (protected) the size in bytes of a 2D slice of a <see cref="T:Cloo.ComputeImage3D"/>. For a <see cref="T:Cloo.ComputeImage2D"/> this value is 0.
+            Gets or sets (protected) the size in bytes of a 2D slice of a <see cref="T:Cloo.ComputeImage3D"/>.
             </summary>
+            <value> The size in bytes of a 2D slice of a <see cref="T:Cloo.ComputeImage3D"/>. For a <see cref="T:Cloo.ComputeImage2D"/> this value is 0. </value>
         </member>
         <member name="P:Cloo.ComputeImage.Width">
             <summary>
             Gets or sets (protected) the width in pixels of the <see cref="T:Cloo.ComputeImage"/>.
             </summary>
+            <value> The width in pixels of the <see cref="T:Cloo.ComputeImage"/>. </value>
         </member>
         <member name="M:Cloo.ComputeImage2D.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,System.Drawing.Bitmap)">
             <summary>
@@ -1374,21 +1391,25 @@
             <summary>
             Gets the <see cref="T:Cloo.ComputeContext"/> of the <see cref="T:Cloo.ComputeCommandQueue"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeContext"/> of the <see cref="T:Cloo.ComputeCommandQueue"/>. </value>
         </member>
         <member name="P:Cloo.ComputeCommandQueue.Device">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDevice"/> of the <see cref="T:Cloo.ComputeCommandQueue"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/> of the <see cref="T:Cloo.ComputeCommandQueue"/>. </value>
         </member>
         <member name="P:Cloo.ComputeCommandQueue.OutOfOrderExecution">
             <summary>
             Gets the out-of-order execution mode of the commands in the <see cref="T:Cloo.ComputeCommandQueue"/>.
             </summary>
+            <value> Is <c>true</c> if <see cref="T:Cloo.ComputeCommandQueue"/> has out-of-order execution mode enabled and <c>false</c> otherwise. </value>
         </member>
         <member name="P:Cloo.ComputeCommandQueue.Profiling">
             <summary>
             Gets the profiling mode of the commands in the <see cref="T:Cloo.ComputeCommandQueue"/>.
             </summary>
+            <value> Is <c>true</c> if <see cref="T:Cloo.ComputeCommandQueue"/> has profiling enabled and <c>false</c> otherwise. </value>
         </member>
         <member name="T:Cloo.SysIntX3">
             <summary>
@@ -1509,16 +1530,19 @@
             <summary>
             Gets a read-only collection of the <see cref="T:Cloo.ComputeDevice"/>s of the <see cref="T:Cloo.ComputeContext"/>.
             </summary>
+            <value> A read-only collection of the <see cref="T:Cloo.ComputeDevice"/>s of the <see cref="T:Cloo.ComputeContext"/>. </value>
         </member>
         <member name="P:Cloo.ComputeContext.Platform">
             <summary>
             Gets the <see cref="T:Cloo.ComputePlatform"/> of the <see cref="T:Cloo.ComputeContext"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputePlatform"/> of the <see cref="T:Cloo.ComputeContext"/>. </value>
         </member>
         <member name="P:Cloo.ComputeContext.Properties">
             <summary>
             Gets a collection of <see cref="T:Cloo.ComputeContextProperty"/>s of the <see cref="T:Cloo.ComputeContext"/>.
             </summary>
+            <value> A collection of <see cref="T:Cloo.ComputeContextProperty"/>s of the <see cref="T:Cloo.ComputeContext"/>. </value>
         </member>
         <member name="T:Cloo.ComputeContextNotifier">
             <summary>
@@ -1640,11 +1664,13 @@
             <summary>
             Gets the <see cref="T:Cloo.ComputeContextPropertyName"/> of the <see cref="T:Cloo.ComputeContextProperty"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeContextPropertyName"/> of the <see cref="T:Cloo.ComputeContextProperty"/>. </value>
         </member>
         <member name="P:Cloo.ComputeContextProperty.Value">
             <summary>
             Gets the value of the <see cref="T:Cloo.ComputeContextProperty"/>.
             </summary>
+            <value> The value of the <see cref="T:Cloo.ComputeContextProperty"/>. </value>
         </member>
         <member name="T:Cloo.ComputeErrorCode">
             <summary>
@@ -2924,16 +2950,19 @@
             <summary>
             Gets the <see cref="T:Cloo.ComputeContext"/> associated with the <see cref="T:Cloo.ComputeKernel"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeContext"/> associated with the <see cref="T:Cloo.ComputeKernel"/>. </value>
         </member>
         <member name="P:Cloo.ComputeKernel.FunctionName">
             <summary>
             Gets the function name of the <see cref="T:Cloo.ComputeKernel"/>.
             </summary>
+            <value> The function name of the <see cref="T:Cloo.ComputeKernel"/>. </value>
         </member>
         <member name="P:Cloo.ComputeKernel.Program">
             <summary>
             Gets the <see cref="T:Cloo.ComputeProgram"/> that the <see cref="T:Cloo.ComputeKernel"/> belongs to.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeProgram"/> that the <see cref="T:Cloo.ComputeKernel"/> belongs to. </value>
         </member>
         <member name="T:Cloo.ComputeEventList">
             <summary>
@@ -3023,8 +3052,9 @@
         </member>
         <member name="P:Cloo.ComputeEventList.Last">
             <summary>
-            Gets the last event on the list.
+            Gets the last <see cref="T:Cloo.ComputeEventBase"/> on the list.
             </summary>
+            <value> The last <see cref="T:Cloo.ComputeEventBase"/> on the list. </value>
         </member>
         <member name="P:Cloo.ComputeEventList.Item(System.Int32)">
             <summary>
@@ -3519,8 +3549,9 @@
         </member>
         <member name="P:Cloo.ComputeBufferBase`1.Count">
             <summary>
-            Gets the number of elements in the buffer.
+            Gets the number of elements in the <see cref="T:Cloo.ComputeBufferBase`1"/>.
             </summary>
+            <value> The number of elements in the <see cref="T:Cloo.ComputeBufferBase`1"/>. </value>
         </member>
         <member name="T:Cloo.ComputeBuffer`1">
             <summary>
@@ -3656,28 +3687,33 @@
             <summary>
             Gets a read-only collection of program binaries associated with the <see cref="P:Cloo.ComputeProgram.Devices"/>.
             </summary>
+            <value> A read-only collection of program binaries associated with the <see cref="P:Cloo.ComputeProgram.Devices"/>. </value>
             <remarks> The bits returned can be an implementation-specific intermediate representation (a.k.a. IR) or device specific executable bits or both. The decision on which information is returned in the binary is up to the OpenCL implementation. </remarks>
         </member>
         <member name="P:Cloo.ComputeProgram.BuildOptions">
             <summary>
             Gets the <see cref="T:Cloo.ComputeProgram"/> build options as specified in <paramref name="options"/> argument of <see cref="M:Cloo.ComputeProgram.Build(System.Collections.Generic.ICollection{Cloo.ComputeDevice},System.String,Cloo.ComputeProgramBuildNotifier,System.IntPtr)"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeProgram"/> build options as specified in <paramref name="options"/> argument of <see cref="M:Cloo.ComputeProgram.Build(System.Collections.Generic.ICollection{Cloo.ComputeDevice},System.String,Cloo.ComputeProgramBuildNotifier,System.IntPtr)"/>. </value>
         </member>
         <member name="P:Cloo.ComputeProgram.Context">
             <summary>
             Gets the <see cref="T:Cloo.ComputeContext"/> of the <see cref="T:Cloo.ComputeProgram"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeContext"/> of the <see cref="T:Cloo.ComputeProgram"/>. </value>
         </member>
         <member name="P:Cloo.ComputeProgram.Devices">
             <summary>
             Gets a read-only collection of <see cref="T:Cloo.ComputeDevice"/>s associated with the <see cref="T:Cloo.ComputeProgram"/>.
             </summary>
-            <remarks> This collection contains <see cref="T:Cloo.ComputeDevice"/>s from <see cref="!:ComputeProgram.Context.Devices"/>. </remarks>
+            <value> A read-only collection of <see cref="T:Cloo.ComputeDevice"/>s associated with the <see cref="T:Cloo.ComputeProgram"/>. </value>
+            <remarks> This collection is a subset of <see cref="!:ComputeProgram.Context.Devices"/>. </remarks>
         </member>
         <member name="P:Cloo.ComputeProgram.Source">
             <summary>
             Gets a read-only collection of program source code strings specified when creating the <see cref="T:Cloo.ComputeProgram"/> or <c>null</c> if <see cref="T:Cloo.ComputeProgram"/> was created using program binaries.
             </summary>
+            <value> A read-only collection of program source code strings specified when creating the <see cref="T:Cloo.ComputeProgram"/> or <c>null</c> if <see cref="T:Cloo.ComputeProgram"/> was created using program binaries. </value>
         </member>
         <member name="T:Cloo.ComputeProgramBuildNotifier">
             <summary>
@@ -3705,17 +3741,19 @@
             <summary>
             Gets the <see cref="!:ComputeImageChannleOrder"/> of the <see cref="T:Cloo.ComputeImage"/>.
             </summary>
+            <value> The <see cref="!:ComputeImageChannleOrder"/> of the <see cref="T:Cloo.ComputeImage"/>. </value>
         </member>
         <member name="P:Cloo.ComputeImageFormat.ChannelType">
             <summary>
             Gets the <see cref="T:Cloo.ComputeImageChannelType"/> of the <see cref="T:Cloo.ComputeImage"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeImageChannelType"/> of the <see cref="T:Cloo.ComputeImage"/>. </value>
         </member>
         <member name="T:Cloo.ComputeDevice">
             <summary>
             Represents an OpenCL device.
             </summary>
-            <remarks> A device is a collection of compute units. A command queue is used to queue commands to a device. Examples of commands include executing kernels, or reading and writing memory objects. OpenCL devices typically correspond to a GPU, a multi-core CPU, and other processors such as DSPs and the Cell/B.E. processor. </remarks>
+            <value> A device is a collection of compute units. A command queue is used to queue commands to a device. Examples of commands include executing kernels, or reading and writing memory objects. OpenCL devices typically correspond to a GPU, a multi-core CPU, and other processors such as DSPs and the Cell/B.E. processor. </value>
             <seealso cref="T:Cloo.ComputeCommandQueue"/>
             <seealso cref="T:Cloo.ComputeKernel"/>
             <seealso cref="T:Cloo.ComputeMemory"/>
@@ -3731,257 +3769,278 @@
             <summary>
             Gets the default <see cref="T:Cloo.ComputeDevice"/> address space size in bits.
             </summary>
-            <remarks> Currently supported values are 32 or 64 bits. </remarks>
+            <value> Currently supported values are 32 or 64 bits. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Available">
             <summary>
             Gets the availability state of the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> Is <c>true</c> if the <see cref="T:Cloo.ComputeDevice"/> is available and <c>false</c> if the <see cref="T:Cloo.ComputeDevice"/> is not available. </remarks>
+            <value> Is <c>true</c> if the <see cref="T:Cloo.ComputeDevice"/> is available and <c>false</c> otherwise. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.CommandQueueFlags">
             <summary>
             Gets the <see cref="T:Cloo.ComputeCommandQueueFlags"/> supported by the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeCommandQueueFlags"/> supported by the <see cref="T:Cloo.ComputeDevice"/>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.CompilerAvailable">
             <summary>
             Gets the availability state of the OpenCL compiler of the <see cref="P:Cloo.ComputeDevice.Platform"/>.
             </summary>
-            <remarks> Is <c>false</c> if the implementation does not have a compiler available to compile the program source. Is <c>true</c> if the compiler is available. This can be <c>false</c> for the embededed platform profile only. </remarks>
+            <value> Is <c>true</c> if the implementation has a compiler available to compile the program source and <c>false</c> otherwise. This can be <c>false</c> for the embededed platform profile only. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.DriverVersion">
             <summary>
             Gets the OpenCL software driver version string of the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> The version string is in the form <c>major_number.minor_number</c>. </remarks>
+            <value> The version string in the form <c>major_number.minor_number</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.EndianLittle">
             <summary>
             Gets the endianness of the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> Is <c>true</c> if the <see cref="T:Cloo.ComputeDevice"/> is a little endian device and <c>false</c> otherwise. </remarks>
+            <value> Is <c>true</c> if the <see cref="T:Cloo.ComputeDevice"/> is a little endian device and <c>false</c> otherwise. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.ErrorCorrectionSupport">
             <summary>
             Gets the error correction support state of the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> Is <c>true</c> if the <see cref="T:Cloo.ComputeDevice"/> implements error correction for the memories, caches, registers etc. Is <c>false</c> if the <see cref="T:Cloo.ComputeDevice"/> does not implement error correction. This can be a requirement for certain clients of OpenCL. </remarks>
+            <value> Is <c>true</c> if the <see cref="T:Cloo.ComputeDevice"/> implements error correction for the memories, caches, registers etc. Is <c>false</c> if the <see cref="T:Cloo.ComputeDevice"/> does not implement error correction. This can be a requirement for certain clients of OpenCL. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.ExecutionCapabilities">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDeviceExecutionCapabilities"/> of the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDeviceExecutionCapabilities"/> of the <see cref="T:Cloo.ComputeDevice"/>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Extensions">
             <summary>
             Gets a read-only collection of names of extensions that the <see cref="T:Cloo.ComputeDevice"/> supports.
             </summary>
+            <value> A read-only collection of names of extensions that the <see cref="T:Cloo.ComputeDevice"/> supports. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.GlobalMemoryCacheLineSize">
             <summary>
             Gets the size of the global <see cref="T:Cloo.ComputeDevice"/> memory cache line in bytes.
             </summary>
+            <value> The size of the global <see cref="T:Cloo.ComputeDevice"/> memory cache line in bytes. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.GlobalMemoryCacheSize">
             <summary>
             Gets the size of the global <see cref="T:Cloo.ComputeDevice"/> memory cache in bytes.
             </summary>
+            <value> The size of the global <see cref="T:Cloo.ComputeDevice"/> memory cache in bytes. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.GlobalMemoryCacheType">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDeviceMemoryCacheType"/> of the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDeviceMemoryCacheType"/> of the <see cref="T:Cloo.ComputeDevice"/>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.GlobalMemorySize">
             <summary>
             Gets the size of the global <see cref="T:Cloo.ComputeDevice"/> memory in bytes.
             </summary>
+            <value> The size of the global <see cref="T:Cloo.ComputeDevice"/> memory in bytes. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Image2DMaxHeight">
             <summary>
-            Maximum height of 2D images that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
+            Gets the maximum <see cref="!:ComputeImage2D.Height"/> value that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
             </summary>
-            <remarks> The minimum value is 8192 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
+            <value> The minimum value is 8192 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Image2DMaxWidth">
             <summary>
-            Maximum width of 2D image that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
+            Gets the maximum <see cref="!:ComputeImage2D.Width"/> value that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
             </summary>
-            <remarks> The minimum value is 8192 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
+            <value> The minimum value is 8192 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxDepth">
             <summary>
-            Maximum depth of 3D image the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
+            Gets the maximum <see cref="!:ComputeImage3D.Depth"/> value that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
             </summary>
-            <remarks> The minimum value is 2048 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
+            <value> The minimum value is 2048 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxHeight">
             <summary>
-            Max height of 3D image the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
+            Gets the maximum <see cref="!:ComputeImage3D.Height"/> value that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
             </summary>
-            <remarks> The minimum value is 2048 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
+            <value> The minimum value is 2048 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxWidth">
             <summary>
-            Max width of 3D image the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
+            Gets the maximum <see cref="!:ComputeImage3D.Width"/> value that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
             </summary>
-            <remarks> The minimum value is 2048 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
+            <value> The minimum value is 2048 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.ImageSupport">
             <summary>
             Gets the state of image support of the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> Is <c>true</c> if <see cref="T:Cloo.ComputeImage"/>s are supported by the <see cref="T:Cloo.ComputeDevice"/> and <c>false</c> otherwise. </remarks>
+            <value> Is <c>true</c> if <see cref="T:Cloo.ComputeImage"/>s are supported by the <see cref="T:Cloo.ComputeDevice"/> and <c>false</c> otherwise. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.LocalMemorySize">
             <summary>
             Gets the size of local memory are of the <see cref="T:Cloo.ComputeDevice"/> in bytes.
             </summary>
-            <remarks> The minimum value is 16 KB (OpenCL 1.0) or 32 KB (OpenCL 1.1). </remarks>
+            <value> The minimum value is 16 KB (OpenCL 1.0) or 32 KB (OpenCL 1.1). </value>
         </member>
         <member name="P:Cloo.ComputeDevice.LocalMemoryType">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDeviceLocalMemoryType"/> that is supported on the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDeviceLocalMemoryType"/> that is supported on the <see cref="T:Cloo.ComputeDevice"/>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxClockFrequency">
             <summary>
             Gets the maximum configured clock frequency of the <see cref="T:Cloo.ComputeDevice"/> in MHz.
             </summary>
+            <value> The maximum configured clock frequency of the <see cref="T:Cloo.ComputeDevice"/> in MHz. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxComputeUnits">
             <summary>
             Gets the number of parallel compute cores on the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> The minimum value is 1. </remarks>
+            <value> The minimum value is 1. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxConstantArguments">
             <summary>
             Gets the maximum number of arguments declared with the <c>__constant</c> or <c>constant</c> qualifier in a <see cref="T:Cloo.ComputeKernel"/> executing in the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> The minimum value is 8. </remarks>
+            <value> The minimum value is 8. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxConstantBufferSize">
             <summary>
             Gets the maximum size in bytes of a constant buffer allocation in the <see cref="T:Cloo.ComputeDevice"/> memory.
             </summary>
-            <remarks>  The minimum value is 64 KB. </remarks>
+            <value> The minimum value is 64 KB. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxMemoryAllocationSize">
             <summary>
             Gets the maximum size of memory object allocation in the <see cref="T:Cloo.ComputeDevice"/> memory in bytes.
             </summary>
-            <remarks> The minimum value is <c>max(<see cref="P:Cloo.ComputeDevice.GlobalMemorySize"/>/4, 128*1024*1024)</c>. </remarks>
+            <value> The minimum value is <c>max(<see cref="P:Cloo.ComputeDevice.GlobalMemorySize"/>/4, 128*1024*1024)</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxParameterSize">
             <summary>
             Gets the maximum size in bytes of the arguments that can be passed to a <see cref="T:Cloo.ComputeKernel"/> executing in the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> The minimum value is 256 (OpenCL 1.0) or 1024 (OpenCL 1.1). </remarks>
+            <value> The minimum value is 256 (OpenCL 1.0) or 1024 (OpenCL 1.1). </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxReadImageArguments">
             <summary>
             Gets the maximum number of simultaneous <see cref="T:Cloo.ComputeImage"/>s that can be read by a <see cref="T:Cloo.ComputeKernel"/> executing in the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> The minimum value is 128 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
+            <value> The minimum value is 128 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxSamplers">
             <summary>
             Gets the maximum number of <see cref="T:Cloo.ComputeSampler"/>s that can be used in a <see cref="T:Cloo.ComputeKernel"/>.
             </summary>
-            <remarks> The minimum value is 16 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
+            <value> The minimum value is 16 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxWorkGroupSize">
             <summary>
             Gets the maximum number of work-items in a work-group executing a <see cref="T:Cloo.ComputeKernel"/> in a <see cref="T:Cloo.ComputeDevice"/> using the data parallel execution model.
             </summary>
-            <remarks> The minimum value is 1. </remarks>
+            <value> The minimum value is 1. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxWorkItemDimensions">
             <summary>
             Gets the maximum number of dimensions that specify the global and local work-item IDs used by the data parallel execution model.
             </summary>
-            <remarks> The minimum value is 3. </remarks>
+            <value> The minimum value is 3. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxWorkItemSizes">
             <summary>
             Gets the maximum number of work-items that can be specified in each dimension of the <paramref name="globalWorkSize"/> argument of <see cref="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})"/>.
             </summary>
+            <value> The maximum number of work-items that can be specified in each dimension of the <paramref name="globalWorkSize"/> argument of <see cref="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})"/>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxWriteImageArguments">
             <summary>
             Gets the maximum number of simultaneous <see cref="T:Cloo.ComputeImage"/>s that can be written to by a <see cref="T:Cloo.ComputeKernel"/> executing in the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> The minimum value is 8 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
+            <value> The minimum value is 8 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MemoryBaseAddressAlignment">
             <summary>
             Gets the alignment in bits of the base address of any <see cref="T:Cloo.ComputeMemory"/> allocated in the <see cref="T:Cloo.ComputeDevice"/> memory.
             </summary>
+            <value> The alignment in bits of the base address of any <see cref="T:Cloo.ComputeMemory"/> allocated in the <see cref="T:Cloo.ComputeDevice"/> memory. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MinDataTypeAlignmentSize">
             <summary>
             Gets the smallest alignment in bytes which can be used for any data type allocated in the <see cref="T:Cloo.ComputeDevice"/> memory.
             </summary>
+            <value> The smallest alignment in bytes which can be used for any data type allocated in the <see cref="T:Cloo.ComputeDevice"/> memory. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Name">
             <summary>
             Gets the name of the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
+            <value> The name of the <see cref="T:Cloo.ComputeDevice"/>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Platform">
             <summary>
             Gets the <see cref="T:Cloo.ComputePlatform"/> associated with the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputePlatform"/> associated with the <see cref="T:Cloo.ComputeDevice"/>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthChar">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>char</c>s.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>char</c>s. </value>
             <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthDouble">
             <summary>
-            Gets the <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>double</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported..
+            Gets the <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>double</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>double</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported. </value>
             <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthFloat">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>float</c>s.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>float</c>s. </value>
             <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthHalf">
             <summary>
-            Gets the <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp16</c> format is not supported..
+            Gets the <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp16</c> format is not supported.
             </summary>
-            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. Returns 0 if the <c>cl_khr_fp16</c> extension is not supported. </remarks>
+            <value> The <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp16</c> format is not supported. </value>
+            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthInt">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>int</c>s.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>int</c>s. </value>
             <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthLong">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>long</c>s.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>long</c>s. </value>
             <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.PreferredVectorWidthShort">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>short</c>s.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/>'s preferred native vector width size for vector of <c>short</c>s. </value>
             <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Profile">
             <summary>
             Gets the OpenCL profile name supported by the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> 
+            <value> 
             The profile name returned can be one of the following strings:
             <list type="bullets">
             <item>
@@ -3993,111 +4052,141 @@
                 <description> The <see cref="T:Cloo.ComputeDevice"/> supports the OpenCL embedded profile. </description>
             </item>
             </list>
-            </remarks>
+            </value>
         </member>
         <member name="P:Cloo.ComputeDevice.ProfilingTimerResolution">
             <summary>
             Gets the resolution of the <see cref="T:Cloo.ComputeDevice"/> timer in nanoseconds.
             </summary>
+            <value> The resolution of the <see cref="T:Cloo.ComputeDevice"/> timer in nanoseconds. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.SingleCapabilites">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDeviceSingleCapabilities"/> of the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDeviceSingleCapabilities"/> of the <see cref="T:Cloo.ComputeDevice"/>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Type">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDeviceTypes"/> of the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDeviceTypes"/> of the <see cref="T:Cloo.ComputeDevice"/>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Vendor">
             <summary>
             Gets the <see cref="T:Cloo.ComputeDevice"/> vendor name string.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeDevice"/> vendor name string. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.VendorId">
             <summary>
             Gets a unique <see cref="T:Cloo.ComputeDevice"/> vendor identifier.
             </summary>
+            <value> A unique <see cref="T:Cloo.ComputeDevice"/> vendor identifier. </value>
             <remarks> An example of a unique device identifier could be the PCIe ID. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.Version">
             <summary>
             Gets the OpenCL version supported by the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
+            <value> The OpenCL version supported by the <see cref="T:Cloo.ComputeDevice"/>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.VersionString">
             <summary>
             Gets the OpenCL version string supported by the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> The version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
+            <value> The version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.HostUnifiedMemory">
             <summary>
-            Returns <c>true</c> if the <see cref="T:Cloo.ComputeDevice"/> and the host have a unified memory subsystem and <c>false</c> otherwise.
+            Gets information about the presence of the unified memory subsystem.
             </summary>
+            <value> Is <c>true</c> if the <see cref="T:Cloo.ComputeDevice"/> and the host have a unified memory subsystem and <c>false</c> otherwise. </value>
             <remarks> Requires OpenCL 1.1 </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.NativeVectorWidthChar">
             <summary>
             Gets the native ISA vector width size for vector of <c>char</c>s.
             </summary>
-            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
-            <remarks> Requires OpenCL 1.1 </remarks>
+            <value> The native ISA vector width size for vector of <c>char</c>s. </value>
+            <remarks> 
+                <para> The vector width is defined as the number of scalar elements that can be stored in the vector. </para>
+                <para> Requires OpenCL 1.1 </para>
+            </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.NativeVectorWidthDouble">
             <summary>
             Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported.
             </summary>
-            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
-            <remarks> Requires OpenCL 1.1 </remarks>
+            <value> The native ISA vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported. </value>
+            <remarks> 
+                <para> The vector width is defined as the number of scalar elements that can be stored in the vector. </para>
+                <para> Requires OpenCL 1.1 </para>
+            </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.NativeVectorWidthFloat">
             <summary>
             Gets the native ISA vector width size for vector of <c>float</c>s.
             </summary>
-            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
-            <remarks> Requires OpenCL 1.1 </remarks>
+            <value> The native ISA vector width size for vector of <c>float</c>s. </value>
+            <remarks> 
+                <para> The vector width is defined as the number of scalar elements that can be stored in the vector. </para>
+                <para> Requires OpenCL 1.1 </para>
+            </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.NativeVectorWidthHalf">
             <summary>
             Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp16</c> format is not supported.
             </summary>
-            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
-            <remarks> Requires OpenCL 1.1 </remarks>
+            <value> The native ISA vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp16</c> format is not supported. </value>
+            <remarks> 
+                <para> The vector width is defined as the number of scalar elements that can be stored in the vector. </para>
+                <para> Requires OpenCL 1.1 </para>
+            </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.NativeVectorWidthInt">
             <summary>
             Gets the native ISA vector width size for vector of <c>int</c>s.
             </summary>
-            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
-            <remarks> Requires OpenCL 1.1 </remarks>
+            <value> The native ISA vector width size for vector of <c>int</c>s. </value>
+            <remarks>
+                <para> The vector width is defined as the number of scalar elements that can be stored in the vector. </para>
+                <para> Requires OpenCL 1.1 </para>
+            </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.NativeVectorWidthLong">
             <summary>
             Gets the native ISA vector width size for vector of <c>long</c>s.
             </summary>
-            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
-            <remarks> Requires OpenCL 1.1 </remarks>
+            <value> The native ISA vector width size for vector of <c>long</c>s. </value>
+            <remarks>
+                <para> The vector width is defined as the number of scalar elements that can be stored in the vector. </para>
+                <para> Requires OpenCL 1.1 </para>
+            </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.NativeVectorWidthShort">
             <summary>
             Gets the native ISA vector width size for vector of <c>short</c>s.
             </summary>
-            <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
-            <remarks> Requires OpenCL 1.1 </remarks>
+            <value> The native ISA vector width size for vector of <c>short</c>s. </value>
+            <remarks> 
+                <para> The vector width is defined as the number of scalar elements that can be stored in the vector. </para>
+                <para> Requires OpenCL 1.1 </para>
+            </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.OpenCLCVersion">
             <summary>
             Gets the OpenCL C version supported by the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> Is 1.1 if <see cref="P:Cloo.ComputeDevice.Version"/> is 1.1. Can be 1.0 or 1.1 if <see cref="P:Cloo.ComputeDevice.Version"/> is 1.0. </remarks>
+            <value> Is <c>1.1</c> if <see cref="P:Cloo.ComputeDevice.Version"/> is <c>1.1</c>. Is <c>1.0</c> or <c>1.1</c> if <see cref="P:Cloo.ComputeDevice.Version"/> is <c>1.0</c>. </value>
+            <remarks> Requires OpenCL 1.1. </remarks>
         </member>
         <member name="P:Cloo.ComputeDevice.OpenCLCVersionString">
             <summary>
             Gets the OpenCL C version string supported by the <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <remarks> The version string has the following format: <c>OpenCL[space]C[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
+            <value> The OpenCL C version string supported by the <see cref="T:Cloo.ComputeDevice"/>. The version string has the following format: <c>OpenCL[space]C[space][major_version].[minor_version][space][vendor-specific information]</c>. </value>
+            <remarks> Requires OpenCL 1.1. </remarks>
         </member>
         <member name="T:Cloo.Bindings.CLx">
             <summary>
@@ -4176,37 +4265,43 @@
             <summary>
             Gets a read-only collection of <see cref="T:Cloo.ComputeDevice"/>s available on the <see cref="T:Cloo.ComputePlatform"/>.
             </summary>
+            <value> A read-only collection of <see cref="T:Cloo.ComputeDevice"/>s available on the <see cref="T:Cloo.ComputePlatform"/>. </value>
         </member>
         <member name="P:Cloo.ComputePlatform.Extensions">
             <summary>
             Gets a read-only collection of extension names supported by the <see cref="T:Cloo.ComputePlatform"/>.
             </summary>
+            <value> A read-only collection of extension names supported by the <see cref="T:Cloo.ComputePlatform"/>. </value>
         </member>
         <member name="P:Cloo.ComputePlatform.Name">
             <summary>
             Gets the <see cref="T:Cloo.ComputePlatform"/> name.
             </summary>
+            <value> The <see cref="T:Cloo.ComputePlatform"/> name. </value>
         </member>
         <member name="P:Cloo.ComputePlatform.Platforms">
             <summary>
             Gets a read-only collection of available <see cref="T:Cloo.ComputePlatform"/>s.
             </summary>
+            <value> A read-only collection of available <see cref="T:Cloo.ComputePlatform"/>s. </value>
         </member>
         <member name="P:Cloo.ComputePlatform.Profile">
             <summary>
             Gets the name of the profile supported by the <see cref="T:Cloo.ComputePlatform"/>.
             </summary>
+            <value> The name of the profile supported by the <see cref="T:Cloo.ComputePlatform"/>. </value>
         </member>
         <member name="P:Cloo.ComputePlatform.Vendor">
             <summary>
             Gets the <see cref="T:Cloo.ComputePlatform"/> vendor.
             </summary>
+            <value> The <see cref="T:Cloo.ComputePlatform"/> vendor. </value>
         </member>
         <member name="P:Cloo.ComputePlatform.Version">
             <summary>
-            Gets the OpenCL version supported by the <see cref="T:Cloo.ComputePlatform"/>.
+            Gets the OpenCL version string supported by the <see cref="T:Cloo.ComputePlatform"/>.
             </summary>
-            <remarks> This version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
+            <value> The OpenCL version string supported by the <see cref="T:Cloo.ComputePlatform"/>. It has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </value>
         </member>
         <member name="T:Cloo.ComputeContextPropertyList">
             <summary>
@@ -4337,21 +4432,25 @@
             <summary>
             Gets the <see cref="T:Cloo.ComputeContext"/> of the <see cref="T:Cloo.ComputeSampler"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeContext"/> of the <see cref="T:Cloo.ComputeSampler"/>. </value>
         </member>
         <member name="P:Cloo.ComputeSampler.Addressing">
             <summary>
             Gets the <see cref="T:Cloo.ComputeImageAddressing"/> mode of the <see cref="T:Cloo.ComputeSampler"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeImageAddressing"/> mode of the <see cref="T:Cloo.ComputeSampler"/>. </value>
         </member>
         <member name="P:Cloo.ComputeSampler.Filtering">
             <summary>
             Gets the <see cref="T:Cloo.ComputeImageFiltering"/> mode of the <see cref="T:Cloo.ComputeSampler"/>.
             </summary>
+            <value> The <see cref="T:Cloo.ComputeImageFiltering"/> mode of the <see cref="T:Cloo.ComputeSampler"/>. </value>
         </member>
         <member name="P:Cloo.ComputeSampler.NormalizedCoords">
             <summary>
             Gets the state of usage of normalized x, y and z coordinates when accessing a <see cref="T:Cloo.ComputeImage"/> in a <see cref="T:Cloo.ComputeKernel"/> through the <see cref="T:Cloo.ComputeSampler"/>.
             </summary>
+            <value> The state of usage of normalized x, y and z coordinates when accessing a <see cref="T:Cloo.ComputeImage"/> in a <see cref="T:Cloo.ComputeKernel"/> through the <see cref="T:Cloo.ComputeSampler"/>. </value>
         </member>
         <member name="T:Cloo.ComputeException">
             <summary>

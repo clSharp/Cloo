@@ -60,16 +60,19 @@ namespace Cloo
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> associated with the <see cref="ComputeKernel"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeContext"/> associated with the <see cref="ComputeKernel"/>. </value>
         public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets the function name of the <see cref="ComputeKernel"/>.
         /// </summary>
+        /// <value> The function name of the <see cref="ComputeKernel"/>. </value>
         public string FunctionName { get { return functionName; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeProgram"/> that the <see cref="ComputeKernel"/> belongs to.
         /// </summary>
+        /// <value> The <see cref="ComputeProgram"/> that the <see cref="ComputeKernel"/> belongs to. </value>
         public ComputeProgram Program { get { return program; } }
 
         #endregion

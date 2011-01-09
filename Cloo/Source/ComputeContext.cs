@@ -80,16 +80,19 @@ namespace Cloo
         /// <summary>
         /// Gets a read-only collection of the <see cref="ComputeDevice"/>s of the <see cref="ComputeContext"/>.
         /// </summary>
+        /// <value> A read-only collection of the <see cref="ComputeDevice"/>s of the <see cref="ComputeContext"/>. </value>
         public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
 
         /// <summary>
         /// Gets the <see cref="ComputePlatform"/> of the <see cref="ComputeContext"/>.
         /// </summary>
+        /// <value> The <see cref="ComputePlatform"/> of the <see cref="ComputeContext"/>. </value>
         public ComputePlatform Platform { get { return platform; } }
 
         /// <summary>
         /// Gets a collection of <see cref="ComputeContextProperty"/>s of the <see cref="ComputeContext"/>.
         /// </summary>
+        /// <value> A collection of <see cref="ComputeContextProperty"/>s of the <see cref="ComputeContext"/>. </value>
         public ComputeContextPropertyList Properties { get { return properties; } }
 
         #endregion

@@ -61,21 +61,25 @@ namespace Cloo
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeCommandQueue"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeContext"/> of the <see cref="ComputeCommandQueue"/>. </value>
         public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeDevice"/> of the <see cref="ComputeCommandQueue"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeDevice"/> of the <see cref="ComputeCommandQueue"/>. </value>
         public ComputeDevice Device { get { return device; } }
 
         /// <summary>
         /// Gets the out-of-order execution mode of the commands in the <see cref="ComputeCommandQueue"/>.
         /// </summary>
+        /// <value> Is <c>true</c> if <see cref="ComputeCommandQueue"/> has out-of-order execution mode enabled and <c>false</c> otherwise. </value>
         public bool OutOfOrderExecution { get { return outOfOrderExec; } }
 
         /// <summary>
         /// Gets the profiling mode of the commands in the <see cref="ComputeCommandQueue"/>.
         /// </summary>
+        /// <value> Is <c>true</c> if <see cref="ComputeCommandQueue"/> has profiling enabled and <c>false</c> otherwise. </value>
         public bool Profiling { get { return profiling; } }
 
         #endregion

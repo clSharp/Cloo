@@ -62,28 +62,33 @@ namespace Cloo
         /// <summary>
         /// Gets a read-only collection of program binaries associated with the <see cref="ComputeProgram.Devices"/>.
         /// </summary>
+        /// <value> A read-only collection of program binaries associated with the <see cref="ComputeProgram.Devices"/>. </value>
         /// <remarks> The bits returned can be an implementation-specific intermediate representation (a.k.a. IR) or device specific executable bits or both. The decision on which information is returned in the binary is up to the OpenCL implementation. </remarks>
         public ReadOnlyCollection<byte[]> Binaries { get { return binaries; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeProgram"/> build options as specified in <paramref name="options"/> argument of <see cref="ComputeProgram.Build"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeProgram"/> build options as specified in <paramref name="options"/> argument of <see cref="ComputeProgram.Build"/>. </value>
         public string BuildOptions { get { return buildOptions; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeProgram"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeContext"/> of the <see cref="ComputeProgram"/>. </value>
         public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets a read-only collection of <see cref="ComputeDevice"/>s associated with the <see cref="ComputeProgram"/>.
         /// </summary>
-        /// <remarks> This collection contains <see cref="ComputeDevice"/>s from <see cref="ComputeProgram.Context.Devices"/>. </remarks>
+        /// <value> A read-only collection of <see cref="ComputeDevice"/>s associated with the <see cref="ComputeProgram"/>. </value>
+        /// <remarks> This collection is a subset of <see cref="ComputeProgram.Context.Devices"/>. </remarks>
         public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
 
         /// <summary>
         /// Gets a read-only collection of program source code strings specified when creating the <see cref="ComputeProgram"/> or <c>null</c> if <see cref="ComputeProgram"/> was created using program binaries.
         /// </summary>
+        /// <value> A read-only collection of program source code strings specified when creating the <see cref="ComputeProgram"/> or <c>null</c> if <see cref="ComputeProgram"/> was created using program binaries. </value>
         public ReadOnlyCollection<string> Source { get { return source; } }
 
         #endregion

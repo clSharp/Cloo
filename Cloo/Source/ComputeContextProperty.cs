@@ -51,11 +51,13 @@ namespace Cloo
         /// <summary>
         /// Gets the <see cref="ComputeContextPropertyName"/> of the <see cref="ComputeContextProperty"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeContextPropertyName"/> of the <see cref="ComputeContextProperty"/>. </value>
         public ComputeContextPropertyName Name { get { return name; } }
 
         /// <summary>
         /// Gets the value of the <see cref="ComputeContextProperty"/>.
         /// </summary>
+        /// <value> The value of the <see cref="ComputeContextProperty"/>. </value>
         public IntPtr Value { get { return value; } }
 
         #endregion

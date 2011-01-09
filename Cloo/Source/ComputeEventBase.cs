@@ -66,13 +66,15 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the <see cref="ComputeContext"/> associated with the event.
+        /// Gets the <see cref="ComputeContext"/> associated with the <see cref="ComputeEventBase"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeContext"/> associated with the <see cref="ComputeEventBase"/>. </value>
         public ComputeContext Context { get; protected set; }
 
         /// <summary>
-        /// Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command has finished execution.
+        /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command has finished execution.
         /// </summary>
+        /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command has finished execution. </value>
         public long FinishTime
         {
             get
@@ -86,8 +88,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command is enqueued in the <see cref="ComputeCommandQueue"/> by the host.
+        /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command is enqueued in the <see cref="ComputeCommandQueue"/> by the host.
         /// </summary>
+        /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command is enqueued in the <see cref="ComputeCommandQueue"/> by the host. </value>
         public long EnqueueTime
         {
             get
@@ -103,7 +106,7 @@ namespace Cloo
         /// <summary>
         /// Gets the execution status of the associated command.
         /// </summary>
-        /// <remarks> Is negative if the command's execution was abnormally terminated. </remarks>
+        /// <value> The execution status of the associated command or a negative value if the execution was abnormally terminated. </value>
         public ComputeCommandExecutionStatus Status
         {
             get
@@ -117,8 +120,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command starts execution.
+        /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command starts execution.
         /// </summary>
+        /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command starts execution. </value>
         public long StartTime
         {
             get
@@ -132,8 +136,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a 64-bit value that describes the device time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
+        /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
         /// </summary>
+        /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device. </value>
         public long SubmitTime
         {
             get
@@ -147,8 +152,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the <c>ComputeCommandType</c> associated with the event.
+        /// Gets the <see cref="ComputeCommandType"/> associated with the event.
         /// </summary>
+        /// <value> The <see cref="ComputeCommandType"/> associated with the event. </value>
         public ComputeCommandType Type { get; protected set; }
 
         #endregion
@@ -232,8 +238,9 @@ namespace Cloo
 
         #endregion
 
-        #region Obsolete
 #if OBSOLETE
+        #region Obsolete
+
         /// <summary>
         /// Obsolete.
         /// </summary>
@@ -269,8 +276,10 @@ namespace Cloo
         /// </summary>
         [Obsolete]
         public ComputeCommandType CommandType { get { return Type; } }
-#endif
+
         #endregion
+#endif
+
     }
 
     /// <summary>

@@ -49,31 +49,37 @@ namespace Cloo
         /// <summary>
         /// Gets or sets (protected) the depth in pixels of the <see cref="ComputeImage"/>.
         /// </summary>
+        /// <value> The depth in pixels of the <see cref="ComputeImage"/>. </value>
         public int Depth { get; protected set; }
 
         /// <summary>
         /// Gets or sets (protected) the size of the elements (pixels) of the <see cref="ComputeImage"/>.
         /// </summary>
+        /// <value> The size of the elements (pixels) of the <see cref="ComputeImage"/>. </value>
         public int ElementSize { get; protected set; }
 
         /// <summary>
         /// Gets or sets (protected) the height in pixels of the <see cref="ComputeImage"/>.
         /// </summary>
+        /// <value> The height in pixels of the <see cref="ComputeImage"/>. </value>
         public int Height { get; protected set; }
 
         /// <summary>
         /// Gets or sets (protected) the size in bytes of a row of elements of the <see cref="ComputeImage"/>.
         /// </summary>
+        /// <value> The size in bytes of a row of elements of the <see cref="ComputeImage"/>. </value>
         public long RowPitch { get; protected set; }
 
         /// <summary>
-        /// Gets or sets (protected) the size in bytes of a 2D slice of a <see cref="ComputeImage3D"/>. For a <see cref="ComputeImage2D"/> this value is 0.
+        /// Gets or sets (protected) the size in bytes of a 2D slice of a <see cref="ComputeImage3D"/>.
         /// </summary>
+        /// <value> The size in bytes of a 2D slice of a <see cref="ComputeImage3D"/>. For a <see cref="ComputeImage2D"/> this value is 0. </value>
         public long SlicePitch { get; protected set; }
 
         /// <summary>
         /// Gets or sets (protected) the width in pixels of the <see cref="ComputeImage"/>.
         /// </summary>
+        /// <value> The width in pixels of the <see cref="ComputeImage"/>. </value>
         public int Width { get; protected set; }
 
         #endregion

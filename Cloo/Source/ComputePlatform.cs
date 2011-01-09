@@ -62,37 +62,43 @@ namespace Cloo
         /// <summary>
         /// Gets a read-only collection of <see cref="ComputeDevice"/>s available on the <see cref="ComputePlatform"/>.
         /// </summary>
+        /// <value> A read-only collection of <see cref="ComputeDevice"/>s available on the <see cref="ComputePlatform"/>. </value>
         public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
 
         /// <summary>
         /// Gets a read-only collection of extension names supported by the <see cref="ComputePlatform"/>.
         /// </summary>
+        /// <value> A read-only collection of extension names supported by the <see cref="ComputePlatform"/>. </value>
         public ReadOnlyCollection<string> Extensions { get { return extensions; } }
 
         /// <summary>
         /// Gets the <see cref="ComputePlatform"/> name.
         /// </summary>
+        /// <value> The <see cref="ComputePlatform"/> name. </value>
         public string Name { get { return name; } }
 
         /// <summary>
         /// Gets a read-only collection of available <see cref="ComputePlatform"/>s.
         /// </summary>
+        /// <value> A read-only collection of available <see cref="ComputePlatform"/>s. </value>
         public static ReadOnlyCollection<ComputePlatform> Platforms { get { return platforms; } }
 
         /// <summary>
         /// Gets the name of the profile supported by the <see cref="ComputePlatform"/>.
         /// </summary>
+        /// <value> The name of the profile supported by the <see cref="ComputePlatform"/>. </value>
         public string Profile { get { return profile; } }
 
         /// <summary>
         /// Gets the <see cref="ComputePlatform"/> vendor.
         /// </summary>
+        /// <value> The <see cref="ComputePlatform"/> vendor. </value>
         public string Vendor { get { return vendor; } }
 
         /// <summary>
-        /// Gets the OpenCL version supported by the <see cref="ComputePlatform"/>.
+        /// Gets the OpenCL version string supported by the <see cref="ComputePlatform"/>.
         /// </summary>
-        /// <remarks> This version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
+        /// <value> The OpenCL version string supported by the <see cref="ComputePlatform"/>. It has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </value>
         public string Version { get { return version; } }
 
         #endregion

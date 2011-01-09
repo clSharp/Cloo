@@ -56,16 +56,19 @@ namespace Cloo
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeMemory"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeContext"/> of the <see cref="ComputeMemory"/>. </value>
         public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeMemoryFlags"/> of the <see cref="ComputeMemory"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeMemoryFlags"/> of the <see cref="ComputeMemory"/>. </value>
         public ComputeMemoryFlags Flags { get { return flags; } }
 
         /// <summary>
         /// Gets or sets (protected) the size in bytes of the <see cref="ComputeMemory"/>.
         /// </summary>
+        /// <value> The size in bytes of the <see cref="ComputeMemory"/>. </value>
         public long Size { get; protected set; }
 
         #endregion

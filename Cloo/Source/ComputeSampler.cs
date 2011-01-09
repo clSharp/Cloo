@@ -57,21 +57,25 @@ namespace Cloo
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeSampler"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeContext"/> of the <see cref="ComputeSampler"/>. </value>
         public ComputeContext Context { get { return context; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeImageAddressing"/> mode of the <see cref="ComputeSampler"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeImageAddressing"/> mode of the <see cref="ComputeSampler"/>. </value>
         public ComputeImageAddressing Addressing { get { return addressing; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeImageFiltering"/> mode of the <see cref="ComputeSampler"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeImageFiltering"/> mode of the <see cref="ComputeSampler"/>. </value>
         public ComputeImageFiltering Filtering { get { return filtering; } }
 
         /// <summary>
         /// Gets the state of usage of normalized x, y and z coordinates when accessing a <see cref="ComputeImage"/> in a <see cref="ComputeKernel"/> through the <see cref="ComputeSampler"/>.
         /// </summary>
+        /// <value> The state of usage of normalized x, y and z coordinates when accessing a <see cref="ComputeImage"/> in a <see cref="ComputeKernel"/> through the <see cref="ComputeSampler"/>. </value>
         public bool NormalizedCoords { get { return normalizedCoords; } }
 
         #endregion

@@ -46,8 +46,9 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the number of elements in the buffer.
+        /// Gets the number of elements in the <see cref="ComputeBufferBase{T}"/>.
         /// </summary>
+        /// <value> The number of elements in the <see cref="ComputeBufferBase{T}"/>. </value>
         public long Count { get; private set; }
 
         #endregion

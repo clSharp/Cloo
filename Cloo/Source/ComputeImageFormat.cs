@@ -53,11 +53,13 @@ namespace Cloo
         /// <summary>
         /// Gets the <see cref="ComputeImageChannleOrder"/> of the <see cref="ComputeImage"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeImageChannleOrder"/> of the <see cref="ComputeImage"/>. </value>
         public ComputeImageChannelOrder ChannelOrder { get { return channelOrder; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeImageChannelType"/> of the <see cref="ComputeImage"/>.
         /// </summary>
+        /// <value> The <see cref="ComputeImageChannelType"/> of the <see cref="ComputeImage"/>. </value>
         public ComputeImageChannelType ChannelType { get { return channelType; } }
 
         #endregion

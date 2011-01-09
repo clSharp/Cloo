@@ -72,8 +72,9 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the last event on the list.
+        /// Gets the last <see cref="ComputeEventBase"/> on the list.
         /// </summary>
+        /// <value> The last <see cref="ComputeEventBase"/> on the list. </value>
         public ComputeEventBase Last { get { return events[events.Count - 1]; } }
 
         #endregion
