@@ -49,12 +49,12 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the <c>ComputeContextPropertyName</c> of the <c>ComputeContextProperty</c>.
+        /// Gets the <see cref="ComputeContextPropertyName"/> of the <see cref="ComputeContextProperty"/>.
         /// </summary>
         public ComputeContextPropertyName Name { get { return name; } }
 
         /// <summary>
-        /// Gets the value of the <c>ComputeContextProperty</c>.
+        /// Gets the value of the <see cref="ComputeContextProperty"/>.
         /// </summary>
         public IntPtr Value { get { return value; } }
 
@@ -63,10 +63,10 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeContextProperty</c>.
+        /// Creates a new <see cref="ComputeContextProperty"/>.
         /// </summary>
-        /// <param name="name"> The name of the <c>ComputeContextProperty</c>. </param>
-        /// <param name="value"> The value of the created <c>ComputeContextProperty</c>. </param>
+        /// <param name="name"> The name of the <see cref="ComputeContextProperty"/>. </param>
+        /// <param name="value"> The value of the created <see cref="ComputeContextProperty"/>. </param>
         public ComputeContextProperty(ComputeContextPropertyName name, IntPtr value)
         {
             this.name = name;
@@ -78,9 +78,9 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputeContextProperty</c>.
+        /// Gets the string representation of the <see cref="ComputeContextProperty"/>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputeContextProperty</c>. </returns>
+        /// <returns> The string representation of the <see cref="ComputeContextProperty"/>. </returns>
         public override string ToString()
         {
             return "ComputeContextProperty(" + name + ", " + value + ")";

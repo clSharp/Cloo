@@ -38,7 +38,7 @@ namespace Cloo
     /// <summary>
     /// Represents a list of <see cref="ComputeContextProperty"/>s.
     /// </summary>
-    /// <remarks> A <c>ComputeContextPropertyList</c> is used to specify the properties of a <c>ComputeContext</c>. </remarks>
+    /// <remarks> A <see cref="ComputeContextPropertyList"/> is used to specify the properties of a <see cref="ComputeContext"/>. </remarks>
     /// <seealso cref="ComputeContext"/>
     /// <seealso cref="ComputeContextProperty"/>
     public class ComputeContextPropertyList: ICollection<ComputeContextProperty>
@@ -52,9 +52,9 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeContextPropertyList</c> which contains a single item specifying a <c>ComputePlatform</c>.
+        /// Creates a new <see cref="ComputeContextPropertyList"/> which contains a single item specifying a <see cref="ComputePlatform"/>.
         /// </summary>
-        /// <param name="platform"> A <c>ComputePlatform</c>. </param>
+        /// <param name="platform"> A <see cref="ComputePlatform"/>. </param>
         public ComputeContextPropertyList(ComputePlatform platform)
         {
             properties = new List<ComputeContextProperty>();
@@ -62,9 +62,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new <c>ComputeContextPropertyList</c> which contains the specified <c>ComputeContextProperty</c>s.
+        /// Creates a new <see cref="ComputeContextPropertyList"/> which contains the specified <see cref="ComputeContextProperty"/>s.
         /// </summary>
-        /// <param name="properties"> An enumerable of <c>ComputeContextProperty</c>'s. </param>
+        /// <param name="properties"> An enumerable of <see cref="ComputeContextProperty"/>'s. </param>
         public ComputeContextPropertyList(IEnumerable<ComputeContextProperty> properties)
         {
             this.properties = new List<ComputeContextProperty>(properties);
@@ -75,10 +75,10 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets a <c>ComputeContextProperty</c> of a specified <c>ComputeContextPropertyName</c>.
+        /// Gets a <see cref="ComputeContextProperty"/> of a specified <c>ComputeContextPropertyName</c>.
         /// </summary>
-        /// <param name="name"> The <c>ComputeContextPropertyName</c> of the <c>ComputeContextProperty</c>. </param>
-        /// <returns> The requested <c>ComputeContextProperty</c> or <c>null</c> if no such <c>ComputeContextProperty</c> exists in the <c>ComputeContextPropertyList</c>. </returns>
+        /// <param name="name"> The <see cref="ComputeContextPropertyName"/> of the <see cref="ComputeContextProperty"/>. </param>
+        /// <returns> The requested <see cref="ComputeContextProperty"/> or <c>null</c> if no such <see cref="ComputeContextProperty"/> exists in the <see cref="ComputeContextPropertyList"/>. </returns>
         public ComputeContextProperty GetByName(ComputeContextPropertyName name)
         {
             foreach (ComputeContextProperty property in properties)

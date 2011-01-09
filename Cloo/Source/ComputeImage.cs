@@ -47,32 +47,32 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets or sets (protected) the depth in pixels of the <c>ComputeImage</c>.
+        /// Gets or sets (protected) the depth in pixels of the <see cref="ComputeImage"/>.
         /// </summary>
         public int Depth { get; protected set; }
 
         /// <summary>
-        /// Gets or sets (protected) the size of the elements (pixels) of the <c>ComputeImage</c>.
+        /// Gets or sets (protected) the size of the elements (pixels) of the <see cref="ComputeImage"/>.
         /// </summary>
         public int ElementSize { get; protected set; }
 
         /// <summary>
-        /// Gets or sets (protected) the height in pixels of the <c>ComputeImage</c>.
+        /// Gets or sets (protected) the height in pixels of the <see cref="ComputeImage"/>.
         /// </summary>
         public int Height { get; protected set; }
 
         /// <summary>
-        /// Gets or sets (protected) the size in bytes of a row of elements of the <c>ComputeImage</c>.
+        /// Gets or sets (protected) the size in bytes of a row of elements of the <see cref="ComputeImage"/>.
         /// </summary>
         public long RowPitch { get; protected set; }
 
         /// <summary>
-        /// Gets or sets (protected) the size in bytes of a 2D slice of a <c>ComputeImage3D</c>. For a <c>ComputeImage2D</c> this value is 0.
+        /// Gets or sets (protected) the size in bytes of a 2D slice of a <see cref="ComputeImage3D"/>. For a <see cref="ComputeImage2D"/> this value is 0.
         /// </summary>
         public long SlicePitch { get; protected set; }
 
         /// <summary>
-        /// Gets or sets (protected) the width in pixels of the <c>ComputeImage</c>.
+        /// Gets or sets (protected) the width in pixels of the <see cref="ComputeImage"/>.
         /// </summary>
         public int Width { get; protected set; }
 
@@ -94,9 +94,9 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputeImage</c>.
+        /// Gets the string representation of the <see cref="ComputeImage"/>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputeImage</c>. </returns>
+        /// <returns> The string representation of the <see cref="ComputeImage"/>. </returns>
         public override string ToString()
         {
             return "ComputeImage" + base.ToString();

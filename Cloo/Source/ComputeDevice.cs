@@ -102,172 +102,172 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the default <c>ComputeDevice</c> address space size in bits.
+        /// Gets the default <see cref="ComputeDevice"/> address space size in bits.
         /// </summary>
         /// <remarks> Currently supported values are 32 or 64 bits. </remarks>
         public long AddressBits { get { return addressBits; } }
 
         /// <summary>
-        /// Gets the availability state of the <c>ComputeDevice</c>.
+        /// Gets the availability state of the <see cref="ComputeDevice"/>.
         /// </summary>
-        /// <remarks> Is <c>true</c> if the <c>ComputeDevice</c> is available and <c>false</c> if the <c>ComputeDevice</c> is not available. </remarks>
+        /// <remarks> Is <c>true</c> if the <see cref="ComputeDevice"/> is available and <c>false</c> if the <see cref="ComputeDevice"/> is not available. </remarks>
         public bool Available { get { return available; } }
 
         /// <summary>
-        /// Gets the <c>ComputeCommandQueueFlags</c> supported by the <c>ComputeDevice</c>.
+        /// Gets the <see cref="ComputeCommandQueueFlags"/> supported by the <see cref="ComputeDevice"/>.
         /// </summary>
         public ComputeCommandQueueFlags CommandQueueFlags { get { return queueProperties; } }
 
         /// <summary>
-        /// Gets the availability state of the OpenCL compiler of the <c>ComputeDevice.Platform</c>.
+        /// Gets the availability state of the OpenCL compiler of the <see cref="ComputeDevice.Platform"/>.
         /// </summary>
         /// <remarks> Is <c>false</c> if the implementation does not have a compiler available to compile the program source. Is <c>true</c> if the compiler is available. This can be <c>false</c> for the embededed platform profile only. </remarks>
         public bool CompilerAvailable { get { return compilerAvailable; } }
 
         /// <summary>
-        /// Gets the OpenCL software driver version string of the <c>ComputeDevice</c>.
+        /// Gets the OpenCL software driver version string of the <see cref="ComputeDevice"/>.
         /// </summary>
         /// <remarks> The version string is in the form <c>major_number.minor_number</c>. </remarks>
         public string DriverVersion { get { return driverVersion; } }
 
         /// <summary>
-        /// Gets the endianness of the <c>ComputeDevice</c>.
+        /// Gets the endianness of the <see cref="ComputeDevice"/>.
         /// </summary>
-        /// <remarks> Is <c>true</c> if the <c>ComputeDevice</c> is a little endian device and <c>false</c> otherwise. </remarks>
+        /// <remarks> Is <c>true</c> if the <see cref="ComputeDevice"/> is a little endian device and <c>false</c> otherwise. </remarks>
         public bool EndianLittle { get { return endianLittle; } }
 
         /// <summary>
-        /// Gets the error correction support state of the <c>ComputeDevice</c>.
+        /// Gets the error correction support state of the <see cref="ComputeDevice"/>.
         /// </summary>
-        /// <remarks> Is <c>true</c> if the <c>ComputeDevice</c> implements error correction for the memories, caches, registers etc. Is <c>false</c> if the <c>ComputeDevice</c> does not implement error correction. This can be a requirement for certain clients of OpenCL. </remarks>
+        /// <remarks> Is <c>true</c> if the <see cref="ComputeDevice"/> implements error correction for the memories, caches, registers etc. Is <c>false</c> if the <see cref="ComputeDevice"/> does not implement error correction. This can be a requirement for certain clients of OpenCL. </remarks>
         public bool ErrorCorrectionSupport { get { return errorCorrectionSupport; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDeviceExecutionCapabilities</c> of the <c>ComputeDevice</c>.
+        /// Gets the <see cref="ComputeDeviceExecutionCapabilities"/> of the <see cref="ComputeDevice"/>.
         /// </summary>
         public ComputeDeviceExecutionCapabilities ExecutionCapabilities { get { return executionCapabilities; } }
 
         /// <summary>
-        /// Gets a read-only collection of names of extensions that the <c>ComputeDevice</c> supports.
+        /// Gets a read-only collection of names of extensions that the <see cref="ComputeDevice"/> supports.
         /// </summary>
         public ReadOnlyCollection<string> Extensions { get { return extensions; } }
 
         /// <summary>
-        /// Gets the size of the global <c>ComputeDevice</c> memory cache line in bytes.
+        /// Gets the size of the global <see cref="ComputeDevice"/> memory cache line in bytes.
         /// </summary>
         public long GlobalMemoryCacheLineSize { get { return globalMemoryCachelineSize; } }
 
         /// <summary>
-        /// Gets the size of the global <c>ComputeDevice</c> memory cache in bytes.
+        /// Gets the size of the global <see cref="ComputeDevice"/> memory cache in bytes.
         /// </summary>
         public long GlobalMemoryCacheSize { get { return globalMemoryCacheSize; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDeviceMemoryCacheType</c> of the <c>ComputeDevice</c>.
+        /// Gets the <see cref="ComputeDeviceMemoryCacheType"/> of the <see cref="ComputeDevice"/>.
         /// </summary>
         public ComputeDeviceMemoryCacheType GlobalMemoryCacheType { get { return globalMemoryCacheType; } }
 
         /// <summary>
-        /// Gets the size of the global <c>ComputeDevice</c> memory in bytes.
+        /// Gets the size of the global <see cref="ComputeDevice"/> memory in bytes.
         /// </summary>
         public long GlobalMemorySize { get { return globalMemorySize; } }
 
         /// <summary>
-        /// Maximum height of 2D images that the <c>ComputeDevice</c> supports in pixels.
+        /// Maximum height of 2D images that the <see cref="ComputeDevice"/> supports in pixels.
         /// </summary>
-        /// <remarks> The minimum value is 8192 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
+        /// <remarks> The minimum value is 8192 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
         public long Image2DMaxHeight { get { return image2DMaxHeight; } }
 
         /// <summary>
-        /// Maximum width of 2D image that the <c>ComputeDevice</c> supports in pixels.
+        /// Maximum width of 2D image that the <see cref="ComputeDevice"/> supports in pixels.
         /// </summary>
-        /// <remarks> The minimum value is 8192 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
+        /// <remarks> The minimum value is 8192 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
         public long Image2DMaxWidth { get { return image2DMaxWidth; } }
 
         /// <summary>
-        /// Maximum depth of 3D image the <c>ComputeDevice</c> supports in pixels.
+        /// Maximum depth of 3D image the <see cref="ComputeDevice"/> supports in pixels.
         /// </summary>
-        /// <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
+        /// <remarks> The minimum value is 2048 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
         public long Image3DMaxDepth { get { return image3DMaxDepth; } }
 
         /// <summary>
-        /// Max height of 3D image the <c>ComputeDevice</c> supports in pixels.
+        /// Max height of 3D image the <see cref="ComputeDevice"/> supports in pixels.
         /// </summary>
-        /// <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
+        /// <remarks> The minimum value is 2048 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
         public long Image3DMaxHeight { get { return image3DMaxHeight; } }
 
         /// <summary>
-        /// Max width of 3D image the <c>ComputeDevice</c> supports in pixels.
+        /// Max width of 3D image the <see cref="ComputeDevice"/> supports in pixels.
         /// </summary>
-        /// <remarks> The minimum value is 2048 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
+        /// <remarks> The minimum value is 2048 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
         public long Image3DMaxWidth { get { return image3DMaxWidth; } }
 
         /// <summary>
-        /// Gets the state of image support of the <c>ComputeDevice</c>.
+        /// Gets the state of image support of the <see cref="ComputeDevice"/>.
         /// </summary>
-        /// <remarks> Is <c>true</c> if <c>ComputeImage</c>s are supported by the <c>ComputeDevice</c> and <c>false</c> otherwise. </remarks>
+        /// <remarks> Is <c>true</c> if <see cref="ComputeImage"/>s are supported by the <see cref="ComputeDevice"/> and <c>false</c> otherwise. </remarks>
         public bool ImageSupport { get { return imageSupport; } }
 
         /// <summary>
-        /// Gets the size of local memory are of the <c>ComputeDevice</c> in bytes.
+        /// Gets the size of local memory are of the <see cref="ComputeDevice"/> in bytes.
         /// </summary>
         /// <remarks> The minimum value is 16 KB (OpenCL 1.0) or 32 KB (OpenCL 1.1). </remarks>
         public long LocalMemorySize { get { return localMemorySize; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDeviceLocalMemoryType</c> that is supported on the <c>ComputeDevice</c>.
+        /// Gets the <see cref="ComputeDeviceLocalMemoryType"/> that is supported on the <see cref="ComputeDevice"/>.
         /// </summary>
         public ComputeDeviceLocalMemoryType LocalMemoryType { get { return localMemoryType; } }
 
         /// <summary>
-        /// Gets the maximum configured clock frequency of the <c>ComputeDevice</c> in MHz.
+        /// Gets the maximum configured clock frequency of the <see cref="ComputeDevice"/> in MHz.
         /// </summary>
         public long MaxClockFrequency { get { return maxClockFrequency; } }
 
         /// <summary>
-        /// Gets the number of parallel compute cores on the <c>ComputeDevice</c>.
+        /// Gets the number of parallel compute cores on the <see cref="ComputeDevice"/>.
         /// </summary>
         /// <remarks> The minimum value is 1. </remarks>
         public long MaxComputeUnits { get { return maxComputeUnits; } }
 
         /// <summary>
-        /// Gets the maximum number of arguments declared with the <c>__constant</c> or <c>constant</c> qualifier in a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
+        /// Gets the maximum number of arguments declared with the <c>__constant</c> or <c>constant</c> qualifier in a <see cref="ComputeKernel"/> executing in the <see cref="ComputeDevice"/>.
         /// </summary>
         /// <remarks> The minimum value is 8. </remarks>
         public long MaxConstantArguments { get { return maxConstantArguments; } }
 
         /// <summary>
-        /// Gets the maximum size in bytes of a constant buffer allocation in the <c>ComputeDevice</c> memory.
+        /// Gets the maximum size in bytes of a constant buffer allocation in the <see cref="ComputeDevice"/> memory.
         /// </summary>
         /// <remarks>  The minimum value is 64 KB. </remarks>
         public long MaxConstantBufferSize { get { return maxConstantBufferSize; } }
 
         /// <summary>
-        /// Gets the maximum size of memory object allocation in the <c>ComputeDevice</c> memory in bytes.
+        /// Gets the maximum size of memory object allocation in the <see cref="ComputeDevice"/> memory in bytes.
         /// </summary>
-        /// <remarks> The minimum value is <c>max(ComputeDevice.GlobalMemorySize/4, 128*1024*1024)</c>. </remarks>
+        /// <remarks> The minimum value is <c>max(<see cref="ComputeDevice.GlobalMemorySize"/>/4, 128*1024*1024)</c>. </remarks>
         public long MaxMemoryAllocationSize { get { return maxMemAllocSize; } }
 
         /// <summary>
-        /// Gets the maximum size in bytes of the arguments that can be passed to a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
+        /// Gets the maximum size in bytes of the arguments that can be passed to a <see cref="ComputeKernel"/> executing in the <see cref="ComputeDevice"/>.
         /// </summary>
         /// <remarks> The minimum value is 256 (OpenCL 1.0) or 1024 (OpenCL 1.1). </remarks>
         public long MaxParameterSize { get { return maxParameterSize; } }
 
         /// <summary>
-        /// Gets the maximum number of simultaneous <c>ComputeImage</c>s that can be read by a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
+        /// Gets the maximum number of simultaneous <see cref="ComputeImage"/>s that can be read by a <see cref="ComputeKernel"/> executing in the <see cref="ComputeDevice"/>.
         /// </summary>
-        /// <remarks> The minimum value is 128 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
+        /// <remarks> The minimum value is 128 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
         public long MaxReadImageArguments { get { return maxReadImageArgs; } }
 
         /// <summary>
-        /// Gets the maximum number of <c>ComputeSampler</c>s that can be used in a <c>ComputeKernel</c>.
+        /// Gets the maximum number of <see cref="ComputeSampler"/>s that can be used in a <see cref="ComputeKernel"/>.
         /// </summary>
-        /// <remarks> The minimum value is 16 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
+        /// <remarks> The minimum value is 16 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
         public long MaxSamplers { get { return maxSamplers; } }
 
         /// <summary>
-        /// Gets the maximum number of work-items in a work-group executing a <c>ComputeKernel</c> in a <c>ComputeDevice</c> using the data parallel execution model.
+        /// Gets the maximum number of work-items in a work-group executing a <see cref="ComputeKernel"/> in a <see cref="ComputeDevice"/> using the data parallel execution model.
         /// </summary>
         /// <remarks> The minimum value is 1. </remarks>
         public long MaxWorkGroupSize { get { return maxWorkGroupSize; } }
@@ -279,129 +279,129 @@ namespace Cloo
         public long MaxWorkItemDimensions { get { return maxWorkItemDimensions; } }
 
         /// <summary>
-        /// Gets the maximum number of work-items that can be specified in each dimension of the <paramref name="globalWorkSize"/> argument of <c>ComputeCommandQueue.Execute</c>.
+        /// Gets the maximum number of work-items that can be specified in each dimension of the <paramref name="globalWorkSize"/> argument of <see cref="ComputeCommandQueue.Execute"/>.
         /// </summary>
         public ReadOnlyCollection<long> MaxWorkItemSizes { get { return maxWorkItemSizes; } }
 
         /// <summary>
-        /// Gets the maximum number of simultaneous <c>ComputeImage</c>s that can be written to by a <c>ComputeKernel</c> executing in the <c>ComputeDevice</c>.
+        /// Gets the maximum number of simultaneous <see cref="ComputeImage"/>s that can be written to by a <see cref="ComputeKernel"/> executing in the <see cref="ComputeDevice"/>.
         /// </summary>
-        /// <remarks> The minimum value is 8 if <c>ComputeDevice.ImageSupport</c> is <c>true</c>. </remarks>
+        /// <remarks> The minimum value is 8 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </remarks>
         public long MaxWriteImageArguments { get { return maxWriteImageArgs; } }
 
         /// <summary>
-        /// Gets the alignment in bits of the base address of any <c>ComputeMemory</c> allocated in the <c>ComputeDevice</c> memory.
+        /// Gets the alignment in bits of the base address of any <see cref="ComputeMemory"/> allocated in the <see cref="ComputeDevice"/> memory.
         /// </summary>
         public long MemoryBaseAddressAlignment { get { return memBaseAddrAlign; } }
 
         /// <summary>
-        /// Gets the smallest alignment in bytes which can be used for any data type allocated in the <c>ComputeDevice</c> memory.
+        /// Gets the smallest alignment in bytes which can be used for any data type allocated in the <see cref="ComputeDevice"/> memory.
         /// </summary>
         public long MinDataTypeAlignmentSize { get { return minDataTypeAlignSize; } }
 
         /// <summary>
-        /// Gets the name of the <c>ComputeDevice</c>.
+        /// Gets the name of the <see cref="ComputeDevice"/>.
         /// </summary>
         public string Name { get { return name; } }
 
         /// <summary>
-        /// Gets the <c>ComputePlatform</c> associated with the <c>ComputeDevice</c>.
+        /// Gets the <see cref="ComputePlatform"/> associated with the <see cref="ComputeDevice"/>.
         /// </summary>
         public ComputePlatform Platform { get { return platform; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>char</c>s.
+        /// Gets the <see cref="ComputeDevice"/>'s preferred native vector width size for vector of <c>char</c>s.
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthChar { get { return preferredVectorWidthChar; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>double</c>s or 0 if the cl_khr_fp64 format is not supported..
+        /// Gets the <see cref="ComputeDevice"/>'s preferred native vector width size for vector of <c>double</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported..
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthDouble { get { return GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthDouble); } }
 
         /// <summary>
-        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>float</c>s.
+        /// Gets the <see cref="ComputeDevice"/>'s preferred native vector width size for vector of <c>float</c>s.
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthFloat { get { return preferredVectorWidthFloat; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>half</c>s or 0 if the cl_khr_fp16 format is not supported..
+        /// Gets the <see cref="ComputeDevice"/>'s preferred native vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp16</c> format is not supported..
         /// </summary>
-        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. Returns 0 if the cl_khr_fp16 extension is not supported. </remarks>
+        /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. Returns 0 if the <c>cl_khr_fp16</c> extension is not supported. </remarks>
         public long PreferredVectorWidthHalf { get { return GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthHalf); } }
 
         /// <summary>
-        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>int</c>s.
+        /// Gets the <see cref="ComputeDevice"/>'s preferred native vector width size for vector of <c>int</c>s.
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthInt { get { return preferredVectorWidthInt; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>long</c>s.
+        /// Gets the <see cref="ComputeDevice"/>'s preferred native vector width size for vector of <c>long</c>s.
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthLong { get { return preferredVectorWidthLong; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDevice</c>'s preferred native vector width size for vector of <c>short</c>s.
+        /// Gets the <see cref="ComputeDevice"/>'s preferred native vector width size for vector of <c>short</c>s.
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         public long PreferredVectorWidthShort { get { return preferredVectorWidthShort; } }
 
         /// <summary>
-        /// Gets the OpenCL profile name supported by the <c>ComputeDevice</c>.
+        /// Gets the OpenCL profile name supported by the <see cref="ComputeDevice"/>.
         /// </summary>
         /// <remarks> 
         /// The profile name returned can be one of the following strings:
         /// <list type="bullets">
         /// <item>
         ///     <term> FULL_PROFILE </term>
-        ///     <description> The <c>ComputeDevice</c> supports the OpenCL specification (functionality defined as part of the core specification and does not require any extensions to be supported). </description>
+        ///     <description> The <see cref="ComputeDevice"/> supports the OpenCL specification (functionality defined as part of the core specification and does not require any extensions to be supported). </description>
         /// </item>
         /// <item>
         ///     <term> EMBEDDED_PROFILE </term>
-        ///     <description> The <c>ComputeDevice</c> supports the OpenCL embedded profile. </description>
+        ///     <description> The <see cref="ComputeDevice"/> supports the OpenCL embedded profile. </description>
         /// </item>
         /// </list>
         /// </remarks>
         public string Profile { get { return profile; } }
 
         /// <summary>
-        /// Gets the resolution of the <c>ComputeDevice</c> timer in nanoseconds.
+        /// Gets the resolution of the <see cref="ComputeDevice"/> timer in nanoseconds.
         /// </summary>
         public long ProfilingTimerResolution { get { return profilingTimerResolution; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDeviceSingleCapabilities</c> of the <c>ComputeDevice</c>.
+        /// Gets the <see cref="ComputeDeviceSingleCapabilities"/> of the <see cref="ComputeDevice"/>.
         /// </summary>
         public ComputeDeviceSingleCapabilities SingleCapabilites { get { return singleCapabilities; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDeviceTypes</c> of the <c>ComputeDevice</c>.
+        /// Gets the <see cref="ComputeDeviceTypes"/> of the <see cref="ComputeDevice"/>.
         /// </summary>
         public ComputeDeviceTypes Type { get { return type; } }
 
         /// <summary>
-        /// Gets the <c>ComputeDevice</c> vendor name string.
+        /// Gets the <see cref="ComputeDevice"/> vendor name string.
         /// </summary>
         public string Vendor { get { return vendor; } }
 
         /// <summary>
-        /// Gets a unique <c>ComputeDevice</c> vendor identifier.
+        /// Gets a unique <see cref="ComputeDevice"/> vendor identifier.
         /// </summary>
         /// <remarks> An example of a unique device identifier could be the PCIe ID. </remarks>
         public long VendorId { get { return vendorId; } }
 
         /// <summary>
-        /// Gets the OpenCL version supported by the <c>ComputeDevice</c>.
+        /// Gets the OpenCL version supported by the <see cref="ComputeDevice"/>.
         /// </summary>
         public Version Version { get { return Tools.ParseVersionString(VersionString, 1); } }
 
         /// <summary>
-        /// Gets the OpenCL version string supported by the <c>ComputeDevice</c>.
+        /// Gets the OpenCL version string supported by the <see cref="ComputeDevice"/>.
         /// </summary>
         /// <remarks> The version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
         public string VersionString { get { return version; } }
@@ -411,7 +411,7 @@ namespace Cloo
         //////////////////////////////////
 
         /// <summary>
-        /// Returns <c>true</c> if the <c>ComputeDevice</c> and the host have a unified memory subsystem and <c>false</c> otherwise.
+        /// Returns <c>true</c> if the <see cref="ComputeDevice"/> and the host have a unified memory subsystem and <c>false</c> otherwise.
         /// </summary>
         /// <remarks> Requires OpenCL 1.1 </remarks>
         public bool HostUnifiedMemory { get { return GetBoolInfo(ComputeDeviceInfo.HostUnifiedMemory); } }
@@ -424,7 +424,7 @@ namespace Cloo
         public long NativeVectorWidthChar { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthChar); } }
 
         /// <summary>
-        /// Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the cl_khr_fp64 format is not supported.
+        /// Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported.
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         /// <remarks> Requires OpenCL 1.1 </remarks>
@@ -438,7 +438,7 @@ namespace Cloo
         public long NativeVectorWidthFloat { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthFloat); } }
 
         /// <summary>
-        /// Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the cl_khr_fp16 format is not supported.
+        /// Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp16</c> format is not supported.
         /// </summary>
         /// <remarks> The vector width is defined as the number of scalar elements that can be stored in the vector. </remarks>
         /// <remarks> Requires OpenCL 1.1 </remarks>
@@ -466,13 +466,13 @@ namespace Cloo
         public long NativeVectorWidthShort { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthShort); } }
 
         /// <summary>
-        /// Gets the OpenCL C version supported by the <c>ComputeDevice</c>.
+        /// Gets the OpenCL C version supported by the <see cref="ComputeDevice"/>.
         /// </summary>
-        /// <remarks> Is 1.1 if <c>ComputeDevice.Version</c> is 1.1. Can be 1.0 or 1.1 if <c>ComputeDevice.Version</c> is 1.0. </remarks>
+        /// <remarks> Is 1.1 if <see cref="ComputeDevice.Version"/> is 1.1. Can be 1.0 or 1.1 if <see cref="ComputeDevice.Version"/> is 1.0. </remarks>
         public Version OpenCLCVersion { get { return Tools.ParseVersionString(OpenCLCVersionString, 2); } }
 
         /// <summary>
-        /// Gets the OpenCL C version string supported by the <c>ComputeDevice</c>.
+        /// Gets the OpenCL C version string supported by the <see cref="ComputeDevice"/>.
         /// </summary>
         /// <remarks> The version string has the following format: <c>OpenCL[space]C[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
         public string OpenCLCVersionString { get { return GetStringInfo(ComputeDeviceInfo.OpenCLCVersion); } }
@@ -547,9 +547,9 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputeDevice</c>.
+        /// Gets the string representation of the <see cref="ComputeDevice"/>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputeDevice</c>. </returns>
+        /// <returns> The string representation of the <see cref="ComputeDevice"/>. </returns>
         public override string ToString()
         {
             return "ComputeDevice(" + Name + ")";

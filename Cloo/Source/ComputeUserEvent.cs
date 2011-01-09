@@ -44,9 +44,9 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeUserEvent</c>.
+        /// Creates a new <see cref="ComputeUserEvent"/>.
         /// </summary>
-        /// <param name="context"> The <c>ComputeContext</c> in which the <c>ComputeUserEvent</c> is created. </param>
+        /// <param name="context"> The <see cref="ComputeContext"/> in which the <see cref="ComputeUserEvent"/> is created. </param>
         /// <remarks> Requires OpenCL 1.1. </remarks>
         public ComputeUserEvent(ComputeContext context)
         {
@@ -70,18 +70,18 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Sets the status of the of the <c>ComputeUserEvent</c>.
+        /// Sets the status of the of the <see cref="ComputeUserEvent"/>.
         /// </summary>
-        /// <param name="status"> The new status of the <c>ComputeUserEvent</c>. Allowed value is <c>ComputeCommandExecutionStatus.Complete</c>. </param>
+        /// <param name="status"> The new status of the <see cref="ComputeUserEvent"/>. Allowed value is <see cref="ComputeCommandExecutionStatus.Complete"/>. </param>
         public void SetStatus(ComputeCommandExecutionStatus status)
         {
             SetStatus((int)status);
         }
 
         /// <summary>
-        /// Sets the status of the <c>ComputeUserEvent</c>.
+        /// Sets the status of the <see cref="ComputeUserEvent"/>.
         /// </summary>
-        /// <param name="status"> The new status of the <c>ComputeUserEvent</c>. </param>
+        /// <param name="status"> The new status of the <see cref="ComputeUserEvent"/>. </param>
         public void SetStatus(int status)
         {
             unsafe

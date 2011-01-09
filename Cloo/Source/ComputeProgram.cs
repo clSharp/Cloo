@@ -60,29 +60,29 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets a read-only collection of program binaries associated with the <c>ComputeProgram.Devices</c>.
+        /// Gets a read-only collection of program binaries associated with the <see cref="ComputeProgram.Devices"/>.
         /// </summary>
         /// <remarks> The bits returned can be an implementation-specific intermediate representation (a.k.a. IR) or device specific executable bits or both. The decision on which information is returned in the binary is up to the OpenCL implementation. </remarks>
         public ReadOnlyCollection<byte[]> Binaries { get { return binaries; } }
 
         /// <summary>
-        /// Gets the <c>ComputeProgram</c> build options as specified in <c>ComputeProgram.Build</c> <paramref name="options"/>.
+        /// Gets the <see cref="ComputeProgram"/> build options as specified in <paramref name="options"/> argument of <see cref="ComputeProgram.Build"/>.
         /// </summary>
         public string BuildOptions { get { return buildOptions; } }
 
         /// <summary>
-        /// Gets the <c>ComputeContext</c> of the <c>ComputeProgram</c>.
+        /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeProgram"/>.
         /// </summary>
         public ComputeContext Context { get { return context; } }
 
         /// <summary>
-        /// Gets a read-only collection of <c>ComputeDevice</c>s associated with the <c>ComputeProgram</c>.
+        /// Gets a read-only collection of <see cref="ComputeDevice"/>s associated with the <see cref="ComputeProgram"/>.
         /// </summary>
-        /// <remarks> This collection contains <c>ComputeDevice</c>s from <c>ComputeProgram.Context.Devices</c>. </remarks>
+        /// <remarks> This collection contains <see cref="ComputeDevice"/>s from <see cref="ComputeProgram.Context.Devices"/>. </remarks>
         public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
 
         /// <summary>
-        /// Gets a read-only collection of program source code strings specified when creating the <c>ComputeProgram</c> or <c>null</c> if <c>ComputeProgram</c> was created using program binaries.
+        /// Gets a read-only collection of program source code strings specified when creating the <see cref="ComputeProgram"/> or <c>null</c> if <see cref="ComputeProgram"/> was created using program binaries.
         /// </summary>
         public ReadOnlyCollection<string> Source { get { return source; } }
 
@@ -91,11 +91,11 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeProgram</c> from a source code string.
+        /// Creates a new <see cref="ComputeProgram"/> from a source code string.
         /// </summary>
-        /// <param name="context"> A <c>ComputeContext</c>. </param>
-        /// <param name="source"> The source code for the <c>ComputeProgram</c>. </param>
-        /// <remarks> The created <c>ComputeProgram</c> is associated with the <c>ComputeContext.Devices</c>. </remarks>
+        /// <param name="context"> A <see cref="ComputeContext"/>. </param>
+        /// <param name="source"> The source code for the <see cref="ComputeProgram"/>. </param>
+        /// <remarks> The created <see cref="ComputeProgram"/> is associated with the <see cref="ComputeContext.Devices"/>. </remarks>
         public ComputeProgram(ComputeContext context, string source)
         {
             unsafe
@@ -118,11 +118,11 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new <c>ComputeProgram</c> from an array of source code strings.
+        /// Creates a new <see cref="ComputeProgram"/> from an array of source code strings.
         /// </summary>
-        /// <param name="context"> A <c>ComputeContext</c>. </param>
-        /// <param name="source"> The source code lines for the <c>ComputeProgram</c>. </param>
-        /// <remarks> The created <c>ComputeProgram</c> is associated with the <c>ComputeContext.Devices</c>. </remarks>
+        /// <param name="context"> A <see cref="ComputeContext"/>. </param>
+        /// <param name="source"> The source code lines for the <see cref="ComputeProgram"/>. </param>
+        /// <remarks> The created <see cref="ComputeProgram"/> is associated with the <see cref="ComputeContext.Devices"/>. </remarks>
         public ComputeProgram(ComputeContext context, string[] source)
         {
             unsafe
@@ -150,11 +150,11 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new <c>ComputeProgram</c> from a specified list of binaries.
+        /// Creates a new <see cref="ComputeProgram"/> from a specified list of binaries.
         /// </summary>
-        /// <param name="context"> A <c>ComputeContext</c>. </param>
+        /// <param name="context"> A <see cref="ComputeContext"/>. </param>
         /// <param name="binaries"> A list of binaries, one for each item in <paramref name="devices"/>. </param>
-        /// <param name="devices"> A subset of the <c>ComputeContext.Devices</c>. If <paramref name="devices"/> is <c>null</c>, OpenCL will associate every binary from <c>ComputeProgram.Binaries</c> with a corresponding <c>ComputeDevice</c> from <c>ComputeContext.Devices</c>. </param>
+        /// <param name="devices"> A subset of the <see cref="ComputeContext.Devices"/>. If <paramref name="devices"/> is <c>null</c>, OpenCL will associate every binary from <see cref="ComputeProgram.Binaries"/> with a corresponding <see cref="ComputeDevice"/> from <see cref="ComputeContext.Devices"/>. </param>
         public ComputeProgram(ComputeContext context, IList<byte[]> binaries, IList<ComputeDevice> devices)
         {
             unsafe
@@ -218,11 +218,11 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Builds (compiles and links) a program executable from the program source or binary for all or some of the <c>ComputeProgram.Devices</c>.
+        /// Builds (compiles and links) a program executable from the program source or binary for all or some of the <see cref="ComputeProgram.Devices"/>.
         /// </summary>
-        /// <param name="devices"> A subset or all of <c>ComputeProgram.Devices</c>. If <paramref name="devices"/> is <c>null</c>, the executable is built for every item of <c>ComputeProgram.Devices</c> for which a source or a binary has been loaded. </param>
+        /// <param name="devices"> A subset or all of <see cref="ComputeProgram.Devices"/>. If <paramref name="devices"/> is <c>null</c>, the executable is built for every item of <see cref="ComputeProgram.Devices"/> for which a source or a binary has been loaded. </param>
         /// <param name="options"> A set of options for the OpenCL compiler. </param>
-        /// <param name="notify"> A delegate instance that represents a reference to a notification routine. This routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If <paramref name="notify"/> is not <c>null</c>, <c>ComputeProgram.Build</c> does not need to wait for the build to complete and can return immediately. If <paramref name="notify"/> is <c>null</c>, <c>ComputeProgram.Build</c> does not return until the build has completed. The callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe and that the delegate instance doesn't get collected by the Garbage Collector until the build operation triggers the callback. </param>
+        /// <param name="notify"> A delegate instance that represents a reference to a notification routine. This routine is a callback function that an application can register and which will be called when the program executable has been built (successfully or unsuccessfully). If <paramref name="notify"/> is not <c>null</c>, <see cref="ComputeProgram.Build"/> does not need to wait for the build to complete and can return immediately. If <paramref name="notify"/> is <c>null</c>, <see cref="ComputeProgram.Build"/> does not return until the build has completed. The callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe and that the delegate instance doesn't get collected by the Garbage Collector until the build operation triggers the callback. </param>
         /// <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public void Build(ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr)
         {
@@ -248,10 +248,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a <c>ComputeKernel</c> for every <c>kernel</c> function in <c>ComputeProgram</c>.
+        /// Creates a <see cref="ComputeKernel"/> for every <c>kernel</c> function in <see cref="ComputeProgram"/>.
         /// </summary>
-        /// <returns> The collection of created <c>ComputeKernel</c>s. </returns>
-        /// <remarks> <c>ComputeKernel</c>s are not created for any <c>kernel</c> functions in <c>ComputeProgram</c> that do not have the same function definition across all <c>ComputeProgram.Devices</c> for which a program executable has been successfully built. </remarks>
+        /// <returns> The collection of created <see cref="ComputeKernel"/>s. </returns>
+        /// <remarks> <see cref="ComputeKernel"/>s are not created for any <c>kernel</c> functions in <see cref="ComputeProgram"/> that do not have the same function definition across all <see cref="ComputeProgram.Devices"/> for which a program executable has been successfully built. </remarks>
         public ICollection<ComputeKernel> CreateAllKernels()
         {
             unsafe
@@ -281,19 +281,19 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a <c>ComputeKernel</c> for a kernel function of a specified name.
+        /// Creates a <see cref="ComputeKernel"/> for a kernel function of a specified name.
         /// </summary>
-        /// <returns> The created <c>ComputeKernel</c>. </returns>
+        /// <returns> The created <see cref="ComputeKernel"/>. </returns>
         public ComputeKernel CreateKernel(string functionName)
         {
             return new ComputeKernel(functionName, this);
         }
 
         /// <summary>
-        /// Gets the build log of the <c>ComputeProgram</c> for a specified <c>ComputeDevice</c>.
+        /// Gets the build log of the <see cref="ComputeProgram"/> for a specified <see cref="ComputeDevice"/>.
         /// </summary>
-        /// <param name="device"> The <c>ComputeDevice</c> building the <c>ComputeProgram</c>. Must be one of <c>ComputeProgram.Devices</c>. </param>
-        /// <returns> The build log of the <c>ComputeProgram</c> for <paramref name="device"/>. </returns>
+        /// <param name="device"> The <see cref="ComputeDevice"/> building the <see cref="ComputeProgram"/>. Must be one of <see cref="ComputeProgram.Devices"/>. </param>
+        /// <returns> The build log of the <see cref="ComputeProgram"/> for <paramref name="device"/>. </returns>
         public string GetBuildLog(ComputeDevice device)
         {
             unsafe
@@ -306,10 +306,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the <c>ComputeProgramBuildStatus</c> of the <c>ComputeProgram</c> for a specified <c>ComputeDevice</c>.
+        /// Gets the <see cref="ComputeProgramBuildStatus"/> of the <see cref="ComputeProgram"/> for a specified <see cref="ComputeDevice"/>.
         /// </summary>
-        /// <param name="device"> The <c>ComputeDevice</c> building the <c>ComputeProgram</c>. Must be one of <c>ComputeProgram.Devices</c>. </param>
-        /// <returns> The <c>ComputeProgramBuildStatus</c> of the <c>ComputeProgram</c> for <paramref name="device"/>. </returns>
+        /// <param name="device"> The <see cref="ComputeDevice"/> building the <see cref="ComputeProgram"/>. Must be one of <see cref="ComputeProgram.Devices"/>. </param>
+        /// <returns> The <see cref="ComputeProgramBuildStatus"/> of the <see cref="ComputeProgram"/> for <paramref name="device"/>. </returns>
         public ComputeProgramBuildStatus GetBuildStatus(ComputeDevice device)
         {
             unsafe
@@ -322,9 +322,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputeProgram</c>.
+        /// Gets the string representation of the <see cref="ComputeProgram"/>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputeProgram</c>. </returns>
+        /// <returns> The string representation of the <see cref="ComputeProgram"/>. </returns>
         public override string ToString()
         {
             return "ComputeProgram" + base.ToString();
@@ -397,10 +397,10 @@ namespace Cloo
     }
 
     /// <summary>
-    /// A callback function that can be registered by the application to report the <c>ComputeProgram</c> build status.
+    /// A callback function that can be registered by the application to report the <see cref="ComputeProgram"/> build status.
     /// </summary>
-    /// <param name="programHandle"> The handle of the <c>ComputeProgram</c> being built. </param>
-    /// <param name="notifyDataPtr"> The pointer to the optional user data specified in <paramref name="notifyDataPtr"/> argument of <c>ComputeProgram.Build</c>. </param>
+    /// <param name="programHandle"> The handle of the <see cref="ComputeProgram"/> being built. </param>
+    /// <param name="notifyDataPtr"> The pointer to the optional user data specified in <paramref name="notifyDataPtr"/> argument of <see cref="ComputeProgram.Build"/>. </param>
     /// <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
     //[UnmanagedFunctionPointer(CallingConvention.Cdecl)] // BUG: Cdecl not working on Win+Stream v2.2
     public delegate void ComputeProgramBuildNotifier(IntPtr programHandle, IntPtr notifyDataPtr);

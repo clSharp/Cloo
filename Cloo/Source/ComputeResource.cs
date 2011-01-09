@@ -43,7 +43,7 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Deletes the <c>ComputeResource</c> and frees its accompanying OpenCL resources.
+        /// Deletes the <see cref="ComputeResource"/> and frees its accompanying OpenCL resources.
         /// </summary>
         public void Dispose()
         {

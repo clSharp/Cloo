@@ -38,19 +38,19 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL sub-buffer.
     /// </summary>
-    /// <typeparam name="T"> The type of the elements of the <c>ComputeSubBuffer</c>. <typeparamref name="T"/> is restricted to value types and <c>struct</c>s containing such types. </typeparam>
+    /// <typeparam name="T"> The type of the elements of the <see cref="ComputeSubBuffer{T}"/>. <typeparamref name="T"/> is restricted to value types and <c>struct</c>s containing such types. </typeparam>
     /// <remarks> A sub-buffer is created from a standard buffer and represents all or part of its data content. <br/> Requires OpenCL 1.1. </remarks>
     public class ComputeSubBuffer<T> : ComputeBufferBase<T> where T : struct
     {
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeSubBuffer</c> from a specified <c>ComputeBuffer</c>.
+        /// Creates a new <see cref="ComputeSubBuffer{T}"/> from a specified <see cref="ComputeBuffer{T}"/>.
         /// </summary>
-        /// <param name="buffer"> The buffer to create the <c>ComputeSubBuffer</c> from. </param>
-        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
-        /// <param name="offset"> The index of the element of <paramref name="buffer"/>, where the <c>ComputeSubBuffer</c> starts. </param>
-        /// <param name="count"> The number of elements of <paramref name="buffer"/> to include in the <c>ComputeSubBuffer</c>. </param>
+        /// <param name="buffer"> The buffer to create the <see cref="ComputeSubBuffer{T}"/> from. </param>
+        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <see cref="ComputeBuffer{T}"/>. </param>
+        /// <param name="offset"> The index of the element of <paramref name="buffer"/>, where the <see cref="ComputeSubBuffer{T}"/> starts. </param>
+        /// <param name="count"> The number of elements of <paramref name="buffer"/> to include in the <see cref="ComputeSubBuffer{T}"/>. </param>
         public ComputeSubBuffer(ComputeBuffer<T> buffer, ComputeMemoryFlags flags, long offset, long count)
             : base(buffer.Context, flags)
         {
@@ -70,12 +70,12 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputeSubBuffer</c>.
+        /// Gets the string representation of the <see cref="ComputeSubBuffer{T}"/>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputeSubBuffer</c>. </returns>
+        /// <returns> The string representation of the <see cref="ComputeSubBuffer{T}"/>. </returns>
         public override string ToString()
         {
-            return "ComputeSubBuffer" + base.ToString();
+            return "ComputeSubBuffer{T}" + base.ToString();
         }
 
         #endregion

@@ -60,37 +60,37 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets a read-only collection of <c>ComputeDevice</c>s available on the <c>ComputePlatform</c>.
+        /// Gets a read-only collection of <see cref="ComputeDevice"/>s available on the <see cref="ComputePlatform"/>.
         /// </summary>
         public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
 
         /// <summary>
-        /// Gets a read-only collection of extension names supported by the <c>ComputePlatform</c>.
+        /// Gets a read-only collection of extension names supported by the <see cref="ComputePlatform"/>.
         /// </summary>
         public ReadOnlyCollection<string> Extensions { get { return extensions; } }
 
         /// <summary>
-        /// Gets the <c>ComputePlatform</c> name.
+        /// Gets the <see cref="ComputePlatform"/> name.
         /// </summary>
         public string Name { get { return name; } }
 
         /// <summary>
-        /// Gets a read-only collection of available <c>ComputePlatform</c>s.
+        /// Gets a read-only collection of available <see cref="ComputePlatform"/>s.
         /// </summary>
         public static ReadOnlyCollection<ComputePlatform> Platforms { get { return platforms; } }
 
         /// <summary>
-        /// Gets the name of the profile supported by the <c>ComputePlatform</c>.
+        /// Gets the name of the profile supported by the <see cref="ComputePlatform"/>.
         /// </summary>
         public string Profile { get { return profile; } }
 
         /// <summary>
-        /// Gets the <c>ComputePlatform</c> vendor.
+        /// Gets the <see cref="ComputePlatform"/> vendor.
         /// </summary>
         public string Vendor { get { return vendor; } }
 
         /// <summary>
-        /// Gets the OpenCL version supported by the <c>ComputePlatform</c>.
+        /// Gets the OpenCL version supported by the <see cref="ComputePlatform"/>.
         /// </summary>
         /// <remarks> This version string has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </remarks>
         public string Version { get { return version; } }
@@ -148,10 +148,10 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets a <c>ComputePlatform</c> of a specified handle.
+        /// Gets a <see cref="ComputePlatform"/> of a specified handle.
         /// </summary>
-        /// <param name="handle"> The handle of the queried <c>ComputePlatform</c>. </param>
-        /// <returns> The <c>ComputePlatform</c> of the matching handle or <c>null</c> if none matches. </returns>
+        /// <param name="handle"> The handle of the queried <see cref="ComputePlatform"/>. </param>
+        /// <returns> The <see cref="ComputePlatform"/> of the matching handle or <c>null</c> if none matches. </returns>
         public static ComputePlatform GetByHandle(IntPtr handle)
         {
             foreach (ComputePlatform platform in Platforms)
@@ -162,10 +162,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the first matching <c>ComputePlatform</c> of a specified name.
+        /// Gets the first matching <see cref="ComputePlatform"/> of a specified name.
         /// </summary>
-        /// <param name="platformName"> The name of the queried <c>ComputePlatform</c>. </param>
-        /// <returns> The first <c>ComputePlatform</c> of the specified name or <c>null</c> if none matches. </returns>
+        /// <param name="platformName"> The name of the queried <see cref="ComputePlatform"/>. </param>
+        /// <returns> The first <see cref="ComputePlatform"/> of the specified name or <c>null</c> if none matches. </returns>
         public static ComputePlatform GetByName(string platformName)
         {
             foreach (ComputePlatform platform in Platforms)
@@ -176,10 +176,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the first matching <c>ComputePlatform</c> of a specified vendor.
+        /// Gets the first matching <see cref="ComputePlatform"/> of a specified vendor.
         /// </summary>
-        /// <param name="platformVendor"> The vendor of the queried <c>ComputePlatform</c>. </param>
-        /// <returns> The first <c>ComputePlatform</c> of the specified vendor or <c>null</c> if none matches. </returns>
+        /// <param name="platformVendor"> The vendor of the queried <see cref="ComputePlatform"/>. </param>
+        /// <returns> The first <see cref="ComputePlatform"/> of the specified vendor or <c>null</c> if none matches. </returns>
         public static ComputePlatform GetByVendor(string platformVendor)
         {
             foreach (ComputePlatform platform in Platforms)
@@ -190,10 +190,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a read-only collection of available <c>ComputeDevice</c>s on the <c>ComputePlatform</c>.
+        /// Gets a read-only collection of available <see cref="ComputeDevice"/>s on the <see cref="ComputePlatform"/>.
         /// </summary>
-        /// <returns> A read-only collection of the available <c>ComputeDevice</c>s on the <c>ComputePlatform</c>. </returns>
-        /// <remarks> This method resets the <c>ComputePlatform.Devices</c>. This is useful if one or more of them become unavailable (<c>ComputeDevice.Available</c> is <c>false</c>) after a <c>ComputeContext</c> and <c>ComputeCommandQueue</c>s that use the <c>ComputeDevice</c> have been created and commands have been queued to them. Further calls will trigger an <c>OutOfResourcesComputeException</c> until this method is executed. You will also need to recreate any <c>ComputeResource</c> that was created on the no longer available <c>ComputeDevice</c>. </remarks>
+        /// <returns> A read-only collection of the available <see cref="ComputeDevice"/>s on the <see cref="ComputePlatform"/>. </returns>
+        /// <remarks> This method resets the <c>ComputePlatform.Devices</c>. This is useful if one or more of them become unavailable (<c>ComputeDevice.Available</c> is <c>false</c>) after a <see cref="ComputeContext"/> and <see cref="ComputeCommandQueue"/>s that use the <see cref="ComputeDevice"/> have been created and commands have been queued to them. Further calls will trigger an <c>OutOfResourcesComputeException</c> until this method is executed. You will also need to recreate any <see cref="ComputeResource"/> that was created on the no longer available <see cref="ComputeDevice"/>. </remarks>
         public ReadOnlyCollection<ComputeDevice> QueryDevices()
         {
             unsafe
@@ -217,9 +217,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputePlatform</c>.
+        /// Gets the string representation of the <see cref="ComputePlatform"/>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputePlatform</c>. </returns>
+        /// <returns> The string representation of the <see cref="ComputePlatform"/>. </returns>
         public override string ToString()
         {
             return "ComputePlatform(" + Name + ")";

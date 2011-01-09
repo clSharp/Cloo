@@ -58,17 +58,17 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the <c>ComputeContext</c> associated with the <c>ComputeKernel</c>.
+        /// Gets the <see cref="ComputeContext"/> associated with the <see cref="ComputeKernel"/>.
         /// </summary>
         public ComputeContext Context { get { return context; } }
 
         /// <summary>
-        /// Gets the function name of the <c>ComputeKernel</c>.
+        /// Gets the function name of the <see cref="ComputeKernel"/>.
         /// </summary>
         public string FunctionName { get { return functionName; } }
 
         /// <summary>
-        /// Gets the <c>ComputeProgram</c> that the <c>ComputeKernel</c> belongs to.
+        /// Gets the <see cref="ComputeProgram"/> that the <see cref="ComputeKernel"/> belongs to.
         /// </summary>
         public ComputeProgram Program { get { return program; } }
 
@@ -114,10 +114,10 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets the amount of local memory in bytes used by the <c>ComputeKernel</c>.
+        /// Gets the amount of local memory in bytes used by the <see cref="ComputeKernel"/>.
         /// </summary>
-        /// <param name="device"> One of the <c>ComputeKernel.Program.Device</c>s. </param>
-        /// <returns> The amount of local memory in bytes used by the <c>ComputeKernel</c>. </returns>
+        /// <param name="device"> One of the <see cref="ComputeKernel.Program.Device"/>s. </param>
+        /// <returns> The amount of local memory in bytes used by the <see cref="ComputeKernel"/>. </returns>
         public long GetLocalMemorySize(ComputeDevice device)
         {
             unsafe
@@ -130,7 +130,7 @@ namespace Cloo
         /// <summary>
         /// Gets the compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier.
         /// </summary>
-        /// <param name="device"> One of the <c>ComputeKernel.Program.Device</c>s. </param>
+        /// <param name="device"> One of the <see cref="ComputeKernel.Program.Device"/>s. </param>
         /// <returns> The compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier. If no such qualifier is specified, (0, 0, 0) is returned. </returns>
         public long[] GetCompileWorkGroupSize(ComputeDevice device)
         {
@@ -145,7 +145,7 @@ namespace Cloo
         /// <summary>
         /// Gets the preferred multiple of workgroup size for launch. 
         /// </summary>
-        /// <param name="device"> One of the <c>ComputeKernel.Program.Device</c>s. </param>
+        /// <param name="device"> One of the <see cref="ComputeKernel.Program.Device"/>s. </param>
         /// <returns> The preferred multiple of workgroup size for launch. </returns>
         /// <remarks> The returned value is a performance hint. Specifying a workgroup size that is not a multiple of the value returned by this query as the value of the local work size argument to ComputeCommandQueue.Execute will not fail to enqueue the kernel for execution unless the work-group size specified is larger than the device maximum. </remarks>
         /// <remarks> Requires OpenCL 1.1. </remarks>
@@ -161,7 +161,7 @@ namespace Cloo
         /// <summary>
         /// Gets the minimum amount of memory, in bytes, used by each work-item in the kernel.
         /// </summary>
-        /// <param name="device"> One of the <c>ComputeKernel.Program.Device</c>s. </param>
+        /// <param name="device"> One of the <see cref="ComputeKernel.Program.Device"/>s. </param>
         /// <returns> The minimum amount of memory, in bytes, used by each work-item in the kernel. </returns>
         /// <remarks> The returned value may include any private memory needed by an implementation to execute the kernel, including that used by the language built-ins and variable declared inside the kernel with the <c>__private</c> or <c>private</c> qualifier. </remarks>
         public long GetPrivateMemorySize(ComputeDevice device)
@@ -174,10 +174,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the maximum work-group size that can be used to execute the <c>ComputeKernel</c> on a <c>ComputeDevice</c>.
+        /// Gets the maximum work-group size that can be used to execute the <see cref="ComputeKernel"/> on a <see cref="ComputeDevice"/>.
         /// </summary>
-        /// <param name="device"> One of the <c>ComputeKernel.Program.Device</c>s. </param>
-        /// <returns> The maximum work-group size that can be used to execute the <c>ComputeKernel</c> on <paramref name="device"/>. </returns>
+        /// <param name="device"> One of the <see cref="ComputeKernel.Program.Device"/>s. </param>
+        /// <returns> The maximum work-group size that can be used to execute the <see cref="ComputeKernel"/> on <paramref name="device"/>. </returns>
         public long GetWorkGroupSize(ComputeDevice device)
         {
             unsafe
@@ -188,7 +188,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets an argument of the <c>ComputeKernel</c> (no argument tracking).
+        /// Sets an argument of the <see cref="ComputeKernel"/> (no argument tracking).
         /// </summary>
         /// <param name="index"> The argument index. </param>
         /// <param name="dataSize"> The size of the argument data in bytes. </param>
@@ -220,10 +220,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <c>ComputeKernel</c>.
+        /// Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <see cref="ComputeKernel"/>.
         /// </summary>
         /// <param name="index"> The argument index. </param>
-        /// <param name="memObj"> The <c>ComputeMemory</c> that is passed as the argument. </param>
+        /// <param name="memObj"> The <see cref="ComputeMemory"/> that is passed as the argument. </param>
         /// <remarks> This method will automatically track <paramref name="memObj"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetMemoryArgument(int index, ComputeMemory memObj)
         {
@@ -231,11 +231,11 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <c>ComputeKernel</c>.
+        /// Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <see cref="ComputeKernel"/>.
         /// </summary>
         /// <param name="index"> The argument index. </param>
-        /// <param name="memObj"> The <c>ComputeMemory</c> that is passed as the argument. </param>
-        /// <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="memObj"/> until <c>ComputeKernel</c> execution. This is useful if the application code doesn't refer to <paramref name="memObj"/> after this call or forces a <c>GC.Collect()</c> between this call and the <c>ComputeKernel</c> execution. </param>
+        /// <param name="memObj"> The <see cref="ComputeMemory"/> that is passed as the argument. </param>
+        /// <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="memObj"/> until <see cref="ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="memObj"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="ComputeKernel"/> execution. </param>
         /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetMemoryArgument(int index, ComputeMemory memObj, bool track)
         {
@@ -245,10 +245,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets a <c>sampler_t</c> argument of the <c>ComputeKernel</c>.
+        /// Sets a <c>sampler_t</c> argument of the <see cref="ComputeKernel"/>.
         /// </summary>
         /// <param name="index"> The argument index. </param>
-        /// <param name="sampler"> The <c>ComputeSampler</c> that is passed as the argument. </param>
+        /// <param name="sampler"> The <see cref="ComputeSampler"/> that is passed as the argument. </param>
         /// <remarks> This method will automatically track <paramref name="sampler"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetSamplerArgument(int index, ComputeSampler sampler)
         {
@@ -256,11 +256,11 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets a <c>sampler_t</c> argument of the <c>ComputeKernel</c>.
+        /// Sets a <c>sampler_t</c> argument of the <see cref="ComputeKernel"/>.
         /// </summary>
         /// <param name="index"> The argument index. </param>
-        /// <param name="sampler"> The <c>ComputeSampler</c> that is passed as the argument. </param>
-        /// <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="sampler"/> until <c>ComputeKernel</c> execution. This is useful if the application code doesn't refer to <paramref name="sampler"/> after this call or forces a <c>GC.Collect()</c> between this call and the <c>ComputeKernel</c> execution. </param>
+        /// <param name="sampler"> The <see cref="ComputeSampler"/> that is passed as the argument. </param>
+        /// <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="sampler"/> until <see cref="ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="sampler"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="ComputeKernel"/> execution. </param>
         /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetSamplerArgument(int index, ComputeSampler sampler, bool track)
         {
@@ -270,7 +270,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets a value argument of the <c>ComputeKernel</c>.
+        /// Sets a value argument of the <see cref="ComputeKernel"/>.
         /// </summary>
         /// <typeparam name="T"> The type of the argument. </typeparam>
         /// <param name="index"> The argument index. </param>
@@ -293,9 +293,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputeKernel</c>.
+        /// Gets the string representation of the <see cref="ComputeKernel"/>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputeKernel</c>. </returns>
+        /// <returns> The string representation of the <see cref="ComputeKernel"/>. </returns>
         public override string ToString()
         {
             return "ComputeKernel" + base.ToString();

@@ -51,12 +51,12 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the <c>ComputeImageChannleOrder</c> of the <c>ComputeImage</c>.
+        /// Gets the <see cref="ComputeImageChannleOrder"/> of the <see cref="ComputeImage"/>.
         /// </summary>
         public ComputeImageChannelOrder ChannelOrder { get { return channelOrder; } }
 
         /// <summary>
-        /// Gets the <c>ComputeImageChannelType</c> of the <c>ComputeImage</c>.
+        /// Gets the <see cref="ComputeImageChannelType"/> of the <see cref="ComputeImage"/>.
         /// </summary>
         public ComputeImageChannelType ChannelType { get { return channelType; } }
 
@@ -65,9 +65,9 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeImageFormat</c>.
+        /// Creates a new <see cref="ComputeImageFormat"/>.
         /// </summary>
-        /// <param name="channelOrder"> The number of channels and the channel layout i.e. the memory layout in which channels are stored in the <c>ComputeImage</c>. </param>
+        /// <param name="channelOrder"> The number of channels and the channel layout i.e. the memory layout in which channels are stored in the <see cref="ComputeImage"/>. </param>
         /// <param name="channelType"> The type of the channel data. The number of bits per element determined by the <paramref name="channelType"/> and <paramref name="channelOrder"/> must be a power of two. </param>
         public ComputeImageFormat(ComputeImageChannelOrder channelOrder, ComputeImageChannelType channelType)
         {

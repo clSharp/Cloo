@@ -51,7 +51,7 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates an empty <c>ComputeEventList</c>.
+        /// Creates an empty <see cref="ComputeEventList"/>.
         /// </summary>
         public ComputeEventList()
         {
@@ -59,9 +59,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new <c>ComputeEventList</c> from an existing list of <c>ComputeEventBase</c>s.
+        /// Creates a new <see cref="ComputeEventList"/> from an existing list of <see cref="ComputeEventBase"/>s.
         /// </summary>
-        /// <param name="events"> A list of <c>ComputeEventBase</c>s. </param>
+        /// <param name="events"> A list of <see cref="ComputeEventBase"/>s. </param>
         public ComputeEventList(IList<ComputeEventBase> events)
         {
             events = new Collection<ComputeEventBase>(events);
@@ -94,7 +94,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Waits on the host thread for the <c>ComputeEventBase</c>s in the <c>ComputeEventList</c> to complete.
+        /// Waits on the host thread for the <see cref="ComputeEventBase"/>s in the <see cref="ComputeEventList"/> to complete.
         /// </summary>
         public void Wait()
         {

@@ -38,7 +38,7 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL buffer.
     /// </summary>
-    /// <typeparam name="T"> The type of the elements of the <c>ComputeBuffer</c>. <typeparamref name="T"/> is restricted to value types and <c>struct</c>s containing such types. </typeparam>
+    /// <typeparam name="T"> The type of the elements of the <see cref="ComputeBuffer{T}"/>. <typeparamref name="T"/> is restricted to value types and <c>struct</c>s containing such types. </typeparam>
     /// <remarks> A memory object that stores a linear collection of bytes. Buffer objects are accessible using a pointer in a kernel executing on a device. </remarks>
     /// <seealso cref="ComputeDevice"/>
     /// <seealso cref="ComputeKernel"/>
@@ -48,22 +48,22 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeBuffer</c>.
+        /// Creates a new <see cref="ComputeBuffer{T}"/>.
         /// </summary>
-        /// <param name="context"> A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>. </param>
-        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
-        /// <param name="count"> The number of elements of the <c>ComputeBuffer</c>. </param>
+        /// <param name="context"> A <see cref="ComputeContext"/> used to create the <see cref="ComputeBuffer{T}"/>. </param>
+        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <see cref="ComputeBuffer{T}"/>. </param>
+        /// <param name="count"> The number of elements of the <see cref="ComputeBuffer{T}"/>. </param>
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, long count)
             : this(context, flags, count, IntPtr.Zero)
         { }
 
         /// <summary>
-        /// Creates a new <c>ComputeBuffer</c>.
+        /// Creates a new <see cref="ComputeBuffer{T}"/>.
         /// </summary>
-        /// <param name="context"> A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>. </param>
-        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
-        /// <param name="count"> The number of elements of the <c>ComputeBuffer</c>. </param>
-        /// <param name="dataPtr"> A pointer to the data for the <c>ComputeBuffer</c>. </param>
+        /// <param name="context"> A <see cref="ComputeContext"/> used to create the <see cref="ComputeBuffer{T}"/>. </param>
+        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <see cref="ComputeBuffer{T}"/>. </param>
+        /// <param name="count"> The number of elements of the <see cref="ComputeBuffer{T}"/>. </param>
+        /// <param name="dataPtr"> A pointer to the data for the <see cref="ComputeBuffer{T}"/>. </param>
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, long count, IntPtr dataPtr)
             : base(context, flags)
         {
@@ -78,11 +78,11 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new <c>ComputeBuffer</c>.
+        /// Creates a new <see cref="ComputeBuffer{T}"/>.
         /// </summary>
-        /// <param name="context"> A <c>ComputeContext</c> used to create the <c>ComputeBuffer</c>. </param>
-        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <c>ComputeBuffer</c>. </param>
-        /// <param name="data"> The data for the <c>ComputeBuffer</c>. </param>
+        /// <param name="context"> A <see cref="ComputeContext"/> used to create the <see cref="ComputeBuffer{T}"/>. </param>
+        /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <see cref="ComputeBuffer{T}"/>. </param>
+        /// <param name="data"> The data for the <see cref="ComputeBuffer{T}"/>. </param>
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, T[] data)
             : base(context, flags)
         {
@@ -119,13 +119,13 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Creates a new <c>ComputeBuffer</c> from an existing OpenGL buffer object.
+        /// Creates a new <see cref="ComputeBuffer{T}"/> from an existing OpenGL buffer object.
         /// </summary>
-        /// <typeparam name="DataType"> The type of the elements of the <c>ComputeBuffer</c>. It is recommended, though not required, that <typeparamref name="T"/> matches the type of the elements in the OpenGL buffer. </typeparam>
-        /// <param name="context"> A <c>ComputeContext</c> with enabled CL/GL sharing. </param>
-        /// <param name="flags"> A bit-field that is used to specify usage information about the <c>ComputeBuffer</c>. Only <c>ComputeMemoryFlags.ReadOnly</c>, <c>ComputeMemoryFlags.WriteOnly</c> and <c>ComputeMemoryFlags.ReadWrite</c> are allowed. </param>
-        /// <param name="bufferId"> The OpenGL buffer object id to use for the creation of the <c>ComputeBuffer</c>. </param>
-        /// <returns> The created <c>ComputeBuffer</c>. </returns>
+        /// <typeparam name="DataType"> The type of the elements of the <see cref="ComputeBuffer{T}"/>. <typeparamref name="T"/> should match the type of the elements in the OpenGL buffer. </typeparam>
+        /// <param name="context"> A <see cref="ComputeContext"/> with enabled CL/GL sharing. </param>
+        /// <param name="flags"> A bit-field that is used to specify usage information about the <see cref="ComputeBuffer{T}"/>. Only <see cref="ComputeMemoryFlags.ReadOnly"/>, <see cref="ComputeMemoryFlags.WriteOnly"/> and <see cref="ComputeMemoryFlags.ReadWrite"/> are allowed. </param>
+        /// <param name="bufferId"> The OpenGL buffer object id to use for the creation of the <see cref="ComputeBuffer{T}"/>. </param>
+        /// <returns> The created <see cref="ComputeBuffer{T}"/>. </returns>
         public static ComputeBuffer<DataType> CreateFromGLBuffer<DataType>(ComputeContext context, ComputeMemoryFlags flags, int bufferId) where DataType : struct
         {
             unsafe
@@ -139,12 +139,12 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputeBuffer</c>.
+        /// Gets the string representation of the <see cref="ComputeBuffer{T}"/>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputeBuffer</c>. </returns>
+        /// <returns> The string representation of the <see cref="ComputeBuffer{T}"/>. </returns>
         public override string ToString()
         {
-            return "ComputeBuffer" + base.ToString();
+            return "ComputeBuffer{T}" + base.ToString();
         }
 
         #endregion

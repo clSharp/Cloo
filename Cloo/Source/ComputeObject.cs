@@ -49,7 +49,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets or sets (protected) the handle of the <c>ComputeObject</c>.
+        /// Gets or sets (protected) the handle of the <see cref="ComputeObject"/>.
         /// </summary>
         public IntPtr Handle
         {
@@ -62,7 +62,7 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Checks if two <c>object</c>s are equal. These <c>object</c>s must be cast from <c>ComputeObject</c>s.
+        /// Checks if two <c>object</c>s are equal. These <c>object</c>s must be cast from <see cref="ComputeObject"/>s.
         /// </summary>
         /// <param name="objA"> The first <c>object</c> to compare. </param>
         /// <param name="objB"> The second <c>object</c> to compare. </param>
@@ -75,10 +75,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Checks if the <c>ComputeObject</c> is equal to a specified <c>ComputeObject</c> cast to an <c>object</c>.
+        /// Checks if the <see cref="ComputeObject"/> is equal to a specified <see cref="ComputeObject"/> cast to an <c>object</c>.
         /// </summary>
-        /// <param name="obj"> The specified <c>object</c> to compare the <c>ComputeObject</c> with. </param>
-        /// <returns> <c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>. </returns>
+        /// <param name="obj"> The specified <c>object</c> to compare the <see cref="ComputeObject"/> with. </param>
+        /// <returns> <c>true</c> if the <see cref="ComputeObject"/> is equal with <paramref name="obj"/> otherwise <c>false</c>. </returns>
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
@@ -87,10 +87,10 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Checks if the <c>ComputeObject</c> is equal to a specified <c>ComputeObject</c>.
+        /// Checks if the <see cref="ComputeObject"/> is equal to a specified <see cref="ComputeObject"/>.
         /// </summary>
-        /// <param name="obj"> The specified <c>ComputeObject</c> to compare the <c>ComputeObject</c> with. </param>
-        /// <returns> <c>true</c> if the <c>ComputeObject</c> is equal with <paramref name="obj"/> otherwise <c>false</c>. </returns>
+        /// <param name="obj"> The specified <see cref="ComputeObject"/> to compare the <see cref="ComputeObject"/> with. </param>
+        /// <returns> <c>true</c> if the <see cref="ComputeObject"/> is equal with <paramref name="obj"/> otherwise <c>false</c>. </returns>
         public bool Equals(ComputeObject obj)
         {
             if (obj == null) return false;
@@ -99,18 +99,18 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the hash code of the <c>ComputeObject</c>.
+        /// Gets the hash code of the <see cref="ComputeObject"/>.
         /// </summary>
-        /// <returns> The hash code of the <c>ComputeObject</c>. </returns>
+        /// <returns> The hash code of the <see cref="ComputeObject"/>. </returns>
         public override int GetHashCode()
         {
             return Handle.GetHashCode();
         }
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputeObject</c>.
+        /// Gets the string representation of the <see cref="ComputeObject"/>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputeObject</c>. </returns>
+        /// <returns> The string representation of the <see cref="ComputeObject"/>. </returns>
         public override string ToString()
         {
             return "(" + Handle.ToString() + ")";

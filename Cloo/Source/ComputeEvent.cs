@@ -56,7 +56,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the <c>ComputeCommandQueue</c> associated with the <c>ComputeEvent</c>.
+        /// Gets the <see cref="ComputeCommandQueue"/> associated with the <see cref="ComputeEvent"/>.
         /// </summary>
         public ComputeCommandQueue CommandQueue { get; private set; }
 

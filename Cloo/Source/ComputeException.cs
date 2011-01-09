@@ -48,7 +48,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the <c>ComputeErrorCode</c> of the <c>ComputeException</c>.
+        /// Gets the <see cref="ComputeErrorCode"/> of the <see cref="ComputeException"/>.
         /// </summary>
         public ComputeErrorCode ComputeErrorCode { get { return code; } }
 
@@ -57,9 +57,9 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeException</c> with a specified <c>ComputeErrorCode</c>.
+        /// Creates a new <see cref="ComputeException"/> with a specified <see cref="ComputeErrorCode"/>.
         /// </summary>
-        /// <param name="code"> A <c>ComputeErrorCode</c>. </param>
+        /// <param name="code"> A <see cref="ComputeErrorCode"/>. </param>
         public ComputeException(ComputeErrorCode code)
             : base("OpenCL error code detected: " + code.ToString() + ".")
         {
@@ -71,7 +71,7 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
+        /// Checks for an OpenCL error code and throws a <see cref="ComputeException"/> if such is encountered.
         /// </summary>
         /// <param name="errorCode"> The value to be checked for an OpenCL error. </param>
         public static void ThrowOnError(int errorCode)
@@ -80,7 +80,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Checks for an OpenCL error code and throws a <c>ComputeException</c> if such is encountered.
+        /// Checks for an OpenCL error code and throws a <see cref="ComputeException"/> if such is encountered.
         /// </summary>
         /// <param name="errorCode"> The OpenCL error code. </param>
         public static void ThrowOnError(ComputeErrorCode errorCode)

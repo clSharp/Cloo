@@ -66,7 +66,7 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the <c>ComputeContext</c> associated with the event.
+        /// Gets the <see cref="ComputeContext"/> associated with the event.
         /// </summary>
         public ComputeContext Context { get; protected set; }
 
@@ -86,7 +86,7 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command is enqueued in the <c>ComputeCommandQueue</c> by the host.
+        /// Gets a 64-bit value that describes the device time counter in nanoseconds when the event's command is enqueued in the <see cref="ComputeCommandQueue"/> by the host.
         /// </summary>
         public long EnqueueTime
         {
@@ -156,9 +156,9 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputeEventBase</c>.
+        /// Gets the string representation of the <see cref="ComputeEventBase"/>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputeEventBase</c>. </returns>
+        /// <returns> The string representation of the <see cref="ComputeEventBase"/>. </returns>
         public override string ToString()
         {
             return "ComputeEvent" + base.ToString();

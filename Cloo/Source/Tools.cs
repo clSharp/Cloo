@@ -44,10 +44,10 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Attempts to convert a PixelFormat to a ComputeImageFormat.
+        /// Attempts to convert a PixelFormat to a <see cref="ComputeImageFormat"/>.
         /// </summary>
         /// <param name="format"> The format to convert. </param>
-        /// <returns> A <c>ComputeImageFormat</c> that matches the specified argument. </returns>
+        /// <returns> A <see cref="ComputeImageFormat"/> that matches the specified argument. </returns>
         /// <remarks> Note that only <c>Alpha</c>, <c>Format16bppRgb555</c>, <c>Format16bppRgb565</c> and <c>Format32bppArgb</c> input values are currently supported. </remarks>
         public static ComputeImageFormat ConvertImageFormat(PixelFormat format)
         {

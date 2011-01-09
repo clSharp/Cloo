@@ -55,22 +55,22 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the <c>ComputeContext</c> of the <c>ComputeSampler</c>.
+        /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeSampler"/>.
         /// </summary>
         public ComputeContext Context { get { return context; } }
 
         /// <summary>
-        /// Gets the <c>ComputeImageAddressing</c> mode of the <c>ComputeSampler</c>.
+        /// Gets the <see cref="ComputeImageAddressing"/> mode of the <see cref="ComputeSampler"/>.
         /// </summary>
         public ComputeImageAddressing Addressing { get { return addressing; } }
 
         /// <summary>
-        /// Gets the <c>ComputeImageFiltering</c> mode of the <c>ComputeSampler</c>.
+        /// Gets the <see cref="ComputeImageFiltering"/> mode of the <see cref="ComputeSampler"/>.
         /// </summary>
         public ComputeImageFiltering Filtering { get { return filtering; } }
 
         /// <summary>
-        /// Gets the state of usage of normalized x, y and z coordinates when accessing a <c>ComputeImage</c> in a <c>ComputeKernel</c> through the <c>ComputeSampler</c>.
+        /// Gets the state of usage of normalized x, y and z coordinates when accessing a <see cref="ComputeImage"/> in a <see cref="ComputeKernel"/> through the <see cref="ComputeSampler"/>.
         /// </summary>
         public bool NormalizedCoords { get { return normalizedCoords; } }
 
@@ -79,12 +79,12 @@ namespace Cloo
         #region Constructors
 
         /// <summary>
-        /// Creates a new <c>ComputeSampler</c>.
+        /// Creates a new <see cref="ComputeSampler"/>.
         /// </summary>
-        /// <param name="context"> A <c>ComputeContext</c>. </param>
-        /// <param name="normalizedCoords"> The usage state of normalized coordinates when accessing a <c>ComputeImage</c> in a <c>ComputeKernel</c>. </param>
-        /// <param name="addressing"> The <c>ComputeImageAddressing</c> mode of the <c>ComputeSampler</c>. Specifies how out-of-range image coordinates are handled while reading. </param>
-        /// <param name="filtering"> The <c>ComputeImageFiltering</c> mode of the <c>ComputeSampler</c>. Specifies the type of filter that must be applied when reading data from an image. </param>
+        /// <param name="context"> A <see cref="ComputeContext"/>. </param>
+        /// <param name="normalizedCoords"> The usage state of normalized coordinates when accessing a <see cref="ComputeImage"/> in a <see cref="ComputeKernel"/>. </param>
+        /// <param name="addressing"> The <see cref="ComputeImageAddressing"/> mode of the <see cref="ComputeSampler"/>. Specifies how out-of-range image coordinates are handled while reading. </param>
+        /// <param name="filtering"> The <see cref="ComputeImageFiltering"/> mode of the <see cref="ComputeSampler"/>. Specifies the type of filter that must be applied when reading data from an image. </param>
         public ComputeSampler(ComputeContext context, bool normalizedCoords, ComputeImageAddressing addressing, ComputeImageFiltering filtering)
         {
             unsafe
@@ -111,9 +111,9 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Gets the string representation of the <c>ComputeSampler</c>.
+        /// Gets the string representation of the <see cref="ComputeSampler"/>.
         /// </summary>
-        /// <returns> The string representation of the <c>ComputeSampler</c>. </returns>
+        /// <returns> The string representation of the <see cref="ComputeSampler"/>. </returns>
         public override string ToString()
         {
             return "ComputeSampler" + base.ToString();

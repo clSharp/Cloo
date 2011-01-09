@@ -54,17 +54,17 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the <c>ComputeContext</c> of the <c>ComputeMemory</c>.
+        /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeMemory"/>.
         /// </summary>
         public ComputeContext Context { get { return context; } }
 
         /// <summary>
-        /// Gets the <c>ComputeMemoryFlags</c> of the <c>ComputeMemory</c>.
+        /// Gets the <see cref="ComputeMemoryFlags"/> of the <see cref="ComputeMemory"/>.
         /// </summary>
         public ComputeMemoryFlags Flags { get { return flags; } }
 
         /// <summary>
-        /// Gets or sets (protected) the size in bytes of the <c>ComputeMemory</c>.
+        /// Gets or sets (protected) the size in bytes of the <see cref="ComputeMemory"/>.
         /// </summary>
         public long Size { get; protected set; }
 
