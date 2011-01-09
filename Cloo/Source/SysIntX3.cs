@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -35,7 +35,7 @@ namespace Cloo
     using System.Runtime.InteropServices;
 
     /// <summary>
-    /// Represents a structure of three integers of platform specific size.
+    /// A structure of three integers of platform specific size.
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct SysIntX3

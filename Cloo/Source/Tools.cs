@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -61,7 +61,7 @@ namespace Cloo
                     return new ComputeImageFormat(ComputeImageChannelOrder.Rgb, ComputeImageChannelType.UNormShort565);
                 case PixelFormat.Format32bppArgb:
                     return new ComputeImageFormat(ComputeImageChannelOrder.Argb, ComputeImageChannelType.UnsignedInt8);
-                default: throw new ArgumentException("PixelFormat not supported.");
+                default: throw new ArgumentException("Pixel format not supported.");
             }
         }
 

@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -36,7 +36,7 @@ namespace Cloo
     using System.Collections.Generic;
 
     /// <summary>
-    /// Represents a list of <c>ComputeContextProperty</c>s.
+    /// Represents a list of <see cref="ComputeContextProperty"/>s.
     /// </summary>
     /// <remarks> A <c>ComputeContextPropertyList</c> is used to specify the properties of a <c>ComputeContext</c>. </remarks>
     /// <seealso cref="ComputeContext"/>
