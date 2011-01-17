@@ -111,24 +111,24 @@ namespace Cloo
             {
                 if (platforms != null)
                     return;
-            }
 
-            unsafe
-            {
-                IntPtr[] handles;
-                int handlesLength = 0;
-                ComputeErrorCode error = CL10.GetPlatformIDs(0, null, &handlesLength);
-                ComputeException.ThrowOnError(error);
-                handles = new IntPtr[handlesLength];
+                unsafe
+                {
+                    IntPtr[] handles;
+                    int handlesLength = 0;
+                    ComputeErrorCode error = CL10.GetPlatformIDs(0, null, &handlesLength);
+                    ComputeException.ThrowOnError(error);
+                    handles = new IntPtr[handlesLength];
 
-                error = CL10.GetPlatformIDs(handlesLength, handles, null);
-                ComputeException.ThrowOnError(error);
+                    error = CL10.GetPlatformIDs(handlesLength, handles, null);
+                    ComputeException.ThrowOnError(error);
 
-                List<ComputePlatform> platformList = new List<ComputePlatform>(handlesLength);
-                foreach (IntPtr handle in handles)
-                    platformList.Add(new ComputePlatform(handle));
+                    List<ComputePlatform> platformList = new List<ComputePlatform>(handlesLength);
+                    foreach (IntPtr handle in handles)
+                        platformList.Add(new ComputePlatform(handle));
 
-                platforms = platformList.AsReadOnly();
+                    platforms = platformList.AsReadOnly();
+                }
             }
         }
 
