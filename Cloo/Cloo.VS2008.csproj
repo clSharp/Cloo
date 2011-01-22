@@ -45,6 +45,7 @@
     <Compile Include="Source\Bindings\CL10.cs" />
     <Compile Include="Source\Bindings\CL11.cs" />
     <Compile Include="Source\Bindings\CLx.cs" />
+    <Compile Include="Source\Bindings\Enums.cs" />
     <Compile Include="Source\ComputeBuffer.cs" />
     <Compile Include="Source\ComputeBufferBase.cs" />
     <Compile Include="Source\ComputeCommandQueue.Added.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="Source\SysIntX3.cs" />
     <Compile Include="Source\Tools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Source\Enums.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Cloo.dll.config">
