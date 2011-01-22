@@ -744,7 +744,7 @@ namespace Cloo
         /// <summary>
         /// Releases the associated OpenCL object.
         /// </summary>
-        /// <param name="manual"></param>
+        /// <param name="manual"> Specifies the operation mode of this method. </param>
         protected override void Dispose(bool manual)
         {
             if (manual)
