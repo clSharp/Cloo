@@ -39,6 +39,8 @@ namespace Clootils
 {
     public class KernelsTest : TestBase
     {
+        static ComputeProgram program;
+
         static string kernelSources = @"
     kernel void k01(          float     num ) {}
 //  kernel void k02(          float *   num ) {}
@@ -67,10 +69,9 @@ namespace Clootils
             
             try
             {
-                ComputeProgram program = new ComputeProgram(context, kernelSources);
+                program = new ComputeProgram(context, kernelSources);
                 program.Build(null, null, null, IntPtr.Zero);
                 log.WriteLine("Program successfully built.");
-
                 program.CreateAllKernels();
                 log.WriteLine("Kernels successfully created.");
             }

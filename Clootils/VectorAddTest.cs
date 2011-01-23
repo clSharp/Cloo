@@ -40,6 +40,7 @@ namespace Clootils
 {
     class VectorAddTest : TestBase
     {
+        static ComputeProgram program;
         private static string kernelSource = @"
 kernel void VectorAdd(
     global  read_only float* a,
@@ -73,7 +74,7 @@ kernel void VectorAdd(
                 ComputeBuffer<float> b = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrB);
                 ComputeBuffer<float> c = new ComputeBuffer<float>(context, ComputeMemoryFlags.WriteOnly, arrC.Length);
 
-                ComputeProgram program = new ComputeProgram(context, kernelSource);
+                program = new ComputeProgram(context, kernelSource);
                 program.Build(null, null, null, IntPtr.Zero);
                 ComputeKernel kernel = program.CreateKernel("VectorAdd");
                 kernel.SetMemoryArgument(0, a);

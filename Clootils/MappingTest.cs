@@ -40,7 +40,7 @@ namespace Clootils
     {
         public static void Run(TextWriter log, ComputeContext context)
         {
-            StartTest(log, "Dummy test");
+            StartTest(log, "Mapping test");
 
             try
             {
@@ -76,7 +76,7 @@ namespace Clootils
                 log.WriteLine(e.ToString());
             }
 
-            EndTest(log, "Dummy test");
+            EndTest(log, "Mapping test");
         }
     }
 }
