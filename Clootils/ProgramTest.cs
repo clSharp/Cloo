@@ -38,7 +38,8 @@ namespace Clootils
     class ProgramTest : TestBase
     {
         static TextWriter log;
-        private static string clSource = @"kernel void Test(void) { }";
+        static string clSource = @"kernel void Test(int argument) { }";
+        static ComputeProgram program;
 
         public static void Run(TextWriter log, ComputeContext context)
         {
@@ -48,11 +49,8 @@ namespace Clootils
             
             try
             {
-                ComputeProgram program = new ComputeProgram(context, clSource);
+                program = new ComputeProgram(context, clSource);
                 program.Build(null, null, notify, IntPtr.Zero);
-                byte[] bytes = program.Binaries[0];
-                log.WriteLine("Compiled program head:");
-                log.WriteLine(BitConverter.ToString(bytes, 0, 16) + "...");
             }
             catch (Exception e)
             {
@@ -65,6 +63,9 @@ namespace Clootils
         private static void notify(IntPtr programHandle, IntPtr userDataPtr)
         {
             log.WriteLine("Program build notification.");
+            byte[] bytes = program.Binaries[0];
+            log.WriteLine("Compiled program head:");
+            log.WriteLine(BitConverter.ToString(bytes, 0, 16) + "...");
         }
     }
 }
