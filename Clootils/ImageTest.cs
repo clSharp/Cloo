@@ -61,7 +61,7 @@ namespace Clootils
                 graphics.FillRectangle(Brushes.Blue, width / 2 + 1, height / 2 + 1, width / 2, height / 2);
                 log.WriteLine("done.");
 
-                log.Write("Creating OpenCL image object from first bitmap... ");
+                log.Write("Creating OpenCL image with pixel data from the first bitmap... ");
                 ComputeImage2D clImage = new ComputeImage2D(context, ComputeMemoryFlags.ReadWrite | ComputeMemoryFlags.CopyHostPointer, firstBitmap);
                 log.WriteLine("done.");
 
@@ -70,7 +70,7 @@ namespace Clootils
                 BitmapData bmpData = secondBitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, secondBitmap.PixelFormat);
                 log.WriteLine("done.");
 
-                log.Write("Reading from OpenCL image object... ");
+                log.Write("Copying pixel data from OpenCL image to the second bitmap... ");
                 commands.ReadFromImage(clImage, bmpData.Scan0, true, null);
                 log.WriteLine("done.");
                 
