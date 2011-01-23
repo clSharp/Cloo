@@ -42,6 +42,7 @@ namespace Clootils
         public static void Run(TextWriter log, ComputeContext context)
         {
             StartTest(log, "Image test");
+            log.WriteLine("Note that this test will FAIL if the tested OpenCL devices have no image support !");
 
             try
             {
