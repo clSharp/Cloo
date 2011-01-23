@@ -82,16 +82,12 @@ kernel void VectorAdd(
 
                 ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
 
-                ICollection<ComputeEventBase> events = new Collection<ComputeEventBase>();
-                
-                // BUG: ATI Stream v2.2 crash if event list not null.
-                commands.Execute(kernel, null, new long[] { count }, null, events);
-                //commands.Execute(kernel, null, new long[] { count }, null, null);
+                commands.Execute(kernel, null, new long[] { count }, null, null);
 
                 arrC = new float[count];
                 GCHandle arrCHandle = GCHandle.Alloc(arrC, GCHandleType.Pinned);
 
-                commands.Read(c, true, 0, count, arrCHandle.AddrOfPinnedObject(), events);
+                commands.Read(c, true, 0, count, arrCHandle.AddrOfPinnedObject(), null);
 
                 arrCHandle.Free();
 
