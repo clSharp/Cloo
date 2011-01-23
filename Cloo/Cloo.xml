@@ -1672,6 +1672,1158 @@
             </summary>
             <value> The value of the <see cref="T:Cloo.ComputeContextProperty"/>. </value>
         </member>
+        <member name="T:Cloo.ComputeErrorCode">
+            <summary>
+            The OpenCL error codes.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.Success">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.DeviceNotFound">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.DeviceNotAvailable">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.CompilerNotAvailable">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.MemoryObjectAllocationFailure">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.OutOfResources">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.OutOfHostMemory">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.ProfilingInfoNotAvailable">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.MemoryCopyOverlap">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.ImageFormatMismatch">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.ImageFormatNotSupported">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.BuildProgramFailure">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.MapFailure">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.MisalignedSubBufferOffset">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.ExecutionStatusErrorForEventsInWaitList">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidValue">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidDeviceType">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidPlatform">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidDevice">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidContext">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidCommandQueueFlags">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidCommandQueue">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidHostPointer">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidMemoryObject">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidImageFormatDescriptor">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidImageSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidSampler">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidBinary">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidBuildOptions">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidProgram">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidProgramExecutable">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidKernelName">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidKernelDefinition">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidKernel">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidArgumentIndex">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidArgumentValue">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidArgumentSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidKernelArguments">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidWorkDimension">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidWorkGroupSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidWorkItemSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidGlobalOffset">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidEventWaitList">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidEvent">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidOperation">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidGLObject">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidBufferSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidMipLevel">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.InvalidGlobalWorkSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.CL_PLATFORM_NOT_FOUND_KHR">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.CL_DEVICE_PARTITION_FAILED_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.CL_INVALID_PARTITION_COUNT_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeErrorCode.CL_INVALID_PARTITION_NAME_EXT">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.OpenCLVersion">
+            <summary>
+            The OpenCL version.
+            </summary>
+        </member>
+        <member name="F:Cloo.OpenCLVersion.Version_1_0">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.OpenCLVersion.Version_1_1">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeBoolean">
+            <summary>
+            The OpenCL boolean values expressed as integers.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeBoolean.False">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeBoolean.True">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputePlatformInfo">
+            <summary>
+            The platform info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputePlatformInfo.Profile">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputePlatformInfo.Version">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputePlatformInfo.Name">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputePlatformInfo.Vendor">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputePlatformInfo.Extensions">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputePlatformInfo.CL_PLATFORM_ICD_SUFFIX_KHR">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeDeviceTypes">
+            <summary>
+            The types of devices.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceTypes.Default">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceTypes.Cpu">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceTypes.Gpu">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceTypes.Accelerator">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceTypes.All">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeDeviceInfo">
+            <summary>
+            The device info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Type">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.VendorId">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxComputeUnits">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxWorkItemDimensions">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxWorkGroupSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxWorkItemSizes">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthChar">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthShort">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthInt">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthLong">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthFloat">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthDouble">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxClockFrequency">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.AddressBits">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxReadImageArguments">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxWriteImageArguments">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxMemoryAllocationSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Image2DMaxWidth">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Image2DMaxHeight">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Image3DMaxWidth">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Image3DMaxHeight">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Image3DMaxDepth">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.ImageSupport">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxParameterSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxSamplers">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MemoryBaseAddressAlignment">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MinDataTypeAlignmentSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.SingleFPConfig">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.GlobalMemoryCacheType">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.GlobalMemoryCachelineSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.GlobalMemoryCacheSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.GlobalMemorySize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxConstantBufferSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.MaxConstantArguments">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.LocalMemoryType">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.LocalMemorySize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.ErrorCorrectionSupport">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.ProfilingTimerResolution">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.EndianLittle">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Available">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CompilerAvailable">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.ExecutionCapabilities">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CommandQueueProperties">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Name">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Vendor">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.DriverVersion">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Profile">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Version">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Extensions">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.Platform">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_DOUBLE_FP_CONFIG">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_HALF_FP_CONFIG">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthHalf">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.HostUnifiedMemory">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthChar">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthShort">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthInt">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthLong">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthFloat">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthDouble">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthHalf">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.OpenCLCVersion">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_PARENT_DEVICE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_PARITION_TYPES_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_AFFINITY_DOMAINS_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_REFERENCE_COUNT_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_PARTITION_STYLE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeDeviceSingleCapabilities">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceSingleCapabilities.Denorm">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceSingleCapabilities.InfNan">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceSingleCapabilities.RoundToNearest">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceSingleCapabilities.RoundToZero">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceSingleCapabilities.RoundToInf">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceSingleCapabilities.Fma">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceSingleCapabilities.SoftFloat">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeDeviceMemoryCacheType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceMemoryCacheType.None">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceMemoryCacheType.ReadOnlyCache">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceMemoryCacheType.ReadWriteCache">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeDeviceLocalMemoryType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceLocalMemoryType.Local">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceLocalMemoryType.Global">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeDeviceExecutionCapabilities">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceExecutionCapabilities.OpenCLKernel">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeDeviceExecutionCapabilities.NativeKernel">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeCommandQueueFlags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandQueueFlags.None">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandQueueFlags.OutOfOrderExecution">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandQueueFlags.Profiling">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeContextInfo">
+            <summary>
+            The context info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeContextInfo.ReferenceCount">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeContextInfo.Devices">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeContextInfo.Properties">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeContextInfo.NumDevices">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeContextInfo.Platform">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeContextPropertyName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeContextPropertyName.Platform">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeContextPropertyName.CL_GL_CONTEXT_KHR">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeContextPropertyName.CL_EGL_DISPLAY_KHR">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeContextPropertyName.CL_GLX_DISPLAY_KHR">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeContextPropertyName.CL_WGL_HDC_KHR">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeContextPropertyName.CL_CGL_SHAREGROUP_KHR">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeCommandQueueInfo">
+            <summary>
+            The command queue info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandQueueInfo.Context">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandQueueInfo.Device">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandQueueInfo.ReferenceCount">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandQueueInfo.Properties">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeMemoryFlags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryFlags.None">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryFlags.ReadWrite">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryFlags.WriteOnly">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryFlags.ReadOnly">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryFlags.UseHostPointer">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryFlags.AllocateHostPointer">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryFlags.CopyHostPointer">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeImageChannelOrder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.R">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.A">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.RG">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.RA">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.Rgb">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.Rgba">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.Bgra">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.Argb">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.Intensity">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.Luminance">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.Rx">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.Rgx">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelOrder.Rgbx">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeImageChannelType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.SNormInt8">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.SNormInt16">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.UNormInt8">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.UNormInt16">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.UNormShort565">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.UNormShort555">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.UNormInt101010">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.SignedInt8">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.SignedInt16">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.SignedInt32">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.UnsignedInt8">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.UnsignedInt16">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.UnsignedInt32">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.HalfFloat">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageChannelType.Float">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeMemoryType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryType.Buffer">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryType.Image2D">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryType.Image3D">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeMemoryInfo">
+            <summary>
+            The memory info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryInfo.Type">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryInfo.Flags">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryInfo.Size">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryInfo.HostPointer">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryInfo.MapppingCount">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryInfo.ReferenceCount">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryInfo.Context">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryInfo.AssociatedMemoryObject">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryInfo.Offset">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeImageInfo">
+            <summary>
+            The image info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageInfo.Format">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageInfo.ElementSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageInfo.RowPitch">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageInfo.SlicePitch">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageInfo.Width">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageInfo.Height">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageInfo.Depth">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeImageAddressing">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageAddressing.None">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageAddressing.ClampToEdge">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageAddressing.Clamp">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageAddressing.Repeat">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageAddressing.MirroredRepeat">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeImageFiltering">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageFiltering.Nearest">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeImageFiltering.Linear">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeSamplerInfo">
+            <summary>
+            The sampler info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeSamplerInfo.ReferenceCount">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeSamplerInfo.Context">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeSamplerInfo.NormalizedCoords">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeSamplerInfo.Addressing">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeSamplerInfo.Filtering">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeMemoryMappingFlags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryMappingFlags.Read">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeMemoryMappingFlags.Write">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeProgramInfo">
+            <summary>
+            The program info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramInfo.ReferenceCount">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramInfo.Context">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramInfo.DeviceCount">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramInfo.Devices">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramInfo.Source">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramInfo.BinarySizes">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramInfo.Binaries">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeProgramBuildInfo">
+            <summary>
+            The program build info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramBuildInfo.Status">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramBuildInfo.Options">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramBuildInfo.BuildLog">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeProgramBuildStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramBuildStatus.Success">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramBuildStatus.None">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramBuildStatus.Error">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeProgramBuildStatus.InProgress">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeKernelInfo">
+            <summary>
+            The kernel info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeKernelInfo.FunctionName">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeKernelInfo.ArgumentCount">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeKernelInfo.ReferenceCount">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeKernelInfo.Context">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeKernelInfo.Program">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeKernelWorkGroupInfo">
+            <summary>
+            The kernel work-group info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeKernelWorkGroupInfo.WorkGroupSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeKernelWorkGroupInfo.CompileWorkGroupSize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeKernelWorkGroupInfo.LocalMemorySize">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeKernelWorkGroupInfo.PreferredWorkGroupSizeMultiple">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeKernelWorkGroupInfo.PrivateMemorySize">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeEventInfo">
+            <summary>
+            The event info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeEventInfo.CommandQueue">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeEventInfo.CommandType">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeEventInfo.ReferenceCount">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeEventInfo.ExecutionStatus">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeEventInfo.Context">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeCommandType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.NDRangeKernel">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.Task">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.NativeKernel">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.ReadBuffer">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.WriteBuffer">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.CopyBuffer">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.ReadImage">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.WriteImage">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.CopyImage">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.CopyImageToBuffer">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.CopyBufferToImage">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.MapBuffer">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.MapImage">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.UnmapMemory">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.Marker">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.AcquireGLObjects">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.ReleaseGLObjects">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.ReadBufferRectangle">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.WriteBufferRectangle">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.CopyBufferRectangle">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.User">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandType.CL_COMMAND_MIGRATE_MEM_OBJECT_EXT">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeCommandExecutionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandExecutionStatus.Complete">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandExecutionStatus.Running">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandExecutionStatus.Submitted">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandExecutionStatus.Queued">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeBufferCreateType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeBufferCreateType.Region">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeCommandProfilingInfo">
+            <summary>
+            The command profiling info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandProfilingInfo.Queued">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandProfilingInfo.Submitted">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandProfilingInfo.Started">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeCommandProfilingInfo.Ended">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeGLObjectType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeGLObjectType.Buffer">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeGLObjectType.Texture2D">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeGLObjectType.Texture3D">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeGLObjectType.Renderbuffer">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeGLTextureInfo">
+            <summary>
+            The shared CL/GL image/texture info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeGLTextureInfo.TextureTarget">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeGLTextureInfo.MipMapLevel">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.ComputeGLContextInfo">
+            <summary>
+            The shared CL/GL context info query symbols.
+            </summary>
+        </member>
+        <member name="F:Cloo.ComputeGLContextInfo.CL_CURRENT_DEVICE_FOR_GL_CONTEXT_KHR">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.ComputeGLContextInfo.CL_DEVICES_FOR_GL_CONTEXT_KHR">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.cl_device_partition_property_ext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_EQUALLY_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_BY_COUNTS_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_BY_NAMES_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L1_CACHE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L2_CACHE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L3_CACHE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L4_CACHE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_NUMA_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_NEXT_FISSIONABLE_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_PROPERTIES_LIST_END_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_PARTITION_BY_COUNTS_LIST_END_EXT">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_device_partition_property_ext.CL_PARTITION_BY_NAMES_LIST_END_EXT">
+            <summary> </summary>
+        </member>
+        <member name="T:Cloo.cl_mem_migration_flags_ext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Cloo.cl_mem_migration_flags_ext.None">
+            <summary> </summary>
+        </member>
+        <member name="F:Cloo.cl_mem_migration_flags_ext.CL_MIGRATE_MEM_OBJECT_HOST_EXT">
+            <summary> </summary>
+        </member>
         <member name="T:Cloo.ComputeKernel">
             <summary>
             Represents an OpenCL kernel.
@@ -3051,9 +4203,6 @@
         <member name="M:Cloo.Bindings.CLx.GetGLContextInfoKHR(System.IntPtr*,Cloo.ComputeGLContextInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
             <summary> </summary>
         </member>
-        <member name="M:Cloo.Bindings.CLx.IcdGetPlatformIDsKHR(System.UInt32,System.IntPtr*,System.UInt32*)">
-            <summary> </summary>
-        </member>
         <member name="M:Cloo.Bindings.CLx.ReleaseDeviceEXT(System.IntPtr)">
             <summary> </summary>
         </member>
@@ -3328,1158 +4477,6 @@
             <summary>
             Gets the <see cref="P:Cloo.ComputeException.ComputeErrorCode"/> of the <see cref="T:Cloo.ComputeException"/>.
             </summary>
-        </member>
-        <member name="T:Cloo.ComputeErrorCode">
-            <summary>
-            The OpenCL error codes.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.Success">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.DeviceNotFound">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.DeviceNotAvailable">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.CompilerNotAvailable">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.MemoryObjectAllocationFailure">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.OutOfResources">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.OutOfHostMemory">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.ProfilingInfoNotAvailable">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.MemoryCopyOverlap">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.ImageFormatMismatch">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.ImageFormatNotSupported">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.BuildProgramFailure">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.MapFailure">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.MisalignedSubBufferOffset">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.ExecutionStatusErrorForEventsInWaitList">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidValue">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidDeviceType">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidPlatform">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidDevice">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidContext">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidCommandQueueFlags">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidCommandQueue">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidHostPointer">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidMemoryObject">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidImageFormatDescriptor">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidImageSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidSampler">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidBinary">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidBuildOptions">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidProgram">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidProgramExecutable">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidKernelName">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidKernelDefinition">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidKernel">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidArgumentIndex">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidArgumentValue">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidArgumentSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidKernelArguments">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidWorkDimension">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidWorkGroupSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidWorkItemSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidGlobalOffset">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidEventWaitList">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidEvent">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidOperation">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidGLObject">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidBufferSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidMipLevel">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.InvalidGlobalWorkSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.CL_PLATFORM_NOT_FOUND_KHR">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.CL_DEVICE_PARTITION_FAILED_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.CL_INVALID_PARTITION_COUNT_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeErrorCode.CL_INVALID_PARTITION_NAME_EXT">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.OpenCLVersion">
-            <summary>
-            The OpenCL version.
-            </summary>
-        </member>
-        <member name="F:Cloo.OpenCLVersion.Version_1_0">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.OpenCLVersion.Version_1_1">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeBoolean">
-            <summary>
-            The OpenCL boolean values expressed as integers.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeBoolean.False">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeBoolean.True">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputePlatformInfo">
-            <summary>
-            The platform info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputePlatformInfo.Profile">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputePlatformInfo.Version">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputePlatformInfo.Name">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputePlatformInfo.Vendor">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputePlatformInfo.Extensions">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputePlatformInfo.CL_PLATFORM_ICD_SUFFIX_KHR">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeDeviceTypes">
-            <summary>
-            The types of devices.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceTypes.Default">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceTypes.Cpu">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceTypes.Gpu">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceTypes.Accelerator">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceTypes.All">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeDeviceInfo">
-            <summary>
-            The device info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Type">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.VendorId">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxComputeUnits">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxWorkItemDimensions">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxWorkGroupSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxWorkItemSizes">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthChar">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthShort">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthInt">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthLong">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthFloat">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthDouble">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxClockFrequency">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.AddressBits">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxReadImageArguments">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxWriteImageArguments">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxMemoryAllocationSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Image2DMaxWidth">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Image2DMaxHeight">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Image3DMaxWidth">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Image3DMaxHeight">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Image3DMaxDepth">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.ImageSupport">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxParameterSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxSamplers">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MemoryBaseAddressAlignment">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MinDataTypeAlignmentSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.SingleFPConfig">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.GlobalMemoryCacheType">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.GlobalMemoryCachelineSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.GlobalMemoryCacheSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.GlobalMemorySize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxConstantBufferSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.MaxConstantArguments">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.LocalMemoryType">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.LocalMemorySize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.ErrorCorrectionSupport">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.ProfilingTimerResolution">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.EndianLittle">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Available">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.CompilerAvailable">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.ExecutionCapabilities">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.CommandQueueProperties">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Name">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Vendor">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.DriverVersion">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Profile">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Version">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Extensions">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.Platform">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_DOUBLE_FP_CONFIG">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_HALF_FP_CONFIG">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.PreferredVectorWidthHalf">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.HostUnifiedMemory">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthChar">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthShort">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthInt">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthLong">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthFloat">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthDouble">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.NativeVectorWidthHalf">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.OpenCLCVersion">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_PARENT_DEVICE_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_PARITION_TYPES_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_AFFINITY_DOMAINS_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_REFERENCE_COUNT_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceInfo.CL_DEVICE_PARTITION_STYLE_EXT">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeDeviceSingleCapabilities">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceSingleCapabilities.Denorm">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceSingleCapabilities.InfNan">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceSingleCapabilities.RoundToNearest">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceSingleCapabilities.RoundToZero">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceSingleCapabilities.RoundToInf">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceSingleCapabilities.Fma">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceSingleCapabilities.SoftFloat">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeDeviceMemoryCacheType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceMemoryCacheType.None">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceMemoryCacheType.ReadOnlyCache">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceMemoryCacheType.ReadWriteCache">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeDeviceLocalMemoryType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceLocalMemoryType.Local">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceLocalMemoryType.Global">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeDeviceExecutionCapabilities">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceExecutionCapabilities.OpenCLKernel">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeDeviceExecutionCapabilities.NativeKernel">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeCommandQueueFlags">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandQueueFlags.None">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandQueueFlags.OutOfOrderExecution">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandQueueFlags.Profiling">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeContextInfo">
-            <summary>
-            The context info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeContextInfo.ReferenceCount">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeContextInfo.Devices">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeContextInfo.Properties">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeContextInfo.NumDevices">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeContextInfo.Platform">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeContextPropertyName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeContextPropertyName.Platform">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeContextPropertyName.CL_GL_CONTEXT_KHR">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeContextPropertyName.CL_EGL_DISPLAY_KHR">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeContextPropertyName.CL_GLX_DISPLAY_KHR">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeContextPropertyName.CL_WGL_HDC_KHR">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeContextPropertyName.CL_CGL_SHAREGROUP_KHR">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeCommandQueueInfo">
-            <summary>
-            The command queue info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandQueueInfo.Context">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandQueueInfo.Device">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandQueueInfo.ReferenceCount">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandQueueInfo.Properties">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeMemoryFlags">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryFlags.None">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryFlags.ReadWrite">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryFlags.WriteOnly">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryFlags.ReadOnly">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryFlags.UseHostPointer">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryFlags.AllocateHostPointer">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryFlags.CopyHostPointer">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeImageChannelOrder">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.R">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.A">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.RG">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.RA">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.Rgb">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.Rgba">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.Bgra">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.Argb">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.Intensity">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.Luminance">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.Rx">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.Rgx">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelOrder.Rgbx">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeImageChannelType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.SNormInt8">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.SNormInt16">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.UNormInt8">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.UNormInt16">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.UNormShort565">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.UNormShort555">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.UNormInt101010">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.SignedInt8">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.SignedInt16">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.SignedInt32">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.UnsignedInt8">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.UnsignedInt16">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.UnsignedInt32">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.HalfFloat">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageChannelType.Float">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeMemoryType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryType.Buffer">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryType.Image2D">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryType.Image3D">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeMemoryInfo">
-            <summary>
-            The memory info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryInfo.Type">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryInfo.Flags">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryInfo.Size">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryInfo.HostPointer">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryInfo.MapppingCount">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryInfo.ReferenceCount">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryInfo.Context">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryInfo.AssociatedMemoryObject">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryInfo.Offset">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeImageInfo">
-            <summary>
-            The image info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageInfo.Format">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageInfo.ElementSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageInfo.RowPitch">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageInfo.SlicePitch">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageInfo.Width">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageInfo.Height">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageInfo.Depth">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeImageAddressing">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageAddressing.None">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageAddressing.ClampToEdge">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageAddressing.Clamp">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageAddressing.Repeat">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageAddressing.MirroredRepeat">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeImageFiltering">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageFiltering.Nearest">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeImageFiltering.Linear">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeSamplerInfo">
-            <summary>
-            The sampler info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeSamplerInfo.ReferenceCount">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeSamplerInfo.Context">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeSamplerInfo.NormalizedCoords">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeSamplerInfo.Addressing">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeSamplerInfo.Filtering">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeMemoryMappingFlags">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryMappingFlags.Read">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeMemoryMappingFlags.Write">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeProgramInfo">
-            <summary>
-            The program info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramInfo.ReferenceCount">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramInfo.Context">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramInfo.DeviceCount">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramInfo.Devices">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramInfo.Source">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramInfo.BinarySizes">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramInfo.Binaries">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeProgramBuildInfo">
-            <summary>
-            The program build info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramBuildInfo.Status">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramBuildInfo.Options">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramBuildInfo.BuildLog">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeProgramBuildStatus">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramBuildStatus.Success">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramBuildStatus.None">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramBuildStatus.Error">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeProgramBuildStatus.InProgress">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeKernelInfo">
-            <summary>
-            The kernel info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeKernelInfo.FunctionName">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeKernelInfo.ArgumentCount">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeKernelInfo.ReferenceCount">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeKernelInfo.Context">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeKernelInfo.Program">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeKernelWorkGroupInfo">
-            <summary>
-            The kernel work-group info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeKernelWorkGroupInfo.WorkGroupSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeKernelWorkGroupInfo.CompileWorkGroupSize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeKernelWorkGroupInfo.LocalMemorySize">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeKernelWorkGroupInfo.PreferredWorkGroupSizeMultiple">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeKernelWorkGroupInfo.PrivateMemorySize">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeEventInfo">
-            <summary>
-            The event info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeEventInfo.CommandQueue">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeEventInfo.CommandType">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeEventInfo.ReferenceCount">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeEventInfo.ExecutionStatus">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeEventInfo.Context">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeCommandType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.NDRangeKernel">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.Task">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.NativeKernel">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.ReadBuffer">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.WriteBuffer">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.CopyBuffer">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.ReadImage">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.WriteImage">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.CopyImage">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.CopyImageToBuffer">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.CopyBufferToImage">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.MapBuffer">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.MapImage">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.UnmapMemory">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.Marker">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.AcquireGLObjects">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.ReleaseGLObjects">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.ReadBufferRectangle">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.WriteBufferRectangle">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.CopyBufferRectangle">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.User">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandType.CL_COMMAND_MIGRATE_MEM_OBJECT_EXT">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeCommandExecutionStatus">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandExecutionStatus.Complete">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandExecutionStatus.Running">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandExecutionStatus.Submitted">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandExecutionStatus.Queued">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeBufferCreateType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeBufferCreateType.Region">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeCommandProfilingInfo">
-            <summary>
-            The command profiling info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandProfilingInfo.Queued">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandProfilingInfo.Submitted">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandProfilingInfo.Started">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeCommandProfilingInfo.Ended">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeGLObjectType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeGLObjectType.Buffer">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeGLObjectType.Texture2D">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeGLObjectType.Texture3D">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeGLObjectType.Renderbuffer">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeGLTextureInfo">
-            <summary>
-            The shared CL/GL image/texture info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeGLTextureInfo.TextureTarget">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeGLTextureInfo.MipMapLevel">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeGLContextInfo">
-            <summary>
-            The shared CL/GL context info query symbols.
-            </summary>
-        </member>
-        <member name="F:Cloo.ComputeGLContextInfo.CL_CURRENT_DEVICE_FOR_GL_CONTEXT_KHR">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.ComputeGLContextInfo.CL_DEVICES_FOR_GL_CONTEXT_KHR">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.cl_device_partition_property_ext">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_EQUALLY_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_BY_COUNTS_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_BY_NAMES_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L1_CACHE_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L2_CACHE_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L3_CACHE_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_L4_CACHE_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_NUMA_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_AFFINITY_DOMAIN_NEXT_FISSIONABLE_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_PROPERTIES_LIST_END_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_PARTITION_BY_COUNTS_LIST_END_EXT">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_device_partition_property_ext.CL_PARTITION_BY_NAMES_LIST_END_EXT">
-            <summary> </summary>
-        </member>
-        <member name="T:Cloo.cl_mem_migration_flags_ext">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Cloo.cl_mem_migration_flags_ext.None">
-            <summary> </summary>
-        </member>
-        <member name="F:Cloo.cl_mem_migration_flags_ext.CL_MIGRATE_MEM_OBJECT_HOST_EXT">
-            <summary> </summary>
         </member>
     </members>
 </doc>

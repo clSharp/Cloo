@@ -72,12 +72,12 @@ namespace Cloo.Bindings
         }
 
         /// <summary> </summary>
-        [CLSCompliant(false)]
-        public unsafe ComputeErrorCode IcdGetPlatformIDsKHR(uint num_entries, IntPtr* platforms, uint* num_platforms)
-        {
-            if (clIcdGetPlatformIDsKHR == null) throw new EntryPointNotFoundException();
-            return clIcdGetPlatformIDsKHR(num_entries, platforms, num_platforms);
-        }
+        //[CLSCompliant(false)]
+        //public unsafe ComputeErrorCode IcdGetPlatformIDsKHR(uint num_entries, IntPtr* platforms, uint* num_platforms)
+        //{
+        //    if (clIcdGetPlatformIDsKHR == null) throw new EntryPointNotFoundException();
+        //    return clIcdGetPlatformIDsKHR(num_entries, platforms, num_platforms);
+        //}
 
         /// <summary> </summary>
         [CLSCompliant(false)]
@@ -114,8 +114,8 @@ namespace Cloo.Bindings
             if (platform.Extensions.Contains("cl_khr_gl_sharing")) 
                 clGetGLContextInfoKHR = (Delegates.clGetGLContextInfoKHR)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clGetGLContextInfoKHR"), typeof(Delegates.clGetGLContextInfoKHR));
 
-            if (platform.Extensions.Contains("cl_khr_icd"))
-                clIcdGetPlatformIDsKHR = (Delegates.clIcdGetPlatformIDsKHR)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clIcdGetPlatformIDsKHR"), typeof(Delegates.clIcdGetPlatformIDsKHR));
+            //if (platform.Extensions.Contains("cl_khr_icd"))
+            //    clIcdGetPlatformIDsKHR = (Delegates.clIcdGetPlatformIDsKHR)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clIcdGetPlatformIDsKHR"), typeof(Delegates.clIcdGetPlatformIDsKHR));
         }
 
         internal static class Delegates
