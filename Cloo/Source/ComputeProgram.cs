@@ -64,7 +64,15 @@ namespace Cloo
         /// </summary>
         /// <value> A read-only collection of program binaries associated with the <see cref="ComputeProgram.Devices"/>. </value>
         /// <remarks> The bits returned can be an implementation-specific intermediate representation (a.k.a. IR) or device specific executable bits or both. The decision on which information is returned in the binary is up to the OpenCL implementation. </remarks>
-        public ReadOnlyCollection<byte[]> Binaries { get { return binaries; } }
+        public ReadOnlyCollection<byte[]> Binaries 
+        { 
+            get 
+            {
+                if (binaries == null)
+                    binaries = GetBinaries();
+                return binaries;
+            }
+        }
 
         /// <summary>
         /// Gets the <see cref="ComputeProgram"/> build options as specified in <paramref name="options"/> argument of <see cref="ComputeProgram.Build"/>.
@@ -248,7 +256,6 @@ namespace Cloo
                         notifyDataPtr);
                     ComputeException.ThrowOnError(error);
                 }
-                binaries = GetBinaries();
             }
         }
 
