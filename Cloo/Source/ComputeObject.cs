@@ -141,7 +141,8 @@ namespace Cloo
                 ComputeErrorCode error;
                 QueriedType[] buffer;
                 IntPtr bufferSizeRet;
-                getInfoDelegate(handle, paramName, IntPtr.Zero, IntPtr.Zero, &bufferSizeRet);
+                error = getInfoDelegate(handle, paramName, IntPtr.Zero, IntPtr.Zero, &bufferSizeRet);
+                ComputeException.ThrowOnError(error);
                 buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
                 GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
                 try
@@ -185,6 +186,7 @@ namespace Cloo
                 QueriedType[] buffer;
                 IntPtr bufferSizeRet;
                 error = getInfoDelegate(handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, &bufferSizeRet);
+                ComputeException.ThrowOnError(error);
                 buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
                 GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
                 try
