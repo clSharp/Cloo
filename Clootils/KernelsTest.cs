@@ -40,27 +40,14 @@ namespace Clootils
     public class KernelsTest : TestBase
     {
         static ComputeProgram program;
+        static TextWriter log;
 
         static string kernelSources = @"
-    kernel void k01(          float     num ) {}
-//  kernel void k02(          float *   num ) {}
-//  kernel void k03(          image3d_t img ) {}
-    kernel void k04(          sampler_t smp ) {}
-
-//  kernel void k05( constant float     num ) {}
-    kernel void k06( constant float *   num ) {}
-//  kernel void k07( constant image3d_t img ) {}
-//  kernel void k08( constant sampler_t smp ) {}
-
-//  kernel void k09( global   float     num ) {}
-    kernel void k10( global   float *   num ) {}
-//  kernel void k11( global   image3d_t img ) {}
-//  kernel void k12( global   sampler_t smp ) {}
-
-//  kernel void k13( local    float     num ) {}
-    kernel void k14( local    float *   num ) {}
-//  kernel void k15( local    image3d_t img ) {}
-//  kernel void k16( local    sampler_t smp ) {}
+    kernel void k1(          float     num ) {}
+  //kernel void k2(          sampler_t smp ) {}       // Wreaks havoc within Nvidia's compiler. This is, however, a valid kernel signature.
+  //kernel void k3( constant float *   num ) {}       // Causes InvalidBinary if drivers == 64bit and application == 32 bit.
+    kernel void k4( global   float *   num ) {}
+    kernel void k5( local    float *   num ) {}
 ";
 
         public static void Run(TextWriter log, ComputeContext context)
@@ -69,6 +56,8 @@ namespace Clootils
             
             try
             {
+                KernelsTest.log = log;
+
                 program = new ComputeProgram(context, kernelSources);
                 program.Build(null, null, null, IntPtr.Zero);
                 log.WriteLine("Program successfully built.");

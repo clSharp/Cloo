@@ -84,6 +84,7 @@ kernel void VectorAdd(
                 ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
 
                 commands.Execute(kernel, null, new long[] { count }, null, null);
+                commands.Finish();
 
                 arrC = new float[count];
                 GCHandle arrCHandle = GCHandle.Alloc(arrC, GCHandleType.Pinned);

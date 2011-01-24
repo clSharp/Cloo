@@ -39,6 +39,7 @@ namespace Clootils
     {
         static TextWriter log;
         static string clSource = @"kernel void Test(int argument) { }";
+
         static ComputeProgram program;
 
         public static void Run(TextWriter log, ComputeContext context)
