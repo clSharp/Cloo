@@ -128,12 +128,14 @@ namespace Cloo
 
         private void ComputeEvent_Fired(object sender, EventArgs e)
         {
-            FreeTracks();
             lock (CommandQueue.events)
             {
-                int eventIndex = CommandQueue.events.IndexOf(this);
-                if (eventIndex < 0) return;
-                CommandQueue.events.RemoveAt(eventIndex);
+#if DEBUG
+                if (CommandQueue.events.IndexOf(this) < 0) 
+                    throw new Exception("Shouldn't reach here.");
+#endif
+                CommandQueue.events.Remove(this);
+                Dispose();
             }
         }
 
