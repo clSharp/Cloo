@@ -47,7 +47,7 @@ namespace Clootils
   //kernel void k2(           sampler_t smp ) {}       // Causes havoc in Nvidia's drivers. This is, however, a valid kernel signature.
   //kernel void k3( read_only image2d_t dem ) {}       // The same.
     kernel void k4( constant  float *   num ) {}       
-  //kernel void k5( global    float *   num ) {}       // Causes InvalidBinary if drivers == 64bit and application == 32 bit.
+  //kernel void k5( global    float *   num ) {}       // Causes InvalidBinary if Nvidia drivers == 64bit and application == 32 bit. Also valid.
     kernel void k6( local     float *   num ) {}
 ";
 

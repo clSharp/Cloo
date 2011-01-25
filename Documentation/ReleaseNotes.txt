@@ -1,7 +1,8 @@
 [0.8.2]
 Welcome to another maintenance release in the 0.8 series.
-This version fixes some discovered bugs affecting extension loading, asynchronous program build, command-queue methods handling ComputeImage2Ds and error checks in some ComputeObject.Get*Info methods. It adds a workaround to prevent Clootils from hanging with the latest Nvidia drivers and another one which helps prevent Cloo initialization errors in a multithreaded environment.
+This version fixes some discovered bugs affecting extension loading, asynchronous program build, command-queue methods handling ComputeImage2Ds and error checking in some of the ComputeObject.Get*Info methods. It also adds a workaround to prevent Clootils from hanging with the latest Nvidia drivers and another one to help prevent Cloo initialization errors in a multithreaded environment.
 New functionality includes support for the cl_ext_device_fission extension.
+For the first time ever, Cloo was tested against the Intel OpenCL SDK. Although alpha, Intel's implementation is the first of the lot to successfully pass all the current Clootils tests! Kudos to Intel! 
 Upgrade from 0.8.1 or 0.8.0 is recommended.
  
 [0.8.1]
