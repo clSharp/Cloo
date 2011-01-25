@@ -1,3 +1,35 @@
+[0.8.2] -----------------------------------------------------------------------
+Breaking changes:
+None.
+
+Additions:
+cl_ext_device_fission support.
+         
+Bugfixes:
+ComputeCommandQueue.ReadFromImage/WriteToImage/CopyImage misbehaviour when ComputeImage2D is involved.
+CLx unsuccessfully querying for clIcdGetPlatformIDsKHR.
+Some ComputeObject.GetInfo methods missing OpenCL error code checks.
+ComputeProgram.Build crashes when a callback function is specified as its argument.
+ProgramTest not working with Intel OpenCL.
+MappingTest prints wrong test name.
+ComputeEvent not being disposed when its associated command finishes execution/aborts.
+Added workaround to prevent Clootils from freezing with latest Nvidia drivers (2xx). This is a driver bug.  
+Possible ComputePlatform constructor bug when multiple threads attempt to initialize Cloo at the same time.
+
+Deprecated:
+None.
+
+Internals:
+Added trace prints that show the creation and disposal of OpenCL objects.
+Added DEBUG symbol to Cloo.VS2010 project file.
+Removed struct BufferRegion.
+
+Documentation:
+A text file that tracks supported OpenCL versions and extensions.
+Added <value> tags to all properties.
+Added element references wherever possible. 
+
+
 [0.8.1] -----------------------------------------------------------------------
 Breaking changes:
 None.
