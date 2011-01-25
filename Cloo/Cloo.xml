@@ -450,15 +450,6 @@
             </summary>
             <value> The width in pixels of the <see cref="T:Cloo.ComputeImage"/>. </value>
         </member>
-        <member name="M:Cloo.ComputeImage2D.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,System.Drawing.Bitmap)">
-            <summary>
-            Creates a new <see cref="T:Cloo.ComputeImage2D"/> from a <c>Bitmap</c>.
-            </summary>
-            <param name="context"> A valid <see cref="T:Cloo.ComputeContext"/> in which the <see cref="T:Cloo.ComputeImage2D"/> is created. </param>
-            <param name="flags"> A bit-field that is used to specify allocation and usage information about the <see cref="T:Cloo.ComputeImage2D"/>. </param>
-            <param name="bitmap"> The bitmap to use. </param>
-            <remarks> Note that only bitmaps with <c>Alpha</c>, <c>Format16bppRgb555</c>, <c>Format16bppRgb565</c> or <c>Format32bppArgb</c> pixel formats are currently supported. </remarks>
-        </member>
         <member name="M:Cloo.ComputeImage2D.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat,System.Int32,System.Int32,System.Int64,System.IntPtr)">
             <summary>
             Creates a new <see cref="T:Cloo.ComputeImage2D"/>.
@@ -3512,14 +3503,6 @@
             <summary>
             Contains various helper methods.
             </summary>
-        </member>
-        <member name="M:Cloo.Tools.ConvertImageFormat(System.Drawing.Imaging.PixelFormat)">
-            <summary>
-            Attempts to convert a PixelFormat to a <see cref="T:Cloo.ComputeImageFormat"/>.
-            </summary>
-            <param name="format"> The format to convert. </param>
-            <returns> A <see cref="T:Cloo.ComputeImageFormat"/> that matches the specified argument. </returns>
-            <remarks> Note that only <c>Alpha</c>, <c>Format16bppRgb555</c>, <c>Format16bppRgb565</c> and <c>Format32bppArgb</c> input values are currently supported. </remarks>
         </member>
         <member name="M:Cloo.Tools.ParseVersionString(System.String,System.Int32)">
             <summary>

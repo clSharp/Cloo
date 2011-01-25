@@ -1,3 +1,9 @@
+[0.8.2]
+Welcome to another maintenance release in the 0.8 series.
+This version fixes some discovered bugs affecting extension loading, asynchronous program build, command-queue methods handling ComputeImage2Ds and error checks in some ComputeObject.Get*Info methods. It adds a workaround to prevent Clootils from hanging with the latest Nvidia drivers and another one which helps prevent Cloo initialization errors in a multithreaded environment.
+New functionality includes support for the cl_ext_device_fission extension.
+Upgrade from 0.8.1 or 0.8.0 is recommended.
+ 
 [0.8.1]
 This is a maintenance release which fixes a highly critical bug on OpenCL platforms that make use of a device without cl_krh_fp16 or cl_khr_fp64 support. The bug prevented 0.8.0 from initializing in such environments. This release also gets rid of the occasional IOException in the ComputeEvent bowels. Upgrade from 0.8.0 is strongly recommended.
 
