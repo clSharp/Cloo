@@ -42,10 +42,10 @@ namespace Clootils
         public static void Run(TextWriter log, ComputeContext context)
         {
             StartTest(log, "Image test");
-            log.WriteLine("Note that this test will FAIL if the tested OpenCL devices have no image support !");
+            log.WriteLine("This test has been disabled.");
 
             try
-            {
+            {/*
                 log.Write("Creating command queue... ");
                 ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
                 log.WriteLine("done.");
@@ -82,7 +82,7 @@ namespace Clootils
                         if (firstBitmap.GetPixel(i, j) != secondBitmap.GetPixel(i, j))
                             throw new Exception("Image data mismatch!");
                 log.WriteLine("passed.");
-            }
+            */}
             catch (Exception e)
             {
                 log.WriteLine(e.ToString());

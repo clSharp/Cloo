@@ -43,12 +43,13 @@ namespace Cloo
     {
         #region Public methods
 
+        /*
         /// <summary>
         /// Attempts to convert a PixelFormat to a <see cref="ComputeImageFormat"/>.
         /// </summary>
         /// <param name="format"> The format to convert. </param>
         /// <returns> A <see cref="ComputeImageFormat"/> that matches the specified argument. </returns>
-        /// <remarks> Note that only <c>Alpha</c>, <c>Format16bppRgb555</c>, <c>Format16bppRgb565</c> and <c>Format32bppArgb</c> input values are currently supported. </remarks>
+        /// <remarks> Note that only <c>Alpha</c>, <c>Format16bppRgb555</c>, <c>Format16bppRgb565</c> and <c>Format32bppArgb</c> input values are currently supported. </remarks>        
         public static ComputeImageFormat ConvertImageFormat(PixelFormat format)
         {
             switch(format)
@@ -64,6 +65,7 @@ namespace Cloo
                 default: throw new ArgumentException("Pixel format not supported.");
             }
         }
+        */
 
         /// <summary>
         /// Parses an OpenCL version string.

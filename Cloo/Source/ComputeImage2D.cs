@@ -44,39 +44,48 @@ namespace Cloo
     public class ComputeImage2D : ComputeImage
     {
         #region Constructors
-
+        /*
         /// <summary>
         /// Creates a new <see cref="ComputeImage2D"/> from a <c>Bitmap</c>.
         /// </summary>
         /// <param name="context"> A valid <see cref="ComputeContext"/> in which the <see cref="ComputeImage2D"/> is created. </param>
         /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <see cref="ComputeImage2D"/>. </param>
         /// <param name="bitmap"> The bitmap to use. </param>
-        /// <remarks> Note that only bitmaps with <c>Alpha</c>, <c>Format16bppRgb555</c>, <c>Format16bppRgb565</c> or <c>Format32bppArgb</c> pixel formats are currently supported. </remarks>
+        /// <remarks> Note that only bitmaps with <c>Format32bppArgb</c> pixel format are currently supported. </remarks>
         public ComputeImage2D(ComputeContext context, ComputeMemoryFlags flags, Bitmap bitmap)
             :base(context, flags)
         {
             unsafe
-            {
-                ComputeImageFormat format = Tools.ConvertImageFormat(bitmap.PixelFormat);
+            {                
+                if(bitmap.PixelFormat != PixelFormat.Format32bppArgb)
+                    throw new ArgumentException("Pixel format not supported.");
+                
+                //ComputeImageFormat format = Tools.ConvertImageFormat(bitmap.PixelFormat);
+                ComputeImageFormat format = new ComputeImageFormat(ComputeImageChannelOrder.Bgra, ComputeImageChannelType.UnsignedInt8);
                 BitmapData bitmapData = bitmap.LockBits(new Rectangle(new Point(), bitmap.Size), ImageLockMode.ReadOnly, bitmap.PixelFormat);
-                
-                ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateImage2D(
-                    context.Handle,
-                    flags,
-                    &format,
-                    new IntPtr(bitmap.Width),
-                    new IntPtr(bitmap.Height),
-                    new IntPtr(bitmapData.Stride),
-                    bitmapData.Scan0,
-                    &error);
-                ComputeException.ThrowOnError(error);
-                
-                bitmap.UnlockBits(bitmapData);
+
+                try
+                {
+                    ComputeErrorCode error = ComputeErrorCode.Success;
+                    Handle = CL10.CreateImage2D(
+                        context.Handle,
+                        flags,
+                        &format,
+                        new IntPtr(bitmap.Width),
+                        new IntPtr(bitmap.Height),
+                        new IntPtr(bitmapData.Stride),
+                        bitmapData.Scan0,
+                        &error);
+                    ComputeException.ThrowOnError(error);
+                }
+                finally
+                {
+                    bitmap.UnlockBits(bitmapData);
+                }
 
                 Init();
             }
-        }
+        }*/
 
         /// <summary>
         /// Creates a new <see cref="ComputeImage2D"/>.
