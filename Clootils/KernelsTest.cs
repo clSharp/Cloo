@@ -43,11 +43,12 @@ namespace Clootils
         static TextWriter log;
 
         static string kernelSources = @"
-    kernel void k1(          float     num ) {}
-  //kernel void k2(          sampler_t smp ) {}       // Wreaks havoc within Nvidia's compiler. This is, however, a valid kernel signature.
-  //kernel void k3( constant float *   num ) {}       // Causes InvalidBinary if drivers == 64bit and application == 32 bit.
-    kernel void k4( global   float *   num ) {}
-    kernel void k5( local    float *   num ) {}
+    kernel void k1(           float     num ) {}
+  //kernel void k2(           sampler_t smp ) {}       // Causes havoc in Nvidia's drivers. This is, however, a valid kernel signature.
+  //kernel void k3( read_only image2d_t dem ) {}       // The same.
+  //kernel void k4( constant  float *   num ) {}       // Causes InvalidBinary if drivers == 64bit and application == 32 bit.
+    kernel void k5( global    float *   num ) {}
+    kernel void k6( local     float *   num ) {}
 ";
 
         public static void Run(TextWriter log, ComputeContext context)
