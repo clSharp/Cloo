@@ -53,6 +53,12 @@ namespace Clootils
             InitializeSettings();
 
             textBoxLog.Font = new Font(FontFamily.GenericMonospace, 10);
+            textBoxLog.Text =
+@"[Platform] - Select the OpenCL platform that should be used to run the examples.
+[Devices] - Select the OpenCL devices that should be used to run the examples.
+[Run] - Runs the selected examples.
+[Copy Log] - Copies the content of this box.";
+
             configForm = new ConfigForm();
 
             devices = new List<ComputeDevice>();
