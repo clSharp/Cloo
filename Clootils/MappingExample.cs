@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -30,18 +30,26 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using Cloo;
-using System.IO;
 
 namespace Clootils
 {
-    public class MappingTest : TestBase
+    public class MappingExample : IExample
     {
-        public static void Run(TextWriter log, ComputeContext context)
+        public string Name
         {
-            StartTest(log, "Mapping test");
+            get { return "Buffer mapping"; }
+        }
 
+        public string Description
+        {
+            get { return "Shows how to map data from an OpenCL buffer to host memory"; }
+        }
+
+        public void Run(ComputeContext context, TextWriter log)
+        {
             try
             {
                 ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
@@ -58,8 +66,8 @@ namespace Clootils
                 }
 
                 ComputeBuffer<long> buffer = new ComputeBuffer<long>(context, ComputeMemoryFlags.CopyHostPointer, bufferContent);
-                IntPtr mappedPtr = commands.Map(buffer, false, ComputeMemoryMappingFlags.Read, 0, bufferContent.Length, null);
-                commands.Finish();
+                
+                IntPtr mappedPtr = commands.Map(buffer, true, ComputeMemoryMappingFlags.Read, 0, bufferContent.Length, null);
 
                 log.WriteLine("Mapped content:");
 
@@ -75,8 +83,6 @@ namespace Clootils
             {
                 log.WriteLine(e.ToString());
             }
-
-            EndTest(log, "Mapping test");
         }
     }
 }

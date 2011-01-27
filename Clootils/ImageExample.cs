@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -37,11 +37,20 @@ using Cloo;
 
 namespace Clootils
 {
-    class ImageTest : TestBase
+    class ImageExample : IExample
     {
-        public static void Run(TextWriter log, ComputeContext context)
+        public string Name
         {
-            StartTest(log, "Image test");
+            get { return "ComputeImage2D and Bitmap"; }
+        }
+
+        public string Description
+        {
+            get { return "Demonstrates cooperation between OpenCL images and Bitmaps in Cloo."; }
+        }
+
+        public void Run(ComputeContext context, TextWriter log)
+        {
             log.WriteLine("This test has been disabled.");
 
             try
@@ -87,9 +96,6 @@ namespace Clootils
             {
                 log.WriteLine(e.ToString());
             }
-
-            EndTest(log, "Image test");
         }
-
     }
 }

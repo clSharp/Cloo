@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -37,12 +37,9 @@ using System.Runtime.InteropServices;
 
 namespace Clootils
 {
-    public class KernelsTest : TestBase
+    public class MultipleKernelsExample : IExample
     {
-        static ComputeProgram program;
-        static TextWriter log;
-
-        static string kernelSources = @"
+        string kernelSources = @"
     kernel void k1(           float     num ) {}
   //kernel void k2(           sampler_t smp ) {}       // Causes havoc in Nvidia's drivers. This is, however, a valid kernel signature.
   //kernel void k3( read_only image2d_t dem ) {}       // The same.
@@ -50,16 +47,22 @@ namespace Clootils
   //kernel void k5( global    float *   num ) {}       // Causes InvalidBinary if Nvidia drivers == 64bit and application == 32 bit. Also valid.
     kernel void k6( local     float *   num ) {}
 ";
-
-        public static void Run(TextWriter log, ComputeContext context)
+        
+        public string Name
         {
-            StartTest(log, "Kernels test");
-            
+            get { return "Building multiple kernels"; }
+        }
+
+        public string Description
+        {
+            get { return "Demonstrates how to build all the kernels in a program simultaneously."; }
+        }
+
+        public void Run(ComputeContext context, TextWriter log)
+        {
             try
             {
-                KernelsTest.log = log;
-
-                program = new ComputeProgram(context, kernelSources);
+                ComputeProgram program = new ComputeProgram(context, kernelSources);
                 program.Build(null, null, null, IntPtr.Zero);
                 log.WriteLine("Program successfully built.");
                 program.CreateAllKernels();
@@ -69,8 +72,6 @@ namespace Clootils
             {
                 log.WriteLine(e.ToString());
             }
-
-            EndTest(log, "Kernels test");
         }
     }
 }

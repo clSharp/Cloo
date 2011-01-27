@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -31,20 +31,25 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.IO;
+using Cloo;
 
 namespace Clootils
 {
-    public class TestBase
+    public class Example : IExample
     {
-        protected static void StartTest(TextWriter log, String name)
+        public string Name
         {
-            log.WriteLine(log.NewLine + "------------------| Start {0} |------------------", name);
+            get { return "Empty"; }
         }
 
-        protected static void EndTest(TextWriter log, String name)
+        public string Description
         {
-            log.WriteLine("-------------------| End {0} |-------------------" + log.NewLine, name);
-            log.Flush();
+            get { return "This is an empty example."; }
+        }
+
+        public void Run(ComputeContext context, TextWriter log)
+        {
+            log.WriteLine(Description);
         }
     }
 }

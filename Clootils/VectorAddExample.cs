@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -38,10 +38,10 @@ using Cloo;
 
 namespace Clootils
 {
-    class VectorAddTest : TestBase
+    class VectorAddExample : IExample
     {
-        static ComputeProgram program;
-        private static string kernelSource = @"
+        ComputeProgram program;
+        string kernelSource = @"
 kernel void VectorAdd(
     global  read_only float* a,
     global  read_only float* b,
@@ -51,10 +51,19 @@ kernel void VectorAdd(
     c[index] = a[index] + b[index];
 }
 ";
-        public static void Run(TextWriter log, ComputeContext context)
-        {
-            StartTest(log, "Vector addition test");
 
+        public string Name
+        {
+            get { return "Vector addition"; }
+        }
+
+        public string Description
+        {
+            get { return "Demonstrates how to add two vectors using the GPU"; }
+        }
+
+        public void Run(ComputeContext context, TextWriter log)
+        {
             try
             {
                 int count = 10;
@@ -84,14 +93,10 @@ kernel void VectorAdd(
                 ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
 
                 commands.Execute(kernel, null, new long[] { count }, null, null);
+                
+                commands.ReadFromBuffer(c, ref arrC, false, null);
+                
                 commands.Finish();
-
-                arrC = new float[count];
-                GCHandle arrCHandle = GCHandle.Alloc(arrC, GCHandleType.Pinned);
-
-                commands.Read(c, true, 0, count, arrCHandle.AddrOfPinnedObject(), null);
-
-                arrCHandle.Free();
 
                 for (int i = 0; i < count; i++)
                     log.WriteLine("{0} + {1} = {2}", arrA[i], arrB[i], arrC[i]);
@@ -100,8 +105,6 @@ kernel void VectorAdd(
             {
                 log.WriteLine(e.ToString());
             }
-
-            EndTest(log, "Vector addition test");
         }
     }
 }

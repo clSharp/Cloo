@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -30,15 +30,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System.IO;
+using Cloo;
 
 namespace Clootils
 {
-    public class DummyTest : TestBase
+    public interface IExample
     {
-        public static void Run(TextWriter log)
-        {
-            StartTest(log, "Dummy test");
-            EndTest(log, "Dummy test");
-        }
+        string Name { get; }
+        string Description { get; }
+        void Run(ComputeContext context, TextWriter log);
     }
 }

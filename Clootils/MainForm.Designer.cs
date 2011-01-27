@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.checkedListTests = new System.Windows.Forms.CheckedListBox();
+            this.checkedListExamples = new System.Windows.Forms.CheckedListBox();
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.comboBoxPlatform = new System.Windows.Forms.ComboBox();
             this.checkedListDevices = new System.Windows.Forms.CheckedListBox();
             this.groupBoxPlatform = new System.Windows.Forms.GroupBox();
             this.groupBoxDevices = new System.Windows.Forms.GroupBox();
-            this.buttonRunSelected = new System.Windows.Forms.Button();
             this.buttonRunAll = new System.Windows.Forms.Button();
             this.buttonCopyLog = new System.Windows.Forms.Button();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
@@ -53,12 +52,12 @@
             // 
             this.tableLayoutPanel.SetColumnSpan(this.splitContainer, 2);
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(3, 113);
+            this.splitContainer.Location = new System.Drawing.Point(3, 141);
             this.splitContainer.Name = "splitContainer";
             // 
             // splitContainer.Panel1
             // 
-            this.splitContainer.Panel1.Controls.Add(this.checkedListTests);
+            this.splitContainer.Panel1.Controls.Add(this.checkedListExamples);
             // 
             // splitContainer.Panel2
             // 
@@ -67,14 +66,14 @@
             this.splitContainer.SplitterDistance = 225;
             this.splitContainer.TabIndex = 2;
             // 
-            // checkedListTests
+            // checkedListExamples
             // 
-            this.checkedListTests.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListTests.FormattingEnabled = true;
-            this.checkedListTests.Location = new System.Drawing.Point(0, 0);
-            this.checkedListTests.Name = "checkedListTests";
-            this.checkedListTests.Size = new System.Drawing.Size(225, 614);
-            this.checkedListTests.TabIndex = 0;
+            this.checkedListExamples.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkedListExamples.FormattingEnabled = true;
+            this.checkedListExamples.Location = new System.Drawing.Point(0, 0);
+            this.checkedListExamples.Name = "checkedListExamples";
+            this.checkedListExamples.Size = new System.Drawing.Size(225, 614);
+            this.checkedListExamples.TabIndex = 0;
             // 
             // textBoxLog
             // 
@@ -113,7 +112,7 @@
             this.groupBoxPlatform.Controls.Add(this.comboBoxPlatform);
             this.groupBoxPlatform.Location = new System.Drawing.Point(3, 3);
             this.groupBoxPlatform.Name = "groupBoxPlatform";
-            this.groupBoxPlatform.Size = new System.Drawing.Size(350, 45);
+            this.groupBoxPlatform.Size = new System.Drawing.Size(350, 59);
             this.groupBoxPlatform.TabIndex = 11;
             this.groupBoxPlatform.TabStop = false;
             this.groupBoxPlatform.Text = "Platform";
@@ -127,19 +126,10 @@
             this.groupBoxDevices.Location = new System.Drawing.Point(359, 3);
             this.groupBoxDevices.Name = "groupBoxDevices";
             this.tableLayoutPanel.SetRowSpan(this.groupBoxDevices, 2);
-            this.groupBoxDevices.Size = new System.Drawing.Size(646, 104);
+            this.groupBoxDevices.Size = new System.Drawing.Size(646, 132);
             this.groupBoxDevices.TabIndex = 12;
             this.groupBoxDevices.TabStop = false;
             this.groupBoxDevices.Text = "Devices";
-            // 
-            // buttonRunSelected
-            // 
-            this.buttonRunSelected.Location = new System.Drawing.Point(87, 25);
-            this.buttonRunSelected.Name = "buttonRunSelected";
-            this.buttonRunSelected.Size = new System.Drawing.Size(95, 23);
-            this.buttonRunSelected.TabIndex = 13;
-            this.buttonRunSelected.Text = "Run Selected";
-            this.buttonRunSelected.UseVisualStyleBackColor = true;
             // 
             // buttonRunAll
             // 
@@ -147,7 +137,7 @@
             this.buttonRunAll.Name = "buttonRunAll";
             this.buttonRunAll.Size = new System.Drawing.Size(75, 23);
             this.buttonRunAll.TabIndex = 14;
-            this.buttonRunAll.Text = "Run All";
+            this.buttonRunAll.Text = "Run";
             this.buttonRunAll.UseVisualStyleBackColor = true;
             this.buttonRunAll.Click += new System.EventHandler(this.buttonRunAll_Click);
             // 
@@ -164,12 +154,11 @@
             // groupBoxOptions
             // 
             this.groupBoxOptions.AutoSize = true;
-            this.groupBoxOptions.Controls.Add(this.buttonRunSelected);
             this.groupBoxOptions.Controls.Add(this.buttonRunAll);
             this.groupBoxOptions.Controls.Add(this.buttonCopyLog);
-            this.groupBoxOptions.Location = new System.Drawing.Point(3, 54);
+            this.groupBoxOptions.Location = new System.Drawing.Point(3, 68);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(350, 53);
+            this.groupBoxOptions.Size = new System.Drawing.Size(350, 67);
             this.groupBoxOptions.TabIndex = 17;
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "Options";
@@ -228,12 +217,11 @@
         private System.Windows.Forms.CheckedListBox checkedListDevices;
         private System.Windows.Forms.GroupBox groupBoxPlatform;
         private System.Windows.Forms.GroupBox groupBoxDevices;
-        private System.Windows.Forms.Button buttonRunSelected;
         private System.Windows.Forms.Button buttonRunAll;
         private System.Windows.Forms.Button buttonCopyLog;
         private System.Windows.Forms.GroupBox groupBoxOptions;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.CheckedListBox checkedListTests;
+        private System.Windows.Forms.CheckedListBox checkedListExamples;
 
     }
 }

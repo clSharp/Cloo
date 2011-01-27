@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -45,19 +45,19 @@ namespace Clootils
         ConfigForm configForm;
         ComputePlatform platform;
         IList<ComputeDevice> devices;
+        IList<IExample> exampleList;
 
         public MainForm()
         {
             InitializeComponent();
             InitializeSettings();
 
-            devices = new List<ComputeDevice>();
-
             textBoxLog.Font = new Font(FontFamily.GenericMonospace, 10);
             configForm = new ConfigForm();
 
-            checkedListDevices.CheckOnClick = true;
+            devices = new List<ComputeDevice>();
 
+            checkedListDevices.CheckOnClick = true;
             checkedListDevices.ItemCheck += new ItemCheckEventHandler(checkedListDevices_ItemCheck);
 
             comboBoxPlatform.SelectedIndexChanged += new EventHandler(comboBoxPlatform_SelectedIndexChanged);
@@ -68,6 +68,19 @@ namespace Clootils
                 availablePlatforms[i] = ComputePlatform.Platforms[i].Name;
             comboBoxPlatform.Items.AddRange(availablePlatforms);
             comboBoxPlatform.SelectedIndex = 0;            
+
+            // Set up the example list
+            exampleList = new List<IExample>();
+            exampleList.Add(new Example());
+            exampleList.Add(new InfoExample());
+            exampleList.Add(new MappingExample());
+            exampleList.Add(new ProgramExample());
+            exampleList.Add(new MultipleKernelsExample());
+            exampleList.Add(new VectorAddExample());
+
+            checkedListExamples.CheckOnClick = true;
+            foreach (IExample example in exampleList)
+                checkedListExamples.Items.Add(example.Name, true);
         }
 
         void checkedListDevices_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -116,53 +129,6 @@ namespace Clootils
             configForm.ShowDialog(this);
         }
 
-        private void showInfoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            StringBuilder info = new StringBuilder();
-
-            info.AppendLine("[HOST INFO]");
-            info.AppendLine("Operating system: " + Environment.OSVersion);
-
-            info.AppendLine();
-            info.AppendLine("[OPENCL PLATFORMS]");
-
-            foreach (ComputePlatform platform in ComputePlatform.Platforms)
-            {
-                info.AppendLine("Name: " + platform.Name);
-                info.AppendLine("Vendor: " + platform.Vendor);
-                info.AppendLine("Version: " + platform.Version);
-                info.AppendLine("Profile: " + platform.Profile);
-                info.AppendLine("Extensions:");
-
-                foreach (string extension in platform.Extensions)
-                    info.AppendLine(" + " + extension);
-
-                info.AppendLine();
-
-                info.AppendLine("Devices:");
-
-                foreach (ComputeDevice device in platform.Devices)
-                {
-                    info.AppendLine("\tName: " + device.Name);
-                    info.AppendLine("\tVendor: " + device.Vendor);
-                    info.AppendLine("\tDriver version: " + device.DriverVersion);
-                    info.AppendLine("\tCompute units: " + device.MaxComputeUnits);
-                    info.AppendLine("\tGlobal memory: " + device.GlobalMemorySize);
-                    info.AppendLine("\tLocal memory: " + device.LocalMemorySize);
-                    info.AppendLine("\tImage support: " + device.ImageSupport);
-                    info.AppendLine("\tExtensions:");
-
-                    foreach (string extension in device.Extensions)
-                        info.AppendLine("\t + " + extension);
-
-                    info.AppendLine();
-                }
-                info.AppendLine();
-            }
-
-            textBoxLog.Lines = ParseLines(info.ToString());
-        }
-
         private void buttonRunAll_Click(object sender, EventArgs e)
         {
             if (devices.Count == 0)
@@ -177,19 +143,20 @@ namespace Clootils
             ComputeContextPropertyList properties = new ComputeContextPropertyList(platform);
             ComputeContext context = new ComputeContext(devices, properties, null, IntPtr.Zero);
 
-            log.WriteLine("Platform: " + context.Platform.Name);
-            log.Write("Devices:");
-            foreach (ComputeDevice device in context.Devices)
-                log.Write(" " + device.Name + "    ");
-            log.WriteLine();
-
-            DummyTest.Run(log);
-            MappingTest.Run(log, context);
-            ProgramTest.Run(log, context);
-            KernelsTest.Run(log, context);
-            VectorAddTest.Run(log, context);
-            CL11Test.Run(log, context);
-            ImageTest.Run(log, context);
+            for (int i = 0; i < exampleList.Count; i++)
+            {
+                if (checkedListExamples.GetItemChecked(i))
+                {
+                    log.WriteLine("--------------------------------------------------------------------------------");
+                    log.WriteLine("Running \"" + exampleList[i].Name + "\"...");
+                    log.WriteLine();
+                    exampleList[i].Run(context, log);
+                    log.WriteLine();
+                    log.WriteLine("\"" + exampleList[i].Name + "\" finished.");
+                    log.WriteLine("--------------------------------------------------------------------------------");
+                    log.Flush();
+                }
+            }
 
             log.Close();
 

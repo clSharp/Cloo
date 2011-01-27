@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -35,18 +35,25 @@ using Cloo;
 
 namespace Clootils
 {
-    class ProgramTest : TestBase
+    class ProgramExample : IExample
     {
-        static TextWriter log;
-        static string clSource = @"kernel void Test(int argument) { }";
+        TextWriter log;
+        ComputeProgram program;
+        string clSource = @"kernel void Test(int argument) { }";
 
-        static ComputeProgram program;
-
-        public static void Run(TextWriter log, ComputeContext context)
+        public string Name
         {
-            StartTest(log, "Program test");
-            
-            ProgramTest.log = log;
+            get { return "Program build"; }
+        }
+
+        public string Description
+        {
+            get { return "Demonstrates how to use a callback function when building a program and retrieve its binary when finished."; }
+        }
+
+        public void Run(ComputeContext context, TextWriter log)
+        {
+            this.log = log;
             
             try
             {
@@ -57,11 +64,9 @@ namespace Clootils
             {
                 log.WriteLine(e.ToString());
             }
-
-            EndTest(log, "Program test");
         }
 
-        private static void notify(IntPtr programHandle, IntPtr userDataPtr)
+        private void notify(IntPtr programHandle, IntPtr userDataPtr)
         {
             log.WriteLine("Program build notification.");
             byte[] bytes = program.Binaries[0];

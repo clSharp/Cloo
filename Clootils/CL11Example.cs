@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2010 Fatjon Sakiqi
+Copyright (c) 2009 - 2011 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -35,12 +35,20 @@ using Cloo;
 
 namespace Clootils
 {
-    class CL11Test : TestBase
+    class CL11Example : IExample
     {
-        public static void Run(TextWriter log, ComputeContext context)
+        public string Name
         {
-            StartTest(log, "OpenCL 1.1 test");
+            get { return "OpenCL 1.1"; }
+        }
 
+        public string Description
+        {
+            get { return "Demonstrates some of the new features of OpenCL 1.1."; }
+        }
+
+        public void Run(ComputeContext context, TextWriter log)
+        {
             try
             {
                 log.Write("Creating command queue... ");
@@ -139,18 +147,16 @@ namespace Clootils
             {
                 log.WriteLine(e.ToString());
             }
-
-            EndTest(log, "OpenCL 1.1 test");
         }
 
-        private static void Compare<T>(T[] a1, T[] a2)
+        private void Compare<T>(T[] a1, T[] a2)
         {
             for (int i = 0; i < a1.Length; i++)
                 if (!a1[i].Equals(a2[i]))
                     throw new Exception("FAILED!");
         }
 
-        private static void Compare<T>(T[,] a1, T[,] a2)
+        private void Compare<T>(T[,] a1, T[,] a2)
         {
             for (int i = 0; i < a1.GetLength(0); i++)
                 for (int j = 0; j < a1.GetLength(1); j++)
@@ -158,7 +164,7 @@ namespace Clootils
                         throw new Exception("FAILED!");
         }
 
-        private static void Compare<T>(T[, ,] a1, T[, ,] a2)
+        private void Compare<T>(T[, ,] a1, T[, ,] a2)
         {
             for (int i = 0; i < a1.GetLength(0); i++)
                 for (int j = 0; j < a1.GetLength(1); j++)
