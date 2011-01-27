@@ -62,7 +62,7 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.textBoxLog);
-            this.splitContainer.Size = new System.Drawing.Size(1002, 614);
+            this.splitContainer.Size = new System.Drawing.Size(1002, 586);
             this.splitContainer.SplitterDistance = 225;
             this.splitContainer.TabIndex = 2;
             // 
@@ -72,7 +72,7 @@
             this.checkedListExamples.FormattingEnabled = true;
             this.checkedListExamples.Location = new System.Drawing.Point(0, 0);
             this.checkedListExamples.Name = "checkedListExamples";
-            this.checkedListExamples.Size = new System.Drawing.Size(225, 614);
+            this.checkedListExamples.Size = new System.Drawing.Size(225, 586);
             this.checkedListExamples.TabIndex = 0;
             // 
             // textBoxLog
@@ -84,12 +84,13 @@
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ReadOnly = true;
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxLog.Size = new System.Drawing.Size(773, 614);
+            this.textBoxLog.Size = new System.Drawing.Size(773, 586);
             this.textBoxLog.TabIndex = 1;
             this.textBoxLog.WordWrap = false;
             // 
             // comboBoxPlatform
             // 
+            this.comboBoxPlatform.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxPlatform.FormattingEnabled = true;
             this.comboBoxPlatform.Location = new System.Drawing.Point(6, 19);
             this.comboBoxPlatform.Name = "comboBoxPlatform";
@@ -110,6 +111,7 @@
             this.groupBoxPlatform.AutoSize = true;
             this.groupBoxPlatform.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxPlatform.Controls.Add(this.comboBoxPlatform);
+            this.groupBoxPlatform.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxPlatform.Location = new System.Drawing.Point(3, 3);
             this.groupBoxPlatform.Name = "groupBoxPlatform";
             this.groupBoxPlatform.Size = new System.Drawing.Size(350, 59);
@@ -133,6 +135,7 @@
             // 
             // buttonRunAll
             // 
+            this.buttonRunAll.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.buttonRunAll.Location = new System.Drawing.Point(6, 25);
             this.buttonRunAll.Name = "buttonRunAll";
             this.buttonRunAll.Size = new System.Drawing.Size(75, 23);
@@ -143,6 +146,7 @@
             // 
             // buttonCopyLog
             // 
+            this.buttonCopyLog.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.buttonCopyLog.Location = new System.Drawing.Point(269, 25);
             this.buttonCopyLog.Name = "buttonCopyLog";
             this.buttonCopyLog.Size = new System.Drawing.Size(75, 23);
@@ -154,8 +158,10 @@
             // groupBoxOptions
             // 
             this.groupBoxOptions.AutoSize = true;
+            this.groupBoxOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxOptions.Controls.Add(this.buttonRunAll);
             this.groupBoxOptions.Controls.Add(this.buttonCopyLog);
+            this.groupBoxOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxOptions.Location = new System.Drawing.Point(3, 68);
             this.groupBoxOptions.Name = "groupBoxOptions";
             this.groupBoxOptions.Size = new System.Drawing.Size(350, 67);
