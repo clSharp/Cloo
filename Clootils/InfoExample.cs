@@ -76,9 +76,10 @@ namespace Clootils
                 log.WriteLine("\tName: " + device.Name);
                 log.WriteLine("\tVendor: " + device.Vendor);
                 log.WriteLine("\tDriver version: " + device.DriverVersion);
+                log.WriteLine("\tOpenCL version: " + device.Version);
                 log.WriteLine("\tCompute units: " + device.MaxComputeUnits);
-                log.WriteLine("\tGlobal memory: " + device.GlobalMemorySize);
-                log.WriteLine("\tLocal memory: " + device.LocalMemorySize);
+                log.WriteLine("\tGlobal memory: " + device.GlobalMemorySize + " bytes");
+                log.WriteLine("\tLocal memory: " + device.LocalMemorySize + " bytes");
                 log.WriteLine("\tImage support: " + device.ImageSupport);
                 log.WriteLine("\tExtensions:");
 
