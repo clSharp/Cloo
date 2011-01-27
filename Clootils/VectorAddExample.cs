@@ -66,38 +66,49 @@ kernel void VectorAdd(
         {
             try
             {
+                // Create the arrays and fill them with random data.
                 int count = 10;
                 float[] arrA = new float[count];
                 float[] arrB = new float[count];
                 float[] arrC = new float[count];
 
                 Random rand = new Random();
-
                 for (int i = 0; i < count; i++)
                 {
                     arrA[i] = (float)(rand.NextDouble() * 100);
                     arrB[i] = (float)(rand.NextDouble() * 100);
                 }
 
+                // Create the input buffers and fill them with data from the arrays.
                 ComputeBuffer<float> a = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrA);
                 ComputeBuffer<float> b = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrB);
+                
+                // The output buffer doesn't need any data from the host. Only its size is specified (arrC.Length).
                 ComputeBuffer<float> c = new ComputeBuffer<float>(context, ComputeMemoryFlags.WriteOnly, arrC.Length);
 
+                // Create and build the opencl program.
                 program = new ComputeProgram(context, kernelSource);
                 program.Build(null, null, null, IntPtr.Zero);
+
+                // Create the kernel function and set its arguments.
                 ComputeKernel kernel = program.CreateKernel("VectorAdd");
                 kernel.SetMemoryArgument(0, a);
                 kernel.SetMemoryArgument(1, b);
                 kernel.SetMemoryArgument(2, c);
 
+                // Create the command queue. This is used to control kernel execution and manage read/write/copy operations.
                 ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
 
+                // Execute the kernel "count" times.
                 commands.Execute(kernel, null, new long[] { count }, null, null);
                 
+                // Read back the result.
                 commands.ReadFromBuffer(c, ref arrC, false, null);
                 
+                // Wait for all the opencl commands to finish execution.
                 commands.Finish();
 
+                // Print the results to a log/console.
                 for (int i = 0; i < count; i++)
                     log.WriteLine("{0} + {1} = {2}", arrA[i], arrB[i], arrC[i]);
             }
