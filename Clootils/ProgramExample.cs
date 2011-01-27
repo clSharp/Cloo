@@ -70,8 +70,8 @@ namespace Clootils
         {
             log.WriteLine("Program build notification.");
             byte[] bytes = program.Binaries[0];
-            log.WriteLine("Compiled program head:");
-            log.WriteLine(BitConverter.ToString(bytes, 0, 16) + "...");
+            log.WriteLine("Beginning of program binary (compiled for the 1st selected device):");
+            log.WriteLine(BitConverter.ToString(bytes, 0, 24) + "...");
         }
     }
 }
