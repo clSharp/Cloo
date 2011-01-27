@@ -43,17 +43,39 @@ namespace Clootils
     public partial class MainForm : Form
     {
         ConfigForm configForm;
+        ComputePlatform platform;
+        IList<ComputeDevice> devices;
 
         public MainForm()
         {
             InitializeComponent();
             InitializeSettings();
-            editorTextBox.Font = Settings.Default.EditorFont;
-            fontDialog.FontMustExist = true;
-            logTextBox.Font = Settings.Default.LogFont;
-            openFileDialog.Multiselect = false;
-            saveFileDialog.OverwritePrompt = true;
+
+            devices = new List<ComputeDevice>();
+
+            textBoxLog.Font = new Font(FontFamily.GenericMonospace, 10);
             configForm = new ConfigForm();
+
+            checkedListDevices.CheckOnClick = true;
+
+            checkedListDevices.ItemCheck += new ItemCheckEventHandler(checkedListDevices_ItemCheck);
+
+            comboBoxPlatform.SelectedIndexChanged += new EventHandler(comboBoxPlatform_SelectedIndexChanged);
+
+            // Populate OpenCL Platform ComboBox
+            object[] availablePlatforms = new object[ComputePlatform.Platforms.Count];
+            for (int i = 0; i < availablePlatforms.Length; i++)
+                availablePlatforms[i] = ComputePlatform.Platforms[i].Name;
+            comboBoxPlatform.Items.AddRange(availablePlatforms);
+            comboBoxPlatform.SelectedIndex = 0;            
+        }
+
+        void checkedListDevices_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked)
+                devices.Add(platform.Devices[e.Index]);
+            else
+                devices.Remove(platform.Devices[e.Index]);
         }
 
         private void InitializeSettings()
@@ -65,98 +87,6 @@ namespace Clootils
                 Settings.Default.LogFont = new Font(FontFamily.GenericMonospace, 10);
 
             Settings.Default.Save();
-        }
-
-        private void openFileMenuItem_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                FileStream file = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
-                StreamReader reader = new StreamReader(file);
-                editorTextBox.Lines = ParseLines(reader.ReadToEnd());
-                reader.Close();
-                file.Close();
-            }
-        }
-
-        private void saveFileMenuItem_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                FileStream file = new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
-                StreamWriter writer = new StreamWriter(file);
-
-                foreach (string line in editorTextBox.Lines)
-                    writer.WriteLine(line);
-
-                writer.Close();
-                file.Close();
-            }
-        }
-
-        private void buildProgramMenuItem_Click(object sender, EventArgs e)
-        {
-            if (editorTextBox.Text.Length == 0)
-            {
-                logTextBox.Text = "No source.";
-                return;
-            }
-
-            string[] logContent;
-
-            ComputeContextPropertyList properties = new ComputeContextPropertyList(configForm.Platform);
-            ComputeContext context = new ComputeContext(configForm.Devices, properties, null, IntPtr.Zero);
-            ComputeProgram program = new ComputeProgram(context, editorTextBox.Text);
-            try
-            {
-                program.Build(configForm.Devices, configForm.Options, null, IntPtr.Zero);
-                logContent = new string[] { "Build succeeded." };
-            }
-            catch (Exception exception)
-            {
-                List<string> lineList = new List<string>();
-                foreach (ComputeDevice device in context.Devices)
-                {
-                    string header = "PLATFORM: " + configForm.Platform.Name + ", DEVICE: " + device.Name;
-                    lineList.Add(header);
-
-                    StringReader reader = new StringReader(program.GetBuildLog(device));
-                    string line = reader.ReadLine();
-                    while (line != null)
-                    {
-                        lineList.Add(line);
-                        line = reader.ReadLine();
-                    }
-
-                    lineList.Add("");
-                    lineList.Add(exception.Message);
-                }
-                logContent = lineList.ToArray();
-            }
-
-            logTextBox.Lines = logContent;
-        }
-
-        private void editorFontMenuItem_Click(object sender, EventArgs e)
-        {
-            fontDialog.Font = editorTextBox.Font;
-            if (fontDialog.ShowDialog() == DialogResult.OK)
-            {
-                editorTextBox.Font = fontDialog.Font;
-                Settings.Default.EditorFont = fontDialog.Font;
-                Settings.Default.Save();
-            }
-        }
-
-        private void logFontMenuItem_Click(object sender, EventArgs e)
-        {
-            fontDialog.Font = logTextBox.Font;
-            if (fontDialog.ShowDialog() == DialogResult.OK)
-            {
-                logTextBox.Font = fontDialog.Font;
-                Settings.Default.LogFont = fontDialog.Font;
-                Settings.Default.Save();
-            }
         }
 
         private string[] ParseLines(string text)
@@ -172,10 +102,13 @@ namespace Clootils
             return lineList.ToArray();
         }
 
-        private void copyButton_Click(object sender, EventArgs e)
+        private void buttonCopyLog_Click(object sender, EventArgs e)
         {
-            Clipboard.Clear();
-            Clipboard.SetText(logTextBox.Text);
+            if (textBoxLog.Text.Length > 0)
+            {
+                Clipboard.Clear();
+                Clipboard.SetText(textBoxLog.Text);
+            }
         }
 
         private void buildDeviceMenuItem_Click(object sender, EventArgs e)
@@ -227,16 +160,22 @@ namespace Clootils
                 info.AppendLine();
             }
 
-            logTextBox.Lines = ParseLines(info.ToString());
+            textBoxLog.Lines = ParseLines(info.ToString());
         }
 
-        private void runTestsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buttonRunAll_Click(object sender, EventArgs e)
         {
+            if (devices.Count == 0)
+            {
+                MessageBox.Show("No OpenCL device selected!\n\nSelect one or more devices from the list to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             StringBuilder output = new StringBuilder();
             StringWriter log = new StringWriter(output);
 
-            ComputeContextPropertyList properties = new ComputeContextPropertyList(configForm.Platform);
-            ComputeContext context = new ComputeContext(configForm.Devices, properties, null, IntPtr.Zero);
+            ComputeContextPropertyList properties = new ComputeContextPropertyList(platform);
+            ComputeContext context = new ComputeContext(devices, properties, null, IntPtr.Zero);
 
             log.WriteLine("Platform: " + context.Platform.Name);
             log.Write("Devices:");
@@ -254,7 +193,19 @@ namespace Clootils
 
             log.Close();
 
-            logTextBox.Lines = ParseLines(output.ToString());
+            textBoxLog.Lines = ParseLines(output.ToString());
+        }
+
+        void comboBoxPlatform_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            devices.Clear();
+            platform = ComputePlatform.Platforms[comboBoxPlatform.SelectedIndex];
+            object[] availableDevices = new object[platform.Devices.Count];
+            for (int i = 0; i < availableDevices.Length; i++)
+                availableDevices[i] = platform.Devices[i].Name;
+            checkedListDevices.Items.Clear();
+            checkedListDevices.Items.AddRange(availableDevices);
+            checkedListDevices.SetItemChecked(0, true);
         }
     }
 }
