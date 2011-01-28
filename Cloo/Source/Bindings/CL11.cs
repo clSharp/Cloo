@@ -45,38 +45,38 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateSubBuffer")]
-        public extern static unsafe IntPtr CreateSubBuffer(
+        public extern static IntPtr CreateSubBuffer(
             IntPtr buffer,
             ComputeMemoryFlags flags,
             ComputeBufferCreateType buffer_create_type,
-            /* const void * */ IntPtr buffer_create_info,
-            ComputeErrorCode* errcode_ret);
+            IntPtr buffer_create_info,
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clSetMemObjectDestructorCallback")]
-        public extern static unsafe ComputeErrorCode SetMemObjectDestructorCallback( 
+        public extern static ComputeErrorCode SetMemObjectDestructorCallback( 
             IntPtr memobj, 
-            /* void (CL_CALLBACK * pfn_notify)(cl_mem memobj, void* user_data)*/ IntPtr pfn_notify, 
-            /* void * */ IntPtr user_data);
+            IntPtr pfn_notify, 
+            IntPtr user_data);
 
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateUserEvent")]
-        public extern static unsafe IntPtr CreateUserEvent(
+        public extern static IntPtr CreateUserEvent(
             IntPtr context,
-            ComputeErrorCode* errcode_ret);
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clSetUserEventStatus")]
-        public extern static unsafe ComputeErrorCode SetUserEventStatus(
+        public extern static ComputeErrorCode SetUserEventStatus(
             IntPtr @event,
             Int32 execution_status);
 
@@ -85,24 +85,24 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clSetEventCallback")]
-        public extern static unsafe ComputeErrorCode SetEventCallback(
+        public extern static ComputeErrorCode SetEventCallback(
             IntPtr @event,
             Int32 command_exec_callback_type,
-            /* void (CL_CALLBACK * pfn_notify)(cl_event, cl_int, void *) */ ComputeEventCallback pfn_notify,
-            /* void * */ IntPtr user_data);
+            ComputeEventCallback pfn_notify,
+            IntPtr user_data);
 
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueReadBufferRect")]
-        public extern static unsafe ComputeErrorCode EnqueueReadBufferRect(
+        public extern static ComputeErrorCode EnqueueReadBufferRect(
             IntPtr command_queue,
             IntPtr buffer,
             ComputeBoolean blocking_read,
-            SysIntX3* buffer_offset,
-            SysIntX3* host_offset,
-            SysIntX3* region,
+            ref SysIntX3 buffer_offset,
+            ref SysIntX3 host_offset,
+            ref SysIntX3 region,
             IntPtr buffer_row_pitch,
             IntPtr buffer_slice_pitch,
             IntPtr host_row_pitch,
@@ -117,13 +117,13 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueWriteBufferRect")]
-        public extern static unsafe ComputeErrorCode EnqueueWriteBufferRect(
+        public extern static ComputeErrorCode EnqueueWriteBufferRect(
             IntPtr command_queue,
             IntPtr buffer,
             ComputeBoolean blocking_write,
-            SysIntX3* buffer_offset,
-            SysIntX3* host_offset,
-            SysIntX3* region,
+            ref SysIntX3 buffer_offset,
+            ref SysIntX3 host_offset,
+            ref SysIntX3 region,
             IntPtr buffer_row_pitch,
             IntPtr buffer_slice_pitch,
             IntPtr host_row_pitch,
@@ -138,13 +138,13 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueCopyBufferRect")]
-        public extern static unsafe ComputeErrorCode EnqueueCopyBufferRect(
+        public extern static ComputeErrorCode EnqueueCopyBufferRect(
             IntPtr command_queue,
             IntPtr src_buffer,
             IntPtr dst_buffer,
-            SysIntX3* src_origin,
-            SysIntX3* dst_origin,
-            SysIntX3* region,
+            ref SysIntX3 src_origin,
+            ref SysIntX3 dst_origin,
+            ref SysIntX3 region,
             IntPtr src_row_pitch,
             IntPtr src_slice_pitch,
             IntPtr dst_row_pitch,
@@ -158,12 +158,12 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [Obsolete("This function has been deprecated in OpenCL 1.1.")]
-        new public static unsafe ComputeErrorCode
+        new public static ComputeErrorCode
         SetCommandQueueProperty(
             IntPtr command_queue,
             ComputeCommandQueueFlags properties,
             ComputeBoolean enable,
-            ComputeCommandQueueFlags* old_properties)
+            out ComputeCommandQueueFlags old_properties)
         {
             throw new NotSupportedException("This function has been deprecated in OpenCL 1.1.");
         }

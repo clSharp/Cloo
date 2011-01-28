@@ -53,7 +53,7 @@ namespace Cloo
             unsafe
             {
                 ComputeErrorCode error;
-                Handle = CL11.CreateUserEvent(context.Handle, &error);
+                Handle = CL11.CreateUserEvent(context.Handle, out error);
                 ComputeException.ThrowOnError(error);
                 Type = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
                     ComputeEventInfo.CommandType, CL10.GetEventInfo);

@@ -3319,7 +3319,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.CreateSubBuffer(System.IntPtr,Cloo.ComputeMemoryFlags,Cloo.ComputeBufferCreateType,System.IntPtr,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL11.CreateSubBuffer(System.IntPtr,Cloo.ComputeMemoryFlags,Cloo.ComputeBufferCreateType,System.IntPtr,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3329,7 +3329,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.CreateUserEvent(System.IntPtr,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL11.CreateUserEvent(System.IntPtr,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3344,22 +3344,22 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.EnqueueReadBufferRect(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.SysIntX3*,Cloo.SysIntX3*,Cloo.SysIntX3*,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
+        <member name="M:Cloo.Bindings.CL11.EnqueueReadBufferRect(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.SysIntX3@,Cloo.SysIntX3@,Cloo.SysIntX3@,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.EnqueueWriteBufferRect(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.SysIntX3*,Cloo.SysIntX3*,Cloo.SysIntX3*,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
+        <member name="M:Cloo.Bindings.CL11.EnqueueWriteBufferRect(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.SysIntX3@,Cloo.SysIntX3@,Cloo.SysIntX3@,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.EnqueueCopyBufferRect(System.IntPtr,System.IntPtr,System.IntPtr,Cloo.SysIntX3*,Cloo.SysIntX3*,Cloo.SysIntX3*,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
+        <member name="M:Cloo.Bindings.CL11.EnqueueCopyBufferRect(System.IntPtr,System.IntPtr,System.IntPtr,Cloo.SysIntX3@,Cloo.SysIntX3@,Cloo.SysIntX3@,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.SetCommandQueueProperty(System.IntPtr,Cloo.ComputeCommandQueueFlags,Cloo.ComputeBoolean,Cloo.ComputeCommandQueueFlags*)">
+        <member name="M:Cloo.Bindings.CL11.SetCommandQueueProperty(System.IntPtr,Cloo.ComputeCommandQueueFlags,Cloo.ComputeBoolean,Cloo.ComputeCommandQueueFlags@)">
             <summary>
             See the OpenCL specification.
             </summary>
