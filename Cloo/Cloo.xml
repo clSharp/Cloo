@@ -3284,7 +3284,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.CreateFromGLTexture2D(System.IntPtr,Cloo.ComputeMemoryFlags,System.Int32,System.Int32,System.Int32,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.CreateFromGLTexture2D(System.IntPtr,Cloo.ComputeMemoryFlags,System.Int32,System.Int32,System.Int32,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>
