@@ -52,11 +52,11 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetPlatformIDs")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetPlatformIDs(
             Int32 num_entries,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] platforms,
-            Int32* num_platforms);
+            out Int32 num_platforms);
 
         /// <summary>
         /// See the OpenCL specification.

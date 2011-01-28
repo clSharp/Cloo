@@ -3081,7 +3081,7 @@
             The name of the library that contains the available OpenCL function points.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetPlatformIDs(System.Int32,System.IntPtr[],System.Int32*)">
+        <member name="M:Cloo.Bindings.CL10.GetPlatformIDs(System.Int32,System.IntPtr[],System.Int32@)">
             <summary>
             See the OpenCL specification.
             </summary>
