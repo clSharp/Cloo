@@ -39,6 +39,7 @@ namespace Cloo.Bindings
     /// Contains bindings to the OpenCL 1.0 functions.
     /// </summary>
     /// <remarks> See the OpenCL specification for documentation regarding these functions. </remarks>
+    [SuppressUnmanagedCodeSecurity]
     public class CL10
     {
         /// <summary>

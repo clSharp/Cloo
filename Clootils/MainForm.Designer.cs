@@ -63,7 +63,7 @@
             // 
             this.splitContainer.Panel2.Controls.Add(this.textBoxLog);
             this.splitContainer.Size = new System.Drawing.Size(1002, 586);
-            this.splitContainer.SplitterDistance = 225;
+            this.splitContainer.SplitterDistance = 173;
             this.splitContainer.TabIndex = 2;
             // 
             // checkedListExamples
@@ -72,7 +72,7 @@
             this.checkedListExamples.FormattingEnabled = true;
             this.checkedListExamples.Location = new System.Drawing.Point(0, 0);
             this.checkedListExamples.Name = "checkedListExamples";
-            this.checkedListExamples.Size = new System.Drawing.Size(225, 586);
+            this.checkedListExamples.Size = new System.Drawing.Size(173, 586);
             this.checkedListExamples.TabIndex = 0;
             // 
             // textBoxLog
@@ -84,7 +84,7 @@
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ReadOnly = true;
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxLog.Size = new System.Drawing.Size(773, 586);
+            this.textBoxLog.Size = new System.Drawing.Size(825, 586);
             this.textBoxLog.TabIndex = 1;
             this.textBoxLog.WordWrap = false;
             // 
