@@ -131,11 +131,9 @@ namespace Cloo
                 IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
 
-                fixed (IntPtr* memObjHandlesPtr = memObjHandles)
-                
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
-                    error = CL10.EnqueueAcquireGLObjects(Handle, memObjCount, memObjHandlesPtr, eventWaitListSize, eventHandles, newEventHandle);
+                    error = CL10.EnqueueAcquireGLObjects(Handle, memObjCount, memObjHandles, eventWaitListSize, eventHandles, newEventHandle);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -596,10 +594,8 @@ namespace Cloo
                 IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
 
-                fixed (IntPtr* memoryObjectsPtr = memObjHandles)
-                
                 {
-                    ComputeErrorCode error = CL10.EnqueueReleaseGLObjects(Handle, memObjCount, memoryObjectsPtr, eventWaitListSize, eventHandles, newEventHandle);
+                    ComputeErrorCode error = CL10.EnqueueReleaseGLObjects(Handle, memObjCount, memObjHandles, eventWaitListSize, eventHandles, newEventHandle);
                     ComputeException.ThrowOnError(error);
                 }
 

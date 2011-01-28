@@ -961,7 +961,7 @@ namespace Cloo.Bindings
         EnqueueAcquireGLObjects(
             IntPtr command_queue,
             Int32 num_objects,
-            IntPtr* mem_objects,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] mem_objects,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
@@ -975,7 +975,7 @@ namespace Cloo.Bindings
         EnqueueReleaseGLObjects(
             IntPtr command_queue,
             Int32 num_objects,
-            IntPtr* mem_objects,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] mem_objects,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
