@@ -63,7 +63,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetPlatformInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetPlatformInfo(
             IntPtr platform,
             ComputePlatformInfo param_name,
@@ -76,7 +76,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetDeviceIDs")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetDeviceIDs(
             IntPtr platform,
             ComputeDeviceTypes device_type,
@@ -89,7 +89,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetDeviceInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetDeviceInfo(
             IntPtr device,
             ComputeDeviceInfo param_name,
@@ -102,7 +102,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateContext")]
-        public extern static unsafe IntPtr
+        public extern static IntPtr
         CreateContext(
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] properties,
             Int32 num_devices,
@@ -116,7 +116,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateContextFromType")]
-        public extern static unsafe IntPtr
+        public extern static IntPtr
         CreateContextFromType(
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] properties,
             ComputeDeviceTypes device_type,
@@ -129,7 +129,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clRetainContext")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         RetainContext(IntPtr context);
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clReleaseContext")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         ReleaseContext(IntPtr context);
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetContextInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetContextInfo(
             IntPtr context,
             ComputeContextInfo param_name,
@@ -158,7 +158,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateCommandQueue")]
-        public extern static unsafe IntPtr
+        public extern static IntPtr
         CreateCommandQueue(
             IntPtr context,
             IntPtr device,
@@ -170,7 +170,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clRetainCommandQueue")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         RetainCommandQueue(IntPtr command_queue);
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clReleaseCommandQueue")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         ReleaseCommandQueue(IntPtr command_queue);
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetCommandQueueInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetCommandQueueInfo(
             IntPtr command_queue,
             ComputeCommandQueueInfo param_name,
@@ -199,7 +199,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clSetCommandQueueProperty")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         SetCommandQueueProperty(
             IntPtr command_queue,
             ComputeCommandQueueFlags properties,
@@ -211,7 +211,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateBuffer")]
-        public extern static unsafe IntPtr
+        public extern static IntPtr
         CreateBuffer(
             IntPtr context,
             ComputeMemoryFlags flags,
@@ -224,7 +224,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateImage2D")]
-        public extern static unsafe IntPtr
+        public extern static IntPtr
         CreateImage2D(
             IntPtr context,
             ComputeMemoryFlags flags,
@@ -240,7 +240,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateImage3D")]
-        public extern static unsafe IntPtr
+        public extern static IntPtr
         CreateImage3D(
             IntPtr context,
             ComputeMemoryFlags flags,
@@ -258,7 +258,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clRetainMemObject")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         RetainMemObject(IntPtr memobj);
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clReleaseMemObject")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         ReleaseMemObject(IntPtr memobj);
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetSupportedImageFormats")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetSupportedImageFormats(
             IntPtr context,
             ComputeMemoryFlags flags,
@@ -288,7 +288,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetMemObjectInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetMemObjectInfo(
             IntPtr memobj,
             ComputeMemoryInfo param_name,
@@ -301,7 +301,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetImageInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetImageInfo(
             IntPtr image,
             ComputeImageInfo param_name,
@@ -314,7 +314,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateSampler")]
-        public extern static unsafe IntPtr
+        public extern static IntPtr
         CreateSampler(
             IntPtr context,
             ComputeBoolean normalized_coords,
@@ -327,7 +327,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clRetainSampler")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         RetainSampler(IntPtr sampler);
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clReleaseSampler")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         ReleaseSampler(IntPtr sampler);
 
         /// <summary>
@@ -343,7 +343,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetSamplerInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetSamplerInfo(
             IntPtr sampler,
             ComputeSamplerInfo param_name,
@@ -356,7 +356,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateProgramWithSource")]
-        public extern static unsafe IntPtr
+        public extern static IntPtr
         CreateProgramWithSource(
             IntPtr context,
             Int32 count,
@@ -369,7 +369,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateProgramWithBinary")]
-        public extern static unsafe IntPtr
+        public extern static IntPtr
         CreateProgramWithBinary(
             IntPtr context,
             Int32 num_devices,
@@ -384,7 +384,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clRetainProgram")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         RetainProgram(IntPtr program);
 
         /// <summary>
@@ -392,7 +392,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clReleaseProgram")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         ReleaseProgram(IntPtr program);
 
         /// <summary>
@@ -400,7 +400,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clBuildProgram")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         BuildProgram(
             IntPtr program,
             Int32 num_devices,
@@ -414,7 +414,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clUnloadCompiler")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         UnloadCompiler();
 
         /// <summary>
@@ -422,7 +422,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetProgramInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetProgramInfo(
             IntPtr program,
             ComputeProgramInfo param_name,
@@ -435,7 +435,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetProgramBuildInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetProgramBuildInfo(
             IntPtr program,
             IntPtr device,
@@ -449,7 +449,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateKernel")]
-        public extern static unsafe IntPtr
+        public extern static IntPtr
         CreateKernel(
             IntPtr program,
             String kernel_name,
@@ -460,7 +460,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateKernelsInProgram")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         CreateKernelsInProgram(
             IntPtr program,
             Int32 num_kernels,
@@ -472,7 +472,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clRetainKernel")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         RetainKernel(IntPtr kernel);
 
         /// <summary>
@@ -480,7 +480,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clReleaseKernel")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         ReleaseKernel(IntPtr kernel);
 
         /// <summary>
@@ -488,19 +488,19 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clSetKernelArg")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         SetKernelArg(
             IntPtr kernel,
             Int32 arg_index,
             IntPtr arg_size,
-            /* const void* */ IntPtr arg_value);
+            IntPtr arg_value);
 
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetKernelInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetKernelInfo(
             IntPtr kernel,
             ComputeKernelInfo param_name,
@@ -513,7 +513,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetKernelWorkGroupInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetKernelWorkGroupInfo(
             IntPtr kernel,
             IntPtr device,
@@ -527,7 +527,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clWaitForEvents")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         WaitForEvents(
             Int32 num_events,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_list);
@@ -537,7 +537,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetEventInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetEventInfo(
             IntPtr @event,
             ComputeEventInfo param_name,
@@ -550,7 +550,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clRetainEvent")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         RetainEvent(IntPtr @event);
 
         /// <summary>
@@ -558,7 +558,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clReleaseEvent")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         ReleaseEvent(IntPtr @event);
 
         /// <summary>
@@ -566,7 +566,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetEventProfilingInfo")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         GetEventProfilingInfo(
             IntPtr @event,
             ComputeCommandProfilingInfo param_name,
@@ -579,7 +579,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clFlush")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         Flush(IntPtr command_queue);
 
         /// <summary>
@@ -587,7 +587,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clFinish")]
-        public extern static unsafe ComputeErrorCode
+        public extern static ComputeErrorCode
         Finish(IntPtr command_queue);
 
         /// <summary>
@@ -602,10 +602,10 @@ namespace Cloo.Bindings
             ComputeBoolean blocking_read,
             IntPtr offset,
             IntPtr cb,
-            /* void* */ IntPtr ptr,
+            IntPtr ptr,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -621,8 +621,8 @@ namespace Cloo.Bindings
             IntPtr cb,
             /* const void* */ IntPtr ptr,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -638,8 +638,8 @@ namespace Cloo.Bindings
             IntPtr dst_offset,
             IntPtr cb,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -657,8 +657,8 @@ namespace Cloo.Bindings
             IntPtr slice_pitch,
             /* void* */ IntPtr ptr,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -676,8 +676,8 @@ namespace Cloo.Bindings
             IntPtr input_slice_pitch,
             /* const void* */ IntPtr ptr,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -693,8 +693,8 @@ namespace Cloo.Bindings
             IntPtr* dst_origin,
             IntPtr* region,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -710,8 +710,8 @@ namespace Cloo.Bindings
             IntPtr* region,
             IntPtr dst_offset,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -727,8 +727,8 @@ namespace Cloo.Bindings
             IntPtr* dst_origin,
             IntPtr* region,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -744,8 +744,8 @@ namespace Cloo.Bindings
             IntPtr offset,
             IntPtr cb,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst = 1)] IntPtr[] new_event,
             ComputeErrorCode* errcode_ret);
 
         /// <summary>
@@ -764,8 +764,8 @@ namespace Cloo.Bindings
             IntPtr* image_row_pitch,
             IntPtr* image_slice_pitch,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst = 1)] IntPtr[] new_event,
             ComputeErrorCode* errcode_ret);
 
         /// <summary>
@@ -779,8 +779,8 @@ namespace Cloo.Bindings
             IntPtr memobj,
             /* void* */ IntPtr mapped_ptr,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -796,8 +796,8 @@ namespace Cloo.Bindings
             IntPtr* global_work_size,
             IntPtr* local_work_size,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -809,8 +809,8 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr kernel,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -827,8 +827,8 @@ namespace Cloo.Bindings
             IntPtr* mem_list,
             /* const void* */ IntPtr* args_mem_loc,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -838,7 +838,7 @@ namespace Cloo.Bindings
         public extern static unsafe ComputeErrorCode
         EnqueueMarker(
             IntPtr command_queue,
-            IntPtr* new_event);
+            out IntPtr new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -849,7 +849,7 @@ namespace Cloo.Bindings
         EnqueueWaitForEvents(
             IntPtr command_queue,
             Int32 num_events,
-            IntPtr* event_list);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_list);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -961,8 +961,8 @@ namespace Cloo.Bindings
             Int32 num_objects,
             IntPtr* mem_objects,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -975,7 +975,7 @@ namespace Cloo.Bindings
             Int32 num_objects,
             IntPtr* mem_objects,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
     }
 }

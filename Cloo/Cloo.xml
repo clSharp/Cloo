@@ -3191,82 +3191,82 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueReadBuffer(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueReadBuffer(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueWriteBuffer(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueWriteBuffer(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueCopyBuffer(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueCopyBuffer(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueReadImage(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,System.IntPtr*,System.IntPtr*,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueReadImage(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,System.IntPtr*,System.IntPtr*,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueWriteImage(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,System.IntPtr*,System.IntPtr*,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueWriteImage(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,System.IntPtr*,System.IntPtr*,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueCopyImage(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr*,System.IntPtr*,System.IntPtr*,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueCopyImage(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr*,System.IntPtr*,System.IntPtr*,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueCopyImageToBuffer(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr*,System.IntPtr*,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueCopyImageToBuffer(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr*,System.IntPtr*,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueCopyBufferToImage(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr*,System.IntPtr*,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueCopyBufferToImage(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr*,System.IntPtr*,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueMapBuffer(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.ComputeMemoryMappingFlags,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueMapBuffer(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.ComputeMemoryMappingFlags,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[],Cloo.ComputeErrorCode*)">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueMapImage(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.ComputeMemoryMappingFlags,System.IntPtr*,System.IntPtr*,System.IntPtr*,System.IntPtr*,System.Int32,System.IntPtr*,System.IntPtr*,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueMapImage(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.ComputeMemoryMappingFlags,System.IntPtr*,System.IntPtr*,System.IntPtr*,System.IntPtr*,System.Int32,System.IntPtr[],System.IntPtr[],Cloo.ComputeErrorCode*)">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueUnmapMemObject(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueUnmapMemObject(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueNDRangeKernel(System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*,System.IntPtr*,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueNDRangeKernel(System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*,System.IntPtr*,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueTask(System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueTask(System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueNativeKernel(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueNativeKernel(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueMarker(System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueMarker(System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueWaitForEvents(System.IntPtr,System.Int32,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueWaitForEvents(System.IntPtr,System.Int32,System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3314,12 +3314,12 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueAcquireGLObjects(System.IntPtr,System.Int32,System.IntPtr*,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueAcquireGLObjects(System.IntPtr,System.Int32,System.IntPtr*,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueReleaseGLObjects(System.IntPtr,System.Int32,System.IntPtr*,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueReleaseGLObjects(System.IntPtr,System.Int32,System.IntPtr*,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3349,17 +3349,17 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.EnqueueReadBufferRect(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.SysIntX3*,Cloo.SysIntX3*,Cloo.SysIntX3*,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL11.EnqueueReadBufferRect(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.SysIntX3*,Cloo.SysIntX3*,Cloo.SysIntX3*,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.EnqueueWriteBufferRect(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.SysIntX3*,Cloo.SysIntX3*,Cloo.SysIntX3*,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL11.EnqueueWriteBufferRect(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.SysIntX3*,Cloo.SysIntX3*,Cloo.SysIntX3*,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.EnqueueCopyBufferRect(System.IntPtr,System.IntPtr,System.IntPtr,Cloo.SysIntX3*,Cloo.SysIntX3*,Cloo.SysIntX3*,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL11.EnqueueCopyBufferRect(System.IntPtr,System.IntPtr,System.IntPtr,Cloo.SysIntX3*,Cloo.SysIntX3*,Cloo.SysIntX3*,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>

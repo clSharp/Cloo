@@ -109,8 +109,8 @@ namespace Cloo.Bindings
             IntPtr host_slice_pitch,
             IntPtr ptr,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -130,8 +130,8 @@ namespace Cloo.Bindings
             IntPtr host_slice_pitch,
             IntPtr ptr,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -150,8 +150,8 @@ namespace Cloo.Bindings
             IntPtr dst_row_pitch,
             IntPtr dst_slice_pitch,
             Int32 num_events_in_wait_list,
-            IntPtr* event_wait_list,
-            IntPtr* new_event);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
+            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
