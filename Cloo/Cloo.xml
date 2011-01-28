@@ -3086,7 +3086,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetPlatformInfo(System.IntPtr,Cloo.ComputePlatformInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetPlatformInfo(System.IntPtr,Cloo.ComputePlatformInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3096,7 +3096,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetDeviceInfo(System.IntPtr,Cloo.ComputeDeviceInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetDeviceInfo(System.IntPtr,Cloo.ComputeDeviceInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3121,7 +3121,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetContextInfo(System.IntPtr,Cloo.ComputeContextInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetContextInfo(System.IntPtr,Cloo.ComputeContextInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3141,7 +3141,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetCommandQueueInfo(System.IntPtr,Cloo.ComputeCommandQueueInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetCommandQueueInfo(System.IntPtr,Cloo.ComputeCommandQueueInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3181,12 +3181,12 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetMemObjectInfo(System.IntPtr,Cloo.ComputeMemoryInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetMemObjectInfo(System.IntPtr,Cloo.ComputeMemoryInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetImageInfo(System.IntPtr,Cloo.ComputeImageInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetImageInfo(System.IntPtr,Cloo.ComputeImageInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3206,7 +3206,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetSamplerInfo(System.IntPtr,Cloo.ComputeSamplerInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetSamplerInfo(System.IntPtr,Cloo.ComputeSamplerInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3241,12 +3241,12 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetProgramInfo(System.IntPtr,Cloo.ComputeProgramInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetProgramInfo(System.IntPtr,Cloo.ComputeProgramInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetProgramBuildInfo(System.IntPtr,System.IntPtr,Cloo.ComputeProgramBuildInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetProgramBuildInfo(System.IntPtr,System.IntPtr,Cloo.ComputeProgramBuildInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3276,12 +3276,12 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetKernelInfo(System.IntPtr,Cloo.ComputeKernelInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetKernelInfo(System.IntPtr,Cloo.ComputeKernelInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetKernelWorkGroupInfo(System.IntPtr,System.IntPtr,Cloo.ComputeKernelWorkGroupInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetKernelWorkGroupInfo(System.IntPtr,System.IntPtr,Cloo.ComputeKernelWorkGroupInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3291,7 +3291,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetEventInfo(System.IntPtr,Cloo.ComputeEventInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetEventInfo(System.IntPtr,Cloo.ComputeEventInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3306,7 +3306,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetEventProfilingInfo(System.IntPtr,Cloo.ComputeCommandProfilingInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetEventProfilingInfo(System.IntPtr,Cloo.ComputeCommandProfilingInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3439,7 +3439,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetGLTextureInfo(System.IntPtr,Cloo.ComputeGLTextureInfo,System.IntPtr,System.IntPtr,System.IntPtr*)">
+        <member name="M:Cloo.Bindings.CL10.GetGLTextureInfo(System.IntPtr,Cloo.ComputeGLTextureInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
             <summary>
             See the OpenCL specification.
             </summary>

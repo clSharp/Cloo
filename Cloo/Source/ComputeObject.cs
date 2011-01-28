@@ -141,7 +141,7 @@ namespace Cloo
                 ComputeErrorCode error;
                 QueriedType[] buffer;
                 IntPtr bufferSizeRet;
-                error = getInfoDelegate(handle, paramName, IntPtr.Zero, IntPtr.Zero, &bufferSizeRet);
+                error = getInfoDelegate(handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
                 ComputeException.ThrowOnError(error);
                 buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
                 GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
@@ -152,7 +152,7 @@ namespace Cloo
                         paramName,
                         bufferSizeRet,
                         gcHandle.AddrOfPinnedObject(),
-                        null);
+                        out bufferSizeRet);
                     ComputeException.ThrowOnError(error);
                 }
                 finally
@@ -185,7 +185,7 @@ namespace Cloo
                 ComputeErrorCode error;
                 QueriedType[] buffer;
                 IntPtr bufferSizeRet;
-                error = getInfoDelegate(handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, &bufferSizeRet);
+                error = getInfoDelegate(handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
                 ComputeException.ThrowOnError(error);
                 buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
                 GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
@@ -197,7 +197,7 @@ namespace Cloo
                         paramName,
                         bufferSizeRet,
                         gcHandle.AddrOfPinnedObject(),
-                        null);
+                        out bufferSizeRet);
                     ComputeException.ThrowOnError(error);
                 }
                 finally
@@ -243,18 +243,18 @@ namespace Cloo
             where QueriedType : struct
         {
             unsafe
-            {
-                ComputeErrorCode error;
+            {                
                 QueriedType result = new QueriedType();
                 GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
                 try
                 {
-                    error = getInfoDelegate(
+                    IntPtr sizeRet;
+                    ComputeErrorCode error = getInfoDelegate(
                         handle,
                         paramName,
                         (IntPtr)Marshal.SizeOf(result),
                         gcHandle.AddrOfPinnedObject(),
-                        null);
+                        out sizeRet);
                     ComputeException.ThrowOnError(error);
                 }
                 finally
@@ -290,13 +290,14 @@ namespace Cloo
                 GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
                 try
                 {
+                    IntPtr sizeRet;
                     ComputeErrorCode error = getInfoDelegate(
                         handle,
                         secondaryObject.handle,
                         paramName,
                         new IntPtr(Marshal.SizeOf(result)),
                         gcHandle.AddrOfPinnedObject(),
-                        null);
+                        out sizeRet);
                     ComputeException.ThrowOnError(error);
                 }
                 finally
@@ -372,7 +373,7 @@ namespace Cloo
                 InfoType paramName,
                 IntPtr paramValueSize,
                 IntPtr paramValue,
-                IntPtr* paramValueSizeRet
+                out IntPtr paramValueSizeRet
             );
 
         /// <summary>
@@ -394,7 +395,7 @@ namespace Cloo
                 InfoType paramName,
                 IntPtr paramValueSize,
                 IntPtr paramValue,
-                IntPtr* paramValueSizeRet
+                out IntPtr paramValueSizeRet
             );
 
         #endregion

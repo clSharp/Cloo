@@ -386,12 +386,13 @@ namespace Cloo
                         binaries.Add(binary);
                     }
 
+                    IntPtr sizeRet;
                     ComputeErrorCode error = CL10.GetProgramInfo(
                         Handle,
                         ComputeProgramInfo.Binaries,
                         new IntPtr(binariesPtrs.Length * IntPtr.Size),
                         binariesPtrsGCHandle.AddrOfPinnedObject(),
-                        null);
+                        out sizeRet);
                     ComputeException.ThrowOnError(error);
                 }
                 finally

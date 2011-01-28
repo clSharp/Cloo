@@ -68,8 +68,8 @@ namespace Cloo.Bindings
             IntPtr platform,
             ComputePlatformInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -94,8 +94,8 @@ namespace Cloo.Bindings
             IntPtr device,
             ComputeDeviceInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -150,8 +150,8 @@ namespace Cloo.Bindings
             IntPtr context,
             ComputeContextInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -191,8 +191,8 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             ComputeCommandQueueInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -293,8 +293,8 @@ namespace Cloo.Bindings
             IntPtr memobj,
             ComputeMemoryInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -306,8 +306,8 @@ namespace Cloo.Bindings
             IntPtr image,
             ComputeImageInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -348,8 +348,8 @@ namespace Cloo.Bindings
             IntPtr sampler,
             ComputeSamplerInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -427,8 +427,8 @@ namespace Cloo.Bindings
             IntPtr program,
             ComputeProgramInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -441,8 +441,8 @@ namespace Cloo.Bindings
             IntPtr device,
             ComputeProgramBuildInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -505,8 +505,8 @@ namespace Cloo.Bindings
             IntPtr kernel,
             ComputeKernelInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -519,8 +519,8 @@ namespace Cloo.Bindings
             IntPtr device,
             ComputeKernelWorkGroupInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -542,8 +542,8 @@ namespace Cloo.Bindings
             IntPtr @event,
             ComputeEventInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -571,8 +571,8 @@ namespace Cloo.Bindings
             IntPtr @event,
             ComputeCommandProfilingInfo param_name,
             IntPtr param_value_size,
-            /* void* */ IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            IntPtr param_value,
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
@@ -948,7 +948,7 @@ namespace Cloo.Bindings
             ComputeGLTextureInfo param_name,
             IntPtr param_value_size,
             IntPtr param_value,
-            IntPtr* param_value_size_ret);
+            out IntPtr param_value_size_ret);
 
         /// <summary>
         /// See the OpenCL specification.
