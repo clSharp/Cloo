@@ -464,8 +464,8 @@ namespace Cloo.Bindings
         CreateKernelsInProgram(
             IntPtr program,
             Int32 num_kernels,
-            IntPtr* kernels,
-            Int32* num_kernels_ret);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] kernels,
+            out Int32 num_kernels_ret);
 
         /// <summary>
         /// See the OpenCL specification.

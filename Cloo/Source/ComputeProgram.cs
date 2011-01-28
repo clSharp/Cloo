@@ -258,19 +258,17 @@ namespace Cloo
                 int kernelsCount = 0;
                 IntPtr[] kernelHandles;
 
-                ComputeErrorCode error = CL10.CreateKernelsInProgram(Handle, 0, null, &kernelsCount);
+                ComputeErrorCode error = CL10.CreateKernelsInProgram(Handle, 0, null, out kernelsCount);
                 ComputeException.ThrowOnError(error);
 
                 kernelHandles = new IntPtr[kernelsCount];
-                fixed (IntPtr* kernelHandlesPtr = kernelHandles)
-                {
-                    error = CL10.CreateKernelsInProgram(
-                        Handle,
-                        kernelsCount,
-                        kernelHandlesPtr,
-                        null);
-                    ComputeException.ThrowOnError(error);
-                }
+                error = CL10.CreateKernelsInProgram(
+                    Handle,
+                    kernelsCount,
+                    kernelHandles,
+                    out kernelsCount);
+                ComputeException.ThrowOnError(error);
+
                 for (int i = 0; i < kernelsCount; i++)
                     kernels.Add(new ComputeKernel(kernelHandles[i], this));
 
