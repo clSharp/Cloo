@@ -3176,7 +3176,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetSupportedImageFormats(System.IntPtr,Cloo.ComputeMemoryFlags,Cloo.ComputeMemoryType,System.Int32,Cloo.ComputeImageFormat*,System.Int32*)">
+        <member name="M:Cloo.Bindings.CL10.GetSupportedImageFormats(System.IntPtr,Cloo.ComputeMemoryFlags,Cloo.ComputeMemoryType,System.Int32,Cloo.ComputeImageFormat[],System.Int32@)">
             <summary>
             See the OpenCL specification.
             </summary>

@@ -280,8 +280,8 @@ namespace Cloo.Bindings
             ComputeMemoryFlags flags,
             ComputeMemoryType image_type,
             Int32 num_entries,
-            ComputeImageFormat* image_formats,
-            Int32* num_image_formats);
+            [MarshalAs(UnmanagedType.LPArray)] ComputeImageFormat[] image_formats,
+            out Int32 num_image_formats);
 
         /// <summary>
         /// See the OpenCL specification.

@@ -124,15 +124,12 @@ namespace Cloo
             unsafe
             {
                 int formatCountRet = 0;
-                ComputeErrorCode error = CL10.GetSupportedImageFormats(context.Handle, flags, type, 0, null, &formatCountRet);
+                ComputeErrorCode error = CL10.GetSupportedImageFormats(context.Handle, flags, type, 0, null, out formatCountRet);
                 ComputeException.ThrowOnError(error);
 
                 ComputeImageFormat[] formats = new ComputeImageFormat[formatCountRet];
-                fixed (ComputeImageFormat* formatsPtr = formats)
-                {
-                    error = CL10.GetSupportedImageFormats(context.Handle, flags, type, formatCountRet, formatsPtr, null);
-                    ComputeException.ThrowOnError(error);
-                }
+                error = CL10.GetSupportedImageFormats(context.Handle, flags, type, formatCountRet, formats, out formatCountRet);
+                ComputeException.ThrowOnError(error);
 
                 return new Collection<ComputeImageFormat>(formats);
             }
