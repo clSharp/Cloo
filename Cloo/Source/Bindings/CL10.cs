@@ -320,7 +320,7 @@ namespace Cloo.Bindings
             ComputeBoolean normalized_coords,
             ComputeImageAddressing addressing_mode,
             ComputeImageFiltering filter_mode,
-            ComputeErrorCode* errcode_ret);
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.

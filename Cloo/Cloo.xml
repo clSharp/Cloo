@@ -3191,7 +3191,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.CreateSampler(System.IntPtr,Cloo.ComputeBoolean,Cloo.ComputeImageAddressing,Cloo.ComputeImageFiltering,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.CreateSampler(System.IntPtr,Cloo.ComputeBoolean,Cloo.ComputeImageAddressing,Cloo.ComputeImageFiltering,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>

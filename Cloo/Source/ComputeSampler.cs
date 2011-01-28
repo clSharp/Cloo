@@ -99,7 +99,7 @@ namespace Cloo
                     (normalizedCoords) ? ComputeBoolean.True : ComputeBoolean.False,
                     addressing,
                     filtering,
-                    &error);
+                    out error);
                 ComputeException.ThrowOnError(error);
                 this.addressing = addressing;
                 this.context = context;
