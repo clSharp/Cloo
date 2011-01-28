@@ -109,7 +109,7 @@ namespace Cloo
 
         internal static IntPtr[] ExtractHandles<T>(ICollection<T> computeObjects, out int handleCount) where T : ComputeObject
         {
-            if (computeObjects == null)
+            if (computeObjects == null || computeObjects.Count == 0)
             {
                 handleCount = 0;
                 return null;
