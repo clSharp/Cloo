@@ -3156,7 +3156,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.CreateImage2D(System.IntPtr,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat*,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.CreateImage2D(System.IntPtr,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat@,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>

@@ -228,12 +228,12 @@ namespace Cloo.Bindings
         CreateImage2D(
             IntPtr context,
             ComputeMemoryFlags flags,
-            ComputeImageFormat* image_format,
+            ref ComputeImageFormat image_format,
             IntPtr image_width,
             IntPtr image_height,
             IntPtr image_row_pitch,
             /* void* */ IntPtr host_ptr,
-            ComputeErrorCode* errcode_ret);
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.

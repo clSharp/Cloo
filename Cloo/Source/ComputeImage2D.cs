@@ -106,12 +106,12 @@ namespace Cloo
                 Handle = CL10.CreateImage2D(
                     context.Handle,
                     flags,
-                    &format,
+                    ref format,
                     new IntPtr(width),
                     new IntPtr(height),
                     new IntPtr(rowPitch),
                     data,
-                    &error);
+                    out error);
                 ComputeException.ThrowOnError(error);
 
                 Init();
