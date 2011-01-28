@@ -3231,7 +3231,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.BuildProgram(System.IntPtr,System.Int32,System.IntPtr*,System.String,Cloo.ComputeProgramBuildNotifier,System.IntPtr)">
+        <member name="M:Cloo.Bindings.CL10.BuildProgram(System.IntPtr,System.Int32,System.IntPtr[],System.String,Cloo.ComputeProgramBuildNotifier,System.IntPtr)">
             <summary>
             See the OpenCL specification.
             </summary>

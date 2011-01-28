@@ -35,6 +35,7 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
+    using System;
 
     /// <summary>
     /// Represents a list of OpenCL generated or user created events.
@@ -89,7 +90,9 @@ namespace Cloo
         {
             unsafe
             {
-                ComputeErrorCode error = CL10.WaitForEvents(events.Count, Tools.ExtractHandles(events));
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
+                ComputeErrorCode error = CL10.WaitForEvents(eventWaitListSize, eventHandles);
                 ComputeException.ThrowOnError(error);
             }
         }
@@ -99,11 +102,7 @@ namespace Cloo
         /// </summary>
         public void Wait()
         {
-            unsafe
-            {
-                ComputeErrorCode error = CL10.WaitForEvents(events.Count, Tools.ExtractHandles(events));
-                ComputeException.ThrowOnError(error);
-            }
+            ComputeEventList.Wait(events);
         }
 
         #endregion

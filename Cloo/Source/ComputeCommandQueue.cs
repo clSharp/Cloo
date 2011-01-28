@@ -125,15 +125,17 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] memObjHandles = Tools.ExtractHandles(memObjs);
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int memObjCount;
+                IntPtr[] memObjHandles = Tools.ExtractHandles(memObjs, out memObjCount);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* memObjHandlesPtr = memObjHandles)
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
-                    error = CL10.EnqueueAcquireGLObjects(Handle, memObjHandles.Length, memObjHandlesPtr, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    error = CL10.EnqueueAcquireGLObjects(Handle, memObjCount, memObjHandlesPtr, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -181,12 +183,13 @@ namespace Cloo
             unsafe
             {
                 int sizeofT = Marshal.SizeOf(typeof(T));
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyBuffer(Handle, source.Handle, destination.Handle, new IntPtr(sourceOffset * sizeofT), new IntPtr(destinationOffset * sizeofT), new IntPtr(region * sizeofT), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueCopyBuffer(Handle, source.Handle, destination.Handle, new IntPtr(sourceOffset * sizeofT), new IntPtr(destinationOffset * sizeofT), new IntPtr(region * sizeofT), eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -218,12 +221,13 @@ namespace Cloo
                 sourceOffset.X = new IntPtr(sourceOffset.X.ToInt64() * sizeofT);
                 destinationOffset.X = new IntPtr(destinationOffset.X.ToInt64() * sizeofT);
                 region.X = new IntPtr(region.X.ToInt64() * sizeofT);
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL11.EnqueueCopyBufferRect(this.Handle, source.Handle, destination.Handle, &(sourceOffset), &(destinationOffset), &(region), new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL11.EnqueueCopyBufferRect(this.Handle, source.Handle, destination.Handle, &(sourceOffset), &(destinationOffset), &(region), new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -247,12 +251,13 @@ namespace Cloo
             unsafe
             {
                 int sizeofT = Marshal.SizeOf(typeof(T));
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyBufferToImage(Handle, source.Handle, destination.Handle, new IntPtr(sourceOffset * sizeofT), &(destinationOffset.X), &(region.X), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueCopyBufferToImage(Handle, source.Handle, destination.Handle, new IntPtr(sourceOffset * sizeofT), &(destinationOffset.X), &(region.X), eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -275,12 +280,13 @@ namespace Cloo
             unsafe
             {
                 int sizeofT = Marshal.SizeOf(typeof(T));
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyImageToBuffer(Handle, source.Handle, destination.Handle, &(sourceOffset.X), &(region.X), new IntPtr(destinationOffset * sizeofT), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueCopyImageToBuffer(Handle, source.Handle, destination.Handle, &(sourceOffset.X), &(region.X), new IntPtr(destinationOffset * sizeofT), eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -302,12 +308,13 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyImage(Handle, source.Handle, destination.Handle, &(sourceOffset.X), &(destinationOffset.X), &(region.X), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueCopyImage(Handle, source.Handle, destination.Handle, &(sourceOffset.X), &(destinationOffset.X), &(region.X), eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -325,12 +332,13 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueTask(Handle, kernel.Handle, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueTask(Handle, kernel.Handle, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -361,7 +369,8 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* globalWorkOffsetPtr = Tools.ConvertArray(globalWorkOffset))
@@ -369,7 +378,7 @@ namespace Cloo
                 fixed (IntPtr* localWorkSizePtr = Tools.ConvertArray(localWorkSize))
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueNDRangeKernel(Handle, kernel.Handle, globalWorkSize.Length, globalWorkOffsetPtr, globalWorkSizePtr, localWorkSizePtr, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueNDRangeKernel(Handle, kernel.Handle, globalWorkSize.Length, globalWorkOffsetPtr, globalWorkSizePtr, localWorkSizePtr, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -413,7 +422,8 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
                 IntPtr mappedPtr = IntPtr.Zero;
                 int sizeofT = Marshal.SizeOf(typeof(T));
@@ -421,7 +431,7 @@ namespace Cloo
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
-                    mappedPtr = CL10.EnqueueMapBuffer(Handle, buffer.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, flags, new IntPtr(offset * sizeofT), new IntPtr(region * sizeofT), eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null, &error);
+                    mappedPtr = CL10.EnqueueMapBuffer(Handle, buffer.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, flags, new IntPtr(offset * sizeofT), new IntPtr(region * sizeofT), eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null, &error);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -446,14 +456,15 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
                 IntPtr mappedPtr;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
-                    mappedPtr = CL10.EnqueueMapImage(Handle, image.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, flags, &(offset.X), &(region.X), null, null, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null, &error);
+                    mappedPtr = CL10.EnqueueMapImage(Handle, image.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, flags, &(offset.X), &(region.X), null, null, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null, &error);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -479,12 +490,13 @@ namespace Cloo
             unsafe
             {
                 int sizeofT = Marshal.SizeOf(typeof(T));
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueReadBuffer(Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, new IntPtr(offset * sizeofT), new IntPtr(region * sizeofT), destination, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueReadBuffer(Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, new IntPtr(offset * sizeofT), new IntPtr(region * sizeofT), destination, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -517,12 +529,13 @@ namespace Cloo
                 sourceOffset.X = new IntPtr(sourceOffset.X.ToInt64() * sizeofT);
                 destinationOffset.X = new IntPtr(destinationOffset.X.ToInt64() * sizeofT);
                 region.X = new IntPtr(region.X.ToInt64() * sizeofT);
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL11.EnqueueReadBufferRect(this.Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(sourceOffset), &(destinationOffset), &(region), new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), destination, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL11.EnqueueReadBufferRect(this.Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(sourceOffset), &(destinationOffset), &(region), new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), destination, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -547,12 +560,13 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueReadImage(Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(offset.X), &(region.X), new IntPtr(rowPitch), new IntPtr(slicePitch), destination, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueReadImage(Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(offset.X), &(region.X), new IntPtr(rowPitch), new IntPtr(slicePitch), destination, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -571,14 +585,16 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] memObjHandles = Tools.ExtractHandles(memObjs);
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int memObjCount;
+                IntPtr[] memObjHandles = Tools.ExtractHandles(memObjs, out memObjCount);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* memoryObjectsPtr = memObjHandles)
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueReleaseGLObjects(Handle, memObjHandles.Length, memoryObjectsPtr, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueReleaseGLObjects(Handle, memObjCount, memoryObjectsPtr, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -606,12 +622,13 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueUnmapMemObject(Handle, memory.Handle, mappedPtr, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueUnmapMemObject(Handle, memory.Handle, mappedPtr, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -630,11 +647,12 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueWaitForEvents(Handle, eventHandles.Length, eventHandlesPtr);
+                    ComputeErrorCode error = CL10.EnqueueWaitForEvents(Handle, eventWaitListSize, eventHandlesPtr);
                     ComputeException.ThrowOnError(error);
                 }
             }
@@ -655,12 +673,13 @@ namespace Cloo
             unsafe
             {
                 int sizeofT = Marshal.SizeOf(typeof(T));
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueWriteBuffer(Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, new IntPtr(destinationOffset * sizeofT), new IntPtr(region * sizeofT), source, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueWriteBuffer(Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, new IntPtr(destinationOffset * sizeofT), new IntPtr(region * sizeofT), source, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -693,12 +712,13 @@ namespace Cloo
                 sourceOffset.X = new IntPtr(sourceOffset.X.ToInt64() * sizeofT);
                 destinationOffset.X = new IntPtr(destinationOffset.X.ToInt64() * sizeofT);
                 region.X = new IntPtr(region.X.ToInt64() * sizeofT);
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL11.EnqueueWriteBufferRect(this.Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(destinationOffset), &(sourceOffset), &(region), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), source, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL11.EnqueueWriteBufferRect(this.Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(destinationOffset), &(sourceOffset), &(region), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), source, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -723,12 +743,13 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] eventHandles = Tools.ExtractHandles(events);
+                int eventWaitListSize;
+                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr newEventHandle = IntPtr.Zero;
 
                 fixed (IntPtr* eventHandlesPtr = eventHandles)
                 {
-                    ComputeErrorCode error = CL10.EnqueueWriteImage(Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(destinationOffset.X), &(region.X), new IntPtr(rowPitch), new IntPtr(slicePitch), source, eventHandles.Length, eventHandlesPtr, (events != null) ? &newEventHandle : null);
+                    ComputeErrorCode error = CL10.EnqueueWriteImage(Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(destinationOffset.X), &(region.X), new IntPtr(rowPitch), new IntPtr(slicePitch), source, eventWaitListSize, eventHandlesPtr, (events != null) ? &newEventHandle : null);
                     ComputeException.ThrowOnError(error);
                 }
 

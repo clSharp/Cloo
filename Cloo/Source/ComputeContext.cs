@@ -110,12 +110,13 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] deviceHandles = Tools.ExtractHandles(devices);
+                int handleCount;
+                IntPtr[] deviceHandles = Tools.ExtractHandles(devices, out handleCount);
                 IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
                 callback = notify;
 
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateContext(propertyArray, devices.Count, deviceHandles, notify, notifyDataPtr, out error);
+                Handle = CL10.CreateContext(propertyArray, handleCount, deviceHandles, notify, notifyDataPtr, out error);
                 ComputeException.ThrowOnError(error);
 
                 this.properties = properties;

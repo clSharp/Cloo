@@ -107,10 +107,13 @@ namespace Cloo
             return result;
         }
 
-        internal static IntPtr[] ExtractHandles<T>(ICollection<T> computeObjects) where T : ComputeObject
+        internal static IntPtr[] ExtractHandles<T>(ICollection<T> computeObjects, out int handleCount) where T : ComputeObject
         {
             if (computeObjects == null)
-                return new IntPtr[0];
+            {
+                handleCount = 0;
+                return null;
+            }
 
             IntPtr[] result = new IntPtr[computeObjects.Count];
             int i = 0;
@@ -119,6 +122,7 @@ namespace Cloo
                 result[i] = computeObj.Handle;
                 i++;
             }
+            handleCount = computeObjects.Count;
             return result;
         }
 

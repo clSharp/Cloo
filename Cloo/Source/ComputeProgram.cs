@@ -167,11 +167,11 @@ namespace Cloo
         {
             unsafe
             {
-                int count = binaries.Count;
+                int count;
 
                 IntPtr[] deviceHandles = (devices != null) ?
-                    Tools.ExtractHandles(devices) :
-                    Tools.ExtractHandles(context.Devices);
+                    Tools.ExtractHandles(devices, out count) :
+                    Tools.ExtractHandles(context.Devices, out count);
 
                 IntPtr[] binariesPtrs = new IntPtr[count];
                 IntPtr[] binariesLengths = new IntPtr[count];
@@ -229,21 +229,19 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] deviceHandles = Tools.ExtractHandles(devices);
+                int handleCount;
+                IntPtr[] deviceHandles = Tools.ExtractHandles(devices, out handleCount);
                 buildOptions = (options != null) ? options : "";
                 buildNotify = notify;
 
-                fixed (IntPtr* deviceHandlesPtr = deviceHandles)
-                {
-                    ComputeErrorCode error = CL10.BuildProgram(
-                        Handle,
-                        deviceHandles.Length,
-                        deviceHandlesPtr,
-                        options,
-                        buildNotify,
-                        notifyDataPtr);
-                    ComputeException.ThrowOnError(error);
-                }
+                ComputeErrorCode error = CL10.BuildProgram(
+                    Handle,
+                    handleCount,
+                    deviceHandles,
+                    options,
+                    buildNotify,
+                    notifyDataPtr);
+                ComputeException.ThrowOnError(error);
             }
         }
 

@@ -404,10 +404,10 @@ namespace Cloo.Bindings
         BuildProgram(
             IntPtr program,
             Int32 num_devices,
-            IntPtr* device_list,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] device_list,
             String options,
-            /* void (*pfn_notify)(cl_program program , IntPtr user_data ) */ ComputeProgramBuildNotifier pfn_notify,
-            /* void* */ IntPtr user_data);
+            ComputeProgramBuildNotifier pfn_notify,
+            IntPtr user_data);
 
         /// <summary>
         /// See the OpenCL specification.
