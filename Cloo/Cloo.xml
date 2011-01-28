@@ -3231,12 +3231,12 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueMapBuffer(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.ComputeMemoryMappingFlags,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[],Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueMapBuffer(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.ComputeMemoryMappingFlags,System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[],Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueMapImage(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.ComputeMemoryMappingFlags,Cloo.SysIntX3@,Cloo.SysIntX3@,System.IntPtr@,System.IntPtr@,System.Int32,System.IntPtr[],System.IntPtr[],Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.EnqueueMapImage(System.IntPtr,System.IntPtr,Cloo.ComputeBoolean,Cloo.ComputeMemoryMappingFlags,Cloo.SysIntX3@,Cloo.SysIntX3@,System.IntPtr@,System.IntPtr@,System.Int32,System.IntPtr[],System.IntPtr[],Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>
