@@ -83,6 +83,7 @@ namespace Clootils
             exampleList.Add(new ProgramExample());
             exampleList.Add(new MultipleKernelsExample());
             exampleList.Add(new VectorAddExample());
+            exampleList.Add(new CL11Example());
 
             checkedListExamples.CheckOnClick = true;
             foreach (IExample example in exampleList)
