@@ -33,6 +33,7 @@ namespace Cloo
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Text;
 
     /// <summary>
     /// Represents an OpenCL object.
@@ -302,14 +303,9 @@ namespace Cloo
         /// <returns></returns>
         protected string GetStringInfo<InfoType>(InfoType paramName, GetInfoDelegate<InfoType> getInfoDelegate)
         {
-            unsafe
-            {
-                string result = null;
-                sbyte[] buffer = GetArrayInfo<InfoType, sbyte>(paramName, getInfoDelegate);
-                fixed (sbyte* bufferPtr = buffer)
-                    result = new string(bufferPtr);
-                return result;
-            }
+            byte[] buffer = GetArrayInfo<InfoType, byte>(paramName, getInfoDelegate);
+            Char[] chars = Encoding.ASCII.GetChars(buffer, 0, buffer.Length);
+            return (new string(chars)).TrimEnd(new char[] { '\0' });
         }
 
         /// <summary>
@@ -322,15 +318,9 @@ namespace Cloo
         /// <returns></returns>
         protected string GetStringInfo<InfoType>(ComputeObject secondaryObject, InfoType paramName, GetInfoDelegateEx<InfoType> getInfoDelegate)
         {
-            unsafe
-            {
-                string result = null;
-                sbyte[] buffer = GetArrayInfo<InfoType, sbyte>(secondaryObject, paramName, getInfoDelegate);
-                fixed (sbyte* bufferPtr = buffer)
-                    result = new string(bufferPtr);
-
-                return result;
-            }
+            byte[] buffer = GetArrayInfo<InfoType, byte>(secondaryObject, paramName, getInfoDelegate);
+            Char[] chars = Encoding.ASCII.GetChars(buffer, 0, buffer.Length);
+            return (new string(chars)).TrimEnd(new char[] { '\0' });
         }
 
         #endregion
