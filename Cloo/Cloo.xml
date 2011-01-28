@@ -3121,7 +3121,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.CreateKernel(System.IntPtr,System.String,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.CreateKernel(System.IntPtr,System.String,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>

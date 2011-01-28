@@ -101,7 +101,7 @@ namespace Cloo
                 Handle = CL10.CreateKernel(
                     program.Handle,
                     functionName,
-                    &error);
+                    out error);
                 ComputeException.ThrowOnError(error);
                 context = program.Context;
                 this.functionName = functionName;

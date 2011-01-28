@@ -453,7 +453,7 @@ namespace Cloo.Bindings
         CreateKernel(
             IntPtr program,
             String kernel_name,
-            ComputeErrorCode* errcode_ret);
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.
