@@ -163,7 +163,7 @@ namespace Cloo.Bindings
             IntPtr context,
             IntPtr device,
             ComputeCommandQueueFlags properties,
-            ComputeErrorCode* errcode_ret);
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.

@@ -3126,7 +3126,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.CreateCommandQueue(System.IntPtr,System.IntPtr,Cloo.ComputeCommandQueueFlags,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.CreateCommandQueue(System.IntPtr,System.IntPtr,Cloo.ComputeCommandQueueFlags,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>

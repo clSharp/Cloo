@@ -97,7 +97,7 @@ namespace Cloo
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateCommandQueue(context.Handle, device.Handle, properties, &error);
+                Handle = CL10.CreateCommandQueue(context.Handle, device.Handle, properties, out error);
                 ComputeException.ThrowOnError(error);
                 this.device = device;
                 this.context = context;
