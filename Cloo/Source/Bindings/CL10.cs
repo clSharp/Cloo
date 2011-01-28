@@ -815,6 +815,7 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
+        /*
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueNativeKernel")]
         public extern static unsafe ComputeErrorCode
@@ -829,6 +830,7 @@ namespace Cloo.Bindings
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
+        */
 
         /// <summary>
         /// See the OpenCL specification.
