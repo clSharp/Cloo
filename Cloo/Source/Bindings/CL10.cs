@@ -926,7 +926,7 @@ namespace Cloo.Bindings
             IntPtr context,
             ComputeMemoryFlags flags,
             Int32 renderbuffer,
-            ComputeErrorCode* errcode_ret);
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.

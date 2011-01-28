@@ -146,7 +146,7 @@ namespace Cloo
                     context.Handle,
                     flags,
                     renderbufferId,
-                    &error);
+                    out error);
                 ComputeException.ThrowOnError(error);
 
                 return new ComputeImage2D(image, context, flags);
