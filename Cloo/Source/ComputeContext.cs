@@ -142,7 +142,7 @@ namespace Cloo
                 callback = notify;
 
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateContextFromType(propertyArray, deviceType, notify, userDataPtr, &error);
+                Handle = CL10.CreateContextFromType(propertyArray, deviceType, notify, userDataPtr, out error);
                 ComputeException.ThrowOnError(error);
 
                 this.properties = properties;

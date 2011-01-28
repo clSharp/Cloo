@@ -3106,7 +3106,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.CreateContextFromType(System.IntPtr[],Cloo.ComputeDeviceTypes,Cloo.ComputeContextNotifier,System.IntPtr,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.CreateContextFromType(System.IntPtr[],Cloo.ComputeDeviceTypes,Cloo.ComputeContextNotifier,System.IntPtr,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>

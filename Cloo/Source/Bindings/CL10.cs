@@ -120,9 +120,9 @@ namespace Cloo.Bindings
         CreateContextFromType(
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] properties,
             ComputeDeviceTypes device_type,
-            /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ ComputeContextNotifier pfn_notify,
-            /* void* */ IntPtr user_data,
-            ComputeErrorCode* errcode_ret);
+            ComputeContextNotifier pfn_notify,
+            IntPtr user_data,
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.
