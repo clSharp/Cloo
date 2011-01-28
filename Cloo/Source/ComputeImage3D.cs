@@ -111,7 +111,7 @@ namespace Cloo
                     textureTarget,
                     mipLevel,
                     textureId,
-                    &error);
+                    out error);
                 ComputeException.ThrowOnError(error);
             }
             return new ComputeImage3D(image, context, flags);

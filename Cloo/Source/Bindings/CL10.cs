@@ -914,7 +914,7 @@ namespace Cloo.Bindings
             Int32 target,
             Int32 miplevel,
             Int32 texture,
-            ComputeErrorCode* errcode_ret);
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.
