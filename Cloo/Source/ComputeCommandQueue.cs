@@ -373,12 +373,17 @@ namespace Cloo
                 IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
 
-                fixed (IntPtr* globalWorkOffsetPtr = Tools.ConvertArray(globalWorkOffset))
-                fixed (IntPtr* globalWorkSizePtr = Tools.ConvertArray(globalWorkSize))
-                fixed (IntPtr* localWorkSizePtr = Tools.ConvertArray(localWorkSize))
-                
                 {
-                    ComputeErrorCode error = CL10.EnqueueNDRangeKernel(Handle, kernel.Handle, globalWorkSize.Length, globalWorkOffsetPtr, globalWorkSizePtr, localWorkSizePtr, eventWaitListSize, eventHandles, newEventHandle);
+                    ComputeErrorCode error = CL10.EnqueueNDRangeKernel(
+                        Handle,
+                        kernel.Handle,
+                        globalWorkSize.Length,
+                        Tools.ConvertArray(globalWorkOffset),
+                        Tools.ConvertArray(globalWorkSize),
+                        Tools.ConvertArray(localWorkSize),
+                        eventWaitListSize,
+                        eventHandles,
+                        newEventHandle);
                     ComputeException.ThrowOnError(error);
                 }
 

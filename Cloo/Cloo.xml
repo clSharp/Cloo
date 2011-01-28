@@ -3246,7 +3246,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.EnqueueNDRangeKernel(System.IntPtr,System.IntPtr,System.Int32,System.IntPtr*,System.IntPtr*,System.IntPtr*,System.Int32,System.IntPtr[],System.IntPtr[])">
+        <member name="M:Cloo.Bindings.CL10.EnqueueNDRangeKernel(System.IntPtr,System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[],System.IntPtr[],System.Int32,System.IntPtr[],System.IntPtr[])">
             <summary>
             See the OpenCL specification.
             </summary>

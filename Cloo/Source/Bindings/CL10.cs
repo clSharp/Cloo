@@ -792,9 +792,9 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr kernel,
             Int32 work_dim,
-            IntPtr* global_work_offset,
-            IntPtr* global_work_size,
-            IntPtr* local_work_size,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] global_work_offset,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] global_work_size,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] local_work_size,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
