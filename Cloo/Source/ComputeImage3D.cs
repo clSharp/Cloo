@@ -64,14 +64,14 @@ namespace Cloo
                 Handle = CL10.CreateImage3D(
                     context.Handle,
                     flags,
-                    &format,
+                    ref format,
                     new IntPtr(width),
                     new IntPtr(height),
                     new IntPtr(depth),
                     new IntPtr(rowPitch),
                     new IntPtr(slicePitch),
                     data,
-                    &error);
+                    out error);
                 ComputeException.ThrowOnError(error);
 
                 Init();
