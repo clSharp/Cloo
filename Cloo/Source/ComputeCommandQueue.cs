@@ -257,7 +257,7 @@ namespace Cloo
 
                 
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyBufferToImage(Handle, source.Handle, destination.Handle, new IntPtr(sourceOffset * sizeofT), &(destinationOffset.X), &(region.X), eventWaitListSize, eventHandles, newEventHandle);
+                    ComputeErrorCode error = CL10.EnqueueCopyBufferToImage(Handle, source.Handle, destination.Handle, new IntPtr(sourceOffset * sizeofT), ref destinationOffset, ref region, eventWaitListSize, eventHandles, newEventHandle);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -286,7 +286,7 @@ namespace Cloo
 
                 
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyImageToBuffer(Handle, source.Handle, destination.Handle, &(sourceOffset.X), &(region.X), new IntPtr(destinationOffset * sizeofT), eventWaitListSize, eventHandles, newEventHandle);
+                    ComputeErrorCode error = CL10.EnqueueCopyImageToBuffer(Handle, source.Handle, destination.Handle, ref sourceOffset, ref region, new IntPtr(destinationOffset * sizeofT), eventWaitListSize, eventHandles, newEventHandle);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -314,7 +314,7 @@ namespace Cloo
 
                 
                 {
-                    ComputeErrorCode error = CL10.EnqueueCopyImage(Handle, source.Handle, destination.Handle, &(sourceOffset.X), &(destinationOffset.X), &(region.X), eventWaitListSize, eventHandles, newEventHandle);
+                    ComputeErrorCode error = CL10.EnqueueCopyImage(Handle, source.Handle, destination.Handle, ref sourceOffset, ref destinationOffset, ref region, eventWaitListSize, eventHandles, newEventHandle);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -459,12 +459,12 @@ namespace Cloo
                 int eventWaitListSize;
                 IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
                 IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
-                IntPtr mappedPtr;
+                IntPtr mappedPtr, rowPitch, slicePitch;
 
                 
                 {
                     ComputeErrorCode error = ComputeErrorCode.Success;
-                    mappedPtr = CL10.EnqueueMapImage(Handle, image.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, flags, &(offset.X), &(region.X), null, null, eventWaitListSize, eventHandles, newEventHandle, &error);
+                    mappedPtr = CL10.EnqueueMapImage(Handle, image.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, flags, ref offset, ref region, out rowPitch, out slicePitch, eventWaitListSize, eventHandles, newEventHandle, &error);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -566,7 +566,7 @@ namespace Cloo
 
                 
                 {
-                    ComputeErrorCode error = CL10.EnqueueReadImage(Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(offset.X), &(region.X), new IntPtr(rowPitch), new IntPtr(slicePitch), destination, eventWaitListSize, eventHandles, newEventHandle);
+                    ComputeErrorCode error = CL10.EnqueueReadImage(Handle, source.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, ref offset, ref region, new IntPtr(rowPitch), new IntPtr(slicePitch), destination, eventWaitListSize, eventHandles, newEventHandle);
                     ComputeException.ThrowOnError(error);
                 }
 
@@ -749,7 +749,7 @@ namespace Cloo
 
                 
                 {
-                    ComputeErrorCode error = CL10.EnqueueWriteImage(Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, &(destinationOffset.X), &(region.X), new IntPtr(rowPitch), new IntPtr(slicePitch), source, eventWaitListSize, eventHandles, newEventHandle);
+                    ComputeErrorCode error = CL10.EnqueueWriteImage(Handle, destination.Handle, (blocking) ? ComputeBoolean.True : ComputeBoolean.False, ref destinationOffset, ref region, new IntPtr(rowPitch), new IntPtr(slicePitch), source, eventWaitListSize, eventHandles, newEventHandle);
                     ComputeException.ThrowOnError(error);
                 }
 

@@ -232,7 +232,7 @@ namespace Cloo.Bindings
             IntPtr image_width,
             IntPtr image_height,
             IntPtr image_row_pitch,
-            /* void* */ IntPtr host_ptr,
+            IntPtr host_ptr,
             out ComputeErrorCode errcode_ret);
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace Cloo.Bindings
             IntPtr image_depth,
             IntPtr image_row_pitch,
             IntPtr image_slice_pitch,
-            /* void* */ IntPtr host_ptr,
+            IntPtr host_ptr,
             out ComputeErrorCode errcode_ret);
 
         /// <summary>
@@ -619,7 +619,7 @@ namespace Cloo.Bindings
             ComputeBoolean blocking_write,
             IntPtr offset,
             IntPtr cb,
-            /* const void* */ IntPtr ptr,
+            IntPtr ptr,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
@@ -651,11 +651,11 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr image,
             ComputeBoolean blocking_read,
-            IntPtr* origin,
-            IntPtr* region,
+            ref SysIntX3 origin,
+            ref SysIntX3 region,
             IntPtr row_pitch,
             IntPtr slice_pitch,
-            /* void* */ IntPtr ptr,
+            IntPtr ptr,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
@@ -670,11 +670,11 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr image,
             ComputeBoolean blocking_write,
-            IntPtr* origin,
-            IntPtr* region,
+            ref SysIntX3 origin,
+            ref SysIntX3 region,
             IntPtr input_row_pitch,
             IntPtr input_slice_pitch,
-            /* const void* */ IntPtr ptr,
+            IntPtr ptr,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
@@ -689,9 +689,9 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr src_image,
             IntPtr dst_image,
-            IntPtr* src_origin,
-            IntPtr* dst_origin,
-            IntPtr* region,
+            ref SysIntX3 src_origin,
+            ref SysIntX3 dst_origin,
+            ref SysIntX3 region,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
@@ -706,8 +706,8 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             IntPtr src_image,
             IntPtr dst_buffer,
-            IntPtr* src_origin,
-            IntPtr* region,
+            ref SysIntX3 src_origin,
+            ref SysIntX3 region,
             IntPtr dst_offset,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
@@ -724,8 +724,8 @@ namespace Cloo.Bindings
             IntPtr src_buffer,
             IntPtr dst_image,
             IntPtr src_offset,
-            IntPtr* dst_origin,
-            IntPtr* region,
+            ref SysIntX3 dst_origin,
+            ref SysIntX3 region,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
@@ -735,7 +735,7 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueMapBuffer")]
-        public extern static unsafe /* void* */ IntPtr
+        public extern static unsafe IntPtr
         EnqueueMapBuffer(
             IntPtr command_queue,
             IntPtr buffer,
@@ -753,16 +753,16 @@ namespace Cloo.Bindings
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueMapImage")]
-        public extern static unsafe /* void* */ IntPtr
+        public extern static unsafe IntPtr
         EnqueueMapImage(
             IntPtr command_queue,
             IntPtr image,
             ComputeBoolean blocking_map,
             ComputeMemoryMappingFlags map_flags,
-            IntPtr* origin,
-            IntPtr* region,
-            IntPtr* image_row_pitch,
-            IntPtr* image_slice_pitch,
+            ref SysIntX3 origin,
+            ref SysIntX3 region,
+            out IntPtr image_row_pitch,
+            out IntPtr image_slice_pitch,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst = 1)] IntPtr[] new_event,
@@ -777,7 +777,7 @@ namespace Cloo.Bindings
         EnqueueUnmapMemObject(
             IntPtr command_queue,
             IntPtr memobj,
-            /* void* */ IntPtr mapped_ptr,
+            IntPtr mapped_ptr,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
@@ -820,12 +820,12 @@ namespace Cloo.Bindings
         public extern static unsafe ComputeErrorCode
         EnqueueNativeKernel(
             IntPtr command_queue,
-            /* void (*user_func)(IntPtr) */ IntPtr user_func,
-            /* void* */ IntPtr args,
+            IntPtr user_func,
+            IntPtr args,
             IntPtr cb_args,
             Int32 num_mem_objects,
             IntPtr* mem_list,
-            /* const void* */ IntPtr* args_mem_loc,
+            IntPtr* args_mem_loc,
             Int32 num_events_in_wait_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
             [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
@@ -862,13 +862,13 @@ namespace Cloo.Bindings
         
         /// <summary>
         /// Gets the extension function address for the given function name,
-        /// or NULL if a valid function can not be found.  The client must
+        /// or NULL if a valid function can not be found. The client must
         /// check to make sure the address is not NULL, before using or 
         /// calling the returned function address.
         /// </summary>
         [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clGetExtensionFunctionAddress")]
-        public extern static unsafe /* void* */ IntPtr
+        public extern static unsafe IntPtr
         GetExtensionFunctionAddress(String func_name);
 
         /**************************************************************************************/
