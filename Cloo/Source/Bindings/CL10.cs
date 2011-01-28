@@ -936,8 +936,8 @@ namespace Cloo.Bindings
         public extern static unsafe ComputeErrorCode
         GetGLObjectInfo(
             IntPtr memobj,
-            ComputeGLObjectType* gl_object_type,
-            Int32* gl_object_name);
+            out ComputeGLObjectType gl_object_type,
+            out Int32 gl_object_name);
 
         /// <summary>
         /// See the OpenCL specification.
