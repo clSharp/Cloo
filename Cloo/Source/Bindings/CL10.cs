@@ -362,7 +362,7 @@ namespace Cloo.Bindings
             Int32 count,
             String[] strings,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] lengths,
-            ComputeErrorCode* errcode_ret);
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.

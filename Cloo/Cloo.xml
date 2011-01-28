@@ -3211,7 +3211,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.CreateProgramWithSource(System.IntPtr,System.Int32,System.String[],System.IntPtr[],Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.CreateProgramWithSource(System.IntPtr,System.Int32,System.String[],System.IntPtr[],Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>

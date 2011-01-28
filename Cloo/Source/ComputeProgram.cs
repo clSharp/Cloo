@@ -119,7 +119,7 @@ namespace Cloo
                     1,
                     new string[] { source },
                     null,
-                    &error);
+                    out error);
                 ComputeException.ThrowOnError(error);
 
                 this.context = context;
@@ -140,18 +140,13 @@ namespace Cloo
         {
             unsafe
             {
-                IntPtr[] lengths = new IntPtr[source.Length];
-                for (int i = 0; i < source.Length; i++)
-                    lengths[i] = new IntPtr(source[i].Length);
-
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                fixed (IntPtr* lengthsPtr = lengths)
-                    Handle = CL10.CreateProgramWithSource(
-                        context.Handle,
-                        source.Length,
-                        source,
-                        null,
-                        &error);
+                Handle = CL10.CreateProgramWithSource(
+                    context.Handle,
+                    source.Length,
+                    source,
+                    null,
+                    out error);
                 ComputeException.ThrowOnError(error);
 
                 this.context = context;
