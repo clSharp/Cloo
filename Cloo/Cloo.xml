@@ -264,36 +264,6 @@
             </summary>
             <value> The <see cref="T:Cloo.ComputeCommandType"/> associated with the event. </value>
         </member>
-        <member name="P:Cloo.ComputeEventBase.CommandEnqueueTime">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeEventBase.CommandExecutionStatus">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeEventBase.CommandFinishTime">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeEventBase.CommandStartTime">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeEventBase.CommandSubmitTime">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeEventBase.CommandType">
-            <summary>
-            Obsolete.
-            </summary>
-        </member>
         <member name="M:Cloo.ComputeUserEvent.#ctor(Cloo.ComputeContext)">
             <summary>
             Creates a new <see cref="T:Cloo.ComputeUserEvent"/>.

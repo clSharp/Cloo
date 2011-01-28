@@ -237,49 +237,6 @@ namespace Cloo
         }
 
         #endregion
-
-#if OBSOLETE
-        #region Obsolete
-
-        /// <summary>
-        /// Obsolete.
-        /// </summary>
-        [Obsolete]
-        public long CommandEnqueueTime { get { return EnqueueTime; } }
-
-        /// <summary>
-        /// Obsolete.
-        /// </summary>
-        [Obsolete]
-        public ComputeCommandExecutionStatus CommandExecutionStatus { get { return Status; } }
-
-        /// <summary>
-        /// Obsolete.
-        /// </summary>
-        [Obsolete]
-        public long CommandFinishTime { get { return FinishTime; } }
-
-        /// <summary>
-        /// Obsolete.
-        /// </summary>
-        [Obsolete]
-        public long CommandStartTime { get { return StartTime; } }
-
-        /// <summary>
-        /// Obsolete.
-        /// </summary>
-        [Obsolete]
-        public long CommandSubmitTime { get { return SubmitTime; } }
-
-        /// <summary>
-        /// Obsolete.
-        /// </summary>
-        [Obsolete]
-        public ComputeCommandType CommandType { get { return Type; } }
-
-        #endregion
-#endif
-
     }
 
     /// <summary>
