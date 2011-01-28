@@ -43,7 +43,6 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateSubBuffer")]
         public extern static IntPtr CreateSubBuffer(
             IntPtr buffer,
@@ -55,7 +54,6 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clSetMemObjectDestructorCallback")]
         public extern static ComputeErrorCode SetMemObjectDestructorCallback( 
             IntPtr memobj, 
@@ -65,7 +63,6 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clCreateUserEvent")]
         public extern static IntPtr CreateUserEvent(
             IntPtr context,
@@ -74,7 +71,6 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clSetUserEventStatus")]
         public extern static ComputeErrorCode SetUserEventStatus(
             IntPtr @event,
@@ -83,7 +79,6 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clSetEventCallback")]
         public extern static ComputeErrorCode SetEventCallback(
             IntPtr @event,
@@ -94,7 +89,6 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueReadBufferRect")]
         public extern static ComputeErrorCode EnqueueReadBufferRect(
             IntPtr command_queue,
@@ -115,7 +109,6 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueWriteBufferRect")]
         public extern static ComputeErrorCode EnqueueWriteBufferRect(
             IntPtr command_queue,
@@ -136,7 +129,6 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [CLSCompliant(false)]
         [DllImport(libName, EntryPoint = "clEnqueueCopyBufferRect")]
         public extern static ComputeErrorCode EnqueueCopyBufferRect(
             IntPtr command_queue,
@@ -156,7 +148,6 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [CLSCompliant(false)]
         [Obsolete("This function has been deprecated in OpenCL 1.1.")]
         new public static ComputeErrorCode
         SetCommandQueueProperty(
