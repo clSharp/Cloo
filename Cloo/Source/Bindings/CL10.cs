@@ -204,7 +204,7 @@ namespace Cloo.Bindings
             IntPtr command_queue,
             ComputeCommandQueueFlags properties,
             ComputeBoolean enable,
-            ComputeCommandQueueFlags* old_properties);
+            out ComputeCommandQueueFlags old_properties);
 
         /// <summary>
         /// See the OpenCL specification.

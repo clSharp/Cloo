@@ -3146,7 +3146,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.SetCommandQueueProperty(System.IntPtr,Cloo.ComputeCommandQueueFlags,Cloo.ComputeBoolean,Cloo.ComputeCommandQueueFlags*)">
+        <member name="M:Cloo.Bindings.CL10.SetCommandQueueProperty(System.IntPtr,Cloo.ComputeCommandQueueFlags,Cloo.ComputeBoolean,Cloo.ComputeCommandQueueFlags@)">
             <summary>
             See the OpenCL specification.
             </summary>
