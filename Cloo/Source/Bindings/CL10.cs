@@ -216,8 +216,8 @@ namespace Cloo.Bindings
             IntPtr context,
             ComputeMemoryFlags flags,
             IntPtr size,
-            /* void* */ IntPtr host_ptr,
-            ComputeErrorCode* errcode_ret);
+            IntPtr host_ptr,
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.
