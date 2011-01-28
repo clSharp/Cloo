@@ -131,7 +131,7 @@ namespace Cloo
             unsafe
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                IntPtr handle = CL10.CreateFromGLBuffer(context.Handle, flags, bufferId, &error);
+                IntPtr handle = CL10.CreateFromGLBuffer(context.Handle, flags, bufferId, out error);
                 ComputeException.ThrowOnError(error);
 
                 return new ComputeBuffer<DataType>(handle, context, flags);

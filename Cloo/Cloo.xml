@@ -3279,7 +3279,7 @@
             calling the returned function address.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.CreateFromGLBuffer(System.IntPtr,Cloo.ComputeMemoryFlags,System.Int32,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.CreateFromGLBuffer(System.IntPtr,Cloo.ComputeMemoryFlags,System.Int32,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>
