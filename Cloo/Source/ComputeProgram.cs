@@ -177,12 +177,10 @@ namespace Cloo
                 IntPtr[] binariesLengths = new IntPtr[count];
                 int[] binariesStats = new int[count];
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                GCHandle binariesPtrGCHandle = new GCHandle();
                 GCHandle[] binariesGCHandles = new GCHandle[count];
 
                 try
                 {
-                    binariesPtrGCHandle = GCHandle.Alloc(binariesPtrs, GCHandleType.Pinned);
                     for (int i = 0; i < count; i++)
                     {
                         binariesGCHandles[i] = GCHandle.Alloc(binaries[i], GCHandleType.Pinned);
@@ -190,23 +188,18 @@ namespace Cloo
                         binariesLengths[i] = new IntPtr(binaries[i].Length);
                     }
 
-                    byte** binariesPtr = (byte**)binariesPtrGCHandle.AddrOfPinnedObject();
-                    fixed (int* binaryStatusPtr = binariesStats)
-                    {
-                        Handle = CL10.CreateProgramWithBinary(
-                            context.Handle,
-                            count,
-                            deviceHandles,
-                            binariesLengths,
-                            binariesPtr,
-                            binaryStatusPtr,
-                            &error);
-                        ComputeException.ThrowOnError(error);
-                    }
+                    Handle = CL10.CreateProgramWithBinary(
+                        context.Handle,
+                        count,
+                        deviceHandles,
+                        binariesLengths,
+                        binariesPtrs,
+                        binariesStats,
+                        out error);
+                    ComputeException.ThrowOnError(error);
                 }
                 finally
                 {
-                    binariesPtrGCHandle.Free();
                     for (int i = 0; i < count; i++)
                         binariesGCHandles[i].Free();
                 }

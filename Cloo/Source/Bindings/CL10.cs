@@ -375,9 +375,9 @@ namespace Cloo.Bindings
             Int32 num_devices,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] device_list,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] lengths,
-            Byte** binaries,
-            Int32* binary_status,
-            ComputeErrorCode* errcode_ret);
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] binaries,
+            [MarshalAs(UnmanagedType.LPArray)] Int32[] binary_status,
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.

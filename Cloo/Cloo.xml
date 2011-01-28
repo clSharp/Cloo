@@ -3216,7 +3216,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.CreateProgramWithBinary(System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[],System.Byte**,System.Int32*,Cloo.ComputeErrorCode*)">
+        <member name="M:Cloo.Bindings.CL10.CreateProgramWithBinary(System.IntPtr,System.Int32,System.IntPtr[],System.IntPtr[],System.IntPtr[],System.Int32[],Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>
