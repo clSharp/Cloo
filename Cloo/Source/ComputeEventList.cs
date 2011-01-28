@@ -88,13 +88,10 @@ namespace Cloo
         /// <param name="events"> The events to be waited for completition. </param>
         public static void Wait(ICollection<ComputeEventBase> events)
         {
-            unsafe
-            {
-                int eventWaitListSize;
-                IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
-                ComputeErrorCode error = CL10.WaitForEvents(eventWaitListSize, eventHandles);
-                ComputeException.ThrowOnError(error);
-            }
+            int eventWaitListSize;
+            IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
+            ComputeErrorCode error = CL10.WaitForEvents(eventWaitListSize, eventHandles);
+            ComputeException.ThrowOnError(error);
         }
 
         /// <summary>

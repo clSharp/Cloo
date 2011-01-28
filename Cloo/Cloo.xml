@@ -3319,7 +3319,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.CreateSubBuffer(System.IntPtr,Cloo.ComputeMemoryFlags,Cloo.ComputeBufferCreateType,System.IntPtr,Cloo.ComputeErrorCode@)">
+        <member name="M:Cloo.Bindings.CL11.CreateSubBuffer(System.IntPtr,Cloo.ComputeMemoryFlags,Cloo.ComputeBufferCreateType,Cloo.SysIntX2@,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>

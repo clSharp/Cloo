@@ -33,11 +33,13 @@ namespace Cloo.Bindings
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Security;
 
     /// <summary>
     /// Contains bindings to the OpenCL 1.1 functions.
     /// </summary>
     /// <remarks> See the OpenCL specification for documentation regarding these functions. </remarks>
+    [SuppressUnmanagedCodeSecurity]
     public class CL11 : CL10
     {
         /// <summary>
@@ -48,7 +50,7 @@ namespace Cloo.Bindings
             IntPtr buffer,
             ComputeMemoryFlags flags,
             ComputeBufferCreateType buffer_create_type,
-            IntPtr buffer_create_info,
+            ref SysIntX2 buffer_create_info,
             out ComputeErrorCode errcode_ret);
 
         /// <summary>

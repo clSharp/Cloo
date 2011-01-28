@@ -67,20 +67,17 @@ namespace Cloo
 
         internal ComputeEvent(IntPtr handle, ComputeCommandQueue queue)
         {
-            unsafe
-            {
-                Handle = handle;
-                CommandQueue = queue;
-                Type = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
-                    ComputeEventInfo.CommandType, CL10.GetEventInfo);
-                Context = queue.Context;
+            Handle = handle;
+            CommandQueue = queue;
+            Type = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
+                ComputeEventInfo.CommandType, CL10.GetEventInfo);
+            Context = queue.Context;
 
-                if (CommandQueue.Device.Version == new Version(1, 1))
-                    HookNotifier();
+            if (CommandQueue.Device.Version == new Version(1, 1))
+                HookNotifier();
 
-                Completed += new ComputeCommandStatusChanged(ComputeEvent_Fired);
-                Aborted += new ComputeCommandStatusChanged(ComputeEvent_Fired);
-            }
+            Completed += new ComputeCommandStatusChanged(ComputeEvent_Fired);
+            Aborted += new ComputeCommandStatusChanged(ComputeEvent_Fired);
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }

@@ -129,38 +129,34 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
         protected QueriedType[] GetArrayInfo<InfoType, QueriedType>
             (
                 InfoType paramName,
                 GetInfoDelegate<InfoType> getInfoDelegate
             )
         {
-            unsafe
+            ComputeErrorCode error;
+            QueriedType[] buffer;
+            IntPtr bufferSizeRet;
+            error = getInfoDelegate(handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
+            ComputeException.ThrowOnError(error);
+            buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
+            GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+            try
             {
-                ComputeErrorCode error;
-                QueriedType[] buffer;
-                IntPtr bufferSizeRet;
-                error = getInfoDelegate(handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
+                error = getInfoDelegate(
+                    handle,
+                    paramName,
+                    bufferSizeRet,
+                    gcHandle.AddrOfPinnedObject(),
+                    out bufferSizeRet);
                 ComputeException.ThrowOnError(error);
-                buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
-                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-                try
-                {
-                    error = getInfoDelegate(
-                        handle,
-                        paramName,
-                        bufferSizeRet,
-                        gcHandle.AddrOfPinnedObject(),
-                        out bufferSizeRet);
-                    ComputeException.ThrowOnError(error);
-                }
-                finally
-                {
-                    gcHandle.Free();
-                }
-                return buffer;
             }
+            finally
+            {
+                gcHandle.Free();
+            }
+            return buffer;
         }
 
         /// <summary>
@@ -172,7 +168,6 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
         protected QueriedType[] GetArrayInfo<InfoType, QueriedType>
             (
                 ComputeObject secondaryObject,
@@ -180,32 +175,29 @@ namespace Cloo
                 GetInfoDelegateEx<InfoType> getInfoDelegate
             )
         {
-            unsafe
+            ComputeErrorCode error;
+            QueriedType[] buffer;
+            IntPtr bufferSizeRet;
+            error = getInfoDelegate(handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
+            ComputeException.ThrowOnError(error);
+            buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
+            GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+            try
             {
-                ComputeErrorCode error;
-                QueriedType[] buffer;
-                IntPtr bufferSizeRet;
-                error = getInfoDelegate(handle, secondaryObject.handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
+                error = getInfoDelegate(
+                    handle,
+                    secondaryObject.handle,
+                    paramName,
+                    bufferSizeRet,
+                    gcHandle.AddrOfPinnedObject(),
+                    out bufferSizeRet);
                 ComputeException.ThrowOnError(error);
-                buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
-                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-                try
-                {
-                    error = getInfoDelegate(
-                        handle,
-                        secondaryObject.handle,
-                        paramName,
-                        bufferSizeRet,
-                        gcHandle.AddrOfPinnedObject(),
-                        out bufferSizeRet);
-                    ComputeException.ThrowOnError(error);
-                }
-                finally
-                {
-                    gcHandle.Free();
-                }
-                return buffer;
             }
+            finally
+            {
+                gcHandle.Free();
+            }
+            return buffer;
         }
 
         /// <summary>
@@ -215,7 +207,6 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
         protected bool GetBoolInfo<InfoType>
             (
                 InfoType paramName,
@@ -234,7 +225,6 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
         protected QueriedType GetInfo<InfoType, QueriedType>
             (
                 InfoType paramName,
@@ -242,28 +232,25 @@ namespace Cloo
             )
             where QueriedType : struct
         {
-            unsafe
-            {                
-                QueriedType result = new QueriedType();
-                GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
-                try
-                {
-                    IntPtr sizeRet;
-                    ComputeErrorCode error = getInfoDelegate(
-                        handle,
-                        paramName,
-                        (IntPtr)Marshal.SizeOf(result),
-                        gcHandle.AddrOfPinnedObject(),
-                        out sizeRet);
-                    ComputeException.ThrowOnError(error);
-                }
-                finally
-                {
-                    result = (QueriedType)gcHandle.Target;
-                    gcHandle.Free();
-                }
-                return result;
+            QueriedType result = new QueriedType();
+            GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
+            try
+            {
+                IntPtr sizeRet;
+                ComputeErrorCode error = getInfoDelegate(
+                    handle,
+                    paramName,
+                    (IntPtr)Marshal.SizeOf(result),
+                    gcHandle.AddrOfPinnedObject(),
+                    out sizeRet);
+                ComputeException.ThrowOnError(error);
             }
+            finally
+            {
+                result = (QueriedType)gcHandle.Target;
+                gcHandle.Free();
+            }
+            return result;
         }
 
         /// <summary>
@@ -275,7 +262,6 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
         protected QueriedType GetInfo<InfoType, QueriedType>
             (
                 ComputeObject secondaryObject,
@@ -284,30 +270,27 @@ namespace Cloo
             )
             where QueriedType : struct
         {
-            unsafe
+            QueriedType result = new QueriedType();
+            GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
+            try
             {
-                QueriedType result = new QueriedType();
-                GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
-                try
-                {
-                    IntPtr sizeRet;
-                    ComputeErrorCode error = getInfoDelegate(
-                        handle,
-                        secondaryObject.handle,
-                        paramName,
-                        new IntPtr(Marshal.SizeOf(result)),
-                        gcHandle.AddrOfPinnedObject(),
-                        out sizeRet);
-                    ComputeException.ThrowOnError(error);
-                }
-                finally
-                {
-                    result = (QueriedType)gcHandle.Target;
-                    gcHandle.Free();
-                }
-
-                return result;
+                IntPtr sizeRet;
+                ComputeErrorCode error = getInfoDelegate(
+                    handle,
+                    secondaryObject.handle,
+                    paramName,
+                    new IntPtr(Marshal.SizeOf(result)),
+                    gcHandle.AddrOfPinnedObject(),
+                    out sizeRet);
+                ComputeException.ThrowOnError(error);
             }
+            finally
+            {
+                result = (QueriedType)gcHandle.Target;
+                gcHandle.Free();
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -317,7 +300,6 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
         protected string GetStringInfo<InfoType>(InfoType paramName, GetInfoDelegate<InfoType> getInfoDelegate)
         {
             unsafe
@@ -338,7 +320,6 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
         protected string GetStringInfo<InfoType>(ComputeObject secondaryObject, InfoType paramName, GetInfoDelegateEx<InfoType> getInfoDelegate)
         {
             unsafe
@@ -366,8 +347,7 @@ namespace Cloo
         /// <param name="paramValue"></param>
         /// <param name="paramValueSizeRet"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
-        protected unsafe delegate ComputeErrorCode GetInfoDelegate<InfoType>
+        protected delegate ComputeErrorCode GetInfoDelegate<InfoType>
             (
                 IntPtr objectHandle,
                 InfoType paramName,
@@ -387,8 +367,7 @@ namespace Cloo
         /// <param name="paramValue"></param>
         /// <param name="paramValueSizeRet"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
-        protected unsafe delegate ComputeErrorCode GetInfoDelegateEx<InfoType>
+        protected delegate ComputeErrorCode GetInfoDelegateEx<InfoType>
             (
                 IntPtr mainObjectHandle,
                 IntPtr secondaryObjectHandle,

@@ -108,22 +108,19 @@ namespace Cloo
         /// <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public ComputeContext(ICollection<ComputeDevice> devices, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr notifyDataPtr)
         {
-            unsafe
-            {
-                int handleCount;
-                IntPtr[] deviceHandles = Tools.ExtractHandles(devices, out handleCount);
-                IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
-                callback = notify;
+            int handleCount;
+            IntPtr[] deviceHandles = Tools.ExtractHandles(devices, out handleCount);
+            IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
+            callback = notify;
 
-                ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateContext(propertyArray, handleCount, deviceHandles, notify, notifyDataPtr, out error);
-                ComputeException.ThrowOnError(error);
+            ComputeErrorCode error = ComputeErrorCode.Success;
+            Handle = CL10.CreateContext(propertyArray, handleCount, deviceHandles, notify, notifyDataPtr, out error);
+            ComputeException.ThrowOnError(error);
 
-                this.properties = properties;
-                ComputeContextProperty platformProperty = properties.GetByName(ComputeContextPropertyName.Platform);
-                this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
-                this.devices = GetDevices();
-            }
+            this.properties = properties;
+            ComputeContextProperty platformProperty = properties.GetByName(ComputeContextPropertyName.Platform);
+            this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
+            this.devices = GetDevices();
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
@@ -137,20 +134,17 @@ namespace Cloo
         /// <param name="userDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public ComputeContext(ComputeDeviceTypes deviceType, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr userDataPtr)
         {
-            unsafe
-            {
-                IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
-                callback = notify;
+            IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
+            callback = notify;
 
-                ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateContextFromType(propertyArray, deviceType, notify, userDataPtr, out error);
-                ComputeException.ThrowOnError(error);
+            ComputeErrorCode error = ComputeErrorCode.Success;
+            Handle = CL10.CreateContextFromType(propertyArray, deviceType, notify, userDataPtr, out error);
+            ComputeException.ThrowOnError(error);
 
-                this.properties = properties;
-                ComputeContextProperty platformProperty = properties.GetByName(ComputeContextPropertyName.Platform);
-                this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
-                this.devices = GetDevices();
-            }
+            this.properties = properties;
+            ComputeContextProperty platformProperty = properties.GetByName(ComputeContextPropertyName.Platform);
+            this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
+            this.devices = GetDevices();
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
@@ -198,18 +192,15 @@ namespace Cloo
 
         private ReadOnlyCollection<ComputeDevice> GetDevices()
         {
-            unsafe
+            List<IntPtr> validDeviceHandles = new List<IntPtr>(GetArrayInfo<ComputeContextInfo, IntPtr>(ComputeContextInfo.Devices, CL10.GetContextInfo));
+            List<ComputeDevice> validDevices = new List<ComputeDevice>();
+            foreach (ComputePlatform platform in ComputePlatform.Platforms)
             {
-                List<IntPtr> validDeviceHandles = new List<IntPtr>(GetArrayInfo<ComputeContextInfo, IntPtr>(ComputeContextInfo.Devices, CL10.GetContextInfo));
-                List<ComputeDevice> validDevices = new List<ComputeDevice>();
-                foreach (ComputePlatform platform in ComputePlatform.Platforms)
-                {
-                    foreach (ComputeDevice device in platform.Devices)
-                        if (validDeviceHandles.Contains(device.Handle))
-                            validDevices.Add(device);
-                }
-                return new ReadOnlyCollection<ComputeDevice>(validDevices);
+                foreach (ComputeDevice device in platform.Devices)
+                    if (validDeviceHandles.Contains(device.Handle))
+                        validDevices.Add(device);
             }
+            return new ReadOnlyCollection<ComputeDevice>(validDevices);
         }
 
         #endregion

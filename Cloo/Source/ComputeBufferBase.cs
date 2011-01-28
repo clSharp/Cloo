@@ -73,11 +73,8 @@ namespace Cloo
         /// </summary>
         protected void Init()
         {
-            unsafe
-            {
-                Size = (long)GetInfo<ComputeMemoryInfo, IntPtr>(ComputeMemoryInfo.Size, CL10.GetMemObjectInfo);
-                Count = Size / Marshal.SizeOf(typeof(T));
-            }
+            Size = (long)GetInfo<ComputeMemoryInfo, IntPtr>(ComputeMemoryInfo.Size, CL10.GetMemObjectInfo);
+            Count = Size / Marshal.SizeOf(typeof(T));
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }

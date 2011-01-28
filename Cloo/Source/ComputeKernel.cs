@@ -81,33 +81,27 @@ namespace Cloo
 
         internal ComputeKernel(IntPtr handle, ComputeProgram program)
         {
-            unsafe
-            {
-                Handle = handle;
-                context = program.Context;
-                functionName = GetStringInfo<ComputeKernelInfo>(ComputeKernelInfo.FunctionName, CL10.GetKernelInfo);
-                this.program = program;
-                tracker = new Dictionary<int, ComputeResource>();
-            }
+            Handle = handle;
+            context = program.Context;
+            functionName = GetStringInfo<ComputeKernelInfo>(ComputeKernelInfo.FunctionName, CL10.GetKernelInfo);
+            this.program = program;
+            tracker = new Dictionary<int, ComputeResource>();
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         internal ComputeKernel(string functionName, ComputeProgram program)
         {
-            unsafe
-            {
-                ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateKernel(
-                    program.Handle,
-                    functionName,
-                    out error);
-                ComputeException.ThrowOnError(error);
-                context = program.Context;
-                this.functionName = functionName;
-                this.program = program;
-                tracker = new Dictionary<int, ComputeResource>();
-            }
+            ComputeErrorCode error = ComputeErrorCode.Success;
+            Handle = CL10.CreateKernel(
+                program.Handle,
+                functionName,
+                out error);
+            ComputeException.ThrowOnError(error);
+            context = program.Context;
+            this.functionName = functionName;
+            this.program = program;
+            tracker = new Dictionary<int, ComputeResource>();
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
@@ -123,11 +117,8 @@ namespace Cloo
         /// <returns> The amount of local memory in bytes used by the <see cref="ComputeKernel"/>. </returns>
         public long GetLocalMemorySize(ComputeDevice device)
         {
-            unsafe
-            {
-                return (long)GetInfo<ComputeKernelWorkGroupInfo, ulong>(
-                    device, ComputeKernelWorkGroupInfo.LocalMemorySize, CL10.GetKernelWorkGroupInfo);
-            }
+            return (long)GetInfo<ComputeKernelWorkGroupInfo, ulong>(
+                device, ComputeKernelWorkGroupInfo.LocalMemorySize, CL10.GetKernelWorkGroupInfo);
         }
 
         /// <summary>
@@ -137,12 +128,9 @@ namespace Cloo
         /// <returns> The compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier. If no such qualifier is specified, (0, 0, 0) is returned. </returns>
         public long[] GetCompileWorkGroupSize(ComputeDevice device)
         {
-            unsafe
-            {
-                return Tools.ConvertArray(
-                    GetArrayInfo<ComputeKernelWorkGroupInfo, IntPtr>(
-                        device, ComputeKernelWorkGroupInfo.CompileWorkGroupSize, CL10.GetKernelWorkGroupInfo));
-            }
+            return Tools.ConvertArray(
+                GetArrayInfo<ComputeKernelWorkGroupInfo, IntPtr>(
+                    device, ComputeKernelWorkGroupInfo.CompileWorkGroupSize, CL10.GetKernelWorkGroupInfo));
         }
 
         /// <summary>
@@ -154,11 +142,8 @@ namespace Cloo
         /// <remarks> Requires OpenCL 1.1. </remarks>
         public long GetPreferredWorkGroupSizeMultiple(ComputeDevice device)
         {
-            unsafe
-            {
-                return (long)GetInfo<ComputeKernelWorkGroupInfo, IntPtr>(
-                    device, ComputeKernelWorkGroupInfo.PreferredWorkGroupSizeMultiple, CL10.GetKernelWorkGroupInfo);
-            }
+            return (long)GetInfo<ComputeKernelWorkGroupInfo, IntPtr>(
+                device, ComputeKernelWorkGroupInfo.PreferredWorkGroupSizeMultiple, CL10.GetKernelWorkGroupInfo);
         }
 
         /// <summary>
@@ -169,11 +154,8 @@ namespace Cloo
         /// <remarks> The returned value may include any private memory needed by an implementation to execute the kernel, including that used by the language built-ins and variable declared inside the kernel with the <c>__private</c> or <c>private</c> qualifier. </remarks>
         public long GetPrivateMemorySize(ComputeDevice device)
         {
-            unsafe
-            {
-                return (long)GetInfo<ComputeKernelWorkGroupInfo, ulong>(
-                    device, ComputeKernelWorkGroupInfo.PrivateMemorySize, CL10.GetKernelWorkGroupInfo);
-            }
+            return (long)GetInfo<ComputeKernelWorkGroupInfo, ulong>(
+                device, ComputeKernelWorkGroupInfo.PrivateMemorySize, CL10.GetKernelWorkGroupInfo);
         }
 
         /// <summary>
@@ -183,11 +165,8 @@ namespace Cloo
         /// <returns> The maximum work-group size that can be used to execute the <see cref="ComputeKernel"/> on <paramref name="device"/>. </returns>
         public long GetWorkGroupSize(ComputeDevice device)
         {
-            unsafe
-            {
-                return (long)GetInfo<ComputeKernelWorkGroupInfo, IntPtr>(
-                        device, ComputeKernelWorkGroupInfo.WorkGroupSize, CL10.GetKernelWorkGroupInfo);
-            }
+            return (long)GetInfo<ComputeKernelWorkGroupInfo, IntPtr>(
+                    device, ComputeKernelWorkGroupInfo.WorkGroupSize, CL10.GetKernelWorkGroupInfo);
         }
 
         /// <summary>

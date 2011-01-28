@@ -50,17 +50,14 @@ namespace Cloo
         /// <remarks> Requires OpenCL 1.1. </remarks>
         public ComputeUserEvent(ComputeContext context)
         {
-            unsafe
-            {
-                ComputeErrorCode error;
-                Handle = CL11.CreateUserEvent(context.Handle, out error);
-                ComputeException.ThrowOnError(error);
-                Type = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
-                    ComputeEventInfo.CommandType, CL10.GetEventInfo);
-                Context = context;
+            ComputeErrorCode error;
+            Handle = CL11.CreateUserEvent(context.Handle, out error);
+            ComputeException.ThrowOnError(error);
+            Type = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
+                ComputeEventInfo.CommandType, CL10.GetEventInfo);
+            Context = context;
 
-                HookNotifier();
-            }
+            HookNotifier();
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
@@ -84,11 +81,8 @@ namespace Cloo
         /// <param name="status"> The new status of the <see cref="ComputeUserEvent"/>. </param>
         public void SetStatus(int status)
         {
-            unsafe
-            {
-                ComputeErrorCode error = CL11.SetUserEventStatus(Handle, status);
-                ComputeException.ThrowOnError(error);
-            }
+            ComputeErrorCode error = CL11.SetUserEventStatus(Handle, status);
+            ComputeException.ThrowOnError(error);
         }
 
         #endregion

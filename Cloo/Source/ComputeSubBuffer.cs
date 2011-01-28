@@ -54,15 +54,12 @@ namespace Cloo
         public ComputeSubBuffer(ComputeBuffer<T> buffer, ComputeMemoryFlags flags, long offset, long count)
             : base(buffer.Context, flags)
         {
-            unsafe
-            {
-                SysIntX2 region = new SysIntX2(offset * Marshal.SizeOf(typeof(T)), count * Marshal.SizeOf(typeof(T)));
-                ComputeErrorCode error;
-                IntPtr handle = CL11.CreateSubBuffer(Handle, flags, ComputeBufferCreateType.Region, new IntPtr(&region), out error);
-                ComputeException.ThrowOnError(error);
-                
-                Init();
-            }
+            SysIntX2 region = new SysIntX2(offset * Marshal.SizeOf(typeof(T)), count * Marshal.SizeOf(typeof(T)));
+            ComputeErrorCode error;
+            IntPtr handle = CL11.CreateSubBuffer(Handle, flags, ComputeBufferCreateType.Region, ref region, out error);
+            ComputeException.ThrowOnError(error);
+
+            Init();
         }
 
         #endregion

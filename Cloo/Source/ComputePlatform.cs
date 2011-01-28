@@ -131,19 +131,16 @@ namespace Cloo
 
         private ComputePlatform(IntPtr handle)
         {
-            unsafe
-            {
-                Handle = handle;                
+            Handle = handle;
 
-                string extensionString = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Extensions, CL10.GetPlatformInfo);
-                extensions = new ReadOnlyCollection<string>(extensionString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+            string extensionString = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Extensions, CL10.GetPlatformInfo);
+            extensions = new ReadOnlyCollection<string>(extensionString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
 
-                name = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Name, CL10.GetPlatformInfo);
-                profile = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Profile, CL10.GetPlatformInfo);
-                vendor = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Vendor, CL10.GetPlatformInfo);
-                version = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Version, CL10.GetPlatformInfo);
-                QueryDevices();
-            }
+            name = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Name, CL10.GetPlatformInfo);
+            profile = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Profile, CL10.GetPlatformInfo);
+            vendor = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Vendor, CL10.GetPlatformInfo);
+            version = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Version, CL10.GetPlatformInfo);
+            QueryDevices();
         }
 
         #endregion
@@ -199,24 +196,21 @@ namespace Cloo
         /// <remarks> This method resets the <c>ComputePlatform.Devices</c>. This is useful if one or more of them become unavailable (<c>ComputeDevice.Available</c> is <c>false</c>) after a <see cref="ComputeContext"/> and <see cref="ComputeCommandQueue"/>s that use the <see cref="ComputeDevice"/> have been created and commands have been queued to them. Further calls will trigger an <c>OutOfResourcesComputeException</c> until this method is executed. You will also need to recreate any <see cref="ComputeResource"/> that was created on the no longer available <see cref="ComputeDevice"/>. </remarks>
         public ReadOnlyCollection<ComputeDevice> QueryDevices()
         {
-            unsafe
-            {
-                int handlesLength = 0;
-                ComputeErrorCode error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, 0, null, out handlesLength);
-                ComputeException.ThrowOnError(error);
+            int handlesLength = 0;
+            ComputeErrorCode error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, 0, null, out handlesLength);
+            ComputeException.ThrowOnError(error);
 
-                IntPtr[] handles = new IntPtr[handlesLength];
-                error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, handlesLength, handles, out handlesLength);
-                ComputeException.ThrowOnError(error);
+            IntPtr[] handles = new IntPtr[handlesLength];
+            error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, handlesLength, handles, out handlesLength);
+            ComputeException.ThrowOnError(error);
 
-                ComputeDevice[] devices = new ComputeDevice[handlesLength];
-                for (int i = 0; i < handlesLength; i++)
-                    devices[i] = new ComputeDevice(this, handles[i]);
+            ComputeDevice[] devices = new ComputeDevice[handlesLength];
+            for (int i = 0; i < handlesLength; i++)
+                devices[i] = new ComputeDevice(this, handles[i]);
 
-                this.devices = new ReadOnlyCollection<ComputeDevice>(devices);
+            this.devices = new ReadOnlyCollection<ComputeDevice>(devices);
 
-                return this.devices;
-            }
+            return this.devices;
         }
 
         /// <summary>

@@ -79,11 +79,8 @@ namespace Cloo
         {
             get
             {
-                unsafe
-                {
-                    return GetInfo<ComputeCommandProfilingInfo, long>(
-                        ComputeCommandProfilingInfo.Ended, CL10.GetEventProfilingInfo);
-                }
+                return GetInfo<ComputeCommandProfilingInfo, long>(
+                    ComputeCommandProfilingInfo.Ended, CL10.GetEventProfilingInfo);
             }
         }
 
@@ -95,11 +92,8 @@ namespace Cloo
         {
             get
             {
-                unsafe
-                {
-                    return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
-                        ComputeCommandProfilingInfo.Queued, CL10.GetEventProfilingInfo);
-                }
+                return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
+                    ComputeCommandProfilingInfo.Queued, CL10.GetEventProfilingInfo);
             }
         }
 
@@ -111,11 +105,8 @@ namespace Cloo
         {
             get
             {
-                unsafe
-                {
-                    return (ComputeCommandExecutionStatus)GetInfo<ComputeEventInfo, int>(
-                        ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo);
-                }
+                return (ComputeCommandExecutionStatus)GetInfo<ComputeEventInfo, int>(
+                    ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo);
             }
         }
 
@@ -127,11 +118,8 @@ namespace Cloo
         {
             get
             {
-                unsafe
-                {
-                    return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
-                        ComputeCommandProfilingInfo.Started, CL10.GetEventProfilingInfo);
-                }
+                return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
+                    ComputeCommandProfilingInfo.Started, CL10.GetEventProfilingInfo);
             }
         }
 
@@ -143,11 +131,8 @@ namespace Cloo
         {
             get
             {
-                unsafe
-                {
-                    return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
-                        ComputeCommandProfilingInfo.Submitted, CL10.GetEventProfilingInfo);
-                }
+                return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
+                    ComputeCommandProfilingInfo.Submitted, CL10.GetEventProfilingInfo);
             }
         }
 

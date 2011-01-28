@@ -58,24 +58,21 @@ namespace Cloo
         public ComputeImage3D(ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int depth, long rowPitch, long slicePitch, IntPtr data)
             : base(context, flags)
         {
-            unsafe
-            {
-                ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateImage3D(
-                    context.Handle,
-                    flags,
-                    ref format,
-                    new IntPtr(width),
-                    new IntPtr(height),
-                    new IntPtr(depth),
-                    new IntPtr(rowPitch),
-                    new IntPtr(slicePitch),
-                    data,
-                    out error);
-                ComputeException.ThrowOnError(error);
+            ComputeErrorCode error = ComputeErrorCode.Success;
+            Handle = CL10.CreateImage3D(
+                context.Handle,
+                flags,
+                ref format,
+                new IntPtr(width),
+                new IntPtr(height),
+                new IntPtr(depth),
+                new IntPtr(rowPitch),
+                new IntPtr(slicePitch),
+                data,
+                out error);
+            ComputeException.ThrowOnError(error);
 
-                Init();
-            }
+            Init();
         }
 
         private ComputeImage3D(IntPtr handle, ComputeContext context, ComputeMemoryFlags flags)
@@ -102,18 +99,16 @@ namespace Cloo
         public static ComputeImage3D CreateFromGLTexture3D(ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId)
         {
             IntPtr image = IntPtr.Zero;
-            unsafe
-            {
-                ComputeErrorCode error = ComputeErrorCode.Success;
-                image = CL10.CreateFromGLTexture3D(
-                    context.Handle,
-                    flags,
-                    textureTarget,
-                    mipLevel,
-                    textureId,
-                    out error);
-                ComputeException.ThrowOnError(error);
-            }
+            ComputeErrorCode error = ComputeErrorCode.Success;
+            image = CL10.CreateFromGLTexture3D(
+                context.Handle,
+                flags,
+                textureTarget,
+                mipLevel,
+                textureId,
+                out error);
+            ComputeException.ThrowOnError(error);
+
             return new ComputeImage3D(image, context, flags);
         }
 

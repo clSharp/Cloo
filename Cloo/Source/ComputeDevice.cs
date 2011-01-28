@@ -534,63 +534,60 @@ namespace Cloo
 
         internal ComputeDevice(ComputePlatform platform, IntPtr handle)
         {
-            unsafe
-            {
-                Handle = handle;
+            Handle = handle;
 
-                addressBits = GetInfo<uint>(ComputeDeviceInfo.AddressBits);
-                available = GetBoolInfo(ComputeDeviceInfo.Available);
-                compilerAvailable = GetBoolInfo(ComputeDeviceInfo.CompilerAvailable);
-                driverVersion = GetStringInfo(ComputeDeviceInfo.DriverVersion);
-                endianLittle = GetBoolInfo(ComputeDeviceInfo.EndianLittle);
-                errorCorrectionSupport = GetBoolInfo(ComputeDeviceInfo.ErrorCorrectionSupport);
-                executionCapabilities = (ComputeDeviceExecutionCapabilities)GetInfo<long>(ComputeDeviceInfo.ExecutionCapabilities);
+            addressBits = GetInfo<uint>(ComputeDeviceInfo.AddressBits);
+            available = GetBoolInfo(ComputeDeviceInfo.Available);
+            compilerAvailable = GetBoolInfo(ComputeDeviceInfo.CompilerAvailable);
+            driverVersion = GetStringInfo(ComputeDeviceInfo.DriverVersion);
+            endianLittle = GetBoolInfo(ComputeDeviceInfo.EndianLittle);
+            errorCorrectionSupport = GetBoolInfo(ComputeDeviceInfo.ErrorCorrectionSupport);
+            executionCapabilities = (ComputeDeviceExecutionCapabilities)GetInfo<long>(ComputeDeviceInfo.ExecutionCapabilities);
 
-                string extensionString = GetStringInfo<ComputeDeviceInfo>(ComputeDeviceInfo.Extensions, CL10.GetDeviceInfo);
-                extensions = new ReadOnlyCollection<string>(extensionString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+            string extensionString = GetStringInfo<ComputeDeviceInfo>(ComputeDeviceInfo.Extensions, CL10.GetDeviceInfo);
+            extensions = new ReadOnlyCollection<string>(extensionString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
 
-                globalMemoryCachelineSize = GetInfo<uint>(ComputeDeviceInfo.GlobalMemoryCachelineSize);
-                globalMemoryCacheSize = (long)GetInfo<ulong>(ComputeDeviceInfo.GlobalMemoryCacheSize);
-                globalMemoryCacheType = (ComputeDeviceMemoryCacheType)GetInfo<long>(ComputeDeviceInfo.GlobalMemoryCacheType);
-                globalMemorySize = (long)GetInfo<ulong>(ComputeDeviceInfo.GlobalMemorySize);
-                image2DMaxHeight = (long)GetInfo<IntPtr>(ComputeDeviceInfo.Image2DMaxHeight);
-                image2DMaxWidth = (long)GetInfo<IntPtr>(ComputeDeviceInfo.Image2DMaxWidth);
-                image3DMaxDepth = (long)GetInfo<IntPtr>(ComputeDeviceInfo.Image3DMaxDepth);
-                image3DMaxHeight = (long)GetInfo<IntPtr>(ComputeDeviceInfo.Image3DMaxHeight);
-                image3DMaxWidth = (long)GetInfo<IntPtr>(ComputeDeviceInfo.Image3DMaxWidth);
-                imageSupport = GetBoolInfo(ComputeDeviceInfo.ImageSupport);
-                localMemorySize = (long)GetInfo<ulong>(ComputeDeviceInfo.LocalMemorySize);
-                localMemoryType = (ComputeDeviceLocalMemoryType)GetInfo<long>(ComputeDeviceInfo.LocalMemoryType);
-                maxClockFrequency = GetInfo<uint>(ComputeDeviceInfo.MaxClockFrequency);
-                maxComputeUnits = GetInfo<uint>(ComputeDeviceInfo.MaxComputeUnits);
-                maxConstantArguments = GetInfo<uint>(ComputeDeviceInfo.MaxConstantArguments);
-                maxConstantBufferSize = (long)GetInfo<ulong>(ComputeDeviceInfo.MaxConstantBufferSize);
-                maxMemAllocSize = (long)GetInfo<ulong>(ComputeDeviceInfo.MaxMemoryAllocationSize);
-                maxParameterSize = (long)GetInfo<IntPtr>(ComputeDeviceInfo.MaxParameterSize);
-                maxReadImageArgs = GetInfo<uint>(ComputeDeviceInfo.MaxReadImageArguments);
-                maxSamplers = GetInfo<uint>(ComputeDeviceInfo.MaxSamplers);
-                maxWorkGroupSize = (long)GetInfo<IntPtr>(ComputeDeviceInfo.MaxWorkGroupSize);
-                maxWorkItemDimensions = GetInfo<uint>(ComputeDeviceInfo.MaxWorkItemDimensions);
-                maxWorkItemSizes = new ReadOnlyCollection<long>(Tools.ConvertArray(GetArrayInfo<ComputeDeviceInfo, IntPtr>(ComputeDeviceInfo.MaxWorkItemSizes, CL10.GetDeviceInfo)));
-                maxWriteImageArgs = GetInfo<uint>(ComputeDeviceInfo.MaxWriteImageArguments);
-                memBaseAddrAlign = GetInfo<uint>(ComputeDeviceInfo.MemoryBaseAddressAlignment);
-                minDataTypeAlignSize = GetInfo<uint>(ComputeDeviceInfo.MinDataTypeAlignmentSize);
-                name = GetStringInfo(ComputeDeviceInfo.Name);
-                this.platform = platform;
-                preferredVectorWidthChar = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthChar);
-                preferredVectorWidthFloat = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthFloat);
-                preferredVectorWidthInt = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthInt);
-                preferredVectorWidthLong = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthLong);
-                preferredVectorWidthShort = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthShort);
-                profile = GetStringInfo(ComputeDeviceInfo.Profile);
-                profilingTimerResolution = (long)GetInfo<IntPtr>(ComputeDeviceInfo.ProfilingTimerResolution);
-                queueProperties = (ComputeCommandQueueFlags)GetInfo<long>(ComputeDeviceInfo.CommandQueueProperties);
-                singleCapabilities = (ComputeDeviceSingleCapabilities)GetInfo<long>(ComputeDeviceInfo.SingleFPConfig);
-                type = (ComputeDeviceTypes)GetInfo<long>(ComputeDeviceInfo.Type);
-                vendor = GetStringInfo(ComputeDeviceInfo.Vendor);
-                vendorId = GetInfo<uint>(ComputeDeviceInfo.VendorId);
-                version = GetStringInfo(ComputeDeviceInfo.Version);
-            }
+            globalMemoryCachelineSize = GetInfo<uint>(ComputeDeviceInfo.GlobalMemoryCachelineSize);
+            globalMemoryCacheSize = (long)GetInfo<ulong>(ComputeDeviceInfo.GlobalMemoryCacheSize);
+            globalMemoryCacheType = (ComputeDeviceMemoryCacheType)GetInfo<long>(ComputeDeviceInfo.GlobalMemoryCacheType);
+            globalMemorySize = (long)GetInfo<ulong>(ComputeDeviceInfo.GlobalMemorySize);
+            image2DMaxHeight = (long)GetInfo<IntPtr>(ComputeDeviceInfo.Image2DMaxHeight);
+            image2DMaxWidth = (long)GetInfo<IntPtr>(ComputeDeviceInfo.Image2DMaxWidth);
+            image3DMaxDepth = (long)GetInfo<IntPtr>(ComputeDeviceInfo.Image3DMaxDepth);
+            image3DMaxHeight = (long)GetInfo<IntPtr>(ComputeDeviceInfo.Image3DMaxHeight);
+            image3DMaxWidth = (long)GetInfo<IntPtr>(ComputeDeviceInfo.Image3DMaxWidth);
+            imageSupport = GetBoolInfo(ComputeDeviceInfo.ImageSupport);
+            localMemorySize = (long)GetInfo<ulong>(ComputeDeviceInfo.LocalMemorySize);
+            localMemoryType = (ComputeDeviceLocalMemoryType)GetInfo<long>(ComputeDeviceInfo.LocalMemoryType);
+            maxClockFrequency = GetInfo<uint>(ComputeDeviceInfo.MaxClockFrequency);
+            maxComputeUnits = GetInfo<uint>(ComputeDeviceInfo.MaxComputeUnits);
+            maxConstantArguments = GetInfo<uint>(ComputeDeviceInfo.MaxConstantArguments);
+            maxConstantBufferSize = (long)GetInfo<ulong>(ComputeDeviceInfo.MaxConstantBufferSize);
+            maxMemAllocSize = (long)GetInfo<ulong>(ComputeDeviceInfo.MaxMemoryAllocationSize);
+            maxParameterSize = (long)GetInfo<IntPtr>(ComputeDeviceInfo.MaxParameterSize);
+            maxReadImageArgs = GetInfo<uint>(ComputeDeviceInfo.MaxReadImageArguments);
+            maxSamplers = GetInfo<uint>(ComputeDeviceInfo.MaxSamplers);
+            maxWorkGroupSize = (long)GetInfo<IntPtr>(ComputeDeviceInfo.MaxWorkGroupSize);
+            maxWorkItemDimensions = GetInfo<uint>(ComputeDeviceInfo.MaxWorkItemDimensions);
+            maxWorkItemSizes = new ReadOnlyCollection<long>(Tools.ConvertArray(GetArrayInfo<ComputeDeviceInfo, IntPtr>(ComputeDeviceInfo.MaxWorkItemSizes, CL10.GetDeviceInfo)));
+            maxWriteImageArgs = GetInfo<uint>(ComputeDeviceInfo.MaxWriteImageArguments);
+            memBaseAddrAlign = GetInfo<uint>(ComputeDeviceInfo.MemoryBaseAddressAlignment);
+            minDataTypeAlignSize = GetInfo<uint>(ComputeDeviceInfo.MinDataTypeAlignmentSize);
+            name = GetStringInfo(ComputeDeviceInfo.Name);
+            this.platform = platform;
+            preferredVectorWidthChar = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthChar);
+            preferredVectorWidthFloat = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthFloat);
+            preferredVectorWidthInt = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthInt);
+            preferredVectorWidthLong = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthLong);
+            preferredVectorWidthShort = GetInfo<uint>(ComputeDeviceInfo.PreferredVectorWidthShort);
+            profile = GetStringInfo(ComputeDeviceInfo.Profile);
+            profilingTimerResolution = (long)GetInfo<IntPtr>(ComputeDeviceInfo.ProfilingTimerResolution);
+            queueProperties = (ComputeCommandQueueFlags)GetInfo<long>(ComputeDeviceInfo.CommandQueueProperties);
+            singleCapabilities = (ComputeDeviceSingleCapabilities)GetInfo<long>(ComputeDeviceInfo.SingleFPConfig);
+            type = (ComputeDeviceTypes)GetInfo<long>(ComputeDeviceInfo.Type);
+            vendor = GetStringInfo(ComputeDeviceInfo.Vendor);
+            vendorId = GetInfo<uint>(ComputeDeviceInfo.VendorId);
+            version = GetStringInfo(ComputeDeviceInfo.Version);
         }
 
         #endregion
@@ -612,27 +609,18 @@ namespace Cloo
 
         private bool GetBoolInfo(ComputeDeviceInfo paramName)
         {
-            unsafe
-            {
-                return GetBoolInfo<ComputeDeviceInfo>(paramName, CL10.GetDeviceInfo);
-            }
+            return GetBoolInfo<ComputeDeviceInfo>(paramName, CL10.GetDeviceInfo);
         }
 
         private NativeType GetInfo<NativeType>(ComputeDeviceInfo paramName)
             where NativeType : struct
         {
-            unsafe
-            {
-                return GetInfo<ComputeDeviceInfo, NativeType>(paramName, CL10.GetDeviceInfo);
-            }
+            return GetInfo<ComputeDeviceInfo, NativeType>(paramName, CL10.GetDeviceInfo);
         }
 
         private string GetStringInfo(ComputeDeviceInfo paramName)
         {
-            unsafe
-            {
-                return GetStringInfo<ComputeDeviceInfo>(paramName, CL10.GetDeviceInfo);
-            }
+            return GetStringInfo<ComputeDeviceInfo>(paramName, CL10.GetDeviceInfo);
         }
 
         #endregion

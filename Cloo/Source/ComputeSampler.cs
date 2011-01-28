@@ -91,21 +91,18 @@ namespace Cloo
         /// <param name="filtering"> The <see cref="ComputeImageFiltering"/> mode of the <see cref="ComputeSampler"/>. Specifies the type of filter that must be applied when reading data from an image. </param>
         public ComputeSampler(ComputeContext context, bool normalizedCoords, ComputeImageAddressing addressing, ComputeImageFiltering filtering)
         {
-            unsafe
-            {
-                ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateSampler(
-                    context.Handle,
-                    (normalizedCoords) ? ComputeBoolean.True : ComputeBoolean.False,
-                    addressing,
-                    filtering,
-                    out error);
-                ComputeException.ThrowOnError(error);
-                this.addressing = addressing;
-                this.context = context;
-                this.filtering = filtering;
-                this.normalizedCoords = normalizedCoords;
-            }
+            ComputeErrorCode error = ComputeErrorCode.Success;
+            Handle = CL10.CreateSampler(
+                context.Handle,
+                (normalizedCoords) ? ComputeBoolean.True : ComputeBoolean.False,
+                addressing,
+                filtering,
+                out error);
+            ComputeException.ThrowOnError(error);
+            this.addressing = addressing;
+            this.context = context;
+            this.filtering = filtering;
+            this.normalizedCoords = normalizedCoords;
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
