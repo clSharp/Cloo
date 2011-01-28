@@ -115,7 +115,7 @@ namespace Cloo
                 callback = notify;
 
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL10.CreateContext(propertyArray, devices.Count, deviceHandles, notify, notifyDataPtr, &error);
+                Handle = CL10.CreateContext(propertyArray, devices.Count, deviceHandles, notify, notifyDataPtr, out error);
                 ComputeException.ThrowOnError(error);
 
                 this.properties = properties;

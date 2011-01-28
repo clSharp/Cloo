@@ -107,9 +107,9 @@ namespace Cloo.Bindings
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] properties,
             Int32 num_devices,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] devices,
-            /* void (*pfn_notify)(const char *, const IntPtr, IntPtr, IntPtr) */ ComputeContextNotifier pfn_notify,
-            /* void* */ IntPtr user_data,
-            ComputeErrorCode* errcode_ret);
+            ComputeContextNotifier pfn_notify,
+            IntPtr user_data,
+            out ComputeErrorCode errcode_ret);
 
         /// <summary>
         /// See the OpenCL specification.
