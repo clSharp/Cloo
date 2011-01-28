@@ -3091,7 +3091,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.GetDeviceIDs(System.IntPtr,Cloo.ComputeDeviceTypes,System.Int32,System.IntPtr[],System.Int32*)">
+        <member name="M:Cloo.Bindings.CL10.GetDeviceIDs(System.IntPtr,Cloo.ComputeDeviceTypes,System.Int32,System.IntPtr[],System.Int32@)">
             <summary>
             See the OpenCL specification.
             </summary>

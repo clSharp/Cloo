@@ -202,11 +202,11 @@ namespace Cloo
             unsafe
             {
                 int handlesLength = 0;
-                ComputeErrorCode error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, 0, null, &handlesLength);
+                ComputeErrorCode error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, 0, null, out handlesLength);
                 ComputeException.ThrowOnError(error);
 
                 IntPtr[] handles = new IntPtr[handlesLength];
-                error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, handlesLength, handles, null);
+                error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, handlesLength, handles, out handlesLength);
                 ComputeException.ThrowOnError(error);
 
                 ComputeDevice[] devices = new ComputeDevice[handlesLength];

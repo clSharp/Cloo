@@ -82,7 +82,7 @@ namespace Cloo.Bindings
             ComputeDeviceTypes device_type,
             Int32 num_entries,
             [MarshalAs(UnmanagedType.LPArray)] IntPtr[] devices,
-            Int32* num_devices);
+            out Int32 num_devices);
 
         /// <summary>
         /// See the OpenCL specification.
