@@ -180,7 +180,7 @@ namespace Cloo.Bindings
         public extern static ComputeErrorCode SetCommandQueueProperty(
             IntPtr command_queue,
             ComputeCommandQueueFlags properties,
-            ComputeBoolean enable,
+            [MarshalAs(UnmanagedType.Bool)] bool enable,
             out ComputeCommandQueueFlags old_properties);
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace Cloo.Bindings
         [DllImport(libName, EntryPoint = "clCreateSampler")]
         public extern static IntPtr CreateSampler(
             IntPtr context,
-            ComputeBoolean normalized_coords,
+            [MarshalAs(UnmanagedType.Bool)] bool normalized_coords,
             ComputeImageAddressing addressing_mode,
             ComputeImageFiltering filter_mode,
             out ComputeErrorCode errcode_ret);
@@ -518,7 +518,7 @@ namespace Cloo.Bindings
         public extern static ComputeErrorCode EnqueueReadBuffer(
             IntPtr command_queue,
             IntPtr buffer,
-            ComputeBoolean blocking_read,
+            [MarshalAs(UnmanagedType.Bool)] bool blocking_read,
             IntPtr offset,
             IntPtr cb,
             IntPtr ptr,
@@ -533,7 +533,7 @@ namespace Cloo.Bindings
         public extern static ComputeErrorCode EnqueueWriteBuffer(
             IntPtr command_queue,
             IntPtr buffer,
-            ComputeBoolean blocking_write,
+            [MarshalAs(UnmanagedType.Bool)] bool blocking_write,
             IntPtr offset,
             IntPtr cb,
             IntPtr ptr,
@@ -563,7 +563,7 @@ namespace Cloo.Bindings
         public extern static ComputeErrorCode EnqueueReadImage(
             IntPtr command_queue,
             IntPtr image,
-            ComputeBoolean blocking_read,
+            [MarshalAs(UnmanagedType.Bool)] bool blocking_read,
             ref SysIntX3 origin,
             ref SysIntX3 region,
             IntPtr row_pitch,
@@ -580,7 +580,7 @@ namespace Cloo.Bindings
         public extern static ComputeErrorCode EnqueueWriteImage(
             IntPtr command_queue,
             IntPtr image,
-            ComputeBoolean blocking_write,
+            [MarshalAs(UnmanagedType.Bool)] bool blocking_write,
             ref SysIntX3 origin,
             ref SysIntX3 region,
             IntPtr input_row_pitch,
@@ -642,7 +642,7 @@ namespace Cloo.Bindings
         public extern static IntPtr EnqueueMapBuffer(
             IntPtr command_queue,
             IntPtr buffer,
-            ComputeBoolean blocking_map,
+            [MarshalAs(UnmanagedType.Bool)] bool blocking_map,
             ComputeMemoryMappingFlags map_flags,
             IntPtr offset,
             IntPtr cb,
@@ -658,7 +658,7 @@ namespace Cloo.Bindings
         public extern static IntPtr EnqueueMapImage(
             IntPtr command_queue,
             IntPtr image,
-            ComputeBoolean blocking_map,
+            [MarshalAs(UnmanagedType.Bool)] bool blocking_map,
             ComputeMemoryMappingFlags map_flags,
             ref SysIntX3 origin,
             ref SysIntX3 region,

@@ -96,7 +96,7 @@ namespace Cloo.Bindings
         public extern static ComputeErrorCode EnqueueReadBufferRect(
             IntPtr command_queue,
             IntPtr buffer,
-            ComputeBoolean blocking_read,
+            [MarshalAs(UnmanagedType.Bool)] bool blocking_read,
             ref SysIntX3 buffer_offset,
             ref SysIntX3 host_offset,
             ref SysIntX3 region,
@@ -116,7 +116,7 @@ namespace Cloo.Bindings
         public extern static ComputeErrorCode EnqueueWriteBufferRect(
             IntPtr command_queue,
             IntPtr buffer,
-            ComputeBoolean blocking_write,
+            [MarshalAs(UnmanagedType.Bool)] bool blocking_write,
             ref SysIntX3 buffer_offset,
             ref SysIntX3 host_offset,
             ref SysIntX3 region,
@@ -155,7 +155,7 @@ namespace Cloo.Bindings
         new public static ComputeErrorCode SetCommandQueueProperty(
             IntPtr command_queue,
             ComputeCommandQueueFlags properties,
-            ComputeBoolean enable,
+            [MarshalAs(UnmanagedType.Bool)] bool enable,
             out ComputeCommandQueueFlags old_properties)
         {
             Trace.WriteLine("WARNING! clSetCommandQueueProperty has been deprecated in OpenCL 1.1.");

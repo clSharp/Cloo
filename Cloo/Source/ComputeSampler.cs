@@ -94,7 +94,7 @@ namespace Cloo
             ComputeErrorCode error = ComputeErrorCode.Success;
             Handle = CL10.CreateSampler(
                 context.Handle,
-                (normalizedCoords) ? ComputeBoolean.True : ComputeBoolean.False,
+                normalizedCoords,
                 addressing,
                 filtering,
                 out error);
