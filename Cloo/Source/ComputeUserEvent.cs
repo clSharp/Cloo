@@ -53,12 +53,9 @@ namespace Cloo
             ComputeErrorCode error;
             Handle = CL11.CreateUserEvent(context.Handle, out error);
             ComputeException.ThrowOnError(error);
-            Type = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
-                ComputeEventInfo.CommandType, CL10.GetEventInfo);
+            Type = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(ComputeEventInfo.CommandType, CL10.GetEventInfo);
             Context = context;
-
             HookNotifier();
-
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
@@ -67,7 +64,7 @@ namespace Cloo
         #region Public methods
 
         /// <summary>
-        /// Sets the status of the of the <see cref="ComputeUserEvent"/>.
+        /// Sets the new status of the <see cref="ComputeUserEvent"/>.
         /// </summary>
         /// <param name="status"> The new status of the <see cref="ComputeUserEvent"/>. Allowed value is <see cref="ComputeCommandExecutionStatus.Complete"/>. </param>
         public void SetStatus(ComputeCommandExecutionStatus status)
@@ -76,9 +73,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets the status of the <see cref="ComputeUserEvent"/>.
+        /// Sets the new status of the <see cref="ComputeUserEvent"/> to an error value.
         /// </summary>
-        /// <param name="status"> The new status of the <see cref="ComputeUserEvent"/>. </param>
+        /// <param name="status"> The error status of the <see cref="ComputeUserEvent"/>. This should be a negative value. </param>
         public void SetStatus(int status)
         {
             ComputeErrorCode error = CL11.SetUserEventStatus(Handle, status);

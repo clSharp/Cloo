@@ -79,7 +79,6 @@ namespace Cloo
             : base(context, flags)
         {
             Handle = handle;
-
             Init();
         }
 

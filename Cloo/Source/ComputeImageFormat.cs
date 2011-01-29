@@ -51,9 +51,9 @@ namespace Cloo
         #region Properties
 
         /// <summary>
-        /// Gets the <see cref="ComputeImageChannleOrder"/> of the <see cref="ComputeImage"/>.
+        /// Gets the <see cref="ComputeImageChannelOrder"/> of the <see cref="ComputeImage"/>.
         /// </summary>
-        /// <value> The <see cref="ComputeImageChannleOrder"/> of the <see cref="ComputeImage"/>. </value>
+        /// <value> The <see cref="ComputeImageChannelOrder"/> of the <see cref="ComputeImage"/>. </value>
         public ComputeImageChannelOrder ChannelOrder { get { return channelOrder; } }
 
         /// <summary>

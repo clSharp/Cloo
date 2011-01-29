@@ -70,7 +70,6 @@ namespace Cloo
             ComputeErrorCode error = ComputeErrorCode.Success;
             Handle = CL10.CreateBuffer(context.Handle, flags, new IntPtr(Marshal.SizeOf(typeof(T)) * count), dataPtr, out error);
             ComputeException.ThrowOnError(error);
-
             Init();
         }
 
@@ -90,11 +89,10 @@ namespace Cloo
                 Handle = CL10.CreateBuffer(context.Handle, flags, new IntPtr(Marshal.SizeOf(typeof(T)) * data.Length), dataPtr.AddrOfPinnedObject(), out error);
                 ComputeException.ThrowOnError(error);
             }
-            finally
+            finally 
             {
-                dataPtr.Free();
+                dataPtr.Free(); 
             }
-
             Init();
         }
 
@@ -122,7 +120,6 @@ namespace Cloo
             ComputeErrorCode error = ComputeErrorCode.Success;
             IntPtr handle = CL10.CreateFromGLBuffer(context.Handle, flags, bufferId, out error);
             ComputeException.ThrowOnError(error);
-
             return new ComputeBuffer<DataType>(handle, context, flags);
         }
 

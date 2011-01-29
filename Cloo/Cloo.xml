@@ -273,15 +273,15 @@
         </member>
         <member name="M:Cloo.ComputeUserEvent.SetStatus(Cloo.ComputeCommandExecutionStatus)">
             <summary>
-            Sets the status of the of the <see cref="T:Cloo.ComputeUserEvent"/>.
+            Sets the new status of the <see cref="T:Cloo.ComputeUserEvent"/>.
             </summary>
             <param name="status"> The new status of the <see cref="T:Cloo.ComputeUserEvent"/>. Allowed value is <see cref="F:Cloo.ComputeCommandExecutionStatus.Complete"/>. </param>
         </member>
         <member name="M:Cloo.ComputeUserEvent.SetStatus(System.Int32)">
             <summary>
-            Sets the status of the <see cref="T:Cloo.ComputeUserEvent"/>.
+            Sets the new status of the <see cref="T:Cloo.ComputeUserEvent"/> to an error value.
             </summary>
-            <param name="status"> The new status of the <see cref="T:Cloo.ComputeUserEvent"/>. </param>
+            <param name="status"> The error status of the <see cref="T:Cloo.ComputeUserEvent"/>. This should be a negative value. </param>
         </member>
         <member name="T:Cloo.ComputeEvent">
             <summary>
@@ -3587,9 +3587,9 @@
         </member>
         <member name="P:Cloo.ComputeImageFormat.ChannelOrder">
             <summary>
-            Gets the <see cref="!:ComputeImageChannleOrder"/> of the <see cref="T:Cloo.ComputeImage"/>.
+            Gets the <see cref="T:Cloo.ComputeImageChannelOrder"/> of the <see cref="T:Cloo.ComputeImage"/>.
             </summary>
-            <value> The <see cref="!:ComputeImageChannleOrder"/> of the <see cref="T:Cloo.ComputeImage"/>. </value>
+            <value> The <see cref="T:Cloo.ComputeImageChannelOrder"/> of the <see cref="T:Cloo.ComputeImage"/>. </value>
         </member>
         <member name="P:Cloo.ComputeImageFormat.ChannelType">
             <summary>

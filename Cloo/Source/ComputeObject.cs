@@ -304,7 +304,7 @@ namespace Cloo
         protected string GetStringInfo<InfoType>(InfoType paramName, GetInfoDelegate<InfoType> getInfoDelegate)
         {
             byte[] buffer = GetArrayInfo<InfoType, byte>(paramName, getInfoDelegate);
-            Char[] chars = Encoding.ASCII.GetChars(buffer, 0, buffer.Length);
+            char[] chars = Encoding.ASCII.GetChars(buffer, 0, buffer.Length);
             return (new string(chars)).TrimEnd(new char[] { '\0' });
         }
 
@@ -319,7 +319,7 @@ namespace Cloo
         protected string GetStringInfo<InfoType>(ComputeObject secondaryObject, InfoType paramName, GetInfoDelegateEx<InfoType> getInfoDelegate)
         {
             byte[] buffer = GetArrayInfo<InfoType, byte>(secondaryObject, paramName, getInfoDelegate);
-            Char[] chars = Encoding.ASCII.GetChars(buffer, 0, buffer.Length);
+            char[] chars = Encoding.ASCII.GetChars(buffer, 0, buffer.Length);
             return (new string(chars)).TrimEnd(new char[] { '\0' });
         }
 
