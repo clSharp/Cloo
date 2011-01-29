@@ -1,14 +1,23 @@
-[0.8.2]
+[0.9.alpha1] -------------------------------------------------------------------
+This is the first of the (two or possibly three) alpha releases that precede Cloo 0.9. It is an experimental release which brings three major changes:
+
+1) The library is now CLS-compliant and contains no unsafe code including the low-level bindings. This means it is fully usable from every CLI-compatible language out there.
+2) Deprecated bits from the previous versions have been removed. Those of you considering upgrade to Cloo 0.9 will need to check their compiler warnings for obsoleted methods/properties. Fear not, though. Every feature can be replaced by a better and more solid one.
+3) Clootils have been completely redesigned. The editor is gone but what's left is a bit more usable and much more extensible (at least from a programmer's point of view).
+
+Apart from the deprecated features the interface hasn't changed (a simple Cloo.dll switch should be sufficient). However, the changes under the hood are quite extensive so, I would really appreciate some user feedback!
+
+[0.8.2] ------------------------------------------------------------------------
 Welcome to another maintenance release in the 0.8 series.
 This version fixes some discovered bugs affecting extension loading, asynchronous program build, command-queue methods handling ComputeImage2Ds and error checking in some of the ComputeObject.Get*Info methods. It also adds a workaround to prevent Clootils from hanging with the latest Nvidia drivers and another one to help prevent Cloo initialization errors in a multithreaded environment.
 New functionality includes support for the cl_ext_device_fission extension.
 For the first time ever, Cloo was tested against the Intel OpenCL SDK. Although alpha, Intel's implementation is the first of the lot to successfully pass all the current Clootils tests! Kudos to Intel! 
 Upgrade from 0.8.1 or 0.8.0 is recommended.
  
-[0.8.1]
+[0.8.1] ------------------------------------------------------------------------
 This is a maintenance release which fixes a highly critical bug on OpenCL platforms that make use of a device without cl_krh_fp16 or cl_khr_fp64 support. The bug prevented 0.8.0 from initializing in such environments. This release also gets rid of the occasional IOException in the ComputeEvent bowels. Upgrade from 0.8.0 is strongly recommended.
 
-[0.8.0]
+[0.8.0] ------------------------------------------------------------------------
 Cloo 0.8 is finally out! Since the initial plans three months have passed. During this time Khronos updated the OpenCL specification and, as it happens, some (actually a lot) of the new OpenCL functions do exactly what I was going to implement myself. So, a big thank you to those guys is in place.
 
 These are some of the new bits you can expect in this version:

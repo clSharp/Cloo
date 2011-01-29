@@ -1,4 +1,26 @@
-[0.8.2] -----------------------------------------------------------------------
+[0.9.alpha1] -------------------------------------------------------------------
+Breaking changes:
+Removed all code that was marked [Obsolete] in the previous versions.
+Modified the bindings to avoid the need for unsafe code.
+
+Additions:
+None.
+
+Bugfixes:
+None.
+
+Deprecated:
+None.
+
+Internals:
+Lots of modifications as a result of the changes in the bindings.
+Removed all the unsafe blocks.
+
+Documentation:
+None.
+
+                                                                                
+[0.8.2] ------------------------------------------------------------------------
 Breaking changes:
 None.
 
@@ -30,7 +52,7 @@ Added <value> tags to all properties.
 Added element references wherever possible. 
 
 
-[0.8.1] -----------------------------------------------------------------------
+[0.8.1] ------------------------------------------------------------------------
 Breaking changes:
 None.
 
@@ -51,7 +73,7 @@ Documentation:
 None.
 
 
-[0.8.0] -----------------------------------------------------------------------
+[0.8.0] ------------------------------------------------------------------------
 Breaking changes:
 All ComputeCommandQueue methods require an ICollection<ComputeEventBase> events argument instead of ICollection<ComputeEvent>.
 ComputeEventList now implements ICollection<ComputeEventBase> instead of IList<ComputeEvent>.
@@ -89,10 +111,10 @@ Documentation:
 Synced with latest additions, changes and removals.
 
 
-[0.7.4] -----------------------------------------------------------------------
+[0.7.4] ------------------------------------------------------------------------
 As per community request: allow usage of deprecated ComputeCommandQueue methods.
 
-[0.7.3] -----------------------------------------------------------------------
+[0.7.3] ------------------------------------------------------------------------
 Breaking changes:
 Renamed ComputeDevice.ComputeCommmandQueueFlags to CommandQueueFlags.
 Renamed MemoryObjectAllocationComputeException to MemoryObjectAllocationFailureComputeException.
@@ -123,7 +145,7 @@ Revised documentation for most of the public bits of the library.
 Added doxygen generated documentation.
 
 
-[0.7.2] -----------------------------------------------------------------------
+[0.7.2] ------------------------------------------------------------------------
 Breaking changes:
 None.
 
@@ -142,7 +164,7 @@ Documentation:
 None.
 
 
-[0.7.1] -----------------------------------------------------------------------
+[0.7.1] ------------------------------------------------------------------------
 Breaking changes:
 Removed ComputeContextPropertyList.Platform property.
 Renamed ComputeCommandQueue.Execute( kernel, events ) to ExecuteTask.
@@ -165,7 +187,7 @@ Documentation:
 Documented new overloads in ComputeCommandQueue.
 
 
-[0.7.0] -----------------------------------------------------------------------
+[0.7.0] ------------------------------------------------------------------------
 Breaking changes:
 Changes affecting ComputeCommandQueue.Read/Write methods in order to fix a bug concerning non-blocking calls. The responsibility of allocating/freeing memory or GC Handles is now up to the application. See VectorAddTest.cs for an example of use.
 
@@ -184,7 +206,7 @@ Documentation:
 None.
 
 
-[0.6.2] -----------------------------------------------------------------------
+[0.6.2] ------------------------------------------------------------------------
 Breaking changes:
 Renamed ComputeImage.PixelSize to ElementSize.
 
@@ -204,7 +226,7 @@ Documentation:
 None.
 
 
-[0.6.1] -----------------------------------------------------------------------
+[0.6.1] ------------------------------------------------------------------------
 Breaking changes:
 Renamed ComputeDeviceMemoryCacheType to ComputeDeviceGlobalMemoryCacheType.
 Changed signature of ComputeCommandQueue.Read( ComputeImage ).
@@ -229,7 +251,7 @@ ComputeCommandQueue.ReleaseGLObjects, ComputeCommandQueue.Read, ComputeCommandQu
 ComputeContext..ctor, ComputeContextNotifier.
 
 	
-[0.6.0] -----------------------------------------------------------------------
+[0.6.0] ------------------------------------------------------------------------
 Breaking changes:
 Replaced all OpenTK enums with new ones.
 Restructured ComputeMemory and its dependents' architecture.
@@ -255,7 +277,7 @@ Added comments for some of the new public bits.
 Added/modified missing comments around existing bits.
 
 
-[0.5.1] -----------------------------------------------------------------------
+[0.5.1] ------------------------------------------------------------------------
 Breaking changes:
 ComputeJobQueue renamed to ComputeCommandQueue. Avoids confusion for new users.
 All ComputeEvent properties that included "Job" in their names are renamed as well.
@@ -280,7 +302,7 @@ Documentation:
 A lot of small tweaks, fixes and new lines.
 
 
-[0.4.1] -----------------------------------------------------------------------
+[0.4.1] ------------------------------------------------------------------------
 ~ changed: Public IntPtrs replaced by longs
 ~ changed: Fixed CLS-Compliancy related warnings
 ~ changed: ComputeObject.GetInfo methods no longer provide conversion between native type and queried type
@@ -288,14 +310,14 @@ A lot of small tweaks, fixes and new lines.
 + added: Missing comments on public methods and properties
 + added: ComputeKernel.SetSamplerArg for setting sampler_t kernel arguments
 
-[0.3.1] -----------------------------------------------------------------------
+[0.3.1] ------------------------------------------------------------------------
 ~ changed: GetInfo string queries are now parsed with regexes
 * fixed: kernel signature for the ray-triangle intersection
 + added: a general ComputeKernel.SetArg method that closely follows clSetKernelArg.
 + added: an internal test for kernel args passing
 + added: ClooInfo, a winforms based app for printing CL related info
 
-[0.2.1] -----------------------------------------------------------------------
+[0.2.1] ------------------------------------------------------------------------
 ~ changed: ComputeDevice now exposes properties instead of fields
 ~ changed: ComputeDevice fields refactoring
 ~ changed: error checking method moved to ComputeException
@@ -303,7 +325,7 @@ A lot of small tweaks, fixes and new lines.
 + added: Ray-Triangle intersection test
 + added: compute exception classes for all the error codes
 
-[0.1.1.100] -------------------------------------------------------------------
+[0.1.1.100] --------------------------------------------------------------------
 - removed: unmanaged allocs and unnecessary transfers between managed <-> unmanaged memory areas
 ~ changed: ComputeQueue to ComputeCommandQueue
 ~ changed: ComputeProgram binaries and all related logic now represented by byte[] instead of string
@@ -312,6 +334,6 @@ A lot of small tweaks, fixes and new lines.
 + added: setting ComputeKernel's value type arguments
 + added: execution of a single kernel through clEnqueueTask
 
-[0.1-alpha-1] -----------------------------------------------------------------
+[0.1-alpha-1] ------------------------------------------------------------------
 The first experimental release of Cloo. This is an alpha release, so expect bugs and missing features.
 Only for testing purposes!
