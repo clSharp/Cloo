@@ -46,7 +46,7 @@ namespace Clootils
         [STAThread]
         public static void Main()
         {
-            bool runningWin32NT = (Environment.OSVersion.Platform == PlatformID.Win32NT) ? true : false;
+            bool runningWin32NT = (Environment.OSVersion.Platform == PlatformID.Win32NT);
             bool consoleAllocated = false;
 
             try

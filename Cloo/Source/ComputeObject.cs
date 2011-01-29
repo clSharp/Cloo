@@ -215,7 +215,7 @@ namespace Cloo
             )
         {
             int result = GetInfo<InfoType, int>(paramName, getInfoDelegate);
-            return (result == (int)ComputeBoolean.True) ? true : false;
+            return (result == (int)ComputeBoolean.True);
         }
 
         /// <summary>

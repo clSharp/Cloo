@@ -106,7 +106,7 @@ namespace Cloo.Bindings
             if (platform.Extensions.Contains("cl_ext_migrate_memobject")) 
                 clEnqueueMigrateMemObjectEXT = (Delegates.clEnqueueMigrateMemObjectEXT)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clEnqueueMigrateMemObjectEXT"), typeof(Delegates.clEnqueueMigrateMemObjectEXT));
             
-            if (platform.Extensions.Contains("cl_khr_gl_sharing")) 
+            if (platform.Extensions.Contains("cl_khr_gl_sharing"))
                 clGetGLContextInfoKHR = (Delegates.clGetGLContextInfoKHR)Marshal.GetDelegateForFunctionPointer(CL10.GetExtensionFunctionAddress("clGetGLContextInfoKHR"), typeof(Delegates.clGetGLContextInfoKHR));
 
             //if (platform.Extensions.Contains("cl_khr_icd"))

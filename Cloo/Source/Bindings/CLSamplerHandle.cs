@@ -40,7 +40,7 @@ namespace Cloo.Bindings
         [PrePrepareMethod]
         protected override bool ReleaseHandle()
         {
-            return (CL10.ReleaseSampler(handle) == ComputeErrorCode.Success) ? true : false;
+            return (CL10.ReleaseSampler(handle) == ComputeErrorCode.Success);
         }
     }
 }
