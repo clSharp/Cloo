@@ -127,11 +127,8 @@ namespace Cloo
         {
             lock (CommandQueue.events)
             {
-#if DEBUG
-                if (CommandQueue.events.IndexOf(this) < 0) 
-                    throw new Exception("Shouldn't reach here.");
-#endif
-                CommandQueue.events.Remove(this);
+                if (CommandQueue.events.IndexOf(this) >= 0) 
+                    CommandQueue.events.Remove(this);
                 Dispose();
             }
         }
