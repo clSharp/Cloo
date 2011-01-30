@@ -31,16 +31,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Cloo.Bindings
 {
-    using System.Runtime.ConstrainedExecution;
+    using System;
 
-    public sealed class CLPlatformHandle : CLHandle
+    public struct CLPlatformHandle
     {
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        [PrePrepareMethod]
-        protected override bool ReleaseHandle()
-        {
-            // This is a NOOP since it isn't possible to release a platform.
-            return true;
-        }
+        readonly IntPtr value;
     }
 }

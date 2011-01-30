@@ -32,15 +32,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo.Bindings
 {
     using System;
-    using System.Runtime.ConstrainedExecution;
 
-    public sealed class CLProgramHandle : CLHandle
+    public struct CLProgramHandle
     {
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        [PrePrepareMethod]
-        protected override bool ReleaseHandle()
-        {
-            return (CL10.ReleaseProgram(handle) == ComputeErrorCode.Success);
-        }
+        readonly IntPtr value;
     }
 }
