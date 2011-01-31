@@ -49,7 +49,6 @@ namespace Cloo
         #region Fields
 
         private GCHandle gcHandle;
-        private Array array;
         
         #endregion
 
@@ -80,6 +79,10 @@ namespace Cloo
             Aborted += new ComputeCommandStatusChanged(ComputeEvent_Fired);
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+
+            // If the command completed before the notifier was listening, this should be fired manually.
+            if (Status == ComputeCommandExecutionStatus.Complete)
+                this.ComputeEvent_Fired(this, null);
         }
 
         #endregion
@@ -89,20 +92,12 @@ namespace Cloo
         internal void FreeTracks()
         {
             if (gcHandle.IsAllocated && gcHandle.Target != null)
-            {
                 gcHandle.Free();
-                array = null;
-            }
         }
 
         internal void Track(GCHandle handle)
         {
             gcHandle = handle;
-        }
-
-        internal void Track(Array array)
-        {
-            this.array = array;
         }
 
         #endregion

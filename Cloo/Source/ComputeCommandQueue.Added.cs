@@ -559,7 +559,6 @@ namespace Cloo
                 IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
                 Write(destination, blocking, destinationOffset, region, sourceOffsetPtr, evlist);
                 ((ComputeEvent)evlist[evlist.Count - 1]).Track(sourceGCHandle);
-                ((ComputeEvent)evlist[evlist.Count - 1]).Track(source);
                 this.events.Add((ComputeEvent)evlist[evlist.Count - 1]);
             }
         }
@@ -623,7 +622,6 @@ namespace Cloo
                 IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
                 Write(destination, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), evlist);
                 ((ComputeEvent)evlist[evlist.Count - 1]).Track(sourceGCHandle);
-                ((ComputeEvent)evlist[evlist.Count - 1]).Track(source);
                 this.events.Add((ComputeEvent)evlist[evlist.Count - 1]);
             }
         }
@@ -657,7 +655,6 @@ namespace Cloo
                 IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
                 Write(destination, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), evlist);
                 ((ComputeEvent)evlist[evlist.Count - 1]).Track(sourceGCHandle);
-                ((ComputeEvent)evlist[evlist.Count - 1]).Track(source);
                 this.events.Add((ComputeEvent)evlist[evlist.Count - 1]);
             }
         }
