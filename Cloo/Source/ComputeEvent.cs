@@ -79,17 +79,23 @@ namespace Cloo
             Aborted += new ComputeCommandStatusChanged(ComputeEvent_Fired);
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
-
-            // If the command completed before the notifier was listening, this should be fired manually.
-            if (Status == ComputeCommandExecutionStatus.Complete)
-                this.ComputeEvent_Fired(this, null);
         }
 
         #endregion
 
         #region Internal methods
 
-        internal void FreeTracks()
+        internal void ComputeEvent_Fired(object sender, EventArgs e)
+        {
+            lock (CommandQueue.events)
+            {
+                if (CommandQueue.events.IndexOf(this) >= 0)
+                    CommandQueue.events.Remove(this);
+                Dispose();
+            }
+        }
+
+        internal void FreeTrack()
         {
             if (gcHandle.IsAllocated && gcHandle.Target != null)
                 gcHandle.Free();
@@ -110,22 +116,8 @@ namespace Cloo
         /// <param name="manual"> Specifies the operation mode of this method. </param>
         protected override void Dispose(bool manual)
         {
-            FreeTracks();
+            FreeTrack();
             base.Dispose(manual);
-        }
-
-        #endregion
-
-        #region Private methods
-
-        private void ComputeEvent_Fired(object sender, EventArgs e)
-        {
-            lock (CommandQueue.events)
-            {
-                if (CommandQueue.events.IndexOf(this) >= 0) 
-                    CommandQueue.events.Remove(this);
-                Dispose();
-            }
         }
 
         #endregion

@@ -41,7 +41,8 @@ namespace Clootils
     class VectorAddExample : IExample
     {
         ComputeProgram program;
-        string kernelSource = @"
+
+        string clProgramSource = @"
 kernel void VectorAdd(
     global  read_only float* a,
     global  read_only float* b,
@@ -87,7 +88,7 @@ kernel void VectorAdd(
                 ComputeBuffer<float> c = new ComputeBuffer<float>(context, ComputeMemoryFlags.WriteOnly, arrC.Length);
 
                 // Create and build the opencl program.
-                program = new ComputeProgram(context, kernelSource);
+                program = new ComputeProgram(context, clProgramSource);
                 program.Build(null, null, null, IntPtr.Zero);
 
                 // Create the kernel function and set its arguments.
@@ -102,7 +103,7 @@ kernel void VectorAdd(
                 // Execute the kernel "count" times.
                 commands.Execute(kernel, null, new long[] { count }, null, null);
                 
-                // Read back the result.
+                // Read back the results.
                 commands.ReadFromBuffer(c, ref arrC, false, null);
                 
                 // Wait for all the opencl commands to finish execution.
