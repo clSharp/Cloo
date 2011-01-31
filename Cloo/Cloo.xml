@@ -175,10 +175,11 @@
             Releases the associated OpenCL object.
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
+            <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         </member>
         <member name="M:Cloo.ComputeResource.Finalize">
             <summary>
-            
+            Releases the associated OpenCL object.
             </summary>
         </member>
         <member name="M:Cloo.ComputeEventBase.ToString">
@@ -192,6 +193,7 @@
             Releases the associated OpenCL object.
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
+            <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         </member>
         <member name="M:Cloo.ComputeEventBase.HookNotifier">
             <summary>
@@ -297,6 +299,7 @@
             Releases the associated OpenCL object.
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
+            <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         </member>
         <member name="P:Cloo.ComputeEvent.CommandQueue">
             <summary>
@@ -338,6 +341,7 @@
             Releases the associated OpenCL object.
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
+            <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         </member>
         <member name="P:Cloo.ComputeMemory.Context">
             <summary>
@@ -1247,6 +1251,7 @@
             Releases the associated OpenCL object.
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
+            <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         </member>
         <member name="P:Cloo.ComputeCommandQueue.Context">
             <summary>
@@ -1386,6 +1391,7 @@
             Releases the associated OpenCL object.
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
+            <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         </member>
         <member name="P:Cloo.ComputeContext.Devices">
             <summary>
@@ -2806,6 +2812,7 @@
             Releases the associated OpenCL object.
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
+            <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         </member>
         <member name="P:Cloo.ComputeKernel.Context">
             <summary>
@@ -3530,6 +3537,7 @@
             Releases the associated OpenCL object.
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
+            <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         </member>
         <member name="P:Cloo.ComputeProgram.Binaries">
             <summary>
@@ -4272,6 +4280,7 @@
             Releases the associated OpenCL object.
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
+            <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         </member>
         <member name="P:Cloo.ComputeSampler.Context">
             <summary>

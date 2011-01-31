@@ -61,6 +61,7 @@ namespace Cloo
         /// Releases the associated OpenCL object.
         /// </summary>
         /// <param name="manual"> Specifies the operation mode of this method. </param>
+        /// <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         protected abstract void Dispose(bool manual);
 
         #endregion
@@ -68,7 +69,7 @@ namespace Cloo
         #region Private methods
 
         /// <summary>
-        /// 
+        /// Releases the associated OpenCL object.
         /// </summary>
         ~ComputeResource()
         {
