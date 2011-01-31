@@ -31,11 +31,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Cloo
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Cloo.Bindings;
-    using System;
 
     /// <summary>
     /// Represents a list of OpenCL generated or user created events.

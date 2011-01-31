@@ -32,6 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// Represents an OpenCL resource.
@@ -71,6 +72,7 @@ namespace Cloo
         /// </summary>
         ~ComputeResource()
         {
+            Trace.WriteLine("WARNING! " + ToString() + " leaked.");
             Dispose(false);
         }
 
