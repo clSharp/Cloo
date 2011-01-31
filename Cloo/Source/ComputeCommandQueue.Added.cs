@@ -337,11 +337,11 @@ namespace Cloo
             }
             else
             {
-                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
+                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.events;
                 Read(source, blocking, sourceOffset, region, destinationOffsetPtr, evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(destinationGCHandle);
-                this.events.Add(ev);                
+                ev.SingleReference = (events == null);
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }
@@ -404,11 +404,11 @@ namespace Cloo
             }
             else
             {
-                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
+                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.events;
                 Read(source, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, destinationGCHandle.AddrOfPinnedObject(), evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(destinationGCHandle);
-                this.events.Add(ev);
+                ev.SingleReference = (events == null);
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }
@@ -441,11 +441,11 @@ namespace Cloo
             }
             else
             {
-                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
+                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.events;
                 Read(source, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, destinationGCHandle.AddrOfPinnedObject(), evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(destinationGCHandle);
-                this.events.Add(ev);
+                ev.SingleReference = (events == null);
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }
@@ -566,11 +566,11 @@ namespace Cloo
             }
             else
             {
-                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
+                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.events;
                 Write(destination, blocking, destinationOffset, region, sourceOffsetPtr, evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(sourceGCHandle);
-                this.events.Add(ev);
+                ev.SingleReference = (events == null);
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }
@@ -632,11 +632,11 @@ namespace Cloo
             }
             else
             {
-                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
+                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.events;
                 Write(destination, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(sourceGCHandle);
-                this.events.Add(ev);
+                ev.SingleReference = (events == null);
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }
@@ -668,11 +668,11 @@ namespace Cloo
             }
             else
             {
-                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
+                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.events;
                 Write(destination, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(sourceGCHandle);
-                this.events.Add(ev);
+                ev.SingleReference = (events == null);
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }

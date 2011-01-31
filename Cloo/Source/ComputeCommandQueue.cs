@@ -52,7 +52,7 @@ namespace Cloo
         private readonly ComputeDevice device;
         private bool outOfOrderExec;
         private bool profiling;
-        internal IList<ComputeEvent> events;
+        internal IList<ComputeEventBase> events;
 
         #endregion
 
@@ -104,7 +104,7 @@ namespace Cloo
             outOfOrderExec = ((properties & ComputeCommandQueueFlags.OutOfOrderExecution) == ComputeCommandQueueFlags.OutOfOrderExecution);
             profiling = ((properties & ComputeCommandQueueFlags.Profiling) == ComputeCommandQueueFlags.Profiling);
             
-            events = new List<ComputeEvent>();
+            events = new List<ComputeEventBase>();
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }

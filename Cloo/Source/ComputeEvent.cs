@@ -49,6 +49,7 @@ namespace Cloo
         #region Fields
 
         private GCHandle gcHandle;
+        internal bool SingleReference;
         
         #endregion
 
@@ -89,10 +90,11 @@ namespace Cloo
         {
             lock (CommandQueue.events)
             {
-                if (CommandQueue.events.IndexOf(this) >= 0)
+                if (CommandQueue.events.Contains(this))
                     CommandQueue.events.Remove(this);
-                Dispose();
             }
+                if (SingleReference)
+                    Dispose();
         }
 
         internal void Track(GCHandle handle)
