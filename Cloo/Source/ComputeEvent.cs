@@ -88,10 +88,10 @@ namespace Cloo
 
         internal void ComputeEvent_Fired(object sender, EventArgs e)
         {
-            lock (CommandQueue.events)
+            lock (CommandQueue.Events)
             {
-                if (CommandQueue.events.Contains(this))
-                    CommandQueue.events.Remove(this);
+                if (CommandQueue.Events.Contains(this))
+                    CommandQueue.Events.Remove(this);
             }
                 if (SingleReference)
                     Dispose();

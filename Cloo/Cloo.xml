@@ -1539,6 +1539,256 @@
             </summary>
             <value> The value of the <see cref="T:Cloo.ComputeContextProperty"/>. </value>
         </member>
+        <member name="T:Cloo.ComputeKernel">
+            <summary>
+            Represents an OpenCL kernel.
+            </summary>
+            <remarks> A kernel object encapsulates a specific kernel function declared in a program and the argument values to be used when executing this kernel function. </remarks>
+            <seealso cref="T:Cloo.ComputeCommandQueue"/>
+            <seealso cref="T:Cloo.ComputeProgram"/>
+        </member>
+        <member name="M:Cloo.ComputeKernel.GetLocalMemorySize(Cloo.ComputeDevice)">
+            <summary>
+            Gets the amount of local memory in bytes used by the <see cref="T:Cloo.ComputeKernel"/>.
+            </summary>
+            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
+            <returns> The amount of local memory in bytes used by the <see cref="T:Cloo.ComputeKernel"/>. </returns>
+        </member>
+        <member name="M:Cloo.ComputeKernel.GetCompileWorkGroupSize(Cloo.ComputeDevice)">
+            <summary>
+            Gets the compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier.
+            </summary>
+            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
+            <returns> The compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier. If no such qualifier is specified, (0, 0, 0) is returned. </returns>
+        </member>
+        <member name="M:Cloo.ComputeKernel.GetPreferredWorkGroupSizeMultiple(Cloo.ComputeDevice)">
+            <summary>
+            Gets the preferred multiple of workgroup size for launch. 
+            </summary>
+            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
+            <returns> The preferred multiple of workgroup size for launch. </returns>
+            <remarks> The returned value is a performance hint. Specifying a workgroup size that is not a multiple of the value returned by this query as the value of the local work size argument to ComputeCommandQueue.Execute will not fail to enqueue the kernel for execution unless the work-group size specified is larger than the device maximum. </remarks>
+            <remarks> Requires OpenCL 1.1. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeKernel.GetPrivateMemorySize(Cloo.ComputeDevice)">
+            <summary>
+            Gets the minimum amount of memory, in bytes, used by each work-item in the kernel.
+            </summary>
+            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
+            <returns> The minimum amount of memory, in bytes, used by each work-item in the kernel. </returns>
+            <remarks> The returned value may include any private memory needed by an implementation to execute the kernel, including that used by the language built-ins and variable declared inside the kernel with the <c>__private</c> or <c>private</c> qualifier. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeKernel.GetWorkGroupSize(Cloo.ComputeDevice)">
+            <summary>
+            Gets the maximum work-group size that can be used to execute the <see cref="T:Cloo.ComputeKernel"/> on a <see cref="T:Cloo.ComputeDevice"/>.
+            </summary>
+            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
+            <returns> The maximum work-group size that can be used to execute the <see cref="T:Cloo.ComputeKernel"/> on <paramref name="device"/>. </returns>
+        </member>
+        <member name="M:Cloo.ComputeKernel.SetArgument(System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            Sets an argument of the <see cref="T:Cloo.ComputeKernel"/> (no argument tracking).
+            </summary>
+            <param name="index"> The argument index. </param>
+            <param name="dataSize"> The size of the argument data in bytes. </param>
+            <param name="dataAddr"> A pointer to the data that should be used as the argument value. </param>
+            <remarks> 
+            Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel.
+            <br/>
+            Note that this method does not provide argument tracking. It is up to the user to reference the kernel arguments (i.e. prevent them from being garbage collected) until the kernel has finished execution.
+            </remarks>
+        </member>
+        <member name="M:Cloo.ComputeKernel.SetLocalArgument(System.Int32,System.Int64)">
+            <summary>
+            Sets the size in bytes of an argument specfied with the <c>local</c> or <c>__local</c> address space qualifier.
+            </summary>
+            <param name="index"> The argument index. </param>
+            <param name="dataSize"> The size of the argument data in bytes. </param>
+            <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeKernel.SetMemoryArgument(System.Int32,Cloo.ComputeMemory)">
+            <summary>
+            Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <see cref="T:Cloo.ComputeKernel"/>.
+            </summary>
+            <param name="index"> The argument index. </param>
+            <param name="memObj"> The <see cref="T:Cloo.ComputeMemory"/> that is passed as the argument. </param>
+            <remarks> This method will automatically track <paramref name="memObj"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeKernel.SetMemoryArgument(System.Int32,Cloo.ComputeMemory,System.Boolean)">
+            <summary>
+            Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <see cref="T:Cloo.ComputeKernel"/>.
+            </summary>
+            <param name="index"> The argument index. </param>
+            <param name="memObj"> The <see cref="T:Cloo.ComputeMemory"/> that is passed as the argument. </param>
+            <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="memObj"/> until <see cref="T:Cloo.ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="memObj"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="T:Cloo.ComputeKernel"/> execution. </param>
+            <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeKernel.SetSamplerArgument(System.Int32,Cloo.ComputeSampler)">
+            <summary>
+            Sets a <c>sampler_t</c> argument of the <see cref="T:Cloo.ComputeKernel"/>.
+            </summary>
+            <param name="index"> The argument index. </param>
+            <param name="sampler"> The <see cref="T:Cloo.ComputeSampler"/> that is passed as the argument. </param>
+            <remarks> This method will automatically track <paramref name="sampler"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeKernel.SetSamplerArgument(System.Int32,Cloo.ComputeSampler,System.Boolean)">
+            <summary>
+            Sets a <c>sampler_t</c> argument of the <see cref="T:Cloo.ComputeKernel"/>.
+            </summary>
+            <param name="index"> The argument index. </param>
+            <param name="sampler"> The <see cref="T:Cloo.ComputeSampler"/> that is passed as the argument. </param>
+            <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="sampler"/> until <see cref="T:Cloo.ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="sampler"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="T:Cloo.ComputeKernel"/> execution. </param>
+            <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeKernel.SetValueArgument``1(System.Int32,``0)">
+            <summary>
+            Sets a value argument of the <see cref="T:Cloo.ComputeKernel"/>.
+            </summary>
+            <typeparam name="T"> The type of the argument. </typeparam>
+            <param name="index"> The argument index. </param>
+            <param name="data"> The data that is passed as the argument value. </param>
+            <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        </member>
+        <member name="M:Cloo.ComputeKernel.ToString">
+            <summary>
+            Gets the string representation of the <see cref="T:Cloo.ComputeKernel"/>.
+            </summary>
+            <returns> The string representation of the <see cref="T:Cloo.ComputeKernel"/>. </returns>
+        </member>
+        <member name="M:Cloo.ComputeKernel.Dispose(System.Boolean)">
+            <summary>
+            Releases the associated OpenCL object.
+            </summary>
+            <param name="manual"> Specifies the operation mode of this method. </param>
+            <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
+        </member>
+        <member name="P:Cloo.ComputeKernel.Context">
+            <summary>
+            Gets the <see cref="T:Cloo.ComputeContext"/> associated with the <see cref="T:Cloo.ComputeKernel"/>.
+            </summary>
+            <value> The <see cref="T:Cloo.ComputeContext"/> associated with the <see cref="T:Cloo.ComputeKernel"/>. </value>
+        </member>
+        <member name="P:Cloo.ComputeKernel.FunctionName">
+            <summary>
+            Gets the function name of the <see cref="T:Cloo.ComputeKernel"/>.
+            </summary>
+            <value> The function name of the <see cref="T:Cloo.ComputeKernel"/>. </value>
+        </member>
+        <member name="P:Cloo.ComputeKernel.Program">
+            <summary>
+            Gets the <see cref="T:Cloo.ComputeProgram"/> that the <see cref="T:Cloo.ComputeKernel"/> belongs to.
+            </summary>
+            <value> The <see cref="T:Cloo.ComputeProgram"/> that the <see cref="T:Cloo.ComputeKernel"/> belongs to. </value>
+        </member>
+        <member name="T:Cloo.ComputeEventList">
+            <summary>
+            Represents a list of OpenCL generated or user created events.
+            </summary>
+            <seealso cref="T:Cloo.ComputeCommandQueue"/>
+        </member>
+        <member name="M:Cloo.ComputeEventList.#ctor">
+            <summary>
+            Creates an empty <see cref="T:Cloo.ComputeEventList"/>.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeEventList.#ctor(System.Collections.Generic.IList{Cloo.ComputeEventBase})">
+            <summary>
+            Creates a new <see cref="T:Cloo.ComputeEventList"/> from an existing list of <see cref="T:Cloo.ComputeEventBase"/>s.
+            </summary>
+            <param name="events"> A list of <see cref="T:Cloo.ComputeEventBase"/>s. </param>
+        </member>
+        <member name="M:Cloo.ComputeEventList.Wait(System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+            <summary>
+            Waits on the host thread for the specified events to complete.
+            </summary>
+            <param name="events"> The events to be waited for completition. </param>
+        </member>
+        <member name="M:Cloo.ComputeEventList.Wait">
+            <summary>
+            Waits on the host thread for the <see cref="T:Cloo.ComputeEventBase"/>s in the <see cref="T:Cloo.ComputeEventList"/> to complete.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeEventList.IndexOf(Cloo.ComputeEventBase)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeEventList.Insert(System.Int32,Cloo.ComputeEventBase)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:Cloo.ComputeEventList.RemoveAt(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="M:Cloo.ComputeEventList.Add(Cloo.ComputeEventBase)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:Cloo.ComputeEventList.Clear">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeEventList.Contains(Cloo.ComputeEventBase)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeEventList.CopyTo(Cloo.ComputeEventBase[],System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="arrayIndex"></param>
+        </member>
+        <member name="M:Cloo.ComputeEventList.Remove(Cloo.ComputeEventBase)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeEventList.GetEnumerator">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Cloo.ComputeEventList.Last">
+            <summary>
+            Gets the last <see cref="T:Cloo.ComputeEventBase"/> on the list.
+            </summary>
+            <value> The last <see cref="T:Cloo.ComputeEventBase"/> on the list. </value>
+        </member>
+        <member name="P:Cloo.ComputeEventList.Item(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Cloo.ComputeEventList.Count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Cloo.ComputeEventList.IsReadOnly">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Cloo.ComputeErrorCode">
             <summary>
             The OpenCL error codes.
@@ -2690,256 +2940,6 @@
         </member>
         <member name="F:Cloo.cl_mem_migration_flags_ext.CL_MIGRATE_MEM_OBJECT_HOST_EXT">
             <summary> </summary>
-        </member>
-        <member name="T:Cloo.ComputeKernel">
-            <summary>
-            Represents an OpenCL kernel.
-            </summary>
-            <remarks> A kernel object encapsulates a specific kernel function declared in a program and the argument values to be used when executing this kernel function. </remarks>
-            <seealso cref="T:Cloo.ComputeCommandQueue"/>
-            <seealso cref="T:Cloo.ComputeProgram"/>
-        </member>
-        <member name="M:Cloo.ComputeKernel.GetLocalMemorySize(Cloo.ComputeDevice)">
-            <summary>
-            Gets the amount of local memory in bytes used by the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
-            <returns> The amount of local memory in bytes used by the <see cref="T:Cloo.ComputeKernel"/>. </returns>
-        </member>
-        <member name="M:Cloo.ComputeKernel.GetCompileWorkGroupSize(Cloo.ComputeDevice)">
-            <summary>
-            Gets the compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier.
-            </summary>
-            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
-            <returns> The compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier. If no such qualifier is specified, (0, 0, 0) is returned. </returns>
-        </member>
-        <member name="M:Cloo.ComputeKernel.GetPreferredWorkGroupSizeMultiple(Cloo.ComputeDevice)">
-            <summary>
-            Gets the preferred multiple of workgroup size for launch. 
-            </summary>
-            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
-            <returns> The preferred multiple of workgroup size for launch. </returns>
-            <remarks> The returned value is a performance hint. Specifying a workgroup size that is not a multiple of the value returned by this query as the value of the local work size argument to ComputeCommandQueue.Execute will not fail to enqueue the kernel for execution unless the work-group size specified is larger than the device maximum. </remarks>
-            <remarks> Requires OpenCL 1.1. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeKernel.GetPrivateMemorySize(Cloo.ComputeDevice)">
-            <summary>
-            Gets the minimum amount of memory, in bytes, used by each work-item in the kernel.
-            </summary>
-            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
-            <returns> The minimum amount of memory, in bytes, used by each work-item in the kernel. </returns>
-            <remarks> The returned value may include any private memory needed by an implementation to execute the kernel, including that used by the language built-ins and variable declared inside the kernel with the <c>__private</c> or <c>private</c> qualifier. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeKernel.GetWorkGroupSize(Cloo.ComputeDevice)">
-            <summary>
-            Gets the maximum work-group size that can be used to execute the <see cref="T:Cloo.ComputeKernel"/> on a <see cref="T:Cloo.ComputeDevice"/>.
-            </summary>
-            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
-            <returns> The maximum work-group size that can be used to execute the <see cref="T:Cloo.ComputeKernel"/> on <paramref name="device"/>. </returns>
-        </member>
-        <member name="M:Cloo.ComputeKernel.SetArgument(System.Int32,System.IntPtr,System.IntPtr)">
-            <summary>
-            Sets an argument of the <see cref="T:Cloo.ComputeKernel"/> (no argument tracking).
-            </summary>
-            <param name="index"> The argument index. </param>
-            <param name="dataSize"> The size of the argument data in bytes. </param>
-            <param name="dataAddr"> A pointer to the data that should be used as the argument value. </param>
-            <remarks> 
-            Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel.
-            <br/>
-            Note that this method does not provide argument tracking. It is up to the user to reference the kernel arguments (i.e. prevent them from being garbage collected) until the kernel has finished execution.
-            </remarks>
-        </member>
-        <member name="M:Cloo.ComputeKernel.SetLocalArgument(System.Int32,System.Int64)">
-            <summary>
-            Sets the size in bytes of an argument specfied with the <c>local</c> or <c>__local</c> address space qualifier.
-            </summary>
-            <param name="index"> The argument index. </param>
-            <param name="dataSize"> The size of the argument data in bytes. </param>
-            <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeKernel.SetMemoryArgument(System.Int32,Cloo.ComputeMemory)">
-            <summary>
-            Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <param name="index"> The argument index. </param>
-            <param name="memObj"> The <see cref="T:Cloo.ComputeMemory"/> that is passed as the argument. </param>
-            <remarks> This method will automatically track <paramref name="memObj"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeKernel.SetMemoryArgument(System.Int32,Cloo.ComputeMemory,System.Boolean)">
-            <summary>
-            Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <param name="index"> The argument index. </param>
-            <param name="memObj"> The <see cref="T:Cloo.ComputeMemory"/> that is passed as the argument. </param>
-            <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="memObj"/> until <see cref="T:Cloo.ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="memObj"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="T:Cloo.ComputeKernel"/> execution. </param>
-            <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeKernel.SetSamplerArgument(System.Int32,Cloo.ComputeSampler)">
-            <summary>
-            Sets a <c>sampler_t</c> argument of the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <param name="index"> The argument index. </param>
-            <param name="sampler"> The <see cref="T:Cloo.ComputeSampler"/> that is passed as the argument. </param>
-            <remarks> This method will automatically track <paramref name="sampler"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeKernel.SetSamplerArgument(System.Int32,Cloo.ComputeSampler,System.Boolean)">
-            <summary>
-            Sets a <c>sampler_t</c> argument of the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <param name="index"> The argument index. </param>
-            <param name="sampler"> The <see cref="T:Cloo.ComputeSampler"/> that is passed as the argument. </param>
-            <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="sampler"/> until <see cref="T:Cloo.ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="sampler"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="T:Cloo.ComputeKernel"/> execution. </param>
-            <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeKernel.SetValueArgument``1(System.Int32,``0)">
-            <summary>
-            Sets a value argument of the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <typeparam name="T"> The type of the argument. </typeparam>
-            <param name="index"> The argument index. </param>
-            <param name="data"> The data that is passed as the argument value. </param>
-            <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeKernel.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeKernel"/>. </returns>
-        </member>
-        <member name="M:Cloo.ComputeKernel.Dispose(System.Boolean)">
-            <summary>
-            Releases the associated OpenCL object.
-            </summary>
-            <param name="manual"> Specifies the operation mode of this method. </param>
-            <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
-        </member>
-        <member name="P:Cloo.ComputeKernel.Context">
-            <summary>
-            Gets the <see cref="T:Cloo.ComputeContext"/> associated with the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <value> The <see cref="T:Cloo.ComputeContext"/> associated with the <see cref="T:Cloo.ComputeKernel"/>. </value>
-        </member>
-        <member name="P:Cloo.ComputeKernel.FunctionName">
-            <summary>
-            Gets the function name of the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <value> The function name of the <see cref="T:Cloo.ComputeKernel"/>. </value>
-        </member>
-        <member name="P:Cloo.ComputeKernel.Program">
-            <summary>
-            Gets the <see cref="T:Cloo.ComputeProgram"/> that the <see cref="T:Cloo.ComputeKernel"/> belongs to.
-            </summary>
-            <value> The <see cref="T:Cloo.ComputeProgram"/> that the <see cref="T:Cloo.ComputeKernel"/> belongs to. </value>
-        </member>
-        <member name="T:Cloo.ComputeEventList">
-            <summary>
-            Represents a list of OpenCL generated or user created events.
-            </summary>
-            <seealso cref="T:Cloo.ComputeCommandQueue"/>
-        </member>
-        <member name="M:Cloo.ComputeEventList.#ctor">
-            <summary>
-            Creates an empty <see cref="T:Cloo.ComputeEventList"/>.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeEventList.#ctor(System.Collections.Generic.IList{Cloo.ComputeEventBase})">
-            <summary>
-            Creates a new <see cref="T:Cloo.ComputeEventList"/> from an existing list of <see cref="T:Cloo.ComputeEventBase"/>s.
-            </summary>
-            <param name="events"> A list of <see cref="T:Cloo.ComputeEventBase"/>s. </param>
-        </member>
-        <member name="M:Cloo.ComputeEventList.Wait(System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Waits on the host thread for the specified events to complete.
-            </summary>
-            <param name="events"> The events to be waited for completition. </param>
-        </member>
-        <member name="M:Cloo.ComputeEventList.Wait">
-            <summary>
-            Waits on the host thread for the <see cref="T:Cloo.ComputeEventBase"/>s in the <see cref="T:Cloo.ComputeEventList"/> to complete.
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeEventList.IndexOf(Cloo.ComputeEventBase)">
-            <summary>
-            
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cloo.ComputeEventList.Insert(System.Int32,Cloo.ComputeEventBase)">
-            <summary>
-            
-            </summary>
-            <param name="index"></param>
-            <param name="item"></param>
-        </member>
-        <member name="M:Cloo.ComputeEventList.RemoveAt(System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="index"></param>
-        </member>
-        <member name="M:Cloo.ComputeEventList.Add(Cloo.ComputeEventBase)">
-            <summary>
-            
-            </summary>
-            <param name="item"></param>
-        </member>
-        <member name="M:Cloo.ComputeEventList.Clear">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Cloo.ComputeEventList.Contains(Cloo.ComputeEventBase)">
-            <summary>
-            
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cloo.ComputeEventList.CopyTo(Cloo.ComputeEventBase[],System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="arrayIndex"></param>
-        </member>
-        <member name="M:Cloo.ComputeEventList.Remove(Cloo.ComputeEventBase)">
-            <summary>
-            
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cloo.ComputeEventList.GetEnumerator">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:Cloo.ComputeEventList.Last">
-            <summary>
-            Gets the last <see cref="T:Cloo.ComputeEventBase"/> on the list.
-            </summary>
-            <value> The last <see cref="T:Cloo.ComputeEventBase"/> on the list. </value>
-        </member>
-        <member name="P:Cloo.ComputeEventList.Item(System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="index"></param>
-            <returns></returns>
-        </member>
-        <member name="P:Cloo.ComputeEventList.Count">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Cloo.ComputeEventList.IsReadOnly">
-            <summary>
-            
-            </summary>
         </member>
         <member name="T:Cloo.Bindings.CL11">
             <summary>
