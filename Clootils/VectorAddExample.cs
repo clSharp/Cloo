@@ -81,6 +81,8 @@ kernel void VectorAdd(
                 }
 
                 // Create the input buffers and fill them with data from the arrays.
+                // Access modifiers should match those in a kernel.
+                // CopyHostPointer means the buffer should be filled with the data provided in the last argument.
                 ComputeBuffer<float> a = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrA);
                 ComputeBuffer<float> b = new ComputeBuffer<float>(context, ComputeMemoryFlags.ReadOnly | ComputeMemoryFlags.CopyHostPointer, arrB);
                 
@@ -97,16 +99,28 @@ kernel void VectorAdd(
                 kernel.SetMemoryArgument(1, b);
                 kernel.SetMemoryArgument(2, c);
 
+                // Create the event wait list. An event list is not needed for this example but it is important to see how it works.
+                // Note that events (like everything else) consume OpenCL resources and creating a lot of them may slow down execution.
+                // If you pass "null" instead of "eventList", no events will be created.
+                ComputeEventList eventList = new ComputeEventList();
+                
                 // Create the command queue. This is used to control kernel execution and manage read/write/copy operations.
                 ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
 
-                // Execute the kernel "count" times.
-                commands.Execute(kernel, null, new long[] { count }, null, null);
+                // Execute the kernel "count" times. After this call returns, "eventList" will contain an event associated with this command.
+                commands.Execute(kernel, null, new long[] { count }, null, eventList);
                 
-                // Read back the results.
-                commands.ReadFromBuffer(c, ref arrC, false, null);
-                
-                // Wait for all the opencl commands to finish execution.
+                // Read back the results. "eventList" will now contain two events.
+                commands.ReadFromBuffer(c, ref arrC, false, eventList);
+
+                // If ReadFromBuffer is blocking (3rd argument is true) the command will wait for itself and any previous commands
+                // in the command queue to finish execution. Otherwise we have to explicitly wait for all the opencl commands to finish 
+                // before we can use "arrC". This explicit synchronization can be achieved in two ways:
+
+                // 1) Wait for the events in the list to finish,
+                //eventList.Wait();
+
+                // 2) Or simply use Finish
                 commands.Finish();
 
                 // Print the results to a log/console.
