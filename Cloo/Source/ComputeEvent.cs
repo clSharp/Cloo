@@ -95,12 +95,6 @@ namespace Cloo
             }
         }
 
-        internal void FreeTrack()
-        {
-            if (gcHandle.IsAllocated && gcHandle.Target != null)
-                gcHandle.Free();
-        }
-
         internal void Track(GCHandle handle)
         {
             gcHandle = handle;
@@ -114,9 +108,12 @@ namespace Cloo
         /// Releases the associated OpenCL object.
         /// </summary>
         /// <param name="manual"> Specifies the operation mode of this method. </param>
+        /// <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         protected override void Dispose(bool manual)
         {
-            FreeTrack();
+            if (gcHandle.IsAllocated && gcHandle.Target != null)
+                gcHandle.Free();
+
             base.Dispose(manual);
         }
 
