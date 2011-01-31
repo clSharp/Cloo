@@ -66,16 +66,6 @@
   <ItemGroup>
     <Compile Include="Source\Bindings\CL10.cs" />
     <Compile Include="Source\Bindings\CL11.cs" />
-    <Compile Include="Source\Bindings\CLCommandQueueHandle.cs" />
-    <Compile Include="Source\Bindings\CLContextHandle.cs" />
-    <Compile Include="Source\Bindings\CLDeviceHandle.cs" />
-    <Compile Include="Source\Bindings\CLEventHandle.cs" />
-    <Compile Include="Source\Bindings\CLHandle.cs" />
-    <Compile Include="Source\Bindings\CLKernelHandle.cs" />
-    <Compile Include="Source\Bindings\CLMemoryHandle.cs" />
-    <Compile Include="Source\Bindings\CLPlatformHandle.cs" />
-    <Compile Include="Source\Bindings\CLProgramHandle.cs" />
-    <Compile Include="Source\Bindings\CLSamplerHandle.cs" />
     <Compile Include="Source\Bindings\CLx.cs" />
     <Compile Include="Source\ComputeBuffer.cs" />
     <Compile Include="Source\ComputeBufferBase.cs" />
