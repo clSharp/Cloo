@@ -34,6 +34,7 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Collections.ObjectModel;
 
     public partial class ComputeCommandQueue
     {
@@ -336,10 +337,13 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
+                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
                 Read(source, blocking, sourceOffset, region, destinationOffsetPtr, evlist);
-                ((ComputeEvent)evlist[evlist.Count - 1]).Track(destinationGCHandle);
-                this.events.Add((ComputeEvent)evlist[evlist.Count - 1]);
+                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
+                ev.Track(destinationGCHandle);
+                this.events.Add(ev);                
+                if (ev.Status == ComputeCommandExecutionStatus.Complete)
+                    ev.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -400,10 +404,13 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
+                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
                 Read(source, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, destinationGCHandle.AddrOfPinnedObject(), evlist);
-                ((ComputeEvent)evlist[evlist.Count - 1]).Track(destinationGCHandle);
-                this.events.Add((ComputeEvent)evlist[evlist.Count - 1]);
+                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
+                ev.Track(destinationGCHandle);
+                this.events.Add(ev);
+                if (ev.Status == ComputeCommandExecutionStatus.Complete)
+                    ev.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -434,10 +441,13 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
+                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
                 Read(source, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, destinationGCHandle.AddrOfPinnedObject(), evlist);
-                ((ComputeEvent)evlist[evlist.Count - 1]).Track(destinationGCHandle);
-                this.events.Add((ComputeEvent)evlist[evlist.Count - 1]);
+                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
+                ev.Track(destinationGCHandle);
+                this.events.Add(ev);
+                if (ev.Status == ComputeCommandExecutionStatus.Complete)
+                    ev.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -556,10 +566,13 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
+                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
                 Write(destination, blocking, destinationOffset, region, sourceOffsetPtr, evlist);
-                ((ComputeEvent)evlist[evlist.Count - 1]).Track(sourceGCHandle);
-                this.events.Add((ComputeEvent)evlist[evlist.Count - 1]);
+                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
+                ev.Track(sourceGCHandle);
+                this.events.Add(ev);
+                if (ev.Status == ComputeCommandExecutionStatus.Complete)
+                    ev.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -619,10 +632,13 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
+                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
                 Write(destination, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), evlist);
-                ((ComputeEvent)evlist[evlist.Count - 1]).Track(sourceGCHandle);
-                this.events.Add((ComputeEvent)evlist[evlist.Count - 1]);
+                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
+                ev.Track(sourceGCHandle);
+                this.events.Add(ev);
+                if (ev.Status == ComputeCommandExecutionStatus.Complete)
+                    ev.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -652,10 +668,13 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (List<ComputeEventBase>)events : new List<ComputeEventBase>();
+                Collection<ComputeEventBase> evlist = (events != null) ? (Collection<ComputeEventBase>)events : new Collection<ComputeEventBase>();
                 Write(destination, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), evlist);
-                ((ComputeEvent)evlist[evlist.Count - 1]).Track(sourceGCHandle);
-                this.events.Add((ComputeEvent)evlist[evlist.Count - 1]);
+                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
+                ev.Track(sourceGCHandle);
+                this.events.Add(ev);
+                if (ev.Status == ComputeCommandExecutionStatus.Complete)
+                    ev.ComputeEvent_Fired(this, null);
             }
         }
 
