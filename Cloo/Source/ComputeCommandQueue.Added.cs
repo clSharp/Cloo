@@ -305,7 +305,7 @@ namespace Cloo
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
-        /// <param name="destination"> The array to write to. If <c>null</c> a new array of appriopriate size is allocated. </param>
+        /// <param name="destination"> The array to write to. </param>
         /// <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[] destination, bool blocking, ICollection<ComputeEventBase> events) where T : struct
@@ -318,7 +318,7 @@ namespace Cloo
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
-        /// <param name="destination"> The array to write to. If <c>null</c> a new array of appriopriate size is allocated. </param>
+        /// <param name="destination"> The array to write to. </param>
         /// <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
         /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
         /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
@@ -326,7 +326,6 @@ namespace Cloo
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[] destination, bool blocking, long sourceOffset, long destinationOffset, long region, ICollection<ComputeEventBase> events) where T : struct
         {
-            if (destination == null) destination = new T[destinationOffset + region];
             GCHandle destinationGCHandle = GCHandle.Alloc(destination, GCHandleType.Pinned);
             IntPtr destinationOffsetPtr = Marshal.UnsafeAddrOfPinnedArrayElement(destination, (int)destinationOffset);
             
@@ -352,7 +351,7 @@ namespace Cloo
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
-        /// <param name="destination"> The array to write to. If <c>null</c> a new array of appriopriate size is allocated. </param>
+        /// <param name="destination"> The array to write to. </param>
         /// <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
         /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
         /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
@@ -368,7 +367,7 @@ namespace Cloo
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
-        /// <param name="destination"> The array to write to. If <c>null</c> a new array of appriopriate size is allocated. </param>
+        /// <param name="destination"> The array to write to. </param>
         /// <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
         /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
         /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
@@ -384,7 +383,7 @@ namespace Cloo
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
-        /// <param name="destination"> The array to write to. If <c>null</c> a new array of appriopriate size is allocated. </param>
+        /// <param name="destination"> The array to write to. </param>
         /// <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
         /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
         /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
@@ -394,7 +393,6 @@ namespace Cloo
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[,] destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, long sourceRowPitch, long destinationRowPitch, ICollection<ComputeEventBase> events) where T : struct
         {
-            if (destination == null) destination = new T[destinationOffset.Y.ToInt64() + region.Y.ToInt64(), destinationOffset.X.ToInt64() + region.X.ToInt64()];
             GCHandle destinationGCHandle = GCHandle.Alloc(destination, GCHandleType.Pinned);
 
             if (blocking)
@@ -419,7 +417,7 @@ namespace Cloo
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffer. </typeparam>
         /// <param name="source"> The buffer to read from. </param>
-        /// <param name="destination"> The array to write to. If <c>null</c> a new array of appriopriate size is allocated. </param>
+        /// <param name="destination"> The array to write to. </param>
         /// <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
         /// <param name="sourceOffset"> The <paramref name="source"/> position where reading starts. </param>
         /// <param name="destinationOffset"> The <paramref name="destination"/> position where writing starts. </param>
@@ -431,7 +429,6 @@ namespace Cloo
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[, ,] destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long sourceRowPitch, long destinationRowPitch, long sourceSlicePitch, long destinationSlicePitch, ICollection<ComputeEventBase> events) where T : struct
         {
-            if (destination == null) destination = new T[destinationOffset.Z.ToInt64() + region.Z.ToInt64(), destinationOffset.Y.ToInt64() + region.Y.ToInt64(), destinationOffset.X.ToInt64() + region.X.ToInt64()];
             GCHandle destinationGCHandle = GCHandle.Alloc(destination, GCHandleType.Pinned);
 
             if (blocking)
