@@ -61,11 +61,11 @@ namespace Clootils
                 SysIntX2 rectSize = new SysIntX2(4, 6);
                 SysIntX3 cubicSize = new SysIntX3(2, 3, 4);
                 float[] linearIn = new float[linearSize];
-                float[] linearOut = null; // new float[linearSize];
+                float[] linearOut = new float[linearSize];
                 float[,] rectIn = new float[(int)rectSize.Y, (int)rectSize.X];
-                float[,] rectOut = null; // new float[(int)rectSize.Y, (int)rectSize.X];
+                float[,] rectOut = new float[(int)rectSize.Y, (int)rectSize.X];
                 float[, ,] cubicIn = new float[(int)cubicSize.Z, (int)cubicSize.Y, (int)cubicSize.X];
-                float[, ,] cubicOut = null; // new float[(int)cubicSize.Z, (int)cubicSize.Y, (int)cubicSize.X];
+                float[, ,] cubicOut = new float[(int)cubicSize.Z, (int)cubicSize.Y, (int)cubicSize.X];
 
                 for (int i = 0; i < linearSize; i++)
                     linearIn[i] = i;
