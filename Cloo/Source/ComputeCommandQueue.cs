@@ -124,6 +124,7 @@ namespace Cloo
         {
             int memObjCount;
             IntPtr[] memObjHandles = Tools.ExtractHandles(memObjs, out memObjCount);
+
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
@@ -170,6 +171,7 @@ namespace Cloo
         public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, long sourceOffset, long destinationOffset, long region, ICollection<ComputeEventBase> events) where T : struct
         {
             int sizeofT = Marshal.SizeOf(typeof(T));
+
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
@@ -199,9 +201,11 @@ namespace Cloo
         public void Copy<T>(ComputeBufferBase<T> source, ComputeBufferBase<T> destination, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long sourceRowPitch, long sourceSlicePitch, long destinationRowPitch, long destinationSlicePitch, ICollection<ComputeEventBase> events) where T : struct
         {
             int sizeofT = Marshal.SizeOf(typeof(T));
-            sourceOffset.X = new IntPtr(sourceOffset.X.ToInt64() * sizeofT);
-            destinationOffset.X = new IntPtr(destinationOffset.X.ToInt64() * sizeofT);
-            region.X = new IntPtr(region.X.ToInt64() * sizeofT);
+
+            sourceOffset.X = new IntPtr(sizeofT * sourceOffset.X.ToInt64());
+            destinationOffset.X = new IntPtr(sizeofT * destinationOffset.X.ToInt64());
+            region.X = new IntPtr(sizeofT * region.X.ToInt64());
+            
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
@@ -226,6 +230,7 @@ namespace Cloo
         public void Copy<T>(ComputeBufferBase<T> source, ComputeImage destination, long sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
         {
             int sizeofT = Marshal.SizeOf(typeof(T));
+
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
@@ -249,6 +254,7 @@ namespace Cloo
         public void Copy<T>(ComputeImage source, ComputeBufferBase<T> destination, SysIntX3 sourceOffset, long destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
         {
             int sizeofT = Marshal.SizeOf(typeof(T));
+
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
@@ -316,16 +322,7 @@ namespace Cloo
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
 
-            ComputeErrorCode error = CL10.EnqueueNDRangeKernel(
-                Handle,
-                kernel.Handle,
-                globalWorkSize.Length,
-                Tools.ConvertArray(globalWorkOffset),
-                Tools.ConvertArray(globalWorkSize),
-                Tools.ConvertArray(localWorkSize),
-                eventWaitListSize,
-                eventHandles,
-                newEventHandle);
+            ComputeErrorCode error = CL10.EnqueueNDRangeKernel(Handle, kernel.Handle, globalWorkSize.Length, Tools.ConvertArray(globalWorkOffset), Tools.ConvertArray(globalWorkSize), Tools.ConvertArray(localWorkSize), eventWaitListSize, eventHandles, newEventHandle);
             ComputeException.ThrowOnError(error);
 
             kernel.ReferenceArguments();
@@ -365,11 +362,13 @@ namespace Cloo
         /// <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         public IntPtr Map<T>(ComputeBufferBase<T> buffer, bool blocking, ComputeMemoryMappingFlags flags, long offset, long region, ICollection<ComputeEventBase> events) where T : struct
         {
+            int sizeofT = Marshal.SizeOf(typeof(T));
+
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
+
             IntPtr mappedPtr = IntPtr.Zero;
-            int sizeofT = Marshal.SizeOf(typeof(T));
 
             ComputeErrorCode error = ComputeErrorCode.Success;
             mappedPtr = CL10.EnqueueMapBuffer(Handle, buffer.Handle, blocking, flags, new IntPtr(offset * sizeofT), new IntPtr(region * sizeofT), eventWaitListSize, eventHandles, newEventHandle, out error);
@@ -396,6 +395,7 @@ namespace Cloo
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
+
             IntPtr mappedPtr, rowPitch, slicePitch;
 
             ComputeErrorCode error = ComputeErrorCode.Success;
@@ -421,6 +421,7 @@ namespace Cloo
         public void Read<T>(ComputeBufferBase<T> source, bool blocking, long offset, long region, IntPtr destination, ICollection<ComputeEventBase> events) where T : struct
         {
             int sizeofT = Marshal.SizeOf(typeof(T));
+
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
@@ -451,9 +452,11 @@ namespace Cloo
         private void Read<T>(ComputeBufferBase<T> source, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long sourceRowPitch, long sourceSlicePitch, long destinationRowPitch, long destinationSlicePitch, IntPtr destination, ICollection<ComputeEventBase> events) where T : struct
         {
             int sizeofT = Marshal.SizeOf(typeof(T));
-            sourceOffset.X = new IntPtr(sourceOffset.X.ToInt64() * sizeofT);
-            destinationOffset.X = new IntPtr(destinationOffset.X.ToInt64() * sizeofT);
-            region.X = new IntPtr(region.X.ToInt64() * sizeofT);
+
+            sourceOffset.X = new IntPtr(sizeofT * sourceOffset.X.ToInt64());
+            destinationOffset.X = new IntPtr(sizeofT * destinationOffset.X.ToInt64());
+            region.X = new IntPtr(sizeofT * region.X.ToInt64());
+
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
@@ -500,6 +503,7 @@ namespace Cloo
         {
             int memObjCount;
             IntPtr[] memObjHandles = Tools.ExtractHandles(memObjs, out memObjCount);
+
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
@@ -567,6 +571,7 @@ namespace Cloo
         public void Write<T>(ComputeBufferBase<T> destination, bool blocking, long destinationOffset, long region, IntPtr source, ICollection<ComputeEventBase> events) where T : struct
         {
             int sizeofT = Marshal.SizeOf(typeof(T));
+
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
@@ -597,9 +602,11 @@ namespace Cloo
         private void Write<T>(ComputeBufferBase<T> destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long destinationRowPitch, long destinationSlicePitch, long sourceRowPitch, long sourceSlicePitch, IntPtr source, ICollection<ComputeEventBase> events) where T : struct
         {
             int sizeofT = Marshal.SizeOf(typeof(T));
-            sourceOffset.X = new IntPtr(sourceOffset.X.ToInt64() * sizeofT);
-            destinationOffset.X = new IntPtr(destinationOffset.X.ToInt64() * sizeofT);
-            region.X = new IntPtr(region.X.ToInt64() * sizeofT);
+
+            sourceOffset.X = new IntPtr(sizeofT * sourceOffset.X.ToInt64());
+            destinationOffset.X = new IntPtr(sizeofT * destinationOffset.X.ToInt64());
+            region.X = new IntPtr(sizeofT * region.X.ToInt64());
+
             int eventWaitListSize;
             IntPtr[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             IntPtr[] newEventHandle = (events != null) ? new IntPtr[1] : null;
