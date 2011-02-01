@@ -33,7 +33,6 @@ namespace Cloo
 {
     using System;
     using System.Collections.Generic;
-    using System.Drawing.Imaging;
     using System.Globalization;
 
     /// <summary>
