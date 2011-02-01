@@ -996,11 +996,10 @@
             <param name="device"> A <see cref="T:Cloo.ComputeDevice"/> associated with the <paramref name="context"/>. It can either be one of <see cref="P:Cloo.ComputeContext.Devices"/> or have the same <see cref="T:Cloo.ComputeDeviceTypes"/> as the <paramref name="device"/> specified when the <paramref name="context"/> is created. </param>
             <param name="properties"> The properties for the <see cref="T:Cloo.ComputeCommandQueue"/>. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.AcquireGLObjects``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.AcquireGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to acquire a collection of <see cref="T:Cloo.ComputeMemory"/>s that have been previously created from OpenGL objects.
             </summary>
-            <typeparam name="CLMemType"> The type of <paramref name="memObjs"/>. </typeparam>
             <param name="memObjs"> A collection of OpenCL memory objects that correspond to OpenGL objects. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
         </member>
@@ -1174,11 +1173,10 @@
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.ReleaseGLObjects``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.ReleaseGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to release <see cref="T:Cloo.ComputeMemory"/>s that have been created from OpenGL objects.
             </summary>
-            <typeparam name="CLMemType"> The type of <paramref name="memObjs"/>. </typeparam>
             <param name="memObjs"> A collection of <see cref="T:Cloo.ComputeMemory"/>s that correspond to OpenGL memory objects. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
         </member>

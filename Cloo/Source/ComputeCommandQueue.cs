@@ -116,11 +116,9 @@ namespace Cloo
         /// <summary>
         /// Enqueues a command to acquire a collection of <see cref="ComputeMemory"/>s that have been previously created from OpenGL objects.
         /// </summary>
-        /// <typeparam name="CLMemType"> The type of <paramref name="memObjs"/>. </typeparam>
         /// <param name="memObjs"> A collection of OpenCL memory objects that correspond to OpenGL objects. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
-        public void AcquireGLObjects<CLMemType>(ICollection<CLMemType> memObjs, ICollection<ComputeEventBase> events)
-            where CLMemType : ComputeMemory
+        public void AcquireGLObjects(ICollection<ComputeMemory> memObjs, ICollection<ComputeEventBase> events)
         {
             int memObjCount;
             IntPtr[] memObjHandles = Tools.ExtractHandles(memObjs, out memObjCount);
@@ -496,10 +494,9 @@ namespace Cloo
         /// <summary>
         /// Enqueues a command to release <see cref="ComputeMemory"/>s that have been created from OpenGL objects.
         /// </summary>
-        /// <typeparam name="CLMemType"> The type of <paramref name="memObjs"/>. </typeparam>
         /// <param name="memObjs"> A collection of <see cref="ComputeMemory"/>s that correspond to OpenGL memory objects. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
-        public void ReleaseGLObjects<CLMemType>(ICollection<CLMemType> memObjs, ICollection<ComputeEventBase> events) where CLMemType : ComputeMemory
+        public void ReleaseGLObjects(ICollection<ComputeMemory> memObjs, ICollection<ComputeEventBase> events)
         {
             int memObjCount;
             IntPtr[] memObjHandles = Tools.ExtractHandles(memObjs, out memObjCount);
