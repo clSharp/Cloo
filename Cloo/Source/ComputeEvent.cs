@@ -113,10 +113,19 @@ namespace Cloo
         /// <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         protected override void Dispose(bool manual)
         {
-            if (gcHandle.IsAllocated && gcHandle.Target != null)
-                gcHandle.Free();
+            Untrack();
 
             base.Dispose(manual);
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void Untrack()
+        {
+            if (gcHandle.IsAllocated && gcHandle.Target != null)
+                gcHandle.Free();
         }
 
         #endregion
