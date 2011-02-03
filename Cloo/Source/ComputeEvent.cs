@@ -65,12 +65,13 @@ namespace Cloo
 
         #region Constructors
 
-        internal ComputeEvent(IntPtr handle, ComputeCommandQueue queue)
+        internal ComputeEvent(CLEventHandle handle, ComputeCommandQueue queue)
         {
             Handle = handle;
+            SetID(Handle.Value);
+
             CommandQueue = queue;
-            Type = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(
-                ComputeEventInfo.CommandType, CL10.GetEventInfo);
+            Type = (ComputeCommandType)GetInfo<CLEventHandle, ComputeEventInfo, int>(Handle, ComputeEventInfo.CommandType, CL10.GetEventInfo);
             Context = queue.Context;
 
             if (CommandQueue.Device.Version == new Version(1, 1))

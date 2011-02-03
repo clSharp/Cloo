@@ -47,8 +47,8 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clCreateSubBuffer")]
-        public extern static IntPtr CreateSubBuffer(
-            IntPtr buffer,
+        public extern static CLMemoryHandle CreateSubBuffer(
+            CLMemoryHandle buffer,
             ComputeMemoryFlags flags,
             ComputeBufferCreateType buffer_create_type,
             ref SysIntX2 buffer_create_info,
@@ -59,7 +59,7 @@ namespace Cloo.Bindings
         /// </summary>
         [DllImport(libName, EntryPoint = "clSetMemObjectDestructorCallback")]
         public extern static ComputeErrorCode SetMemObjectDestructorCallback( 
-            IntPtr memobj, 
+            CLMemoryHandle memobj, 
             IntPtr pfn_notify, 
             IntPtr user_data);
 
@@ -67,8 +67,8 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clCreateUserEvent")]
-        public extern static IntPtr CreateUserEvent(
-            IntPtr context,
+        public extern static CLEventHandle CreateUserEvent(
+            CLContextHandle context,
             out ComputeErrorCode errcode_ret);
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Cloo.Bindings
         /// </summary>
         [DllImport(libName, EntryPoint = "clSetUserEventStatus")]
         public extern static ComputeErrorCode SetUserEventStatus(
-            IntPtr @event,
+            CLEventHandle @event,
             Int32 execution_status);
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Cloo.Bindings
         /// </summary>
         [DllImport(libName, EntryPoint = "clSetEventCallback")]
         public extern static ComputeErrorCode SetEventCallback(
-            IntPtr @event,
+            CLEventHandle @event,
             Int32 command_exec_callback_type,
             ComputeEventCallback pfn_notify,
             IntPtr user_data);
@@ -94,8 +94,8 @@ namespace Cloo.Bindings
         /// </summary>
         [DllImport(libName, EntryPoint = "clEnqueueReadBufferRect")]
         public extern static ComputeErrorCode EnqueueReadBufferRect(
-            IntPtr command_queue,
-            IntPtr buffer,
+            CLCommandQueueHandle command_queue,
+            CLMemoryHandle buffer,
             [MarshalAs(UnmanagedType.Bool)] bool blocking_read,
             ref SysIntX3 buffer_offset,
             ref SysIntX3 host_offset,
@@ -106,16 +106,16 @@ namespace Cloo.Bindings
             IntPtr host_slice_pitch,
             IntPtr ptr,
             Int32 num_events_in_wait_list,
-            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
-            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
+            [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_wait_list,
+            [Out, MarshalAs(UnmanagedType.LPArray, SizeConst=1)] CLEventHandle[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clEnqueueWriteBufferRect")]
         public extern static ComputeErrorCode EnqueueWriteBufferRect(
-            IntPtr command_queue,
-            IntPtr buffer,
+            CLCommandQueueHandle command_queue,
+            CLMemoryHandle buffer,
             [MarshalAs(UnmanagedType.Bool)] bool blocking_write,
             ref SysIntX3 buffer_offset,
             ref SysIntX3 host_offset,
@@ -126,17 +126,17 @@ namespace Cloo.Bindings
             IntPtr host_slice_pitch,
             IntPtr ptr,
             Int32 num_events_in_wait_list,
-            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
-            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
+            [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_wait_list,
+            [Out, MarshalAs(UnmanagedType.LPArray, SizeConst=1)] CLEventHandle[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clEnqueueCopyBufferRect")]
         public extern static ComputeErrorCode EnqueueCopyBufferRect(
-            IntPtr command_queue,
-            IntPtr src_buffer,
-            IntPtr dst_buffer,
+            CLCommandQueueHandle command_queue,
+            CLMemoryHandle src_buffer,
+            CLMemoryHandle dst_buffer,
             ref SysIntX3 src_origin,
             ref SysIntX3 dst_origin,
             ref SysIntX3 region,
@@ -145,15 +145,15 @@ namespace Cloo.Bindings
             IntPtr dst_row_pitch,
             IntPtr dst_slice_pitch,
             Int32 num_events_in_wait_list,
-            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] event_wait_list,
-            [MarshalAs(UnmanagedType.LPArray, SizeConst=1)] IntPtr[] new_event);
+            [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_wait_list,
+            [Out, MarshalAs(UnmanagedType.LPArray, SizeConst=1)] CLEventHandle[] new_event);
 
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
         [Obsolete("This function has been deprecated in OpenCL 1.1.")]
         new public static ComputeErrorCode SetCommandQueueProperty(
-            IntPtr command_queue,
+            CLCommandQueueHandle command_queue,
             ComputeCommandQueueFlags properties,
             [MarshalAs(UnmanagedType.Bool)] bool enable,
             out ComputeCommandQueueFlags old_properties)

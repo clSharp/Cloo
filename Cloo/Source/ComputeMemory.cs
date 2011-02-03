@@ -53,6 +53,12 @@ namespace Cloo
 
         #region Properties
 
+        public CLMemoryHandle Handle
+        {
+            get;
+            protected set;
+        }
+
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeMemory"/>.
         /// </summary>
@@ -97,11 +103,11 @@ namespace Cloo
         /// <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         protected override void Dispose(bool manual)
         {
-            if (Handle != IntPtr.Zero)
+            if (Handle.IsValid)
             {
                 Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseMemObject(Handle);
-                Handle = IntPtr.Zero;
+                Handle.Invalidate();
             }
         }
 

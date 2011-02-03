@@ -59,6 +59,12 @@ namespace Cloo
 
         #region Properties
 
+        public CLPlatformHandle Handle
+        {
+            get;
+            protected set;
+        }
+
         /// <summary>
         /// Gets a read-only collection of <see cref="ComputeDevice"/>s available on the <see cref="ComputePlatform"/>.
         /// </summary>
@@ -112,34 +118,35 @@ namespace Cloo
                 if (platforms != null)
                     return;
 
-                IntPtr[] handles;
+                CLPlatformHandle[] handles;
                 int handlesLength;
                 ComputeErrorCode error = CL10.GetPlatformIDs(0, null, out handlesLength);
                 ComputeException.ThrowOnError(error);
-                handles = new IntPtr[handlesLength];
+                handles = new CLPlatformHandle[handlesLength];
 
                 error = CL10.GetPlatformIDs(handlesLength, handles, out handlesLength);
                 ComputeException.ThrowOnError(error);
 
                 List<ComputePlatform> platformList = new List<ComputePlatform>(handlesLength);
-                foreach (IntPtr handle in handles)
+                foreach (CLPlatformHandle handle in handles)
                     platformList.Add(new ComputePlatform(handle));
 
                 platforms = platformList.AsReadOnly();
             }
         }
 
-        private ComputePlatform(IntPtr handle)
+        private ComputePlatform(CLPlatformHandle handle)
         {
             Handle = handle;
+            SetID(Handle.Value);
 
-            string extensionString = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Extensions, CL10.GetPlatformInfo);
+            string extensionString = GetStringInfo<CLPlatformHandle, ComputePlatformInfo>(Handle, ComputePlatformInfo.Extensions, CL10.GetPlatformInfo);
             extensions = new ReadOnlyCollection<string>(extensionString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
 
-            name = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Name, CL10.GetPlatformInfo);
-            profile = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Profile, CL10.GetPlatformInfo);
-            vendor = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Vendor, CL10.GetPlatformInfo);
-            version = GetStringInfo<ComputePlatformInfo>(ComputePlatformInfo.Version, CL10.GetPlatformInfo);
+            name = GetStringInfo<CLPlatformHandle, ComputePlatformInfo>(Handle, ComputePlatformInfo.Name, CL10.GetPlatformInfo);
+            profile = GetStringInfo<CLPlatformHandle, ComputePlatformInfo>(Handle, ComputePlatformInfo.Profile, CL10.GetPlatformInfo);
+            vendor = GetStringInfo<CLPlatformHandle, ComputePlatformInfo>(Handle, ComputePlatformInfo.Vendor, CL10.GetPlatformInfo);
+            version = GetStringInfo<CLPlatformHandle, ComputePlatformInfo>(Handle, ComputePlatformInfo.Version, CL10.GetPlatformInfo);
             QueryDevices();
         }
 
@@ -155,7 +162,7 @@ namespace Cloo
         public static ComputePlatform GetByHandle(IntPtr handle)
         {
             foreach (ComputePlatform platform in Platforms)
-                if (platform.Handle == handle)
+                if (platform.Handle.Value == handle)
                     return platform;
 
             return null;
@@ -200,7 +207,7 @@ namespace Cloo
             ComputeErrorCode error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, 0, null, out handlesLength);
             ComputeException.ThrowOnError(error);
 
-            IntPtr[] handles = new IntPtr[handlesLength];
+            CLDeviceHandle[] handles = new CLDeviceHandle[handlesLength];
             error = CL10.GetDeviceIDs(Handle, ComputeDeviceTypes.All, handlesLength, handles, out handlesLength);
             ComputeException.ThrowOnError(error);
 

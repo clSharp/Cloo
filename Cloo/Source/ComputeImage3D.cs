@@ -59,26 +59,17 @@ namespace Cloo
             : base(context, flags)
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL10.CreateImage3D(
-                context.Handle,
-                flags,
-                ref format,
-                new IntPtr(width),
-                new IntPtr(height),
-                new IntPtr(depth),
-                new IntPtr(rowPitch),
-                new IntPtr(slicePitch),
-                data,
-                out error);
+            Handle = CL10.CreateImage3D(context.Handle, flags, ref format, new IntPtr(width), new IntPtr(height), new IntPtr(depth), new IntPtr(rowPitch), new IntPtr(slicePitch), data, out error);
             ComputeException.ThrowOnError(error);
 
             Init();
         }
 
-        private ComputeImage3D(IntPtr handle, ComputeContext context, ComputeMemoryFlags flags)
+        private ComputeImage3D(CLMemoryHandle handle, ComputeContext context, ComputeMemoryFlags flags)
             : base(context, flags)
         {
             Handle = handle;
+
             Init();
         }
 
@@ -97,15 +88,9 @@ namespace Cloo
         /// <returns> The created <see cref="ComputeImage2D"/>. </returns>
         public static ComputeImage3D CreateFromGLTexture3D(ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId)
         {
-            IntPtr image = IntPtr.Zero;
+            CLMemoryHandle image;
             ComputeErrorCode error = ComputeErrorCode.Success;
-            image = CL10.CreateFromGLTexture3D(
-                context.Handle,
-                flags,
-                textureTarget,
-                mipLevel,
-                textureId,
-                out error);
+            image = CL10.CreateFromGLTexture3D(context.Handle, flags, textureTarget, mipLevel, textureId, out error);
             ComputeException.ThrowOnError(error);
 
             return new ComputeImage3D(image, context, flags);

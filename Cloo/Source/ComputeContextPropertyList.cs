@@ -58,7 +58,7 @@ namespace Cloo
         public ComputeContextPropertyList(ComputePlatform platform)
         {
             properties = new List<ComputeContextProperty>();
-            properties.Add(new ComputeContextProperty(ComputeContextPropertyName.Platform, platform.Handle));
+            properties.Add(new ComputeContextProperty(ComputeContextPropertyName.Platform, platform.Handle.Value));
         }
 
         /// <summary>

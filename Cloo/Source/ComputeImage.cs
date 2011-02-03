@@ -34,6 +34,8 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Threading;
     using Cloo.Bindings;
 
     /// <summary>
@@ -137,13 +139,17 @@ namespace Cloo
         /// </summary>
         protected void Init()
         {
-            Depth = (int)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.Depth, CL10.GetImageInfo);
-            ElementSize = (int)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.ElementSize, CL10.GetImageInfo);
-            Height = (int)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.Height, CL10.GetImageInfo);
-            RowPitch = (long)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.RowPitch, CL10.GetImageInfo);
-            Size = (long)GetInfo<ComputeMemoryInfo, IntPtr>(ComputeMemoryInfo.Size, CL10.GetMemObjectInfo);
-            SlicePitch = (long)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.SlicePitch, CL10.GetImageInfo);
-            Width = (int)GetInfo<ComputeImageInfo, IntPtr>(ComputeImageInfo.Width, CL10.GetImageInfo);
+            SetID(Handle.Value);
+
+            Depth = (int)GetInfo<CLMemoryHandle, ComputeImageInfo, IntPtr>(Handle, ComputeImageInfo.Depth, CL10.GetImageInfo);
+            ElementSize = (int)GetInfo<CLMemoryHandle, ComputeImageInfo, IntPtr>(Handle, ComputeImageInfo.ElementSize, CL10.GetImageInfo);
+            Height = (int)GetInfo<CLMemoryHandle, ComputeImageInfo, IntPtr>(Handle, ComputeImageInfo.Height, CL10.GetImageInfo);
+            RowPitch = (long)GetInfo<CLMemoryHandle, ComputeImageInfo, IntPtr>(Handle, ComputeImageInfo.RowPitch, CL10.GetImageInfo);
+            Size = (long)GetInfo<CLMemoryHandle, ComputeMemoryInfo, IntPtr>(Handle, ComputeMemoryInfo.Size, CL10.GetMemObjectInfo);
+            SlicePitch = (long)GetInfo<CLMemoryHandle, ComputeImageInfo, IntPtr>(Handle, ComputeImageInfo.SlicePitch, CL10.GetImageInfo);
+            Width = (int)GetInfo<CLMemoryHandle, ComputeImageInfo, IntPtr>(Handle, ComputeImageInfo.Width, CL10.GetImageInfo);
+
+            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
         #endregion

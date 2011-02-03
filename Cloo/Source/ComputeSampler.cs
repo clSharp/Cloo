@@ -54,6 +54,12 @@ namespace Cloo
 
         #region Properties
 
+        public CLSamplerHandle Handle
+        {
+            get;
+            protected set;
+        }
+
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeSampler"/>.
         /// </summary>
@@ -92,13 +98,11 @@ namespace Cloo
         public ComputeSampler(ComputeContext context, bool normalizedCoords, ComputeImageAddressing addressing, ComputeImageFiltering filtering)
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL10.CreateSampler(
-                context.Handle,
-                normalizedCoords,
-                addressing,
-                filtering,
-                out error);
+            Handle = CL10.CreateSampler(context.Handle, normalizedCoords, addressing, filtering, out error);
             ComputeException.ThrowOnError(error);
+
+            SetID(Handle.Value);
+            
             this.addressing = addressing;
             this.context = context;
             this.filtering = filtering;
@@ -131,11 +135,11 @@ namespace Cloo
         /// <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         protected override void Dispose(bool manual)
         {
-            if (Handle != IntPtr.Zero)
+            if (Handle.IsValid)
             {
                 Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseSampler(Handle);
-                Handle = IntPtr.Zero;
+                Handle.Invalidate();
             }
         }
 

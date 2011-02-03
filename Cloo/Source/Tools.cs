@@ -34,6 +34,7 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using Cloo.Bindings;
 
     /// <summary>
     /// Contains various helper methods.
@@ -106,7 +107,7 @@ namespace Cloo
             return result;
         }
 
-        internal static IntPtr[] ExtractHandles<T>(ICollection<T> computeObjects, out int handleCount) where T : ComputeObject
+        internal static CLDeviceHandle[] ExtractDeviceHandles(ICollection<ComputeDevice> computeObjects, out int handleCount)
         {
             if (computeObjects == null || computeObjects.Count == 0)
             {
@@ -114,9 +115,47 @@ namespace Cloo
                 return null;
             }
 
-            IntPtr[] result = new IntPtr[computeObjects.Count];
+            CLDeviceHandle[] result = new CLDeviceHandle[computeObjects.Count];
             int i = 0;
-            foreach (T computeObj in computeObjects)
+            foreach (ComputeDevice computeObj in computeObjects)
+            {
+                result[i] = computeObj.Handle;
+                i++;
+            }
+            handleCount = computeObjects.Count;
+            return result;
+        }
+
+        internal static CLEventHandle[] ExtractEventHandles(ICollection<ComputeEventBase> computeObjects, out int handleCount)
+        {
+            if (computeObjects == null || computeObjects.Count == 0)
+            {
+                handleCount = 0;
+                return null;
+            }
+
+            CLEventHandle[] result = new CLEventHandle[computeObjects.Count];
+            int i = 0;
+            foreach (ComputeEventBase computeObj in computeObjects)
+            {
+                result[i] = computeObj.Handle;
+                i++;
+            }
+            handleCount = computeObjects.Count;
+            return result;
+        }
+
+        internal static CLMemoryHandle[] ExtractMemoryHandles(ICollection<ComputeMemory> computeObjects, out int handleCount)
+        {
+            if (computeObjects == null || computeObjects.Count == 0)
+            {
+                handleCount = 0;
+                return null;
+            }
+
+            CLMemoryHandle[] result = new CLMemoryHandle[computeObjects.Count];
+            int i = 0;
+            foreach (ComputeMemory computeObj in computeObjects)
             {
                 result[i] = computeObj.Handle;
                 i++;

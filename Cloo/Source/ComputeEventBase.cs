@@ -65,6 +65,12 @@ namespace Cloo
 
         #region Properties
 
+        public CLEventHandle Handle
+        {
+            get;
+            protected set;
+        }
+
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> associated with the <see cref="ComputeEventBase"/>.
         /// </summary>
@@ -77,11 +83,7 @@ namespace Cloo
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command has finished execution. </value>
         public long FinishTime
         {
-            get
-            {
-                return GetInfo<ComputeCommandProfilingInfo, long>(
-                    ComputeCommandProfilingInfo.Ended, CL10.GetEventProfilingInfo);
-            }
+            get { return GetInfo<CLEventHandle, ComputeCommandProfilingInfo, long>(Handle, ComputeCommandProfilingInfo.Ended, CL10.GetEventProfilingInfo); }
         }
 
         /// <summary>
@@ -90,11 +92,7 @@ namespace Cloo
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command is enqueued in the <see cref="ComputeCommandQueue"/> by the host. </value>
         public long EnqueueTime
         {
-            get
-            {
-                return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
-                    ComputeCommandProfilingInfo.Queued, CL10.GetEventProfilingInfo);
-            }
+            get { return (long)GetInfo<CLEventHandle, ComputeCommandProfilingInfo, long>(Handle, ComputeCommandProfilingInfo.Queued, CL10.GetEventProfilingInfo); }
         }
 
         /// <summary>
@@ -103,11 +101,7 @@ namespace Cloo
         /// <value> The execution status of the associated command or a negative value if the execution was abnormally terminated. </value>
         public ComputeCommandExecutionStatus Status
         {
-            get
-            {
-                return (ComputeCommandExecutionStatus)GetInfo<ComputeEventInfo, int>(
-                    ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo);
-            }
+            get { return (ComputeCommandExecutionStatus)GetInfo<CLEventHandle, ComputeEventInfo, int>(Handle, ComputeEventInfo.ExecutionStatus, CL10.GetEventInfo); }
         }
 
         /// <summary>
@@ -116,11 +110,7 @@ namespace Cloo
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command starts execution. </value>
         public long StartTime
         {
-            get
-            {
-                return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
-                    ComputeCommandProfilingInfo.Started, CL10.GetEventProfilingInfo);
-            }
+            get { return (long)GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Started, CL10.GetEventProfilingInfo); }
         }
 
         /// <summary>
@@ -129,11 +119,7 @@ namespace Cloo
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device. </value>
         public long SubmitTime
         {
-            get
-            {
-                return (long)GetInfo<ComputeCommandProfilingInfo, ulong>(
-                    ComputeCommandProfilingInfo.Submitted, CL10.GetEventProfilingInfo);
-            }
+            get { return (long)GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Submitted, CL10.GetEventProfilingInfo); }
         }
 
         /// <summary>
@@ -166,11 +152,11 @@ namespace Cloo
         /// <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         protected override void Dispose(bool manual)
         {
-            if (Handle != IntPtr.Zero)
+            if (Handle.IsValid)
             {
                 Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseEvent(Handle);
-                Handle = IntPtr.Zero;
+                Handle.Invalidate();
             }
         }
 

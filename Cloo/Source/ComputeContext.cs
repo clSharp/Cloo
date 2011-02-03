@@ -77,6 +77,12 @@ namespace Cloo
 
         #region Properties
 
+        public CLContextHandle Handle
+        {
+            get;
+            protected set;
+        }
+
         /// <summary>
         /// Gets a read-only collection of the <see cref="ComputeDevice"/>s of the <see cref="ComputeContext"/>.
         /// </summary>
@@ -109,14 +115,16 @@ namespace Cloo
         public ComputeContext(ICollection<ComputeDevice> devices, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr notifyDataPtr)
         {
             int handleCount;
-            IntPtr[] deviceHandles = Tools.ExtractHandles(devices, out handleCount);
+            CLDeviceHandle[] deviceHandles = Tools.ExtractDeviceHandles(devices, out handleCount);
             IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
             callback = notify;
 
             ComputeErrorCode error = ComputeErrorCode.Success;
             Handle = CL10.CreateContext(propertyArray, handleCount, deviceHandles, notify, notifyDataPtr, out error);
             ComputeException.ThrowOnError(error);
-
+            
+            SetID(Handle.Value);
+            
             this.properties = properties;
             ComputeContextProperty platformProperty = properties.GetByName(ComputeContextPropertyName.Platform);
             this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
@@ -140,6 +148,8 @@ namespace Cloo
             ComputeErrorCode error = ComputeErrorCode.Success;
             Handle = CL10.CreateContextFromType(propertyArray, deviceType, notify, userDataPtr, out error);
             ComputeException.ThrowOnError(error);
+
+            SetID(Handle.Value);
 
             this.properties = properties;
             ComputeContextProperty platformProperty = properties.GetByName(ComputeContextPropertyName.Platform);
@@ -179,11 +189,11 @@ namespace Cloo
             }
 
             // free native resources
-            if (Handle != IntPtr.Zero)
+            if (Handle.IsValid)
             {
                 Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseContext(Handle);
-                Handle = IntPtr.Zero;
+                Handle.Invalidate();
             }
         }
 
@@ -193,15 +203,15 @@ namespace Cloo
 
         private ReadOnlyCollection<ComputeDevice> GetDevices()
         {
-            List<IntPtr> validDeviceHandles = new List<IntPtr>(GetArrayInfo<ComputeContextInfo, IntPtr>(ComputeContextInfo.Devices, CL10.GetContextInfo));
-            List<ComputeDevice> validDevices = new List<ComputeDevice>();
+            List<CLDeviceHandle> deviceHandles = new List<CLDeviceHandle>(GetArrayInfo<CLContextHandle, ComputeContextInfo, CLDeviceHandle>(Handle, ComputeContextInfo.Devices, CL10.GetContextInfo));
+            List<ComputeDevice> devices = new List<ComputeDevice>();
             foreach (ComputePlatform platform in ComputePlatform.Platforms)
             {
                 foreach (ComputeDevice device in platform.Devices)
-                    if (validDeviceHandles.Contains(device.Handle))
-                        validDevices.Add(device);
+                    if (deviceHandles.Contains(device.Handle))
+                        devices.Add(device);
             }
-            return new ReadOnlyCollection<ComputeDevice>(validDevices);
+            return new ReadOnlyCollection<ComputeDevice>(devices);
         }
 
         #endregion

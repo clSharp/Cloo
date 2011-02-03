@@ -56,7 +56,7 @@ namespace Cloo
         {
             SysIntX2 region = new SysIntX2(offset * Marshal.SizeOf(typeof(T)), count * Marshal.SizeOf(typeof(T)));
             ComputeErrorCode error;
-            IntPtr handle = CL11.CreateSubBuffer(Handle, flags, ComputeBufferCreateType.Region, ref region, out error);
+            CLMemoryHandle handle = CL11.CreateSubBuffer(Handle, flags, ComputeBufferCreateType.Region, ref region, out error);
             ComputeException.ThrowOnError(error);
 
             Init();

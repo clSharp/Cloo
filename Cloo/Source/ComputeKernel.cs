@@ -57,6 +57,12 @@ namespace Cloo
 
         #region Properties
 
+        public CLKernelHandle Handle
+        {
+            get;
+            protected set;
+        }
+
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> associated with the <see cref="ComputeKernel"/>.
         /// </summary>
@@ -79,11 +85,13 @@ namespace Cloo
 
         #region Constructors
 
-        internal ComputeKernel(IntPtr handle, ComputeProgram program)
+        internal ComputeKernel(CLKernelHandle handle, ComputeProgram program)
         {
             Handle = handle;
+            SetID(Handle.Value);
+
             context = program.Context;
-            functionName = GetStringInfo<ComputeKernelInfo>(ComputeKernelInfo.FunctionName, CL10.GetKernelInfo);
+            functionName = GetStringInfo<CLKernelHandle, ComputeKernelInfo>(Handle, ComputeKernelInfo.FunctionName, CL10.GetKernelInfo);
             this.program = program;
             tracker = new Dictionary<int, ComputeResource>();
 
@@ -93,11 +101,11 @@ namespace Cloo
         internal ComputeKernel(string functionName, ComputeProgram program)
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL10.CreateKernel(
-                program.Handle,
-                functionName,
-                out error);
+            Handle = CL10.CreateKernel(program.Handle, functionName, out error);
             ComputeException.ThrowOnError(error);
+
+            SetID(Handle.Value);
+
             context = program.Context;
             this.functionName = functionName;
             this.program = program;
@@ -117,8 +125,8 @@ namespace Cloo
         /// <returns> The amount of local memory in bytes used by the <see cref="ComputeKernel"/>. </returns>
         public long GetLocalMemorySize(ComputeDevice device)
         {
-            return (long)GetInfo<ComputeKernelWorkGroupInfo, ulong>(
-                device, ComputeKernelWorkGroupInfo.LocalMemorySize, CL10.GetKernelWorkGroupInfo);
+            return GetInfo<CLKernelHandle, CLDeviceHandle, ComputeKernelWorkGroupInfo, long>(
+                Handle, device.Handle, ComputeKernelWorkGroupInfo.LocalMemorySize, CL10.GetKernelWorkGroupInfo);
         }
 
         /// <summary>
@@ -129,8 +137,8 @@ namespace Cloo
         public long[] GetCompileWorkGroupSize(ComputeDevice device)
         {
             return Tools.ConvertArray(
-                GetArrayInfo<ComputeKernelWorkGroupInfo, IntPtr>(
-                    device, ComputeKernelWorkGroupInfo.CompileWorkGroupSize, CL10.GetKernelWorkGroupInfo));
+                GetArrayInfo<CLKernelHandle, CLDeviceHandle, ComputeKernelWorkGroupInfo, IntPtr>(
+                    Handle, device.Handle, ComputeKernelWorkGroupInfo.CompileWorkGroupSize, CL10.GetKernelWorkGroupInfo));
         }
 
         /// <summary>
@@ -142,8 +150,8 @@ namespace Cloo
         /// <remarks> Requires OpenCL 1.1. </remarks>
         public long GetPreferredWorkGroupSizeMultiple(ComputeDevice device)
         {
-            return (long)GetInfo<ComputeKernelWorkGroupInfo, IntPtr>(
-                device, ComputeKernelWorkGroupInfo.PreferredWorkGroupSizeMultiple, CL10.GetKernelWorkGroupInfo);
+            return (long)GetInfo<CLKernelHandle, CLDeviceHandle, ComputeKernelWorkGroupInfo, IntPtr>(
+                Handle, device.Handle, ComputeKernelWorkGroupInfo.PreferredWorkGroupSizeMultiple, CL10.GetKernelWorkGroupInfo);
         }
 
         /// <summary>
@@ -154,8 +162,8 @@ namespace Cloo
         /// <remarks> The returned value may include any private memory needed by an implementation to execute the kernel, including that used by the language built-ins and variable declared inside the kernel with the <c>__private</c> or <c>private</c> qualifier. </remarks>
         public long GetPrivateMemorySize(ComputeDevice device)
         {
-            return (long)GetInfo<ComputeKernelWorkGroupInfo, ulong>(
-                device, ComputeKernelWorkGroupInfo.PrivateMemorySize, CL10.GetKernelWorkGroupInfo);
+            return GetInfo<CLKernelHandle, CLDeviceHandle, ComputeKernelWorkGroupInfo, long>(
+                Handle, device.Handle, ComputeKernelWorkGroupInfo.PrivateMemorySize, CL10.GetKernelWorkGroupInfo);
         }
 
         /// <summary>
@@ -165,8 +173,8 @@ namespace Cloo
         /// <returns> The maximum work-group size that can be used to execute the <see cref="ComputeKernel"/> on <paramref name="device"/>. </returns>
         public long GetWorkGroupSize(ComputeDevice device)
         {
-            return (long)GetInfo<ComputeKernelWorkGroupInfo, IntPtr>(
-                    device, ComputeKernelWorkGroupInfo.WorkGroupSize, CL10.GetKernelWorkGroupInfo);
+            return (long)GetInfo<CLKernelHandle, CLDeviceHandle, ComputeKernelWorkGroupInfo, IntPtr>(
+                    Handle, device.Handle, ComputeKernelWorkGroupInfo.WorkGroupSize, CL10.GetKernelWorkGroupInfo);
         }
 
         /// <summary>
@@ -182,11 +190,7 @@ namespace Cloo
         /// </remarks>
         public void SetArgument(int index, IntPtr dataSize, IntPtr dataAddr)
         {
-            ComputeErrorCode error = CL10.SetKernelArg(
-                Handle,
-                index,
-                dataSize,
-                dataAddr);
+            ComputeErrorCode error = CL10.SetKernelArg(Handle, index, dataSize, dataAddr);
             ComputeException.ThrowOnError(error);
         }
 
@@ -223,7 +227,7 @@ namespace Cloo
         {
             if (track) tracker[index] = memObj;
 
-            SetValueArgument<IntPtr>(index, memObj.Handle);
+            SetValueArgument<CLMemoryHandle>(index, memObj.Handle);
         }
 
         /// <summary>
@@ -248,7 +252,7 @@ namespace Cloo
         {
             if (track) tracker[index] = sampler;
 
-            SetValueArgument<IntPtr>(index, sampler.Handle);
+            SetValueArgument<CLSamplerHandle>(index, sampler.Handle);
         }
 
         /// <summary>
@@ -304,11 +308,11 @@ namespace Cloo
         /// <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         protected override void Dispose(bool manual)
         {
-            if (Handle != IntPtr.Zero)
+            if (Handle.IsValid)
             {
                 Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
                 CL10.ReleaseKernel(Handle);
-                Handle = IntPtr.Zero;
+                Handle.Invalidate();
             }
         }
 

@@ -53,9 +53,13 @@ namespace Cloo
             ComputeErrorCode error;
             Handle = CL11.CreateUserEvent(context.Handle, out error);
             ComputeException.ThrowOnError(error);
-            Type = (ComputeCommandType)GetInfo<ComputeEventInfo, uint>(ComputeEventInfo.CommandType, CL10.GetEventInfo);
+            
+            SetID(Handle.Value);
+
+            Type = (ComputeCommandType)GetInfo<CLEventHandle, ComputeEventInfo, uint>(Handle, ComputeEventInfo.CommandType, CL10.GetEventInfo);
             Context = context;
             HookNotifier();
+
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
 
