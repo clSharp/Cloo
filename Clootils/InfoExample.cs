@@ -50,11 +50,11 @@ namespace Clootils
 
         public void Run(ComputeContext context, TextWriter log)
         {
-            log.WriteLine("[HOST INFO]");
-            log.WriteLine("Operating system: " + Environment.OSVersion);
+            log.WriteLine("[HOST]");
+            log.WriteLine(Environment.OSVersion);
 
             log.WriteLine();
-            log.WriteLine("[OPENCL PLATFORMS]");
+            log.WriteLine("[OPENCL PLATFORM]");
 
             ComputePlatform platform = context.Platform;
 
