@@ -350,13 +350,4 @@ namespace Cloo
 
         #endregion
     }
-
-    /// <summary>
-    /// A callback function that can be registered by the application to report the <see cref="ComputeProgram"/> build status.
-    /// </summary>
-    /// <param name="programHandle"> The handle of the <see cref="ComputeProgram"/> being built. </param>
-    /// <param name="notifyDataPtr"> The pointer to the optional user data specified in <paramref name="notifyDataPtr"/> argument of <see cref="ComputeProgram.Build"/>. </param>
-    /// <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
-    //[UnmanagedFunctionPointer(CallingConvention.Cdecl)] // BUG: Cdecl not working on Win+Stream v2.2
-    public delegate void ComputeProgramBuildNotifier(IntPtr programHandle, IntPtr notifyDataPtr);
 }
