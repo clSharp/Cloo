@@ -30,22 +30,20 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
-using System.Collections.Generic;
-using Cloo;
 using System.IO;
-using System.Runtime.InteropServices;
+using Cloo;
 
 namespace Clootils
 {
     public class MultipleKernelsExample : IExample
     {
         string kernelSources = @"
-    kernel void k1(           float     num ) {}
-  //kernel void k2(           sampler_t smp ) {}       // Causes havoc in Nvidia's drivers. This is, however, a valid kernel signature.
-  //kernel void k3( read_only image2d_t dem ) {}       // The same.
-    kernel void k4( constant  float *   num ) {}       
-  //kernel void k5( global    float *   num ) {}       // Causes InvalidBinary if Nvidia drivers == 64bit and application == 32 bit. Also valid.
-    kernel void k6( local     float *   num ) {}
+    kernel void k1(           float     bla ) {}
+  //kernel void k2(           sampler_t bla ) {}       // Causes havoc in Nvidia's drivers. This is, however, a valid kernel signature.
+  //kernel void k3( read_only image2d_t bla ) {}       // The same.
+    kernel void k4( constant  float *   bla ) {}       
+  //kernel void k5( global    float *   bla ) {}       // Causes InvalidBinary if Nvidia drivers == 64bit and application == 32 bit. Also valid.
+    kernel void k6( local     float *   bla ) {}
 ";
         
         public string Name
