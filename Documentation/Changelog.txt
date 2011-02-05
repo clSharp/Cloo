@@ -1,3 +1,28 @@
+[0.9.alpha2] -------------------------------------------------------------------
+Breaking changes:
+Every OpenCL object handle in the bindings is represented by a new type, replacing the old IntPtr types.
+Every Compute class Handle had its type changed.
+ReadFromBuffer arrays don't allow for a null array to be passed in.
+AcquireGLOBjects and ReleaseGLObjects memObjs type restricted to ICollection<ComputeMemory> (was generic type). 
+Notifier delegates moved to Cloo.Bindings namespace.
+
+Additions:
+A whole new set of OpenCL objects and bindings which operate on them.
+
+Bugfixes:
+Event self-disposing, when some command queue methods were called with non null event list.
+Added check to ensure event callback being fired even if the hook was installed after command finished execution.
+
+Deprecated:
+None.
+
+Internals:
+Extensive modifications to accomodate for the new OpenCL handle types.
+
+Documentation:
+Some updates and typo fixes.
+
+
 [0.9.alpha1] -------------------------------------------------------------------
 Breaking changes:
 Removed all code that was marked [Obsolete] in the previous versions.

@@ -1,3 +1,11 @@
+[0.9.alpha2] -------------------------------------------------------------------
+The second 0.9 preview is out.
+The major feature is a whole new set of OpenCL object handles, which can be used with the redesigned bindings. This final major change is the result of the efforts aiming at bringing the low level part of the library up to par with the rest of the code. So, if you wanted a basic set of fast, type safe and still very friendly OpenCL bindings that completely bypasses the object oriented layer, you're finally served!
+As for some bad news, in order to take advantage of the new handle types the ComputeObject handles now use them as well. Which means you'll have to upgrade your code if you were working directly with handles in previous versions. However, it is very unlikely that this will affect many applications (if any).
+Some other, but much smaller changes have shaped the new interface as well (acquiring and releasing OpenGL objects, ReadFromBuffer methods). As always checking the Changelog in the documentation folder is heartily recommended. 
+This was the last large set of the planned features for Cloo. So, what you see here is basically what Cloo 1.0 will look like!
+Stay tuned!
+
 [0.9.alpha1] -------------------------------------------------------------------
 This is the first of the (two or possibly three) alpha releases that precede Cloo 0.9. It is an experimental release which brings three major changes:
 
