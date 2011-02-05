@@ -142,11 +142,13 @@
             <summary>
             Occurs when the command associated with the event is abnormally terminated.
             </summary>
+            <remarks> Requires OpenCL 1.1. </remarks>
         </member>
         <member name="E:Cloo.ComputeEventBase.Completed">
             <summary>
             Occurs when <c>ComputeEventBase.Status</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
             </summary>
+            <remarks> Requires OpenCL 1.1. </remarks>
         </member>
         <member name="P:Cloo.ComputeEventBase.Context">
             <summary>
@@ -1284,7 +1286,7 @@
             <seealso cref="T:Cloo.ComputeDevice"/>
             <seealso cref="T:Cloo.ComputePlatform"/>
         </member>
-        <member name="M:Cloo.ComputeContext.#ctor(System.Collections.Generic.ICollection{Cloo.ComputeDevice},Cloo.ComputeContextPropertyList,Cloo.ComputeContextNotifier,System.IntPtr)">
+        <member name="M:Cloo.ComputeContext.#ctor(System.Collections.Generic.ICollection{Cloo.ComputeDevice},Cloo.ComputeContextPropertyList,Cloo.Bindings.ComputeContextNotifier,System.IntPtr)">
             <summary>
             Creates a new <see cref="T:Cloo.ComputeContext"/> on a collection of <see cref="T:Cloo.ComputeDevice"/>s.
             </summary>
@@ -1293,7 +1295,7 @@
             <param name="notify"> A delegate instance that refers to a notification routine. This routine is a callback function that will be used by the OpenCL implementation to report information on errors that occur in the <see cref="T:Cloo.ComputeContext"/>. The callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe and that the delegate instance doesn't get collected by the Garbage Collector until <see cref="T:Cloo.ComputeContext"/> is disposed. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
             <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         </member>
-        <member name="M:Cloo.ComputeContext.#ctor(Cloo.ComputeDeviceTypes,Cloo.ComputeContextPropertyList,Cloo.ComputeContextNotifier,System.IntPtr)">
+        <member name="M:Cloo.ComputeContext.#ctor(Cloo.ComputeDeviceTypes,Cloo.ComputeContextPropertyList,Cloo.Bindings.ComputeContextNotifier,System.IntPtr)">
             <summary>
             Creates a new <see cref="T:Cloo.ComputeContext"/> on all the <see cref="T:Cloo.ComputeDevice"/>s that match the specified <see cref="T:Cloo.ComputeDeviceTypes"/>.
             </summary>
@@ -1332,16 +1334,6 @@
             Gets a collection of <see cref="T:Cloo.ComputeContextProperty"/>s of the <see cref="T:Cloo.ComputeContext"/>.
             </summary>
             <value> A collection of <see cref="T:Cloo.ComputeContextProperty"/>s of the <see cref="T:Cloo.ComputeContext"/>. </value>
-        </member>
-        <member name="T:Cloo.ComputeContextNotifier">
-            <summary>
-            A callback function that can be registered by the application to report information on errors that occur in the <see cref="T:Cloo.ComputeContext"/>.
-            </summary>
-            <param name="errorInfo"> An error string. </param>
-            <param name="clDataPtr"> A pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error.</param>
-            <param name="clDataSize"> The size of the binary data that is returned by the OpenCL. </param>
-            <param name="userDataPtr"> The pointer to the optional user data specified in <paramref name="userDataPtr"/> argument of <see cref="T:Cloo.ComputeContext"/> constructor. </param>
-            <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
         </member>
         <member name="T:Cloo.SysIntX2">
              <summary>
@@ -1414,14 +1406,6 @@
             Gets the execution status of the command represented by the event.
             </summary>
             <remarks> Returns a negative integer if the command was abnormally terminated. </remarks>
-        </member>
-        <member name="T:Cloo.ComputeEventCallback">
-            <summary>
-            
-            </summary>
-            <param name="eventHandle"></param>
-            <param name="cmdExecStatusOrErr"></param>
-            <param name="userData"></param>
         </member>
         <member name="T:Cloo.ComputeCommandStatusChanged">
             <summary>
@@ -2900,12 +2884,12 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.CreateContext(System.IntPtr[],System.Int32,Cloo.Bindings.CLDeviceHandle[],Cloo.ComputeContextNotifier,System.IntPtr,Cloo.ComputeErrorCode@)">
+        <member name="M:Cloo.Bindings.CL10.CreateContext(System.IntPtr[],System.Int32,Cloo.Bindings.CLDeviceHandle[],Cloo.Bindings.ComputeContextNotifier,System.IntPtr,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL10.CreateContextFromType(System.IntPtr[],Cloo.ComputeDeviceTypes,Cloo.ComputeContextNotifier,System.IntPtr,Cloo.ComputeErrorCode@)">
+        <member name="M:Cloo.Bindings.CL10.CreateContextFromType(System.IntPtr[],Cloo.ComputeDeviceTypes,Cloo.Bindings.ComputeContextNotifier,System.IntPtr,Cloo.ComputeErrorCode@)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3253,7 +3237,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.SetMemObjectDestructorCallback(Cloo.Bindings.CLMemoryHandle,System.IntPtr,System.IntPtr)">
+        <member name="M:Cloo.Bindings.CL11.SetMemObjectDestructorCallback(Cloo.Bindings.CLMemoryHandle,Cloo.Bindings.ComputeMemoryDestructorNotifer,System.IntPtr)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3268,7 +3252,7 @@
             See the OpenCL specification.
             </summary>
         </member>
-        <member name="M:Cloo.Bindings.CL11.SetEventCallback(Cloo.Bindings.CLEventHandle,System.Int32,Cloo.ComputeEventCallback,System.IntPtr)">
+        <member name="M:Cloo.Bindings.CL11.SetEventCallback(Cloo.Bindings.CLEventHandle,System.Int32,Cloo.Bindings.ComputeEventCallback,System.IntPtr)">
             <summary>
             See the OpenCL specification.
             </summary>
@@ -3293,6 +3277,21 @@
             See the OpenCL specification.
             </summary>
         </member>
+        <member name="T:Cloo.Bindings.ComputeMemoryDestructorNotifer">
+            <summary>
+            A callback function that can be registered by the application. This callback function may be called asynchronously by the OpenCL implementation. It is the application’s responsibility to ensure that the callback function is thread-safe. 
+            </summary>
+            <param name="memobj"> The memory object being deleted. When the user callback is called, this memory object is not longer valid. <paramref name="memobj"/> is only provided for reference purposes. </param>
+            <param name="user_data"> A pointer to user supplied data. </param>
+        </member>
+        <member name="T:Cloo.Bindings.ComputeEventCallback">
+            <summary>
+            The event callback function that can be registered by the application. This callback function may be called asynchronously by the OpenCL implementation. It is the application’s responsibility to ensure that the callback function is thread-safe.
+            </summary>
+            <param name="eventHandle"> The event object for which the callback function is invoked. </param>
+            <param name="cmdExecStatusOrErr"> Represents the execution status of the command for which this callback function is invoked. If the callback is called as the result of the command associated with the event being abnormally terminated, an appropriate error code for the error that caused the termination will be passed to <paramref name="cmdExecStatusOrErr"/> instead. </param>
+            <param name="userData"> A pointer to user supplied data. </param>
+        </member>
         <member name="T:Cloo.Tools">
             <summary>
             Contains various helper methods.
@@ -3305,6 +3304,16 @@
             <param name="versionString"> The version string to parse. Must be in the format: <c>Additional substrings[space][major_version].[minor_version][space]Additional substrings</c>. </param>
             <param name="substringIndex"> The index of the substring that specifies the OpenCL version. </param>
             <returns> A <c>Version</c> instance containing the major and minor version from <paramref name="versionString"/>. </returns>
+        </member>
+        <member name="T:Cloo.Bindings.ComputeContextNotifier">
+            <summary>
+            A callback function that can be registered by the application to report information on errors that occur in the <see cref="T:Cloo.ComputeContext"/>.
+            </summary>
+            <param name="errorInfo"> An error string. </param>
+            <param name="clDataPtr"> A pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error.</param>
+            <param name="clDataSize"> The size of the binary data that is returned by the OpenCL. </param>
+            <param name="userDataPtr"> The pointer to the optional user data specified in <paramref name="userDataPtr"/> argument of <see cref="T:Cloo.ComputeContext"/> constructor. </param>
+            <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
         </member>
         <member name="T:Cloo.ComputeBufferBase`1">
             <summary>
