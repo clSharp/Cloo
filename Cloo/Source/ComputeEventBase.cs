@@ -54,11 +54,13 @@ namespace Cloo
         /// <summary>
         /// Occurs when the command associated with the event is abnormally terminated.
         /// </summary>
+        /// <remarks> Requires OpenCL 1.1. </remarks>
         public event ComputeCommandStatusChanged Aborted;
 
         /// <summary>
         /// Occurs when <c>ComputeEventBase.Status</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
         /// </summary>
+        /// <remarks> Requires OpenCL 1.1. </remarks>
         public event ComputeCommandStatusChanged Completed;
 
         #endregion
@@ -198,7 +200,7 @@ namespace Cloo
 
         #region Private methods
 
-        private void StatusNotify(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData)
+        private void StatusNotify(CLEventHandle eventHandle, int cmdExecStatusOrErr, IntPtr userData)
         {
             ComputeCommandStatusArgs statusArgs = new ComputeCommandStatusArgs(this, (ComputeCommandExecutionStatus)cmdExecStatusOrErr);
             switch (cmdExecStatusOrErr)
@@ -247,14 +249,6 @@ namespace Cloo
             : this(ev, (ComputeCommandExecutionStatus)status)
         { }
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="eventHandle"></param>
-    /// <param name="cmdExecStatusOrErr"></param>
-    /// <param name="userData"></param>
-    public delegate void ComputeEventCallback(IntPtr eventHandle, int cmdExecStatusOrErr, IntPtr userData);
 
     /// <summary>
     /// 

@@ -32,6 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.IO;
 using Cloo;
+using Cloo.Bindings;
 
 namespace Clootils
 {
@@ -66,7 +67,7 @@ namespace Clootils
             }
         }
 
-        private void notify(IntPtr programHandle, IntPtr userDataPtr)
+        private void notify(CLProgramHandle programHandle, IntPtr userDataPtr)
         {
             log.WriteLine("Program build notification.");
             byte[] bytes = program.Binaries[0];
