@@ -1267,21 +1267,40 @@
             <example> 
             This example shows how to create a <see cref="T:Cloo.ComputeContext"/> that is able to share data with an OpenGL context in a Microsoft Windows OS:
             <code>
+            <![CDATA[
+            
+            // NOTE: If you see some non C# bits surrounding this code section, ignore them. They're not part of the code.
+            
+            // We will need the device context, which is obtained through an OS specific function.
             [DllImport("opengl32.dll")]
             extern static IntPtr wglGetCurrentDC();
-            // ...
+            
+            // Query the device context.
             IntPtr deviceContextHandle = wglGetCurrentDC();
-            ComputePlatform platform = ComputePlatform.GetByName(nameOfPlatformCapableOfCLGLInterop);
-            ComputeContextProperty p1 = new ComputeContextProperty(ComputeContextPropertyName.Platform, platform.Handle);
+            
+            // Select a platform which is capable of OpenCL/OpenGL interop.
+            ComputePlatform platform = ComputePlatform.GetByName(name);
+            
+            // Create the context property list and populate it.
+            ComputeContextProperty p1 = new ComputeContextProperty(ComputeContextPropertyName.Platform, platform.Handle.Value);
             ComputeContextProperty p2 = new ComputeContextProperty(ComputeContextPropertyName.CL_GL_CONTEXT_KHR, openGLContextHandle);
             ComputeContextProperty p3 = new ComputeContextProperty(ComputeContextPropertyName.CL_WGL_HDC_KHR, deviceContextHandle);
             ComputeContextPropertyList cpl = new ComputeContextPropertyList(new ComputeContextProperty[] { p1, p2, p3 });
+            
+            // Create the context. Usually, you'll want this on a GPU but other options might be available as well.
             ComputeContext context = new ComputeContext(ComputeDeviceTypes.Gpu, cpl, null, IntPtr.Zero);
+            
             // Create a shared OpenCL/OpenGL buffer.
             // The generic type should match the type of data that the buffer contains.
-            // glBufferId is an existent OpenGL buffer identifier.
-            <![CDATA[ComputeBuffer<float> clglBuffer = ComputeBuffer.CreateFromGLBuffer<float>(context, ComputeMemoryFlags.ReadWrite, glBufferId);]]>
+            // glBufferId is an existing OpenGL buffer identifier.
+            ComputeBuffer<float> clglBuffer = ComputeBuffer.CreateFromGLBuffer<float>(context, ComputeMemoryFlags.ReadWrite, glBufferId);
+            
+            ]]>
             </code>
+            Before working with the <c>clglBuffer</c> you should make sure of two things:<br/>
+            1) OpenGL isn't using <c>glBufferId</c>. You can achieve this by calling <c>glFinish</c>.<br/>
+            2) Make it available to OpenCL through the <see cref="M:Cloo.ComputeCommandQueue.AcquireGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})"/> method.<br/>
+            When finished, you should wait until <c>clglBuffer</c> isn't used any longer by OpenCL. After that, call <see cref="M:Cloo.ComputeCommandQueue.ReleaseGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})"/> to make the buffer available to OpenGL again.
             </example>
             <seealso cref="T:Cloo.ComputeDevice"/>
             <seealso cref="T:Cloo.ComputePlatform"/>
@@ -3279,18 +3298,20 @@
         </member>
         <member name="T:Cloo.Bindings.ComputeMemoryDestructorNotifer">
             <summary>
-            A callback function that can be registered by the application. This callback function may be called asynchronously by the OpenCL implementation. It is the application’s responsibility to ensure that the callback function is thread-safe. 
+            A callback function that can be registered by the application.
             </summary>
             <param name="memobj"> The memory object being deleted. When the user callback is called, this memory object is not longer valid. <paramref name="memobj"/> is only provided for reference purposes. </param>
             <param name="user_data"> A pointer to user supplied data. </param>
+            /// <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
         </member>
         <member name="T:Cloo.Bindings.ComputeEventCallback">
             <summary>
-            The event callback function that can be registered by the application. This callback function may be called asynchronously by the OpenCL implementation. It is the application’s responsibility to ensure that the callback function is thread-safe.
+            The event callback function that can be registered by the application.
             </summary>
             <param name="eventHandle"> The event object for which the callback function is invoked. </param>
             <param name="cmdExecStatusOrErr"> Represents the execution status of the command for which this callback function is invoked. If the callback is called as the result of the command associated with the event being abnormally terminated, an appropriate error code for the error that caused the termination will be passed to <paramref name="cmdExecStatusOrErr"/> instead. </param>
             <param name="userData"> A pointer to user supplied data. </param>
+            /// <remarks> This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe. </remarks>
         </member>
         <member name="T:Cloo.Tools">
             <summary>
@@ -3903,9 +3924,9 @@
         </member>
         <member name="P:Cloo.ComputeDevice.NativeVectorWidthDouble">
             <summary>
-            Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported.
+            Gets the native ISA vector width size for vector of <c>double</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported.
             </summary>
-            <value> The native ISA vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported. </value>
+            <value> The native ISA vector width size for vector of <c>double</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported. </value>
             <remarks> 
                 <para> The vector width is defined as the number of scalar elements that can be stored in the vector. </para>
                 <para> Requires OpenCL 1.1 </para>

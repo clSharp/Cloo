@@ -46,21 +46,40 @@ namespace Cloo
     /// <example> 
     /// This example shows how to create a <see cref="ComputeContext"/> that is able to share data with an OpenGL context in a Microsoft Windows OS:
     /// <code>
+    /// <![CDATA[
+    /// 
+    /// // NOTE: If you see some non C# bits surrounding this code section, ignore them. They're not part of the code.
+    /// 
+    /// // We will need the device context, which is obtained through an OS specific function.
     /// [DllImport("opengl32.dll")]
     /// extern static IntPtr wglGetCurrentDC();
-    /// // ...
+    /// 
+    /// // Query the device context.
     /// IntPtr deviceContextHandle = wglGetCurrentDC();
-    /// ComputePlatform platform = ComputePlatform.GetByName(nameOfPlatformCapableOfCLGLInterop);
+    /// 
+    /// // Select a platform which is capable of OpenCL/OpenGL interop.
+    /// ComputePlatform platform = ComputePlatform.GetByName(name);
+    /// 
+    /// // Create the context property list and populate it.
     /// ComputeContextProperty p1 = new ComputeContextProperty(ComputeContextPropertyName.Platform, platform.Handle.Value);
     /// ComputeContextProperty p2 = new ComputeContextProperty(ComputeContextPropertyName.CL_GL_CONTEXT_KHR, openGLContextHandle);
     /// ComputeContextProperty p3 = new ComputeContextProperty(ComputeContextPropertyName.CL_WGL_HDC_KHR, deviceContextHandle);
     /// ComputeContextPropertyList cpl = new ComputeContextPropertyList(new ComputeContextProperty[] { p1, p2, p3 });
+    /// 
+    /// // Create the context. Usually, you'll want this on a GPU but other options might be available as well.
     /// ComputeContext context = new ComputeContext(ComputeDeviceTypes.Gpu, cpl, null, IntPtr.Zero);
+    /// 
     /// // Create a shared OpenCL/OpenGL buffer.
     /// // The generic type should match the type of data that the buffer contains.
-    /// // glBufferId is an existent OpenGL buffer identifier.
-    /// <![CDATA[ComputeBuffer<float> clglBuffer = ComputeBuffer.CreateFromGLBuffer<float>(context, ComputeMemoryFlags.ReadWrite, glBufferId);]]>
+    /// // glBufferId is an existing OpenGL buffer identifier.
+    /// ComputeBuffer<float> clglBuffer = ComputeBuffer.CreateFromGLBuffer<float>(context, ComputeMemoryFlags.ReadWrite, glBufferId);
+    /// 
+    /// ]]>
     /// </code>
+    /// Before working with the <c>clglBuffer</c> you should make sure of two things:<br/>
+    /// 1) OpenGL isn't using <c>glBufferId</c>. You can achieve this by calling <c>glFinish</c>.<br/>
+    /// 2) Make it available to OpenCL through the <see cref="ComputeCommandQueue.AcquireGLObjects"/> method.<br/>
+    /// When finished, you should wait until <c>clglBuffer</c> isn't used any longer by OpenCL. After that, call <see cref="ComputeCommandQueue.ReleaseGLObjects"/> to make the buffer available to OpenGL again.
     /// </example>
     /// <seealso cref="ComputeDevice"/>
     /// <seealso cref="ComputePlatform"/>

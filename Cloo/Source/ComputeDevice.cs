@@ -461,9 +461,9 @@ namespace Cloo
         public long NativeVectorWidthChar { get { return GetInfo<long>(ComputeDeviceInfo.NativeVectorWidthChar); } }
 
         /// <summary>
-        /// Gets the native ISA vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported.
+        /// Gets the native ISA vector width size for vector of <c>double</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported.
         /// </summary>
-        /// <value> The native ISA vector width size for vector of <c>half</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported. </value>
+        /// <value> The native ISA vector width size for vector of <c>double</c>s or 0 if the <c>cl_khr_fp64</c> format is not supported. </value>
         /// <remarks> 
         ///     <para> The vector width is defined as the number of scalar elements that can be stored in the vector. </para>
         ///     <para> Requires OpenCL 1.1 </para>
