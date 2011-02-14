@@ -927,7 +927,7 @@
             Enqueues a command to acquire a collection of <see cref="T:Cloo.ComputeMemory"/>s that have been previously created from OpenGL objects.
             </summary>
             <param name="memObjs"> A collection of OpenCL memory objects that correspond to OpenGL objects. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.AddBarrier">
             <summary>
@@ -966,7 +966,7 @@
             <param name="sourceSlicePitch"> The size of the source buffer 2D slice in bytes. If set to zero then <paramref name="sourceSlicePitch"/> equals <c>region.Y * sizeof(T) * sourceRowPitch</c>. </param>
             <param name="destinationRowPitch"> The size of the destination buffer row in bytes. If set to zero then <paramref name="destinationRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
             <param name="destinationSlicePitch"> The size of the destination buffer 2D slice in bytes. If set to zero then <paramref name="destinationSlicePitch"/> equals <c>region.Y * sizeof(T) * destinationRowPitch</c>. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
             <remarks> Requires OpenCL 1.1. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeBufferBase{``0},Cloo.ComputeImage,System.Int64,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
@@ -979,7 +979,7 @@
             <param name="sourceOffset"> The <paramref name="source"/> element position where reading starts. </param>
             <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
             <param name="region"> The region of elements to copy. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Copy``1(Cloo.ComputeImage,Cloo.ComputeBufferBase{``0},Cloo.SysIntX3,System.Int64,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
@@ -990,7 +990,7 @@
             <param name="sourceOffset"> The <paramref name="source"/> element position where reading starts. </param>
             <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
             <param name="region"> The region of elements to copy. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Copy(Cloo.ComputeImage,Cloo.ComputeImage,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
@@ -1001,14 +1001,14 @@
             <param name="sourceOffset"> The <paramref name="source"/> element position where reading starts. </param>
             <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
             <param name="region"> The region of elements to copy. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ExecuteTask(Cloo.ComputeKernel,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to execute a single <see cref="T:Cloo.ComputeKernel"/>.
             </summary>
             <param name="kernel"> The <see cref="T:Cloo.ComputeKernel"/> to execute. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
@@ -1018,7 +1018,7 @@
             <param name="globalWorkOffset"> An array of values that describe the offset used to calculate the global ID of a work-item instead of having the global IDs always start at offset (0, 0,... 0). </param>
             <param name="globalWorkSize"> An array of values that describe the number of global work-items in dimensions that will execute the kernel function. The total number of global work-items is computed as global_work_size[0] *...* global_work_size[work_dim - 1]. </param>
             <param name="localWorkSize"> An array of values that describe the number of work-items that make up a work-group (also referred to as the size of the work-group) that will execute the <paramref name="kernel"/>. The total number of work-items in a work-group is computed as local_work_size[0] *... * local_work_size[work_dim - 1]. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Finish">
             <summary>
@@ -1040,7 +1040,7 @@
             <param name="flags"> A list of properties for the mapping mode. </param>
             <param name="offset"> The <paramref name="buffer"/> element position where mapping starts. </param>
             <param name="region"> The region of elements to map. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
@@ -1052,7 +1052,7 @@
             <param name="flags"> A list of properties for the mapping mode. </param>
             <param name="offset"> The <paramref name="image"/> element position where mapping starts. </param>
             <param name="region"> The region of elements to map. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
@@ -1064,7 +1064,7 @@
             <param name="offset"> The <paramref name="source"/> element position where reading starts. </param>
             <param name="region"> The region of elements to read. </param>
             <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Read``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
@@ -1082,7 +1082,7 @@
             <param name="destinationRowPitch"> The size of the destination buffer row in bytes. If set to zero then <paramref name="destinationRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
             <param name="destinationSlicePitch"> The size of the destination buffer 2D slice in bytes. If set to zero then <paramref name="destinationSlicePitch"/> equals <c>region.Y * sizeof(T) * destinationRowPitch</c>. </param>
             <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
             <remarks> Requires OpenCL 1.1. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Read(Cloo.ComputeImage,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
@@ -1096,7 +1096,7 @@
             <param name="rowPitch"> The <see cref="P:Cloo.ComputeImage.RowPitch"/> of <paramref name="source"/> or 0. </param>
             <param name="slicePitch"> The <see cref="P:Cloo.ComputeImage.SlicePitch"/> of <paramref name="source"/> or 0. </param>
             <param name="destination"> A pointer to a preallocated memory area to read the data into. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ReleaseGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
@@ -1104,7 +1104,7 @@
             Enqueues a command to release <see cref="T:Cloo.ComputeMemory"/>s that have been created from OpenGL objects.
             </summary>
             <param name="memObjs"> A collection of <see cref="T:Cloo.ComputeMemory"/>s that correspond to OpenGL memory objects. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.ToString">
             <summary>
@@ -1118,7 +1118,7 @@
             </summary>
             <param name="memory"> The <see cref="T:Cloo.ComputeMemory"/>. </param>
             <param name="mappedPtr"> The host address returned by a previous call to <see cref="M:Cloo.ComputeCommandQueue.Map(Cloo.ComputeImage,System.Boolean,Cloo.ComputeMemoryMappingFlags,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})"/>. This pointer is <c>IntPtr.Zero</c> after this method returns. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Wait(System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
@@ -1135,7 +1135,7 @@
             <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
             <param name="region"> The region of elements to write. </param>
             <param name="source"> The data written to the buffer. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Write``1(Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
@@ -1153,7 +1153,7 @@
             <param name="sourceRowPitch"> The size of the memory area row in bytes. If set to zero then <paramref name="sourceRowPitch"/> equals <c>region.X * sizeof(T)</c>. </param>
             <param name="sourceSlicePitch"> The size of the memory area 2D slice in bytes. If set to zero then <paramref name="sourceSlicePitch"/> equals <c>region.Y * sizeof(T) * sourceRowPitch</c>. </param>
             <param name="source"> The data written to the buffer. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
             <remarks> Requires OpenCL 1.1. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Write(Cloo.ComputeImage,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.IntPtr,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
@@ -1167,7 +1167,7 @@
             <param name="rowPitch"> The <see cref="P:Cloo.ComputeImage.RowPitch"/> of <paramref name="destination"/> or 0. </param>
             <param name="slicePitch"> The <see cref="P:Cloo.ComputeImage.SlicePitch"/> of <paramref name="destination"/> or 0. </param>
             <param name="source"> The content written to the <see cref="T:Cloo.ComputeImage"/>. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
             <remarks> If <paramref name="blocking"/> is <c>true</c> this method will not return until the command completes. If <paramref name="blocking"/> is <c>false</c> this method will return immediately after the command is enqueued. </remarks>
         </member>
         <member name="M:Cloo.ComputeCommandQueue.Dispose(System.Boolean)">

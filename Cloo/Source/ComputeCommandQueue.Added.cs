@@ -335,11 +335,12 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.Events;
+                bool eventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
                 Read(source, blocking, sourceOffset, region, destinationOffsetPtr, evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(destinationGCHandle);
-                ev.SingleReference = (events == null);
+                ev.SingleReference = !eventsWritable;
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }
@@ -401,11 +402,12 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.Events;
+                bool eventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
                 Read(source, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, destinationGCHandle.AddrOfPinnedObject(), evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(destinationGCHandle);
-                ev.SingleReference = (events == null);
+                ev.SingleReference = !eventsWritable;
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }
@@ -437,11 +439,12 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.Events;
+                bool eventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
                 Read(source, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, destinationGCHandle.AddrOfPinnedObject(), evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(destinationGCHandle);
-                ev.SingleReference = (events == null);
+                ev.SingleReference = !eventsWritable;
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }
@@ -562,11 +565,12 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.Events;
+                bool eventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
                 Write(destination, blocking, destinationOffset, region, sourceOffsetPtr, evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(sourceGCHandle);
-                ev.SingleReference = (events == null);
+                ev.SingleReference = !eventsWritable;
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }
@@ -628,11 +632,12 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.Events;
+                bool eventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
                 Write(destination, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(sourceGCHandle);
-                ev.SingleReference = (events == null);
+                ev.SingleReference = !eventsWritable;
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }
@@ -664,11 +669,12 @@ namespace Cloo
             }
             else
             {
-                IList<ComputeEventBase> evlist = (events != null) ? (IList<ComputeEventBase>)events : this.Events;
+                bool eventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
                 Write(destination, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), evlist);
                 ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
                 ev.Track(sourceGCHandle);
-                ev.SingleReference = (events == null);
+                ev.SingleReference = !eventsWritable;
                 if (ev.Status == ComputeCommandExecutionStatus.Complete)
                     ev.ComputeEvent_Fired(this, null);
             }
