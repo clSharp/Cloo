@@ -640,7 +640,7 @@
             <param name="region"> The region of elements to copy. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[]@,System.Boolean,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[]@,System.Boolean,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to read data from a buffer.
             </summary>
@@ -650,20 +650,7 @@
             <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[]@,System.Boolean,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to read data from a buffer.
-            </summary>
-            <typeparam name="T"> The type of data in the buffer. </typeparam>
-            <param name="source"> The buffer to read from. </param>
-            <param name="destination"> The array to write to. </param>
-            <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> element position where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
-            <param name="region"> The region of elements to read. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:]@,System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[]@,System.Boolean,System.Int64,System.Int64,System.Int64,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to read data from a buffer.
             </summary>
@@ -676,7 +663,7 @@
             <param name="region"> The region of elements to read. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:,0:]@,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:]@,System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to read data from a buffer.
             </summary>
@@ -689,7 +676,20 @@
             <param name="region"> The region of elements to read. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:]@,System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:,0:]@,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to read data from a buffer.
+            </summary>
+            <typeparam name="T"> The type of data in the buffer. </typeparam>
+            <param name="source"> The buffer to read from. </param>
+            <param name="destination"> The array to write to. </param>
+            <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> element position where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
+            <param name="region"> The region of elements to read. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:]@,System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Int64,System.Int64,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to read data from a buffer.
             </summary>
@@ -704,7 +704,7 @@
             <param name="destinationRowPitch"> The size of a row of elements of <paramref name="destination"/> in bytes. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:,0:]@,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.ReadFromBuffer``1(Cloo.ComputeBufferBase{``0},``0[0:,0:,0:]@,System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to read data from a buffer.
             </summary>
@@ -777,7 +777,7 @@
             <param name="sourceSlicePitch"> The size of a 2D slice of pixels of <paramref name="destination"/> in bytes. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[],Cloo.ComputeBufferBase{``0},System.Boolean,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[],Cloo.ComputeBufferBase{``0},System.Boolean,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to write data to a buffer.
             </summary>
@@ -787,20 +787,7 @@
             <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[],Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
-            <summary>
-            Enqueues a command to write data to a buffer.
-            </summary>
-            <typeparam name="T"> The type of data in the buffer. </typeparam>
-            <param name="source"> The array to read from. </param>
-            <param name="destination"> The buffer to write to. </param>
-            <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
-            <param name="sourceOffset"> The <paramref name="source"/> element position where reading starts. </param>
-            <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
-            <param name="region"> The region of elements to write. </param>
-            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        </member>
-        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[],Cloo.ComputeBufferBase{``0},System.Boolean,System.Int64,System.Int64,System.Int64,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to write data to a buffer.
             </summary>
@@ -813,7 +800,7 @@
             <param name="region"> The region of elements to write. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to write data to a buffer.
             </summary>
@@ -826,7 +813,20 @@
             <param name="region"> The region of elements to write. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
+            <summary>
+            Enqueues a command to write data to a buffer.
+            </summary>
+            <typeparam name="T"> The type of data in the buffer. </typeparam>
+            <param name="source"> The array to read from. </param>
+            <param name="destination"> The buffer to write to. </param>
+            <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
+            <param name="sourceOffset"> The <paramref name="source"/> element position where reading starts. </param>
+            <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
+            <param name="region"> The region of elements to write. </param>
+            <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
+        </member>
+        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX2,Cloo.SysIntX2,Cloo.SysIntX2,System.Int64,System.Int64,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to write data to a buffer.
             </summary>
@@ -841,7 +841,7 @@
             <param name="destinationRowPitch"> The size of a row of elements of <paramref name="destination"/> in bytes. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
+        <member name="M:Cloo.ComputeCommandQueue.WriteToBuffer``1(``0[0:,0:,0:],Cloo.ComputeBufferBase{``0},System.Boolean,Cloo.SysIntX3,Cloo.SysIntX3,Cloo.SysIntX3,System.Int64,System.Int64,System.Int64,System.Int64,System.Collections.Generic.IList{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to write data to a buffer.
             </summary>

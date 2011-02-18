@@ -307,7 +307,7 @@ namespace Cloo
         /// <param name="destination"> The array to write to. </param>
         /// <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[] destination, bool blocking, ICollection<ComputeEventBase> events) where T : struct
+        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[] destination, bool blocking, IList<ComputeEventBase> events) where T : struct
         {
             ReadFromBuffer(source, ref destination, blocking, 0, 0, source.Count, events);
         }
@@ -323,7 +323,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
         /// <param name="region"> The region of elements to read. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[] destination, bool blocking, long sourceOffset, long destinationOffset, long region, ICollection<ComputeEventBase> events) where T : struct
+        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[] destination, bool blocking, long sourceOffset, long destinationOffset, long region, IList<ComputeEventBase> events) where T : struct
         {
             GCHandle destinationGCHandle = GCHandle.Alloc(destination, GCHandleType.Pinned);
             IntPtr destinationOffsetPtr = Marshal.UnsafeAddrOfPinnedArrayElement(destination, (int)destinationOffset);
@@ -335,14 +335,13 @@ namespace Cloo
             }
             else
             {
-                bool eventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
-                Read(source, blocking, sourceOffset, region, destinationOffsetPtr, evlist);
-                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
-                ev.Track(destinationGCHandle);
-                ev.SingleReference = !eventsWritable;
-                if (ev.Status == ComputeCommandExecutionStatus.Complete)
-                    ev.ComputeEvent_Fired(this, null);
+                bool userEventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : Events;
+                Read(source, blocking, sourceOffset, region, destinationOffsetPtr, eventList);
+                ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
+                newEvent.TrackGCHandle(destinationGCHandle);
+                if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
+                    newEvent.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -357,7 +356,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
         /// <param name="region"> The region of elements to read. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[,] destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, ICollection<ComputeEventBase> events) where T : struct
+        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[,] destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, IList<ComputeEventBase> events) where T : struct
         {
             ReadFromBuffer(source, ref destination, blocking, sourceOffset, destinationOffset, region, 0, 0, events);
         }
@@ -373,7 +372,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
         /// <param name="region"> The region of elements to read. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[, ,] destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
+        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[, ,] destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, IList<ComputeEventBase> events) where T : struct
         {
             ReadFromBuffer(source, ref destination, blocking, sourceOffset, destinationOffset, region, 0, 0, 0, 0, events);
         }
@@ -391,7 +390,7 @@ namespace Cloo
         /// <param name="sourceRowPitch"> The size of a row of elements of <paramref name="source"/> in bytes. </param>
         /// <param name="destinationRowPitch"> The size of a row of elements of <paramref name="destination"/> in bytes. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[,] destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, long sourceRowPitch, long destinationRowPitch, ICollection<ComputeEventBase> events) where T : struct
+        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[,] destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, long sourceRowPitch, long destinationRowPitch, IList<ComputeEventBase> events) where T : struct
         {
             GCHandle destinationGCHandle = GCHandle.Alloc(destination, GCHandleType.Pinned);
 
@@ -402,14 +401,13 @@ namespace Cloo
             }
             else
             {
-                bool eventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
-                Read(source, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, destinationGCHandle.AddrOfPinnedObject(), evlist);
-                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
-                ev.Track(destinationGCHandle);
-                ev.SingleReference = !eventsWritable;
-                if (ev.Status == ComputeCommandExecutionStatus.Complete)
-                    ev.ComputeEvent_Fired(this, null);
+                bool userEventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : Events;
+                Read(source, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, destinationGCHandle.AddrOfPinnedObject(), eventList);
+                ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
+                newEvent.TrackGCHandle(destinationGCHandle);
+                if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
+                    newEvent.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -428,7 +426,7 @@ namespace Cloo
         /// <param name="sourceSlicePitch"> The size of a 2D slice of elements of <paramref name="source"/> in bytes. </param>
         /// <param name="destinationSlicePitch"> The size of a 2D slice of elements of <paramref name="destination"/> in bytes. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[, ,] destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long sourceRowPitch, long destinationRowPitch, long sourceSlicePitch, long destinationSlicePitch, ICollection<ComputeEventBase> events) where T : struct
+        public void ReadFromBuffer<T>(ComputeBufferBase<T> source, ref T[, ,] destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long sourceRowPitch, long destinationRowPitch, long sourceSlicePitch, long destinationSlicePitch, IList<ComputeEventBase> events) where T : struct
         {
             GCHandle destinationGCHandle = GCHandle.Alloc(destination, GCHandleType.Pinned);
 
@@ -439,14 +437,13 @@ namespace Cloo
             }
             else
             {
-                bool eventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
-                Read(source, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, destinationGCHandle.AddrOfPinnedObject(), evlist);
-                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
-                ev.Track(destinationGCHandle);
-                ev.SingleReference = !eventsWritable;
-                if (ev.Status == ComputeCommandExecutionStatus.Complete)
-                    ev.ComputeEvent_Fired(this, null);
+                bool userEventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : Events;
+                Read(source, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, destinationGCHandle.AddrOfPinnedObject(), eventList);
+                ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
+                newEvent.TrackGCHandle(destinationGCHandle);
+                if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
+                    newEvent.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -537,7 +534,7 @@ namespace Cloo
         /// <param name="destination"> The buffer to write to. </param>
         /// <param name="blocking"> The mode of operation of this command. If <c>true</c> this call will not return until the command has finished execution. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void WriteToBuffer<T>(T[] source, ComputeBufferBase<T> destination, bool blocking, ICollection<ComputeEventBase> events) where T : struct
+        public void WriteToBuffer<T>(T[] source, ComputeBufferBase<T> destination, bool blocking, IList<ComputeEventBase> events) where T : struct
         {
             WriteToBuffer(source, destination, blocking, 0, 0, destination.Count, events);
         }
@@ -553,7 +550,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
         /// <param name="region"> The region of elements to write. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void WriteToBuffer<T>(T[] source, ComputeBufferBase<T> destination, bool blocking, long sourceOffset, long destinationOffset, long region, ICollection<ComputeEventBase> events) where T : struct
+        public void WriteToBuffer<T>(T[] source, ComputeBufferBase<T> destination, bool blocking, long sourceOffset, long destinationOffset, long region, IList<ComputeEventBase> events) where T : struct
         {
             GCHandle sourceGCHandle = GCHandle.Alloc(source, GCHandleType.Pinned);
             IntPtr sourceOffsetPtr = Marshal.UnsafeAddrOfPinnedArrayElement(source, (int)sourceOffset);
@@ -565,14 +562,13 @@ namespace Cloo
             }
             else
             {
-                bool eventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
-                Write(destination, blocking, destinationOffset, region, sourceOffsetPtr, evlist);
-                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
-                ev.Track(sourceGCHandle);
-                ev.SingleReference = !eventsWritable;
-                if (ev.Status == ComputeCommandExecutionStatus.Complete)
-                    ev.ComputeEvent_Fired(this, null);
+                bool userEventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : Events;
+                Write(destination, blocking, destinationOffset, region, sourceOffsetPtr, eventList);
+                ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
+                newEvent.TrackGCHandle(sourceGCHandle);
+                if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
+                    newEvent.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -587,7 +583,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
         /// <param name="region"> The region of elements to write. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void WriteToBuffer<T>(T[,] source, ComputeBufferBase<T> destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, ICollection<ComputeEventBase> events) where T : struct
+        public void WriteToBuffer<T>(T[,] source, ComputeBufferBase<T> destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, IList<ComputeEventBase> events) where T : struct
         {
             WriteToBuffer(source, destination, blocking, sourceOffset, destinationOffset, region, 0, 0, events);
         }
@@ -603,7 +599,7 @@ namespace Cloo
         /// <param name="destinationOffset"> The <paramref name="destination"/> element position where writing starts. </param>
         /// <param name="region"> The region of elements to write. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void WriteToBuffer<T>(T[, ,] source, ComputeBufferBase<T> destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, ICollection<ComputeEventBase> events) where T : struct
+        public void WriteToBuffer<T>(T[, ,] source, ComputeBufferBase<T> destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, IList<ComputeEventBase> events) where T : struct
         {
             WriteToBuffer(source, destination, blocking, sourceOffset, destinationOffset, region, 0, 0, 0, 0, events);
         }
@@ -621,7 +617,7 @@ namespace Cloo
         /// <param name="sourceRowPitch"> The size of a row of elements of <paramref name="source"/> in bytes. </param>
         /// <param name="destinationRowPitch"> The size of a row of elements of <paramref name="destination"/> in bytes. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void WriteToBuffer<T>(T[,] source, ComputeBufferBase<T> destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, long sourceRowPitch, long destinationRowPitch, ICollection<ComputeEventBase> events) where T : struct
+        public void WriteToBuffer<T>(T[,] source, ComputeBufferBase<T> destination, bool blocking, SysIntX2 sourceOffset, SysIntX2 destinationOffset, SysIntX2 region, long sourceRowPitch, long destinationRowPitch, IList<ComputeEventBase> events) where T : struct
         {
             GCHandle sourceGCHandle = GCHandle.Alloc(source, GCHandleType.Pinned);
 
@@ -632,14 +628,13 @@ namespace Cloo
             }
             else
             {
-                bool eventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
-                Write(destination, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), evlist);
-                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
-                ev.Track(sourceGCHandle);
-                ev.SingleReference = !eventsWritable;
-                if (ev.Status == ComputeCommandExecutionStatus.Complete)
-                    ev.ComputeEvent_Fired(this, null);
+                bool userEventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : Events;
+                Write(destination, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), eventList);
+                ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
+                newEvent.TrackGCHandle(sourceGCHandle);
+                if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
+                    newEvent.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -658,7 +653,7 @@ namespace Cloo
         /// <param name="sourceSlicePitch"> The size of a 2D slice of elements of <paramref name="source"/> in bytes. </param>
         /// <param name="destinationSlicePitch"> The size of a 2D slice of elements of <paramref name="destination"/> in bytes. </param>
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> a new event identifying this command is attached to the end of the collection. </param>
-        public void WriteToBuffer<T>(T[, ,] source, ComputeBufferBase<T> destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long sourceRowPitch, long destinationRowPitch, long sourceSlicePitch, long destinationSlicePitch, ICollection<ComputeEventBase> events) where T : struct
+        public void WriteToBuffer<T>(T[, ,] source, ComputeBufferBase<T> destination, bool blocking, SysIntX3 sourceOffset, SysIntX3 destinationOffset, SysIntX3 region, long sourceRowPitch, long destinationRowPitch, long sourceSlicePitch, long destinationSlicePitch, IList<ComputeEventBase> events) where T : struct
         {
             GCHandle sourceGCHandle = GCHandle.Alloc(source, GCHandleType.Pinned);
 
@@ -669,14 +664,13 @@ namespace Cloo
             }
             else
             {
-                bool eventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> evlist = (eventsWritable) ? (IList<ComputeEventBase>)events : this.Events;
-                Write(destination, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), evlist);
-                ComputeEvent ev = (ComputeEvent)evlist[evlist.Count - 1];
-                ev.Track(sourceGCHandle);
-                ev.SingleReference = !eventsWritable;
-                if (ev.Status == ComputeCommandExecutionStatus.Complete)
-                    ev.ComputeEvent_Fired(this, null);
+                bool userEventsWritable = (events != null && !events.IsReadOnly);
+                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : Events;
+                Write(destination, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), eventList);
+                ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
+                newEvent.TrackGCHandle(sourceGCHandle);
+                if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
+                    newEvent.ComputeEvent_Fired(this, null);
             }
         }
 

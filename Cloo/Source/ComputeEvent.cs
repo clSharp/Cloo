@@ -49,7 +49,6 @@ namespace Cloo
         #region Fields
 
         private GCHandle gcHandle;
-        internal bool SingleReference;
         
         #endregion
 
@@ -92,13 +91,16 @@ namespace Cloo
             lock (CommandQueue.Events)
             {
                 if (CommandQueue.Events.Contains(this))
+                {
                     CommandQueue.Events.Remove(this);
-            }
-                if (SingleReference)
                     Dispose();
+                }
+                else
+                    FreeGCHandle();
+            }
         }
 
-        internal void Track(GCHandle handle)
+        internal void TrackGCHandle(GCHandle handle)
         {
             gcHandle = handle;
         }
@@ -114,8 +116,7 @@ namespace Cloo
         /// <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         protected override void Dispose(bool manual)
         {
-            Untrack();
-
+            FreeGCHandle();
             base.Dispose(manual);
         }
 
@@ -123,7 +124,7 @@ namespace Cloo
 
         #region Private methods
 
-        private void Untrack()
+        private void FreeGCHandle()
         {
             if (gcHandle.IsAllocated && gcHandle.Target != null)
                 gcHandle.Free();
