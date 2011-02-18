@@ -101,21 +101,26 @@ kernel void VectorAdd(
 
                 // Create the event wait list. An event list is not really needed for this example but it is important to see how it works.
                 // Note that events (like everything else) consume OpenCL resources and creating a lot of them may slow down execution.
-                // If "null" is used instead of "eventList", no events will be created.
+                // For this reason their use should be avoided if possible.
                 ComputeEventList eventList = new ComputeEventList();
                 
                 // Create the command queue. This is used to control kernel execution and manage read/write/copy operations.
                 ComputeCommandQueue commands = new ComputeCommandQueue(context, context.Devices[0], ComputeCommandQueueFlags.None);
 
                 // Execute the kernel "count" times. After this call returns, "eventList" will contain an event associated with this command.
+                // If eventList == null or typeof(eventList) == ReadOnlyCollection<ComputeEventBase>, a new event will not be created.
                 commands.Execute(kernel, null, new long[] { count }, null, eventList);
                 
-                // Read back the results. "eventList" will now contain two events.
+                // Read back the results. If the command-queue has out-of-order execution enabled (default is off), ReadFromBuffer 
+                // will not execute until any previous events in eventList (in our case only eventList[0]) are marked as complete 
+                // by OpenCL. By default the command-queue will execute the commands in the same order as they are issued from the host.
+                // eventList will contain two events after this method returns.
                 commands.ReadFromBuffer(c, ref arrC, false, eventList);
 
                 // A blocking "ReadFromBuffer" (if 3rd argument is true) will wait for itself and any previous commands
-                // in the command queue to finish execution. Otherwise an explicit wait for all the opencl commands to finish has to 
-                // be issued before "arrC" can be used. This explicit synchronization can be achieved in two ways:
+                // in the command queue or eventList to finish execution. Otherwise an explicit wait for all the opencl commands 
+                // to finish has to be issued before "arrC" can be used. 
+                // This explicit synchronization can be achieved in two ways:
 
                 // 1) Wait for the events in the list to finish,
                 //eventList.Wait();
