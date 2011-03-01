@@ -73,11 +73,11 @@ namespace Cloo
             Type = (ComputeCommandType)GetInfo<CLEventHandle, ComputeEventInfo, int>(Handle, ComputeEventInfo.CommandType, CL10.GetEventInfo);
             Context = queue.Context;
 
-            if (CommandQueue.Device.Version == new Version(1, 1))
-                HookNotifier();
-
             Completed += new ComputeCommandStatusChanged(ComputeEvent_Fired);
             Aborted += new ComputeCommandStatusChanged(ComputeEvent_Fired);
+
+            if (CommandQueue.Device.Version == new Version(1, 1))
+                HookNotifier();
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
