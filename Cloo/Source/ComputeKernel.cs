@@ -213,7 +213,7 @@ namespace Cloo
         /// <remarks> This method will automatically track <paramref name="memObj"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetMemoryArgument(int index, ComputeMemory memObj)
         {
-            SetMemoryArgument(index, memObj, true);
+            SetValueArgument<CLMemoryHandle>(index, memObj.Handle);
         }
 
         /// <summary>
@@ -223,6 +223,7 @@ namespace Cloo
         /// <param name="memObj"> The <see cref="ComputeMemory"/> that is passed as the argument. </param>
         /// <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="memObj"/> until <see cref="ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="memObj"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="ComputeKernel"/> execution. </param>
         /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        [Obsolete("Do not rely on this method. It doesn't work properly and will be removed in future versions")]
         public void SetMemoryArgument(int index, ComputeMemory memObj, bool track)
         {
             if (track) tracker[index] = memObj;
@@ -238,7 +239,7 @@ namespace Cloo
         /// <remarks> This method will automatically track <paramref name="sampler"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetSamplerArgument(int index, ComputeSampler sampler)
         {
-            SetSamplerArgument(index, sampler, true);
+            SetValueArgument<CLSamplerHandle>(index, sampler.Handle);
         }
 
         /// <summary>
@@ -248,6 +249,7 @@ namespace Cloo
         /// <param name="sampler"> The <see cref="ComputeSampler"/> that is passed as the argument. </param>
         /// <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="sampler"/> until <see cref="ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="sampler"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="ComputeKernel"/> execution. </param>
         /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        [Obsolete("Do not rely on this method. It doesn't work properly and will be removed in future versions")]
         public void SetSamplerArgument(int index, ComputeSampler sampler, bool track)
         {
             if (track) tracker[index] = sampler;
