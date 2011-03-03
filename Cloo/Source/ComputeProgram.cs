@@ -283,15 +283,6 @@ namespace Cloo
             return (ComputeProgramBuildStatus)GetInfo<CLProgramHandle, CLDeviceHandle, ComputeProgramBuildInfo, uint>(Handle, device.Handle, ComputeProgramBuildInfo.Status, CL10.GetProgramBuildInfo);
         }
 
-        /// <summary>
-        /// Gets the string representation of the <see cref="ComputeProgram"/>.
-        /// </summary>
-        /// <returns> The string representation of the <see cref="ComputeProgram"/>. </returns>
-        public override string ToString()
-        {
-            return "ComputeProgram" + base.ToString();
-        }
-
         #endregion
 
         #region Protected methods

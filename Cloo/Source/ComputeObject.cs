@@ -101,7 +101,7 @@ namespace Cloo
         /// <returns> The string representation of the <see cref="ComputeObject"/>. </returns>
         public override string ToString()
         {
-            return "(" + handle.ToString() + ")";
+            return GetType().Name + "(" + handle.ToString() + ")";
         }
 
         #endregion

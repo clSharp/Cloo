@@ -106,12 +106,6 @@
             Releases the associated OpenCL object.
             </summary>
         </member>
-        <member name="M:Cloo.ComputeEventBase.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeEventBase"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeEventBase"/>. </returns>
-        </member>
         <member name="M:Cloo.ComputeEventBase.Dispose(System.Boolean)">
             <summary>
             Releases the associated OpenCL object.
@@ -293,12 +287,6 @@
             </summary>
             <param name="context"></param>
             <param name="flags"></param>
-        </member>
-        <member name="M:Cloo.ComputeImage.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeImage"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeImage"/>. </returns>
         </member>
         <member name="M:Cloo.ComputeImage.GetSupportedFormats(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,Cloo.ComputeMemoryType)">
             <summary>
@@ -1106,12 +1094,6 @@
             <param name="memObjs"> A collection of <see cref="T:Cloo.ComputeMemory"/>s that correspond to OpenGL memory objects. </param>
             <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="T:Cloo.ComputeEvent"/> identifying this command is attached to the end of the collection. </param>
         </member>
-        <member name="M:Cloo.ComputeCommandQueue.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeCommandQueue"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeCommandQueue"/>. </returns>
-        </member>
         <member name="M:Cloo.ComputeCommandQueue.Unmap(Cloo.ComputeMemory,System.IntPtr@,System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to unmap a buffer or a <see cref="T:Cloo.ComputeImage"/> from the host address space.
@@ -1323,12 +1305,6 @@
             <param name="notify"> A delegate instance that refers to a notification routine. This routine is a callback function that will be used by the OpenCL implementation to report information on errors that occur in the <see cref="T:Cloo.ComputeContext"/>. The callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe and that the delegate instance doesn't get collected by the Garbage Collector until <see cref="T:Cloo.ComputeContext"/> is disposed. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
             <param name="userDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         </member>
-        <member name="M:Cloo.ComputeContext.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeContext"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeContext"/>. </returns>
-        </member>
         <member name="M:Cloo.ComputeContext.Dispose(System.Boolean)">
             <summary>
             Releases the associated OpenCL object.
@@ -1445,12 +1421,6 @@
             </summary>
             <param name="name"> The name of the <see cref="T:Cloo.ComputeContextProperty"/>. </param>
             <param name="value"> The value of the created <see cref="T:Cloo.ComputeContextProperty"/>. </param>
-        </member>
-        <member name="M:Cloo.ComputeContextProperty.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeContextProperty"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeContextProperty"/>. </returns>
         </member>
         <member name="P:Cloo.ComputeContextProperty.Name">
             <summary>
@@ -2726,12 +2696,6 @@
             <param name="data"> The data that is passed as the argument value. </param>
             <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         </member>
-        <member name="M:Cloo.ComputeKernel.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeKernel"/>. </returns>
-        </member>
         <member name="M:Cloo.ComputeKernel.Dispose(System.Boolean)">
             <summary>
             Releases the associated OpenCL object.
@@ -3413,12 +3377,6 @@
             <param name="bufferId"> The OpenGL buffer object id to use for the creation of the <see cref="T:Cloo.ComputeBuffer`1"/>. </param>
             <returns> The created <see cref="T:Cloo.ComputeBuffer`1"/>. </returns>
         </member>
-        <member name="M:Cloo.ComputeBuffer`1.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeBuffer`1"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeBuffer`1"/>. </returns>
-        </member>
         <member name="T:Cloo.ComputeProgram">
             <summary>
             Represents an OpenCL program.
@@ -3485,12 +3443,6 @@
             </summary>
             <param name="device"> The <see cref="T:Cloo.ComputeDevice"/> building the <see cref="T:Cloo.ComputeProgram"/>. Must be one of <see cref="P:Cloo.ComputeProgram.Devices"/>. </param>
             <returns> The <see cref="T:Cloo.ComputeProgramBuildStatus"/> of the <see cref="T:Cloo.ComputeProgram"/> for <paramref name="device"/>. </returns>
-        </member>
-        <member name="M:Cloo.ComputeProgram.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeProgram"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeProgram"/>. </returns>
         </member>
         <member name="M:Cloo.ComputeProgram.Dispose(System.Boolean)">
             <summary>
@@ -3566,12 +3518,6 @@
             <seealso cref="T:Cloo.ComputeKernel"/>
             <seealso cref="T:Cloo.ComputeMemory"/>
             <seealso cref="T:Cloo.ComputePlatform"/>
-        </member>
-        <member name="M:Cloo.ComputeDevice.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeDevice"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeDevice"/>. </returns>
         </member>
         <member name="P:Cloo.ComputeDevice.AddressBits">
             <summary>
@@ -4060,12 +4006,6 @@
             <returns> A read-only collection of the available <see cref="T:Cloo.ComputeDevice"/>s on the <see cref="T:Cloo.ComputePlatform"/>. </returns>
             <remarks> This method resets the <c>ComputePlatform.Devices</c>. This is useful if one or more of them become unavailable (<c>ComputeDevice.Available</c> is <c>false</c>) after a <see cref="T:Cloo.ComputeContext"/> and <see cref="T:Cloo.ComputeCommandQueue"/>s that use the <see cref="T:Cloo.ComputeDevice"/> have been created and commands have been queued to them. Further calls will trigger an <c>OutOfResourcesComputeException</c> until this method is executed. You will also need to recreate any <see cref="T:Cloo.ComputeResource"/> that was created on the no longer available <see cref="T:Cloo.ComputeDevice"/>. </remarks>
         </member>
-        <member name="M:Cloo.ComputePlatform.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputePlatform"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputePlatform"/>. </returns>
-        </member>
         <member name="P:Cloo.ComputePlatform.Devices">
             <summary>
             Gets a read-only collection of <see cref="T:Cloo.ComputeDevice"/>s available on the <see cref="T:Cloo.ComputePlatform"/>.
@@ -4199,12 +4139,6 @@
             <param name="offset"> The index of the element of <paramref name="buffer"/>, where the <see cref="T:Cloo.ComputeSubBuffer`1"/> starts. </param>
             <param name="count"> The number of elements of <paramref name="buffer"/> to include in the <see cref="T:Cloo.ComputeSubBuffer`1"/>. </param>
         </member>
-        <member name="M:Cloo.ComputeSubBuffer`1.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeSubBuffer`1"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeSubBuffer`1"/>. </returns>
-        </member>
         <member name="T:Cloo.ComputeSampler">
             <summary>
             Represents an OpenCL sampler.
@@ -4220,12 +4154,6 @@
             <param name="normalizedCoords"> The usage state of normalized coordinates when accessing a <see cref="T:Cloo.ComputeImage"/> in a <see cref="T:Cloo.ComputeKernel"/>. </param>
             <param name="addressing"> The <see cref="T:Cloo.ComputeImageAddressing"/> mode of the <see cref="T:Cloo.ComputeSampler"/>. Specifies how out-of-range image coordinates are handled while reading. </param>
             <param name="filtering"> The <see cref="T:Cloo.ComputeImageFiltering"/> mode of the <see cref="T:Cloo.ComputeSampler"/>. Specifies the type of filter that must be applied when reading data from an image. </param>
-        </member>
-        <member name="M:Cloo.ComputeSampler.ToString">
-            <summary>
-            Gets the string representation of the <see cref="T:Cloo.ComputeSampler"/>.
-            </summary>
-            <returns> The string representation of the <see cref="T:Cloo.ComputeSampler"/>. </returns>
         </member>
         <member name="M:Cloo.ComputeSampler.Dispose(System.Boolean)">
             <summary>

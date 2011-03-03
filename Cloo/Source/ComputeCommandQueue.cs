@@ -535,15 +535,6 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the string representation of the <see cref="ComputeCommandQueue"/>.
-        /// </summary>
-        /// <returns> The string representation of the <see cref="ComputeCommandQueue"/>. </returns>
-        public override string ToString()
-        {
-            return "ComputeCommandQueue" + base.ToString();
-        }
-
-        /// <summary>
         /// Enqueues a command to unmap a buffer or a <see cref="ComputeImage"/> from the host address space.
         /// </summary>
         /// <param name="memory"> The <see cref="ComputeMemory"/>. </param>

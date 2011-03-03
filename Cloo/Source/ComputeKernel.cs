@@ -280,15 +280,6 @@ namespace Cloo
             }
         }
 
-        /// <summary>
-        /// Gets the string representation of the <see cref="ComputeKernel"/>.
-        /// </summary>
-        /// <returns> The string representation of the <see cref="ComputeKernel"/>. </returns>
-        public override string ToString()
-        {
-            return "ComputeKernel" + base.ToString();
-        }
-
         #endregion
 
         #region Internal methods

@@ -99,19 +99,6 @@ namespace Cloo
 
         #endregion
 
-        #region Public methods
-
-        /// <summary>
-        /// Gets the string representation of the <see cref="ComputeImage"/>.
-        /// </summary>
-        /// <returns> The string representation of the <see cref="ComputeImage"/>. </returns>
-        public override string ToString()
-        {
-            return "ComputeImage" + base.ToString();
-        }
-
-        #endregion
-
         #region Protected methods
 
         /// <summary>

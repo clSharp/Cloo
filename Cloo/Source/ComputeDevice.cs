@@ -599,19 +599,6 @@ namespace Cloo
 
         #endregion
 
-        #region Public methods
-
-        /// <summary>
-        /// Gets the string representation of the <see cref="ComputeDevice"/>.
-        /// </summary>
-        /// <returns> The string representation of the <see cref="ComputeDevice"/>. </returns>
-        public override string ToString()
-        {
-            return "ComputeDevice(" + Name + ")";
-        }
-
-        #endregion
-
         #region Private methods
 
         private bool GetBoolInfo(ComputeDeviceInfo paramName)

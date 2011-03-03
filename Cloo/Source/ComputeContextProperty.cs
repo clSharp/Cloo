@@ -85,7 +85,7 @@ namespace Cloo
         /// <returns> The string representation of the <see cref="ComputeContextProperty"/>. </returns>
         public override string ToString()
         {
-            return "ComputeContextProperty(" + name + ", " + value + ")";
+            return GetType().Name + "(" + name + ", " + value + ")";
         }
 
         #endregion

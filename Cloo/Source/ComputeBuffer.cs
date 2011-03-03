@@ -123,15 +123,6 @@ namespace Cloo
             return new ComputeBuffer<DataType>(handle, context, flags);
         }
 
-        /// <summary>
-        /// Gets the string representation of the <see cref="ComputeBuffer{T}"/>.
-        /// </summary>
-        /// <returns> The string representation of the <see cref="ComputeBuffer{T}"/>. </returns>
-        public override string ToString()
-        {
-            return "ComputeBuffer{T}" + base.ToString();
-        }
-
         #endregion
     }
 }

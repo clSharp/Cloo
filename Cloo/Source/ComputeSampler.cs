@@ -113,19 +113,6 @@ namespace Cloo
 
         #endregion
 
-        #region Public methods
-
-        /// <summary>
-        /// Gets the string representation of the <see cref="ComputeSampler"/>.
-        /// </summary>
-        /// <returns> The string representation of the <see cref="ComputeSampler"/>. </returns>
-        public override string ToString()
-        {
-            return "ComputeSampler" + base.ToString();
-        }
-
-        #endregion
-
         #region Protected methods
 
         /// <summary>
