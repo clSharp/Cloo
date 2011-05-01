@@ -86,7 +86,7 @@ namespace Cloo
 
         #region Internal methods
 
-        internal void ComputeEvent_Fired(object sender, EventArgs e)
+        internal void ComputeEvent_Fired(object sender, ComputeCommandStatusArgs e)
         {
             lock (CommandQueue.Events)
             {
