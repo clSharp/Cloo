@@ -1,3 +1,9 @@
+[0.9.0] ------------------------------------------------------------------------
+Cloo 0.9 is finally out.
+This is a minor upgrade over the previous alpha release bringing some small updates, bugfixes and documentation edits.
+The most notable change is the deprecation of some of the ComputeKernel.SetArgument methods, which will be removed in the near future. These so called "tracking" variants used to keep track of kernel arguments to prevent them from being garbage collected until kernel execution. This is problematic however, because at the library level it is impossible to determine, when the kernel finishes. The application is now responsible for tracking these objects.
+Asynchronous command queue calls are now more robust and carry a bit less overhead. The ComputeEvent callback mechanism has been much improved. Unlike in previous versions the ComputeEventBase.Completed and ComputeEventBase.Aborted events are now guaranteed to trigger under all circumstances.
+
 [0.9.alpha2] -------------------------------------------------------------------
 The second 0.9 preview is out.
 The major feature is a whole new set of OpenCL object handles, which can be used with the redesigned bindings. This final major change is the result of the efforts aiming at bringing the low level part of the library up to par with the rest of the code. So, if you wanted a basic set of fast, type safe and still very friendly OpenCL bindings that completely bypasses the object oriented layer, you're finally served!

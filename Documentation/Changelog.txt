@@ -1,3 +1,21 @@
+[0.9.0] ------------------------------------------------------------------------
+Breaking changes:
+ComputeEventBase.Aborted and ComputeEventBase.Completed event fields are now private.
+
+Bugfixes:
+Passing a read-only collection of events to command queue methods would cause a memory leak.
+The event callback would not trigger under certain circumstances.
+
+Deprecated:
+ComputeKernel.SetArgument methods that accept a "tracking" argument.
+
+Internals:
+Removed ToString methods from all classes but ComputeObject.
+
+Documentation:
+Fixed an error regarding OpenGL/OpenCL contexts and other minor clarifications.
+
+
 [0.9.alpha2] -------------------------------------------------------------------
 Breaking changes:
 Every OpenCL object handle in the bindings is represented by a new type, replacing the old IntPtr types.
