@@ -73,9 +73,6 @@ namespace Cloo
             Type = (ComputeCommandType)GetInfo<CLEventHandle, ComputeEventInfo, int>(Handle, ComputeEventInfo.CommandType, CL10.GetEventInfo);
             Context = queue.Context;
 
-            Completed += new ComputeCommandStatusChanged(ComputeEvent_Fired);
-            Aborted += new ComputeCommandStatusChanged(ComputeEvent_Fired);
-
             if (CommandQueue.Device.Version == new Version(1, 1))
                 HookNotifier();
 
@@ -86,23 +83,12 @@ namespace Cloo
 
         #region Internal methods
 
-        internal void ComputeEvent_Fired(object sender, ComputeCommandStatusArgs e)
-        {
-            lock (CommandQueue.Events)
-            {
-                if (CommandQueue.Events.Contains(this))
-                {
-                    CommandQueue.Events.Remove(this);
-                    Dispose();
-                }
-                else
-                    FreeGCHandle();
-            }
-        }
-
         internal void TrackGCHandle(GCHandle handle)
         {
             gcHandle = handle;
+
+            Completed += new ComputeCommandStatusChanged(Cleanup);
+            Aborted += new ComputeCommandStatusChanged(Cleanup);
         }
 
         #endregion
@@ -123,6 +109,20 @@ namespace Cloo
         #endregion
 
         #region Private methods
+
+        private void Cleanup(object sender, ComputeCommandStatusArgs e)
+        {
+            lock (CommandQueue.Events)
+            {
+                if (CommandQueue.Events.Contains(this))
+                {
+                    CommandQueue.Events.Remove(this);
+                    Dispose();
+                }
+                else
+                    FreeGCHandle();
+            }
+        }
 
         private void FreeGCHandle()
         {
