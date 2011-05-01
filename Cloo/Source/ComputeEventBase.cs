@@ -45,6 +45,9 @@ namespace Cloo
     {
         #region Fields
 
+        private event ComputeCommandStatusChanged aborted;
+        private event ComputeCommandStatusChanged completed;
+        private ComputeCommandStatusArgs status;
         private ComputeEventCallback statusNotify;
 
         #endregion
@@ -55,13 +58,37 @@ namespace Cloo
         /// Occurs when the command associated with the event is abnormally terminated.
         /// </summary>
         /// <remarks> Requires OpenCL 1.1. </remarks>
-        public event ComputeCommandStatusChanged Aborted;
+        public event ComputeCommandStatusChanged Aborted
+        {
+            add
+            {
+                aborted += value;
+                if (status != null && status.Status != ComputeCommandExecutionStatus.Complete)
+                    value.Invoke(this, status);
+            }
+            remove
+            {
+                aborted -= value;
+            }
+        }
 
         /// <summary>
         /// Occurs when <c>ComputeEventBase.Status</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
         /// </summary>
         /// <remarks> Requires OpenCL 1.1. </remarks>
-        public event ComputeCommandStatusChanged Completed;
+        public event ComputeCommandStatusChanged Completed
+        {
+            add
+            {
+                completed += value;
+                if (status != null && status.Status == ComputeCommandExecutionStatus.Complete)
+                    value.Invoke(this, status);
+            }
+            remove
+            {
+                completed -= value;
+            }
+        }
 
         #endregion
 
@@ -167,8 +194,8 @@ namespace Cloo
         protected virtual void OnCompleted(object sender, ComputeCommandStatusArgs evArgs)
         {
             Trace.WriteLine("Completed " + Type + " operation of " + this + ".");
-            if (Completed != null)
-                Completed(sender, evArgs);
+            if (completed != null)
+                completed(sender, evArgs);
         }
 
         /// <summary>
@@ -179,8 +206,8 @@ namespace Cloo
         protected virtual void OnAborted(object sender, ComputeCommandStatusArgs evArgs)
         {
             Trace.WriteLine("Aborted " + Type + " operation of " + this + ".");
-            if (Aborted != null)
-                Aborted(sender, evArgs);
+            if (aborted != null)
+                aborted(sender, evArgs);
         }
 
         #endregion
@@ -189,11 +216,11 @@ namespace Cloo
 
         private void StatusNotify(CLEventHandle eventHandle, int cmdExecStatusOrErr, IntPtr userData)
         {
-            ComputeCommandStatusArgs statusArgs = new ComputeCommandStatusArgs(this, (ComputeCommandExecutionStatus)cmdExecStatusOrErr);
+            status = new ComputeCommandStatusArgs(this, (ComputeCommandExecutionStatus)cmdExecStatusOrErr);
             switch (cmdExecStatusOrErr)
             {
-                case (int)ComputeCommandExecutionStatus.Complete: OnCompleted(this, statusArgs); break;
-                default: OnAborted(this, statusArgs); break;
+                case (int)ComputeCommandExecutionStatus.Complete: OnCompleted(this, status); break;
+                default: OnAborted(this, status); break;
             }
         }
 
