@@ -340,8 +340,6 @@ namespace Cloo
                 Read(source, blocking, sourceOffset, region, destinationOffsetPtr, eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(destinationGCHandle);
-                //if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
-                    //newEvent.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -406,8 +404,6 @@ namespace Cloo
                 Read(source, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, destinationGCHandle.AddrOfPinnedObject(), eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(destinationGCHandle);
-                //if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
-                    //newEvent.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -442,8 +438,6 @@ namespace Cloo
                 Read(source, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, destinationGCHandle.AddrOfPinnedObject(), eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(destinationGCHandle);
-                //if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
-                    //newEvent.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -567,8 +561,6 @@ namespace Cloo
                 Write(destination, blocking, destinationOffset, region, sourceOffsetPtr, eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(sourceGCHandle);
-                //if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
-                    //newEvent.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -633,8 +625,6 @@ namespace Cloo
                 Write(destination, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(sourceGCHandle);
-                //if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
-                    //newEvent.ComputeEvent_Fired(this, null);
             }
         }
 
@@ -669,8 +659,6 @@ namespace Cloo
                 Write(destination, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(sourceGCHandle);
-                //if (newEvent.Status == ComputeCommandExecutionStatus.Complete)
-                    //newEvent.ComputeEvent_Fired(this, null);
             }
         }
 

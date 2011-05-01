@@ -48,7 +48,7 @@ namespace Clootils
         
         public string Name
         {
-            get { return "Building multiple kernels"; }
+            get { return "Multiple kernels"; }
         }
 
         public string Description

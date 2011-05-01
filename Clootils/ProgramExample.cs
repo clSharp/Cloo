@@ -44,7 +44,7 @@ namespace Clootils
 
         public string Name
         {
-            get { return "Program build"; }
+            get { return "Program building"; }
         }
 
         public string Description
