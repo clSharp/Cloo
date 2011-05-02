@@ -5,6 +5,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloo.VS2010", "Cloo\Cloo.VS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clootils.VS2010", "Clootils\Clootils.VS2010.csproj", "{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{5040C738-55ED-42D8-B006-07FA2B151C4B}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\ChangeLog.txt = Documentation\ChangeLog.txt
+		Documentation\License.txt = Documentation\License.txt
+		Documentation\ReadMe.txt = Documentation\ReadMe.txt
+		Documentation\ReleaseNotes.txt = Documentation\ReleaseNotes.txt
+		Documentation\Supported.txt = Documentation\Supported.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
