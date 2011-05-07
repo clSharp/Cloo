@@ -51,7 +51,6 @@ namespace Cloo
         private readonly ComputeContext context;
         private readonly string functionName;
         private readonly ComputeProgram program;
-        private readonly Dictionary<int, ComputeResource> tracker;
 
         #endregion
 
@@ -93,7 +92,6 @@ namespace Cloo
             context = program.Context;
             functionName = GetStringInfo<CLKernelHandle, ComputeKernelInfo>(Handle, ComputeKernelInfo.FunctionName, CL10.GetKernelInfo);
             this.program = program;
-            tracker = new Dictionary<int, ComputeResource>();
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
@@ -109,7 +107,6 @@ namespace Cloo
             context = program.Context;
             this.functionName = functionName;
             this.program = program;
-            tracker = new Dictionary<int, ComputeResource>();
 
             Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
         }
@@ -217,21 +214,6 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <see cref="ComputeKernel"/>.
-        /// </summary>
-        /// <param name="index"> The argument index. </param>
-        /// <param name="memObj"> The <see cref="ComputeMemory"/> that is passed as the argument. </param>
-        /// <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="memObj"/> until <see cref="ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="memObj"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="ComputeKernel"/> execution. </param>
-        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
-        [Obsolete("Do not rely on this method. It doesn't work properly and will be removed in future versions")]
-        public void SetMemoryArgument(int index, ComputeMemory memObj, bool track)
-        {
-            if (track) tracker[index] = memObj;
-
-            SetValueArgument<CLMemoryHandle>(index, memObj.Handle);
-        }
-
-        /// <summary>
         /// Sets a <c>sampler_t</c> argument of the <see cref="ComputeKernel"/>.
         /// </summary>
         /// <param name="index"> The argument index. </param>
@@ -239,21 +221,6 @@ namespace Cloo
         /// <remarks> This method will automatically track <paramref name="sampler"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetSamplerArgument(int index, ComputeSampler sampler)
         {
-            SetValueArgument<CLSamplerHandle>(index, sampler.Handle);
-        }
-
-        /// <summary>
-        /// Sets a <c>sampler_t</c> argument of the <see cref="ComputeKernel"/>.
-        /// </summary>
-        /// <param name="index"> The argument index. </param>
-        /// <param name="sampler"> The <see cref="ComputeSampler"/> that is passed as the argument. </param>
-        /// <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="sampler"/> until <see cref="ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="sampler"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="ComputeKernel"/> execution. </param>
-        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
-        [Obsolete("Do not rely on this method. It doesn't work properly and will be removed in future versions")]
-        public void SetSamplerArgument(int index, ComputeSampler sampler, bool track)
-        {
-            if (track) tracker[index] = sampler;
-
             SetValueArgument<CLSamplerHandle>(index, sampler.Handle);
         }
 
@@ -278,16 +245,6 @@ namespace Cloo
             {
                 gcHandle.Free();
             }
-        }
-
-        #endregion
-
-        #region Internal methods
-
-        internal void ReferenceArguments()
-        {
-            foreach (ComputeResource resource in tracker.Values)
-                GC.KeepAlive(resource);
         }
 
         #endregion

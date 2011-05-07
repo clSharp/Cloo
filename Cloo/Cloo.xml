@@ -604,15 +604,6 @@
             <param name="memObj"> The <see cref="T:Cloo.ComputeMemory"/> that is passed as the argument. </param>
             <remarks> This method will automatically track <paramref name="memObj"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         </member>
-        <member name="M:Cloo.ComputeKernel.SetMemoryArgument(System.Int32,Cloo.ComputeMemory,System.Boolean)">
-            <summary>
-            Sets a <c>T*</c>, <c>image2d_t</c> or <c>image3d_t</c> argument of the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <param name="index"> The argument index. </param>
-            <param name="memObj"> The <see cref="T:Cloo.ComputeMemory"/> that is passed as the argument. </param>
-            <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="memObj"/> until <see cref="T:Cloo.ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="memObj"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="T:Cloo.ComputeKernel"/> execution. </param>
-            <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
-        </member>
         <member name="M:Cloo.ComputeKernel.SetSamplerArgument(System.Int32,Cloo.ComputeSampler)">
             <summary>
             Sets a <c>sampler_t</c> argument of the <see cref="T:Cloo.ComputeKernel"/>.
@@ -620,15 +611,6 @@
             <param name="index"> The argument index. </param>
             <param name="sampler"> The <see cref="T:Cloo.ComputeSampler"/> that is passed as the argument. </param>
             <remarks> This method will automatically track <paramref name="sampler"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
-        </member>
-        <member name="M:Cloo.ComputeKernel.SetSamplerArgument(System.Int32,Cloo.ComputeSampler,System.Boolean)">
-            <summary>
-            Sets a <c>sampler_t</c> argument of the <see cref="T:Cloo.ComputeKernel"/>.
-            </summary>
-            <param name="index"> The argument index. </param>
-            <param name="sampler"> The <see cref="T:Cloo.ComputeSampler"/> that is passed as the argument. </param>
-            <param name="track"> Specify whether the kernel should prevent garbage collection of the <paramref name="sampler"/> until <see cref="T:Cloo.ComputeKernel"/> execution. This is useful if the application code doesn't refer to <paramref name="sampler"/> after this call or forces a <c>GC.Collect()</c> between this call and the <see cref="T:Cloo.ComputeKernel"/> execution. </param>
-            <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         </member>
         <member name="M:Cloo.ComputeKernel.SetValueArgument``1(System.Int32,``0)">
             <summary>

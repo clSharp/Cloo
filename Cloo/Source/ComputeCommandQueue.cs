@@ -315,8 +315,6 @@ namespace Cloo
             ComputeErrorCode error = CL10.EnqueueTask(Handle, kernel.Handle, eventWaitListSize, eventHandles, newEventHandle);
             ComputeException.ThrowOnError(error);
 
-            kernel.ReferenceArguments();
-
             if (eventsWritable)
                 events.Add(new ComputeEvent(newEventHandle[0], this));
         }
@@ -338,8 +336,6 @@ namespace Cloo
 
             ComputeErrorCode error = CL10.EnqueueNDRangeKernel(Handle, kernel.Handle, globalWorkSize.Length, Tools.ConvertArray(globalWorkOffset), Tools.ConvertArray(globalWorkSize), Tools.ConvertArray(localWorkSize), eventWaitListSize, eventHandles, newEventHandle);
             ComputeException.ThrowOnError(error);
-
-            kernel.ReferenceArguments();
 
             if (eventsWritable)
                 events.Add(new ComputeEvent(newEventHandle[0], this));
