@@ -79,6 +79,7 @@ namespace Cloo
         /// <param name="context"> A <see cref="ComputeContext"/> used to create the <see cref="ComputeBuffer{T}"/>. </param>
         /// <param name="flags"> A bit-field that is used to specify allocation and usage information about the <see cref="ComputeBuffer{T}"/>. </param>
         /// <param name="data"> The data for the <see cref="ComputeBuffer{T}"/>. </param>
+        /// <remarks> Note, that <paramref name="data"/> cannot be an "immediate" parameter, i.e.: <c>new T[100]</c>, because it could be quickly collected by the GC causing Cloo to send and invalid reference to OpenCL. </remarks>
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, T[] data)
             : base(context, flags)
         {

@@ -1844,6 +1844,7 @@
             <param name="context"> A <see cref="T:Cloo.ComputeContext"/> used to create the <see cref="T:Cloo.ComputeBuffer`1"/>. </param>
             <param name="flags"> A bit-field that is used to specify allocation and usage information about the <see cref="T:Cloo.ComputeBuffer`1"/>. </param>
             <param name="data"> The data for the <see cref="T:Cloo.ComputeBuffer`1"/>. </param>
+            <remarks> Note, that <paramref name="data"/> cannot be an "immediate" parameter, i.e.: <c>new T[100]</c>, because it could be quickly collected by the GC causing Cloo to send and invalid reference to OpenCL. </remarks>
         </member>
         <member name="M:Cloo.ComputeBuffer`1.CreateFromGLBuffer``1(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,System.Int32)">
             <summary>
@@ -2462,16 +2463,16 @@
             </summary>
         </member>
         <member name="F:Cloo.ComputeMemoryFlags.None">
-            <summary> </summary>
+            <summary> Let the OpenCL choose the default flags. </summary>
         </member>
         <member name="F:Cloo.ComputeMemoryFlags.ReadWrite">
-            <summary> </summary>
+            <summary> The <see cref="T:Cloo.ComputeMemory"/> will be accessible from the <see cref="T:Cloo.ComputeKernel"/> for read and write operations. </summary>
         </member>
         <member name="F:Cloo.ComputeMemoryFlags.WriteOnly">
-            <summary> </summary>
+            <summary> The <see cref="T:Cloo.ComputeMemory"/> will be accessible from the <see cref="T:Cloo.ComputeKernel"/> for write operations only. </summary>
         </member>
         <member name="F:Cloo.ComputeMemoryFlags.ReadOnly">
-            <summary> </summary>
+            <summary> The <see cref="T:Cloo.ComputeMemory"/> will be accessible from the <see cref="T:Cloo.ComputeKernel"/> for read operations only. </summary>
         </member>
         <member name="F:Cloo.ComputeMemoryFlags.UseHostPointer">
             <summary> </summary>

@@ -476,13 +476,13 @@ namespace Cloo
     [Flags]
     public enum ComputeMemoryFlags : long
     {
-        /// <summary> </summary>
+        /// <summary> Let the OpenCL choose the default flags. </summary>
         None = 0,
-        /// <summary> </summary>
+        /// <summary> The <see cref="ComputeMemory"/> will be accessible from the <see cref="ComputeKernel"/> for read and write operations. </summary>
         ReadWrite = 1 << 0,
-        /// <summary> </summary>
+        /// <summary> The <see cref="ComputeMemory"/> will be accessible from the <see cref="ComputeKernel"/> for write operations only. </summary>
         WriteOnly = 1 << 1,
-        /// <summary> </summary>
+        /// <summary> The <see cref="ComputeMemory"/> will be accessible from the <see cref="ComputeKernel"/> for read operations only. </summary>
         ReadOnly = 1 << 2,
         /// <summary> </summary>
         UseHostPointer = 1 << 3,
