@@ -89,7 +89,7 @@ namespace Cloo
         public static void Wait(ICollection<ComputeEventBase> events)
         {
             int eventWaitListSize;
-            CLEventHandle[] eventHandles = Tools.ExtractEventHandles(events, out eventWaitListSize);
+            CLEventHandle[] eventHandles = Tools.ExtractHandles(events, out eventWaitListSize);
             ComputeErrorCode error = CL10.WaitForEvents(eventWaitListSize, eventHandles);
             ComputeException.ThrowOnError(error);
         }
