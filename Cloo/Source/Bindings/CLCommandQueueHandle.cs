@@ -33,13 +33,35 @@ namespace Cloo.Bindings
 {
     using System;
 
+    /// <summary>
+    /// Represents the <see cref="ComputeCommandQueue"/> ID.
+    /// </summary>
     public struct CLCommandQueueHandle
     {
         IntPtr value;
 
-        public bool IsValid { get { return value != IntPtr.Zero; } }
-        public IntPtr Value { get { return value; } }
+        /// <summary>
+        /// Gets a logic value indicating whether the handle is valid.
+        /// </summary>
+        public bool IsValid
+        {
+            get { return value != IntPtr.Zero; }
+        }
+
+        /// <summary>
+        /// Gets the value of the handle.
+        /// </summary>
+        public IntPtr Value
+        {
+            get { return value; }
+        }
         
-        public void Invalidate() { value = IntPtr.Zero; }
+        /// <summary>
+        /// Invalidates the handle.
+        /// </summary>
+        public void Invalidate()
+        {
+            value = IntPtr.Zero;
+        }
     }
 }
