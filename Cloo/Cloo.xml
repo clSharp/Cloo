@@ -148,6 +148,46 @@
             </summary>
             <value> The OpenCL version string supported by the <see cref="T:Cloo.ComputePlatform"/>. It has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </value>
         </member>
+        <member name="T:Cloo.Bindings.CLSamplerHandle">
+            <summary>
+            Represents the <see cref="T:Cloo.ComputeSampler"/> ID.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLSamplerHandle.Invalidate">
+            <summary>
+            Invalidates the handle.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLSamplerHandle.IsValid">
+            <summary>
+            Gets a logic value indicating whether the handle is valid.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLSamplerHandle.Value">
+            <summary>
+            Gets the value of the handle.
+            </summary>
+        </member>
+        <member name="T:Cloo.Bindings.CLContextHandle">
+            <summary>
+            Represents the <see cref="T:Cloo.ComputeContext"/> ID.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLContextHandle.Invalidate">
+            <summary>
+            Invalidates the handle.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLContextHandle.IsValid">
+            <summary>
+            Gets a logic value indicating whether the handle is valid.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLContextHandle.Value">
+            <summary>
+            Gets the value of the handle.
+            </summary>
+        </member>
         <member name="T:Cloo.Tools">
             <summary>
             Contains various helper methods.
@@ -795,6 +835,26 @@
             <param name="context"> The <see cref="T:Cloo.ComputeContext"/> for which the collection of <see cref="T:Cloo.ComputeImageFormat"/>s is queried. </param>
             <param name="flags"> The <c>ComputeMemoryFlags</c> for which the collection of <see cref="T:Cloo.ComputeImageFormat"/>s is queried. </param>
             <returns> The collection of the required <see cref="T:Cloo.ComputeImageFormat"/>s. </returns>
+        </member>
+        <member name="T:Cloo.Bindings.CLProgramHandle">
+            <summary>
+            Represents the <see cref="T:Cloo.ComputeProgram"/> ID.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLProgramHandle.Invalidate">
+            <summary>
+            Invalidates the handle.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLProgramHandle.IsValid">
+            <summary>
+            Gets a logic value indicating whether the handle is valid.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLProgramHandle.Value">
+            <summary>
+            Gets the value of the handle.
+            </summary>
         </member>
         <member name="T:Cloo.Bindings.CL11">
             <summary>
@@ -1882,6 +1942,26 @@
             
             </summary>
             <param name="platform"></param>
+        </member>
+        <member name="T:Cloo.Bindings.CLKernelHandle">
+            <summary>
+            Represents the <see cref="T:Cloo.ComputeKernel"/> ID.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLKernelHandle.Invalidate">
+            <summary>
+            Invalidates the handle.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLKernelHandle.IsValid">
+            <summary>
+            Gets a logic value indicating whether the handle is valid.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLKernelHandle.Value">
+            <summary>
+            Gets the value of the handle.
+            </summary>
         </member>
         <member name="T:Cloo.ComputeErrorCode">
             <summary>
@@ -3817,6 +3897,46 @@
             </summary>
             <value> Is <c>true</c> if <see cref="T:Cloo.ComputeCommandQueue"/> has profiling enabled and <c>false</c> otherwise. </value>
         </member>
+        <member name="T:Cloo.Bindings.CLDeviceHandle">
+            <summary>
+            Represents the <see cref="T:Cloo.ComputeDevice"/> ID.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLDeviceHandle.Invalidate">
+            <summary>
+            Invalidates the handle.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLDeviceHandle.IsValid">
+            <summary>
+            Gets a logic value indicating whether the handle is valid.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLDeviceHandle.Value">
+            <summary>
+            Gets the value of the handle.
+            </summary>
+        </member>
+        <member name="T:Cloo.Bindings.CLMemoryHandle">
+            <summary>
+            Represents the <see cref="T:Cloo.ComputeMemory"/> ID.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLMemoryHandle.Invalidate">
+            <summary>
+            Invalidates the handle.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLMemoryHandle.IsValid">
+            <summary>
+            Gets a logic value indicating whether the handle is valid.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLMemoryHandle.Value">
+            <summary>
+            Gets the value of the handle.
+            </summary>
+        </member>
         <member name="T:Cloo.ComputeException">
             <summary>
             Represents an error state that occurred while executing an OpenCL API call.
@@ -3844,6 +3964,46 @@
         <member name="P:Cloo.ComputeException.ComputeErrorCode">
             <summary>
             Gets the <see cref="P:Cloo.ComputeException.ComputeErrorCode"/> of the <see cref="T:Cloo.ComputeException"/>.
+            </summary>
+        </member>
+        <member name="T:Cloo.Bindings.CLPlatformHandle">
+            <summary>
+            Represents the <see cref="T:Cloo.ComputePlatform"/> ID.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLPlatformHandle.Invalidate">
+            <summary>
+            Invalidates the handle.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLPlatformHandle.IsValid">
+            <summary>
+            Gets a logic value indicating whether the handle is valid.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLPlatformHandle.Value">
+            <summary>
+            Gets the value of the handle.
+            </summary>
+        </member>
+        <member name="T:Cloo.Bindings.CLEventHandle">
+            <summary>
+            Represents the <see cref="T:Cloo.ComputeEvent"/> ID.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLEventHandle.Invalidate">
+            <summary>
+            Invalidates the handle.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLEventHandle.IsValid">
+            <summary>
+            Gets a logic value indicating whether the handle is valid.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLEventHandle.Value">
+            <summary>
+            Gets the value of the handle.
             </summary>
         </member>
         <member name="T:Cloo.SysIntX3">
@@ -4150,6 +4310,26 @@
             Sets the new status of the <see cref="T:Cloo.ComputeUserEvent"/> to an error value.
             </summary>
             <param name="status"> The error status of the <see cref="T:Cloo.ComputeUserEvent"/>. This should be a negative value. </param>
+        </member>
+        <member name="T:Cloo.Bindings.CLCommandQueueHandle">
+            <summary>
+            Represents the <see cref="T:Cloo.ComputeCommandQueue"/> ID.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLCommandQueueHandle.Invalidate">
+            <summary>
+            Invalidates the handle.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLCommandQueueHandle.IsValid">
+            <summary>
+            Gets a logic value indicating whether the handle is valid.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLCommandQueueHandle.Value">
+            <summary>
+            Gets the value of the handle.
+            </summary>
         </member>
         <member name="T:Cloo.ComputeEvent">
             <summary>

@@ -42,7 +42,6 @@ namespace Clootils
 {
     public partial class MainForm : Form
     {
-        ConfigForm configForm;
         ComputePlatform platform;
         IList<ComputeDevice> devices;
         IList<IExample> exampleList;
@@ -58,8 +57,6 @@ namespace Clootils
 [Devices] - Select the OpenCL devices that should be used to run the examples.
 [Run] - Runs the selected examples.
 [Copy Log] - Copies the content of this box.";
-
-            configForm = new ConfigForm();
 
             devices = new List<ComputeDevice>();
 
@@ -129,11 +126,6 @@ namespace Clootils
                 Clipboard.Clear();
                 Clipboard.SetText(textBoxLog.Text);
             }
-        }
-
-        private void buildDeviceMenuItem_Click(object sender, EventArgs e)
-        {
-            configForm.ShowDialog(this);
         }
 
         private void buttonRunAll_Click(object sender, EventArgs e)
