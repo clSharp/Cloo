@@ -87,6 +87,7 @@ namespace Cloo
         /// Gets a read-only collection of available <see cref="ComputePlatform"/>s.
         /// </summary>
         /// <value> A read-only collection of available <see cref="ComputePlatform"/>s. </value>
+        /// <remarks> The collection will contain no items, if no OpenCL platforms are found on the system. </remarks>
         public static ReadOnlyCollection<ComputePlatform> Platforms { get { return platforms; } }
 
         /// <summary>
@@ -115,23 +116,30 @@ namespace Cloo
         {
             lock (typeof(ComputePlatform))
             {
-                if (platforms != null)
-                    return;
+                try
+                {
+                    if (platforms != null)
+                        return;
 
-                CLPlatformHandle[] handles;
-                int handlesLength;
-                ComputeErrorCode error = CL10.GetPlatformIDs(0, null, out handlesLength);
-                ComputeException.ThrowOnError(error);
-                handles = new CLPlatformHandle[handlesLength];
+                    CLPlatformHandle[] handles;
+                    int handlesLength;
+                    ComputeErrorCode error = CL10.GetPlatformIDs(0, null, out handlesLength);
+                    ComputeException.ThrowOnError(error);
+                    handles = new CLPlatformHandle[handlesLength];
 
-                error = CL10.GetPlatformIDs(handlesLength, handles, out handlesLength);
-                ComputeException.ThrowOnError(error);
+                    error = CL10.GetPlatformIDs(handlesLength, handles, out handlesLength);
+                    ComputeException.ThrowOnError(error);
 
-                List<ComputePlatform> platformList = new List<ComputePlatform>(handlesLength);
-                foreach (CLPlatformHandle handle in handles)
-                    platformList.Add(new ComputePlatform(handle));
+                    List<ComputePlatform> platformList = new List<ComputePlatform>(handlesLength);
+                    foreach (CLPlatformHandle handle in handles)
+                        platformList.Add(new ComputePlatform(handle));
 
-                platforms = platformList.AsReadOnly();
+                    platforms = platformList.AsReadOnly();
+                }
+                catch (DllNotFoundException)
+                {
+                    platforms = new List<ComputePlatform>().AsReadOnly();
+                }
             }
         }
 
