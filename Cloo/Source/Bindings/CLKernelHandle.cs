@@ -32,12 +32,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo.Bindings
 {
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// Represents the <see cref="ComputeKernel"/> ID.
     /// </summary>
     public struct CLKernelHandle
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         IntPtr value;
 
         /// <summary>

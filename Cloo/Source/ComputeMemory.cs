@@ -46,7 +46,10 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeContext context;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeMemoryFlags flags;
 
         #endregion

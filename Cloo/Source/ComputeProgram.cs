@@ -48,11 +48,22 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeContext context;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ReadOnlyCollection<ComputeDevice> devices;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ReadOnlyCollection<string> source;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ReadOnlyCollection<byte[]> binaries;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string buildOptions;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ComputeProgramBuildNotifier buildNotify;
 
         #endregion

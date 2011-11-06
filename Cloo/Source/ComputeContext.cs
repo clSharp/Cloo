@@ -87,9 +87,16 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ReadOnlyCollection<ComputeDevice> devices;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputePlatform platform;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeContextPropertyList properties;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ComputeContextNotifier callback;
 
         #endregion

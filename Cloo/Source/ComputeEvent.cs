@@ -48,6 +48,7 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private GCHandle gcHandle;
         
         #endregion

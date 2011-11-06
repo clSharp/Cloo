@@ -48,10 +48,19 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeContext context;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeDevice device;
+        
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private bool outOfOrderExec;
+        
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private bool profiling;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal IList<ComputeEventBase> Events;
 
         #endregion

@@ -129,6 +129,7 @@
             Gets a read-only collection of available <see cref="T:Cloo.ComputePlatform"/>s.
             </summary>
             <value> A read-only collection of available <see cref="T:Cloo.ComputePlatform"/>s. </value>
+            <remarks> The collection will contain no items, if no OpenCL platforms are found on the system. </remarks>
         </member>
         <member name="P:Cloo.ComputePlatform.Profile">
             <summary>

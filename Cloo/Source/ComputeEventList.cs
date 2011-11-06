@@ -31,10 +31,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Cloo
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using Cloo.Bindings;
 
     /// <summary>
@@ -45,6 +45,7 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
         private readonly List<ComputeEventBase> events;
 
         #endregion

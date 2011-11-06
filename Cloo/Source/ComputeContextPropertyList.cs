@@ -34,6 +34,7 @@ namespace Cloo
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     /// <summary>
     /// Represents a list of <see cref="ComputeContextProperty"/>s.
@@ -45,6 +46,7 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IList<ComputeContextProperty> properties;
 
         #endregion

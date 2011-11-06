@@ -34,6 +34,7 @@ namespace Cloo
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using Cloo.Bindings;
 
     /// <summary>
@@ -47,12 +48,25 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ReadOnlyCollection<ComputeDevice> devices;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ReadOnlyCollection<string> extensions;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string name;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static ReadOnlyCollection<ComputePlatform> platforms;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string profile;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string vendor;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string version;
 
         #endregion

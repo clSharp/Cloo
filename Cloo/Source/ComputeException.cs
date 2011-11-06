@@ -32,6 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// Represents an error state that occurred while executing an OpenCL API call.
@@ -41,6 +42,7 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeErrorCode code;
 
         #endregion

@@ -32,6 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Text;
 
@@ -43,6 +44,7 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IntPtr handle;
 
         #endregion

@@ -32,12 +32,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo.Bindings
 {
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// Represents the <see cref="ComputeContext"/> ID.
     /// </summary>
     public struct CLContextHandle
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         IntPtr value;
 
         /// <summary>

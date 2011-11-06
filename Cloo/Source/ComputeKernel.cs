@@ -48,8 +48,13 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeContext context;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string functionName;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeProgram program;
 
         #endregion

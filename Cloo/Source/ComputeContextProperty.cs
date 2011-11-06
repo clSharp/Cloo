@@ -32,6 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// Represents an OpenCL context property.
@@ -41,7 +42,10 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeContextPropertyName name;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly IntPtr value;
 
         #endregion

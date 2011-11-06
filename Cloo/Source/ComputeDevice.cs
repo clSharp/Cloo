@@ -33,6 +33,7 @@ namespace Cloo
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using Cloo.Bindings;
 
     /// <summary>
@@ -47,58 +48,57 @@ namespace Cloo
     {
         #region Fields
 
-        private readonly long addressBits;
-        private readonly bool available;
-        private readonly bool compilerAvailable;
-        private readonly string driverVersion;
-        private readonly bool endianLittle;
-        private readonly bool errorCorrectionSupport;
-        private readonly ComputeDeviceExecutionCapabilities executionCapabilities;
-        private readonly ReadOnlyCollection<string> extensions;
-        private readonly long globalMemoryCachelineSize;
-        private readonly long globalMemoryCacheSize;
-        private readonly ComputeDeviceMemoryCacheType globalMemoryCacheType;
-        private readonly long globalMemorySize;
-        private readonly bool imageSupport;
-        private readonly long image2DMaxHeight;
-        private readonly long image2DMaxWidth;
-        private readonly long image3DMaxDepth;
-        private readonly long image3DMaxHeight;
-        private readonly long image3DMaxWidth;
-        private readonly long localMemorySize;
-        private readonly ComputeDeviceLocalMemoryType localMemoryType;
-        private readonly long maxClockFrequency;
-        private readonly long maxComputeUnits;
-        private readonly long maxConstantArguments;
-        private readonly long maxConstantBufferSize;
-        private readonly long maxMemAllocSize;
-        private readonly long maxParameterSize;
-        private readonly long maxReadImageArgs;
-        private readonly long maxSamplers;
-        private readonly long maxWorkGroupSize;
-        private readonly long maxWorkItemDimensions;
-        private readonly ReadOnlyCollection<long> maxWorkItemSizes;
-        private readonly long maxWriteImageArgs;
-        private readonly long memBaseAddrAlign;
-        private readonly long minDataTypeAlignSize;
-        private readonly string name;
-        private readonly ComputePlatform platform;
-        private readonly long preferredVectorWidthChar;
-        private readonly long preferredVectorWidthFloat;
-        private readonly long preferredVectorWidthInt;
-        private readonly long preferredVectorWidthLong;
-        private readonly long preferredVectorWidthShort;
-        private readonly string profile;
-        private readonly long profilingTimerResolution;
-        private readonly ComputeCommandQueueFlags queueProperties;
-        private readonly ComputeDeviceSingleCapabilities singleCapabilities;
-        private readonly ComputeDeviceTypes type;
-        private readonly string vendor;
-        private readonly long vendorId;
-        private readonly string version;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long addressBits;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly bool available;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly bool compilerAvailable;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly string driverVersion;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly bool endianLittle;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly bool errorCorrectionSupport;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly ComputeDeviceExecutionCapabilities executionCapabilities;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly ReadOnlyCollection<string> extensions;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long globalMemoryCachelineSize;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long globalMemoryCacheSize;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly ComputeDeviceMemoryCacheType globalMemoryCacheType;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long globalMemorySize;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly bool imageSupport;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long image2DMaxHeight;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long image2DMaxWidth;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long image3DMaxDepth;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long image3DMaxHeight;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long image3DMaxWidth;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long localMemorySize;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly ComputeDeviceLocalMemoryType localMemoryType;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long maxClockFrequency;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long maxComputeUnits;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long maxConstantArguments;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long maxConstantBufferSize;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long maxMemAllocSize;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long maxParameterSize;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long maxReadImageArgs;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long maxSamplers;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long maxWorkGroupSize;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long maxWorkItemDimensions;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly ReadOnlyCollection<long> maxWorkItemSizes;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long maxWriteImageArgs;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long memBaseAddrAlign;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long minDataTypeAlignSize;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly string name;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly ComputePlatform platform;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long preferredVectorWidthChar;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long preferredVectorWidthFloat;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long preferredVectorWidthInt;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long preferredVectorWidthLong;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long preferredVectorWidthShort;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly string profile;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long profilingTimerResolution;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly ComputeCommandQueueFlags queueProperties;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly ComputeDeviceSingleCapabilities singleCapabilities;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly ComputeDeviceTypes type;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly string vendor;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly long vendorId;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly string version;
 
         #endregion
-
         #region Properties
 
         public CLDeviceHandle Handle

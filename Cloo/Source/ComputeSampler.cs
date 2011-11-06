@@ -45,9 +45,16 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeContext context;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeImageAddressing addressing;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeImageFiltering filtering;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly bool normalizedCoords;
 
         #endregion

@@ -45,9 +45,13 @@ namespace Cloo
     {
         #region Fields
 
-        private event ComputeCommandStatusChanged aborted;
+        private event ComputeCommandStatusChanged aborted;        
         private event ComputeCommandStatusChanged completed;
+        
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ComputeCommandStatusArgs status;
+        
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ComputeEventCallback statusNotify;
 
         #endregion

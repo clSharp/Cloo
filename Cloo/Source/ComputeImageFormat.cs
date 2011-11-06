@@ -31,6 +31,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Cloo
 {
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
 
     /// <summary>
@@ -43,7 +44,10 @@ namespace Cloo
     {
         #region Fields
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeImageChannelOrder channelOrder;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeImageChannelType channelType;
 
         #endregion
