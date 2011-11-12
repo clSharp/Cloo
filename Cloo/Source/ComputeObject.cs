@@ -39,7 +39,7 @@ namespace Cloo
     /// <summary>
     /// Represents an OpenCL object.
     /// </summary>
-    /// <remarks> For the purpose of Cloo an OpenCL object is an object that is identified by its handle in the OpenCL environment. </remarks>
+    /// <remarks> An OpenCL object is an object that is identified by its handle in the OpenCL environment. </remarks>
     public abstract class ComputeObject : IEquatable<ComputeObject>
     {
         #region Fields
