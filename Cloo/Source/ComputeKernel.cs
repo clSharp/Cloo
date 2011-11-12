@@ -61,6 +61,9 @@ namespace Cloo
 
         #region Properties
 
+        /// <summary>
+        /// The handle of the <see cref="ComputeKernel"/>.
+        /// </summary>
         public CLKernelHandle Handle
         {
             get;
@@ -98,7 +101,7 @@ namespace Cloo
             functionName = GetStringInfo<CLKernelHandle, ComputeKernelInfo>(Handle, ComputeKernelInfo.FunctionName, CL10.GetKernelInfo);
             this.program = program;
 
-            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         internal ComputeKernel(string functionName, ComputeProgram program)
@@ -113,7 +116,7 @@ namespace Cloo
             this.functionName = functionName;
             this.program = program;
 
-            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         #endregion
@@ -265,7 +268,7 @@ namespace Cloo
         {
             if (Handle.IsValid)
             {
-                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL10.ReleaseKernel(Handle);
                 Handle.Invalidate();
             }

@@ -61,6 +61,9 @@ namespace Cloo
 
         #region Properties
 
+        /// <summary>
+        /// The handle of the <see cref="ComputeSampler"/>.
+        /// </summary>
         public CLSamplerHandle Handle
         {
             get;
@@ -115,7 +118,7 @@ namespace Cloo
             this.filtering = filtering;
             this.normalizedCoords = normalizedCoords;
 
-            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         #endregion
@@ -131,7 +134,7 @@ namespace Cloo
         {
             if (Handle.IsValid)
             {
-                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL10.ReleaseSampler(Handle);
                 Handle.Invalidate();
             }

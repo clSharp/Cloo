@@ -98,6 +98,9 @@ namespace Cloo
 
         #region Properties
 
+        /// <summary>
+        /// The handle of the <see cref="ComputeEventBase"/>.
+        /// </summary>
         public CLEventHandle Handle
         {
             get;
@@ -174,7 +177,7 @@ namespace Cloo
         {
             if (Handle.IsValid)
             {
-                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL10.ReleaseEvent(Handle);
                 Handle.Invalidate();
             }
@@ -197,7 +200,7 @@ namespace Cloo
         /// <param name="evArgs"></param>
         protected virtual void OnCompleted(object sender, ComputeCommandStatusArgs evArgs)
         {
-            Trace.WriteLine("Completed " + Type + " operation of " + this + ".");
+            Trace.WriteLine("Complete " + Type + " operation of " + this + ".", "Information");
             if (completed != null)
                 completed(sender, evArgs);
         }
@@ -209,7 +212,7 @@ namespace Cloo
         /// <param name="evArgs"></param>
         protected virtual void OnAborted(object sender, ComputeCommandStatusArgs evArgs)
         {
-            Trace.WriteLine("Aborted " + Type + " operation of " + this + ".");
+            Trace.WriteLine("Abort " + Type + " operation of " + this + ".", "Information");
             if (aborted != null)
                 aborted(sender, evArgs);
         }

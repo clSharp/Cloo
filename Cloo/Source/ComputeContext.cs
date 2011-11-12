@@ -103,6 +103,9 @@ namespace Cloo
 
         #region Properties
 
+        /// <summary>
+        /// The handle of the <see cref="ComputeContext"/>.
+        /// </summary>
         public CLContextHandle Handle
         {
             get;
@@ -156,7 +159,7 @@ namespace Cloo
             this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
             this.devices = GetDevices();
 
-            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         /// <summary>
@@ -182,7 +185,7 @@ namespace Cloo
             this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
             this.devices = GetDevices();
 
-            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         #endregion
@@ -204,7 +207,7 @@ namespace Cloo
             // free native resources
             if (Handle.IsValid)
             {
-                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL10.ReleaseContext(Handle);
                 Handle.Invalidate();
             }

@@ -707,9 +707,9 @@ namespace Cloo.Bindings
             [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_wait_list,
             [Out, MarshalAs(UnmanagedType.LPArray, SizeConst=1)] CLEventHandle[] new_event);
 
-        /// <summary>
-        /// See the OpenCL specification.
-        /// </summary>
+        // <summary>
+        // See the OpenCL specification.
+        // </summary>
         /*
         [DllImport(libName, EntryPoint = "clEnqueueNativeKernel")]
         public extern static ComputeErrorCode EnqueueNativeKernel(

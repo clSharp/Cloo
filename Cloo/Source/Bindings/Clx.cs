@@ -43,7 +43,7 @@ namespace Cloo.Bindings
         private readonly Delegates.clCreateSubDevicesEXT clCreateSubDevicesEXT = null;
         private readonly Delegates.clEnqueueMigrateMemObjectEXT clEnqueueMigrateMemObjectEXT = null;
         private readonly Delegates.clGetGLContextInfoKHR clGetGLContextInfoKHR = null;
-        private readonly Delegates.clIcdGetPlatformIDsKHR clIcdGetPlatformIDsKHR = null;
+        //private readonly Delegates.clIcdGetPlatformIDsKHR clIcdGetPlatformIDsKHR = null;
         private readonly Delegates.clReleaseDeviceEXT clReleaseDeviceEXT = null;
         private readonly Delegates.clRetainDeviceEXT clRetainDeviceEXT = null;
 
@@ -68,7 +68,7 @@ namespace Cloo.Bindings
             return clGetGLContextInfoKHR(properties, param_name, param_value_size, param_value, out param_value_size_ret);
         }
 
-        /// <summary> </summary>
+        // <summary> </summary>
         //[CLSCompliant(false)]
         //public ComputeErrorCode IcdGetPlatformIDsKHR(Int32 num_entries, IntPtr* platforms, Int32* num_platforms)
         //{

@@ -99,8 +99,12 @@ namespace Cloo
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly string version;
 
         #endregion
+
         #region Properties
 
+        /// <summary>
+        /// The handle of the <see cref="ComputeDevice"/>.
+        /// </summary>
         public CLDeviceHandle Handle
         {
             get;

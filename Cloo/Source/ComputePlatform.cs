@@ -73,6 +73,9 @@ namespace Cloo
 
         #region Properties
 
+        /// <summary>
+        /// The handle of the <see cref="ComputePlatform"/>.
+        /// </summary>
         public CLPlatformHandle Handle
         {
             get;

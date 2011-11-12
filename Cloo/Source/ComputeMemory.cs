@@ -56,6 +56,9 @@ namespace Cloo
 
         #region Properties
 
+        /// <summary>
+        /// The handle of the <see cref="ComputeMemory"/>.
+        /// </summary>
         public CLMemoryHandle Handle
         {
             get;
@@ -108,7 +111,7 @@ namespace Cloo
         {
             if (Handle.IsValid)
             {
-                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL10.ReleaseMemObject(Handle);
                 Handle.Invalidate();
             }

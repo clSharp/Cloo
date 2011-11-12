@@ -110,6 +110,16 @@ namespace Cloo
 
         #region Protected methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="HandleType"></typeparam>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="QueriedType"></typeparam>
+        /// <param name="handle"></param>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
         protected QueriedType[] GetArrayInfo<HandleType, InfoType, QueriedType>
             (HandleType handle, InfoType paramName, GetInfoDelegate<HandleType, InfoType> getInfoDelegate)
         {
@@ -132,6 +142,18 @@ namespace Cloo
             return buffer;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="MainHandleType"></typeparam>
+        /// <typeparam name="SecondHandleType"></typeparam>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="QueriedType"></typeparam>
+        /// <param name="mainHandle"></param>
+        /// <param name="secondHandle"></param>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
         protected QueriedType[] GetArrayInfo<MainHandleType, SecondHandleType, InfoType, QueriedType>
             (MainHandleType mainHandle, SecondHandleType secondHandle, InfoType paramName, GetInfoDelegateEx<MainHandleType, SecondHandleType, InfoType> getInfoDelegate)
         {
@@ -154,6 +176,15 @@ namespace Cloo
             return buffer;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="HandleType"></typeparam>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <param name="handle"></param>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
         protected bool GetBoolInfo<HandleType, InfoType>
             (HandleType handle, InfoType paramName, GetInfoDelegate<HandleType, InfoType> getInfoDelegate)
         {
@@ -161,6 +192,16 @@ namespace Cloo
             return (result == (int)ComputeBoolean.True);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="HandleType"></typeparam>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="QueriedType"></typeparam>
+        /// <param name="handle"></param>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
         protected QueriedType GetInfo<HandleType, InfoType, QueriedType>
             (HandleType handle, InfoType paramName, GetInfoDelegate<HandleType, InfoType> getInfoDelegate) 
             where QueriedType : struct
@@ -181,6 +222,18 @@ namespace Cloo
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="MainHandleType"></typeparam>
+        /// <typeparam name="SecondHandleType"></typeparam>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="QueriedType"></typeparam>
+        /// <param name="mainHandle"></param>
+        /// <param name="secondHandle"></param>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
         protected QueriedType GetInfo<MainHandleType, SecondHandleType, InfoType, QueriedType>
             (MainHandleType mainHandle, SecondHandleType secondHandle, InfoType paramName, GetInfoDelegateEx<MainHandleType, SecondHandleType, InfoType> getInfoDelegate)
             where QueriedType : struct
@@ -202,6 +255,15 @@ namespace Cloo
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="HandleType"></typeparam>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <param name="handle"></param>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
         protected string GetStringInfo<HandleType, InfoType>
             (HandleType handle, InfoType paramName, GetInfoDelegate<HandleType, InfoType> getInfoDelegate)
         {
@@ -210,6 +272,17 @@ namespace Cloo
             return (new string(chars)).TrimEnd(new char[] { '\0' });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="MainHandleType"></typeparam>
+        /// <typeparam name="SecondHandleType"></typeparam>
+        /// <typeparam name="InfoType"></typeparam>
+        /// <param name="mainHandle"></param>
+        /// <param name="secondHandle"></param>
+        /// <param name="paramName"></param>
+        /// <param name="getInfoDelegate"></param>
+        /// <returns></returns>
         protected string GetStringInfo<MainHandleType, SecondHandleType, InfoType>
             (MainHandleType mainHandle, SecondHandleType secondHandle, InfoType paramName, GetInfoDelegateEx<MainHandleType, SecondHandleType, InfoType> getInfoDelegate)
         {
@@ -218,6 +291,10 @@ namespace Cloo
             return (new string(chars)).TrimEnd(new char[] { '\0' });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         protected void SetID(IntPtr id)
         {
             handle = id;
@@ -230,6 +307,7 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
+        /// <typeparam name="HandleType"></typeparam>
         /// <typeparam name="InfoType"></typeparam>
         /// <param name="objectHandle"></param>
         /// <param name="paramName"></param>
@@ -249,6 +327,8 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
+        /// <typeparam name="MainHandleType"></typeparam>
+        /// <typeparam name="SecondHandleType"></typeparam>
         /// <typeparam name="InfoType"></typeparam>
         /// <param name="mainObjectHandle"></param>
         /// <param name="secondaryObjectHandle"></param>

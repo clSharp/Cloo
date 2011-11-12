@@ -77,7 +77,7 @@ namespace Cloo
             if (CommandQueue.Device.Version == new Version(1, 1))
                 HookNotifier();
 
-            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         #endregion

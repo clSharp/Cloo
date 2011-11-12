@@ -237,6 +237,9 @@ namespace Cloo
 
     #region Exception classes
 
+    // Disable CS1591 warnings (missing XML comment for publicly visible type or member).
+    #pragma warning disable 1591
+
     public class DeviceNotFoundComputeException : ComputeException
     { public DeviceNotFoundComputeException() : base(ComputeErrorCode.DeviceNotFound) { } }
 

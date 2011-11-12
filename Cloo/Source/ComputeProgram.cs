@@ -70,6 +70,9 @@ namespace Cloo
 
         #region Properties
 
+        /// <summary>
+        /// The handle of the <see cref="ComputeProgram"/>.
+        /// </summary>
         public CLProgramHandle Handle
         {
             get;
@@ -138,7 +141,7 @@ namespace Cloo
             this.devices = context.Devices;
             this.source = new ReadOnlyCollection<string>(new string[] { source });
 
-            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         /// <summary>
@@ -162,7 +165,7 @@ namespace Cloo
             this.devices = context.Devices;
             this.source = new ReadOnlyCollection<string>(source);
 
-            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         /// <summary>
@@ -216,7 +219,7 @@ namespace Cloo
             this.devices = new ReadOnlyCollection<ComputeDevice>(
                 (devices != null) ? devices : context.Devices);
 
-            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         #endregion
@@ -307,7 +310,7 @@ namespace Cloo
         {
             if (Handle.IsValid)
             {
-                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL10.ReleaseProgram(Handle);
                 Handle.Invalidate();
             }

@@ -67,6 +67,9 @@ namespace Cloo
 
         #region Properties
 
+        /// <summary>
+        /// The handle of the <see cref="ComputeCommandQueue"/>.
+        /// </summary>
         public CLCommandQueueHandle Handle
         {
             get;
@@ -123,7 +126,7 @@ namespace Cloo
             
             Events = new List<ComputeEventBase>();
 
-            Trace.WriteLine("Created " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         #endregion
@@ -681,7 +684,7 @@ namespace Cloo
             // free native resources
             if (Handle.IsValid)
             {
-                Trace.WriteLine("Disposing " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").");
+                Trace.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL10.ReleaseCommandQueue(Handle);
                 Handle.Invalidate();
             }

@@ -44,10 +44,104 @@
             </summary>
             <returns> The string representation of the <see cref="T:Cloo.ComputeObject"/>. </returns>
         </member>
+        <member name="M:Cloo.ComputeObject.GetArrayInfo``3(``0,``1,Cloo.ComputeObject.GetInfoDelegate{``0,``1})">
+            <summary>
+            
+            </summary>
+            <typeparam name="HandleType"></typeparam>
+            <typeparam name="InfoType"></typeparam>
+            <typeparam name="QueriedType"></typeparam>
+            <param name="handle"></param>
+            <param name="paramName"></param>
+            <param name="getInfoDelegate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeObject.GetArrayInfo``4(``0,``1,``2,Cloo.ComputeObject.GetInfoDelegateEx{``0,``1,``2})">
+            <summary>
+            
+            </summary>
+            <typeparam name="MainHandleType"></typeparam>
+            <typeparam name="SecondHandleType"></typeparam>
+            <typeparam name="InfoType"></typeparam>
+            <typeparam name="QueriedType"></typeparam>
+            <param name="mainHandle"></param>
+            <param name="secondHandle"></param>
+            <param name="paramName"></param>
+            <param name="getInfoDelegate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeObject.GetBoolInfo``2(``0,``1,Cloo.ComputeObject.GetInfoDelegate{``0,``1})">
+            <summary>
+            
+            </summary>
+            <typeparam name="HandleType"></typeparam>
+            <typeparam name="InfoType"></typeparam>
+            <param name="handle"></param>
+            <param name="paramName"></param>
+            <param name="getInfoDelegate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeObject.GetInfo``3(``0,``1,Cloo.ComputeObject.GetInfoDelegate{``0,``1})">
+            <summary>
+            
+            </summary>
+            <typeparam name="HandleType"></typeparam>
+            <typeparam name="InfoType"></typeparam>
+            <typeparam name="QueriedType"></typeparam>
+            <param name="handle"></param>
+            <param name="paramName"></param>
+            <param name="getInfoDelegate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeObject.GetInfo``4(``0,``1,``2,Cloo.ComputeObject.GetInfoDelegateEx{``0,``1,``2})">
+            <summary>
+            
+            </summary>
+            <typeparam name="MainHandleType"></typeparam>
+            <typeparam name="SecondHandleType"></typeparam>
+            <typeparam name="InfoType"></typeparam>
+            <typeparam name="QueriedType"></typeparam>
+            <param name="mainHandle"></param>
+            <param name="secondHandle"></param>
+            <param name="paramName"></param>
+            <param name="getInfoDelegate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeObject.GetStringInfo``2(``0,``1,Cloo.ComputeObject.GetInfoDelegate{``0,``1})">
+            <summary>
+            
+            </summary>
+            <typeparam name="HandleType"></typeparam>
+            <typeparam name="InfoType"></typeparam>
+            <param name="handle"></param>
+            <param name="paramName"></param>
+            <param name="getInfoDelegate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeObject.GetStringInfo``3(``0,``1,``2,Cloo.ComputeObject.GetInfoDelegateEx{``0,``1,``2})">
+            <summary>
+            
+            </summary>
+            <typeparam name="MainHandleType"></typeparam>
+            <typeparam name="SecondHandleType"></typeparam>
+            <typeparam name="InfoType"></typeparam>
+            <param name="mainHandle"></param>
+            <param name="secondHandle"></param>
+            <param name="paramName"></param>
+            <param name="getInfoDelegate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeObject.SetID(System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+        </member>
         <member name="T:Cloo.ComputeObject.GetInfoDelegate`2">
             <summary>
             
             </summary>
+            <typeparam name="HandleType"></typeparam>
             <typeparam name="InfoType"></typeparam>
             <param name="objectHandle"></param>
             <param name="paramName"></param>
@@ -60,6 +154,8 @@
             <summary>
             
             </summary>
+            <typeparam name="MainHandleType"></typeparam>
+            <typeparam name="SecondHandleType"></typeparam>
             <typeparam name="InfoType"></typeparam>
             <param name="mainObjectHandle"></param>
             <param name="secondaryObjectHandle"></param>
@@ -105,6 +201,11 @@
             </summary>
             <returns> A read-only collection of the available <see cref="T:Cloo.ComputeDevice"/>s on the <see cref="T:Cloo.ComputePlatform"/>. </returns>
             <remarks> This method resets the <c>ComputePlatform.Devices</c>. This is useful if one or more of them become unavailable (<c>ComputeDevice.Available</c> is <c>false</c>) after a <see cref="T:Cloo.ComputeContext"/> and <see cref="T:Cloo.ComputeCommandQueue"/>s that use the <see cref="T:Cloo.ComputeDevice"/> have been created and commands have been queued to them. Further calls will trigger an <c>OutOfResourcesComputeException</c> until this method is executed. You will also need to recreate any <see cref="T:Cloo.ComputeResource"/> that was created on the no longer available <see cref="T:Cloo.ComputeDevice"/>. </remarks>
+        </member>
+        <member name="P:Cloo.ComputePlatform.Handle">
+            <summary>
+            The handle of the <see cref="T:Cloo.ComputePlatform"/>.
+            </summary>
         </member>
         <member name="P:Cloo.ComputePlatform.Devices">
             <summary>
@@ -249,6 +350,11 @@
             <param name="manual"> Specifies the operation mode of this method. </param>
             <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         </member>
+        <member name="P:Cloo.ComputeSampler.Handle">
+            <summary>
+            The handle of the <see cref="T:Cloo.ComputeSampler"/>.
+            </summary>
+        </member>
         <member name="P:Cloo.ComputeSampler.Context">
             <summary>
             Gets the <see cref="T:Cloo.ComputeContext"/> of the <see cref="T:Cloo.ComputeSampler"/>.
@@ -317,6 +423,11 @@
             Occurs when <c>ComputeEventBase.Status</c> changes to <c>ComputeCommandExecutionStatus.Complete</c>.
             </summary>
             <remarks> Requires OpenCL 1.1. </remarks>
+        </member>
+        <member name="P:Cloo.ComputeEventBase.Handle">
+            <summary>
+            The handle of the <see cref="T:Cloo.ComputeEventBase"/>.
+            </summary>
         </member>
         <member name="P:Cloo.ComputeEventBase.Context">
             <summary>
@@ -424,6 +535,11 @@
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
             <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
+        </member>
+        <member name="P:Cloo.ComputeMemory.Handle">
+            <summary>
+            The handle of the <see cref="T:Cloo.ComputeMemory"/>.
+            </summary>
         </member>
         <member name="P:Cloo.ComputeMemory.Context">
             <summary>
@@ -668,6 +784,11 @@
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
             <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
+        </member>
+        <member name="P:Cloo.ComputeKernel.Handle">
+            <summary>
+            The handle of the <see cref="T:Cloo.ComputeKernel"/>.
+            </summary>
         </member>
         <member name="P:Cloo.ComputeKernel.Context">
             <summary>
@@ -1358,6 +1479,11 @@
             <seealso cref="T:Cloo.ComputeMemory"/>
             <seealso cref="T:Cloo.ComputePlatform"/>
         </member>
+        <member name="P:Cloo.ComputeDevice.Handle">
+            <summary>
+            The handle of the <see cref="T:Cloo.ComputeDevice"/>.
+            </summary>
+        </member>
         <member name="P:Cloo.ComputeDevice.AddressBits">
             <summary>
             Gets the default <see cref="T:Cloo.ComputeDevice"/> address space size in bits.
@@ -1852,6 +1978,11 @@
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
             <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
+        </member>
+        <member name="P:Cloo.ComputeContext.Handle">
+            <summary>
+            The handle of the <see cref="T:Cloo.ComputeContext"/>.
+            </summary>
         </member>
         <member name="P:Cloo.ComputeContext.Devices">
             <summary>
@@ -3874,6 +4005,11 @@
             <param name="manual"> Specifies the operation mode of this method. </param>
             <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
         </member>
+        <member name="P:Cloo.ComputeCommandQueue.Handle">
+            <summary>
+            The handle of the <see cref="T:Cloo.ComputeCommandQueue"/>.
+            </summary>
+        </member>
         <member name="P:Cloo.ComputeCommandQueue.Context">
             <summary>
             Gets the <see cref="T:Cloo.ComputeContext"/> of the <see cref="T:Cloo.ComputeCommandQueue"/>.
@@ -4137,6 +4273,11 @@
             </summary>
             <param name="manual"> Specifies the operation mode of this method. </param>
             <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
+        </member>
+        <member name="P:Cloo.ComputeProgram.Handle">
+            <summary>
+            The handle of the <see cref="T:Cloo.ComputeProgram"/>.
+            </summary>
         </member>
         <member name="P:Cloo.ComputeProgram.Binaries">
             <summary>
