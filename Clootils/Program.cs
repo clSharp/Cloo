@@ -37,10 +37,10 @@ namespace Clootils
 {
     public class Program
     {
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool AllocConsole();
 
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool FreeConsole();
 
         [STAThread]
@@ -48,17 +48,35 @@ namespace Clootils
         {
             bool runningWin32NT = (Environment.OSVersion.Platform == PlatformID.Win32NT);
             bool consoleAllocated = false;
+            int allocError = 0;
+            bool runClootils = true;
 
             try
             {
-                if (runningWin32NT) consoleAllocated = AllocConsole();
-                Application.Run(new MainForm());
+                // This code works around an AMD OpenCL implementation problem,
+                // which requires a console to be present during clBuildProgram().
+
+                // Allocate a console.
+                if (runningWin32NT)
+                {
+                    consoleAllocated = AllocConsole();
+                    //if (!consoleAllocated)
+                    {
+                        allocError = Marshal.GetLastWin32Error();
+                        if (allocError != 0)
+                            runClootils = (DialogResult.Yes == MessageBox.Show("Could not allocate console (error code: " + allocError + ").\nRunning examples on the AMD APP OpenCL platform might fail.\nContinue anyway?", "Clootils Error", MessageBoxButtons.YesNo, MessageBoxIcon.Warning));
+                    }
+                }
+
+                // Run Clootils
+                if (runClootils) Application.Run(new MainForm());
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.ToString(), "Clootils Error");
             }
 
+            // Free the allocated console.
             if (consoleAllocated) FreeConsole();
         }
     }
