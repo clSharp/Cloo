@@ -1,3 +1,10 @@
+[0.9.1] ------------------------------------------------------------------------
+This is a maintenance release (with a small breaking change).
+0.9.1 incorporates some recommendations and tips from the community like the DebuggerBrowsableAttribute hint (thanks vicviper) and a Cloo initialization improvement if OpenCL is not installed in the system. The later can now be checked through the ComputePlatform.Platforms collection, which contains no platforms if OpenCL is not present (instead of crashing with DllNotFoundException).
+Deprecated ComputeKernel.SetArgument methods were removed. You are now responsible for kernel argument tracking until the kernel finishes execution.
+As always, you can find more info in ChangeLog.txt.
+Upgrading from 0.9.0 is optional.
+
 [0.9.0] ------------------------------------------------------------------------
 Cloo 0.9 is finally out.
 This is a minor upgrade over the previous alpha release bringing some small updates, bugfixes and documentation edits.

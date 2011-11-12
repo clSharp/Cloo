@@ -1,3 +1,29 @@
+[0.9.1] ------------------------------------------------------------------------
+Breaking changes:
+Removed ComputeKernel.SetArgument methods that accept a tracking argument.
+Removed the Config dialog from Clootils.
+
+Additions:
+Added DebuggerBrowsableAttribute to non-public fields.
+More sanity checks to Clootils console allocation procedure.
+
+Bugfixes:
+DllNotFoundException was thrown on systems without any OpenCL installed.
+
+Deprecated:
+None.
+
+Internals:
+Changed letter case of the "OpenCL.dll" string in the P/Invoke layer.
+Renamed Tools.ExtractHandles methods.
+Updated Trace logging information.
+Significantly reduced the number of compiler warnings.
+
+Documentation:
+Added "Documentation" to Visual Studio solution files.
+Minor additions, clarifications and fixes.
+
+
 [0.9.0] ------------------------------------------------------------------------
 Breaking changes:
 ComputeEventBase.Aborted and ComputeEventBase.Completed event fields are now private.
