@@ -60,7 +60,7 @@ namespace Clootils
                 if (runningWin32NT)
                 {
                     consoleAllocated = AllocConsole();
-                    //if (!consoleAllocated)
+                    if (!consoleAllocated)
                     {
                         allocError = Marshal.GetLastWin32Error();
                         if (allocError != 0)
