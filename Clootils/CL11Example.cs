@@ -77,7 +77,7 @@ namespace Clootils
                 for (int i = 0; i < (int)cubicSize.X; i++)
                     for (int j = 0; j < (int)cubicSize.Y; j++)
                         for( int k = 0; k < (int)cubicSize.Z; k++ )
-                        cubicIn[k, j, i] = (float)(k * cubicSize.Y.ToInt32() * cubicSize.X.ToInt32() + cubicSize.X.ToInt32() * j + i);
+                            cubicIn[k, j, i] = (float)(k * cubicSize.Y.ToInt32() * cubicSize.X.ToInt32() + cubicSize.X.ToInt32() * j + i);
 
                 log.WriteLine("done.");
 
