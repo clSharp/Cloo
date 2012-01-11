@@ -21,7 +21,8 @@ Renamed Tools.ExtractHandles methods.
 Updated Trace logging information.
 Significantly reduced the number of compiler warnings.
 
-Documentation:
+Documentation and other:
+Microsoft Visual Studio 2008 solution and project files are no longer provided.
 Added "Documentation" to Visual Studio solution files.
 Minor additions, clarifications and fixes.
 
