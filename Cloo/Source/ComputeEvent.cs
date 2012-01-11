@@ -74,7 +74,7 @@ namespace Cloo
             Type = (ComputeCommandType)GetInfo<CLEventHandle, ComputeEventInfo, int>(Handle, ComputeEventInfo.CommandType, CL10.GetEventInfo);
             Context = queue.Context;
 
-            if (CommandQueue.Device.Version == new Version(1, 1))
+            if (Tools.ParseVersionString(CommandQueue.Device.Platform.Version, 1) > new Version(1, 0))
                 HookNotifier();
 
             Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
