@@ -141,7 +141,7 @@ namespace Cloo
         /// <returns> The compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier. If no such qualifier is specified, (0, 0, 0) is returned. </returns>
         public long[] GetCompileWorkGroupSize(ComputeDevice device)
         {
-            return Tools.ConvertArray(
+            return ComputeTools.ConvertArray(
                 GetArrayInfo<CLKernelHandle, CLDeviceHandle, ComputeKernelWorkGroupInfo, IntPtr>(
                     Handle, device.Handle, ComputeKernelWorkGroupInfo.CompileWorkGroupSize, CL10.GetKernelWorkGroupInfo));
         }

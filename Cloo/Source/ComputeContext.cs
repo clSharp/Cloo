@@ -144,7 +144,7 @@ namespace Cloo
         public ComputeContext(ICollection<ComputeDevice> devices, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr notifyDataPtr)
         {
             int handleCount;
-            CLDeviceHandle[] deviceHandles = Tools.ExtractHandles(devices, out handleCount);
+            CLDeviceHandle[] deviceHandles = ComputeTools.ExtractHandles(devices, out handleCount);
             IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
             callback = notify;
 

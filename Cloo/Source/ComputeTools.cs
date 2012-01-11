@@ -39,7 +39,7 @@ namespace Cloo
     /// <summary>
     /// Contains various helper methods.
     /// </summary>
-    public class Tools
+    public class ComputeTools
     {
         #region Public methods
 

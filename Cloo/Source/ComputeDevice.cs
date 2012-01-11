@@ -435,7 +435,7 @@ namespace Cloo
         /// Gets the OpenCL version supported by the <see cref="ComputeDevice"/>.
         /// </summary>
         /// <value> The OpenCL version supported by the <see cref="ComputeDevice"/>. </value>
-        public Version Version { get { return Tools.ParseVersionString(VersionString, 1); } }
+        public Version Version { get { return ComputeTools.ParseVersionString(VersionString, 1); } }
 
         /// <summary>
         /// Gets the OpenCL version string supported by the <see cref="ComputeDevice"/>.
@@ -529,7 +529,7 @@ namespace Cloo
         /// </summary>
         /// <value> Is <c>1.1</c> if <see cref="ComputeDevice.Version"/> is <c>1.1</c>. Is <c>1.0</c> or <c>1.1</c> if <see cref="ComputeDevice.Version"/> is <c>1.0</c>. </value>
         /// <remarks> Requires OpenCL 1.1. </remarks>
-        public Version OpenCLCVersion { get { return Tools.ParseVersionString(OpenCLCVersionString, 2); } }
+        public Version OpenCLCVersion { get { return ComputeTools.ParseVersionString(OpenCLCVersionString, 2); } }
 
         /// <summary>
         /// Gets the OpenCL C version string supported by the <see cref="ComputeDevice"/>.
@@ -580,7 +580,7 @@ namespace Cloo
             maxSamplers = GetInfo<uint>(ComputeDeviceInfo.MaxSamplers);
             maxWorkGroupSize = (long)GetInfo<IntPtr>(ComputeDeviceInfo.MaxWorkGroupSize);
             maxWorkItemDimensions = GetInfo<uint>(ComputeDeviceInfo.MaxWorkItemDimensions);
-            maxWorkItemSizes = new ReadOnlyCollection<long>(Tools.ConvertArray(GetArrayInfo<CLDeviceHandle, ComputeDeviceInfo, IntPtr>(Handle, ComputeDeviceInfo.MaxWorkItemSizes, CL10.GetDeviceInfo)));
+            maxWorkItemSizes = new ReadOnlyCollection<long>(ComputeTools.ConvertArray(GetArrayInfo<CLDeviceHandle, ComputeDeviceInfo, IntPtr>(Handle, ComputeDeviceInfo.MaxWorkItemSizes, CL10.GetDeviceInfo)));
             maxWriteImageArgs = GetInfo<uint>(ComputeDeviceInfo.MaxWriteImageArguments);
             memBaseAddrAlign = GetInfo<uint>(ComputeDeviceInfo.MemoryBaseAddressAlignment);
             minDataTypeAlignSize = GetInfo<uint>(ComputeDeviceInfo.MinDataTypeAlignmentSize);

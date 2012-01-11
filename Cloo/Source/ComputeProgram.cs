@@ -179,8 +179,8 @@ namespace Cloo
             int count;
 
             CLDeviceHandle[] deviceHandles = (devices != null) ?
-                Tools.ExtractHandles(devices, out count) :
-                Tools.ExtractHandles(context.Devices, out count);
+                ComputeTools.ExtractHandles(devices, out count) :
+                ComputeTools.ExtractHandles(context.Devices, out count);
 
             IntPtr[] binariesPtrs = new IntPtr[count];
             IntPtr[] binariesLengths = new IntPtr[count];
@@ -236,7 +236,7 @@ namespace Cloo
         public void Build(ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr)
         {
             int handleCount;
-            CLDeviceHandle[] deviceHandles = Tools.ExtractHandles(devices, out handleCount);
+            CLDeviceHandle[] deviceHandles = ComputeTools.ExtractHandles(devices, out handleCount);
             buildOptions = (options != null) ? options : "";
             buildNotify = notify;
 

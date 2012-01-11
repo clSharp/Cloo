@@ -290,19 +290,6 @@
             Gets the value of the handle.
             </summary>
         </member>
-        <member name="T:Cloo.Tools">
-            <summary>
-            Contains various helper methods.
-            </summary>
-        </member>
-        <member name="M:Cloo.Tools.ParseVersionString(System.String,System.Int32)">
-            <summary>
-            Parses an OpenCL version string.
-            </summary>
-            <param name="versionString"> The version string to parse. Must be in the format: <c>Additional substrings[space][major_version].[minor_version][space]Additional substrings</c>. </param>
-            <param name="substringIndex"> The index of the substring that specifies the OpenCL version. </param>
-            <returns> A <c>Version</c> instance containing the major and minor version from <paramref name="versionString"/>. </returns>
-        </member>
         <member name="T:Cloo.ComputeSampler">
             <summary>
             Represents an OpenCL sampler.
@@ -4525,6 +4512,19 @@
             Gets the value of the <see cref="T:Cloo.ComputeContextProperty"/>.
             </summary>
             <value> The value of the <see cref="T:Cloo.ComputeContextProperty"/>. </value>
+        </member>
+        <member name="T:Cloo.ComputeTools">
+            <summary>
+            Contains various helper methods.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeTools.ParseVersionString(System.String,System.Int32)">
+            <summary>
+            Parses an OpenCL version string.
+            </summary>
+            <param name="versionString"> The version string to parse. Must be in the format: <c>Additional substrings[space][major_version].[minor_version][space]Additional substrings</c>. </param>
+            <param name="substringIndex"> The index of the substring that specifies the OpenCL version. </param>
+            <returns> A <c>Version</c> instance containing the major and minor version from <paramref name="versionString"/>. </returns>
         </member>
     </members>
 </doc>
