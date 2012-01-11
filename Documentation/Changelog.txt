@@ -1,6 +1,7 @@
 [0.9.1] ------------------------------------------------------------------------
 Breaking changes:
 Removed ComputeKernel.SetArgument methods that accept a tracking argument.
+Renamed Tools to ComputeTools.
 Removed the Config dialog from Clootils.
 
 Additions:
@@ -9,6 +10,7 @@ More sanity checks to Clootils console allocation procedure.
 
 Bugfixes:
 DllNotFoundException was thrown on systems without any OpenCL installed.
+Event callback didn't trigger on devices displaying only OpenCL 1.0 support.
 
 Deprecated:
 None.
