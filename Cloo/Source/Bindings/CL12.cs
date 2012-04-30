@@ -43,10 +43,12 @@ namespace Cloo.Bindings
     [SuppressUnmanagedCodeSecurity]
     public class CL12 : CL11
     {
+        #region Deprecated functions
+
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [Obsolete("This function has been deprecated in OpenCL 1.2.")]
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public new static CLMemoryHandle CreateFromGLTexture2D(
             CLContextHandle context,
             ComputeMemoryFlags flags,
@@ -62,7 +64,7 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [Obsolete("This function has been deprecated in OpenCL 1.2.")]
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public new static CLMemoryHandle CreateFromGLTexture3D(
             CLContextHandle context,
             ComputeMemoryFlags flags,
@@ -78,7 +80,7 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [Obsolete("This function has been deprecated in OpenCL 1.2.")]
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public new static CLMemoryHandle CreateImage2D(
             CLContextHandle context,
             ComputeMemoryFlags flags,
@@ -96,7 +98,7 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [Obsolete("This function has been deprecated in OpenCL 1.2.")]
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public new static CLMemoryHandle CreateImage3D(
             CLContextHandle context,
             ComputeMemoryFlags flags,
@@ -116,7 +118,7 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [Obsolete("This function has been deprecated in OpenCL 1.2.")]
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public new static ComputeErrorCode EnqueueBarrier(
             CLCommandQueueHandle command_queue)
         {
@@ -127,7 +129,7 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [Obsolete("This function has been deprecated in OpenCL 1.2.")]
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public new static ComputeErrorCode EnqueueMarker(
             CLCommandQueueHandle command_queue,
             out CLEventHandle new_event)
@@ -139,7 +141,7 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [Obsolete("This function has been deprecated in OpenCL 1.2.")]
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public new static ComputeErrorCode EnqueueWaitForEvents(
             CLCommandQueueHandle command_queue,
             Int32 num_events,
@@ -152,7 +154,7 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [Obsolete("This function has been deprecated in OpenCL 1.2.")]
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public new static IntPtr GetExtensionFunctionAddress(
             String func_name)
         {
@@ -163,11 +165,13 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [Obsolete("This function has been deprecated in OpenCL 1.2.")]
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public new static ComputeErrorCode UnloadCompiler()
         {
             Trace.WriteLine("WARNING! clUnloadCompiler has been deprecated in OpenCL 1.2.");
             return CL11.UnloadCompiler();
         }
+
+        #endregion
     }
 }

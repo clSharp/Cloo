@@ -265,6 +265,7 @@ namespace Cloo
         /// <summary> </summary>
         MemoryBaseAddressAlignment = 0x1019,
         /// <summary> </summary>
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         MinDataTypeAlignmentSize = 0x101A,
         /// <summary> </summary>
         SingleFPConfig = 0x101B,

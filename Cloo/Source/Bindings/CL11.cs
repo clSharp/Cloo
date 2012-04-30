@@ -148,10 +148,12 @@ namespace Cloo.Bindings
             [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_wait_list,
             [Out, MarshalAs(UnmanagedType.LPArray, SizeConst=1)] CLEventHandle[] new_event);
 
+        #region Deprecated functions
+
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
-        [Obsolete("This function has been deprecated in OpenCL 1.1.")]
+        [Obsolete("Deprecated in OpenCL 1.1.")]
         public new static ComputeErrorCode SetCommandQueueProperty(
             CLCommandQueueHandle command_queue,
             ComputeCommandQueueFlags properties,
@@ -161,6 +163,8 @@ namespace Cloo.Bindings
             Trace.WriteLine("WARNING! clSetCommandQueueProperty has been deprecated in OpenCL 1.1.");
             return CL10.SetCommandQueueProperty(command_queue, properties, enable, out old_properties);
         }
+
+        #endregion
     }
 
     /// <summary>
