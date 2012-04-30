@@ -152,7 +152,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [Obsolete("This function has been deprecated in OpenCL 1.1.")]
-        new public static ComputeErrorCode SetCommandQueueProperty(
+        public new static ComputeErrorCode SetCommandQueueProperty(
             CLCommandQueueHandle command_queue,
             ComputeCommandQueueFlags properties,
             [MarshalAs(UnmanagedType.Bool)] bool enable,

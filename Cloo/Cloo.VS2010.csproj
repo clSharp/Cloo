@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Source\Bindings\CL10.cs" />
     <Compile Include="Source\Bindings\CL11.cs" />
+    <Compile Include="Source\Bindings\CL12.cs" />
     <Compile Include="Source\Bindings\CLCommandQueueHandle.cs" />
     <Compile Include="Source\Bindings\CLContextHandle.cs" />
     <Compile Include="Source\Bindings\CLDeviceHandle.cs" />
