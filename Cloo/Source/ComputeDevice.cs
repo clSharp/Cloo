@@ -580,7 +580,7 @@ namespace Cloo
             maxSamplers = GetInfo<uint>(ComputeDeviceInfo.MaxSamplers);
             maxWorkGroupSize = (long)GetInfo<IntPtr>(ComputeDeviceInfo.MaxWorkGroupSize);
             maxWorkItemDimensions = GetInfo<uint>(ComputeDeviceInfo.MaxWorkItemDimensions);
-            maxWorkItemSizes = new ReadOnlyCollection<long>(ComputeTools.ConvertArray(GetArrayInfo<CLDeviceHandle, ComputeDeviceInfo, IntPtr>(Handle, ComputeDeviceInfo.MaxWorkItemSizes, CL10.GetDeviceInfo)));
+            maxWorkItemSizes = new ReadOnlyCollection<long>(ComputeTools.ConvertArray(GetArrayInfo<CLDeviceHandle, ComputeDeviceInfo, IntPtr>(Handle, ComputeDeviceInfo.MaxWorkItemSizes, CL12.GetDeviceInfo)));
             maxWriteImageArgs = GetInfo<uint>(ComputeDeviceInfo.MaxWriteImageArguments);
             memBaseAddrAlign = GetInfo<uint>(ComputeDeviceInfo.MemoryBaseAddressAlignment);
             minDataTypeAlignSize = GetInfo<uint>(ComputeDeviceInfo.MinDataTypeAlignmentSize);
@@ -607,17 +607,17 @@ namespace Cloo
 
         private bool GetBoolInfo(ComputeDeviceInfo paramName)
         {
-            return GetBoolInfo<CLDeviceHandle, ComputeDeviceInfo>(Handle, paramName, CL10.GetDeviceInfo);
+            return GetBoolInfo<CLDeviceHandle, ComputeDeviceInfo>(Handle, paramName, CL12.GetDeviceInfo);
         }
 
         private NativeType GetInfo<NativeType>(ComputeDeviceInfo paramName) where NativeType : struct
         {
-            return GetInfo<CLDeviceHandle, ComputeDeviceInfo, NativeType>(Handle, paramName, CL10.GetDeviceInfo);
+            return GetInfo<CLDeviceHandle, ComputeDeviceInfo, NativeType>(Handle, paramName, CL12.GetDeviceInfo);
         }
 
         private string GetStringInfo(ComputeDeviceInfo paramName)
         {
-            return GetStringInfo<CLDeviceHandle, ComputeDeviceInfo>(Handle, paramName, CL10.GetDeviceInfo);
+            return GetStringInfo<CLDeviceHandle, ComputeDeviceInfo>(Handle, paramName, CL12.GetDeviceInfo);
         }
 
         #endregion

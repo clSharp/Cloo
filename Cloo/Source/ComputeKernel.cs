@@ -98,7 +98,7 @@ namespace Cloo
             SetID(Handle.Value);
 
             context = program.Context;
-            functionName = GetStringInfo<CLKernelHandle, ComputeKernelInfo>(Handle, ComputeKernelInfo.FunctionName, CL10.GetKernelInfo);
+            functionName = GetStringInfo<CLKernelHandle, ComputeKernelInfo>(Handle, ComputeKernelInfo.FunctionName, CL12.GetKernelInfo);
             this.program = program;
 
             Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
@@ -107,7 +107,7 @@ namespace Cloo
         internal ComputeKernel(string functionName, ComputeProgram program)
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL10.CreateKernel(program.Handle, functionName, out error);
+            Handle = CL12.CreateKernel(program.Handle, functionName, out error);
             ComputeException.ThrowOnError(error);
 
             SetID(Handle.Value);
@@ -131,7 +131,7 @@ namespace Cloo
         public long GetLocalMemorySize(ComputeDevice device)
         {
             return GetInfo<CLKernelHandle, CLDeviceHandle, ComputeKernelWorkGroupInfo, long>(
-                Handle, device.Handle, ComputeKernelWorkGroupInfo.LocalMemorySize, CL10.GetKernelWorkGroupInfo);
+                Handle, device.Handle, ComputeKernelWorkGroupInfo.LocalMemorySize, CL12.GetKernelWorkGroupInfo);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Cloo
         {
             return ComputeTools.ConvertArray(
                 GetArrayInfo<CLKernelHandle, CLDeviceHandle, ComputeKernelWorkGroupInfo, IntPtr>(
-                    Handle, device.Handle, ComputeKernelWorkGroupInfo.CompileWorkGroupSize, CL10.GetKernelWorkGroupInfo));
+                    Handle, device.Handle, ComputeKernelWorkGroupInfo.CompileWorkGroupSize, CL12.GetKernelWorkGroupInfo));
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Cloo
         public long GetPreferredWorkGroupSizeMultiple(ComputeDevice device)
         {
             return (long)GetInfo<CLKernelHandle, CLDeviceHandle, ComputeKernelWorkGroupInfo, IntPtr>(
-                Handle, device.Handle, ComputeKernelWorkGroupInfo.PreferredWorkGroupSizeMultiple, CL10.GetKernelWorkGroupInfo);
+                Handle, device.Handle, ComputeKernelWorkGroupInfo.PreferredWorkGroupSizeMultiple, CL12.GetKernelWorkGroupInfo);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Cloo
         public long GetPrivateMemorySize(ComputeDevice device)
         {
             return GetInfo<CLKernelHandle, CLDeviceHandle, ComputeKernelWorkGroupInfo, long>(
-                Handle, device.Handle, ComputeKernelWorkGroupInfo.PrivateMemorySize, CL10.GetKernelWorkGroupInfo);
+                Handle, device.Handle, ComputeKernelWorkGroupInfo.PrivateMemorySize, CL12.GetKernelWorkGroupInfo);
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace Cloo
         public long GetWorkGroupSize(ComputeDevice device)
         {
             return (long)GetInfo<CLKernelHandle, CLDeviceHandle, ComputeKernelWorkGroupInfo, IntPtr>(
-                    Handle, device.Handle, ComputeKernelWorkGroupInfo.WorkGroupSize, CL10.GetKernelWorkGroupInfo);
+                    Handle, device.Handle, ComputeKernelWorkGroupInfo.WorkGroupSize, CL12.GetKernelWorkGroupInfo);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace Cloo
         /// </remarks>
         public void SetArgument(int index, IntPtr dataSize, IntPtr dataAddr)
         {
-            ComputeErrorCode error = CL10.SetKernelArg(Handle, index, dataSize, dataAddr);
+            ComputeErrorCode error = CL12.SetKernelArg(Handle, index, dataSize, dataAddr);
             ComputeException.ThrowOnError(error);
         }
 
@@ -269,7 +269,7 @@ namespace Cloo
             if (Handle.IsValid)
             {
                 Trace.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
-                CL10.ReleaseKernel(Handle);
+                CL12.ReleaseKernel(Handle);
                 Handle.Invalidate();
             }
         }

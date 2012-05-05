@@ -906,77 +906,11 @@
             <param name="flags"> The <c>ComputeMemoryFlags</c> for which the collection of <see cref="T:Cloo.ComputeImageFormat"/>s is queried. </param>
             <returns> The collection of the required <see cref="T:Cloo.ComputeImageFormat"/>s. </returns>
         </member>
-        <member name="T:Cloo.ComputeTools">
+        <member name="T:Cloo.Bindings.CL12">
             <summary>
-            Contains various helper methods.
+            Contains bindings to the OpenCL 1.2 functions.
             </summary>
-        </member>
-        <member name="M:Cloo.ComputeTools.ParseVersionString(System.String,System.Int32)">
-            <summary>
-            Parses an OpenCL version string.
-            </summary>
-            <param name="versionString"> The version string to parse. Must be in the format: <c>Additional substrings[space][major_version].[minor_version][space]Additional substrings</c>. </param>
-            <param name="substringIndex"> The index of the substring that specifies the OpenCL version. </param>
-            <returns> A <c>Version</c> instance containing the major and minor version from <paramref name="versionString"/>. </returns>
-        </member>
-        <member name="T:Cloo.ComputeImage3D">
-            <summary>
-            Represents an OpenCL 3D image.
-            </summary>
-            <seealso cref="T:Cloo.ComputeImage"/>
-        </member>
-        <member name="M:Cloo.ComputeImage3D.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat,System.Int32,System.Int32,System.Int32,System.Int64,System.Int64,System.IntPtr)">
-            <summary>
-            Creates a new <see cref="T:Cloo.ComputeImage3D"/>.
-            </summary>
-            <param name="context"> A valid <see cref="T:Cloo.ComputeContext"/> in which the <see cref="T:Cloo.ComputeImage3D"/> is created. </param>
-            <param name="flags"> A bit-field that is used to specify allocation and usage information about the <see cref="T:Cloo.ComputeImage3D"/>. </param>
-            <param name="format"> A structure that describes the format properties of the <see cref="T:Cloo.ComputeImage3D"/>. </param>
-            <param name="width"> The width of the <see cref="T:Cloo.ComputeImage3D"/> in pixels. </param>
-            <param name="height"> The height of the <see cref="T:Cloo.ComputeImage3D"/> in pixels. </param>
-            <param name="depth"> The depth of the <see cref="T:Cloo.ComputeImage3D"/> in pixels. </param>
-            <param name="rowPitch"> The size in bytes of each row of elements of the <see cref="T:Cloo.ComputeImage3D"/>. If <paramref name="rowPitch"/> is zero, OpenCL will compute the proper value based on <see cref="P:Cloo.ComputeImage.Width"/> and <see cref="P:Cloo.ComputeImage.ElementSize"/>. </param>
-            <param name="slicePitch"> The size in bytes of each 2D slice in the <see cref="T:Cloo.ComputeImage3D"/>. If <paramref name="slicePitch"/> is zero, OpenCL will compute the proper value based on <see cref="P:Cloo.ComputeImage.RowPitch"/> and <see cref="P:Cloo.ComputeImage.Height"/>. </param>
-            <param name="data"> The data to initialize the <see cref="T:Cloo.ComputeImage3D"/>. Can be <c>IntPtr.Zero</c>. </param>
-        </member>
-        <member name="M:Cloo.ComputeImage3D.CreateFromGLTexture3D(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Creates a new <see cref="T:Cloo.ComputeImage3D"/> from an OpenGL 3D texture object.
-            </summary>
-            <param name="context"> A <see cref="T:Cloo.ComputeContext"/> with enabled CL/GL sharing. </param>
-            <param name="flags"> A bit-field that is used to specify usage information about the <see cref="T:Cloo.ComputeImage3D"/>. Only <c>ComputeMemoryFlags.ReadOnly</c>, <c>ComputeMemoryFlags.WriteOnly</c> and <c>ComputeMemoryFlags.ReadWrite</c> are allowed. </param>
-            <param name="textureTarget"> The image type of texture. Must be GL_TEXTURE_3D. </param>
-            <param name="mipLevel"> The mipmap level of the OpenGL 2D texture object to be used. </param>
-            <param name="textureId"> The OpenGL 2D texture object id to use. </param>
-            <returns> The created <see cref="T:Cloo.ComputeImage2D"/>. </returns>
-        </member>
-        <member name="M:Cloo.ComputeImage3D.GetSupportedFormats(Cloo.ComputeContext,Cloo.ComputeMemoryFlags)">
-            <summary>
-            Gets a collection of supported <see cref="T:Cloo.ComputeImage3D"/> <see cref="T:Cloo.ComputeImageFormat"/>s in a <see cref="T:Cloo.ComputeContext"/>.
-            </summary>
-            <param name="context"> The <see cref="T:Cloo.ComputeContext"/> for which the collection of <see cref="T:Cloo.ComputeImageFormat"/>s is queried. </param>
-            <param name="flags"> The <c>ComputeMemoryFlags</c> for which the collection of <see cref="T:Cloo.ComputeImageFormat"/>s is queried. </param>
-            <returns> The collection of the required <see cref="T:Cloo.ComputeImageFormat"/>s. </returns>
-        </member>
-        <member name="T:Cloo.Bindings.CLProgramHandle">
-            <summary>
-            Represents the <see cref="T:Cloo.ComputeProgram"/> ID.
-            </summary>
-        </member>
-        <member name="M:Cloo.Bindings.CLProgramHandle.Invalidate">
-            <summary>
-            Invalidates the handle.
-            </summary>
-        </member>
-        <member name="P:Cloo.Bindings.CLProgramHandle.IsValid">
-            <summary>
-            Gets a logic value indicating whether the handle is valid.
-            </summary>
-        </member>
-        <member name="P:Cloo.Bindings.CLProgramHandle.Value">
-            <summary>
-            Gets the value of the handle.
-            </summary>
+            <remarks> See the OpenCL specification for documentation regarding these functions. </remarks>
         </member>
         <member name="T:Cloo.Bindings.CL11">
             <summary>
@@ -1406,6 +1340,123 @@
         <member name="M:Cloo.Bindings.CL11.SetCommandQueueProperty(Cloo.Bindings.CLCommandQueueHandle,Cloo.ComputeCommandQueueFlags,System.Boolean,Cloo.ComputeCommandQueueFlags@)">
             <summary>
             See the OpenCL specification.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CL12.CreateFromGLTexture2D(Cloo.Bindings.CLContextHandle,Cloo.ComputeMemoryFlags,System.Int32,System.Int32,System.Int32,Cloo.ComputeErrorCode@)">
+            <summary>
+            See the OpenCL specification.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CL12.CreateFromGLTexture3D(Cloo.Bindings.CLContextHandle,Cloo.ComputeMemoryFlags,System.Int32,System.Int32,System.Int32,Cloo.ComputeErrorCode@)">
+            <summary>
+            See the OpenCL specification.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CL12.CreateImage2D(Cloo.Bindings.CLContextHandle,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat@,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Cloo.ComputeErrorCode@)">
+            <summary>
+            See the OpenCL specification.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CL12.CreateImage3D(Cloo.Bindings.CLContextHandle,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat@,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Cloo.ComputeErrorCode@)">
+            <summary>
+            See the OpenCL specification.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CL12.EnqueueBarrier(Cloo.Bindings.CLCommandQueueHandle)">
+            <summary>
+            See the OpenCL specification.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CL12.EnqueueMarker(Cloo.Bindings.CLCommandQueueHandle,Cloo.Bindings.CLEventHandle@)">
+            <summary>
+            See the OpenCL specification.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CL12.EnqueueWaitForEvents(Cloo.Bindings.CLCommandQueueHandle,System.Int32,Cloo.Bindings.CLEventHandle[])">
+            <summary>
+            See the OpenCL specification.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CL12.GetExtensionFunctionAddress(System.String)">
+            <summary>
+            See the OpenCL specification.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CL12.UnloadCompiler">
+            <summary>
+            See the OpenCL specification.
+            </summary>
+        </member>
+        <member name="T:Cloo.ComputeTools">
+            <summary>
+            Contains various helper methods.
+            </summary>
+        </member>
+        <member name="M:Cloo.ComputeTools.ParseVersionString(System.String,System.Int32)">
+            <summary>
+            Parses an OpenCL version string.
+            </summary>
+            <param name="versionString"> The version string to parse. Must be in the format: <c>Additional substrings[space][major_version].[minor_version][space]Additional substrings</c>. </param>
+            <param name="substringIndex"> The index of the substring that specifies the OpenCL version. </param>
+            <returns> A <c>Version</c> instance containing the major and minor version from <paramref name="versionString"/>. </returns>
+        </member>
+        <member name="T:Cloo.ComputeImage3D">
+            <summary>
+            Represents an OpenCL 3D image.
+            </summary>
+            <seealso cref="T:Cloo.ComputeImage"/>
+        </member>
+        <member name="M:Cloo.ComputeImage3D.#ctor(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat,System.Int32,System.Int32,System.Int32,System.Int64,System.Int64,System.IntPtr)">
+            <summary>
+            Creates a new <see cref="T:Cloo.ComputeImage3D"/>.
+            </summary>
+            <param name="context"> A valid <see cref="T:Cloo.ComputeContext"/> in which the <see cref="T:Cloo.ComputeImage3D"/> is created. </param>
+            <param name="flags"> A bit-field that is used to specify allocation and usage information about the <see cref="T:Cloo.ComputeImage3D"/>. </param>
+            <param name="format"> A structure that describes the format properties of the <see cref="T:Cloo.ComputeImage3D"/>. </param>
+            <param name="width"> The width of the <see cref="T:Cloo.ComputeImage3D"/> in pixels. </param>
+            <param name="height"> The height of the <see cref="T:Cloo.ComputeImage3D"/> in pixels. </param>
+            <param name="depth"> The depth of the <see cref="T:Cloo.ComputeImage3D"/> in pixels. </param>
+            <param name="rowPitch"> The size in bytes of each row of elements of the <see cref="T:Cloo.ComputeImage3D"/>. If <paramref name="rowPitch"/> is zero, OpenCL will compute the proper value based on <see cref="P:Cloo.ComputeImage.Width"/> and <see cref="P:Cloo.ComputeImage.ElementSize"/>. </param>
+            <param name="slicePitch"> The size in bytes of each 2D slice in the <see cref="T:Cloo.ComputeImage3D"/>. If <paramref name="slicePitch"/> is zero, OpenCL will compute the proper value based on <see cref="P:Cloo.ComputeImage.RowPitch"/> and <see cref="P:Cloo.ComputeImage.Height"/>. </param>
+            <param name="data"> The data to initialize the <see cref="T:Cloo.ComputeImage3D"/>. Can be <c>IntPtr.Zero</c>. </param>
+        </member>
+        <member name="M:Cloo.ComputeImage3D.CreateFromGLTexture3D(Cloo.ComputeContext,Cloo.ComputeMemoryFlags,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new <see cref="T:Cloo.ComputeImage3D"/> from an OpenGL 3D texture object.
+            </summary>
+            <param name="context"> A <see cref="T:Cloo.ComputeContext"/> with enabled CL/GL sharing. </param>
+            <param name="flags"> A bit-field that is used to specify usage information about the <see cref="T:Cloo.ComputeImage3D"/>. Only <c>ComputeMemoryFlags.ReadOnly</c>, <c>ComputeMemoryFlags.WriteOnly</c> and <c>ComputeMemoryFlags.ReadWrite</c> are allowed. </param>
+            <param name="textureTarget"> The image type of texture. Must be GL_TEXTURE_3D. </param>
+            <param name="mipLevel"> The mipmap level of the OpenGL 2D texture object to be used. </param>
+            <param name="textureId"> The OpenGL 2D texture object id to use. </param>
+            <returns> The created <see cref="T:Cloo.ComputeImage2D"/>. </returns>
+        </member>
+        <member name="M:Cloo.ComputeImage3D.GetSupportedFormats(Cloo.ComputeContext,Cloo.ComputeMemoryFlags)">
+            <summary>
+            Gets a collection of supported <see cref="T:Cloo.ComputeImage3D"/> <see cref="T:Cloo.ComputeImageFormat"/>s in a <see cref="T:Cloo.ComputeContext"/>.
+            </summary>
+            <param name="context"> The <see cref="T:Cloo.ComputeContext"/> for which the collection of <see cref="T:Cloo.ComputeImageFormat"/>s is queried. </param>
+            <param name="flags"> The <c>ComputeMemoryFlags</c> for which the collection of <see cref="T:Cloo.ComputeImageFormat"/>s is queried. </param>
+            <returns> The collection of the required <see cref="T:Cloo.ComputeImageFormat"/>s. </returns>
+        </member>
+        <member name="T:Cloo.Bindings.CLProgramHandle">
+            <summary>
+            Represents the <see cref="T:Cloo.ComputeProgram"/> ID.
+            </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLProgramHandle.Invalidate">
+            <summary>
+            Invalidates the handle.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLProgramHandle.IsValid">
+            <summary>
+            Gets a logic value indicating whether the handle is valid.
+            </summary>
+        </member>
+        <member name="P:Cloo.Bindings.CLProgramHandle.Value">
+            <summary>
+            Gets the value of the handle.
             </summary>
         </member>
         <member name="T:Cloo.Bindings.ComputeMemoryDestructorNotifer">
@@ -4525,57 +4576,6 @@
             Gets the value of the <see cref="T:Cloo.ComputeContextProperty"/>.
             </summary>
             <value> The value of the <see cref="T:Cloo.ComputeContextProperty"/>. </value>
-        </member>
-        <member name="T:Cloo.Bindings.CL12">
-            <summary>
-            Contains bindings to the OpenCL 1.2 functions.
-            </summary>
-            <remarks> See the OpenCL specification for documentation regarding these functions. </remarks>
-        </member>
-        <member name="M:Cloo.Bindings.CL12.CreateFromGLTexture2D(Cloo.Bindings.CLContextHandle,Cloo.ComputeMemoryFlags,System.Int32,System.Int32,System.Int32,Cloo.ComputeErrorCode@)">
-            <summary>
-            See the OpenCL specification.
-            </summary>
-        </member>
-        <member name="M:Cloo.Bindings.CL12.CreateFromGLTexture3D(Cloo.Bindings.CLContextHandle,Cloo.ComputeMemoryFlags,System.Int32,System.Int32,System.Int32,Cloo.ComputeErrorCode@)">
-            <summary>
-            See the OpenCL specification.
-            </summary>
-        </member>
-        <member name="M:Cloo.Bindings.CL12.CreateImage2D(Cloo.Bindings.CLContextHandle,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat@,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Cloo.ComputeErrorCode@)">
-            <summary>
-            See the OpenCL specification.
-            </summary>
-        </member>
-        <member name="M:Cloo.Bindings.CL12.CreateImage3D(Cloo.Bindings.CLContextHandle,Cloo.ComputeMemoryFlags,Cloo.ComputeImageFormat@,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Cloo.ComputeErrorCode@)">
-            <summary>
-            See the OpenCL specification.
-            </summary>
-        </member>
-        <member name="M:Cloo.Bindings.CL12.EnqueueBarrier(Cloo.Bindings.CLCommandQueueHandle)">
-            <summary>
-            See the OpenCL specification.
-            </summary>
-        </member>
-        <member name="M:Cloo.Bindings.CL12.EnqueueMarker(Cloo.Bindings.CLCommandQueueHandle,Cloo.Bindings.CLEventHandle@)">
-            <summary>
-            See the OpenCL specification.
-            </summary>
-        </member>
-        <member name="M:Cloo.Bindings.CL12.EnqueueWaitForEvents(Cloo.Bindings.CLCommandQueueHandle,System.Int32,Cloo.Bindings.CLEventHandle[])">
-            <summary>
-            See the OpenCL specification.
-            </summary>
-        </member>
-        <member name="M:Cloo.Bindings.CL12.GetExtensionFunctionAddress(System.String)">
-            <summary>
-            See the OpenCL specification.
-            </summary>
-        </member>
-        <member name="M:Cloo.Bindings.CL12.UnloadCompiler">
-            <summary>
-            See the OpenCL specification.
-            </summary>
         </member>
     </members>
 </doc>

@@ -161,7 +161,7 @@ namespace Cloo.Bindings
             out ComputeCommandQueueFlags old_properties)
         {
             Trace.WriteLine("WARNING! clSetCommandQueueProperty has been deprecated in OpenCL 1.1.");
-            return CL10.SetCommandQueueProperty(command_queue, properties, enable, out old_properties);
+            return CL12.SetCommandQueueProperty(command_queue, properties, enable, out old_properties);
         }
 
         #endregion

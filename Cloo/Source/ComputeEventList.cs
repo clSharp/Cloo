@@ -91,7 +91,7 @@ namespace Cloo
         {
             int eventWaitListSize;
             CLEventHandle[] eventHandles = ComputeTools.ExtractHandles(events, out eventWaitListSize);
-            ComputeErrorCode error = CL10.WaitForEvents(eventWaitListSize, eventHandles);
+            ComputeErrorCode error = CL12.WaitForEvents(eventWaitListSize, eventHandles);
             ComputeException.ThrowOnError(error);
         }
 
