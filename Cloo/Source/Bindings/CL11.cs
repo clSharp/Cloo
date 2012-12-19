@@ -2,7 +2,7 @@
 
 /*
 
-Copyright (c) 2009 - 2011 Fatjon Sakiqi
+Copyright (c) 2009 - 2013 Fatjon Sakiqi
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -161,7 +161,7 @@ namespace Cloo.Bindings
             out ComputeCommandQueueFlags old_properties)
         {
             Trace.WriteLine("WARNING! clSetCommandQueueProperty has been deprecated in OpenCL 1.1.");
-            return CL12.SetCommandQueueProperty(command_queue, properties, enable, out old_properties);
+            return CL10.SetCommandQueueProperty(command_queue, properties, enable, out old_properties);
         }
 
         #endregion
