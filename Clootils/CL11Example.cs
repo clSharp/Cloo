@@ -142,6 +142,12 @@ namespace Clootils
                 log.Write("Comparing data... ");
                 Compare(cubicIn, cubicOut);
                 log.WriteLine("passed.");
+
+                // cleanup commands
+                commands.Dispose();
+
+                // cleanup buffer
+                buffer.Dispose();
             }
             catch (Exception e)
             {

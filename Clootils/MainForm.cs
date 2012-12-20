@@ -160,6 +160,9 @@ namespace Clootils
             log.Close();
 
             textBoxLog.Lines = ParseLines(output.ToString());
+
+            // cleanup context!
+            context.Dispose();
         }
 
         void comboBoxPlatform_SelectedIndexChanged(object sender, EventArgs e)

@@ -30,6 +30,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Cloo;
 
@@ -63,8 +64,18 @@ namespace Clootils
                 ComputeProgram program = new ComputeProgram(context, kernelSources);
                 program.Build(null, null, null, IntPtr.Zero);
                 log.WriteLine("Program successfully built.");
-                program.CreateAllKernels();
+                ICollection<ComputeKernel> kernels = program.CreateAllKernels();
                 log.WriteLine("Kernels successfully created.");
+
+                // cleanup kernels
+                foreach (ComputeKernel kernel in kernels)
+                {
+                    kernel.Dispose();
+                }
+                kernels.Clear();
+
+                // cleanup program
+                program.Dispose();
             }
             catch (Exception e)
             {

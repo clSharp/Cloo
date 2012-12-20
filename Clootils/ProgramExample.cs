@@ -65,6 +65,9 @@ namespace Clootils
             {
                 log.WriteLine(e.ToString());
             }
+
+            // cleanup program
+            program.Dispose();
         }
 
         private void notify(CLProgramHandle programHandle, IntPtr userDataPtr)

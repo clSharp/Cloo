@@ -131,6 +131,27 @@ kernel void VectorAdd(
                 // Print the results to a log/console.
                 for (int i = 0; i < count; i++)
                     log.WriteLine("{0} + {1} = {2}", arrA[i], arrB[i], arrC[i]);
+
+                // cleanup commands
+                commands.Dispose();
+
+                // cleanup events
+                foreach (ComputeEventBase eventBase in eventList)
+                {
+                    eventBase.Dispose();
+                }
+                eventList.Clear();
+
+                // cleanup kernel
+                kernel.Dispose();
+
+                // cleanup program
+                program.Dispose();
+
+                // cleanup buffers
+                a.Dispose();
+                b.Dispose();
+                c.Dispose();
             }
             catch (Exception e)
             {

@@ -78,6 +78,13 @@ namespace Clootils
                 }
 
                 commands.Unmap(buffer, ref mappedPtr, null);
+
+                // wait for the unmap to happen
+                commands.Finish();
+                // cleanup buffer
+                buffer.Dispose();
+                // cleanup commands
+                commands.Dispose();
             }
             catch (Exception e)
             {
