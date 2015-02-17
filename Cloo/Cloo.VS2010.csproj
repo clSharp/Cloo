@@ -89,6 +89,7 @@
     <Compile Include="Source\ComputeEventBase.cs" />
     <Compile Include="Source\ComputeEventList.cs" />
     <Compile Include="Source\ComputeException.cs" />
+    <Compile Include="Source\ComputeExternalEvent.cs" />
     <Compile Include="Source\ComputeImage.cs" />
     <Compile Include="Source\ComputeImage2D.cs" />
     <Compile Include="Source\ComputeImage3D.cs" />
