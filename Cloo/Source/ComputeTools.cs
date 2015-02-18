@@ -107,7 +107,7 @@ namespace Cloo
             return result;
         }
 
-        internal static CLDeviceHandle[] ExtractHandles(ICollection<ComputeDevice> computeObjects, out int handleCount)
+        public static CLDeviceHandle[] ExtractHandles(ICollection<ComputeDevice> computeObjects, out int handleCount)
         {
             if (computeObjects == null || computeObjects.Count == 0)
             {
@@ -145,7 +145,26 @@ namespace Cloo
             return result;
         }
 
-        internal static CLMemoryHandle[] ExtractHandles(ICollection<ComputeMemory> computeObjects, out int handleCount)
+        public static CLCommandQueueHandle[] ExtractHandles(ICollection<ComputeCommandQueue> computeObjects, out int handleCount)
+        {
+            if (computeObjects == null || computeObjects.Count == 0)
+            {
+                handleCount = 0;
+                return null;
+            }
+
+            CLCommandQueueHandle[] result = new CLCommandQueueHandle[computeObjects.Count];
+            int i = 0;
+            foreach (ComputeCommandQueue computeObj in computeObjects)
+            {
+                result[i] = computeObj.Handle;
+                i++;
+            }
+            handleCount = computeObjects.Count;
+            return result;
+        }
+
+        public static CLMemoryHandle[] ExtractHandles(ICollection<ComputeMemory> computeObjects, out int handleCount)
         {
             if (computeObjects == null || computeObjects.Count == 0)
             {
