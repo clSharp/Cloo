@@ -54,6 +54,7 @@ namespace Cloo
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ComputeEventCallback statusNotify;
 
+        private object _statusLockObject = new Object();
         #endregion
 
         #region Events
@@ -66,9 +67,13 @@ namespace Cloo
         {
             add
             {
-                aborted += value;
-                if (status != null && status.Status != ComputeCommandExecutionStatus.Complete)
-                    value.Invoke(this, status);
+                lock (_statusLockObject)
+                {
+                    if (status != null && status.Status != ComputeCommandExecutionStatus.Complete)
+                        value.Invoke(this, status);
+
+                    aborted += value;
+                }
             }
             remove
             {
@@ -84,9 +89,13 @@ namespace Cloo
         {
             add
             {
-                completed += value;
-                if (status != null && status.Status == ComputeCommandExecutionStatus.Complete)
-                    value.Invoke(this, status);
+                lock (_statusLockObject)
+                {
+                    completed += value;
+
+                    if (status != null && status.Status == ComputeCommandExecutionStatus.Complete)
+                        value.Invoke(this, status);
+                }
             }
             remove
             {
@@ -223,11 +232,18 @@ namespace Cloo
 
         private void StatusNotify(CLEventHandle eventHandle, int cmdExecStatusOrErr, IntPtr userData)
         {
-            status = new ComputeCommandStatusArgs(this, (ComputeCommandExecutionStatus)cmdExecStatusOrErr);
-            switch (cmdExecStatusOrErr)
+            lock (_statusLockObject)
             {
-                case (int)ComputeCommandExecutionStatus.Complete: OnCompleted(this, status); break;
-                default: OnAborted(this, status); break;
+                status = new ComputeCommandStatusArgs(this, (ComputeCommandExecutionStatus)cmdExecStatusOrErr);
+                switch (cmdExecStatusOrErr)
+                {
+                    case (int)ComputeCommandExecutionStatus.Complete:
+                        OnCompleted(this, status);
+                        break;
+                    default:
+                        OnAborted(this, status);
+                        break;
+                }
             }
         }
 
