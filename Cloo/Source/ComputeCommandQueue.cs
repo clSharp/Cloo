@@ -178,6 +178,44 @@ namespace Cloo
         }
 
         /// <summary>
+        /// Enqueues a marker command which waits for either a list of events to complete, or all previously enqueued commands to complete.
+        /// </summary>
+        /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="ComputeEvent"/> identifying this command is created and attached to the end of the collection. </param>
+        /// <remarks> Requires OpenCL 1.2. </remarks>
+        public void AddMarkerWithWaitList(ICollection<ComputeEventBase> events)
+        {
+            int eventWaitListSize;
+            CLEventHandle[] eventHandles = ComputeTools.ExtractHandles(events, out eventWaitListSize);
+            bool eventsWritable = (events != null && !events.IsReadOnly);
+            CLEventHandle[] newEventHandle = (eventsWritable) ? new CLEventHandle[1] : null;
+
+            ComputeErrorCode error = CL12.EnqueueMarkerWithWaitList(Handle, eventWaitListSize, eventHandles, newEventHandle);
+            ComputeException.ThrowOnError(error);
+
+            if (eventsWritable)
+                events.Add(new ComputeEvent(newEventHandle[0], this));
+        }
+
+        /// <summary>
+        /// A synchronization point that enqueues a barrier operation.
+        /// </summary>
+        /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="ComputeEvent"/> identifying this command is created and attached to the end of the collection. </param>
+        /// <remarks> Requires OpenCL 1.2. </remarks>
+        public void AddBarrierWithWaitList(ICollection<ComputeEventBase> events)
+        {
+            int eventWaitListSize;
+            CLEventHandle[] eventHandles = ComputeTools.ExtractHandles(events, out eventWaitListSize);
+            bool eventsWritable = (events != null && !events.IsReadOnly);
+            CLEventHandle[] newEventHandle = (eventsWritable) ? new CLEventHandle[1] : null;
+
+            ComputeErrorCode error = CL12.EnqueueBarrierWithWaitList(Handle, eventWaitListSize, eventHandles, newEventHandle);
+            ComputeException.ThrowOnError(error);
+
+            if (eventsWritable)
+                events.Add(new ComputeEvent(newEventHandle[0], this));
+        }
+
+        /// <summary>
         /// Enqueues a command to copy data between buffers.
         /// </summary>
         /// <typeparam name="T"> The type of data in the buffers. </typeparam>

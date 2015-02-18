@@ -43,8 +43,28 @@ namespace Cloo.Bindings
     [SuppressUnmanagedCodeSecurity]
     public class CL12 : CL11
     {
-        #region Deprecated functions
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clEnqueueMarkerWithWaitList")]
+        public extern static ComputeErrorCode EnqueueMarkerWithWaitList(
+            CLCommandQueueHandle command_queue,
+            Int32 num_events,
+            [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_list,
+            [Out, MarshalAs(UnmanagedType.LPArray, SizeConst = 1)] CLEventHandle[] new_event);
 
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clEnqueueBarrierWithWaitList")]
+        public extern static ComputeErrorCode EnqueueBarrierWithWaitList(
+            CLCommandQueueHandle command_queue,
+            Int32 num_events,
+            [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_list,
+            [Out, MarshalAs(UnmanagedType.LPArray, SizeConst = 1)] CLEventHandle[] new_event);
+
+        #region Deprecated functions
+        
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
