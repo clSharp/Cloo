@@ -68,7 +68,7 @@ namespace Cloo
             : base(context, flags)
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(Marshal.SizeOf(typeof(T)) * count), dataPtr, out error);
+            Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(ComputeTools.SizeOf<T>() * count), dataPtr, out error);
             ComputeException.ThrowOnError(error);
             Init();
         }
@@ -87,7 +87,7 @@ namespace Cloo
             try
             {
                 ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(Marshal.SizeOf(typeof(T)) * data.Length), dataPtr.AddrOfPinnedObject(), out error);
+                Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(ComputeTools.SizeOf<T>() * data.Length), dataPtr.AddrOfPinnedObject(), out error);
                 ComputeException.ThrowOnError(error);
             }
             finally 

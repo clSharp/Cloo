@@ -29,6 +29,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+using System.Runtime.InteropServices;
+
 namespace Cloo
 {
     using System;
@@ -181,6 +183,11 @@ namespace Cloo
             }
             handleCount = computeObjects.Count;
             return result;
+        }
+        
+        internal static int SizeOf<T>()
+        {
+            return typeof (T).IsGenericType ? Marshal.SizeOf(default(T)) : Marshal.SizeOf(typeof(T));
         }
 
         #endregion

@@ -31,9 +31,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Cloo
 {
-    using System;
-    using System.Runtime.InteropServices;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL sub-buffer.
@@ -54,7 +52,9 @@ namespace Cloo
         public ComputeSubBuffer(ComputeBuffer<T> buffer, ComputeMemoryFlags flags, long offset, long count)
             : base(buffer.Context, flags)
         {
-            SysIntX2 region = new SysIntX2(offset * Marshal.SizeOf(typeof(T)), count * Marshal.SizeOf(typeof(T)));
+            var sizeofT = ComputeTools.SizeOf<T>();
+
+            SysIntX2 region = new SysIntX2(offset * sizeofT, count * sizeofT);
             ComputeErrorCode error;
             Handle = CL11.CreateSubBuffer(buffer.Handle, flags, ComputeBufferCreateType.Region, ref region, out error);
             ComputeException.ThrowOnError(error);
