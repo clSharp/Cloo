@@ -29,6 +29,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+using System.Collections.Generic;
+
 namespace Cloo
 {
     using System;
@@ -54,8 +56,13 @@ namespace Cloo
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ComputeEventCallback statusNotify;
 
-        private object _statusLockObject = new Object();
+        private readonly object _statusLockObject = new Object();
         #endregion
+
+        // A static list of all hooked statusNotifyCallbacks is kept to avoid "Callback on collected delegate" exceptions when ComputeEvent is garbage collected.
+        // TODO: 1) Is there a better way to avoid garbage collection of callback?
+        // TODO: 2) Can we improve removal performance by using HashSet or something like that?
+        private static readonly LinkedList<ComputeEventCallback> StatusNotifyCallbacks = new LinkedList<ComputeEventCallback>();
 
         #region Events
 
@@ -200,6 +207,11 @@ namespace Cloo
             statusNotify = new ComputeEventCallback(StatusNotify);
             ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, statusNotify, IntPtr.Zero);
             ComputeException.ThrowOnError(error);
+
+            lock (StatusNotifyCallbacks)
+            {
+                StatusNotifyCallbacks.AddLast(statusNotify);
+            }
         }
 
         /// <summary>
@@ -244,6 +256,11 @@ namespace Cloo
                         OnAborted(this, status);
                         break;
                 }
+            }
+
+            lock (StatusNotifyCallbacks)
+            {
+                StatusNotifyCallbacks.Remove(statusNotify);
             }
         }
 
