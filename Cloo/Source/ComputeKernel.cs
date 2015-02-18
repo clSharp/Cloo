@@ -246,7 +246,7 @@ namespace Cloo
             {
                 SetArgument(
                     index,
-                    new IntPtr(Marshal.SizeOf(typeof(T))),
+                    new IntPtr(Marshal.SizeOf(data)),
                     gcHandle.AddrOfPinnedObject());
             }
             finally
