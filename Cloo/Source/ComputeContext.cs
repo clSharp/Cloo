@@ -188,6 +188,33 @@ namespace Cloo
             Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
+        private struct ComputeContextPropertyTuple
+        {
+            public ComputeContextPropertyName Name;
+            public IntPtr Value;
+        }
+
+        public ComputeContext(IntPtr externalHandle)
+        {
+            Handle = new CLContextHandle(externalHandle);
+            
+            ComputeErrorCode error = CL12.RetainContext(Handle);
+            ComputeException.ThrowOnError(error);
+
+            SetID(Handle.Value);
+
+            var p1 = new List<ComputeContextPropertyTuple>(GetArrayInfo<CLContextHandle, ComputeContextInfo, ComputeContextPropertyTuple>(Handle, ComputeContextInfo.Properties, CL12.GetContextInfo));
+            var p2 = new List<ComputeContextProperty>();
+            foreach (var p in p1) p2.Add(new ComputeContextProperty(p.Name, p.Value));
+
+            this.properties = new ComputeContextPropertyList(p2);
+            ComputeContextProperty platformProperty = properties.GetByName(ComputeContextPropertyName.Platform);
+            this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
+            this.devices = GetDevices();
+
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
+        }
+        
         #endregion
 
         #region Protected methods

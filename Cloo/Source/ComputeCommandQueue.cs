@@ -130,6 +130,46 @@ namespace Cloo
             Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
+        private struct ComputeQueuePropertyTuple
+        {
+            public ComputeContextPropertyName Name;
+            public IntPtr Value;
+        }
+
+        public ComputeCommandQueue(ComputeContext context, IntPtr externalHandle)
+        {
+            Handle = new CLCommandQueueHandle(externalHandle);
+
+            ComputeErrorCode error = CL12.RetainCommandQueue(Handle);
+            ComputeException.ThrowOnError(error);
+
+            SetID(Handle.Value);
+
+            var contextHandle = GetInfo<CLCommandQueueHandle, ComputeCommandQueueInfo, CLContextHandle>(Handle, ComputeCommandQueueInfo.Context, CL12.GetCommandQueueInfo);
+            var deviceHandle = GetInfo<CLCommandQueueHandle, ComputeCommandQueueInfo, CLDeviceHandle>(Handle, ComputeCommandQueueInfo.Device, CL12.GetCommandQueueInfo);
+            var properties = (ComputeCommandQueueFlags)GetInfo<CLCommandQueueHandle, ComputeCommandQueueInfo, long>(Handle, ComputeCommandQueueInfo.Properties, CL12.GetCommandQueueInfo);
+
+            if (context.Handle.Value != contextHandle.Value) throw new ArgumentException("Context does not belong to queue", nameof(context));
+
+            this.context = context;
+
+            foreach (var d in this.context.Devices)
+            {
+                if (d.Handle.Value == deviceHandle.Value)
+                {
+                    device = d;
+                    break;
+                }
+            }
+            
+            outOfOrderExec = ((properties & ComputeCommandQueueFlags.OutOfOrderExecution) == ComputeCommandQueueFlags.OutOfOrderExecution);
+            profiling = ((properties & ComputeCommandQueueFlags.Profiling) == ComputeCommandQueueFlags.Profiling);
+
+            Events = new List<ComputeEventBase>();
+
+            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
+        }
+
         #endregion
 
         #region Public methods

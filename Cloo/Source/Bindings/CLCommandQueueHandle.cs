@@ -39,6 +39,11 @@ namespace Cloo.Bindings
     /// </summary>
     public struct CLCommandQueueHandle
     {
+        internal CLCommandQueueHandle(IntPtr externalValue)
+        {
+            value = externalValue;
+        }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         IntPtr value;
 

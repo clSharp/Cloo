@@ -39,6 +39,11 @@ namespace Cloo.Bindings
     /// </summary>
     public struct CLContextHandle
     {
+        internal CLContextHandle(IntPtr value)
+        {
+            this.value = value;
+        }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         IntPtr value;
 
