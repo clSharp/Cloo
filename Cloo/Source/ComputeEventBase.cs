@@ -30,6 +30,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Cloo
 {
@@ -62,7 +63,8 @@ namespace Cloo
         // A static list of all hooked statusNotifyCallbacks is kept to avoid "Callback on collected delegate" exceptions when ComputeEvent is garbage collected.
         // TODO: 1) Is there a better way to avoid garbage collection of callback?
         // TODO: 2) Can we improve removal performance by using HashSet or something like that?
-        private static readonly LinkedList<ComputeEventCallback> StatusNotifyCallbacks = new LinkedList<ComputeEventCallback>();
+        //private static readonly LinkedList<ComputeEventCallback> StatusNotifyCallbacks = new LinkedList<ComputeEventCallback>();
+        public static int CallbacksWaiting;
 
         #region Events
 
@@ -76,6 +78,8 @@ namespace Cloo
             {
                 lock (_statusLockObject)
                 {
+                    if (statusNotify == null) HookNotifier();
+
                     if (status != null && status.Status != ComputeCommandExecutionStatus.Complete)
                         value.Invoke(this, status);
 
@@ -98,10 +102,12 @@ namespace Cloo
             {
                 lock (_statusLockObject)
                 {
-                    completed += value;
-
+                    if (statusNotify == null) HookNotifier();
+                    
                     if (status != null && status.Status == ComputeCommandExecutionStatus.Complete)
                         value.Invoke(this, status);
+
+                    completed += value;
                 }
             }
             remove
@@ -205,13 +211,20 @@ namespace Cloo
         protected void HookNotifier()
         {
             statusNotify = new ComputeEventCallback(StatusNotify);
-            ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, statusNotify, IntPtr.Zero);
+            var handle = GCHandle.Alloc(statusNotify);
+            Interlocked.Increment(ref CallbacksWaiting);
+
+            ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, statusNotify, GCHandle.ToIntPtr(handle));
             ComputeException.ThrowOnError(error);
 
-            lock (StatusNotifyCallbacks)
-            {
-                StatusNotifyCallbacks.AddLast(statusNotify);
-            }
+            if (status != null && status.Status == ComputeCommandExecutionStatus.Complete) return;
+
+            
+
+            //lock (StatusNotifyCallbacks)
+            //{
+            //    StatusNotifyCallbacks.AddLast(statusNotify);
+            //}
         }
 
         /// <summary>
@@ -256,12 +269,16 @@ namespace Cloo
                         OnAborted(this, status);
                         break;
                 }
+                
+                /*lock (StatusNotifyCallbacks)
+                {
+                    if (!StatusNotifyCallbacks.Remove(statusNotify)) throw new Exception();
+                }*/
             }
 
-            lock (StatusNotifyCallbacks)
-            {
-                StatusNotifyCallbacks.Remove(statusNotify);
-            }
+            Interlocked.Decrement(ref CallbacksWaiting);
+            var handle = GCHandle.FromIntPtr(userData);
+            handle.Free();
         }
 
         #endregion

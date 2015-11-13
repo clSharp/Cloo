@@ -68,7 +68,7 @@ kernel void VectorAdd(
             try
             {
                 // Create the arrays and fill them with random data.
-                int count = 10;
+                int count = 1000000;
                 float[] arrA = new float[count];
                 float[] arrB = new float[count];
                 float[] arrC = new float[count];
