@@ -65,13 +65,18 @@ namespace Cloo
 
         #region Constructors
 
-        internal ComputeEvent(CLEventHandle handle, ComputeCommandQueue queue)
+        internal ComputeEvent(CLEventHandle handle, ComputeCommandQueue queue) : this (handle, queue, 0)
+        {
+            Type = (ComputeCommandType)GetInfo<CLEventHandle, ComputeEventInfo, int>(Handle, ComputeEventInfo.CommandType, CL12.GetEventInfo);
+        }
+
+        internal ComputeEvent(CLEventHandle handle, ComputeCommandQueue queue, ComputeCommandType type)
         {
             Handle = handle;
             SetID(Handle.Value);
 
             CommandQueue = queue;
-            Type = (ComputeCommandType)GetInfo<CLEventHandle, ComputeEventInfo, int>(Handle, ComputeEventInfo.CommandType, CL12.GetEventInfo);
+            Type = type;
             Context = queue.Context;
 
             //if (ComputeTools.ParseVersionString(CommandQueue.Device.Platform.Version, 1) > new Version(1, 0))
@@ -79,6 +84,8 @@ namespace Cloo
 
             Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
+        
+
 
         #endregion
 
@@ -132,5 +139,15 @@ namespace Cloo
         }
 
         #endregion
+
+        /// <summary>
+        /// Clones the event. Because the event is retained the cloned event as well as the clone have to be disposed
+        /// </summary>
+        /// <returns>Cloned event</returns>
+        public override ComputeEventBase Clone()
+        {
+            CL10.RetainEvent(Handle);
+            return new ComputeEvent(Handle, CommandQueue, Type);
+        }
     }
 }

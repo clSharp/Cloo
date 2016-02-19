@@ -63,6 +63,17 @@ namespace Cloo
             Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
+        internal ComputeUserEvent(ComputeContext context, CLEventHandle handle, ComputeCommandType type)
+        {
+            Handle = handle;
+
+            SetID(Handle.Value);
+
+            Type = type;
+
+            Context = context;
+        }
+
         #endregion
 
         #region Public methods
@@ -87,5 +98,15 @@ namespace Cloo
         }
 
         #endregion
+
+        /// <summary>
+        /// Clones the event. Because the event is retained the cloned event as well as the clone have to be disposed
+        /// </summary>
+        /// <returns>Cloned event</returns>
+        public override ComputeEventBase Clone()
+        {
+            CL10.RetainEvent(Handle);
+            return new ComputeUserEvent(Context, Handle, Type);
+        }
     }
 }

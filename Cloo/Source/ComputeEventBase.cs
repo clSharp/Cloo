@@ -60,12 +60,6 @@ namespace Cloo
         private readonly object _statusLockObject = new Object();
         #endregion
 
-        // A static list of all hooked statusNotifyCallbacks is kept to avoid "Callback on collected delegate" exceptions when ComputeEvent is garbage collected.
-        // TODO: 1) Is there a better way to avoid garbage collection of callback?
-        // TODO: 2) Can we improve removal performance by using HashSet or something like that?
-        //private static readonly LinkedList<ComputeEventCallback> StatusNotifyCallbacks = new LinkedList<ComputeEventCallback>();
-        public static int CallbacksWaiting;
-
         #region Events
 
         /// <summary>
@@ -212,19 +206,9 @@ namespace Cloo
         {
             statusNotify = new ComputeEventCallback(StatusNotify);
             var handle = GCHandle.Alloc(statusNotify);
-            Interlocked.Increment(ref CallbacksWaiting);
 
             ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, statusNotify, GCHandle.ToIntPtr(handle));
             ComputeException.ThrowOnError(error);
-
-            if (status != null && status.Status == ComputeCommandExecutionStatus.Complete) return;
-
-            
-
-            //lock (StatusNotifyCallbacks)
-            //{
-            //    StatusNotifyCallbacks.AddLast(statusNotify);
-            //}
         }
 
         /// <summary>
@@ -269,19 +253,15 @@ namespace Cloo
                         OnAborted(this, status);
                         break;
                 }
-                
-                /*lock (StatusNotifyCallbacks)
-                {
-                    if (!StatusNotifyCallbacks.Remove(statusNotify)) throw new Exception();
-                }*/
             }
-
-            Interlocked.Decrement(ref CallbacksWaiting);
+            
             var handle = GCHandle.FromIntPtr(userData);
             handle.Free();
         }
 
         #endregion
+
+        public abstract ComputeEventBase Clone();
     }
 
     /// <summary>
