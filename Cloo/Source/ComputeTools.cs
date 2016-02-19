@@ -109,6 +109,12 @@ namespace Cloo
             return result;
         }
 
+        /// <summary>
+        /// Extract device handles of <see cref="ComputeDevice"/>s
+        /// </summary>
+        /// <param name="computeObjects"></param>
+        /// <param name="handleCount"></param>
+        /// <returns></returns>
         public static CLDeviceHandle[] ExtractHandles(ICollection<ComputeDevice> computeObjects, out int handleCount)
         {
             if (computeObjects == null || computeObjects.Count == 0)
@@ -128,6 +134,12 @@ namespace Cloo
             return result;
         }
 
+        /// <summary>
+        /// Extract device handles of <see cref="ComputeEventBase"/>s
+        /// </summary>
+        /// <param name="computeObjects"></param>
+        /// <param name="handleCount"></param>
+        /// <returns></returns>
         public static CLEventHandle[] ExtractHandles(ICollection<ComputeEventBase> computeObjects, out int handleCount)
         {
             if (computeObjects == null || computeObjects.Count == 0)
@@ -147,6 +159,12 @@ namespace Cloo
             return result;
         }
 
+        /// <summary>
+        /// Extract device handles of <see cref="ComputeCommandQueue"/>s
+        /// </summary>
+        /// <param name="computeObjects"></param>
+        /// <param name="handleCount"></param>
+        /// <returns></returns>
         public static CLCommandQueueHandle[] ExtractHandles(ICollection<ComputeCommandQueue> computeObjects, out int handleCount)
         {
             if (computeObjects == null || computeObjects.Count == 0)
@@ -166,6 +184,12 @@ namespace Cloo
             return result;
         }
 
+        /// <summary>
+        /// Extract device handles of <see cref="ComputeMemory"/>s
+        /// </summary>
+        /// <param name="computeObjects"></param>
+        /// <param name="handleCount"></param>
+        /// <returns></returns>
         public static CLMemoryHandle[] ExtractHandles(ICollection<ComputeMemory> computeObjects, out int handleCount)
         {
             if (computeObjects == null || computeObjects.Count == 0)

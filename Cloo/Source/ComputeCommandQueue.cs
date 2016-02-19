@@ -130,12 +130,11 @@ namespace Cloo
             Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
-        private struct ComputeQueuePropertyTuple
-        {
-            public ComputeContextPropertyName Name;
-            public IntPtr Value;
-        }
-
+        /// <summary>
+        /// Creates a <see cref="ComputeCommandQueue"/> from an externalHandle.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="externalHandle"></param>
         public ComputeCommandQueue(ComputeContext context, IntPtr externalHandle)
         {
             Handle = new CLCommandQueueHandle(externalHandle);

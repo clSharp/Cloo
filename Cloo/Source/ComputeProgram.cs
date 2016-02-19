@@ -95,9 +95,9 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Gets the <see cref="ComputeProgram"/> build options as specified in <paramref name="options"/> argument of <see cref="ComputeProgram.Build"/>.
+        /// Gets the <see cref="ComputeProgram"/> build options as specified in options argument of <see cref="ComputeProgram.Build"/>.
         /// </summary>
-        /// <value> The <see cref="ComputeProgram"/> build options as specified in <paramref name="options"/> argument of <see cref="ComputeProgram.Build"/>. </value>
+        /// <value> The <see cref="ComputeProgram"/> build options as specified in options argument of <see cref="ComputeProgram.Build"/>. </value>
         public string BuildOptions { get { return buildOptions; } }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Cloo
         /// Gets a read-only collection of <see cref="ComputeDevice"/>s associated with the <see cref="ComputeProgram"/>.
         /// </summary>
         /// <value> A read-only collection of <see cref="ComputeDevice"/>s associated with the <see cref="ComputeProgram"/>. </value>
-        /// <remarks> This collection is a subset of <see cref="ComputeProgram.Context.Devices"/>. </remarks>
+        /// <remarks> This collection is a subset of the <see cref="ComputeProgram.Context"/> <see cref="ComputeContext.Devices"/>. </remarks>
         public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
 
         /// <summary>

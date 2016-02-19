@@ -261,6 +261,10 @@ namespace Cloo
 
         #endregion
 
+        /// <summary>
+        /// Clones the event. Because the event is retained the cloned event as well as the clone have to be disposed
+        /// </summary>
+        /// <returns>Cloned event</returns>
         public abstract ComputeEventBase Clone();
     }
 

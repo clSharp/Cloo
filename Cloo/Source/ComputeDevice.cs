@@ -190,31 +190,31 @@ namespace Cloo
         public long GlobalMemorySize { get { return globalMemorySize; } }
 
         /// <summary>
-        /// Gets the maximum <see cref="ComputeImage2D.Height"/> value that the <see cref="ComputeDevice"/> supports in pixels.
+        /// Gets the maximum <see cref="ComputeImage.Height"/> value for <see cref="ComputeImage2D"/> that the <see cref="ComputeDevice"/> supports in pixels.
         /// </summary>
         /// <value> The minimum value is 8192 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         public long Image2DMaxHeight { get { return image2DMaxHeight; } }
 
         /// <summary>
-        /// Gets the maximum <see cref="ComputeImage2D.Width"/> value that the <see cref="ComputeDevice"/> supports in pixels.
+        /// Gets the maximum <see cref="ComputeImage.Width"/> value for <see cref="ComputeImage2D"/> that the <see cref="ComputeDevice"/> supports in pixels.
         /// </summary>
         /// <value> The minimum value is 8192 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         public long Image2DMaxWidth { get { return image2DMaxWidth; } }
 
         /// <summary>
-        /// Gets the maximum <see cref="ComputeImage3D.Depth"/> value that the <see cref="ComputeDevice"/> supports in pixels.
+        /// Gets the maximum <see cref="ComputeImage.Depth"/> value for <see cref="ComputeImage3D"/> that the <see cref="ComputeDevice"/> supports in pixels.
         /// </summary>
         /// <value> The minimum value is 2048 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         public long Image3DMaxDepth { get { return image3DMaxDepth; } }
 
         /// <summary>
-        /// Gets the maximum <see cref="ComputeImage3D.Height"/> value that the <see cref="ComputeDevice"/> supports in pixels.
+        /// Gets the maximum <see cref="ComputeImage.Height"/> value for <see cref="ComputeImage3D"/> that the <see cref="ComputeDevice"/> supports in pixels.
         /// </summary>
         /// <value> The minimum value is 2048 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         public long Image3DMaxHeight { get { return image3DMaxHeight; } }
 
         /// <summary>
-        /// Gets the maximum <see cref="ComputeImage3D.Width"/> value that the <see cref="ComputeDevice"/> supports in pixels.
+        /// Gets the maximum <see cref="ComputeImage.Width"/> value for <see cref="ComputeImage3D"/> that the <see cref="ComputeDevice"/> supports in pixels.
         /// </summary>
         /// <value> The minimum value is 2048 if <see cref="ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         public long Image3DMaxWidth { get { return image3DMaxWidth; } }
@@ -298,9 +298,9 @@ namespace Cloo
         public long MaxWorkItemDimensions { get { return maxWorkItemDimensions; } }
 
         /// <summary>
-        /// Gets the maximum number of work-items that can be specified in each dimension of the <paramref name="globalWorkSize"/> argument of <see cref="ComputeCommandQueue.Execute"/>.
+        /// Gets the maximum number of work-items that can be specified in each dimension of the globalWorkSize argument of <see cref="ComputeCommandQueue.Execute"/>.
         /// </summary>
-        /// <value> The maximum number of work-items that can be specified in each dimension of the <paramref name="globalWorkSize"/> argument of <see cref="ComputeCommandQueue.Execute"/>. </value>
+        /// <value> The maximum number of work-items that can be specified in each dimension of the globalWorkSize argument of <see cref="ComputeCommandQueue.Execute"/>. </value>
         public ReadOnlyCollection<long> MaxWorkItemSizes { get { return maxWorkItemSizes; } }
 
         /// <summary>
