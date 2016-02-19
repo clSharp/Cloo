@@ -125,5 +125,15 @@ namespace Cloo
         }
 
         #endregion
+
+        /// <summary>
+        /// Clones the ComputeBuffer. Because the buffer is retained the cloned buffer as well as the clone have to be disposed
+        /// </summary>
+        /// <returns>Cloned buffer</returns>
+        public override ComputeBufferBase<T> Clone()
+        {
+            CL10.RetainMemObject(Handle);
+            return new ComputeBuffer<T>(Handle, Context, Flags);
+        } 
     }
 }

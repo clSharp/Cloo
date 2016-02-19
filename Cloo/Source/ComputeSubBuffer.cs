@@ -62,6 +62,26 @@ namespace Cloo
             Init();
         }
 
+        internal ComputeSubBuffer(ComputeContext context, CLMemoryHandle handle, ComputeMemoryFlags flags)
+            : base(context, flags)
+        {
+            Handle = handle;
+
+            Init();
+        }
+
         #endregion
+
+        /// <summary>
+        /// Clones the ComputeBuffer. Because the buffer is retained the cloned buffer as well as the clone have to be disposed
+        /// </summary>
+        /// <returns>Cloned buffer</returns>
+        public override ComputeBufferBase<T> Clone()
+        {
+            CL10.RetainMemObject(Handle);
+            return new ComputeSubBuffer<T>(Context, Handle, Flags);
+        }
     }
+
+    
 }
