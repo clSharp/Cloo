@@ -159,7 +159,7 @@ namespace Cloo
             this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
             this.devices = GetDevices();
 
-            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
+            Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Cloo
             this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
             this.devices = GetDevices();
 
-            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
+            Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         /*private struct ComputeContextPropertyTuple
@@ -216,7 +216,7 @@ namespace Cloo
             this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
             this.devices = GetDevices();
 
-            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
+            Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
         
         #endregion
@@ -238,7 +238,7 @@ namespace Cloo
             // free native resources
             if (Handle.IsValid)
             {
-                Trace.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
+                Debug.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL12.ReleaseContext(Handle);
                 Handle.Invalidate();
             }

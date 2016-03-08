@@ -60,7 +60,7 @@ namespace Cloo
             Context = context;
             //HookNotifier();
 
-            Trace.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
+            Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
         internal ComputeUserEvent(ComputeContext context, CLEventHandle handle, ComputeCommandType type)
