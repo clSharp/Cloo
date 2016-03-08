@@ -783,6 +783,12 @@
             <param name="bufferId"> The OpenGL buffer object id to use for the creation of the <see cref="T:Cloo.ComputeBuffer`1"/>. </param>
             <returns> The created <see cref="T:Cloo.ComputeBuffer`1"/>. </returns>
         </member>
+        <member name="M:Cloo.ComputeBuffer`1.Clone">
+            <summary>
+            Clones the ComputeBuffer. Because the buffer is retained the cloned buffer as well as the clone have to be disposed
+            </summary>
+            <returns>Cloned buffer</returns>
+        </member>
         <member name="T:Cloo.ComputeBufferBase`1">
             <summary>
             Represents the parent type to any Cloo buffer types.
@@ -806,6 +812,12 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Cloo.ComputeBufferBase`1.Clone">
+            <summary>
+            Clones the ComputeBuffer. Because the buffer is retained the cloned buffer as well as the clone have to be disposed
+            </summary>
+            <returns>Cloned buffer</returns>
         </member>
         <member name="T:Cloo.ComputeCommandQueue">
             <summary>
@@ -1319,6 +1331,13 @@
             <param name="device"> A <see cref="T:Cloo.ComputeDevice"/> associated with the <paramref name="context"/>. It can either be one of <see cref="P:Cloo.ComputeContext.Devices"/> or have the same <see cref="T:Cloo.ComputeDeviceTypes"/> as the <paramref name="device"/> specified when the <paramref name="context"/> is created. </param>
             <param name="properties"> The properties for the <see cref="T:Cloo.ComputeCommandQueue"/>. </param>
         </member>
+        <member name="M:Cloo.ComputeCommandQueue.#ctor(Cloo.ComputeContext,System.IntPtr)">
+            <summary>
+            Creates a <see cref="T:Cloo.ComputeCommandQueue"/> from an externalHandle.
+            </summary>
+            <param name="context"></param>
+            <param name="externalHandle"></param>
+        </member>
         <member name="M:Cloo.ComputeCommandQueue.AcquireGLObjects(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Collections.Generic.ICollection{Cloo.ComputeEventBase})">
             <summary>
             Enqueues a command to acquire a collection of <see cref="T:Cloo.ComputeMemory"/>s that have been previously created from OpenGL objects.
@@ -1680,6 +1699,12 @@
             <param name="notify"> A delegate instance that refers to a notification routine. This routine is a callback function that will be used by the OpenCL implementation to report information on errors that occur in the <see cref="T:Cloo.ComputeContext"/>. The callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe and that the delegate instance doesn't get collected by the Garbage Collector until <see cref="T:Cloo.ComputeContext"/> is disposed. If <paramref name="notify"/> is <c>null</c>, no callback function is registered. </param>
             <param name="userDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         </member>
+        <member name="M:Cloo.ComputeContext.#ctor(System.IntPtr)">
+            <summary>
+            Creates a <see cref="T:Cloo.ComputeContext"/> from an external handle>.
+            </summary>
+            <param name="externalHandle"></param>
+        </member>
         <member name="M:Cloo.ComputeContext.Dispose(System.Boolean)">
             <summary>
             Releases the associated OpenCL object.
@@ -1888,31 +1913,31 @@
         </member>
         <member name="P:Cloo.ComputeDevice.Image2DMaxHeight">
             <summary>
-            Gets the maximum <see cref="!:ComputeImage2D.Height"/> value that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
+            Gets the maximum <see cref="P:Cloo.ComputeImage.Height"/> value for <see cref="T:Cloo.ComputeImage2D"/> that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
             </summary>
             <value> The minimum value is 8192 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Image2DMaxWidth">
             <summary>
-            Gets the maximum <see cref="!:ComputeImage2D.Width"/> value that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
+            Gets the maximum <see cref="P:Cloo.ComputeImage.Width"/> value for <see cref="T:Cloo.ComputeImage2D"/> that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
             </summary>
             <value> The minimum value is 8192 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxDepth">
             <summary>
-            Gets the maximum <see cref="!:ComputeImage3D.Depth"/> value that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
+            Gets the maximum <see cref="P:Cloo.ComputeImage.Depth"/> value for <see cref="T:Cloo.ComputeImage3D"/> that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
             </summary>
             <value> The minimum value is 2048 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxHeight">
             <summary>
-            Gets the maximum <see cref="!:ComputeImage3D.Height"/> value that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
+            Gets the maximum <see cref="P:Cloo.ComputeImage.Height"/> value for <see cref="T:Cloo.ComputeImage3D"/> that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
             </summary>
             <value> The minimum value is 2048 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.Image3DMaxWidth">
             <summary>
-            Gets the maximum <see cref="!:ComputeImage3D.Width"/> value that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
+            Gets the maximum <see cref="P:Cloo.ComputeImage.Width"/> value for <see cref="T:Cloo.ComputeImage3D"/> that the <see cref="T:Cloo.ComputeDevice"/> supports in pixels.
             </summary>
             <value> The minimum value is 2048 if <see cref="P:Cloo.ComputeDevice.ImageSupport"/> is <c>true</c>. </value>
         </member>
@@ -1996,9 +2021,9 @@
         </member>
         <member name="P:Cloo.ComputeDevice.MaxWorkItemSizes">
             <summary>
-            Gets the maximum number of work-items that can be specified in each dimension of the <paramref name="globalWorkSize"/> argument of <see cref="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})"/>.
+            Gets the maximum number of work-items that can be specified in each dimension of the globalWorkSize argument of <see cref="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})"/>.
             </summary>
-            <value> The maximum number of work-items that can be specified in each dimension of the <paramref name="globalWorkSize"/> argument of <see cref="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})"/>. </value>
+            <value> The maximum number of work-items that can be specified in each dimension of the globalWorkSize argument of <see cref="M:Cloo.ComputeCommandQueue.Execute(Cloo.ComputeKernel,System.Int64[],System.Int64[],System.Int64[],System.Collections.Generic.ICollection{Cloo.ComputeEventBase})"/>. </value>
         </member>
         <member name="P:Cloo.ComputeDevice.MaxWriteImageArguments">
             <summary>
@@ -2351,6 +2376,12 @@
             <param name="sender"></param>
             <param name="evArgs"></param>
         </member>
+        <member name="M:Cloo.ComputeEventBase.Clone">
+            <summary>
+            Clones the event. Because the event is retained the cloned event as well as the clone have to be disposed
+            </summary>
+            <returns>Cloned event</returns>
+        </member>
         <member name="T:Cloo.ComputeCommandStatusArgs">
             <summary>
             Represents the arguments of a command status change.
@@ -2530,6 +2561,13 @@
             <summary>
             Represents an event created by an external library
             </summary>
+        </member>
+        <member name="M:Cloo.ComputeExternalEvent.#ctor(Cloo.Bindings.CLEventHandle,Cloo.ComputeCommandQueue)">
+            <summary>
+            Creates an see<see cref="T:Cloo.ComputeExternalEvent"/> from an external handle
+            </summary>
+            <param name="handle"></param>
+            <param name="queue"></param>
         </member>
         <member name="T:Cloo.ComputeImage">
             <summary>
@@ -2742,21 +2780,21 @@
             <summary>
             Gets the amount of local memory in bytes used by the <see cref="T:Cloo.ComputeKernel"/>.
             </summary>
-            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
+            <param name="device"> One of the <see cref="P:Cloo.ComputeProgram.Devices"/> of the <see cref="P:Cloo.ComputeKernel.Program"/>. </param>
             <returns> The amount of local memory in bytes used by the <see cref="T:Cloo.ComputeKernel"/>. </returns>
         </member>
         <member name="M:Cloo.ComputeKernel.GetCompileWorkGroupSize(Cloo.ComputeDevice)">
             <summary>
             Gets the compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier.
             </summary>
-            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
+            <param name="device"> One of the <see cref="P:Cloo.ComputeProgram.Devices"/> of the <see cref="P:Cloo.ComputeKernel.Program"/>. </param>
             <returns> The compile work-group size specified by the <c>__attribute__((reqd_work_group_size(X, Y, Z)))</c> qualifier. If no such qualifier is specified, (0, 0, 0) is returned. </returns>
         </member>
         <member name="M:Cloo.ComputeKernel.GetPreferredWorkGroupSizeMultiple(Cloo.ComputeDevice)">
             <summary>
             Gets the preferred multiple of workgroup size for launch. 
             </summary>
-            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
+            <param name="device"> One of the <see cref="P:Cloo.ComputeProgram.Devices"/> of the <see cref="P:Cloo.ComputeKernel.Program"/>. </param>
             <returns> The preferred multiple of workgroup size for launch. </returns>
             <remarks> The returned value is a performance hint. Specifying a workgroup size that is not a multiple of the value returned by this query as the value of the local work size argument to ComputeCommandQueue.Execute will not fail to enqueue the kernel for execution unless the work-group size specified is larger than the device maximum. </remarks>
             <remarks> Requires OpenCL 1.1. </remarks>
@@ -2765,7 +2803,7 @@
             <summary>
             Gets the minimum amount of memory, in bytes, used by each work-item in the kernel.
             </summary>
-            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
+            <param name="device"> One of the <see cref="P:Cloo.ComputeProgram.Devices"/> of the <see cref="P:Cloo.ComputeKernel.Program"/>. </param>
             <returns> The minimum amount of memory, in bytes, used by each work-item in the kernel. </returns>
             <remarks> The returned value may include any private memory needed by an implementation to execute the kernel, including that used by the language built-ins and variable declared inside the kernel with the <c>__private</c> or <c>private</c> qualifier. </remarks>
         </member>
@@ -2773,7 +2811,7 @@
             <summary>
             Gets the maximum work-group size that can be used to execute the <see cref="T:Cloo.ComputeKernel"/> on a <see cref="T:Cloo.ComputeDevice"/>.
             </summary>
-            <param name="device"> One of the <see cref="!:ComputeKernel.Program.Device"/>s. </param>
+            <param name="device"> One of the <see cref="P:Cloo.ComputeProgram.Devices"/> of the <see cref="P:Cloo.ComputeKernel.Program"/>. </param>
             <returns> The maximum work-group size that can be used to execute the <see cref="T:Cloo.ComputeKernel"/> on <paramref name="device"/>. </returns>
         </member>
         <member name="M:Cloo.ComputeKernel.SetArgument(System.Int32,System.IntPtr,System.IntPtr)">
@@ -3141,9 +3179,9 @@
         </member>
         <member name="P:Cloo.ComputeProgram.BuildOptions">
             <summary>
-            Gets the <see cref="T:Cloo.ComputeProgram"/> build options as specified in <paramref name="options"/> argument of <see cref="M:Cloo.ComputeProgram.Build(System.Collections.Generic.ICollection{Cloo.ComputeDevice},System.String,Cloo.Bindings.ComputeProgramBuildNotifier,System.IntPtr)"/>.
+            Gets the <see cref="T:Cloo.ComputeProgram"/> build options as specified in options argument of <see cref="M:Cloo.ComputeProgram.Build(System.Collections.Generic.ICollection{Cloo.ComputeDevice},System.String,Cloo.Bindings.ComputeProgramBuildNotifier,System.IntPtr)"/>.
             </summary>
-            <value> The <see cref="T:Cloo.ComputeProgram"/> build options as specified in <paramref name="options"/> argument of <see cref="M:Cloo.ComputeProgram.Build(System.Collections.Generic.ICollection{Cloo.ComputeDevice},System.String,Cloo.Bindings.ComputeProgramBuildNotifier,System.IntPtr)"/>. </value>
+            <value> The <see cref="T:Cloo.ComputeProgram"/> build options as specified in options argument of <see cref="M:Cloo.ComputeProgram.Build(System.Collections.Generic.ICollection{Cloo.ComputeDevice},System.String,Cloo.Bindings.ComputeProgramBuildNotifier,System.IntPtr)"/>. </value>
         </member>
         <member name="P:Cloo.ComputeProgram.Context">
             <summary>
@@ -3156,7 +3194,7 @@
             Gets a read-only collection of <see cref="T:Cloo.ComputeDevice"/>s associated with the <see cref="T:Cloo.ComputeProgram"/>.
             </summary>
             <value> A read-only collection of <see cref="T:Cloo.ComputeDevice"/>s associated with the <see cref="T:Cloo.ComputeProgram"/>. </value>
-            <remarks> This collection is a subset of <see cref="!:ComputeProgram.Context.Devices"/>. </remarks>
+            <remarks> This collection is a subset of the <see cref="P:Cloo.ComputeProgram.Context"/> <see cref="P:Cloo.ComputeContext.Devices"/>. </remarks>
         </member>
         <member name="P:Cloo.ComputeProgram.Source">
             <summary>
@@ -3323,6 +3361,12 @@
             <param name="offset"> The index of the element of <paramref name="buffer"/>, where the <see cref="T:Cloo.ComputeSubBuffer`1"/> starts. </param>
             <param name="count"> The number of elements of <paramref name="buffer"/> to include in the <see cref="T:Cloo.ComputeSubBuffer`1"/>. </param>
         </member>
+        <member name="M:Cloo.ComputeSubBuffer`1.Clone">
+            <summary>
+            Clones the ComputeBuffer. Because the buffer is retained the cloned buffer as well as the clone have to be disposed
+            </summary>
+            <returns>Cloned buffer</returns>
+        </member>
         <member name="T:Cloo.ComputeUserEvent">
             <summary>
             Represents an user created event.
@@ -3465,6 +3509,38 @@
             <param name="versionString"> The version string to parse. Must be in the format: <c>Additional substrings[space][major_version].[minor_version][space]Additional substrings</c>. </param>
             <param name="substringIndex"> The index of the substring that specifies the OpenCL version. </param>
             <returns> A <c>Version</c> instance containing the major and minor version from <paramref name="versionString"/>. </returns>
+        </member>
+        <member name="M:Cloo.ComputeTools.ExtractHandles(System.Collections.Generic.ICollection{Cloo.ComputeDevice},System.Int32@)">
+            <summary>
+            Extract device handles of <see cref="T:Cloo.ComputeDevice"/>s
+            </summary>
+            <param name="computeObjects"></param>
+            <param name="handleCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeTools.ExtractHandles(System.Collections.Generic.ICollection{Cloo.ComputeEventBase},System.Int32@)">
+            <summary>
+            Extract device handles of <see cref="T:Cloo.ComputeEventBase"/>s
+            </summary>
+            <param name="computeObjects"></param>
+            <param name="handleCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeTools.ExtractHandles(System.Collections.Generic.ICollection{Cloo.ComputeCommandQueue},System.Int32@)">
+            <summary>
+            Extract device handles of <see cref="T:Cloo.ComputeCommandQueue"/>s
+            </summary>
+            <param name="computeObjects"></param>
+            <param name="handleCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloo.ComputeTools.ExtractHandles(System.Collections.Generic.ICollection{Cloo.ComputeMemory},System.Int32@)">
+            <summary>
+            Extract device handles of <see cref="T:Cloo.ComputeMemory"/>s
+            </summary>
+            <param name="computeObjects"></param>
+            <param name="handleCount"></param>
+            <returns></returns>
         </member>
         <member name="T:Cloo.ComputeErrorCode">
             <summary>
