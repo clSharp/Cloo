@@ -29,11 +29,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
-namespace Cloo.Bindings
-{
-    using System;
-    using System.Runtime.InteropServices;
+using System;
+using System.Runtime.InteropServices;
 
+namespace Cloo
+{
     /// <summary>
     /// Contains bindings to the OpenCL extension functions.
     /// </summary>

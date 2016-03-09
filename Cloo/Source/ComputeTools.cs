@@ -30,12 +30,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System.Runtime.InteropServices;
+using Cloo.Bindings;
 
 namespace Cloo
 {
     using System;
     using System.Collections.Generic;
-    using Bindings;
 
     /// <summary>
     /// Contains various helper methods.

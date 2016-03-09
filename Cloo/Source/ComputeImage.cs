@@ -29,6 +29,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+using Cloo.Bindings;
+
 namespace Cloo
 {
     using System;
@@ -36,7 +38,6 @@ namespace Cloo
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Threading;
-    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL image.

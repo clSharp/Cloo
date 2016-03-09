@@ -29,13 +29,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
-namespace Cloo.Bindings
-{
-    using System;
-    using System.Diagnostics;
-    using System.Runtime.InteropServices;
-    using System.Security;
+using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Security;
+using Cloo.Bindings;
 
+namespace Cloo
+{
     /// <summary>
     /// Contains bindings to the OpenCL 1.2 functions.
     /// </summary>

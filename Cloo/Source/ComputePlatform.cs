@@ -35,7 +35,6 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL platform.

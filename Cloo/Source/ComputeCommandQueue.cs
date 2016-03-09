@@ -29,13 +29,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+using Cloo.Bindings;
+
 namespace Cloo
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading;
-    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL command queue.

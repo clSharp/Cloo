@@ -29,11 +29,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
-namespace Cloo.Bindings
-{
-    using System;
-    using System.Diagnostics;
+using System;
+using System.Diagnostics;
 
+namespace Cloo
+{
     /// <summary>
     /// Represents the <see cref="ComputeSampler"/> ID.
     /// </summary>

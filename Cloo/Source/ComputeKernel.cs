@@ -35,7 +35,6 @@ namespace Cloo
     using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL kernel.

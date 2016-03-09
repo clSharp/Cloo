@@ -36,7 +36,6 @@ namespace Cloo
     using System;
     using System.Diagnostics;
     using System.Threading;
-    using Bindings;
 
     /// <summary>
     /// Represents the parent type to any Cloo event types.

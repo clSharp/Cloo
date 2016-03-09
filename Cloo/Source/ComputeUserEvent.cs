@@ -33,7 +33,6 @@ namespace Cloo
 {
     using System.Diagnostics;
     using System.Threading;
-    using Bindings;
 
     /// <summary>
     /// Represents an user created event.

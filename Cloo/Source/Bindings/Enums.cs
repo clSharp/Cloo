@@ -31,7 +31,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 
-namespace Cloo.Bindings
+namespace Cloo
 {
     /// <summary>
     /// The OpenCL error codes.

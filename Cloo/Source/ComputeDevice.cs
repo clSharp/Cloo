@@ -34,7 +34,6 @@ namespace Cloo
     using System;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL device.

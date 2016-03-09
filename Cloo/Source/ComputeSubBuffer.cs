@@ -29,10 +29,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+using Cloo.Bindings;
+
 namespace Cloo
 {
-    using Bindings;
-
     /// <summary>
     /// Represents an OpenCL sub-buffer.
     /// </summary>

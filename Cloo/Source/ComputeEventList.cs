@@ -34,7 +34,6 @@ namespace Cloo
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using Bindings;
 
     /// <summary>
     /// Represents a list of OpenCL generated or user created events.
