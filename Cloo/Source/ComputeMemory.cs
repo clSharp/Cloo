@@ -52,6 +52,8 @@ namespace Cloo
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeMemoryFlags flags;
 
+        private CLMemoryHandle _handle;
+
         #endregion
 
         #region Properties
@@ -61,8 +63,8 @@ namespace Cloo
         /// </summary>
         public CLMemoryHandle Handle
         {
-            get;
-            protected set;
+            get { return _handle; }
+            protected set { _handle = value; }
         }
 
         /// <summary>
@@ -113,7 +115,7 @@ namespace Cloo
             {
                 Debug.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL12.ReleaseMemObject(Handle);
-                Handle.Invalidate();
+                _handle.Invalidate();
             }
         }
 

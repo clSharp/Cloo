@@ -64,6 +64,8 @@ namespace Cloo
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal IList<ComputeEventBase> Events;
 
+        private CLCommandQueueHandle _handle;
+
         #endregion
 
         #region Properties
@@ -73,8 +75,8 @@ namespace Cloo
         /// </summary>
         public CLCommandQueueHandle Handle
         {
-            get;
-            protected set;
+            get { return _handle; }
+            protected set { _handle = value; }
         }
 
         /// <summary>
@@ -764,7 +766,7 @@ namespace Cloo
             {
                 Debug.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL12.ReleaseCommandQueue(Handle);
-                Handle.Invalidate();
+                _handle.Invalidate();
             }
         }
 

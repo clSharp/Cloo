@@ -99,6 +99,8 @@ namespace Cloo
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ComputeContextNotifier callback;
 
+        private CLContextHandle _handle;
+
         #endregion
 
         #region Properties
@@ -108,8 +110,8 @@ namespace Cloo
         /// </summary>
         public CLContextHandle Handle
         {
-            get;
-            protected set;
+            get { return _handle; }
+            protected set { _handle = value; }
         }
 
         /// <summary>
@@ -240,7 +242,7 @@ namespace Cloo
             {
                 Debug.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL12.ReleaseContext(Handle);
-                Handle.Invalidate();
+                _handle.Invalidate();
             }
         }
 

@@ -58,6 +58,8 @@ namespace Cloo
         private ComputeEventCallback statusNotify;
 
         private readonly object _statusLockObject = new Object();
+        private CLEventHandle _handle;
+
         #endregion
 
         #region Events
@@ -119,8 +121,8 @@ namespace Cloo
         /// </summary>
         public CLEventHandle Handle
         {
-            get;
-            protected set;
+            get { return _handle; }
+            protected set { _handle = value; }
         }
 
         /// <summary>
@@ -195,7 +197,7 @@ namespace Cloo
             {
                 Debug.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL12.ReleaseEvent(Handle);
-                Handle.Invalidate();
+                _handle.Invalidate();
             }
         }
 

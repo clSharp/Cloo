@@ -66,6 +66,8 @@ namespace Cloo
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ComputeProgramBuildNotifier buildNotify;
 
+        private CLProgramHandle _handle;
+
         #endregion
 
         #region Properties
@@ -75,8 +77,8 @@ namespace Cloo
         /// </summary>
         public CLProgramHandle Handle
         {
-            get;
-            protected set;
+            get { return _handle; }
+            protected set { _handle = value; }
         }
 
         /// <summary>
@@ -312,7 +314,7 @@ namespace Cloo
             {
                 Debug.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL12.ReleaseProgram(Handle);
-                Handle.Invalidate();
+                _handle.Invalidate();
             }
         }
 

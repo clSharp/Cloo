@@ -57,6 +57,8 @@ namespace Cloo
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly bool normalizedCoords;
 
+        private CLSamplerHandle _handle;
+
         #endregion
 
         #region Properties
@@ -66,8 +68,8 @@ namespace Cloo
         /// </summary>
         public CLSamplerHandle Handle
         {
-            get;
-            protected set;
+            get { return _handle; }
+            protected set { _handle = value; }
         }
 
         /// <summary>
@@ -136,7 +138,7 @@ namespace Cloo
             {
                 Debug.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL12.ReleaseSampler(Handle);
-                Handle.Invalidate();
+                _handle.Invalidate();
             }
         }
 

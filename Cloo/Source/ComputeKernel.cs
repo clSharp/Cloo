@@ -57,6 +57,8 @@ namespace Cloo
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ComputeProgram program;
 
+        private CLKernelHandle _handle;
+
         #endregion
 
         #region Properties
@@ -66,8 +68,8 @@ namespace Cloo
         /// </summary>
         public CLKernelHandle Handle
         {
-            get;
-            protected set;
+            get { return _handle; }
+            protected set { _handle = value; }
         }
 
         /// <summary>
@@ -270,7 +272,7 @@ namespace Cloo
             {
                 Debug.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL12.ReleaseKernel(Handle);
-                Handle.Invalidate();
+                _handle.Invalidate();
             }
         }
 
