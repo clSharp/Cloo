@@ -37,7 +37,7 @@ namespace Cloo
     using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL program.
@@ -49,22 +49,22 @@ namespace Cloo
         #region Fields
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ComputeContext context;
+        private readonly ComputeContext _context;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ReadOnlyCollection<ComputeDevice> devices;
+        private readonly ReadOnlyCollection<ComputeDevice> _devices;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ReadOnlyCollection<string> source;
+        private readonly ReadOnlyCollection<string> _source;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private ReadOnlyCollection<byte[]> binaries;
+        private ReadOnlyCollection<byte[]> _binaries;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string buildOptions;
+        private string _buildOptions;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private ComputeProgramBuildNotifier buildNotify;
+        private ComputeProgramBuildNotifier _buildNotify;
 
         private CLProgramHandle _handle;
 
@@ -90,9 +90,9 @@ namespace Cloo
         { 
             get 
             {
-                if (binaries == null)
-                    binaries = GetBinaries();
-                return binaries;
+                if (_binaries == null)
+                    _binaries = GetBinaries();
+                return _binaries;
             }
         }
 
@@ -100,26 +100,26 @@ namespace Cloo
         /// Gets the <see cref="ComputeProgram"/> build options as specified in options argument of <see cref="ComputeProgram.Build"/>.
         /// </summary>
         /// <value> The <see cref="ComputeProgram"/> build options as specified in options argument of <see cref="ComputeProgram.Build"/>. </value>
-        public string BuildOptions { get { return buildOptions; } }
+        public string BuildOptions { get { return _buildOptions; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeProgram"/>.
         /// </summary>
         /// <value> The <see cref="ComputeContext"/> of the <see cref="ComputeProgram"/>. </value>
-        public ComputeContext Context { get { return context; } }
+        public ComputeContext Context { get { return _context; } }
 
         /// <summary>
         /// Gets a read-only collection of <see cref="ComputeDevice"/>s associated with the <see cref="ComputeProgram"/>.
         /// </summary>
         /// <value> A read-only collection of <see cref="ComputeDevice"/>s associated with the <see cref="ComputeProgram"/>. </value>
         /// <remarks> This collection is a subset of the <see cref="ComputeProgram.Context"/> <see cref="ComputeContext.Devices"/>. </remarks>
-        public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
+        public ReadOnlyCollection<ComputeDevice> Devices { get { return _devices; } }
 
         /// <summary>
         /// Gets a read-only collection of program source code strings specified when creating the <see cref="ComputeProgram"/> or <c>null</c> if <see cref="ComputeProgram"/> was created using program binaries.
         /// </summary>
         /// <value> A read-only collection of program source code strings specified when creating the <see cref="ComputeProgram"/> or <c>null</c> if <see cref="ComputeProgram"/> was created using program binaries. </value>
-        public ReadOnlyCollection<string> Source { get { return source; } }
+        public ReadOnlyCollection<string> Source { get { return _source; } }
 
         #endregion
 
@@ -134,14 +134,14 @@ namespace Cloo
         public ComputeProgram(ComputeContext context, string source)
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL12.CreateProgramWithSource(context.Handle, 1, new string[] { source }, null, out error);
+            Handle = CL12.CreateProgramWithSource(context.Handle, 1, new [] { source }, null, out error);
             ComputeException.ThrowOnError(error);
 
             SetID(Handle.Value);
 
-            this.context = context;
-            this.devices = context.Devices;
-            this.source = new ReadOnlyCollection<string>(new string[] { source });
+            _context = context;
+            _devices = context.Devices;
+            _source = new ReadOnlyCollection<string>(new [] { source });
 
             Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
@@ -163,9 +163,9 @@ namespace Cloo
                 out error);
             ComputeException.ThrowOnError(error);
 
-            this.context = context;
-            this.devices = context.Devices;
-            this.source = new ReadOnlyCollection<string>(source);
+            _context = context;
+            _devices = context.Devices;
+            _source = new ReadOnlyCollection<string>(source);
 
             Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
@@ -187,7 +187,6 @@ namespace Cloo
             IntPtr[] binariesPtrs = new IntPtr[count];
             IntPtr[] binariesLengths = new IntPtr[count];
             int[] binariesStats = new int[count];
-            ComputeErrorCode error = ComputeErrorCode.Success;
             GCHandle[] binariesGCHandles = new GCHandle[count];
 
             try
@@ -199,6 +198,7 @@ namespace Cloo
                     binariesLengths[i] = new IntPtr(binaries[i].Length);
                 }
 
+                var error = ComputeErrorCode.Success;
                 Handle = CL12.CreateProgramWithBinary(
                     context.Handle,
                     count,
@@ -216,9 +216,9 @@ namespace Cloo
             }
 
 
-            this.binaries = new ReadOnlyCollection<byte[]>(binaries);
-            this.context = context;
-            this.devices = new ReadOnlyCollection<ComputeDevice>(
+            _binaries = new ReadOnlyCollection<byte[]>(binaries);
+            _context = context;
+            _devices = new ReadOnlyCollection<ComputeDevice>(
                 (devices != null) ? devices : context.Devices);
 
             Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
@@ -239,10 +239,10 @@ namespace Cloo
         {
             int handleCount;
             CLDeviceHandle[] deviceHandles = ComputeTools.ExtractHandles(devices, out handleCount);
-            buildOptions = (options != null) ? options : "";
-            buildNotify = notify;
+            _buildOptions = (options != null) ? options : "";
+            _buildNotify = notify;
 
-            ComputeErrorCode error = CL12.BuildProgram(Handle, handleCount, deviceHandles, options, buildNotify, notifyDataPtr);
+            ComputeErrorCode error = CL12.BuildProgram(Handle, handleCount, deviceHandles, options, _buildNotify, notifyDataPtr);
             ComputeException.ThrowOnError(error);
         }
 
@@ -255,12 +255,11 @@ namespace Cloo
         {
             ICollection<ComputeKernel> kernels = new Collection<ComputeKernel>();
             int kernelsCount = 0;
-            CLKernelHandle[] kernelHandles;
 
             ComputeErrorCode error = CL12.CreateKernelsInProgram(Handle, 0, null, out kernelsCount);
             ComputeException.ThrowOnError(error);
 
-            kernelHandles = new CLKernelHandle[kernelsCount];
+            var kernelHandles = new CLKernelHandle[kernelsCount];
             error = CL12.CreateKernelsInProgram(Handle, kernelsCount, kernelHandles, out kernelsCount);
             ComputeException.ThrowOnError(error);
 
@@ -286,7 +285,7 @@ namespace Cloo
         /// <returns> The build log of the <see cref="ComputeProgram"/> for <paramref name="device"/>. </returns>
         public string GetBuildLog(ComputeDevice device)
         {
-            return GetStringInfo<CLProgramHandle, CLDeviceHandle, ComputeProgramBuildInfo>(Handle, device.Handle, ComputeProgramBuildInfo.BuildLog, CL12.GetProgramBuildInfo);
+            return GetStringInfo(Handle, device.Handle, ComputeProgramBuildInfo.BuildLog, CL12.GetProgramBuildInfo);
         }
 
         /// <summary>

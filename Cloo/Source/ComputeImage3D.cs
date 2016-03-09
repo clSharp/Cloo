@@ -33,7 +33,7 @@ namespace Cloo
 {
     using System;
     using System.Collections.Generic;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL 3D image.
@@ -88,9 +88,8 @@ namespace Cloo
         /// <returns> The created <see cref="ComputeImage2D"/>. </returns>
         public static ComputeImage3D CreateFromGLTexture3D(ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId)
         {
-            CLMemoryHandle image;
             ComputeErrorCode error = ComputeErrorCode.Success;
-            image = CL12.CreateFromGLTexture3D(context.Handle, flags, textureTarget, mipLevel, textureId, out error);
+            var image = CL12.CreateFromGLTexture3D(context.Handle, flags, textureTarget, mipLevel, textureId, out error);
             ComputeException.ThrowOnError(error);
 
             return new ComputeImage3D(image, context, flags);

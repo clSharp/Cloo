@@ -36,7 +36,7 @@ namespace Cloo
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Threading;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL context.
@@ -88,16 +88,16 @@ namespace Cloo
         #region Fields
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ReadOnlyCollection<ComputeDevice> devices;
+        private readonly ReadOnlyCollection<ComputeDevice> _devices;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ComputePlatform platform;
+        private readonly ComputePlatform _platform;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ComputeContextPropertyList properties;
+        private readonly ComputeContextPropertyList _properties;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private ComputeContextNotifier callback;
+        private ComputeContextNotifier _callback;
 
         private CLContextHandle _handle;
 
@@ -118,19 +118,19 @@ namespace Cloo
         /// Gets a read-only collection of the <see cref="ComputeDevice"/>s of the <see cref="ComputeContext"/>.
         /// </summary>
         /// <value> A read-only collection of the <see cref="ComputeDevice"/>s of the <see cref="ComputeContext"/>. </value>
-        public ReadOnlyCollection<ComputeDevice> Devices { get { return devices; } }
+        public ReadOnlyCollection<ComputeDevice> Devices { get { return _devices; } }
 
         /// <summary>
         /// Gets the <see cref="ComputePlatform"/> of the <see cref="ComputeContext"/>.
         /// </summary>
         /// <value> The <see cref="ComputePlatform"/> of the <see cref="ComputeContext"/>. </value>
-        public ComputePlatform Platform { get { return platform; } }
+        public ComputePlatform Platform { get { return _platform; } }
 
         /// <summary>
         /// Gets a collection of <see cref="ComputeContextProperty"/>s of the <see cref="ComputeContext"/>.
         /// </summary>
         /// <value> A collection of <see cref="ComputeContextProperty"/>s of the <see cref="ComputeContext"/>. </value>
-        public ComputeContextPropertyList Properties { get { return properties; } }
+        public ComputeContextPropertyList Properties { get { return _properties; } }
 
         #endregion
 
@@ -148,7 +148,7 @@ namespace Cloo
             int handleCount;
             CLDeviceHandle[] deviceHandles = ComputeTools.ExtractHandles(devices, out handleCount);
             IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
-            callback = notify;
+            _callback = notify;
 
             ComputeErrorCode error = ComputeErrorCode.Success;
             Handle = CL12.CreateContext(propertyArray, handleCount, deviceHandles, notify, notifyDataPtr, out error);
@@ -156,10 +156,10 @@ namespace Cloo
             
             SetID(Handle.Value);
             
-            this.properties = properties;
+            _properties = properties;
             ComputeContextProperty platformProperty = properties.GetByName(ComputeContextPropertyName.Platform);
-            this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
-            this.devices = GetDevices();
+            _platform = ComputePlatform.GetByHandle(platformProperty.Value);
+            _devices = GetDevices();
 
             Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
@@ -174,7 +174,7 @@ namespace Cloo
         public ComputeContext(ComputeDeviceTypes deviceType, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr userDataPtr)
         {
             IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
-            callback = notify;
+            _callback = notify;
 
             ComputeErrorCode error = ComputeErrorCode.Success;
             Handle = CL12.CreateContextFromType(propertyArray, deviceType, notify, userDataPtr, out error);
@@ -182,10 +182,10 @@ namespace Cloo
 
             SetID(Handle.Value);
 
-            this.properties = properties;
+            _properties = properties;
             ComputeContextProperty platformProperty = properties.GetByName(ComputeContextPropertyName.Platform);
-            this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
-            this.devices = GetDevices();
+            _platform = ComputePlatform.GetByHandle(platformProperty.Value);
+            _devices = GetDevices();
 
             Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
@@ -213,10 +213,10 @@ namespace Cloo
             var p2 = new List<ComputeContextProperty>();
             //foreach (var p in p1) p2.Add(new ComputeContextProperty(p.Name, p.Value));
 
-            this.properties = new ComputeContextPropertyList(p2);
-            ComputeContextProperty platformProperty = properties.GetByName(ComputeContextPropertyName.Platform);
-            this.platform = ComputePlatform.GetByHandle(platformProperty.Value);
-            this.devices = GetDevices();
+            _properties = new ComputeContextPropertyList(p2);
+            ComputeContextProperty platformProperty = _properties.GetByName(ComputeContextPropertyName.Platform);
+            _platform = ComputePlatform.GetByHandle(platformProperty.Value);
+            _devices = GetDevices();
 
             Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }

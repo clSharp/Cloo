@@ -40,12 +40,12 @@ namespace Cloo.Bindings
     /// <remarks> See the Khronos OpenCL API extensions registry for documentation regarding these functions. </remarks>
     public class CLx
     {
-        private readonly Delegates.clCreateSubDevicesEXT clCreateSubDevicesEXT = null;
-        private readonly Delegates.clEnqueueMigrateMemObjectEXT clEnqueueMigrateMemObjectEXT = null;
-        private readonly Delegates.clGetGLContextInfoKHR clGetGLContextInfoKHR = null;
+        private readonly Delegates.clCreateSubDevicesEXT clCreateSubDevicesEXT;
+        private readonly Delegates.clEnqueueMigrateMemObjectEXT clEnqueueMigrateMemObjectEXT;
+        private readonly Delegates.clGetGLContextInfoKHR clGetGLContextInfoKHR;
         //private readonly Delegates.clIcdGetPlatformIDsKHR clIcdGetPlatformIDsKHR = null;
-        private readonly Delegates.clReleaseDeviceEXT clReleaseDeviceEXT = null;
-        private readonly Delegates.clRetainDeviceEXT clRetainDeviceEXT = null;
+        private readonly Delegates.clReleaseDeviceEXT clReleaseDeviceEXT;
+        private readonly Delegates.clRetainDeviceEXT clRetainDeviceEXT;
 
         /// <summary> </summary>
         public ComputeErrorCode CreateSubDevicesEXT(IntPtr in_device, cl_device_partition_property_ext[] properties, Int32 num_entries, IntPtr[] out_devices, out Int32 num_devices)

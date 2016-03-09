@@ -29,6 +29,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+using Cloo.Bindings;
+
 namespace Cloo
 {
     using System;
@@ -45,7 +47,7 @@ namespace Cloo
         #region Fields
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IntPtr handle;
+        private IntPtr _handle;
 
         #endregion
 
@@ -73,7 +75,7 @@ namespace Cloo
         {
             if (obj == null) return false;
             if (!(obj is ComputeObject)) return false;
-            return Equals(obj as ComputeObject);
+            return Equals((ComputeObject) obj);
         }
 
         /// <summary>
@@ -84,7 +86,7 @@ namespace Cloo
         public bool Equals(ComputeObject obj)
         {
             if (obj == null) return false;
-            if (!handle.Equals(obj.handle)) return false;
+            if (!_handle.Equals(obj._handle)) return false;
             return true;
         }
 
@@ -94,7 +96,7 @@ namespace Cloo
         /// <returns> The hash code of the <see cref="ComputeObject"/>. </returns>
         public override int GetHashCode()
         {
-            return handle.GetHashCode();
+            return _handle.GetHashCode();
         }
 
         /// <summary>
@@ -103,7 +105,7 @@ namespace Cloo
         /// <returns> The string representation of the <see cref="ComputeObject"/>. </returns>
         public override string ToString()
         {
-            return GetType().Name + "(" + handle.ToString() + ")";
+            return GetType().Name + "(" + _handle.ToString() + ")";
         }
 
         #endregion
@@ -113,22 +115,20 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="HandleType"></typeparam>
-        /// <typeparam name="InfoType"></typeparam>
-        /// <typeparam name="QueriedType"></typeparam>
+        /// <typeparam name="THandleType"></typeparam>
+        /// <typeparam name="TInfoType"></typeparam>
+        /// <typeparam name="TQueriedType"></typeparam>
         /// <param name="handle"></param>
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected QueriedType[] GetArrayInfo<HandleType, InfoType, QueriedType>
-            (HandleType handle, InfoType paramName, GetInfoDelegate<HandleType, InfoType> getInfoDelegate)
+        protected TQueriedType[] GetArrayInfo<THandleType, TInfoType, TQueriedType>
+            (THandleType handle, TInfoType paramName, GetInfoDelegate<THandleType, TInfoType> getInfoDelegate)
         {
-            ComputeErrorCode error;
-            QueriedType[] buffer;
             IntPtr bufferSizeRet;
-            error = getInfoDelegate(handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
+            var error = getInfoDelegate(handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
             ComputeException.ThrowOnError(error);
-            buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
+            var buffer = new TQueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(TQueriedType))];
             GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             try
             {
@@ -145,24 +145,22 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="MainHandleType"></typeparam>
-        /// <typeparam name="SecondHandleType"></typeparam>
-        /// <typeparam name="InfoType"></typeparam>
-        /// <typeparam name="QueriedType"></typeparam>
+        /// <typeparam name="TMainHandleType"></typeparam>
+        /// <typeparam name="TSecondHandleType"></typeparam>
+        /// <typeparam name="TInfoType"></typeparam>
+        /// <typeparam name="TQueriedType"></typeparam>
         /// <param name="mainHandle"></param>
         /// <param name="secondHandle"></param>
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected QueriedType[] GetArrayInfo<MainHandleType, SecondHandleType, InfoType, QueriedType>
-            (MainHandleType mainHandle, SecondHandleType secondHandle, InfoType paramName, GetInfoDelegateEx<MainHandleType, SecondHandleType, InfoType> getInfoDelegate)
+        protected TQueriedType[] GetArrayInfo<TMainHandleType, TSecondHandleType, TInfoType, TQueriedType>
+            (TMainHandleType mainHandle, TSecondHandleType secondHandle, TInfoType paramName, GetInfoDelegateEx<TMainHandleType, TSecondHandleType, TInfoType> getInfoDelegate)
         {
-            ComputeErrorCode error;
-            QueriedType[] buffer;
             IntPtr bufferSizeRet;
-            error = getInfoDelegate(mainHandle, secondHandle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
+            var error = getInfoDelegate(mainHandle, secondHandle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
             ComputeException.ThrowOnError(error);
-            buffer = new QueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(QueriedType))];
+            var buffer = new TQueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(TQueriedType))];
             GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             try
             {
@@ -179,34 +177,34 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="HandleType"></typeparam>
-        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="THandleType"></typeparam>
+        /// <typeparam name="TInfoType"></typeparam>
         /// <param name="handle"></param>
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected bool GetBoolInfo<HandleType, InfoType>
-            (HandleType handle, InfoType paramName, GetInfoDelegate<HandleType, InfoType> getInfoDelegate)
+        protected bool GetBoolInfo<THandleType, TInfoType>
+            (THandleType handle, TInfoType paramName, GetInfoDelegate<THandleType, TInfoType> getInfoDelegate)
         {
-            int result = GetInfo<HandleType, InfoType, int>(handle, paramName, getInfoDelegate);
+            int result = GetInfo<THandleType, TInfoType, int>(handle, paramName, getInfoDelegate);
             return (result == (int)ComputeBoolean.True);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="HandleType"></typeparam>
-        /// <typeparam name="InfoType"></typeparam>
-        /// <typeparam name="QueriedType"></typeparam>
+        /// <typeparam name="THandleType"></typeparam>
+        /// <typeparam name="TInfoType"></typeparam>
+        /// <typeparam name="TQueriedType"></typeparam>
         /// <param name="handle"></param>
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected QueriedType GetInfo<HandleType, InfoType, QueriedType>
-            (HandleType handle, InfoType paramName, GetInfoDelegate<HandleType, InfoType> getInfoDelegate) 
-            where QueriedType : struct
+        protected TQueriedType GetInfo<THandleType, TInfoType, TQueriedType>
+            (THandleType handle, TInfoType paramName, GetInfoDelegate<THandleType, TInfoType> getInfoDelegate) 
+            where TQueriedType : struct
         {
-            QueriedType result = new QueriedType();
+            TQueriedType result = new TQueriedType();
             GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
             try
             {
@@ -216,7 +214,7 @@ namespace Cloo
             }
             finally
             {
-                result = (QueriedType)gcHandle.Target;
+                result = (TQueriedType)gcHandle.Target;
                 gcHandle.Free();
             }
             return result;
@@ -225,20 +223,20 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="MainHandleType"></typeparam>
-        /// <typeparam name="SecondHandleType"></typeparam>
-        /// <typeparam name="InfoType"></typeparam>
-        /// <typeparam name="QueriedType"></typeparam>
+        /// <typeparam name="TMainHandleType"></typeparam>
+        /// <typeparam name="TSecondHandleType"></typeparam>
+        /// <typeparam name="TInfoType"></typeparam>
+        /// <typeparam name="TQueriedType"></typeparam>
         /// <param name="mainHandle"></param>
         /// <param name="secondHandle"></param>
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected QueriedType GetInfo<MainHandleType, SecondHandleType, InfoType, QueriedType>
-            (MainHandleType mainHandle, SecondHandleType secondHandle, InfoType paramName, GetInfoDelegateEx<MainHandleType, SecondHandleType, InfoType> getInfoDelegate)
-            where QueriedType : struct
+        protected TQueriedType GetInfo<TMainHandleType, TSecondHandleType, TInfoType, TQueriedType>
+            (TMainHandleType mainHandle, TSecondHandleType secondHandle, TInfoType paramName, GetInfoDelegateEx<TMainHandleType, TSecondHandleType, TInfoType> getInfoDelegate)
+            where TQueriedType : struct
         {
-            QueriedType result = new QueriedType();
+            TQueriedType result = new TQueriedType();
             GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
             try
             {
@@ -248,7 +246,7 @@ namespace Cloo
             }
             finally
             {
-                result = (QueriedType)gcHandle.Target;
+                result = (TQueriedType)gcHandle.Target;
                 gcHandle.Free();
             }
 
@@ -258,37 +256,37 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="HandleType"></typeparam>
-        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="THandleType"></typeparam>
+        /// <typeparam name="TInfoType"></typeparam>
         /// <param name="handle"></param>
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected string GetStringInfo<HandleType, InfoType>
-            (HandleType handle, InfoType paramName, GetInfoDelegate<HandleType, InfoType> getInfoDelegate)
+        protected string GetStringInfo<THandleType, TInfoType>
+            (THandleType handle, TInfoType paramName, GetInfoDelegate<THandleType, TInfoType> getInfoDelegate)
         {
-            byte[] buffer = GetArrayInfo<HandleType, InfoType, byte>(handle, paramName, getInfoDelegate);
+            byte[] buffer = GetArrayInfo<THandleType, TInfoType, byte>(handle, paramName, getInfoDelegate);
             char[] chars = Encoding.ASCII.GetChars(buffer, 0, buffer.Length);
-            return (new string(chars)).TrimEnd(new char[] { '\0' });
+            return (new string(chars)).TrimEnd('\0');
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="MainHandleType"></typeparam>
-        /// <typeparam name="SecondHandleType"></typeparam>
-        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="TMainHandleType"></typeparam>
+        /// <typeparam name="TSecondHandleType"></typeparam>
+        /// <typeparam name="TInfoType"></typeparam>
         /// <param name="mainHandle"></param>
         /// <param name="secondHandle"></param>
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected string GetStringInfo<MainHandleType, SecondHandleType, InfoType>
-            (MainHandleType mainHandle, SecondHandleType secondHandle, InfoType paramName, GetInfoDelegateEx<MainHandleType, SecondHandleType, InfoType> getInfoDelegate)
+        protected string GetStringInfo<TMainHandleType, TSecondHandleType, TInfoType>
+            (TMainHandleType mainHandle, TSecondHandleType secondHandle, TInfoType paramName, GetInfoDelegateEx<TMainHandleType, TSecondHandleType, TInfoType> getInfoDelegate)
         {
-            byte[] buffer = GetArrayInfo<MainHandleType, SecondHandleType, InfoType, byte>(mainHandle, secondHandle, paramName, getInfoDelegate);
+            byte[] buffer = GetArrayInfo<TMainHandleType, TSecondHandleType, TInfoType, byte>(mainHandle, secondHandle, paramName, getInfoDelegate);
             char[] chars = Encoding.ASCII.GetChars(buffer, 0, buffer.Length);
-            return (new string(chars)).TrimEnd(new char[] { '\0' });
+            return (new string(chars)).TrimEnd('\0');
         }
 
         /// <summary>
@@ -297,7 +295,7 @@ namespace Cloo
         /// <param name="id"></param>
         protected void SetID(IntPtr id)
         {
-            handle = id;
+            _handle = id;
         }
 
         #endregion
@@ -307,18 +305,18 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="HandleType"></typeparam>
-        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="THandleType"></typeparam>
+        /// <typeparam name="TInfoType"></typeparam>
         /// <param name="objectHandle"></param>
         /// <param name="paramName"></param>
         /// <param name="paramValueSize"></param>
         /// <param name="paramValue"></param>
         /// <param name="paramValueSizeRet"></param>
         /// <returns></returns>
-        protected delegate ComputeErrorCode GetInfoDelegate<HandleType, InfoType>
+        protected delegate ComputeErrorCode GetInfoDelegate<THandleType, TInfoType>
             (
-                HandleType objectHandle,
-                InfoType paramName,
+                THandleType objectHandle,
+                TInfoType paramName,
                 IntPtr paramValueSize,
                 IntPtr paramValue,
                 out IntPtr paramValueSizeRet
@@ -327,9 +325,9 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="MainHandleType"></typeparam>
-        /// <typeparam name="SecondHandleType"></typeparam>
-        /// <typeparam name="InfoType"></typeparam>
+        /// <typeparam name="TMainHandleType"></typeparam>
+        /// <typeparam name="TSecondHandleType"></typeparam>
+        /// <typeparam name="TInfoType"></typeparam>
         /// <param name="mainObjectHandle"></param>
         /// <param name="secondaryObjectHandle"></param>
         /// <param name="paramName"></param>
@@ -337,11 +335,11 @@ namespace Cloo
         /// <param name="paramValue"></param>
         /// <param name="paramValueSizeRet"></param>
         /// <returns></returns>
-        protected delegate ComputeErrorCode GetInfoDelegateEx<MainHandleType, SecondHandleType, InfoType>
+        protected delegate ComputeErrorCode GetInfoDelegateEx<TMainHandleType, TSecondHandleType, TInfoType>
             (
-                MainHandleType mainObjectHandle,
-                SecondHandleType secondaryObjectHandle,
-                InfoType paramName,
+                TMainHandleType mainObjectHandle,
+                TSecondHandleType secondaryObjectHandle,
+                TInfoType paramName,
                 IntPtr paramValueSize,
                 IntPtr paramValue,
                 out IntPtr paramValueSizeRet

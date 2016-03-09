@@ -35,8 +35,7 @@ namespace Cloo
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Contains various helper methods.
@@ -77,7 +76,7 @@ namespace Cloo
         /// <returns> A <c>Version</c> instance containing the major and minor version from <paramref name="versionString"/>. </returns>
         public static Version ParseVersionString(String versionString, int substringIndex)
         {
-            string[] verstring = versionString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] verstring = versionString.Split(new [] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             return new Version(verstring[substringIndex]);
         }
 
@@ -88,9 +87,7 @@ namespace Cloo
         internal static IntPtr[] ConvertArray(long[] array)
         {
             if (array == null) return null;
-
-            NumberFormatInfo nfi = new NumberFormatInfo();
-
+            
             IntPtr[] result = new IntPtr[array.Length];
             for (long i = 0; i < array.Length; i++)
                 result[i] = new IntPtr(array[i]);
@@ -100,9 +97,7 @@ namespace Cloo
         internal static long[] ConvertArray(IntPtr[] array)
         {
             if (array == null) return null;
-
-            NumberFormatInfo nfi = new NumberFormatInfo();
-
+            
             long[] result = new long[array.Length];
             for (long i = 0; i < array.Length; i++)
                 result[i] = array[i].ToInt64();

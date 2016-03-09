@@ -29,6 +29,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+using Cloo.Bindings;
+
 namespace Cloo
 {
     using System;
@@ -47,7 +49,7 @@ namespace Cloo
         #region Fields
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IList<ComputeContextProperty> properties;
+        private readonly IList<ComputeContextProperty> _properties;
 
         #endregion
 
@@ -59,8 +61,10 @@ namespace Cloo
         /// <param name="platform"> A <see cref="ComputePlatform"/>. </param>
         public ComputeContextPropertyList(ComputePlatform platform)
         {
-            properties = new List<ComputeContextProperty>();
-            properties.Add(new ComputeContextProperty(ComputeContextPropertyName.Platform, platform.Handle.Value));
+            _properties = new List<ComputeContextProperty>
+            {
+                new ComputeContextProperty(ComputeContextPropertyName.Platform, platform.Handle.Value)
+            };
         }
 
         /// <summary>
@@ -69,7 +73,7 @@ namespace Cloo
         /// <param name="properties"> An enumerable of <see cref="ComputeContextProperty"/>'s. </param>
         public ComputeContextPropertyList(IEnumerable<ComputeContextProperty> properties)
         {
-            this.properties = new List<ComputeContextProperty>(properties);
+            _properties = new List<ComputeContextProperty>(properties);
         }
 
         #endregion
@@ -83,7 +87,7 @@ namespace Cloo
         /// <returns> The requested <see cref="ComputeContextProperty"/> or <c>null</c> if no such <see cref="ComputeContextProperty"/> exists in the <see cref="ComputeContextPropertyList"/>. </returns>
         public ComputeContextProperty GetByName(ComputeContextPropertyName name)
         {
-            foreach (ComputeContextProperty property in properties)
+            foreach (ComputeContextProperty property in _properties)
                 if (property.Name == name)
                     return property;
 
@@ -96,11 +100,11 @@ namespace Cloo
 
         internal IntPtr[] ToIntPtrArray()
         {
-            IntPtr[] result = new IntPtr[2 * properties.Count + 1];
-            for (int i = 0; i < properties.Count; i++)
+            IntPtr[] result = new IntPtr[2 * _properties.Count + 1];
+            for (int i = 0; i < _properties.Count; i++)
             {
-                result[2 * i] = new IntPtr((int)properties[i].Name);
-                result[2 * i + 1] = properties[i].Value;
+                result[2 * i] = new IntPtr((int)_properties[i].Name);
+                result[2 * i + 1] = _properties[i].Value;
             }
             result[result.Length - 1] = IntPtr.Zero;
             return result;
@@ -116,7 +120,7 @@ namespace Cloo
         /// <param name="item"></param>
         public void Add(ComputeContextProperty item)
         {
-            properties.Add(item);
+            _properties.Add(item);
         }
 
         /// <summary>
@@ -124,7 +128,7 @@ namespace Cloo
         /// </summary>
         public void Clear()
         {
-            properties.Clear();
+            _properties.Clear();
         }
 
         /// <summary>
@@ -134,7 +138,7 @@ namespace Cloo
         /// <returns></returns>
         public bool Contains(ComputeContextProperty item)
         {
-            return properties.Contains(item);
+            return _properties.Contains(item);
         }
 
         /// <summary>
@@ -144,7 +148,7 @@ namespace Cloo
         /// <param name="arrayIndex"></param>
         public void CopyTo(ComputeContextProperty[] array, int arrayIndex)
         {
-            properties.CopyTo(array, arrayIndex);
+            _properties.CopyTo(array, arrayIndex);
         }
 
         /// <summary>
@@ -152,7 +156,7 @@ namespace Cloo
         /// </summary>
         public int Count
         {
-            get { return properties.Count; }
+            get { return _properties.Count; }
         }
 
         /// <summary>
@@ -170,7 +174,7 @@ namespace Cloo
         /// <returns></returns>
         public bool Remove(ComputeContextProperty item)
         {
-            return properties.Remove(item);
+            return _properties.Remove(item);
         }
 
         #endregion
@@ -183,7 +187,7 @@ namespace Cloo
         /// <returns></returns>
         public IEnumerator<ComputeContextProperty> GetEnumerator()
         {
-            return ((IEnumerable<ComputeContextProperty>)properties).GetEnumerator();
+            return _properties.GetEnumerator();
         }
 
         #endregion
@@ -192,7 +196,7 @@ namespace Cloo
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)properties).GetEnumerator();
+            return ((IEnumerable)_properties).GetEnumerator();
         }
 
         #endregion
