@@ -46,7 +46,7 @@ namespace Cloo
         #region Fields
 
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-        private readonly List<ComputeEventBase> events;
+        private readonly List<ComputeEventBase> _events;
 
         #endregion
 
@@ -57,7 +57,7 @@ namespace Cloo
         /// </summary>
         public ComputeEventList()
         {
-            events = new List<ComputeEventBase>();
+            _events = new List<ComputeEventBase>();
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Cloo
         /// <param name="events"> A list of <see cref="ComputeEventBase"/>s. </param>
         public ComputeEventList(IList<ComputeEventBase> events)
         {
-            events = new Collection<ComputeEventBase>(events);
+            _events = new List<ComputeEventBase>(events);
         }
 
         #endregion
@@ -77,7 +77,7 @@ namespace Cloo
         /// Gets the last <see cref="ComputeEventBase"/> on the list.
         /// </summary>
         /// <value> The last <see cref="ComputeEventBase"/> on the list. </value>
-        public ComputeEventBase Last { get { return events[events.Count - 1]; } }
+        public ComputeEventBase Last { get { return _events[_events.Count - 1]; } }
 
         #endregion
 
@@ -100,7 +100,7 @@ namespace Cloo
         /// </summary>
         public void Wait()
         {
-            ComputeEventList.Wait(events);
+            ComputeEventList.Wait(_events);
         }
 
         #endregion
@@ -114,7 +114,7 @@ namespace Cloo
         /// <returns></returns>
         public int IndexOf(ComputeEventBase item)
         {
-            return events.IndexOf(item);
+            return _events.IndexOf(item);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Cloo
         /// <param name="item"></param>
         public void Insert(int index, ComputeEventBase item)
         {
-            events.Insert(index, item);
+            _events.Insert(index, item);
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Cloo
         /// <param name="index"></param>
         public void RemoveAt(int index)
         {
-            events.RemoveAt(index);
+            _events.RemoveAt(index);
         }
 
         /// <summary>
@@ -145,11 +145,11 @@ namespace Cloo
         {
             get
             {
-                return events[index];
+                return _events[index];
             }
             set
             {
-                events[index] = value;
+                _events[index] = value;
             }
         }
 
@@ -163,7 +163,7 @@ namespace Cloo
         /// <param name="item"></param>
         public void Add(ComputeEventBase item)
         {
-            events.Add(item);
+            _events.Add(item);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Cloo
         /// </summary>
         public void Clear()
         {
-            events.Clear();
+            _events.Clear();
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Cloo
         /// <returns></returns>
         public bool Contains(ComputeEventBase item)
         {
-            return events.Contains(item);
+            return _events.Contains(item);
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace Cloo
         /// <param name="arrayIndex"></param>
         public void CopyTo(ComputeEventBase[] array, int arrayIndex)
         {
-            events.CopyTo(array, arrayIndex);
+            _events.CopyTo(array, arrayIndex);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace Cloo
         /// </summary>
         public int Count
         {
-            get { return events.Count; }
+            get { return _events.Count; }
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Cloo
         /// <returns></returns>
         public bool Remove(ComputeEventBase item)
         {
-            return events.Remove(item);
+            return _events.Remove(item);
         }
 
         #endregion
@@ -230,7 +230,7 @@ namespace Cloo
         /// <returns></returns>
         public IEnumerator<ComputeEventBase> GetEnumerator()
         {
-            return ((IEnumerable<ComputeEventBase>)events).GetEnumerator();
+            return ((IEnumerable<ComputeEventBase>)_events).GetEnumerator();
         }
 
         #endregion
@@ -239,7 +239,7 @@ namespace Cloo
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)events).GetEnumerator();
+            return ((IEnumerable)_events).GetEnumerator();
         }
 
         #endregion
