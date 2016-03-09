@@ -31,10 +31,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Cloo
 {
-    using System;
     using System.Diagnostics;
     using System.Threading;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL memory object.
@@ -47,10 +46,10 @@ namespace Cloo
         #region Fields
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ComputeContext context;
+        private readonly ComputeContext _context;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ComputeMemoryFlags flags;
+        private readonly ComputeMemoryFlags _flags;
 
         private CLMemoryHandle _handle;
 
@@ -71,13 +70,13 @@ namespace Cloo
         /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeMemory"/>.
         /// </summary>
         /// <value> The <see cref="ComputeContext"/> of the <see cref="ComputeMemory"/>. </value>
-        public ComputeContext Context { get { return context; } }
+        public ComputeContext Context { get { return _context; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeMemoryFlags"/> of the <see cref="ComputeMemory"/>.
         /// </summary>
         /// <value> The <see cref="ComputeMemoryFlags"/> of the <see cref="ComputeMemory"/>. </value>
-        public ComputeMemoryFlags Flags { get { return flags; } }
+        public ComputeMemoryFlags Flags { get { return _flags; } }
 
         /// <summary>
         /// Gets or sets (protected) the size in bytes of the <see cref="ComputeMemory"/>.
@@ -96,8 +95,8 @@ namespace Cloo
         /// <param name="flags"></param>
         protected ComputeMemory(ComputeContext context, ComputeMemoryFlags flags)
         {
-            this.context = context;
-            this.flags = flags;
+            _context = context;
+            _flags = flags;
         }
 
         #endregion

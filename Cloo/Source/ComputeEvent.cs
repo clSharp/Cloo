@@ -31,11 +31,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Cloo
 {
-    using System;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL event.

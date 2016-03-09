@@ -29,6 +29,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+using Cloo.Bindings;
+
 namespace Cloo
 {
     using System;
@@ -43,10 +45,10 @@ namespace Cloo
         #region Fields
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ComputeContextPropertyName name;
+        private readonly ComputeContextPropertyName _name;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly IntPtr value;
+        private readonly IntPtr _value;
 
         #endregion
 
@@ -56,13 +58,13 @@ namespace Cloo
         /// Gets the <see cref="ComputeContextPropertyName"/> of the <see cref="ComputeContextProperty"/>.
         /// </summary>
         /// <value> The <see cref="ComputeContextPropertyName"/> of the <see cref="ComputeContextProperty"/>. </value>
-        public ComputeContextPropertyName Name { get { return name; } }
+        public ComputeContextPropertyName Name { get { return _name; } }
 
         /// <summary>
         /// Gets the value of the <see cref="ComputeContextProperty"/>.
         /// </summary>
         /// <value> The value of the <see cref="ComputeContextProperty"/>. </value>
-        public IntPtr Value { get { return value; } }
+        public IntPtr Value { get { return _value; } }
 
         #endregion
 
@@ -75,8 +77,8 @@ namespace Cloo
         /// <param name="value"> The value of the created <see cref="ComputeContextProperty"/>. </param>
         public ComputeContextProperty(ComputeContextPropertyName name, IntPtr value)
         {
-            this.name = name;
-            this.value = value;
+            _name = name;
+            _value = value;
         }
 
         #endregion
@@ -89,7 +91,7 @@ namespace Cloo
         /// <returns> The string representation of the <see cref="ComputeContextProperty"/>. </returns>
         public override string ToString()
         {
-            return GetType().Name + "(" + name + ", " + value + ")";
+            return GetType().Name + "(" + _name + ", " + _value + ")";
         }
 
         #endregion

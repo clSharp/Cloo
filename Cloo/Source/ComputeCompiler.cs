@@ -31,7 +31,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Cloo
 {
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents the OpenCL compiler.

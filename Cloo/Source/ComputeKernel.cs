@@ -32,11 +32,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 namespace Cloo
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL kernel.
@@ -49,13 +48,13 @@ namespace Cloo
         #region Fields
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ComputeContext context;
+        private readonly ComputeContext _context;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly string functionName;
+        private readonly string _functionName;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ComputeProgram program;
+        private readonly ComputeProgram _program;
 
         private CLKernelHandle _handle;
 
@@ -76,19 +75,19 @@ namespace Cloo
         /// Gets the <see cref="ComputeContext"/> associated with the <see cref="ComputeKernel"/>.
         /// </summary>
         /// <value> The <see cref="ComputeContext"/> associated with the <see cref="ComputeKernel"/>. </value>
-        public ComputeContext Context { get { return context; } }
+        public ComputeContext Context { get { return _context; } }
 
         /// <summary>
         /// Gets the function name of the <see cref="ComputeKernel"/>.
         /// </summary>
         /// <value> The function name of the <see cref="ComputeKernel"/>. </value>
-        public string FunctionName { get { return functionName; } }
+        public string FunctionName { get { return _functionName; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeProgram"/> that the <see cref="ComputeKernel"/> belongs to.
         /// </summary>
         /// <value> The <see cref="ComputeProgram"/> that the <see cref="ComputeKernel"/> belongs to. </value>
-        public ComputeProgram Program { get { return program; } }
+        public ComputeProgram Program { get { return _program; } }
 
         #endregion
 
@@ -99,9 +98,9 @@ namespace Cloo
             Handle = handle;
             SetID(Handle.Value);
 
-            context = program.Context;
-            functionName = GetStringInfo<CLKernelHandle, ComputeKernelInfo>(Handle, ComputeKernelInfo.FunctionName, CL12.GetKernelInfo);
-            this.program = program;
+            _context = program.Context;
+            _functionName = GetStringInfo(Handle, ComputeKernelInfo.FunctionName, CL12.GetKernelInfo);
+            _program = program;
 
             Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
@@ -114,9 +113,9 @@ namespace Cloo
 
             SetID(Handle.Value);
 
-            context = program.Context;
-            this.functionName = functionName;
-            this.program = program;
+            _context = program.Context;
+            _functionName = functionName;
+            _program = program;
 
             Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
@@ -220,7 +219,7 @@ namespace Cloo
         /// <remarks> This method will automatically track <paramref name="memObj"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetMemoryArgument(int index, ComputeMemory memObj)
         {
-            SetValueArgument<CLMemoryHandle>(index, memObj.Handle);
+            SetValueArgument(index, memObj.Handle);
         }
 
         /// <summary>
@@ -231,7 +230,7 @@ namespace Cloo
         /// <remarks> This method will automatically track <paramref name="sampler"/> to prevent it from being collected by the GC.<br/> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
         public void SetSamplerArgument(int index, ComputeSampler sampler)
         {
-            SetValueArgument<CLSamplerHandle>(index, sampler.Handle);
+            SetValueArgument(index, sampler.Handle);
         }
 
         /// <summary>

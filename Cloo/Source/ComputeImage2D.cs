@@ -33,7 +33,7 @@ namespace Cloo
 {
     using System;
     using System.Collections.Generic;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL 2D image.

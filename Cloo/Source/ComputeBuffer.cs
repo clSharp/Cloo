@@ -33,7 +33,7 @@ namespace Cloo
 {
     using System;
     using System.Runtime.InteropServices;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL buffer.
@@ -111,17 +111,17 @@ namespace Cloo
         /// <summary>
         /// Creates a new <see cref="ComputeBuffer{T}"/> from an existing OpenGL buffer object.
         /// </summary>
-        /// <typeparam name="DataType"> The type of the elements of the <see cref="ComputeBuffer{T}"/>. <typeparamref name="T"/> should match the type of the elements in the OpenGL buffer. </typeparam>
+        /// <typeparam name="TDataType"> The type of the elements of the <see cref="ComputeBuffer{T}"/>. <typeparamref name="T"/> should match the type of the elements in the OpenGL buffer. </typeparam>
         /// <param name="context"> A <see cref="ComputeContext"/> with enabled CL/GL sharing. </param>
         /// <param name="flags"> A bit-field that is used to specify usage information about the <see cref="ComputeBuffer{T}"/>. Only <see cref="ComputeMemoryFlags.ReadOnly"/>, <see cref="ComputeMemoryFlags.WriteOnly"/> and <see cref="ComputeMemoryFlags.ReadWrite"/> are allowed. </param>
         /// <param name="bufferId"> The OpenGL buffer object id to use for the creation of the <see cref="ComputeBuffer{T}"/>. </param>
         /// <returns> The created <see cref="ComputeBuffer{T}"/>. </returns>
-        public static ComputeBuffer<DataType> CreateFromGLBuffer<DataType>(ComputeContext context, ComputeMemoryFlags flags, int bufferId) where DataType : struct
+        public static ComputeBuffer<TDataType> CreateFromGLBuffer<TDataType>(ComputeContext context, ComputeMemoryFlags flags, int bufferId) where TDataType : struct
         {
             ComputeErrorCode error = ComputeErrorCode.Success;
             CLMemoryHandle handle = CL12.CreateFromGLBuffer(context.Handle, flags, bufferId, out error);
             ComputeException.ThrowOnError(error);
-            return new ComputeBuffer<DataType>(handle, context, flags);
+            return new ComputeBuffer<TDataType>(handle, context, flags);
         }
 
         #endregion

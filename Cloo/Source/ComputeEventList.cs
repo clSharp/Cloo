@@ -33,9 +33,8 @@ namespace Cloo
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents a list of OpenCL generated or user created events.
@@ -100,7 +99,7 @@ namespace Cloo
         /// </summary>
         public void Wait()
         {
-            ComputeEventList.Wait(_events);
+            Wait(_events);
         }
 
         #endregion

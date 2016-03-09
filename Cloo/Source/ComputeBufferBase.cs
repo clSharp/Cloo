@@ -34,7 +34,7 @@ namespace Cloo
     using System;
     using System.Diagnostics;
     using System.Threading;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents the parent type to any Cloo buffer types.

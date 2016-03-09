@@ -41,18 +41,18 @@ namespace Cloo.Bindings
     {
         internal CLContextHandle(IntPtr value)
         {
-            this.value = value;
+            _value = value;
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        IntPtr value;
+        IntPtr _value;
 
         /// <summary>
         /// Gets a logic value indicating whether the handle is valid.
         /// </summary>
         public bool IsValid
         {
-            get { return value != IntPtr.Zero; }
+            get { return _value != IntPtr.Zero; }
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Cloo.Bindings
         /// </summary>
         public IntPtr Value
         {
-            get { return value; }
+            get { return _value; }
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Cloo.Bindings
         /// </summary>
         public void Invalidate()
         {
-            value = IntPtr.Zero;
+            _value = IntPtr.Zero;
         }
     }
 }

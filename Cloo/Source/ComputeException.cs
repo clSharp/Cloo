@@ -29,6 +29,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+using Cloo.Bindings;
+
 namespace Cloo
 {
     using System;
@@ -43,7 +45,7 @@ namespace Cloo
         #region Fields
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ComputeErrorCode code;
+        private readonly ComputeErrorCode _code;
 
         #endregion
 
@@ -52,7 +54,7 @@ namespace Cloo
         /// <summary>
         /// Gets the <see cref="ComputeErrorCode"/> of the <see cref="ComputeException"/>.
         /// </summary>
-        public ComputeErrorCode ComputeErrorCode { get { return code; } }
+        public ComputeErrorCode ComputeErrorCode { get { return _code; } }
 
         #endregion
 
@@ -65,7 +67,7 @@ namespace Cloo
         public ComputeException(ComputeErrorCode code)
             : base("OpenCL error code detected: " + code.ToString() + ".")
         {
-            this.code = code;
+            _code = code;
         }
 
         #endregion

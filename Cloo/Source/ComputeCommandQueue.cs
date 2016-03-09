@@ -29,15 +29,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
-using System.CodeDom;
-
 namespace Cloo
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL command queue.
@@ -50,16 +48,16 @@ namespace Cloo
         #region Fields
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ComputeContext context;
+        private readonly ComputeContext _context;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ComputeDevice device;
+        private readonly ComputeDevice _device;
         
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private bool outOfOrderExec;
+        private readonly bool _outOfOrderExec;
         
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private bool profiling;
+        private readonly bool _profiling;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal IList<ComputeEventBase> Events;
@@ -83,25 +81,25 @@ namespace Cloo
         /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeCommandQueue"/>.
         /// </summary>
         /// <value> The <see cref="ComputeContext"/> of the <see cref="ComputeCommandQueue"/>. </value>
-        public ComputeContext Context { get { return context; } }
+        public ComputeContext Context { get { return _context; } }
 
         /// <summary>
         /// Gets the <see cref="ComputeDevice"/> of the <see cref="ComputeCommandQueue"/>.
         /// </summary>
         /// <value> The <see cref="ComputeDevice"/> of the <see cref="ComputeCommandQueue"/>. </value>
-        public ComputeDevice Device { get { return device; } }
+        public ComputeDevice Device { get { return _device; } }
 
         /// <summary>
         /// Gets the out-of-order execution mode of the commands in the <see cref="ComputeCommandQueue"/>.
         /// </summary>
         /// <value> Is <c>true</c> if <see cref="ComputeCommandQueue"/> has out-of-order execution mode enabled and <c>false</c> otherwise. </value>
-        public bool OutOfOrderExecution { get { return outOfOrderExec; } }
+        public bool OutOfOrderExecution { get { return _outOfOrderExec; } }
 
         /// <summary>
         /// Gets the profiling mode of the commands in the <see cref="ComputeCommandQueue"/>.
         /// </summary>
         /// <value> Is <c>true</c> if <see cref="ComputeCommandQueue"/> has profiling enabled and <c>false</c> otherwise. </value>
-        public bool Profiling { get { return profiling; } }
+        public bool Profiling { get { return _profiling; } }
 
         #endregion
 
@@ -121,11 +119,11 @@ namespace Cloo
             
             SetID(Handle.Value);
             
-            this.device = device;
-            this.context = context;
+            _device = device;
+            _context = context;
             
-            outOfOrderExec = ((properties & ComputeCommandQueueFlags.OutOfOrderExecution) == ComputeCommandQueueFlags.OutOfOrderExecution);
-            profiling = ((properties & ComputeCommandQueueFlags.Profiling) == ComputeCommandQueueFlags.Profiling);
+            _outOfOrderExec = ((properties & ComputeCommandQueueFlags.OutOfOrderExecution) == ComputeCommandQueueFlags.OutOfOrderExecution);
+            _profiling = ((properties & ComputeCommandQueueFlags.Profiling) == ComputeCommandQueueFlags.Profiling);
             
             Events = new List<ComputeEventBase>();
 
@@ -152,19 +150,19 @@ namespace Cloo
 
             if (context.Handle.Value != contextHandle.Value) throw new ArgumentException("Context does not belong to queue", nameof(context));
 
-            this.context = context;
+            _context = context;
 
-            foreach (var d in this.context.Devices)
+            foreach (var d in _context.Devices)
             {
                 if (d.Handle.Value == deviceHandle.Value)
                 {
-                    device = d;
+                    _device = d;
                     break;
                 }
             }
             
-            outOfOrderExec = ((properties & ComputeCommandQueueFlags.OutOfOrderExecution) == ComputeCommandQueueFlags.OutOfOrderExecution);
-            profiling = ((properties & ComputeCommandQueueFlags.Profiling) == ComputeCommandQueueFlags.Profiling);
+            _outOfOrderExec = ((properties & ComputeCommandQueueFlags.OutOfOrderExecution) == ComputeCommandQueueFlags.OutOfOrderExecution);
+            _profiling = ((properties & ComputeCommandQueueFlags.Profiling) == ComputeCommandQueueFlags.Profiling);
 
             Events = new List<ComputeEventBase>();
 
@@ -311,7 +309,7 @@ namespace Cloo
             bool eventsWritable = (events != null && !events.IsReadOnly);
             CLEventHandle[] newEventHandle = (eventsWritable) ? new CLEventHandle[1] : null;
 
-            ComputeErrorCode error = CL11.EnqueueCopyBufferRect(this.Handle, source.Handle, destination.Handle, ref sourceOffset, ref destinationOffset, ref region, new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), eventWaitListSize, eventHandles, newEventHandle);
+            ComputeErrorCode error = CL11.EnqueueCopyBufferRect(Handle, source.Handle, destination.Handle, ref sourceOffset, ref destinationOffset, ref region, new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), eventWaitListSize, eventHandles, newEventHandle);
             ComputeException.ThrowOnError(error);
 
             if (eventsWritable)
@@ -500,10 +498,10 @@ namespace Cloo
             bool eventsWritable = (events != null && !events.IsReadOnly);
             CLEventHandle[] newEventHandle = (eventsWritable) ? new CLEventHandle[1] : null;
 
-            IntPtr mappedPtr, rowPitch, slicePitch;
+            IntPtr rowPitch, slicePitch;
 
             ComputeErrorCode error = ComputeErrorCode.Success;
-            mappedPtr = CL12.EnqueueMapImage(Handle, image.Handle, blocking, flags, ref offset, ref region, out rowPitch, out slicePitch, eventWaitListSize, eventHandles, newEventHandle, out error);
+            var mappedPtr = CL12.EnqueueMapImage(Handle, image.Handle, blocking, flags, ref offset, ref region, out rowPitch, out slicePitch, eventWaitListSize, eventHandles, newEventHandle, out error);
             ComputeException.ThrowOnError(error);
 
             if (eventsWritable)
@@ -567,7 +565,7 @@ namespace Cloo
             bool eventsWritable = (events != null && !events.IsReadOnly);
             CLEventHandle[] newEventHandle = (eventsWritable) ? new CLEventHandle[1] : null;
 
-            ComputeErrorCode error = CL11.EnqueueReadBufferRect(this.Handle, source.Handle, blocking, ref sourceOffset, ref destinationOffset, ref region, new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), destination, eventWaitListSize, eventHandles, newEventHandle);
+            ComputeErrorCode error = CL11.EnqueueReadBufferRect(Handle, source.Handle, blocking, ref sourceOffset, ref destinationOffset, ref region, new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), destination, eventWaitListSize, eventHandles, newEventHandle);
             ComputeException.ThrowOnError(error);
 
             if (eventsWritable)
@@ -712,7 +710,7 @@ namespace Cloo
             bool eventsWritable = (events != null && !events.IsReadOnly);
             CLEventHandle[] newEventHandle = (eventsWritable) ? new CLEventHandle[1] : null;
 
-            ComputeErrorCode error = CL11.EnqueueWriteBufferRect(this.Handle, destination.Handle, blocking, ref destinationOffset, ref sourceOffset, ref region, new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), source, eventWaitListSize, eventHandles, newEventHandle);
+            ComputeErrorCode error = CL11.EnqueueWriteBufferRect(Handle, destination.Handle, blocking, ref destinationOffset, ref sourceOffset, ref region, new IntPtr(destinationRowPitch), new IntPtr(destinationSlicePitch), new IntPtr(sourceRowPitch), new IntPtr(sourceSlicePitch), source, eventWaitListSize, eventHandles, newEventHandle);
             ComputeException.ThrowOnError(error);
 
             if (eventsWritable)

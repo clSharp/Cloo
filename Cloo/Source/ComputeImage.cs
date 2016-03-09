@@ -36,7 +36,7 @@ namespace Cloo
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Threading;
-    using Cloo.Bindings;
+    using Bindings;
 
     /// <summary>
     /// Represents an OpenCL image.
@@ -110,7 +110,7 @@ namespace Cloo
         /// <returns></returns>
         protected static ICollection<ComputeImageFormat> GetSupportedFormats(ComputeContext context, ComputeMemoryFlags flags, ComputeMemoryType type)
         {
-            int formatCountRet = 0;
+            int formatCountRet;
             ComputeErrorCode error = CL12.GetSupportedImageFormats(context.Handle, flags, type, 0, null, out formatCountRet);
             ComputeException.ThrowOnError(error);
 
