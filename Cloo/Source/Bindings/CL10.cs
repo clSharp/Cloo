@@ -32,9 +32,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
-using Cloo.Bindings;
 
-namespace Cloo
+namespace Cloo.Bindings
 {
     /// <summary>
     /// Contains bindings to the OpenCL 1.0 functions.

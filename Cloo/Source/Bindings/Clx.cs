@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 
-namespace Cloo
+namespace Cloo.Bindings
 {
     /// <summary>
     /// Contains bindings to the OpenCL extension functions.
