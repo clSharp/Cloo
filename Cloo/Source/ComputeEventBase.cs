@@ -30,6 +30,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System.Runtime.InteropServices;
+using Cloo.Bindings;
 
 namespace Cloo
 {

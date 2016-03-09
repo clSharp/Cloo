@@ -1,4 +1,6 @@
-﻿namespace Cloo
+﻿using Cloo.Bindings;
+
+namespace Cloo
 {
     /// <summary>
     /// Represents an event created by an external library

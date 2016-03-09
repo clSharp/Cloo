@@ -32,7 +32,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Diagnostics;
 
-namespace Cloo
+namespace Cloo.Bindings
 {
     /// <summary>
     /// Represents the <see cref="ComputeDevice"/> ID.
