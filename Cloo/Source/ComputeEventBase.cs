@@ -206,7 +206,7 @@ namespace Cloo
         protected void HookNotifier()
         {
             _statusNotify = new ComputeEventCallback(StatusNotify);
-            var handle = GCHandle.Alloc(_statusNotify);
+            var handle = GCHandle.Alloc(_statusNotify, GCHandleType.Pinned);
 
             ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, _statusNotify, GCHandle.ToIntPtr(handle));
             ComputeException.ThrowOnError(error);
