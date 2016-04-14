@@ -46,13 +46,6 @@ namespace Cloo
     /// <seealso cref="ComputeContext"/>
     public class ComputeEvent : ComputeEventBase
     {
-        #region Fields
-
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private GCHandle gcHandle;
-        
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -91,55 +84,19 @@ namespace Cloo
 
         #region Internal methods
 
-        internal void TrackGCHandle(GCHandle handle)
+        internal void TrackGCHandle(GCHandle gcHandle)
         {
-            gcHandle = handle;
-
-            Completed += new ComputeCommandStatusChanged(Cleanup);
-            Aborted += new ComputeCommandStatusChanged(Cleanup);
-        }
-
-        #endregion
-
-        #region Protected methods
-
-        /// <summary>
-        /// Releases the associated OpenCL object.
-        /// </summary>
-        /// <param name="manual"> Specifies the operation mode of this method. </param>
-        /// <remarks> <paramref name="manual"/> must be <c>true</c> if this method is invoked directly by the application. </remarks>
-        protected override void Dispose(bool manual)
-        {
-            FreeGCHandle();
-            base.Dispose(manual);
-        }
-
-        #endregion
-
-        #region Private methods
-
-        private void Cleanup(object sender, ComputeCommandStatusArgs e)
-        {
-            lock (CommandQueue.Events)
+            var freeDelegate = new ComputeCommandStatusChanged((s, e) =>
             {
-                if (CommandQueue.Events.Contains(this))
-                {
-                    CommandQueue.Events.Remove(this);
-                    Dispose();
-                }
-                else
-                    FreeGCHandle();
-            }
-        }
+                if (gcHandle.IsAllocated && gcHandle.Target != null) gcHandle.Free();
+            });
 
-        private void FreeGCHandle()
-        {
-            if (gcHandle.IsAllocated && gcHandle.Target != null)
-                gcHandle.Free();
+            Completed += freeDelegate;
+            Aborted += freeDelegate;
         }
 
         #endregion
-
+        
         /// <summary>
         /// Clones the event. Because the event is retained the cloned event as well as the clone have to be disposed
         /// </summary>

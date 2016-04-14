@@ -59,10 +59,7 @@ namespace Cloo
         
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly bool _profiling;
-
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal IList<ComputeEventBase> Events;
-
+        
         private CLCommandQueueHandle _handle;
 
         #endregion
@@ -126,8 +123,6 @@ namespace Cloo
             _outOfOrderExec = ((properties & ComputeCommandQueueFlags.OutOfOrderExecution) == ComputeCommandQueueFlags.OutOfOrderExecution);
             _profiling = ((properties & ComputeCommandQueueFlags.Profiling) == ComputeCommandQueueFlags.Profiling);
             
-            Events = new List<ComputeEventBase>();
-
             Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
@@ -164,9 +159,7 @@ namespace Cloo
             
             _outOfOrderExec = ((properties & ComputeCommandQueueFlags.OutOfOrderExecution) == ComputeCommandQueueFlags.OutOfOrderExecution);
             _profiling = ((properties & ComputeCommandQueueFlags.Profiling) == ComputeCommandQueueFlags.Profiling);
-
-            Events = new List<ComputeEventBase>();
-
+            
             Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
 
