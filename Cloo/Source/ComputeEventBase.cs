@@ -54,7 +54,7 @@ namespace Cloo
         private ComputeCommandStatusArgs _status;
         
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private ComputeEventCallback _statusNotify;
+        private bool _notifierHooked;
 
         private readonly object _statusLockObject = new object();
         private CLEventHandle _handle;
@@ -73,7 +73,7 @@ namespace Cloo
             {
                 lock (_statusLockObject)
                 {
-                    if (_statusNotify == null) HookNotifier();
+                    if (!_notifierHooked) HookNotifier();
 
                     if (_status != null && _status.Status != ComputeCommandExecutionStatus.Complete)
                         value.Invoke(this, _status);
@@ -97,7 +97,7 @@ namespace Cloo
             {
                 lock (_statusLockObject)
                 {
-                    if (_statusNotify == null) HookNotifier();
+                    if (!_notifierHooked) HookNotifier();
                     
                     if (_status != null && _status.Status == ComputeCommandExecutionStatus.Complete)
                         value.Invoke(this, _status);
@@ -205,10 +205,13 @@ namespace Cloo
         /// </summary>
         protected void HookNotifier()
         {
-            _statusNotify = new ComputeEventCallback(StatusNotify);
-            var handle = GCHandle.Alloc(_statusNotify);
+            _notifierHooked = true;
 
-            ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, _statusNotify, GCHandle.ToIntPtr(handle));
+            var callback = new ComputeEventCallback(StatusNotify);
+            var handle = GCHandle.Alloc(callback);
+            var handlePointer = GCHandle.ToIntPtr(handle);
+
+            ComputeErrorCode error = CL11.SetEventCallback(Handle, (int)ComputeCommandExecutionStatus.Complete, callback, handlePointer);
             ComputeException.ThrowOnError(error);
         }
 
@@ -220,8 +223,7 @@ namespace Cloo
         protected virtual void OnCompleted(object sender, ComputeCommandStatusArgs evArgs)
         {
             Debug.WriteLine("Complete " + Type + " operation of " + this + ".", "Information");
-            if (CompletedInternal != null)
-                CompletedInternal(sender, evArgs);
+            CompletedInternal?.Invoke(sender, evArgs);
         }
 
         /// <summary>
@@ -232,8 +234,7 @@ namespace Cloo
         protected virtual void OnAborted(object sender, ComputeCommandStatusArgs evArgs)
         {
             Debug.WriteLine("Abort " + Type + " operation of " + this + ".", "Information");
-            if (AbortedInternal != null)
-                AbortedInternal(sender, evArgs);
+            AbortedInternal?.Invoke(sender, evArgs);
         }
 
         #endregion
