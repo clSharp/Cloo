@@ -135,6 +135,17 @@ namespace Cloo
         {
             CL10.RetainMemObject(Handle);
             return new ComputeBuffer<T>(Handle, Context, Flags);
-        } 
+        }
+
+        /// <summary>
+        /// Creates a new ComputeBuffer from an ComputeMemory. Because the memory is retained the cloned buffer as well as the clone have to be disposed
+        /// </summary>
+        /// <param name="memory"></param>
+        /// <returns></returns>
+        public static ComputeBuffer<T> From(ComputeMemory memory)
+        {
+            CL10.RetainMemObject(memory.Handle);
+            return new ComputeBuffer<T>(memory.Handle, memory.Context, memory.Flags);
+        }
     }
 }
