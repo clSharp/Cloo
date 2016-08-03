@@ -37,6 +37,7 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Represents an OpenCL command queue.
@@ -732,6 +733,35 @@ namespace Cloo
 
             ComputeErrorCode error = CL12.EnqueueWriteImage(Handle, destination.Handle, blocking, ref destinationOffset, ref region, new IntPtr(rowPitch), new IntPtr(slicePitch), source, eventWaitListSize, eventHandles, newEventHandle);
             ComputeException.ThrowOnError(error);
+
+            if (eventsWritable)
+                events.Add(new ComputeEvent(newEventHandle[0], this));
+        }
+
+        /// <summary>
+        /// Enqueues a command to fill a buffer with a given pattern.
+        /// </summary>
+        /// <typeparam name="T"> The type of the elements of the buffer. </typeparam>
+        /// <param name="buffer"> The buffer to write to. </param>
+        /// <param name="pattern"> The pattern to write. </param>
+        /// <param name="offset"> The position in <paramref name="buffer"/> where writing starts. Given in multiples of the given pattern length. </param>
+        /// <param name="size"> How often the <paramref name="pattern"/> is written to the buffer. </param>
+        /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="ComputeEvent"/> identifying this command is created and attached to the end of the collection. </param>
+        /// <remarks> Requires OpenCL 1.2. </remarks>
+        public void FillBuffer<T>(ComputeBufferBase<T> buffer, T[] pattern, long offset, long size, ICollection<ComputeEventBase> events) where T : struct
+        {
+            int sizeofT = ComputeTools.SizeOf<T>();
+            int patternSize = sizeofT * pattern.Length;
+
+            int eventWaitListSize;
+            CLEventHandle[] eventHandles = ComputeTools.ExtractHandles(events, out eventWaitListSize);
+            bool eventsWritable = (events != null && !events.IsReadOnly);
+            CLEventHandle[] newEventHandle = (eventsWritable) ? new CLEventHandle[1] : null;
+
+            GCHandle patternGCHandle = GCHandle.Alloc(pattern, GCHandleType.Pinned);
+            ComputeErrorCode error = CL12.EnqueueFillBuffer(Handle, buffer.Handle, patternGCHandle.AddrOfPinnedObject(), new IntPtr(patternSize), new IntPtr(patternSize * offset), new IntPtr(patternSize * size), eventWaitListSize, eventHandles, newEventHandle);
+            ComputeException.ThrowOnError(error);
+            patternGCHandle.Free();
 
             if (eventsWritable)
                 events.Add(new ComputeEvent(newEventHandle[0], this));

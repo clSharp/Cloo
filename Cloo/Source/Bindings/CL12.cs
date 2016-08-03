@@ -63,6 +63,21 @@ namespace Cloo.Bindings
             [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_list,
             [Out, MarshalAs(UnmanagedType.LPArray, SizeConst = 1)] CLEventHandle[] new_event);
 
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clEnqueueFillBuffer")]
+        public extern static ComputeErrorCode EnqueueFillBuffer(
+            CLCommandQueueHandle command_queue,
+            CLMemoryHandle buffer,
+            IntPtr pattern,
+            IntPtr pattern_size,
+            IntPtr offset,
+            IntPtr size,
+            Int32 num_events_in_wait_list,
+            [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_wait_list,
+            [Out, MarshalAs(UnmanagedType.LPArray, SizeConst = 1)] CLEventHandle[] new_event);
+
         #region Deprecated functions
         
         /// <summary>
