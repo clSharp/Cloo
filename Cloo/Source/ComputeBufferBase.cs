@@ -51,6 +51,18 @@ namespace Cloo
         /// <value> The number of elements in the <see cref="ComputeBufferBase{T}"/>. </value>
         public long Count { get; private set; }
 
+        /// <summary>
+        /// Gets the current reference count of the <see cref="ComputeBufferBase{T}"/>.
+        /// </summary>
+        /// <value> The current reference count of the <see cref="ComputeBufferBase{T}"/>. </value>
+        public uint ReferenceCount
+        {
+            get
+            {
+                return GetInfo<CLMemoryHandle, ComputeMemoryInfo, uint>(Handle, ComputeMemoryInfo.ReferenceCount, CL12.GetMemObjectInfo);
+            }
+        }
+
         #endregion
 
         #region Constructors
