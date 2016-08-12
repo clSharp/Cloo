@@ -105,6 +105,12 @@ namespace Cloo
             Init();
         }
 
+        private ComputeBuffer(IntPtr handle, ComputeContext context, ComputeMemoryFlags flags)
+            : this(new CLMemoryHandle(handle), context, flags)
+        {
+
+        }
+
         #endregion
 
         #region Public methods
@@ -149,13 +155,13 @@ namespace Cloo
         }
 
         /// <summary>
-        /// Creates a new ComputeBuffer from an CLMemoryHandle.
+        /// Creates a new ComputeBuffer from external memory handles.
         /// </summary>
         /// <param name="handle"></param>
         /// <param name="context"></param>
         /// <param name="flags"></param>
         /// <returns></returns>
-        public static ComputeBuffer<T> From(CLMemoryHandle handle, ComputeContext context, ComputeMemoryFlags flags)
+        public static ComputeBuffer<T> From(IntPtr handle, ComputeContext context, ComputeMemoryFlags flags)
         {
             return new ComputeBuffer<T>(handle, context, flags);
         }

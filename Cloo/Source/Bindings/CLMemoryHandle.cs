@@ -42,6 +42,11 @@ namespace Cloo.Bindings
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         IntPtr _value;
 
+        internal CLMemoryHandle(IntPtr value)
+        {
+            _value = value;
+        }
+
         /// <summary>
         /// Gets a logic value indicating whether the handle is valid.
         /// </summary>
