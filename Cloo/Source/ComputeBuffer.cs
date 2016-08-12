@@ -147,5 +147,17 @@ namespace Cloo
             CL10.RetainMemObject(memory.Handle);
             return new ComputeBuffer<T>(memory.Handle, memory.Context, memory.Flags);
         }
+
+        /// <summary>
+        /// Creates a new ComputeBuffer from an CLMemoryHandle.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <param name="context"></param>
+        /// <param name="flags"></param>
+        /// <returns></returns>
+        public static ComputeBuffer<T> From(CLMemoryHandle handle, ComputeContext context, ComputeMemoryFlags flags)
+        {
+            return new ComputeBuffer<T>(handle, context, flags);
+        }
     }
 }
