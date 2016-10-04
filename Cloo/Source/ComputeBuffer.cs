@@ -68,10 +68,12 @@ namespace Cloo
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, long count, IntPtr dataPtr)
             : base(context, flags)
         {
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(ComputeTools.SizeOf<T>() * count), dataPtr, out error);
+            var size = ComputeTools.SizeOf<T>()*count;
+            
+            ComputeErrorCode error;
+            Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(size), dataPtr, out error);
             ComputeException.ThrowOnError(error);
-            Init();
+            Init(size, count);
         }
 
         /// <summary>
@@ -84,18 +86,21 @@ namespace Cloo
         public ComputeBuffer(ComputeContext context, ComputeMemoryFlags flags, T[] data)
             : base(context, flags)
         {
+            var size = ComputeTools.SizeOf<T>()*data.Length;
+
             GCHandle dataPtr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
-                ComputeErrorCode error = ComputeErrorCode.Success;
-                Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(ComputeTools.SizeOf<T>() * data.Length), dataPtr.AddrOfPinnedObject(), out error);
+                ComputeErrorCode error;
+                Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(size), dataPtr.AddrOfPinnedObject(), out error);
                 ComputeException.ThrowOnError(error);
             }
             finally 
             {
                 dataPtr.Free(); 
             }
-            Init();
+
+            Init(size, data.Length);
         }
 
         private ComputeBuffer(CLMemoryHandle handle, ComputeContext context, ComputeMemoryFlags flags)
@@ -103,6 +108,20 @@ namespace Cloo
         {
             Handle = handle;
             Init();
+        }
+
+        private ComputeBuffer(CLMemoryHandle handle, ComputeContext context, ComputeMemoryFlags flags, long size)
+            : base(context, flags)
+        {
+            Handle = handle;
+            Init(size);
+        }
+
+        private ComputeBuffer(CLMemoryHandle handle, ComputeContext context, ComputeMemoryFlags flags, long size, long count)
+            : base(context, flags)
+        {
+            Handle = handle;
+            Init(size, count);
         }
 
         private ComputeBuffer(IntPtr handle, ComputeContext context, ComputeMemoryFlags flags)
@@ -140,7 +159,7 @@ namespace Cloo
         public override ComputeBufferBase<T> Clone()
         {
             CL10.RetainMemObject(Handle);
-            return new ComputeBuffer<T>(Handle, Context, Flags);
+            return new ComputeBuffer<T>(Handle, Context, Flags, Size, Count);
         }
 
         /// <summary>
@@ -151,7 +170,7 @@ namespace Cloo
         public static ComputeBuffer<T> From(ComputeMemory memory)
         {
             CL10.RetainMemObject(memory.Handle);
-            return new ComputeBuffer<T>(memory.Handle, memory.Context, memory.Flags);
+            return new ComputeBuffer<T>(memory.Handle, memory.Context, memory.Flags, memory.Size);
         }
 
         /// <summary>

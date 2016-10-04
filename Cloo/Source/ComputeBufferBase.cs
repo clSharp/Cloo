@@ -83,6 +83,32 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
+        protected void Init(long size)
+        {
+            SetID(Handle.Value);
+
+            Size = size;
+            Count = Size / ComputeTools.SizeOf<T>();
+
+            Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected void Init(long size, long count)
+        {
+            SetID(Handle.Value);
+
+            Size = size;
+            Count = count;
+
+            Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         protected void Init()
         {
             SetID(Handle.Value);
