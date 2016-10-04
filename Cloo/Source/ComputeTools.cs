@@ -209,6 +209,11 @@ namespace Cloo
             return typeof (T).IsGenericType ? Marshal.SizeOf(default(T)) : Marshal.SizeOf(typeof(T));
         }
 
+        internal static int SizeOf<T>(T data)
+        {
+            return Marshal.SizeOf(data);
+        }
+
         #endregion
     }
 }

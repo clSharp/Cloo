@@ -223,6 +223,11 @@ namespace Cloo
             SetValueArgument(index, memObj.Handle);
         }
 
+        private unsafe void SetValueArgument(int index, CLMemoryHandle handle)
+        {
+            SetArgument(index, new IntPtr(sizeof(CLMemoryHandle)), new IntPtr(&handle));
+        }
+
         /// <summary>
         /// Sets a <c>sampler_t</c> argument of the <see cref="ComputeKernel"/>.
         /// </summary>
@@ -248,13 +253,112 @@ namespace Cloo
             {
                 SetArgument(
                     index,
-                    new IntPtr(ComputeTools.SizeOf<T>()),
+                    new IntPtr(ComputeTools.SizeOf(data)),
                     gcHandle.AddrOfPinnedObject());
             }
             finally
             {
                 gcHandle.Free();
             }
+        }
+
+        /// <summary>
+        /// Sets a value argument of the <see cref="ComputeKernel"/>.
+        /// </summary>
+        /// <param name="index"> The argument index. </param>
+        /// <param name="data"> The data that is passed as the argument value. </param>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        public unsafe void SetValueArgument(int index, byte data)
+        {
+            SetArgument(index, new IntPtr(sizeof(byte)), new IntPtr(&data));
+        }
+
+        /// <summary>
+        /// Sets a value argument of the <see cref="ComputeKernel"/>.
+        /// </summary>
+        /// <param name="index"> The argument index. </param>
+        /// <param name="data"> The data that is passed as the argument value. </param>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        public unsafe void SetValueArgument(int index, ushort data)
+        {
+            SetArgument(index, new IntPtr(sizeof(ushort)), new IntPtr(&data));
+        }
+
+        /// <summary>
+        /// Sets a value argument of the <see cref="ComputeKernel"/>.
+        /// </summary>
+        /// <param name="index"> The argument index. </param>
+        /// <param name="data"> The data that is passed as the argument value. </param>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        public unsafe void SetValueArgument(int index, short data)
+        {
+            SetArgument(index, new IntPtr(sizeof(short)), new IntPtr(&data));
+        }
+
+        /// <summary>
+        /// Sets a value argument of the <see cref="ComputeKernel"/>.
+        /// </summary>
+        /// <param name="index"> The argument index. </param>
+        /// <param name="data"> The data that is passed as the argument value. </param>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        public unsafe void SetValueArgument(int index, uint data)
+        {
+            SetArgument(index, new IntPtr(sizeof(uint)), new IntPtr(&data));
+        }
+
+        /// <summary>
+        /// Sets a value argument of the <see cref="ComputeKernel"/>.
+        /// </summary>
+        /// <param name="index"> The argument index. </param>
+        /// <param name="data"> The data that is passed as the argument value. </param>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        public unsafe void SetValueArgument(int index, int data)
+        {
+            SetArgument(index, new IntPtr(sizeof(int)), new IntPtr(&data));
+        }
+
+        /// <summary>
+        /// Sets a value argument of the <see cref="ComputeKernel"/>.
+        /// </summary>
+        /// <param name="index"> The argument index. </param>
+        /// <param name="data"> The data that is passed as the argument value. </param>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        public unsafe void SetValueArgument(int index, ulong data)
+        {
+            SetArgument(index, new IntPtr(sizeof(ulong)), new IntPtr(&data));
+        }
+
+        /// <summary>
+        /// Sets a value argument of the <see cref="ComputeKernel"/>.
+        /// </summary>
+        /// <param name="index"> The argument index. </param>
+        /// <param name="data"> The data that is passed as the argument value. </param>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        public unsafe void SetValueArgument(int index, long data)
+        {
+            SetArgument(index, new IntPtr(sizeof(long)), new IntPtr(&data));
+        }
+
+        /// <summary>
+        /// Sets a value argument of the <see cref="ComputeKernel"/>.
+        /// </summary>
+        /// <param name="index"> The argument index. </param>
+        /// <param name="data"> The data that is passed as the argument value. </param>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        public unsafe void SetValueArgument(int index, float data)
+        {
+            SetArgument(index, new IntPtr(sizeof(float)), new IntPtr(&data));
+        }
+
+        /// <summary>
+        /// Sets a value argument of the <see cref="ComputeKernel"/>.
+        /// </summary>
+        /// <param name="index"> The argument index. </param>
+        /// <param name="data"> The data that is passed as the argument value. </param>
+        /// <remarks> Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to n-1, where n is the total number of arguments declared by the kernel. </remarks>
+        public unsafe void SetValueArgument(int index, double data)
+        {
+            SetArgument(index, new IntPtr(sizeof(double)), new IntPtr(&data));
         }
 
         #endregion
