@@ -433,6 +433,106 @@ namespace Cloo.Bindings
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>
+        [DllImport(libName, EntryPoint = "clSetKernelArg")]
+        public extern static ComputeErrorCode SetKernelArg(
+            CLKernelHandle kernel,
+            Int32 arg_index,
+            IntPtr arg_size,
+            ref CLMemoryHandle arg_value);
+
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clSetKernelArg")]
+        public extern static ComputeErrorCode SetKernelArg(
+            CLKernelHandle kernel,
+            Int32 arg_index,
+            IntPtr arg_size,
+            ref byte arg_value);
+
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clSetKernelArg")]
+        public extern static ComputeErrorCode SetKernelArg(
+            CLKernelHandle kernel,
+            Int32 arg_index,
+            IntPtr arg_size,
+            ref ushort arg_value);
+
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clSetKernelArg")]
+        public extern static ComputeErrorCode SetKernelArg(
+            CLKernelHandle kernel,
+            Int32 arg_index,
+            IntPtr arg_size,
+            ref short arg_value);
+
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clSetKernelArg")]
+        public extern static ComputeErrorCode SetKernelArg(
+            CLKernelHandle kernel,
+            Int32 arg_index,
+            IntPtr arg_size,
+            ref uint arg_value);
+
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clSetKernelArg")]
+        public extern static ComputeErrorCode SetKernelArg(
+            CLKernelHandle kernel,
+            Int32 arg_index,
+            IntPtr arg_size,
+            ref int arg_value);
+
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clSetKernelArg")]
+        public extern static ComputeErrorCode SetKernelArg(
+            CLKernelHandle kernel,
+            Int32 arg_index,
+            IntPtr arg_size,
+            ref ulong arg_value);
+
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clSetKernelArg")]
+        public extern static ComputeErrorCode SetKernelArg(
+            CLKernelHandle kernel,
+            Int32 arg_index,
+            IntPtr arg_size,
+            ref long arg_value);
+
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clSetKernelArg")]
+        public extern static ComputeErrorCode SetKernelArg(
+            CLKernelHandle kernel,
+            Int32 arg_index,
+            IntPtr arg_size,
+            ref float arg_value);
+
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clSetKernelArg")]
+        public extern static ComputeErrorCode SetKernelArg(
+            CLKernelHandle kernel,
+            Int32 arg_index,
+            IntPtr arg_size,
+            ref double arg_value);
+
+        /// <summary>
+        /// See the OpenCL specification.
+        /// </summary>
         [DllImport(libName, EntryPoint = "clGetKernelInfo")]
         public extern static ComputeErrorCode GetKernelInfo(
             CLKernelHandle kernel,
