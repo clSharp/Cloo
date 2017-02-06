@@ -65,5 +65,13 @@ namespace Cloo.Bindings
         {
             _value = IntPtr.Zero;
         }
+
+        /// <summary>
+        /// Creates a handle from an external handle
+        /// </summary>
+        public static CLEventHandle From(IntPtr value)
+        {
+            return new CLEventHandle(){_value = value};
+        }
     }
 }

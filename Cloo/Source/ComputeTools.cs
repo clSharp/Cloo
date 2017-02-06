@@ -155,6 +155,31 @@ namespace Cloo
         }
 
         /// <summary>
+        /// Extract device handle values of <see cref="ComputeEventBase"/>s
+        /// </summary>
+        /// <param name="computeObjects"></param>
+        /// <param name="handleCount"></param>
+        /// <returns></returns>
+        public static IntPtr[] ExtractHandleValues(ICollection<ComputeEventBase> computeObjects, out int handleCount)
+        {
+            if (computeObjects == null || computeObjects.Count == 0)
+            {
+                handleCount = 0;
+                return null;
+            }
+
+            IntPtr[] result = new IntPtr[computeObjects.Count];
+            int i = 0;
+            foreach (ComputeEventBase computeObj in computeObjects)
+            {
+                result[i] = computeObj.Handle.Value;
+                i++;
+            }
+            handleCount = computeObjects.Count;
+            return result;
+        }
+
+        /// <summary>
         /// Extract device handles of <see cref="ComputeCommandQueue"/>s
         /// </summary>
         /// <param name="computeObjects"></param>
