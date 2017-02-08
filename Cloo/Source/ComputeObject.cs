@@ -122,7 +122,7 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected TQueriedType[] GetArrayInfo<THandleType, TInfoType, TQueriedType>
+        protected static TQueriedType[] GetArrayInfo<THandleType, TInfoType, TQueriedType>
             (THandleType handle, TInfoType paramName, GetInfoDelegate<THandleType, TInfoType> getInfoDelegate)
         {
             IntPtr bufferSizeRet;
@@ -154,7 +154,7 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected TQueriedType[] GetArrayInfo<TMainHandleType, TSecondHandleType, TInfoType, TQueriedType>
+        protected static TQueriedType[] GetArrayInfo<TMainHandleType, TSecondHandleType, TInfoType, TQueriedType>
             (TMainHandleType mainHandle, TSecondHandleType secondHandle, TInfoType paramName, GetInfoDelegateEx<TMainHandleType, TSecondHandleType, TInfoType> getInfoDelegate)
         {
             IntPtr bufferSizeRet;
@@ -183,7 +183,7 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected bool GetBoolInfo<THandleType, TInfoType>
+        protected static bool GetBoolInfo<THandleType, TInfoType>
             (THandleType handle, TInfoType paramName, GetInfoDelegate<THandleType, TInfoType> getInfoDelegate)
         {
             int result = GetInfo<THandleType, TInfoType, int>(handle, paramName, getInfoDelegate);
@@ -200,7 +200,7 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected TQueriedType GetInfo<THandleType, TInfoType, TQueriedType>
+        protected static TQueriedType GetInfo<THandleType, TInfoType, TQueriedType>
             (THandleType handle, TInfoType paramName, GetInfoDelegate<THandleType, TInfoType> getInfoDelegate) 
             where TQueriedType : struct
         {
@@ -232,7 +232,7 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected TQueriedType GetInfo<TMainHandleType, TSecondHandleType, TInfoType, TQueriedType>
+        protected static TQueriedType GetInfo<TMainHandleType, TSecondHandleType, TInfoType, TQueriedType>
             (TMainHandleType mainHandle, TSecondHandleType secondHandle, TInfoType paramName, GetInfoDelegateEx<TMainHandleType, TSecondHandleType, TInfoType> getInfoDelegate)
             where TQueriedType : struct
         {
@@ -262,7 +262,7 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected string GetStringInfo<THandleType, TInfoType>
+        protected static string GetStringInfo<THandleType, TInfoType>
             (THandleType handle, TInfoType paramName, GetInfoDelegate<THandleType, TInfoType> getInfoDelegate)
         {
             byte[] buffer = GetArrayInfo<THandleType, TInfoType, byte>(handle, paramName, getInfoDelegate);
@@ -281,7 +281,7 @@ namespace Cloo
         /// <param name="paramName"></param>
         /// <param name="getInfoDelegate"></param>
         /// <returns></returns>
-        protected string GetStringInfo<TMainHandleType, TSecondHandleType, TInfoType>
+        protected static string GetStringInfo<TMainHandleType, TSecondHandleType, TInfoType>
             (TMainHandleType mainHandle, TSecondHandleType secondHandle, TInfoType paramName, GetInfoDelegateEx<TMainHandleType, TSecondHandleType, TInfoType> getInfoDelegate)
         {
             byte[] buffer = GetArrayInfo<TMainHandleType, TSecondHandleType, TInfoType, byte>(mainHandle, secondHandle, paramName, getInfoDelegate);

@@ -123,13 +123,7 @@ namespace Cloo
             Handle = handle;
             Init(size, count);
         }
-
-        private ComputeBuffer(IntPtr handle, ComputeContext context, ComputeMemoryFlags flags)
-            : this(new CLMemoryHandle(handle), context, flags)
-        {
-
-        }
-
+        
         #endregion
 
         #region Public methods
@@ -180,9 +174,13 @@ namespace Cloo
         /// <param name="context"></param>
         /// <param name="flags"></param>
         /// <returns></returns>
-        public static ComputeBuffer<T> From(IntPtr handle, ComputeContext context, ComputeMemoryFlags flags)
+        public static ComputeBuffer<T> From(IntPtr handle, ComputeContext context)
         {
-            return new ComputeBuffer<T>(handle, context, flags);
+            var memoryHandle = new CLMemoryHandle(handle);
+
+            var flags = (ComputeMemoryFlags)GetInfo<CLMemoryHandle, ComputeMemoryInfo, long>(memoryHandle, ComputeMemoryInfo.Flags, CL12.GetMemObjectInfo);
+
+            return new ComputeBuffer<T>(memoryHandle, context, flags);
         }
     }
 }
