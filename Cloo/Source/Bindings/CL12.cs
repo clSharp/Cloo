@@ -78,8 +78,19 @@ namespace Cloo.Bindings
             [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_wait_list,
             [Out, MarshalAs(UnmanagedType.LPArray, SizeConst = 1)] CLEventHandle[] new_event);
 
+        /// <summary>
+        /// Gets the extension function address for the given function name,
+        /// or NULL if a valid function can not be found. The client must
+        /// check to make sure the address is not NULL, before using or 
+        /// calling the returned function address.
+        /// </summary>
+        [DllImport(libName, EntryPoint = "clGetExtensionFunctionAddressForPlatform")]
+        public extern static IntPtr GetExtensionFunctionAddressForPlatform(
+            CLPlatformHandle platform,
+            String func_name);
+
         #region Deprecated functions
-        
+
         /// <summary>
         /// See the OpenCL specification.
         /// </summary>

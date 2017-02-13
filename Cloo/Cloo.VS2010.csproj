@@ -77,6 +77,7 @@
     <Compile Include="Source\Bindings\CLProgramHandle.cs" />
     <Compile Include="Source\Bindings\CLSamplerHandle.cs" />
     <Compile Include="Source\Bindings\CLx.cs" />
+    <Compile Include="Source\Bindings\CLx12.cs" />
     <Compile Include="Source\ComputeBuffer.cs" />
     <Compile Include="Source\ComputeBufferBase.cs" />
     <Compile Include="Source\ComputeCommandQueue.Added.cs" />
