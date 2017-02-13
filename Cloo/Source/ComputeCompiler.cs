@@ -29,6 +29,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
+using System;
 using Cloo.Bindings;
 
 namespace Cloo
@@ -43,6 +44,7 @@ namespace Cloo
         /// <summary>
         /// Unloads the OpenCL compiler.
         /// </summary>
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public static void Unload()
         {
             ComputeErrorCode error = CL12.UnloadCompiler();

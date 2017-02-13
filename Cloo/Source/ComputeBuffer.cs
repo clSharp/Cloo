@@ -172,7 +172,6 @@ namespace Cloo
         /// </summary>
         /// <param name="handle"></param>
         /// <param name="context"></param>
-        /// <param name="flags"></param>
         /// <returns></returns>
         public static ComputeBuffer<T> From(IntPtr handle, ComputeContext context)
         {

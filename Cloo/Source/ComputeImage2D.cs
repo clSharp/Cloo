@@ -96,6 +96,7 @@ namespace Cloo
         /// <param name="height"> The height of the <see cref="ComputeImage2D"/> in pixels. </param>
         /// <param name="rowPitch"> The size in bytes of each row of elements of the <see cref="ComputeImage2D"/>. If <paramref name="rowPitch"/> is zero, OpenCL will compute the proper value based on <see cref="ComputeImage.Width"/> and <see cref="ComputeImage.ElementSize"/>. </param>
         /// <param name="data"> The data to initialize the <see cref="ComputeImage2D"/>. Can be <c>IntPtr.Zero</c>. </param>
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public ComputeImage2D(ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, long rowPitch, IntPtr data)
             : base(context, flags)
         {
@@ -143,6 +144,7 @@ namespace Cloo
         /// <param name="mipLevel"> The mipmap level of the OpenGL 2D texture object to be used. </param>
         /// <param name="textureId"> The OpenGL 2D texture object id to use. </param>
         /// <returns> The created <see cref="ComputeImage2D"/>. </returns>
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public static ComputeImage2D CreateFromGLTexture2D(ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId)
         {
             ComputeErrorCode error = ComputeErrorCode.Success;

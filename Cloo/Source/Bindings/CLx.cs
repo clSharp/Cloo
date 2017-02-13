@@ -38,6 +38,7 @@ namespace Cloo.Bindings
     /// Contains bindings to the OpenCL extension functions.
     /// </summary>
     /// <remarks> See the Khronos OpenCL API extensions registry for documentation regarding these functions. </remarks>
+    [Obsolete("Deprecated in OpenCL 1.2. Use CLx12 instead")]
     public class CLx
     {
         private readonly Delegates.clCreateSubDevicesEXT clCreateSubDevicesEXT;

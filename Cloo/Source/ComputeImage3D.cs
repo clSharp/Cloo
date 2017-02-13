@@ -56,6 +56,7 @@ namespace Cloo
         /// <param name="rowPitch"> The size in bytes of each row of elements of the <see cref="ComputeImage3D"/>. If <paramref name="rowPitch"/> is zero, OpenCL will compute the proper value based on <see cref="ComputeImage.Width"/> and <see cref="ComputeImage.ElementSize"/>. </param>
         /// <param name="slicePitch"> The size in bytes of each 2D slice in the <see cref="ComputeImage3D"/>. If <paramref name="slicePitch"/> is zero, OpenCL will compute the proper value based on <see cref="ComputeImage.RowPitch"/> and <see cref="ComputeImage.Height"/>. </param>
         /// <param name="data"> The data to initialize the <see cref="ComputeImage3D"/>. Can be <c>IntPtr.Zero</c>. </param>
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public ComputeImage3D(ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, int depth, long rowPitch, long slicePitch, IntPtr data)
             : base(context, flags)
         {
@@ -87,6 +88,7 @@ namespace Cloo
         /// <param name="mipLevel"> The mipmap level of the OpenGL 2D texture object to be used. </param>
         /// <param name="textureId"> The OpenGL 2D texture object id to use. </param>
         /// <returns> The created <see cref="ComputeImage2D"/>. </returns>
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public static ComputeImage3D CreateFromGLTexture3D(ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId)
         {
             ComputeErrorCode error = ComputeErrorCode.Success;

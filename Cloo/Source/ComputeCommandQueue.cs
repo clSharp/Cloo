@@ -195,6 +195,7 @@ namespace Cloo
         /// Enqueues a barrier.
         /// </summary>
         /// <remarks> A barrier ensures that all queued commands have finished execution before the next batch of commands can begin execution. </remarks>
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public void AddBarrier()
         {
             ComputeErrorCode error = CL12.EnqueueBarrier(Handle);
@@ -204,6 +205,7 @@ namespace Cloo
         /// <summary>
         /// Enqueues a marker.
         /// </summary>
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public ComputeEvent AddMarker()
         {
             CLEventHandle newEventHandle;
@@ -641,6 +643,7 @@ namespace Cloo
         /// Enqueues a wait command for a collection of <see cref="ComputeEvent"/>s to complete before any future commands queued in the <see cref="ComputeCommandQueue"/> are executed.
         /// </summary>
         /// <param name="events"> The <see cref="ComputeEvent"/>s that this command will wait for. </param>
+        [Obsolete("Deprecated in OpenCL 1.2.")]
         public void Wait(ICollection<ComputeEventBase> events)
         {
             int eventWaitListSize;
