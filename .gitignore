@@ -42,3 +42,5 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 /Cloo/*.nupkg
 Cloo/Cloo.xml
+/.vs
+Cloo/.vs
