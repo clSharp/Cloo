@@ -50,18 +50,12 @@ namespace Cloo.Bindings
         /// <summary>
         /// Gets a logic value indicating whether the handle is valid.
         /// </summary>
-        public bool IsValid
-        {
-            get { return _value != IntPtr.Zero; }
-        }
+        public bool IsValid => _value != IntPtr.Zero;
 
         /// <summary>
         /// Gets the value of the handle.
         /// </summary>
-        public IntPtr Value
-        {
-            get { return _value; }
-        }
+        public IntPtr Value => _value;
 
         /// <summary>
         /// Invalidates the handle.

@@ -29,8 +29,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
-using Cloo.Bindings;
-
 namespace Cloo
 {
     using System;
@@ -154,18 +152,12 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
-        public int Count
-        {
-            get { return _properties.Count; }
-        }
+        public int Count => _properties.Count;
 
         /// <summary>
         /// 
         /// </summary>
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
+        public bool IsReadOnly => false;
 
         /// <summary>
         /// 

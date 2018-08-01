@@ -34,8 +34,6 @@ using Cloo.Bindings;
 namespace Cloo
 {
     using System;
-    using System.Diagnostics;
-    using System.Threading;
 
     /// <summary>
     /// Represents the parent type to any Cloo buffer types.
@@ -55,13 +53,7 @@ namespace Cloo
         /// Gets the current reference count of the <see cref="ComputeBufferBase{T}"/>.
         /// </summary>
         /// <value> The current reference count of the <see cref="ComputeBufferBase{T}"/>. </value>
-        public uint ReferenceCount
-        {
-            get
-            {
-                return GetInfo<CLMemoryHandle, ComputeMemoryInfo, uint>(Handle, ComputeMemoryInfo.ReferenceCount, CL12.GetMemObjectInfo);
-            }
-        }
+        public uint ReferenceCount => GetInfo<CLMemoryHandle, ComputeMemoryInfo, uint>(Handle, ComputeMemoryInfo.ReferenceCount, CL12.GetMemObjectInfo);
 
         #endregion
 

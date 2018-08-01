@@ -29,8 +29,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
-using Cloo.Bindings;
-
 namespace Cloo
 {
     using System;
@@ -125,8 +123,7 @@ namespace Cloo
         protected static TQueriedType[] GetArrayInfo<THandleType, TInfoType, TQueriedType>
             (THandleType handle, TInfoType paramName, GetInfoDelegate<THandleType, TInfoType> getInfoDelegate)
         {
-            IntPtr bufferSizeRet;
-            var error = getInfoDelegate(handle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
+            var error = getInfoDelegate(handle, paramName, IntPtr.Zero, IntPtr.Zero, out var bufferSizeRet);
             ComputeException.ThrowOnError(error);
             var buffer = new TQueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(TQueriedType))];
             GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
@@ -157,8 +154,7 @@ namespace Cloo
         protected static TQueriedType[] GetArrayInfo<TMainHandleType, TSecondHandleType, TInfoType, TQueriedType>
             (TMainHandleType mainHandle, TSecondHandleType secondHandle, TInfoType paramName, GetInfoDelegateEx<TMainHandleType, TSecondHandleType, TInfoType> getInfoDelegate)
         {
-            IntPtr bufferSizeRet;
-            var error = getInfoDelegate(mainHandle, secondHandle, paramName, IntPtr.Zero, IntPtr.Zero, out bufferSizeRet);
+            var error = getInfoDelegate(mainHandle, secondHandle, paramName, IntPtr.Zero, IntPtr.Zero, out var bufferSizeRet);
             ComputeException.ThrowOnError(error);
             var buffer = new TQueriedType[bufferSizeRet.ToInt64() / Marshal.SizeOf(typeof(TQueriedType))];
             GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
@@ -187,7 +183,7 @@ namespace Cloo
             (THandleType handle, TInfoType paramName, GetInfoDelegate<THandleType, TInfoType> getInfoDelegate)
         {
             int result = GetInfo<THandleType, TInfoType, int>(handle, paramName, getInfoDelegate);
-            return (result == (int)ComputeBoolean.True);
+            return result == (int)ComputeBoolean.True;
         }
 
         /// <summary>
@@ -208,8 +204,7 @@ namespace Cloo
             GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
             try
             {
-                IntPtr sizeRet;
-                ComputeErrorCode error = getInfoDelegate(handle, paramName, (IntPtr)Marshal.SizeOf(result), gcHandle.AddrOfPinnedObject(), out sizeRet);
+                ComputeErrorCode error = getInfoDelegate(handle, paramName, (IntPtr)Marshal.SizeOf(result), gcHandle.AddrOfPinnedObject(), out _);
                 ComputeException.ThrowOnError(error);
             }
             finally
@@ -240,8 +235,7 @@ namespace Cloo
             GCHandle gcHandle = GCHandle.Alloc(result, GCHandleType.Pinned);
             try
             {
-                IntPtr sizeRet;
-                ComputeErrorCode error = getInfoDelegate(mainHandle, secondHandle, paramName, new IntPtr(Marshal.SizeOf(result)), gcHandle.AddrOfPinnedObject(), out sizeRet);
+                ComputeErrorCode error = getInfoDelegate(mainHandle, secondHandle, paramName, new IntPtr(Marshal.SizeOf(result)), gcHandle.AddrOfPinnedObject(), out _);
                 ComputeException.ThrowOnError(error);
             }
             finally
@@ -267,7 +261,7 @@ namespace Cloo
         {
             byte[] buffer = GetArrayInfo<THandleType, TInfoType, byte>(handle, paramName, getInfoDelegate);
             char[] chars = Encoding.ASCII.GetChars(buffer, 0, buffer.Length);
-            return (new string(chars)).TrimEnd('\0');
+            return new string(chars).TrimEnd('\0');
         }
 
         /// <summary>
@@ -286,7 +280,7 @@ namespace Cloo
         {
             byte[] buffer = GetArrayInfo<TMainHandleType, TSecondHandleType, TInfoType, byte>(mainHandle, secondHandle, paramName, getInfoDelegate);
             char[] chars = Encoding.ASCII.GetChars(buffer, 0, buffer.Length);
-            return (new string(chars)).TrimEnd('\0');
+            return new string(chars).TrimEnd('\0');
         }
 
         /// <summary>

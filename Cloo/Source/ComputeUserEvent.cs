@@ -33,9 +33,6 @@ using Cloo.Bindings;
 
 namespace Cloo
 {
-    using System.Diagnostics;
-    using System.Threading;
-
     /// <summary>
     /// Represents an user created event.
     /// </summary>
@@ -51,8 +48,7 @@ namespace Cloo
         /// <remarks> Requires OpenCL 1.1. </remarks>
         public ComputeUserEvent(ComputeContext context)
         {
-            ComputeErrorCode error;
-            Handle = CL11.CreateUserEvent(context.Handle, out error);
+            Handle = CL11.CreateUserEvent(context.Handle, out var error);
             ComputeException.ThrowOnError(error);
             
             SetID(Handle.Value);

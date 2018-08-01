@@ -29,8 +29,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
-using Cloo.Bindings;
-
 namespace Cloo
 {
     using System;
@@ -54,7 +52,7 @@ namespace Cloo
         /// <summary>
         /// Gets the <see cref="ComputeErrorCode"/> of the <see cref="ComputeException"/>.
         /// </summary>
-        public ComputeErrorCode ComputeErrorCode { get { return _code; } }
+        public ComputeErrorCode ComputeErrorCode => _code;
 
         #endregion
 

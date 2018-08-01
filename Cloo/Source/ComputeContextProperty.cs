@@ -29,8 +29,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
 
-using Cloo.Bindings;
-
 namespace Cloo
 {
     using System;
@@ -58,13 +56,13 @@ namespace Cloo
         /// Gets the <see cref="ComputeContextPropertyName"/> of the <see cref="ComputeContextProperty"/>.
         /// </summary>
         /// <value> The <see cref="ComputeContextPropertyName"/> of the <see cref="ComputeContextProperty"/>. </value>
-        public ComputeContextPropertyName Name { get { return _name; } }
+        public ComputeContextPropertyName Name => _name;
 
         /// <summary>
         /// Gets the value of the <see cref="ComputeContextProperty"/>.
         /// </summary>
         /// <value> The value of the <see cref="ComputeContextProperty"/>. </value>
-        public IntPtr Value { get { return _value; } }
+        public IntPtr Value => _value;
 
         #endregion
 

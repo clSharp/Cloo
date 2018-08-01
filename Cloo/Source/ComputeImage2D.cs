@@ -100,8 +100,7 @@ namespace Cloo
         public ComputeImage2D(ComputeContext context, ComputeMemoryFlags flags, ComputeImageFormat format, int width, int height, long rowPitch, IntPtr data)
             : base(context, flags)
         {
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL12.CreateImage2D(context.Handle, flags, ref format, new IntPtr(width), new IntPtr(height), new IntPtr(rowPitch), data, out error);
+            Handle = CL12.CreateImage2D(context.Handle, flags, ref format, new IntPtr(width), new IntPtr(height), new IntPtr(rowPitch), data, out var error);
             ComputeException.ThrowOnError(error);
 
             Init();
@@ -128,8 +127,7 @@ namespace Cloo
         /// <returns> The created <see cref="ComputeImage2D"/>. </returns>
         public static ComputeImage2D CreateFromGLRenderbuffer(ComputeContext context, ComputeMemoryFlags flags, int renderbufferId)
         {
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            CLMemoryHandle image = CL12.CreateFromGLRenderbuffer(context.Handle, flags, renderbufferId, out error);
+            CLMemoryHandle image = CL12.CreateFromGLRenderbuffer(context.Handle, flags, renderbufferId, out var error);
             ComputeException.ThrowOnError(error);
 
             return new ComputeImage2D(image, context, flags);
@@ -147,8 +145,7 @@ namespace Cloo
         [Obsolete("Deprecated in OpenCL 1.2.")]
         public static ComputeImage2D CreateFromGLTexture2D(ComputeContext context, ComputeMemoryFlags flags, int textureTarget, int mipLevel, int textureId)
         {
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            CLMemoryHandle image = CL12.CreateFromGLTexture2D(context.Handle, flags, textureTarget, mipLevel, textureId, out error);
+            CLMemoryHandle image = CL12.CreateFromGLTexture2D(context.Handle, flags, textureTarget, mipLevel, textureId, out var error);
             ComputeException.ThrowOnError(error);
 
             return new ComputeImage2D(image, context, flags);

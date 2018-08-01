@@ -47,7 +47,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clCreateSubBuffer")]
-        public extern static CLMemoryHandle CreateSubBuffer(
+        public static extern CLMemoryHandle CreateSubBuffer(
             CLMemoryHandle buffer,
             ComputeMemoryFlags flags,
             ComputeBufferCreateType buffer_create_type,
@@ -58,7 +58,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clSetMemObjectDestructorCallback")]
-        public extern static ComputeErrorCode SetMemObjectDestructorCallback( 
+        public static extern ComputeErrorCode SetMemObjectDestructorCallback( 
             CLMemoryHandle memobj, 
             ComputeMemoryDestructorNotifer pfn_notify, 
             IntPtr user_data);
@@ -67,7 +67,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clCreateUserEvent")]
-        public extern static CLEventHandle CreateUserEvent(
+        public static extern CLEventHandle CreateUserEvent(
             CLContextHandle context,
             out ComputeErrorCode errcode_ret);
 
@@ -75,7 +75,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clSetUserEventStatus")]
-        public extern static ComputeErrorCode SetUserEventStatus(
+        public static extern ComputeErrorCode SetUserEventStatus(
             CLEventHandle @event,
             Int32 execution_status);
 
@@ -83,7 +83,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clSetEventCallback")]
-        public extern static ComputeErrorCode SetEventCallback(
+        public static extern ComputeErrorCode SetEventCallback(
             CLEventHandle @event,
             Int32 command_exec_callback_type,
             ComputeEventCallback pfn_notify,
@@ -93,7 +93,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clEnqueueReadBufferRect")]
-        public extern static ComputeErrorCode EnqueueReadBufferRect(
+        public static extern ComputeErrorCode EnqueueReadBufferRect(
             CLCommandQueueHandle command_queue,
             CLMemoryHandle buffer,
             [MarshalAs(UnmanagedType.Bool)] bool blocking_read,
@@ -113,7 +113,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clEnqueueWriteBufferRect")]
-        public extern static ComputeErrorCode EnqueueWriteBufferRect(
+        public static extern ComputeErrorCode EnqueueWriteBufferRect(
             CLCommandQueueHandle command_queue,
             CLMemoryHandle buffer,
             [MarshalAs(UnmanagedType.Bool)] bool blocking_write,
@@ -133,7 +133,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clEnqueueCopyBufferRect")]
-        public extern static ComputeErrorCode EnqueueCopyBufferRect(
+        public static extern ComputeErrorCode EnqueueCopyBufferRect(
             CLCommandQueueHandle command_queue,
             CLMemoryHandle src_buffer,
             CLMemoryHandle dst_buffer,

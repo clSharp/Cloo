@@ -145,7 +145,7 @@ namespace Cloo
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="ComputeEvent"/> identifying this command is created and attached to the end of the collection. </param>
         public void CopyBufferToImage<T>(ComputeBufferBase<T> source, ComputeImage destination, ICollection<ComputeEventBase> events) where T : struct
         {
-            Copy(source, destination, 0, new SysIntX3(), new SysIntX3(destination.Width, destination.Height, (destination.Depth == 0) ? 1 : destination.Depth), events);
+            Copy(source, destination, 0, new SysIntX3(), new SysIntX3(destination.Width, destination.Height, destination.Depth == 0 ? 1 : destination.Depth), events);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace Cloo
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="ComputeEvent"/> identifying this command is created and attached to the end of the collection. </param>
         public void CopyImage(ComputeImage source, ComputeImage destination, ICollection<ComputeEventBase> events)
         {
-            Copy(source, destination, new SysIntX3(), new SysIntX3(), new SysIntX3(source.Width, source.Height, (source.Depth == 0) ? 1 : source.Depth), events);
+            Copy(source, destination, new SysIntX3(), new SysIntX3(), new SysIntX3(source.Width, source.Height, source.Depth == 0 ? 1 : source.Depth), events);
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace Cloo
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="ComputeEvent"/> identifying this command is created and attached to the end of the collection. </param>
         public void CopyImageToBuffer<T>(ComputeImage source, ComputeBufferBase<T> destination, ICollection<ComputeEventBase> events) where T : struct
         {
-            Copy(source, destination, new SysIntX3(), 0, new SysIntX3(source.Width, source.Height, (source.Depth == 0) ? 1 : source.Depth), events);
+            Copy(source, destination, new SysIntX3(), 0, new SysIntX3(source.Width, source.Height, source.Depth == 0 ? 1 : source.Depth), events);
         }
 
         /// <summary>
@@ -330,14 +330,14 @@ namespace Cloo
             
             if (blocking)
             {
-                Read(source, blocking, sourceOffset, region, destinationOffsetPtr, events);
+                Read(source, true, sourceOffset, region, destinationOffsetPtr, events);
                 destinationGCHandle.Free();
             }
             else
             {
-                bool userEventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : new ComputeEventList();
-                Read(source, blocking, sourceOffset, region, destinationOffsetPtr, eventList);
+                bool userEventsWritable = events != null && !events.IsReadOnly;
+                IList<ComputeEventBase> eventList = userEventsWritable ? events : new ComputeEventList();
+                Read(source, false, sourceOffset, region, destinationOffsetPtr, eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(destinationGCHandle);
                 if (!userEventsWritable) newEvent.Dispose();
@@ -395,14 +395,14 @@ namespace Cloo
 
             if (blocking)
             {
-                Read(source, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, destinationGCHandle.AddrOfPinnedObject(), events);
+                Read(source, true, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, destinationGCHandle.AddrOfPinnedObject(), events);
                 destinationGCHandle.Free();
             }
             else
             {
-                bool userEventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : new ComputeEventList();
-                Read(source, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, destinationGCHandle.AddrOfPinnedObject(), eventList);
+                bool userEventsWritable = events != null && !events.IsReadOnly;
+                IList<ComputeEventBase> eventList = userEventsWritable ? events : new ComputeEventList();
+                Read(source, false, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, destinationGCHandle.AddrOfPinnedObject(), eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(destinationGCHandle);
                 if (!userEventsWritable) newEvent.Dispose();
@@ -430,14 +430,14 @@ namespace Cloo
 
             if (blocking)
             {
-                Read(source, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, destinationGCHandle.AddrOfPinnedObject(), events);
+                Read(source, true, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, destinationGCHandle.AddrOfPinnedObject(), events);
                 destinationGCHandle.Free();
             }
             else
             {
-                bool userEventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : new ComputeEventList();
-                Read(source, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, destinationGCHandle.AddrOfPinnedObject(), eventList);
+                bool userEventsWritable = events != null && !events.IsReadOnly;
+                IList<ComputeEventBase> eventList = userEventsWritable ? events : new ComputeEventList();
+                Read(source, false, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, destinationGCHandle.AddrOfPinnedObject(), eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(destinationGCHandle);
                 if (!userEventsWritable) newEvent.Dispose();
@@ -457,7 +457,7 @@ namespace Cloo
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="ComputeEvent"/> identifying this command is created and attached to the end of the collection. </param>
         public void ReadFromImage(ComputeImage source, IntPtr destination, bool blocking, ICollection<ComputeEventBase> events)
         {
-            Read(source, blocking, new SysIntX3(), new SysIntX3(source.Width, source.Height, (source.Depth == 0) ? 1 : source.Depth), 0, 0, destination, events);
+            Read(source, blocking, new SysIntX3(), new SysIntX3(source.Width, source.Height, source.Depth == 0 ? 1 : source.Depth), 0, 0, destination, events);
         }
 
         /// <summary>
@@ -554,14 +554,14 @@ namespace Cloo
 
             if (blocking)
             {
-                Write(destination, blocking, destinationOffset, region, sourceOffsetPtr, events);
+                Write(destination, true, destinationOffset, region, sourceOffsetPtr, events);
                 sourceGCHandle.Free();
             }
             else
             {
-                bool userEventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : new ComputeEventList();
-                Write(destination, blocking, destinationOffset, region, sourceOffsetPtr, eventList);
+                bool userEventsWritable = events != null && !events.IsReadOnly;
+                IList<ComputeEventBase> eventList = userEventsWritable ? events : new ComputeEventList();
+                Write(destination, false, destinationOffset, region, sourceOffsetPtr, eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(sourceGCHandle);
                 if (!userEventsWritable) newEvent.Dispose();
@@ -619,14 +619,14 @@ namespace Cloo
 
             if (blocking)
             {
-                Write(destination, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), events);
+                Write(destination, true, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), events);
                 sourceGCHandle.Free();
             }
             else
             {
-                bool userEventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : new ComputeEventList();
-                Write(destination, blocking, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), eventList);
+                bool userEventsWritable = events != null && !events.IsReadOnly;
+                IList<ComputeEventBase> eventList = userEventsWritable ? events : new ComputeEventList();
+                Write(destination, false, new SysIntX3(sourceOffset, 0), new SysIntX3(destinationOffset, 0), new SysIntX3(region, 1), sourceRowPitch, 0, destinationRowPitch, 0, sourceGCHandle.AddrOfPinnedObject(), eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(sourceGCHandle);
                 if (!userEventsWritable) newEvent.Dispose();
@@ -654,14 +654,14 @@ namespace Cloo
 
             if (blocking)
             {
-                Write(destination, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), events);
+                Write(destination, true, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), events);
                 sourceGCHandle.Free();
             }
             else
             {
-                bool userEventsWritable = (events != null && !events.IsReadOnly);
-                IList<ComputeEventBase> eventList = (userEventsWritable) ? events : new ComputeEventList();
-                Write(destination, blocking, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), eventList);
+                bool userEventsWritable = events != null && !events.IsReadOnly;
+                IList<ComputeEventBase> eventList = userEventsWritable ? events : new ComputeEventList();
+                Write(destination, false, sourceOffset, destinationOffset, region, sourceRowPitch, sourceSlicePitch, destinationRowPitch, destinationSlicePitch, sourceGCHandle.AddrOfPinnedObject(), eventList);
                 ComputeEvent newEvent = (ComputeEvent)eventList[eventList.Count - 1];
                 newEvent.TrackGCHandle(sourceGCHandle);
                 if (!userEventsWritable) newEvent.Dispose();
@@ -681,7 +681,7 @@ namespace Cloo
         /// <param name="events"> A collection of events that need to complete before this particular command can be executed. If <paramref name="events"/> is not <c>null</c> or read-only a new <see cref="ComputeEvent"/> identifying this command is created and attached to the end of the collection. </param>
         public void WriteToImage(IntPtr source, ComputeImage destination, bool blocking, ICollection<ComputeEventBase> events)
         {
-            Write(destination, blocking, new SysIntX3(), new SysIntX3(destination.Width, destination.Height, (destination.Depth == 0) ? 1 : destination.Depth), 0, 0, source, events);
+            Write(destination, blocking, new SysIntX3(), new SysIntX3(destination.Width, destination.Height, destination.Depth == 0 ? 1 : destination.Depth), 0, 0, source, events);
         }
 
         /// <summary>

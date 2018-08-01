@@ -33,9 +33,7 @@ using Cloo.Bindings;
 
 namespace Cloo
 {
-    using System.Diagnostics;
     using System.Runtime.InteropServices;
-    using System.Threading;
 
     /// <summary>
     /// Represents an OpenCL event.
@@ -52,7 +50,7 @@ namespace Cloo
         /// Gets the <see cref="ComputeCommandQueue"/> associated with the <see cref="ComputeEvent"/>.
         /// </summary>
         /// <value> The <see cref="ComputeCommandQueue"/> associated with the <see cref="ComputeEvent"/>. </value>
-        public ComputeCommandQueue CommandQueue { get; private set; }
+        public ComputeCommandQueue CommandQueue { get; }
 
         #endregion
 

@@ -36,7 +36,6 @@ namespace Cloo
     using System;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
-    using System.Threading;
 
     /// <summary>
     /// Represents an OpenCL kernel.
@@ -68,27 +67,27 @@ namespace Cloo
         /// </summary>
         public CLKernelHandle Handle
         {
-            get { return _handle; }
-            protected set { _handle = value; }
+            get => _handle;
+            protected set => _handle = value;
         }
 
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> associated with the <see cref="ComputeKernel"/>.
         /// </summary>
         /// <value> The <see cref="ComputeContext"/> associated with the <see cref="ComputeKernel"/>. </value>
-        public ComputeContext Context { get { return _context; } }
+        public ComputeContext Context => _context;
 
         /// <summary>
         /// Gets the function name of the <see cref="ComputeKernel"/>.
         /// </summary>
         /// <value> The function name of the <see cref="ComputeKernel"/>. </value>
-        public string FunctionName { get { return _functionName; } }
+        public string FunctionName => _functionName;
 
         /// <summary>
         /// Gets the <see cref="ComputeProgram"/> that the <see cref="ComputeKernel"/> belongs to.
         /// </summary>
         /// <value> The <see cref="ComputeProgram"/> that the <see cref="ComputeKernel"/> belongs to. </value>
-        public ComputeProgram Program { get { return _program; } }
+        public ComputeProgram Program => _program;
 
         #endregion
 
@@ -108,8 +107,7 @@ namespace Cloo
 
         internal ComputeKernel(string functionName, ComputeProgram program)
         {
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL12.CreateKernel(program.Handle, functionName, out error);
+            Handle = CL12.CreateKernel(program.Handle, functionName, out var error);
             ComputeException.ThrowOnError(error);
 
             SetID(Handle.Value);

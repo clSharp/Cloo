@@ -87,44 +87,44 @@ namespace Cloo
         /// Gets a read-only collection of <see cref="ComputeDevice"/>s available on the <see cref="ComputePlatform"/>.
         /// </summary>
         /// <value> A read-only collection of <see cref="ComputeDevice"/>s available on the <see cref="ComputePlatform"/>. </value>
-        public ReadOnlyCollection<ComputeDevice> Devices { get { return _devices; } }
+        public ReadOnlyCollection<ComputeDevice> Devices => _devices;
 
         /// <summary>
         /// Gets a read-only collection of extension names supported by the <see cref="ComputePlatform"/>.
         /// </summary>
         /// <value> A read-only collection of extension names supported by the <see cref="ComputePlatform"/>. </value>
-        public ReadOnlyCollection<string> Extensions { get { return _extensions; } }
+        public ReadOnlyCollection<string> Extensions => _extensions;
 
         /// <summary>
         /// Gets the <see cref="ComputePlatform"/> name.
         /// </summary>
         /// <value> The <see cref="ComputePlatform"/> name. </value>
-        public string Name { get { return _name; } }
+        public string Name => _name;
 
         /// <summary>
         /// Gets a read-only collection of available <see cref="ComputePlatform"/>s.
         /// </summary>
         /// <value> A read-only collection of available <see cref="ComputePlatform"/>s. </value>
         /// <remarks> The collection will contain no items, if no OpenCL platforms are found on the system. </remarks>
-        public static ReadOnlyCollection<ComputePlatform> Platforms { get { return platforms; } }
+        public static ReadOnlyCollection<ComputePlatform> Platforms => platforms;
 
         /// <summary>
         /// Gets the name of the profile supported by the <see cref="ComputePlatform"/>.
         /// </summary>
         /// <value> The name of the profile supported by the <see cref="ComputePlatform"/>. </value>
-        public string Profile { get { return _profile; } }
+        public string Profile => _profile;
 
         /// <summary>
         /// Gets the <see cref="ComputePlatform"/> vendor.
         /// </summary>
         /// <value> The <see cref="ComputePlatform"/> vendor. </value>
-        public string Vendor { get { return _vendor; } }
+        public string Vendor => _vendor;
 
         /// <summary>
         /// Gets the OpenCL version string supported by the <see cref="ComputePlatform"/>.
         /// </summary>
         /// <value> The OpenCL version string supported by the <see cref="ComputePlatform"/>. It has the following format: <c>OpenCL[space][major_version].[minor_version][space][vendor-specific information]</c>. </value>
-        public string Version { get { return _version; } }
+        public string Version => _version;
 
         #endregion
 
@@ -139,8 +139,7 @@ namespace Cloo
                     if (platforms != null)
                         return;
 
-                    int handlesLength;
-                    ComputeErrorCode error = CL12.GetPlatformIDs(0, null, out handlesLength);
+                    ComputeErrorCode error = CL12.GetPlatformIDs(0, null, out var handlesLength);
                     ComputeException.ThrowOnError(error);
                     var handles = new CLPlatformHandle[handlesLength];
 
@@ -228,8 +227,7 @@ namespace Cloo
         /// <remarks> This method resets the <c>ComputePlatform.Devices</c>. This is useful if one or more of them become unavailable (<c>ComputeDevice.Available</c> is <c>false</c>) after a <see cref="ComputeContext"/> and <see cref="ComputeCommandQueue"/>s that use the <see cref="ComputeDevice"/> have been created and commands have been queued to them. Further calls will trigger an <c>OutOfResourcesComputeException</c> until this method is executed. You will also need to recreate any <see cref="ComputeResource"/> that was created on the no longer available <see cref="ComputeDevice"/>. </remarks>
         public ReadOnlyCollection<ComputeDevice> QueryDevices()
         {
-            int handlesLength;
-            ComputeErrorCode error = CL12.GetDeviceIDs(Handle, ComputeDeviceTypes.All, 0, null, out handlesLength);
+            ComputeErrorCode error = CL12.GetDeviceIDs(Handle, ComputeDeviceTypes.All, 0, null, out var handlesLength);
             ComputeException.ThrowOnError(error);
 
             CLDeviceHandle[] handles = new CLDeviceHandle[handlesLength];

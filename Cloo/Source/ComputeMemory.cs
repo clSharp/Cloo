@@ -34,7 +34,6 @@ using Cloo.Bindings;
 namespace Cloo
 {
     using System.Diagnostics;
-    using System.Threading;
 
     /// <summary>
     /// Represents an OpenCL memory object.
@@ -63,21 +62,21 @@ namespace Cloo
         /// </summary>
         public CLMemoryHandle Handle
         {
-            get { return _handle; }
-            protected set { _handle = value; }
+            get => _handle;
+            protected set => _handle = value;
         }
 
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeMemory"/>.
         /// </summary>
         /// <value> The <see cref="ComputeContext"/> of the <see cref="ComputeMemory"/>. </value>
-        public ComputeContext Context { get { return _context; } }
+        public ComputeContext Context => _context;
 
         /// <summary>
         /// Gets the <see cref="ComputeMemoryFlags"/> of the <see cref="ComputeMemory"/>.
         /// </summary>
         /// <value> The <see cref="ComputeMemoryFlags"/> of the <see cref="ComputeMemory"/>. </value>
-        public ComputeMemoryFlags Flags { get { return _flags; } }
+        public ComputeMemoryFlags Flags => _flags;
 
         /// <summary>
         /// Gets or sets (protected) the size in bytes of the <see cref="ComputeMemory"/>.

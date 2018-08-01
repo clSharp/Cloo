@@ -38,7 +38,6 @@ namespace Cloo
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
-    using System.Threading;
 
     /// <summary>
     /// Represents an OpenCL program.
@@ -78,8 +77,8 @@ namespace Cloo
         /// </summary>
         public CLProgramHandle Handle
         {
-            get { return _handle; }
-            protected set { _handle = value; }
+            get => _handle;
+            protected set => _handle = value;
         }
 
         /// <summary>
@@ -87,40 +86,32 @@ namespace Cloo
         /// </summary>
         /// <value> A read-only collection of program binaries associated with the <see cref="ComputeProgram.Devices"/>. </value>
         /// <remarks> The bits returned can be an implementation-specific intermediate representation (a.k.a. IR) or device specific executable bits or both. The decision on which information is returned in the binary is up to the OpenCL implementation. </remarks>
-        public ReadOnlyCollection<byte[]> Binaries 
-        { 
-            get 
-            {
-                if (_binaries == null)
-                    _binaries = GetBinaries();
-                return _binaries;
-            }
-        }
+        public ReadOnlyCollection<byte[]> Binaries => _binaries ?? (_binaries = GetBinaries());
 
         /// <summary>
         /// Gets the <see cref="ComputeProgram"/> build options as specified in options argument of <see cref="ComputeProgram.Build"/>.
         /// </summary>
         /// <value> The <see cref="ComputeProgram"/> build options as specified in options argument of <see cref="ComputeProgram.Build"/>. </value>
-        public string BuildOptions { get { return _buildOptions; } }
+        public string BuildOptions => _buildOptions;
 
         /// <summary>
         /// Gets the <see cref="ComputeContext"/> of the <see cref="ComputeProgram"/>.
         /// </summary>
         /// <value> The <see cref="ComputeContext"/> of the <see cref="ComputeProgram"/>. </value>
-        public ComputeContext Context { get { return _context; } }
+        public ComputeContext Context => _context;
 
         /// <summary>
         /// Gets a read-only collection of <see cref="ComputeDevice"/>s associated with the <see cref="ComputeProgram"/>.
         /// </summary>
         /// <value> A read-only collection of <see cref="ComputeDevice"/>s associated with the <see cref="ComputeProgram"/>. </value>
         /// <remarks> This collection is a subset of the <see cref="ComputeProgram.Context"/> <see cref="ComputeContext.Devices"/>. </remarks>
-        public ReadOnlyCollection<ComputeDevice> Devices { get { return _devices; } }
+        public ReadOnlyCollection<ComputeDevice> Devices => _devices;
 
         /// <summary>
         /// Gets a read-only collection of program source code strings specified when creating the <see cref="ComputeProgram"/> or <c>null</c> if <see cref="ComputeProgram"/> was created using program binaries.
         /// </summary>
         /// <value> A read-only collection of program source code strings specified when creating the <see cref="ComputeProgram"/> or <c>null</c> if <see cref="ComputeProgram"/> was created using program binaries. </value>
-        public ReadOnlyCollection<string> Source { get { return _source; } }
+        public ReadOnlyCollection<string> Source => _source;
 
         #endregion
 
@@ -134,8 +125,7 @@ namespace Cloo
         /// <remarks> The created <see cref="ComputeProgram"/> is associated with the <see cref="ComputeContext.Devices"/>. </remarks>
         public ComputeProgram(ComputeContext context, string source)
         {
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL12.CreateProgramWithSource(context.Handle, 1, new [] { source }, null, out error);
+            Handle = CL12.CreateProgramWithSource(context.Handle, 1, new [] { source }, null, out var error);
             ComputeException.ThrowOnError(error);
 
             SetID(Handle.Value);
@@ -155,13 +145,12 @@ namespace Cloo
         /// <remarks> The created <see cref="ComputeProgram"/> is associated with the <see cref="ComputeContext.Devices"/>. </remarks>
         public ComputeProgram(ComputeContext context, string[] source)
         {
-            ComputeErrorCode error = ComputeErrorCode.Success;
             Handle = CL12.CreateProgramWithSource(
                 context.Handle,
                 source.Length,
                 source,
                 null,
-                out error);
+                out var error);
             ComputeException.ThrowOnError(error);
 
             _context = context;
@@ -179,10 +168,8 @@ namespace Cloo
         /// <param name="devices"> A subset of the <see cref="ComputeContext.Devices"/>. If <paramref name="devices"/> is <c>null</c>, OpenCL will associate every binary from <see cref="ComputeProgram.Binaries"/> with a corresponding <see cref="ComputeDevice"/> from <see cref="ComputeContext.Devices"/>. </param>
         public ComputeProgram(ComputeContext context, IList<byte[]> binaries, IList<ComputeDevice> devices)
         {
-            int count;
-
-            CLDeviceHandle[] deviceHandles = (devices != null) ?
-                ComputeTools.ExtractHandles(devices, out count) :
+            CLDeviceHandle[] deviceHandles = devices != null ?
+                ComputeTools.ExtractHandles(devices, out int count) :
                 ComputeTools.ExtractHandles(context.Devices, out count);
 
             IntPtr[] binariesPtrs = new IntPtr[count];
@@ -199,7 +186,6 @@ namespace Cloo
                     binariesLengths[i] = new IntPtr(binaries[i].Length);
                 }
 
-                var error = ComputeErrorCode.Success;
                 Handle = CL12.CreateProgramWithBinary(
                     context.Handle,
                     count,
@@ -207,7 +193,7 @@ namespace Cloo
                     binariesLengths,
                     binariesPtrs,
                     binariesStats,
-                    out error);
+                    out var error);
                 ComputeException.ThrowOnError(error);
             }
             finally
@@ -219,8 +205,7 @@ namespace Cloo
 
             _binaries = new ReadOnlyCollection<byte[]>(binaries);
             _context = context;
-            _devices = new ReadOnlyCollection<ComputeDevice>(
-                (devices != null) ? devices : context.Devices);
+            _devices = new ReadOnlyCollection<ComputeDevice>(devices ?? context.Devices);
 
             //Debug.WriteLine("Create " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
         }
@@ -238,9 +223,8 @@ namespace Cloo
         /// <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public void Build(ICollection<ComputeDevice> devices, string options, ComputeProgramBuildNotifier notify, IntPtr notifyDataPtr)
         {
-            int handleCount;
-            CLDeviceHandle[] deviceHandles = ComputeTools.ExtractHandles(devices, out handleCount);
-            _buildOptions = (options != null) ? options : "";
+            CLDeviceHandle[] deviceHandles = ComputeTools.ExtractHandles(devices, out var handleCount);
+            _buildOptions = options ?? "";
             _buildNotify = notify;
 
             ComputeErrorCode error = CL12.BuildProgram(Handle, handleCount, deviceHandles, options, _buildNotify, notifyDataPtr);
@@ -255,9 +239,8 @@ namespace Cloo
         public ICollection<ComputeKernel> CreateAllKernels()
         {
             ICollection<ComputeKernel> kernels = new Collection<ComputeKernel>();
-            int kernelsCount = 0;
 
-            ComputeErrorCode error = CL12.CreateKernelsInProgram(Handle, 0, null, out kernelsCount);
+            ComputeErrorCode error = CL12.CreateKernelsInProgram(Handle, 0, null, out var kernelsCount);
             ComputeException.ThrowOnError(error);
 
             var kernelHandles = new CLKernelHandle[kernelsCount];
@@ -341,8 +324,7 @@ namespace Cloo
                     binaries.Add(binary);
                 }
 
-                IntPtr sizeRet;
-                ComputeErrorCode error = CL12.GetProgramInfo(Handle, ComputeProgramInfo.Binaries, new IntPtr(binariesPtrs.Length * IntPtr.Size), binariesPtrsGCHandle.AddrOfPinnedObject(), out sizeRet);
+                ComputeErrorCode error = CL12.GetProgramInfo(Handle, ComputeProgramInfo.Binaries, new IntPtr(binariesPtrs.Length * IntPtr.Size), binariesPtrsGCHandle.AddrOfPinnedObject(), out _);
                 ComputeException.ThrowOnError(error);
             }
             finally

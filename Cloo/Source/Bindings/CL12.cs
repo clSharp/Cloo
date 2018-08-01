@@ -47,7 +47,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clEnqueueMarkerWithWaitList")]
-        public extern static ComputeErrorCode EnqueueMarkerWithWaitList(
+        public static extern ComputeErrorCode EnqueueMarkerWithWaitList(
             CLCommandQueueHandle command_queue,
             Int32 num_events,
             [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_list,
@@ -57,7 +57,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clEnqueueBarrierWithWaitList")]
-        public extern static ComputeErrorCode EnqueueBarrierWithWaitList(
+        public static extern ComputeErrorCode EnqueueBarrierWithWaitList(
             CLCommandQueueHandle command_queue,
             Int32 num_events,
             [MarshalAs(UnmanagedType.LPArray)] CLEventHandle[] event_list,
@@ -67,7 +67,7 @@ namespace Cloo.Bindings
         /// See the OpenCL specification.
         /// </summary>
         [DllImport(libName, EntryPoint = "clEnqueueFillBuffer")]
-        public extern static ComputeErrorCode EnqueueFillBuffer(
+        public static extern ComputeErrorCode EnqueueFillBuffer(
             CLCommandQueueHandle command_queue,
             CLMemoryHandle buffer,
             IntPtr pattern,
@@ -85,7 +85,7 @@ namespace Cloo.Bindings
         /// calling the returned function address.
         /// </summary>
         [DllImport(libName, EntryPoint = "clGetExtensionFunctionAddressForPlatform")]
-        public extern static IntPtr GetExtensionFunctionAddressForPlatform(
+        public static extern IntPtr GetExtensionFunctionAddressForPlatform(
             CLPlatformHandle platform,
             String func_name);
 

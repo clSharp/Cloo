@@ -37,7 +37,6 @@ namespace Cloo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.Threading;
 
     /// <summary>
     /// Represents an OpenCL context.
@@ -111,27 +110,27 @@ namespace Cloo
         /// </summary>
         public CLContextHandle Handle
         {
-            get { return _handle; }
-            protected set { _handle = value; }
+            get => _handle;
+            protected set => _handle = value;
         }
 
         /// <summary>
         /// Gets a read-only collection of the <see cref="ComputeDevice"/>s of the <see cref="ComputeContext"/>.
         /// </summary>
         /// <value> A read-only collection of the <see cref="ComputeDevice"/>s of the <see cref="ComputeContext"/>. </value>
-        public ReadOnlyCollection<ComputeDevice> Devices { get { return _devices; } }
+        public ReadOnlyCollection<ComputeDevice> Devices => _devices;
 
         /// <summary>
         /// Gets the <see cref="ComputePlatform"/> of the <see cref="ComputeContext"/>.
         /// </summary>
         /// <value> The <see cref="ComputePlatform"/> of the <see cref="ComputeContext"/>. </value>
-        public ComputePlatform Platform { get { return _platform; } }
+        public ComputePlatform Platform => _platform;
 
         /// <summary>
         /// Gets a collection of <see cref="ComputeContextProperty"/>s of the <see cref="ComputeContext"/>.
         /// </summary>
         /// <value> A collection of <see cref="ComputeContextProperty"/>s of the <see cref="ComputeContext"/>. </value>
-        public ComputeContextPropertyList Properties { get { return _properties; } }
+        public ComputeContextPropertyList Properties => _properties;
 
         #endregion
 
@@ -146,13 +145,11 @@ namespace Cloo
         /// <param name="notifyDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public ComputeContext(ICollection<ComputeDevice> devices, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr notifyDataPtr)
         {
-            int handleCount;
-            CLDeviceHandle[] deviceHandles = ComputeTools.ExtractHandles(devices, out handleCount);
-            IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
+            CLDeviceHandle[] deviceHandles = ComputeTools.ExtractHandles(devices, out var handleCount);
+            IntPtr[] propertyArray = properties?.ToIntPtrArray();
             _callback = notify;
 
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL12.CreateContext(propertyArray, handleCount, deviceHandles, notify, notifyDataPtr, out error);
+            Handle = CL12.CreateContext(propertyArray, handleCount, deviceHandles, notify, notifyDataPtr, out var error);
             ComputeException.ThrowOnError(error);
             
             SetID(Handle.Value);
@@ -174,11 +171,10 @@ namespace Cloo
         /// <param name="userDataPtr"> Optional user data that will be passed to <paramref name="notify"/>. </param>
         public ComputeContext(ComputeDeviceTypes deviceType, ComputeContextPropertyList properties, ComputeContextNotifier notify, IntPtr userDataPtr)
         {
-            IntPtr[] propertyArray = (properties != null) ? properties.ToIntPtrArray() : null;
+            IntPtr[] propertyArray = properties?.ToIntPtrArray();
             _callback = notify;
 
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            Handle = CL12.CreateContextFromType(propertyArray, deviceType, notify, userDataPtr, out error);
+            Handle = CL12.CreateContextFromType(propertyArray, deviceType, notify, userDataPtr, out var error);
             ComputeException.ThrowOnError(error);
 
             SetID(Handle.Value);

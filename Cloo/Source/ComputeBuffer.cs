@@ -69,9 +69,8 @@ namespace Cloo
             : base(context, flags)
         {
             var size = ComputeTools.SizeOf<T>()*count;
-            
-            ComputeErrorCode error;
-            Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(size), dataPtr, out error);
+
+            Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(size), dataPtr, out var error);
             ComputeException.ThrowOnError(error);
             Init(size, count);
         }
@@ -91,8 +90,7 @@ namespace Cloo
             GCHandle dataPtr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
-                ComputeErrorCode error;
-                Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(size), dataPtr.AddrOfPinnedObject(), out error);
+                Handle = CL12.CreateBuffer(context.Handle, flags, new IntPtr(size), dataPtr.AddrOfPinnedObject(), out var error);
                 ComputeException.ThrowOnError(error);
             }
             finally 
@@ -138,8 +136,7 @@ namespace Cloo
         /// <returns> The created <see cref="ComputeBuffer{T}"/>. </returns>
         public static ComputeBuffer<TDataType> CreateFromGLBuffer<TDataType>(ComputeContext context, ComputeMemoryFlags flags, int bufferId) where TDataType : struct
         {
-            ComputeErrorCode error = ComputeErrorCode.Success;
-            CLMemoryHandle handle = CL12.CreateFromGLBuffer(context.Handle, flags, bufferId, out error);
+            CLMemoryHandle handle = CL12.CreateFromGLBuffer(context.Handle, flags, bufferId, out var error);
             ComputeException.ThrowOnError(error);
             return new ComputeBuffer<TDataType>(handle, context, flags);
         }

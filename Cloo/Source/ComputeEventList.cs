@@ -77,7 +77,7 @@ namespace Cloo
         /// Gets the last <see cref="ComputeEventBase"/> on the list.
         /// </summary>
         /// <value> The last <see cref="ComputeEventBase"/> on the list. </value>
-        public ComputeEventBase Last { get { return _events[_events.Count - 1]; } }
+        public ComputeEventBase Last => _events[_events.Count - 1];
 
         #endregion
 
@@ -89,8 +89,7 @@ namespace Cloo
         /// <param name="events"> The events to be waited for completition. </param>
         public static void Wait(ICollection<ComputeEventBase> events)
         {
-            int eventWaitListSize;
-            CLEventHandle[] eventHandles = ComputeTools.ExtractHandles(events, out eventWaitListSize);
+            CLEventHandle[] eventHandles = ComputeTools.ExtractHandles(events, out var eventWaitListSize);
             ComputeErrorCode error = CL12.WaitForEvents(eventWaitListSize, eventHandles);
             ComputeException.ThrowOnError(error);
         }
@@ -143,14 +142,8 @@ namespace Cloo
         /// <returns></returns>
         public ComputeEventBase this[int index]
         {
-            get
-            {
-                return _events[index];
-            }
-            set
-            {
-                _events[index] = value;
-            }
+            get => _events[index];
+            set => _events[index] = value;
         }
 
         #endregion
@@ -197,18 +190,12 @@ namespace Cloo
         /// <summary>
         /// 
         /// </summary>
-        public int Count
-        {
-            get { return _events.Count; }
-        }
+        public int Count => _events.Count;
 
         /// <summary>
         /// 
         /// </summary>
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
+        public bool IsReadOnly => false;
 
         /// <summary>
         /// 

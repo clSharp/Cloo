@@ -36,7 +36,6 @@ namespace Cloo
 {
     using System;
     using System.Diagnostics;
-    using System.Threading;
 
     /// <summary>
     /// Represents the parent type to any Cloo event types.
@@ -81,10 +80,7 @@ namespace Cloo
                     AbortedInternal += value;
                 }
             }
-            remove
-            {
-                AbortedInternal -= value;
-            }
+            remove => AbortedInternal -= value;
         }
 
         /// <summary>
@@ -105,10 +101,7 @@ namespace Cloo
                     CompletedInternal += value;
                 }
             }
-            remove
-            {
-                CompletedInternal -= value;
-            }
+            remove => CompletedInternal -= value;
         }
 
         #endregion
@@ -120,8 +113,8 @@ namespace Cloo
         /// </summary>
         public CLEventHandle Handle
         {
-            get { return _handle; }
-            protected set { _handle = value; }
+            get => _handle;
+            protected set => _handle = value;
         }
 
         /// <summary>
@@ -134,46 +127,31 @@ namespace Cloo
         /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command has finished execution.
         /// </summary>
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command has finished execution. </value>
-        public long FinishTime
-        {
-            get { return GetInfo<CLEventHandle, ComputeCommandProfilingInfo, long>(Handle, ComputeCommandProfilingInfo.Ended, CL12.GetEventProfilingInfo); }
-        }
+        public long FinishTime => GetInfo<CLEventHandle, ComputeCommandProfilingInfo, long>(Handle, ComputeCommandProfilingInfo.Ended, CL12.GetEventProfilingInfo);
 
         /// <summary>
         /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command is enqueued in the <see cref="ComputeCommandQueue"/> by the host.
         /// </summary>
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command is enqueued in the <see cref="ComputeCommandQueue"/> by the host. </value>
-        public long EnqueueTime
-        {
-            get { return (long)GetInfo<CLEventHandle, ComputeCommandProfilingInfo, long>(Handle, ComputeCommandProfilingInfo.Queued, CL12.GetEventProfilingInfo); }
-        }
+        public long EnqueueTime => GetInfo<CLEventHandle, ComputeCommandProfilingInfo, long>(Handle, ComputeCommandProfilingInfo.Queued, CL12.GetEventProfilingInfo);
 
         /// <summary>
         /// Gets the execution status of the associated command.
         /// </summary>
         /// <value> The execution status of the associated command or a negative value if the execution was abnormally terminated. </value>
-        public ComputeCommandExecutionStatus Status
-        {
-            get { return (ComputeCommandExecutionStatus)GetInfo<CLEventHandle, ComputeEventInfo, int>(Handle, ComputeEventInfo.ExecutionStatus, CL12.GetEventInfo); }
-        }
+        public ComputeCommandExecutionStatus Status => (ComputeCommandExecutionStatus)GetInfo<CLEventHandle, ComputeEventInfo, int>(Handle, ComputeEventInfo.ExecutionStatus, CL12.GetEventInfo);
 
         /// <summary>
         /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command starts execution.
         /// </summary>
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command starts execution. </value>
-        public long StartTime
-        {
-            get { return (long)GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Started, CL12.GetEventProfilingInfo); }
-        }
+        public long StartTime => (long)GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Started, CL12.GetEventProfilingInfo);
 
         /// <summary>
         /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
         /// </summary>
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device. </value>
-        public long SubmitTime
-        {
-            get { return (long)GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Submitted, CL12.GetEventProfilingInfo); }
-        }
+        public long SubmitTime => (long)GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Submitted, CL12.GetEventProfilingInfo);
 
         /// <summary>
         /// Gets the <see cref="ComputeCommandType"/> associated with the event.
@@ -278,13 +256,13 @@ namespace Cloo
         /// <summary>
         /// Gets the event associated with the command that had its status changed.
         /// </summary>
-        public ComputeEventBase Event { get; private set; }
+        public ComputeEventBase Event { get; }
 
         /// <summary>
         /// Gets the execution status of the command represented by the event.
         /// </summary>
         /// <remarks> Returns a negative integer if the command was abnormally terminated. </remarks>
-        public ComputeCommandExecutionStatus Status { get; private set; }
+        public ComputeCommandExecutionStatus Status { get; }
 
         /// <summary>
         /// Creates a new <c>ComputeCommandStatusArgs</c> instance.
