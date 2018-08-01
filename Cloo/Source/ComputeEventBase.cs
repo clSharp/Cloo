@@ -127,13 +127,13 @@ namespace Cloo
         /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command has finished execution.
         /// </summary>
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command has finished execution. </value>
-        public long FinishTime => GetInfo<CLEventHandle, ComputeCommandProfilingInfo, long>(Handle, ComputeCommandProfilingInfo.Ended, CL12.GetEventProfilingInfo);
+        public ulong FinishTime => GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Ended, CL12.GetEventProfilingInfo);
 
         /// <summary>
         /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command is enqueued in the <see cref="ComputeCommandQueue"/> by the host.
         /// </summary>
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command is enqueued in the <see cref="ComputeCommandQueue"/> by the host. </value>
-        public long EnqueueTime => GetInfo<CLEventHandle, ComputeCommandProfilingInfo, long>(Handle, ComputeCommandProfilingInfo.Queued, CL12.GetEventProfilingInfo);
+        public ulong EnqueueTime => GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Queued, CL12.GetEventProfilingInfo);
 
         /// <summary>
         /// Gets the execution status of the associated command.
@@ -145,13 +145,13 @@ namespace Cloo
         /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command starts execution.
         /// </summary>
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command starts execution. </value>
-        public long StartTime => (long)GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Started, CL12.GetEventProfilingInfo);
+        public ulong StartTime => GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Started, CL12.GetEventProfilingInfo);
 
         /// <summary>
         /// Gets the <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device.
         /// </summary>
         /// <value> The <see cref="ComputeDevice"/> time counter in nanoseconds when the associated command that has been enqueued is submitted by the host to the device. </value>
-        public long SubmitTime => (long)GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Submitted, CL12.GetEventProfilingInfo);
+        public ulong SubmitTime => GetInfo<CLEventHandle, ComputeCommandProfilingInfo, ulong>(Handle, ComputeCommandProfilingInfo.Submitted, CL12.GetEventProfilingInfo);
 
         /// <summary>
         /// Gets the <see cref="ComputeCommandType"/> associated with the event.
