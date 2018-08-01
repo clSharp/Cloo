@@ -194,7 +194,7 @@ namespace Cloo
         {
             if (Handle.IsValid)
             {
-                Debug.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
+                //Debug.WriteLine("Dispose " + this + " in Thread(" + Thread.CurrentThread.ManagedThreadId + ").", "Information");
                 CL12.ReleaseEvent(Handle);
                 _handle.Invalidate();
             }
@@ -222,7 +222,7 @@ namespace Cloo
         /// <param name="evArgs"></param>
         protected virtual void OnCompleted(object sender, ComputeCommandStatusArgs evArgs)
         {
-            Debug.WriteLine("Complete " + Type + " operation of " + this + ".", "Information");
+            //Debug.WriteLine("Complete " + Type + " operation of " + this + ".", "Information");
             CompletedInternal?.Invoke(sender, evArgs);
         }
 
@@ -233,7 +233,7 @@ namespace Cloo
         /// <param name="evArgs"></param>
         protected virtual void OnAborted(object sender, ComputeCommandStatusArgs evArgs)
         {
-            Debug.WriteLine("Abort " + Type + " operation of " + this + ".", "Information");
+            //Debug.WriteLine("Abort " + Type + " operation of " + this + ".", "Information");
             AbortedInternal?.Invoke(sender, evArgs);
         }
 
