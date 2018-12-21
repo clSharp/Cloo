@@ -700,6 +700,33 @@
             Invalidates the handle.
             </summary>
         </member>
+        <member name="T:Cloo.Bindings.CLx">
+            <summary>
+            Contains bindings to the OpenCL extension functions.
+            </summary>
+            <remarks> See the Khronos OpenCL API extensions registry for documentation regarding these functions. </remarks>
+        </member>
+        <member name="M:Cloo.Bindings.CLx.CreateSubDevicesEXT(System.IntPtr,Cloo.cl_device_partition_property_ext[],System.Int32,System.IntPtr[],System.Int32@)">
+            <summary> </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLx.EnqueueMigrateMemObjectEXT(System.IntPtr,System.Int32,System.IntPtr[],Cloo.cl_mem_migration_flags_ext,System.Int32,System.IntPtr[],System.IntPtr[])">
+            <summary> </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLx.GetGLContextInfoKHR(System.IntPtr[],Cloo.ComputeGLContextInfo,System.IntPtr,System.IntPtr,System.IntPtr@)">
+            <summary> </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLx.ReleaseDeviceEXT(System.IntPtr)">
+            <summary> </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLx.RetainDeviceEXT(System.IntPtr)">
+            <summary> </summary>
+        </member>
+        <member name="M:Cloo.Bindings.CLx.#ctor(Cloo.ComputePlatform)">
+            <summary>
+            
+            </summary>
+            <param name="platform"></param>
+        </member>
         <member name="T:Cloo.ComputeErrorCode">
             <summary>
             The OpenCL error codes.
@@ -4450,6 +4477,21 @@
             Sets the new status of the <see cref="T:Cloo.ComputeUserEvent"/> to an error value.
             </summary>
             <param name="status"> The error status of the <see cref="T:Cloo.ComputeUserEvent"/>. This should be a negative value. </param>
+        </member>
+        <member name="T:Cloo.Extensions.ClooExtensions">
+            <summary>
+            Contains extension methods using Cloo
+            </summary>
+        </member>
+        <member name="M:Cloo.Extensions.ClooExtensions.ClooForEach``1(``0[],System.String,System.Func{System.String,System.Boolean},System.Func{System.Int32,System.String,System.Version,System.Boolean})">
+            <summary>
+            Run kernel against all elements.
+            </summary>
+            <typeparam name="TSource">Struct type that corresponds to kernel function type</typeparam>
+            <param name="array">Array of elements to process</param>
+            <param name="kernelCode">The code of kernel function</param>
+            <param name="kernelSelector">Method that selects kernel by function name, if null uses first</param>
+            <param name="deviceSelector">Method that selects device by name, if null uses first</param>
         </member>
         <member name="T:Cloo.SysIntX2">
              <summary>

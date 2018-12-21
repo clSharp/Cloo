@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloo.VS2017", "Cloo\Cloo.VS2017.csproj", "{656E96CE-2587-4CCC-A4DB-06D36267133A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clootils.VS2017", "Clootils\Clootils.VS2017.csproj", "{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{5040C738-55ED-42D8-B006-07FA2B151C4B}"
 	ProjectSection(SolutionItems) = preProject
 		Documentation\ChangeLog.txt = Documentation\ChangeLog.txt
@@ -15,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		Documentation\ReleaseNotes.txt = Documentation\ReleaseNotes.txt
 		Documentation\Supported.txt = Documentation\Supported.txt
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClootilsNetFull.VS2017", "ClootilsNetFull\ClootilsNetFull.VS2017.csproj", "{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClootilsNetCore.VS2017", "ClootilsNetCore\ClootilsNetCore.VS2017.csproj", "{BDB1FA1A-33AF-4C70-B465-5B080880C9DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,10 @@ Global
 		{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDB1FA1A-33AF-4C70-B465-5B080880C9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB1FA1A-33AF-4C70-B465-5B080880C9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDB1FA1A-33AF-4C70-B465-5B080880C9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDB1FA1A-33AF-4C70-B465-5B080880C9DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

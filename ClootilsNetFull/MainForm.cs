@@ -48,7 +48,6 @@ namespace Clootils
         public MainForm()
         {
             InitializeComponent();
-            InitializeSettings();
 
             textBoxLog.Font = new Font(FontFamily.GenericMonospace, 10);
             textBoxLog.Text =
@@ -92,17 +91,6 @@ namespace Clootils
                 devices.Add(platform.Devices[e.Index]);
             else
                 devices.Remove(platform.Devices[e.Index]);
-        }
-
-        private void InitializeSettings()
-        {
-            //if (Settings.Default.EditorFont == null)
-            //    Settings.Default.EditorFont = new Font(FontFamily.GenericMonospace, 10);
-
-            //if (Settings.Default.LogFont == null)
-            //    Settings.Default.LogFont = new Font(FontFamily.GenericMonospace, 10);
-
-            //Settings.Default.Save();
         }
 
         private string[] ParseLines(string text)
