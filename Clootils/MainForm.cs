@@ -36,7 +36,6 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Cloo;
-using Clootils.Properties;
 
 namespace Clootils
 {
@@ -70,7 +69,7 @@ namespace Clootils
             for (int i = 0; i < availablePlatforms.Length; i++)
                 availablePlatforms[i] = ComputePlatform.Platforms[i].Name;
             comboBoxPlatform.Items.AddRange(availablePlatforms);
-            comboBoxPlatform.SelectedIndex = 0;            
+            comboBoxPlatform.SelectedIndex = 0;
 
             // Set up the example list
             exampleList = new List<IExample>();
@@ -97,13 +96,13 @@ namespace Clootils
 
         private void InitializeSettings()
         {
-            if (Settings.Default.EditorFont == null)
-                Settings.Default.EditorFont = new Font(FontFamily.GenericMonospace, 10);
+            //if (Settings.Default.EditorFont == null)
+            //    Settings.Default.EditorFont = new Font(FontFamily.GenericMonospace, 10);
 
-            if (Settings.Default.LogFont == null)
-                Settings.Default.LogFont = new Font(FontFamily.GenericMonospace, 10);
+            //if (Settings.Default.LogFont == null)
+            //    Settings.Default.LogFont = new Font(FontFamily.GenericMonospace, 10);
 
-            Settings.Default.Save();
+            //Settings.Default.Save();
         }
 
         private string[] ParseLines(string text)

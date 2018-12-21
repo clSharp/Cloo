@@ -1,9 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloo.VS2010", "Cloo\Cloo.VS2010.csproj", "{656E96CE-2587-4CCC-A4DB-06D36267133A}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloo.VS2017", "Cloo\Cloo.VS2017.csproj", "{656E96CE-2587-4CCC-A4DB-06D36267133A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clootils.VS2010", "Clootils\Clootils.VS2010.csproj", "{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clootils.VS2017", "Clootils\Clootils.VS2017.csproj", "{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{5040C738-55ED-42D8-B006-07FA2B151C4B}"
 	ProjectSection(SolutionItems) = preProject
@@ -31,5 +33,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5565014-4163-4343-A86C-7992A0972ED5}
 	EndGlobalSection
 EndGlobal

@@ -4,7 +4,7 @@ Cloo is an open source, easy to use, managed library which enables .NET/Mono app
 [Requirements]
 The following is required for Cloo to work properly:
 1) OpenCL drivers. Depending on your system, you can obtain them from your graphics device manufacturer website or operating system vendor website.
-2) The Microsoft .NET Framework 2.0 or an equivalent alternative (Mono).
+2) The Microsoft .NET Framework 4.7.2.
 
 [Download & Install]
 You can download the most recent version of Cloo from "http://sourceforge.net/projects/cloo/". 

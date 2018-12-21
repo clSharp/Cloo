@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <ProjectGuid>{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Clootils</RootNamespace>
+    <AssemblyName>Clootils</AssemblyName>
+    <TargetFramework>net472</TargetFramework>
+    <StartupObject />
+    <FileUpgradeFlags />
+    <UpgradeBackupLocation />
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <AssemblyTitle>Clootils</AssemblyTitle>
+    <Product>Clootils</Product>
+    <Description>Cloo utilities</Description>
+    <Copyright>Copyright (c) 2009 - 2013 Fatjon Sakiqi</Copyright>
+    <AssemblyVersion>0.9.1</AssemblyVersion>
+    <FileVersion>0.9.1</FileVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cloo\Cloo.VS2017.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Properties\Settings.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+</Project>
