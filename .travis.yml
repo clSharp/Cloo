@@ -1,0 +1,19 @@
+language: csharp
+mono: none
+group: dev
+sudo: required
+dist: xenial
+dotnet: 2.2
+script:
+  - dotnet restore Cloo/Cloo.VS2017.csproj
+  - dotnet build Cloo/Cloo.VS2017.csproj
+
+deploy:
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    file_glob: true
+    file: "Cloo/bin/**/*"
+    skip_cleanup: true
+    on:
+      branch: master
+      condition: "$TRAVIS_OS_NAME == linux"
