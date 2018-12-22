@@ -1,0 +1,12 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ClootilsNetCoreUI.VS2017"
+        xmlns:vm="clr-namespace:ClootilsNetCoreUI.VS2017">
+    <StackPanel>
+        <!-- <DropDown Items="{Binding Platforms}" x:Name="Platforms" SelectedIndex="0" Width="100" Margin="8">
+        <DropDownItem>Light</DropDownItem>
+        <DropDownItem>Dark</DropDownItem>
+        </DropDown> -->
+        <ListBox Items="{Binding Items}" SelectionMode="Multiple" SelectedItems="{Binding SelectedItems}"/>
+    </StackPanel>
+</Window>

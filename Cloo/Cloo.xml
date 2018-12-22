@@ -4483,6 +4483,11 @@
             Contains extension methods using Cloo
             </summary>
         </member>
+        <member name="M:Cloo.Extensions.ClooExtensions.GetDeviceNames">
+            <summary>
+            Returns ordered device descriptions.
+            </summary>
+        </member>
         <member name="M:Cloo.Extensions.ClooExtensions.ClooForEach``1(``0[],System.String,System.Func{System.String,System.Boolean},System.Func{System.Int32,System.String,System.Version,System.Boolean})">
             <summary>
             Run kernel against all elements.
@@ -4490,8 +4495,8 @@
             <typeparam name="TSource">Struct type that corresponds to kernel function type</typeparam>
             <param name="array">Array of elements to process</param>
             <param name="kernelCode">The code of kernel function</param>
-            <param name="kernelSelector">Method that selects kernel by function name, if null uses first</param>
-            <param name="deviceSelector">Method that selects device by name, if null uses first</param>
+            <param name="kernelSelector">Method that selects kernel by function name; if null uses first</param>
+            <param name="deviceSelector">Method that selects device by index, description, OpenCL version; if null uses first</param>
         </member>
         <member name="T:Cloo.SysIntX2">
              <summary>
