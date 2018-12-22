@@ -7,7 +7,7 @@ namespace ClootilsCore.VS2017
 {
     class Program
     {
-        static void Main(string[] args)
+        public static int Main(string[] args)
         {
             const int DataSize = 10000000;
             var sw  = new Stopwatch();
@@ -51,9 +51,11 @@ namespace ClootilsCore.VS2017
 
             Console.Write($"Done, press any key to exit...");
             Console.ReadKey();
+
+            return 0;
         }
 
-        static string IsPrime =
+        private static string IsPrime =
 @"
 kernel void GetIfPrime(global int* message)
 {

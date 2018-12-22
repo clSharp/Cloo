@@ -11,6 +11,7 @@ Cloo `OpenCL`&trade; library with nuget package deployment ported to netstandard
 - **Cloo** - `netstandard2.0` library with configured build producing nuget package
 - **ClootilsNetFull** - `net472` winforms application sample
 - **ClootilsNetCore** - `netcoreapp2.2` console application using linq-style extension
+- **ClootilsNetCoreUI** - `netcoreapp2.2` ui application based on `Avalonia` (WPF-like)
 
 ## Usage
 

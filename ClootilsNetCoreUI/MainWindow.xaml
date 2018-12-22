@@ -1,12 +1,23 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ClootilsNetCoreUI.VS2017"
-        xmlns:vm="clr-namespace:ClootilsNetCoreUI.VS2017">
-    <StackPanel>
-        <!-- <DropDown Items="{Binding Platforms}" x:Name="Platforms" SelectedIndex="0" Width="100" Margin="8">
-        <DropDownItem>Light</DropDownItem>
-        <DropDownItem>Dark</DropDownItem>
-        </DropDown> -->
-        <ListBox Items="{Binding Items}" SelectionMode="Multiple" SelectedItems="{Binding SelectedItems}"/>
-    </StackPanel>
+        Title="ClootilsNetCoreUI"
+        xmlns:vm="clr-namespace:ClootilsNetCoreUI.VS2017"
+        Background="#EEEEEE"
+        MinWidth="700"
+        MinHeight="500">
+    <ScrollViewer VerticalAlignment="Center">
+        <StackPanel Margin="30">
+
+            <TextBlock Text="Select OpenCL device:"/>
+            <DropDown Items="{Binding Platforms}" SelectedIndex="{Binding SelectedPlatformIndex}" 
+                Background="#FFFFFF"/>
+
+            <TextBlock Text="Select tests:"/>
+            <ListBox Height="140"  
+                Items="{Binding Items}" SelectionMode="Multiple" SelectedItems="{Binding SelectedItems}"/>
+            
+            <Button Command="{Binding RunItems}" Background="#FFFFFF" Width="300" HorizontalAlignment="Center">Run selected tests</Button>
+            <TextBox Height="210" Text="{Binding ResultText}" IsReadOnly="True"/>    
+        </StackPanel>    
+    </ScrollViewer>
 </Window>
