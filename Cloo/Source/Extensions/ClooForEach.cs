@@ -9,19 +9,27 @@ namespace Cloo.Extensions
     public static class ClooExtensions
     {
         /// <summary>
+        /// Returns ordered device descriptions.
+        /// </summary>
+        public static string[] GetDeviceNames()
+        {
+            return ComputePlatform.Platforms.SelectMany(p=> p.Devices).Select(d => $"{d.Name} {d.DriverVersion}").ToArray();
+        }
+
+        /// <summary>
         /// Run kernel against all elements.
         /// </summary>
         /// <typeparam name="TSource">Struct type that corresponds to kernel function type</typeparam>
         /// <param name="array">Array of elements to process</param>
         /// <param name="kernelCode">The code of kernel function</param>
-        /// <param name="kernelSelector">Method that selects kernel by function name, if null uses first</param>
-        /// <param name="deviceSelector">Method that selects device by name, if null uses first</param>
+        /// <param name="kernelSelector">Method that selects kernel by function name; if null uses first</param>
+        /// <param name="deviceSelector">Method that selects device by index, description, OpenCL version; if null uses first</param>
         public static void ClooForEach<TSource>(this TSource[] array, string kernelCode, Func<string, bool> kernelSelector = null, Func<int, string, Version, bool> deviceSelector = null) where TSource : struct
         {
             kernelSelector = kernelSelector ?? ((k) => true);
             deviceSelector = deviceSelector ?? ((i, d, v) => true);
 
-            var device = ComputePlatform.Platforms.SelectMany(p => p.Devices).Where((d, i) => deviceSelector(i, d.Name, d.Version)).First();
+            var device = ComputePlatform.Platforms.SelectMany(p => p.Devices).Where((d, i) => deviceSelector(i, $"{d.Name} {d.DriverVersion}", d.Version)).First();
 
             var properties = new ComputeContextPropertyList(device.Platform);
             using (var context = new ComputeContext(new[] { device }, properties, null, IntPtr.Zero))
