@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Diagnostics;
 
 using ReactiveUI;
+using ReactiveUI.Legacy;
 using Cloo.Extensions;
 using ClootilsNetCoreUI.VS2017.Properties;
 
@@ -26,27 +27,27 @@ namespace ClootilsNetCoreUI.VS2017
                     var primes = Enumerable.Range(2, 10000000).ToArray();
                     primes.ClooForEach(Resources.IsPrime, null, (i, d, v) => i == deviceIndex);
 
-                    return string.Join(", ", primes.Take(100).Where(n => n != 0).Where(n => n != 0))
-                     + ", ... ," + string.Join(", ", primes.Skip(primes.Length-100).Where(n => n != 0));
+                    return string.Join(", ", primes.Take(30).Where(n => n != 0).Where(n => n != 0))
+                     + ", ... ," + string.Join(", ", primes.Skip(primes.Length-30).Where(n => n != 0));
                 })
             }
         }; 
 
         public MainWindowViewModel()
         {
-            this.Items = new ObservableCollection<TestItem>(
+            this.Items = new ReactiveList<TestItem>(
                 this.tests.Select(t => new TestItem
                 {
                     StringValue = t.Key
                 }));
 
-            this.Platforms = new ObservableCollection<TestItem>(
+            this.Platforms = new ReactiveList<TestItem>(
                 ClooExtensions.GetDeviceNames().Select((d, i) => new TestItem
                 {
                     StringValue = d
                 }));
 
-            this.SelectedItems = new ObservableCollection<TestItem>();
+            this.SelectedItems = new ReactiveList<TestItem>();
 
             this.SelectedPlatformIndex=0;
 
@@ -75,7 +76,7 @@ namespace ClootilsNetCoreUI.VS2017
                 }
 
                 this.ResultText += $"{Environment.NewLine} All {selectedTestNames.Count} test(s) done!";
-            });
+            }, this.SelectedItems.CountChanged.Select(count => count != 0));
         }
 
         private int selectedPlatformIndex;
@@ -92,9 +93,9 @@ namespace ClootilsNetCoreUI.VS2017
             set { this.RaiseAndSetIfChanged(ref resultText, value); }
         }
 
-        public ObservableCollection<TestItem> Items { get; }
-        public ObservableCollection<TestItem> Platforms { get; }
-        public ObservableCollection<TestItem> SelectedItems { get; }
+        public ReactiveList<TestItem> Items { get; }
+        public ReactiveList<TestItem> Platforms { get; }
+        public ReactiveList<TestItem> SelectedItems { get; }
         public ICommand RunItems { get; }
 
         public class TestItem : ReactiveObject

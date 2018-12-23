@@ -7,7 +7,12 @@
         MinHeight="500">
     <ScrollViewer VerticalAlignment="Center">
         <StackPanel Margin="30">
-
+            <StackPanel.Styles>
+                <Style Selector="Button.hoverable:pointerover">
+                    <Setter Property="Button.Foreground" Value="Red"/>
+                </Style>
+            </StackPanel.Styles>
+        
             <TextBlock Text="Select OpenCL device:"/>
             <DropDown Items="{Binding Platforms}" SelectedIndex="{Binding SelectedPlatformIndex}" 
                 Background="#FFFFFF"/>
@@ -16,8 +21,11 @@
             <ListBox Height="140"  
                 Items="{Binding Items}" SelectionMode="Multiple" SelectedItems="{Binding SelectedItems}"/>
             
-            <Button Command="{Binding RunItems}" Background="#FFFFFF" Width="300" HorizontalAlignment="Center">Run selected tests</Button>
-            <TextBox Height="210" Text="{Binding ResultText}" IsReadOnly="True"/>    
+            <Button Command="{Binding RunItems}" Background="#FFFFFF" Width="300" HorizontalAlignment="Center"
+                Content="{Binding SelectedItems.Count, StringFormat=Run selected \{0\} tests}"
+                Classes="hoverable" >
+            </Button>
+            <TextBox Height="210" Text="{Binding ResultText}" IsReadOnly="True" TextWrapping="Wrap"/>    
         </StackPanel>    
     </ScrollViewer>
 </Window>

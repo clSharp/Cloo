@@ -13,8 +13,13 @@ namespace ClootilsNetCoreUI.VS2017
 
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
+#if DEBUG            
                 .UsePlatformDetect()
                 .UseReactiveUI()
                 .LogToDebug();
+#else
+                .UsePlatformDetect()
+                .UseReactiveUI();
+#endif
     }
 }
