@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <StartupObject>ClootilsNetCoreUI.VS2017.Program</StartupObject>
     <LangVersion>latest</LangVersion>
+    <TieredCompilation>true</TieredCompilation>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">

@@ -4,14 +4,14 @@ using Avalonia.Logging.Serilog;
 
 namespace ClootilsNetCoreUI.VS2017
 {
-    class Program
+    public sealed class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             BuildAvaloniaApp().Start<MainWindow>();
         }
 
-        public static AppBuilder BuildAvaloniaApp()
+        private static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
 #if DEBUG            
                 .UsePlatformDetect()

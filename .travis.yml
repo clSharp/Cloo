@@ -9,12 +9,14 @@ script:
   - dotnet build Cloo/Cloo.VS2017.csproj --configuration Release
   - dotnet pack Cloo/Cloo.VS2017.csproj --configuration Release
 #  - dotnet nuget push Cloo/bin/*/Cloo.clSharp.*.nupkg --api-key <API_KEY>
+  - dotnet restore ClootilsNetCoreUI/ClootilsNetCoreUI.VS2017.csproj
+  - dotnet publish ClootilsNetCoreUI/ClootilsNetCoreUI.VS2017.csproj  --configuration Release
 
 deploy:
   - provider: releases
     api_key: $GITHUB_TOKEN
     file_glob: true
-    file: "Cloo/bin/**/*"
+    file: "Cloo*/bin/**/*"
     skip_cleanup: true
     on:
       branch: master

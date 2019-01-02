@@ -17,6 +17,7 @@
     <PackageId>Cloo.clSharp</PackageId>
     <Authors>rogalmic</Authors>
     <Company></Company>
+    <TieredCompilation>true</TieredCompilation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
