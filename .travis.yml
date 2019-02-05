@@ -1,0 +1,23 @@
+language: csharp
+mono: none
+group: dev
+sudo: required
+dist: xenial
+dotnet: 2.2
+script:
+  - dotnet restore Cloo/Cloo.VS2017.csproj
+  - dotnet build Cloo/Cloo.VS2017.csproj --configuration Release
+  - dotnet pack Cloo/Cloo.VS2017.csproj --configuration Release
+#  - dotnet nuget push Cloo/bin/*/Cloo.clSharp.*.nupkg --api-key <API_KEY>
+  - dotnet restore ClootilsNetCoreUI/ClootilsNetCoreUI.VS2017.csproj
+  - dotnet publish ClootilsNetCoreUI/ClootilsNetCoreUI.VS2017.csproj  --configuration Release
+
+deploy:
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    file_glob: true
+    file: "Cloo*/bin/**/*"
+    skip_cleanup: true
+    on:
+      branch: master
+      condition: "$TRAVIS_OS_NAME == linux"

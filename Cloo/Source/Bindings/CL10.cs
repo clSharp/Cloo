@@ -749,11 +749,11 @@ namespace Cloo.Bindings
         public extern static ComputeErrorCode EnqueueBarrier(
             CLCommandQueueHandle command_queue);
 
-        
+
         /// <summary>
         /// Gets the extension function address for the given function name,
         /// or NULL if a valid function can not be found. The client must
-        /// check to make sure the address is not NULL, before using or 
+        /// check to make sure the address is not NULL, before using or
         /// calling the returned function address.
         /// </summary>
         [DllImport(libName, EntryPoint = "clGetExtensionFunctionAddress")]
