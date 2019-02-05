@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using Cloo.Extensions;
 
-namespace ClootilsCore.VS2017
+namespace ClootilsNetCore
 {
     class Program
     {

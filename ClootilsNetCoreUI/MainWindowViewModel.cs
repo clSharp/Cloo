@@ -1,20 +1,18 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.Windows.Input;
-using System.Diagnostics;
-
+using Cloo.Extensions;
+using ClootilsNetCoreUI.Properties;
 using ReactiveUI;
 using ReactiveUI.Legacy;
-using Cloo.Extensions;
-using ClootilsNetCoreUI.VS2017.Properties;
 
 
 // NOTE: https://github.com/AvaloniaUI/Avalonia/blob/master/samples/BindingDemo/ViewModels/MainWindowViewModel.cs
-namespace ClootilsNetCoreUI.VS2017
+namespace ClootilsNetCoreUI
 {
     public class MainWindowViewModel : ReactiveObject
     {

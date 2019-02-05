@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloo.VS2017", "Cloo\Cloo.VS2017.csproj", "{656E96CE-2587-4CCC-A4DB-06D36267133A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{5040C738-55ED-42D8-B006-07FA2B151C4B}"
 	ProjectSection(SolutionItems) = preProject
 		Documentation\ChangeLog.txt = Documentation\ChangeLog.txt
@@ -14,17 +12,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		Documentation\Supported.txt = Documentation\Supported.txt
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClootilsNetFull.VS2017", "ClootilsNetFull\ClootilsNetFull.VS2017.csproj", "{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClootilsNetCore.VS2017", "ClootilsNetCore\ClootilsNetCore.VS2017.csproj", "{BDB1FA1A-33AF-4C70-B465-5B080880C9DF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A7D58388-7580-4F9B-ACCC-F95DB47DB66D}"
 	ProjectSection(SolutionItems) = preProject
 		.travis.yml = .travis.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClootilsNetCoreUI.VS2017", "ClootilsNetCoreUI\ClootilsNetCoreUI.VS2017.csproj", "{6C9B41AF-0655-4704-91DA-395A7630AE21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloo", "Cloo\Cloo.csproj", "{5E6E3794-E70C-4986-BE7E-9C491D67F7E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClootilsNetCore", "ClootilsNetCore\ClootilsNetCore.csproj", "{EF8BC187-D431-4A1A-A821-1DA2083A8AC3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClootilsNetCoreUI", "ClootilsNetCoreUI\ClootilsNetCoreUI.csproj", "{244E62FF-1FA6-427C-A4BB-CBCB51FF32E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClootilsNetFull", "ClootilsNetFull\ClootilsNetFull.csproj", "{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,22 +32,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{656E96CE-2587-4CCC-A4DB-06D36267133A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{656E96CE-2587-4CCC-A4DB-06D36267133A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{656E96CE-2587-4CCC-A4DB-06D36267133A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{656E96CE-2587-4CCC-A4DB-06D36267133A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E6E3794-E70C-4986-BE7E-9C491D67F7E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E6E3794-E70C-4986-BE7E-9C491D67F7E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E6E3794-E70C-4986-BE7E-9C491D67F7E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E6E3794-E70C-4986-BE7E-9C491D67F7E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF8BC187-D431-4A1A-A821-1DA2083A8AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF8BC187-D431-4A1A-A821-1DA2083A8AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF8BC187-D431-4A1A-A821-1DA2083A8AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF8BC187-D431-4A1A-A821-1DA2083A8AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{244E62FF-1FA6-427C-A4BB-CBCB51FF32E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{244E62FF-1FA6-427C-A4BB-CBCB51FF32E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{244E62FF-1FA6-427C-A4BB-CBCB51FF32E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{244E62FF-1FA6-427C-A4BB-CBCB51FF32E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BDB1FA1A-33AF-4C70-B465-5B080880C9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDB1FA1A-33AF-4C70-B465-5B080880C9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDB1FA1A-33AF-4C70-B465-5B080880C9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDB1FA1A-33AF-4C70-B465-5B080880C9DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C9B41AF-0655-4704-91DA-395A7630AE21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C9B41AF-0655-4704-91DA-395A7630AE21}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C9B41AF-0655-4704-91DA-395A7630AE21}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C9B41AF-0655-4704-91DA-395A7630AE21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

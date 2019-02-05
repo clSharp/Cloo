@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace ClootilsNetCoreUI.VS2017
+namespace ClootilsNetCoreUI
 {
     public class MainWindow : Window
     {

@@ -1,5 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Compute Language - Object Oriented (clSharp fork)"</Description>
@@ -10,7 +9,7 @@
     <FileVersion>0.9.3.0</FileVersion>
     <Version>0.9.3</Version>
   </PropertyGroup>
-
+  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard2.0\Cloo.xml</DocumentationFile>
   </PropertyGroup>
@@ -18,5 +17,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard2.0\Cloo.xml</DocumentationFile>
   </PropertyGroup>
-
+  
+  <ItemGroup>
+    <None Update="Cloo.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

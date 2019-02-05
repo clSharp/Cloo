@@ -1,8 +1,7 @@
 using Avalonia;
 using Avalonia.Markup.Xaml;
-using ReactiveUI;
 
-namespace ClootilsNetCoreUI.VS2017
+namespace ClootilsNetCoreUI
 {
     public class App : Application
     {

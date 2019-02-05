@@ -1,8 +1,7 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Logging.Serilog;
 
-namespace ClootilsNetCoreUI.VS2017
+namespace ClootilsNetCoreUI
 {
     public sealed class Program
     {
