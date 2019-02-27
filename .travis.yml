@@ -3,7 +3,7 @@ mono: none
 group: dev
 sudo: required
 dist: xenial
-dotnet: 2.0
+dotnet: 2.2 # 2.0 not available in travis, but 2.2 should be backward compatible
 script:
   - dotnet restore Cloo/Cloo.csproj
   - dotnet build Cloo/Cloo.csproj --configuration Release
