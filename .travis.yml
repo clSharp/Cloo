@@ -15,9 +15,10 @@ script:
 deploy:
   - provider: releases
     api_key: $GITHUB_TOKEN
-    file_glob: true
-    file: "Cloo*/bin/**/*"
-    skip_cleanup: true
+#    file_glob: true
+#    file: "Cloo*/bin/**/*"
+#    skip_cleanup: true
     on:
       branch: master
+      tags: true
       condition: "$TRAVIS_OS_NAME == linux"
