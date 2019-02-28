@@ -10,7 +10,7 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: dotnet nuget push Cloo\bin\Debug/Cloo.clSharp.*.nupkg --api-key $NUGET_API_KEY
+    script: dotnet nuget push Cloo\bin\Debug/Cloo.clSharp.*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
     on:
       branch: master
       tags: true
