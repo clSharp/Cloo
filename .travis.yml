@@ -5,20 +5,20 @@ sudo: required
 dist: xenial
 dotnet: 2.2 # 2.0 not available in travis, but 2.2 should be backward compatible
 script:
-  - dotnet restore Cloo/Cloo.csproj
-  - dotnet build Cloo/Cloo.csproj --configuration Release
   - dotnet pack Cloo/Cloo.csproj --configuration Release
-#  - dotnet nuget push Cloo/bin/*/Cloo.clSharp.*.nupkg --api-key <API_KEY>
-  - dotnet restore ClootilsNetCoreUI/ClootilsNetCoreUI.csproj
-  - dotnet publish ClootilsNetCoreUI/ClootilsNetCoreUI.csproj  --configuration Release
 
 deploy:
+  - provider: script
+    skip_cleanup: true
+    script: dotnet nuget push Cloo\bin\Debug/Cloo.clSharp.*.nupkg --api-key $NUGET_API_KEY
+    on:
+      branch: master
+      tags: true
   - provider: releases
     api_key: $GITHUB_TOKEN
-#    file_glob: true
-#    file: "Cloo*/bin/**/*"
-#    skip_cleanup: true
+    skip_cleanup: false
     on:
       branch: master
       tags: true
       condition: "$TRAVIS_OS_NAME == linux"
+
