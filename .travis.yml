@@ -8,7 +8,10 @@ dotnet: 2.2
 jobs:
   include:
     - stage: build
-      script: dotnet build
+      script: 
+        - dotnet build Cloo/Cloo.csproj
+        - dotnet build ClootilsNetCore/ClootilsNetCore.csproj
+        - dotnet build ClootilsNetCoreUI/ClootilsNetCoreUI.csproj
     - stage: deploy
       script:
         - dotnet pack Cloo/Cloo.csproj --configuration Release      
