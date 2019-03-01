@@ -16,9 +16,8 @@ deploy:
       tags: true
   - provider: releases
     api_key: $GITHUB_TOKEN
-    skip_cleanup: false
+    skip_cleanup: true
+    file_glob: true
+    file: "Cloo/bin/Release/Cloo.clSharp.*.nupkg"
     on:
       branch: master
-      tags: true
-      condition: "$TRAVIS_OS_NAME == linux"
-
