@@ -3,22 +3,27 @@ mono: none
 group: dev
 sudo: required
 dist: xenial
-dotnet: 2.2 # 2.0 not available in travis, but 2.2 should be backward compatible
-script:
-  - dotnet pack Cloo/Cloo.csproj --configuration Release
+dotnet: 2.2
 
-deploy:
-  - provider: script
-    skip_cleanup: true
-    script: dotnet nuget push Cloo/bin/Release/Cloo.clSharp.*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
-    on:
-      branch: master
-      tags: true
-  - provider: releases
-    api_key: $GITHUB_TOKEN
-    skip_cleanup: false
-    on:
-      branch: master
-      tags: true
-      condition: "$TRAVIS_OS_NAME == linux"
+jobs:
+  include:
+    - stage: build
+      script: dotnet build
+    - stage: deploy
+      script:
+        - dotnet pack Cloo/Cloo.csproj --configuration Release      
+      deploy:
+        - provider: script
+          skip_cleanup: true
+          script: dotnet nuget push Cloo/bin/Release/Cloo.clSharp.*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+          on:
+            branch: master
+            tags: true
+        - provider: releases
+          api_key: $GITHUB_TOKEN
+          skip_cleanup: false
+          on:
+            branch: master
+            tags: true
+            condition: "$TRAVIS_OS_NAME == linux"
 
