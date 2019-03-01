@@ -13,20 +13,14 @@ jobs:
         - dotnet build ClootilsNetCore/ClootilsNetCore.csproj
         - dotnet build ClootilsNetCoreUI/ClootilsNetCoreUI.csproj
     - stage: deploy
+      if: branch = master AND tag IS present
       script:
         - dotnet pack Cloo/Cloo.csproj --configuration Release      
       deploy:
         - provider: script
           skip_cleanup: true
           script: dotnet nuget push Cloo/bin/Release/Cloo.clSharp.*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
-          on:
-            branch: master
-            tags: true
         - provider: releases
           api_key: $GITHUB_TOKEN
           skip_cleanup: false
-          on:
-            branch: master
-            tags: true
-            condition: "$TRAVIS_OS_NAME == linux"
 
