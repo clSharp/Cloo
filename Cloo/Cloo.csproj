@@ -19,10 +19,4 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard2.0\Cloo.xml</DocumentationFile>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <None Update="Cloo.dll.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>
