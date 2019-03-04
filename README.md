@@ -29,5 +29,4 @@ Cloo `OpenCL`&trade; library with nuget package deployment ported to netstandard
 - Press `F5` to run the core app
 
 ## Remarks
-- Tested on `Windows 10`&trade; with `AMD`&trade; and `Intel`&trade; GPUS.
-- Not tested with Mono yet, but [should be doable](https://stackoverflow.com/questions/48061333/using-net-standard-2-0-with-mono)
+- Tested on `Windows 10`&trade; and `Linux` with `AMD`&trade;, `Nvidia`&trade; and `Intel`&trade; platforms.
