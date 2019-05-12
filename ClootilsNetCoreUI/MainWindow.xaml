@@ -14,7 +14,7 @@
             </StackPanel.Styles>
         
             <TextBlock Text="Select OpenCL device:"/>
-            <DropDown Items="{Binding Platforms}" SelectedIndex="{Binding SelectedPlatformIndex}" 
+            <ComboBox Items="{Binding Platforms}" SelectedIndex="{Binding SelectedPlatformIndex}" 
                 Background="#FFFFFF"/>
 
             <TextBlock Text="Select tests:"/>
