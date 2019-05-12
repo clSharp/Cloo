@@ -1,6 +1,7 @@
 # Cloo
 Cloo `OpenCL`&trade; library with nuget package deployment ported to netstandard2.0 + sample apps.
 
+[![Build Status](https://travis-ci.org/clSharp/Cloo.svg?branch=master)](https://travis-ci.org/clSharp/Cloo)
 ## Dependencies
 1. OpenCL drivers. Depending on your system, you can obtain them from your graphics device manufacturer website or operating system vendor website. Newest drivers for popular GPUs should be fine.
 1. The Microsoft .NET Framework 4.7.1 SDK.
@@ -28,5 +29,4 @@ Cloo `OpenCL`&trade; library with nuget package deployment ported to netstandard
 - Press `F5` to run the core app
 
 ## Remarks
-- Tested on `Windows 10`&trade; with `AMD`&trade; and `Intel`&trade; GPUS.
-- Not tested with Mono yet, but [should be doable](https://stackoverflow.com/questions/48061333/using-net-standard-2-0-with-mono)
+- Tested on `Windows 10`&trade; and `Linux` with `AMD`&trade;, `Nvidia`&trade; and `Intel`&trade; platforms.
