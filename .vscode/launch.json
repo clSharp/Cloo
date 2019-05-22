@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/ClootilsNetCore/bin/Debug/netcoreapp2.0/ClootilsNetCore.dll",
+            "program": "${workspaceFolder}/ClootilsNetCore/bin/Debug/netcoreapp3.0/ClootilsNetCore.dll",
             "args": [],
             "cwd": "${workspaceFolder}/ClootilsNetCore",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
@@ -24,9 +24,23 @@
             "request": "launch",
             "preLaunchTask": "buildui",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/ClootilsNetCoreUI/bin/Debug/netcoreapp2.0/ClootilsNetCoreUI.dll",
+            "program": "${workspaceFolder}/ClootilsNetCoreUI/bin/Debug/netcoreapp3.0/ClootilsNetCoreUI.dll",
             "args": [],
             "cwd": "${workspaceFolder}/ClootilsNetCoreUI",
+            // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": ".NET Core Launch (WinForms)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildwinforms",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/ClootilsNetFull/bin/Debug/netcoreapp3.0/ClootilsNetFull.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/ClootilsNetFull",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
             "console": "internalConsole",
             "stopAtEntry": false,

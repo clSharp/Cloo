@@ -22,6 +22,17 @@
                 "${workspaceFolder}/ClootilsNetCoreUI/ClootilsNetCoreUI.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "buildwinforms",
+            "command": "dotnet",
+            "type": "process",
+            "group": "build",
+            "args": [
+                "build",
+                "${workspaceFolder}/ClootilsNetFull/ClootilsNetFull.csproj"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }

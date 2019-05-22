@@ -3,12 +3,17 @@ mono: none
 group: dev
 sudo: required
 dist: xenial
-dotnet: 2.2
-
+addons:
+  snaps:
+  - name: dotnet-sdk
+    classic: true
+    channel: latest/beta
 jobs:
   include:
     - stage: build
       script: 
+        - sudo snap alias dotnet-sdk.dotnet dotnet
+        - dotnet --version
         - dotnet build Cloo/Cloo.csproj
         - dotnet build ClootilsNetCore/ClootilsNetCore.csproj
         - dotnet build ClootilsNetCoreUI/ClootilsNetCoreUI.csproj
