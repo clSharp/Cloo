@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
@@ -8,10 +9,7 @@ using System.Windows.Input;
 using Cloo.Extensions;
 using ClootilsNetCoreUI.Properties;
 using ReactiveUI;
-using ReactiveUI.Legacy;
 
-
-// NOTE: https://github.com/AvaloniaUI/Avalonia/blob/master/samples/BindingDemo/ViewModels/MainWindowViewModel.cs
 namespace ClootilsNetCoreUI
 {
     public class MainWindowViewModel : ReactiveObject
@@ -33,26 +31,24 @@ namespace ClootilsNetCoreUI
 
         public MainWindowViewModel()
         {
-            this.Items = new ReactiveList<TestItem>(
-                this.tests.Select(t => new TestItem
+            this.Items = new ObservableCollection<TestItem>(this.tests.Select(t => new TestItem
                 {
                     StringValue = t.Key
                 }));
 
-            this.Platforms = new ReactiveList<TestItem>(
-                ClooExtensions.GetDeviceNames().Select((d, i) => new TestItem
+            this.Platforms = new ObservableCollection<TestItem>(ClooExtensions.GetDeviceNames().Select((d, i) => new TestItem
                 {
-                    StringValue = d
+                    StringValue = d.Trim()
                 }));
 
-            this.SelectedItems = new ReactiveList<TestItem>();
+            this.SelectedItems = new ObservableCollection<TestItem>(new List<TestItem>());
 
             this.SelectedPlatformIndex=0;
 
             this.RunItems = ReactiveCommand.CreateFromTask(async () =>
             {                
                 var selectedTestNames = this.SelectedItems.Select(si => si.StringValue).ToList();
-                this.ResultText = $"Started {selectedTestNames.Count} test(s)... {Environment.NewLine}";
+                this.ResultText = $"Started {selectedTestNames.Count()} test(s)... {Environment.NewLine}";
 
                 var sw = new Stopwatch();
                 foreach(var testName in selectedTestNames)
@@ -69,12 +65,12 @@ namespace ClootilsNetCoreUI
                     finally
                     {
                         sw.Stop();
-                    }                    
+                    }
                     this.ResultText += $"{Environment.NewLine}Time({testName}): {sw.Elapsed}";
                 }
 
-                this.ResultText += $"{Environment.NewLine} All {selectedTestNames.Count} test(s) done!";
-            }, this.SelectedItems.CountChanged.Select(count => count != 0));
+                this.ResultText += $"{Environment.NewLine} All {selectedTestNames.Count()} test(s) done!";
+            }, this.WhenAnyValue(x => x.SelectedItems).Any());
         }
 
         private int selectedPlatformIndex;
@@ -91,9 +87,9 @@ namespace ClootilsNetCoreUI
             set { this.RaiseAndSetIfChanged(ref resultText, value); }
         }
 
-        public ReactiveList<TestItem> Items { get; }
-        public ReactiveList<TestItem> Platforms { get; }
-        public ReactiveList<TestItem> SelectedItems { get; }
+        public ObservableCollection<TestItem> Items { get; }
+        public ObservableCollection<TestItem> Platforms { get; }
+        public ObservableCollection<TestItem> SelectedItems { get; }
         public ICommand RunItems { get; }
 
         public class TestItem : ReactiveObject

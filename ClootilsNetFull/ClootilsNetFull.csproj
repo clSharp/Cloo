@@ -5,7 +5,6 @@
     <LangVersion>latest</LangVersion>
     <UseWindowsForms>true</UseWindowsForms>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TieredCompilation>true</TieredCompilation>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cloo\Cloo.csproj" />

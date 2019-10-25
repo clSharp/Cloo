@@ -4,7 +4,6 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <StartupObject>ClootilsNetCoreUI.Program</StartupObject>
     <LangVersion>latest</LangVersion>
-    <TieredCompilation>true</TieredCompilation>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
@@ -15,9 +14,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Desktop" Version="0.8.0" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.0" />
-    <PackageReference Include="ReactiveUI" Version="9.14.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.0-preview4" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.0-preview4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cloo\Cloo.csproj" />

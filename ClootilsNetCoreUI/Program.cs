@@ -1,13 +1,16 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Logging.Serilog;
+using Avalonia.ReactiveUI;
 
 namespace ClootilsNetCoreUI
 {
     public sealed class Program
     {
+        [STAThread]
         public static void Main(string[] args)
         {
-            BuildAvaloniaApp().Start<MainWindow>();
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         }
 
         private static AppBuilder BuildAvaloniaApp()
