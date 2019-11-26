@@ -33,6 +33,19 @@
                 "${workspaceFolder}/ClootilsNetFull/ClootilsNetFull.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "pack",
+            "command": "dotnet",
+            "type": "process",
+            "group": "none",
+            "args": [
+                "pack",
+                "${workspaceFolder}/Cloo/Cloo.csproj",
+                "--configuration",
+                "Release"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }

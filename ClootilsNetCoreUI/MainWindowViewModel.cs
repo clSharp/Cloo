@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
@@ -8,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Cloo.Extensions;
 using ClootilsNetCoreUI.Properties;
+using DynamicData;
+using DynamicData.Binding;
 using ReactiveUI;
 
 namespace ClootilsNetCoreUI
@@ -16,6 +17,17 @@ namespace ClootilsNetCoreUI
     {
         private Dictionary<string, Func<int, string>> tests = new  Dictionary<string, Func<int, string>>()
         {
+            {
+                "Calculate some primes", 
+                new Func<int, string>((deviceIndex)=>
+                {
+                    var primes = Enumerable.Range(2, 1000).ToArray();
+                    primes.ClooForEach(Resources.IsPrime, null, (i, d, v) => i == deviceIndex);
+
+                    return string.Join(", ", primes.Take(30).Where(n => n != 0).Where(n => n != 0))
+                     + ", ... ," + string.Join(", ", primes.Skip(primes.Length-30).Where(n => n != 0));
+                })
+            },
             {
                 "Calculate tons of primes - up to 10000000", 
                 new Func<int, string>((deviceIndex)=>
@@ -31,28 +43,35 @@ namespace ClootilsNetCoreUI
 
         public MainWindowViewModel()
         {
-            this.Items = new ObservableCollection<TestItem>(this.tests.Select(t => new TestItem
+            var items = new SourceList<TestItem>();
+            items.AddRange(this.tests.Select(t => new TestItem
                 {
                     StringValue = t.Key
                 }));
+            items.Connect().Bind(this.Items).Subscribe();
 
-            this.Platforms = new ObservableCollection<TestItem>(ClooExtensions.GetDeviceNames().Select((d, i) => new TestItem
+            var platforms = new SourceList<TestItem>();
+            platforms.AddRange(ClooExtensions.GetDeviceNames().Select((d, i) => new TestItem
                 {
                     StringValue = d.Trim()
                 }));
+            platforms.Connect().Bind(this.Platforms).Subscribe();
 
-            this.SelectedItems = new ObservableCollection<TestItem>(new List<TestItem>());
+            var selectedItems = new SourceList<TestItem>();
+            selectedItems.AddRange(new List<TestItem>());
+            selectedItems.Connect().Bind(this.SelectedItems).Subscribe();
 
             this.SelectedPlatformIndex=0;
 
             this.RunItems = ReactiveCommand.CreateFromTask(async () =>
-            {                
+            {
                 var selectedTestNames = this.SelectedItems.Select(si => si.StringValue).ToList();
-                this.ResultText = $"Started {selectedTestNames.Count()} test(s)... {Environment.NewLine}";
+                this.ResultText = $"Started {selectedTestNames.Count()} test(s)...";
 
                 var sw = new Stopwatch();
                 foreach(var testName in selectedTestNames)
                 {
+                    this.ResultText += $"{Environment.NewLine}";
                     sw.Restart();
                     try
                     {
@@ -70,7 +89,7 @@ namespace ClootilsNetCoreUI
                 }
 
                 this.ResultText += $"{Environment.NewLine} All {selectedTestNames.Count()} test(s) done!";
-            }, this.WhenAnyValue(x => x.SelectedItems).Any());
+            }, this.SelectedItems.ObserveCollectionChanges().Select(x => this.SelectedItems.Any()));
         }
 
         private int selectedPlatformIndex;
@@ -87,9 +106,9 @@ namespace ClootilsNetCoreUI
             set { this.RaiseAndSetIfChanged(ref resultText, value); }
         }
 
-        public ObservableCollection<TestItem> Items { get; }
-        public ObservableCollection<TestItem> Platforms { get; }
-        public ObservableCollection<TestItem> SelectedItems { get; }
+        public IObservableCollection<TestItem> Items { get; } = new ObservableCollectionExtended<TestItem>();
+        public IObservableCollection<TestItem> Platforms { get; } = new ObservableCollectionExtended<TestItem>();
+        public IObservableCollection<TestItem> SelectedItems { get; } = new ObservableCollectionExtended<TestItem>();
         public ICommand RunItems { get; }
 
         public class TestItem : ReactiveObject

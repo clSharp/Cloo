@@ -20,7 +20,7 @@ jobs:
     - stage: deploy
       if: branch = master AND tag IS present
       script:
-        - dotnet pack Cloo/Cloo.csproj --configuration Release      
+        - dotnet pack Cloo/Cloo.csproj --configuration Release
       deploy:
         - provider: script
           skip_cleanup: true

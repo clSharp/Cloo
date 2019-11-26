@@ -10,7 +10,7 @@ namespace ClootilsNetCoreUI
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
-#if DEBUG            
+#if DEBUG
             this.AttachDevTools();
 #endif
         }
