@@ -1,5 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ClootilsNetCoreUI.MainWindow"
         Title="ClootilsNetCoreUI"
         xmlns:vm="clr-namespace:ClootilsNetCoreUI"
         Background="#EEEEEE"
@@ -12,7 +13,7 @@
                     <Setter Property="Button.Foreground" Value="Red"/>
                 </Style>
             </StackPanel.Styles>
-        
+
             <TextBlock Text="Select OpenCL device:"/>
             <ComboBox Items="{Binding Platforms}" SelectedIndex="{Binding SelectedPlatformIndex}" 
                 Background="#FFFFFF"/>
@@ -25,7 +26,7 @@
                 Content="{Binding SelectedItems.Count, StringFormat=Run selected \{0\} tests}"
                 Classes="hoverable" >
             </Button>
-            <TextBox Height="210" Text="{Binding ResultText}" IsReadOnly="True" TextWrapping="Wrap"/>    
-        </StackPanel>    
+            <TextBox Height="210" Text="{Binding ResultText}" IsReadOnly="True" TextWrapping="Wrap"/>
+        </StackPanel>
     </ScrollViewer>
 </Window>

@@ -1,50 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Version>0.10.0</Version>
-    <ProjectGuid>{FD7A92BD-8036-428F-9C7D-9A3630AF7E2F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Clootils</RootNamespace>
-    <AssemblyName>Clootils</AssemblyName>
-    <TargetFramework>net471</TargetFramework>
-    <StartupObject />
-    <AssemblyTitle>Clootils</AssemblyTitle>
-    <Product>Clootils</Product>
-    <Description>Cloo utilities</Description>
-    <Copyright>Copyright (c) 2009 - 2013 Fatjon Sakiqi</Copyright>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <TieredCompilation>true</TieredCompilation>
+    <UseWindowsForms>true</UseWindowsForms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System.Windows.Forms" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cloo\Cloo.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Properties\Settings.Designer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 </Project>

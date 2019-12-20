@@ -21,12 +21,12 @@ namespace ClootilsNetCore
                 primes = Enumerable.Range(2, DataSize).ToArray();
 
                 sw.Restart();
-                primes.ClooForEach(IsPrime, null, (i, n, v) => i==deviceId);
+                primes.ClooForEach(IsPrime, null, (i, n, v) => i == deviceId);
                 sw.Stop();
                 Console.WriteLine($"OpenCL[{deviceId}] ({deviceNames[deviceId]}): {sw.ElapsedMilliseconds}ms");
 
                 Console.WriteLine(string.Join(", ", primes.Where(n => n != 0).Where(n => n != 0).Take(20)));
-            }                       
+            }
             
             // CPU part
             primes = Enumerable.Range(2, DataSize).ToArray();

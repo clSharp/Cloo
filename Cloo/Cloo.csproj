@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Compute Language - Object Oriented (clSharp fork)</Description>
@@ -10,6 +10,7 @@
     <RepositoryUrl>https://github.com/clSharp/Cloo</RepositoryUrl>
     <PackageId>Cloo.clSharp</PackageId>
     <Company />
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,4 +20,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard2.0\Cloo.xml</DocumentationFile>
   </PropertyGroup>
+
+  <Target Name="PreBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Release'">
+    <!-- "dotnet tool install -g dotnet-script" ( https://github.com/filipw/dotnet-script )-->
+    <Exec Command="dotnet-script  ./Build/UpdateXmlDocumentation.csx ./bin/$(Configuration)/$(TargetFramework)/$(AssemblyName).xml"/>
+  </Target>
 </Project>

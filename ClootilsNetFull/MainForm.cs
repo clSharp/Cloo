@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cloo;
 
@@ -66,7 +67,7 @@ namespace Clootils
             // Populate OpenCL Platform ComboBox
             object[] availablePlatforms = new object[ComputePlatform.Platforms.Count];
             for (int i = 0; i < availablePlatforms.Length; i++)
-                availablePlatforms[i] = ComputePlatform.Platforms[i].Name;
+                availablePlatforms[i] = ComputePlatform.Platforms[i].Name.Trim();
             comboBoxPlatform.Items.AddRange(availablePlatforms);
             comboBoxPlatform.SelectedIndex = 0;
 
@@ -115,7 +116,7 @@ namespace Clootils
             }
         }
 
-        private void buttonRunAll_Click(object sender, EventArgs e)
+        private async void buttonRunAll_Click(object sender, EventArgs e)
         {
             if (devices.Count == 0)
             {
@@ -129,24 +130,44 @@ namespace Clootils
             ComputeContextPropertyList properties = new ComputeContextPropertyList(platform);
             ComputeContext context = new ComputeContext(devices, properties, null, IntPtr.Zero);
 
-            for (int i = 0; i < exampleList.Count; i++)
+            this.buttonRunAll.Enabled = false;
+            this.buttonCopyLog.Enabled = false;
+
+            textBoxLog.Lines = new [] { "Started" };
+            try
             {
-                if (checkedListExamples.GetItemChecked(i))
+                for (int i = 0; i < exampleList.Count; i++)
                 {
-                    log.WriteLine("--------------------------------------------------------------------------------");
-                    log.WriteLine("Running \"" + exampleList[i].Name + "\"...");
-                    log.WriteLine();
-                    exampleList[i].Run(context, log);
-                    log.WriteLine();
-                    log.WriteLine("\"" + exampleList[i].Name + "\" finished.");
-                    log.WriteLine("--------------------------------------------------------------------------------");
-                    log.Flush();
+                    if (checkedListExamples.GetItemChecked(i))
+                    {
+
+                        log.WriteLine("--------------------------------------------------------------------------------");
+                        log.WriteLine($"Running \"{exampleList[i].Name}\"...");
+                        log.WriteLine();
+                        await Task.Run(() => exampleList[i].Run(context, log));
+                        log.WriteLine();
+                        log.WriteLine($"\"{exampleList[i].Name}\" finished.");
+                        log.WriteLine("--------------------------------------------------------------------------------");
+                        log.Flush();
+
+                        textBoxLog.Lines = ParseLines(output.ToString());
+                        textBoxLog.SelectionStart = textBoxLog.TextLength;
+                        textBoxLog.ScrollToCaret();
+                    }
                 }
             }
-
-            log.Close();
-
-            textBoxLog.Lines = ParseLines(output.ToString());
+            catch (Exception ex)
+            {
+                log.WriteLine($"Error: \"{ex.Message}\".");
+            }
+            finally
+            {
+                this.buttonRunAll.Enabled = true;
+                this.buttonCopyLog.Enabled = true;
+                log.Close();
+                
+                textBoxLog.Lines = ParseLines(output.ToString());
+            }
 
             // cleanup context!
             context.Dispose();
@@ -158,7 +179,7 @@ namespace Clootils
             platform = ComputePlatform.Platforms[comboBoxPlatform.SelectedIndex];
             object[] availableDevices = new object[platform.Devices.Count];
             for (int i = 0; i < availableDevices.Length; i++)
-                availableDevices[i] = platform.Devices[i].Name;
+                availableDevices[i] = platform.Devices[i].Name.Trim();
             checkedListDevices.Items.Clear();
             checkedListDevices.Items.AddRange(availableDevices);
             checkedListDevices.SetItemChecked(0, true);
