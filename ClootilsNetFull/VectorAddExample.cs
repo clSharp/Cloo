@@ -44,9 +44,9 @@ namespace Clootils
 
         string clProgramSource = @"
 kernel void VectorAdd(
-    global  read_only float* a,
-    global  read_only float* b,
-    global write_only float* c )
+    global  /*read_only*/ float* a,  // access qualifier 'read_only' can only be used for pipe and image type
+    global  /*read_only*/ float* b,  // access qualifier 'read_only' can only be used for pipe and image type
+    global /*write_only*/ float* c ) // access qualifier 'write_only' can only be used for pipe and image type
 {
     int index = get_global_id(0);
     c[index] = a[index] + b[index];
